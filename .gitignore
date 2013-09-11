@@ -1,10 +1,25 @@
-.DS_Store
+# Others #
+##########
 .nodemonignore
 .sass-cache/
-node_modules/
 public/lib
 .tmp
-.idea
+
+# Node Specific #
+#################
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+results
+npm-debug.log
+node_modules
 
 # Packages #
 ############
