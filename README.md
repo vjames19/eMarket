@@ -33,7 +33,8 @@ Links to docs go here.
     http://localhost:9000
 
 ## Configuration
-All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file. Here you will need to specify your application name, database name, as well as hook up any social app keys if you want integration with Twitter, Facebook, GitHub or Google.
+All configuration is specified in the [config](config/) folder, particularly the [config.js] 
+(config/config.js) file.
 
 ### Environmental Settings
 To run with a different environment, just specify NODE_ENV as you call grunt:
@@ -54,6 +55,8 @@ To run with a different environment, just specify NODE_ENV as you call grunt:
 `trim_trailing_whitespace = true`
 
 `insert_final_newline = true`
+
+Javascript style guide - [style guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
 
 ## Contributing
 TODO: Specify commiting rules and format.
