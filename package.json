@@ -1,17 +1,29 @@
 {
   "name": "eMarket",
-  "description": "Database class project.",
-  "version": "0.0.0",
-  "private": false,
-  "author": "",
+  "description": "Database Class Project",
+  "version": "0.0.1",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Victor J. Reventos",
+      "email": "victor.reventos@upr.edu"
+    },
+    {
+      "name": "Samuel Matos",
+      "email": "samuel.matos@upr.edu"
+    },
+    {
+      "name": "Eduardo M. Breijo",
+      "email": "eduardo.breijo@upr.edu"
+    }
+  ],
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
   },
   "scripts": {
     "start": "make start",
-    "test": "make test",
-    "postinstall": "node_modules/bower/bin/bower install"
+    "test": "make test"
   },
   "dependencies": {
     "express": "latest",
@@ -23,7 +35,8 @@
     "async": "latest",
     "view-helpers": "latest",
     "bower": "latest",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "mysql": "latest"
   },
   "devDependencies": {
     "supertest": "latest",

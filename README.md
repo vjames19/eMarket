@@ -1,6 +1,6 @@
 # eMarket
 
-Database's class project.
+DataBase Class Project.
 
 ## Docs
 Links to docs go here.
@@ -9,6 +9,7 @@ Links to docs go here.
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * [bower](https://github.com/bower/bower)
 * [grunt-cli](http://gruntjs.com/getting-started)
+* Make sure you install bower and grunt-cli globally using `npm install -g bower grunt-cli`.
 
 ## Quick Install
 
@@ -37,6 +38,9 @@ All configuration is specified in the [config](config/) folder, particularly the
 To run with a different environment, just specify NODE_ENV as you call grunt:
 
   $ NODE_ENV=test grunt
+
+## Code Style
+We currently are using [editorconfig](http://editorconfig.org/) to standardize coding styles.
 
 ## Contributing
 TODO: Specify commiting rules and format.
