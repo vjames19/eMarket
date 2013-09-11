@@ -94,6 +94,14 @@ module.exports = function (grunt) {
             configFile: 'karma.conf.js',
             singleRun: true
           }
+        },
+        uglify: {
+          options: {
+
+          },
+          build: {
+
+          }
         }
       }
       // TODO(vjames19): Add task to build minify and deploy.

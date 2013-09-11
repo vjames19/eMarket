@@ -9,8 +9,7 @@ Links to docs go here.
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * Bower - [bower](https://github.com/bower/bower)
 * Grunt - [grunt-cli](http://gruntjs.com/getting-started)
-* nodemon - [nodemon](https://github.com/remy/nodemon)
-* Make sure you install bower, grunt-cli and nodemon globally using `npm install -g bower grunt-cli nodemon`.
+* Make sure you install bower, grunt-cli and globally using `npm install -g bower grunt-cli`.
 
 ## Quick Install
 
@@ -33,7 +32,7 @@ Links to docs go here.
     http://localhost:9000
 
 ## Configuration
-All configuration is specified in the [config](config/) folder, particularly the [config.js] 
+All configuration is specified in the [config](config/) folder, particularly the [config.js]
 (config/config.js) file.
 
 ### Environmental Settings
