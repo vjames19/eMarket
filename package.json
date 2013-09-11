@@ -1,0 +1,51 @@
+{
+  "name": "eMarket",
+  "description": "Database class project.",
+  "version": "0.0.0",
+  "private": false,
+  "author": "",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "start": "make start",
+    "test": "make test",
+    "postinstall": "node_modules/bower/bin/bower install"
+  },
+  "dependencies": {
+    "express": "latest",
+    "jade": "latest",
+    "mongoose": "latest",
+    "connect-flash": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "async": "latest",
+    "view-helpers": "latest",
+    "bower": "latest",
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {
+    "supertest": "latest",
+    "should": "latest",
+    "mocha": "latest",
+    "web-mocha": "0.0.10",
+    "grunt": "~0.4.1",
+    "grunt-contrib-compass": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-nodemon": "0.0.8",
+    "grunt-concurrent": "~0.3.0",
+    "matchdep": "~0.1.2",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.3",
+    "karma-requirejs": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma": "~0.10.2",
+    "grunt-karma": "~0.6.2"
+  }
+}
