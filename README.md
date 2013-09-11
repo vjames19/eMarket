@@ -9,7 +9,8 @@ Links to docs go here.
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
 * Bower - [bower](https://github.com/bower/bower)
 * Grunt - [grunt-cli](http://gruntjs.com/getting-started)
-* Make sure you install bower and grunt-cli globally using `npm install -g bower grunt-cli`.
+* nodemon - [nodemon](https://github.com/remy/nodemon)
+* Make sure you install bower, grunt-cli and nodemon globally using `npm install -g bower grunt-cli nodemon`.
 
 ## Quick Install
 
@@ -24,9 +25,9 @@ Links to docs go here.
     grunt
 
   We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
-    
+
     grunt
-    
+
   Then open a browser and go to:
 
     http://localhost:9000

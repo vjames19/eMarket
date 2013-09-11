@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // Project Configuration
   grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
             options: {
               file: 'server.js',
               args: [],
-              ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store', '.idea'],
+              ignoredFiles: ['LICENSE', 'README.md', 'node_modules/**', '.DS_Store', '.idea'],
               watchedExtensions: ['js'],
               watchedFolders: ['app', 'config'],
               debug: true,
