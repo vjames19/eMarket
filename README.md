@@ -40,7 +40,10 @@ To run with a different environment, just specify NODE_ENV as you call grunt:
   $ NODE_ENV=test grunt
 
 ## Code Style
-We currently are using [editorconfig](http://editorconfig.org/) to standardize coding styles.
+`indent = 2`
+`continuation indent = 2`
+`line-ending = lf`
+`charset = utf-8`
 
 ## Contributing
 TODO: Specify commiting rules and format.
