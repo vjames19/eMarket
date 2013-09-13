@@ -16,9 +16,10 @@ module.exports = function(config) {
     ],
 
     // list of files to exclude
-    exclude: [
-      'client/main.js'
-    ],
+    exclude: [],
+//    exclude: [
+//      'client/main.js'
+//    ],
 
     // use dots reporter, as travis terminal does not support escaping sequences
     // possible values: 'dots', 'progress'
@@ -56,8 +57,8 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     // CLI --browsers Chrome,Firefox,Safari
-    browsers: [process.env.USERDOMAIN = 'Stuxnet' ? 'Firefox' : 'Chrome'], // Stuxnet = Compu de Sam lol
-
+    //browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome']
+    browsers : ['PhantomJS'],
     // If browser does not capture in given timeout [ms], kill it
     // CLI --capture-timeout 5000
     captureTimeout: 20000,
@@ -73,7 +74,9 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-chrome-launcher',
-      'karma-firefox-launcher'
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher'
     ]
+
   });
 };

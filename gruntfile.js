@@ -97,6 +97,11 @@ module.exports = function (grunt) {
             }
           }
         },
+        open: {
+          server: {
+            path: 'http://localhost:<%= nodemon.dev.options.env.PORT %>/'
+          }
+        },
         concurrent: {
           target: {
             tasks: ['nodemon', 'watch'],
@@ -132,7 +137,7 @@ module.exports = function (grunt) {
   grunt.option('force', true);
 
   // Register tasks.
-  grunt.registerTask('default', ['jshint', 'concurrent:target']);
+  grunt.registerTask('default', ['jshint', 'open', 'concurrent:target']);
 
   grunt.registerTask('minify', ['uglify']);
 
