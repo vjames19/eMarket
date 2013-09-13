@@ -1,12 +1,14 @@
 # eMarket
 
-DataBase Class Project.
+  DataBase Class Project.
 
 ## Docs
-Links to docs go here.
+
+  Links to docs go here.
 
 ## Prerequisites
-* Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm
+
+* Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm.
 * Bower - [bower](https://github.com/bower/bower)
 * Grunt - [grunt-cli](http://gruntjs.com/getting-started)
 * Make sure you install bower, grunt-cli and globally using `npm install -g bower grunt-cli`.
@@ -32,30 +34,30 @@ Links to docs go here.
     http://localhost:9000
 
 ## Configuration
-All configuration is specified in the [config](config/) folder, particularly the [config.js]
-(config/config.js) file.
+
+  All configuration is specified in the [config](config/) folder, particularly the [config.js](config/config.js) file.
 
 ### Environmental Settings
-To run with a different environment, just specify NODE_ENV as you call grunt:
 
-  $ NODE_ENV=test grunt
+  To run with a different environment, just specify NODE_ENV as you call grunt:
+
+    $ NODE_ENV=test grunt
 
 ## Code Style
-`indent_style = space`
 
-`indent_size = 2`
+  We enforce the following general settings:
 
-`continuation_indent_size = 4`
+    indent_style = space
+    indent_size = 2
+    continuation_indent_size = 4
+    end_of_line = lf
+    charset = utf-8
+    trim_trailing_whitespace = true
+    insert_final_newline = true
 
-`end_of_line = lf`
 
-`charset = utf-8`
-
-`trim_trailing_whitespace = true`
-
-`insert_final_newline = true`
-
-Javascript style guide - [style guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
+  We use the following JavaScript [Style Guide](http://goo.gl/b3LFBH) as our JS coding standards.
 
 ## Contributing
-TODO: Specify commiting rules and format.
+
+  TODO: Specify commiting rules and format.
