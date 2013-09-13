@@ -25,14 +25,14 @@ module.exports = function(config) {
     // CLI --reporters progress
     reporters: ['progress'],
 
-    junitReporter: {
-      // will be resolved to basePath (in the same way as files/exclude patterns)
-      outputFile: 'test-results.xml'
-    },
+//    junitReporter: {
+//      // will be resolved to basePath (in the same way as files/exclude patterns)
+//      outputFile: 'test-results.xml'
+//    },
 
     // web server port
     // CLI --port 9876
-    port: 9876,
+    port: 9000,
 
     // enable / disable colors in the output (reporters and logs)
     // CLI --colors --no-colors
@@ -56,7 +56,7 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     // CLI --browsers Chrome,Firefox,Safari
-    browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome'],
+    browsers: [process.env.USERDOMAIN = 'Stuxnet' ? 'Firefox' : 'Chrome'], // Stuxnet = Compu de Sam lol
 
     // If browser does not capture in given timeout [ms], kill it
     // CLI --capture-timeout 5000
