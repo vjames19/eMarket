@@ -52,21 +52,28 @@ module.exports = function (grunt) {
             }
           }
         },
-        //        compass: { //Task
-        //          dist: { //Target
-        //            options: { //Target options
-        //              sassDir: 'public/sass',
-        //              cssDir: 'public/css',
-        //              environment: 'production'
-        //            }
-        //          },
-        //          dev: { //Another target
-        //            options: {
-        //              sassDir: 'public/sass',
-        //              cssDir: 'public/css'
-        //            }
-        //          }
-        //        },
+        compass: {
+          dist: {
+            options: {
+              sassDir: 'public/sass',
+              cssDir: 'public/css',
+              imagesDir: 'public/img',
+              javascriptsDir: 'public/js',
+              relativeAssets: false,
+              environment: 'production'
+            }
+          },
+          dev: {
+            options: {
+              sassDir: 'public/sass',
+              cssDir: 'public/css',
+              imagesDir: 'public/img',
+              javascriptsDir: 'public/js',
+              relativeAssets: false,
+              environment: 'development'
+            }
+          }
+        },
         // Watch the server and restart it if needed.
         nodemon: {
           dev: {
@@ -114,7 +121,7 @@ module.exports = function (grunt) {
           }
         }
       }
-      // TODO(vjames19): Add task to build minify and deploy.
+      // TODO : Add task to deploy in different environments (production, development).
   );
 
 
