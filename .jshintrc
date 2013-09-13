@@ -32,7 +32,7 @@
     "angular"
   ],
   "indent": false, // Specify indentation spacing
-  "maxlen": 100, // Max line lenght
-  "devel": false, // Allow development statements e.g. `console.log();`.
+  "maxlen": 120, // Max line length, using webstorm default...
+  "devel": true, // Allow development statements e.g. `console.log();`.
   "noempty": true // Prohibit use of empty blocks.
 }

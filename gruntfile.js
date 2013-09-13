@@ -2,6 +2,15 @@
 
 module.exports = function (grunt) {
   // Project Configuration
+
+  var uglyFiles = function (srcDir) {
+    var results = {};
+    grunt.file.expand(srcDir).forEach(function (file) {
+      results[file.split('.')[0] + '.min.js'] = [file];
+    });
+    return results;
+  };
+
   grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         // Watch files and reload browser if a file changes.
@@ -97,15 +106,17 @@ module.exports = function (grunt) {
         },
         uglify: {
           options: {
-
+            banner: '/* Built on <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %> */\n',
+            mangle: true
           },
-          build: {
-
+          target: {
+            files: uglyFiles('public/js/**/*.js')
           }
         }
       }
       // TODO(vjames19): Add task to build minify and deploy.
   );
+
 
   // Load NPM tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -115,6 +126,8 @@ module.exports = function (grunt) {
 
   // Register tasks.
   grunt.registerTask('default', ['jshint', 'concurrent:target']);
+
+  grunt.registerTask('minify', ['uglify']);
 
   grunt.registerTask('lint', ['jshint']);
 
