@@ -29,7 +29,6 @@
     "express": "latest",
     "jade": "latest",
     "mongoose": "latest",
-    "connect-flash": "latest",
     "passport": "latest",
     "passport-local": "latest",
     "async": "latest",

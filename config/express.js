@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var express = require('express'),
-    flash = require('connect-flash'),
     helpers = require('view-helpers'),
     config = require('./config');
 
@@ -38,23 +37,12 @@ module.exports = function(app, passport) {
   app.configure(function() {
     //cookieParser should be above session
     app.use(express.cookieParser());
+    //    TODO(group): Decide if sessions are going to be implemented, extra cred!
+    app.use(express.session({secret: 'eMarket'}));
 
     //bodyParser should be above methodOverride
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-
-    //express/mongo session storage
-    // TODO(group): Decide if sessions are going to be implemented, extra cred!
-    //    app.use(express.session({
-    //      secret: 'MEAN',
-    //      store: new mongoStore({
-    //        url: config.db,
-    //        collection: 'sessions'
-    //      })
-    //    }));
-
-    //connect flash for flash messages
-    app.use(flash());
 
     //dynamic helpers
     app.use(helpers(config.app.name));
