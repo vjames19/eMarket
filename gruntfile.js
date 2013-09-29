@@ -97,17 +97,31 @@ module.exports = function (grunt) {
             }
           }
         },
-        open: {
-          server: {
-            path: 'http://localhost:<%= nodemon.dev.options.env.PORT %>/'
-          }
-        },
         concurrent: {
           target: {
             tasks: ['nodemon', 'watch'],
             options: {
               logConcurrentOutput: true
             }
+          },
+          front : {
+            tasks: ['connect:front', 'open']
+          }
+        },
+        connect: {
+          front: {
+            options: {
+              port: 9000,
+              hostname: 'localhost',
+              base: 'public',
+              keepalive: true,
+              open: true
+            }
+          }
+        },
+        open: {
+          server: {
+            path: 'http://localhost:<%= connect.front.options.port %>/'
           }
         },
         karma: {
@@ -137,7 +151,9 @@ module.exports = function (grunt) {
   grunt.option('force', true);
 
   // Register tasks.
-  grunt.registerTask('default', ['jshint', 'open', 'concurrent:target']);
+  grunt.registerTask('default', ['jshint', 'concurrent:target']);
+
+  grunt.registerTask('front', ['concurrent:front']);
 
   grunt.registerTask('minify', ['uglify']);
 
