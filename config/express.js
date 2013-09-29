@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var express = require('express'),
-    helpers = require('view-helpers'),
+    //helpers = require('view-helpers'),
     config = require('./config');
 
 module.exports = function(app, passport) {
@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
   app.set('view engine', 'jade');
 
   //Enable jsonp
-  app.enable("jsonp callback");
+  app.enable('jsonp callback');
 
   app.configure(function() {
     //cookieParser should be above session

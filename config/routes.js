@@ -1,6 +1,6 @@
 'use strict';
 
-var async = require('async');
+//var async = require('async');
 
 module.exports = function(app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
