@@ -99,13 +99,13 @@ module.exports = function (grunt) {
         },
         concurrent: {
           target: {
-            tasks: ['nodemon', 'watch'],
+            tasks: ['nodemon', 'watch', 'open:server'],
             options: {
               logConcurrentOutput: true
             }
           },
           front : {
-            tasks: ['connect:front', 'open']
+            tasks: ['connect:front', 'open:server']
           }
         },
         connect: {
