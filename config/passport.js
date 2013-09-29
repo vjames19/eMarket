@@ -6,42 +6,35 @@ var LocalStrategy = require('passport-local').Strategy,
 
 module.exports = function(passport) {
   // TODO: Serialize sessions
-  //  passport.serializeUser(function(user, done) {
-  //    done(null, user.id);
-  //  });
-  //
-  //  passport.deserializeUser(function(id, done) {
-  //    User.findOne({
-  //      _id: id
-  //    }, function(err, user) {
-  //      done(err, user);
-  //    });
-  //  });
+  var user = {
+    username: 'user',
+    password: 'password',
+    id: 1
+  };
+
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(function(id, done) {
+    if(user.id = id) {
+      done(null, user);
+    } else {
+      done('exploto como siqui', null);
+    }
+  });
 
   //Use local strategy
   passport.use(new LocalStrategy({
-        usernameField: 'email',
+        usernameField: 'username',
         passwordField: 'password'
       },
-      function(email, password, done) {
-        User.findOne({
-          email: email
-        }, function(err, user) {
-          if(err) {
-            return done(err);
-          }
-          if(!user) {
-            return done(null, false, {
-              message: 'Unknown user'
-            });
-          }
-          if(!user.authenticate(password)) {
-            return done(null, false, {
-              message: 'Invalid password'
-            });
-          }
-          return done(null, user);
-        });
+      function(username, password, done) {
+        if(username === 'user' && password === 'password') {
+          done(null, user);
+        } else {
+          done('exploto como siqui', null);
+        }
       }
   ));
 };
