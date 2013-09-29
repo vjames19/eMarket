@@ -114,8 +114,7 @@ module.exports = function (grunt) {
               port: 9000,
               hostname: 'localhost',
               base: 'public',
-              keepalive: true,
-              open: true
+              keepalive: true
             }
           }
         },
