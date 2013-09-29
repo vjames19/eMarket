@@ -44,8 +44,8 @@ module.exports = function(app, passport) {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
 
-    //dynamic helpers
-    app.use(helpers(config.app.name));
+//    //dynamic helpers
+//    app.use(helpers(config.app.name));
 
     //use passport session
     app.use(passport.initialize());

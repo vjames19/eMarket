@@ -21,63 +21,30 @@ module.exports = function(app, passport, auth) {
   app.get('/users/me', users.me);
   app.get('/users/:userId', users.show);
 
-  //Setting the facebook oauth routes
-  app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email', 'user_about_me'],
-    failureRedirect: '/signin'
-  }), users.signin);
-
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
-
-  //Setting the github oauth routes
-  app.get('/auth/github', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.signin);
-
-  app.get('/auth/github/callback', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
-
-  //Setting the twitter oauth routes
-  app.get('/auth/twitter', passport.authenticate('twitter', {
-    failureRedirect: '/signin'
-  }), users.signin);
-
-  app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
-
-  //Setting the google oauth routes
-  app.get('/auth/google', passport.authenticate('google', {
-    failureRedirect: '/signin',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ]
-  }), users.signin);
-
-  app.get('/auth/google/callback', passport.authenticate('google', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
-
   //Finish with setting up the userId param
   app.param('userId', users.user);
 
   //Article Routes
-  var articles = require('../app/controllers/articles');
-  app.get('/articles', articles.all);
-  app.post('/articles', auth.requiresLogin, articles.create);
-  app.get('/articles/:articleId', articles.show);
-  app.put('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.update);
-  app.del('/articles/:articleId', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy);
+  var categories = require('../app/controllers/categories');
+  app.get('/categories', categories.readAll);
+  app.post('/categories', categories.createCategory);
+  app.get('/categories/:categoryId', categories.readCategory);
+  app.put('/categories/:categoryId', categories.updateCategory);
+  app.del('/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
+  //Finish with setting up the categoryId param
+  app.param('categoryId', categories.findCategoryById);
 
-  //Finish with setting up the articleId param
-  app.param('articleId', articles.article);
+
+
+  //  var products = require('../app/controllers/products');
+  //  app.get('/categories', categories.all);
+  //  app.post('/categories', auth.requiresLogin, categories.create);
+  //  app.get('/categories/:categoryId', categories.show);
+  //  app.put('/categories/:categoryId', auth.requiresLogin, auth.article.hasAuthorization, categories.update);
+  //  app.del('/categories/:categoryId', auth.requiresLogin, auth.article.hasAuthorization, categories.destroy);
 
   //Home route
-  var index = require('../app/controllers/index');
-  app.get('/', index.render);
+  //  var index = require('../app/controllers/index');
+  //  app.get('/', index.render);
 
 };
