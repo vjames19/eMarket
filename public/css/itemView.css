@@ -1,9 +1,9 @@
-#item-title {
+.item-title {
     display: table-cell;
     width: 50%;
     float: left;
 }
-#save-button {
+.save-button {
     display: table-cell;
     float: right;
 }
@@ -11,18 +11,18 @@ hr {
     clear: both;
     visibility: hidden;
 }
-#item-photo {
+.item-photo {
     width: 150px;
     height: 150px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-#place-bid-button {
+.place-bid-button {
     display: table-cell;
     float: left;
 }
-#buy-it-now-button {
+.buy-it-now-button {
     display: table-cell;
     float: right;
 }

@@ -1,4 +1,4 @@
-#add-image {
+.add-image {
     background-image: url(../img/button-add-icon.png);
     background-size: 100%;
     background-color: transparent; /* make the button transparent */
@@ -12,13 +12,13 @@
     color: greenyellow;
 }
 
-#container {
+.container {
     display:table-row;
     width: 100%;
     overflow: hidden;  /* add this to contain floated children */
 }
 
-#left {
+.left {
     display:table-cell;
     width: 25%;
     height: 120px;
@@ -26,17 +26,17 @@
     padding-bottom: 20px;
 }
 
-#right {
+.right {
     display:table-cell;
     width: 150%;
 }
 
-#text-input-title {
+.text-input-title {
     top:0px;
     resize: none;
     max-height: 115px;
 }
-#preview-button {
+.preview-button {
     left:35%;
     width:30%;
 }

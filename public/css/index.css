@@ -1,122 +1,67 @@
-#ui-grid-a {
+.ui-grid-a {
     width:100%;
     height:130px;
-}
-#ui-grid-b {
-    width:100%;
-    height:130px;
-}
-#ui-grid-c {
-    width:100%;
-    height:130px;
-}
-#ui-grid-d {
-    width:100%;
-    height:130px;
-}
-#ui-grid-e {
-     width:100%;
-     height:130px;
 }
 
-#ui-grid-a-block-a {
+.ui-block-a {
     width: 50%;
     height:100%;
     padding:10px;
 }
-#ui-grid-a-block-b {
+.ui-block-b {
     width: 50%;
     height:100%;
     padding:10px;
 }
-#ui-grid-b-block-a {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-b-block-b {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-c-block-a {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-c-block-b {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-d-block-a {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-d-block-b {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-e-block-a {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
-#ui-grid-e-block-b {
-    width: 50%;
-    height:100%;
-    padding:10px;
-}
+
 #shopping-cart {
     right: 0%;
     top: 0%;
 }
 
-#my-emarket {
+.my-emarket {
     width:100%;
     height:100%;
     line-height: 65px;
 }
-#category {
+.category {
     width:100%;
     height:100%;
     line-height:65px;
 }
-#sell-an-item {
+.sell-an-item {
     width:100%;
     height:100%;
     line-height:65px;
 }
-#recently-viewed {
+.recently-viewed {
     width:100%;
     height:100%;
     line-height:65px;
 }
-#notifications {
-    width:100%;
-    height:100%;
-    line-height:65px;
-}
-
-#invoices {
-    width:100%;
-    height:100%;
-    line-height:65px;
-}
-#payment-option {
-    width:100%;
-    height:100%;
-    line-height:65px;
-}
-#profile {
+.notifications {
     width:100%;
     height:100%;
     line-height:65px;
 }
 
-#settings {
+.invoices {
+    width:100%;
+    height:100%;
+    line-height:65px;
+}
+.payment-option {
+    width:100%;
+    height:100%;
+    line-height:65px;
+}
+.profile {
+    width:100%;
+    height:100%;
+    line-height:65px;
+}
+
+.settings {
     width:100%;
     height:100%;
     line-height:65px;
@@ -125,7 +70,7 @@
 p {
     font-size: 75%;
 }
-#sign-out-button {
+.sign-out-button {
     left:35%;
     width:30%;
 }
