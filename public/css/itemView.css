@@ -1,0 +1,28 @@
+#item-title {
+    display: table-cell;
+    width: 50%;
+    float: left;
+}
+#save-button {
+    display: table-cell;
+    float: right;
+}
+hr {
+    clear: both;
+    visibility: hidden;
+}
+#item-photo {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#place-bid-button {
+    display: table-cell;
+    float: left;
+}
+#buy-it-now-button {
+    display: table-cell;
+    float: right;
+}

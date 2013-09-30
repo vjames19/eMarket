@@ -5,13 +5,50 @@
         <!--go back to the index page data-rel="back" reverse the transition back -->
         <a href="#index-page" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
 
-        <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-            <a href="" id="shopping-cart" data-role="button">Cart</a>
-            <a href="" data-role="button" data-icon="search" data-iconpos="notext">Search</a>
-        </div>
+        <form action="#">
+            <div data-role="fieldcontain" class="ui-btn-right">
+                <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+                <a href="" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+            </div>
+        </form>
     </div>
 
     <div data-role="content" data-theme="b">
 
+        <h3 id="item-title">Samsung Serie 9 TouchScreen Ultrabook i7 8GB Ram 128SSD 15.6"</h3>
+        <a href="" data-role="button" id="save-button">Save</a>
+        <hr/>
+
+        <img src="img/shopping-cart.png" id="item-photo"/>
+
+        <a href="" data-role="button" id="place-bid-button">Place bid US $562.25</a>
+        <a href="" data-role="button" id="buy-it-now-button">Buy it now</a>
+        <hr/>
+
+        <ul data-role="listview" data-theme="c" data-inset="true">
+            <li>
+                Starting bid: $899.99 <br>
+                Current bid: $950.99  <br>
+                Buy it Now: $1099.00  <br>
+                Shipping: Free
+            </li>
+            <li>
+                Time Left: 1h 21m <br>
+                End Date: Sep 8, 2013 4:31PM <br>
+                Location: California, USA <br>
+                Ships to: USA, Canada
+            </li>
+            <li>
+                Condition: Used
+            </li>
+            <li>
+                Description
+            </li>
+            <li>
+                Seller: Chencho    *****
+            </li>
+        </ul>
     </div>
+
+    <link rel="stylesheet" href="css/itemView.css"/>
 </div>
