@@ -35,21 +35,19 @@ module.exports = function(app, passport) {
   app.enable('jsonp callback');
 
   app.configure(function() {
-    //cookieParser should be above session
-    app.use(express.cookieParser());
-    //    TODO(group): Decide if sessions are going to be implemented, extra cred!
-    app.use(express.session({secret: 'eMarket'}));
-
     //bodyParser should be above methodOverride
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-
-//    //dynamic helpers
-//    app.use(helpers(config.app.name));
-
+    //cookieParser should be above session
+    app.use(express.cookieParser());
+    app.use(express.session({secret: 'eMarket'}));
     //use passport session
     app.use(passport.initialize());
     app.use(passport.session());
+
+
+//    //dynamic helpers
+//    app.use(helpers(config.app.name));
 
     //routes should be at the last
     app.use(app.router);
