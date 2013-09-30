@@ -50,6 +50,12 @@ module.exports = function (grunt) {
               jshintrc: '.jshintrc',
               ignores: ['public/lib/*']
             }
+          },
+          backend: {
+            src: ['app/**/*.js', 'server.js'],
+            options: {
+              jshintrc: '.jshintrc'
+            }
           }
         },
         compass: {
