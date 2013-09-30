@@ -5,7 +5,7 @@ var _ = require('underscore');
 var categories = [
   {categoryId: 1, categoryName: 'books', categoryParent: null},
   {categoryId: 2, categoryName: 'computers', categoryParent: null},
-  {categoryId: 3, categoryName: 'fiction', categoryParent: 1},
+  {categoryId: 3, categoryName: 'fiction', categoryParent: 1}
 ];
 
 exports.findCategoryById = function(req, res, next, id) {
