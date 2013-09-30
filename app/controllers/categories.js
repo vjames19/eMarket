@@ -43,7 +43,7 @@ exports.updateCategory = function(req, res) {
  */
 exports.deleteCategory = function(req, res) {
   delete categories[req.category.categoryId];
-  res.jsonp(category);
+  res.jsonp(req.category);
 };
 
 /**
