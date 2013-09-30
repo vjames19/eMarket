@@ -48,7 +48,4 @@ module.exports = function(app, passport, auth) {
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
   app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
   app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
-
-  //
-
 };
