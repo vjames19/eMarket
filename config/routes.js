@@ -28,24 +28,24 @@ module.exports = function(app, passport, auth) {
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
   app.post('/api/categories', categories.createCategory);
-  app.get('/api/categories/:categoryId', categories.readProduct);
+  app.get('/api/categories/:categoryId', categories.readCategory);
   app.put('/api/categories/:categoryId', categories.updateCategory);
   app.del('/api/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
 
   // products Routes
-  // TODO: uncomment when the product controller is implemented
-//  var products = require('../app/controllers/products');
-//  app.param('productId', products.findProductById);
-//  app.param('bidId', products.findProductBidById);
-//  app.get('/api/products', products.readAll);
-//  app.post('/api/products', products.createProduct)
-//  app.get('/api/products/:productId', products.readProduct);
-//  app.put('/api/products/:productId', products.updateProduct);
-//  app.del('/api/products/:productId', products.deleteProduct);
-//  // Bid Routes
-//  app.get('/api/products/:productId/bids', products.readAllProductBids);
-//  app.post('/api/products/:productId/bids', products.createProductBid);
-//  app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-//  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
-//  app.put('/api/products/:productId/bids/:bidId', products.deleteProductBid);
+  var products = require('../app/controllers/products');
+  app.param('productId', products.findProductById);
+  app.get('/api/products', products.readAllProducts);
+  app.post('/api/products', products.createProduct);
+  app.get('/api/products/:productId', products.readProduct);
+  app.put('/api/products/:productId', products.updateProduct);
+  app.del('/api/products/:productId', products.deleteProduct);
+
+  // Bid Routes
+  app.param('bidId', products.findProductBidById);
+  app.get('/api/products/:productId/bids', products.readAllProductBids);
+  app.post('/api/products/:productId/bids', products.createProductBid);
+  app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
+  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
+  app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
 };
