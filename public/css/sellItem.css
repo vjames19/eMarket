@@ -15,7 +15,7 @@
 #container {
     display:table-row;
     width: 100%;
-    overflow: hidden; /* add this to contain floated children */
+    overflow: hidden;  /* add this to contain floated children */
 }
 
 #left {
@@ -40,3 +40,4 @@
     left:35%;
     width:30%;
 }
+

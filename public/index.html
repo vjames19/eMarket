@@ -23,10 +23,12 @@
         <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
             <h1>eMarket</h1>
 
-            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-                <a href="" id="shopping-cart" data-role="button">Cart</a>
-                <a href="" id="search" data-role="button" data-icon="search" data-iconpos="notext">Search</a>
-            </div>
+            <form action="#">
+                <div data-role="fieldcontain" class="ui-btn-right">
+                    <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+                    <a href="#shopping-cart-view" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+                </div>
+            </form>
         </div>
 
         <div data-role="content" data-theme="b">
@@ -104,6 +106,7 @@
     <sell-item></sell-item>
     <recently-viewed></recently-viewed>
     <item-view></item-view>
+    <shopping-cart></shopping-cart>
 
 
 
@@ -123,6 +126,7 @@
     <script src="js/directives/sellItem.js"></script>
     <script src="js/directives/recentlyViewed.js"></script>
     <script src="js/directives/itemView.js"></script>
+    <script src="js/directives/shoppingCart.js"></script>
 
 </body>
 </html>
