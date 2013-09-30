@@ -48,14 +48,14 @@ exports.deleteCategory = function(req, res) {
 };
 
 /**
- * Show an category
+ * Read a category
  */
 exports.readCategory = function(req, res) {
   res.jsonp(req.category);
 };
 
 /**
- * List of Articles
+ * List of categories.
  */
 exports.readAll = function(req, res) {
   res.jsonp(categories);

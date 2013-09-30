@@ -1,7 +1,7 @@
 'use strict';
 
-var LocalStrategy = require('passport-local').Strategy,
-    config = require('./config');
+var LocalStrategy = require('passport-local').Strategy;//,
+//    config = require('./config');
 // TODO: Require the user model here.
 
 module.exports = function(passport) {
@@ -17,7 +17,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    if(user.id = id) {
+    if(user.id === id) {
       done(null, user);
     } else {
       done('exploto como siqui', null);

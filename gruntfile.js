@@ -50,6 +50,12 @@ module.exports = function (grunt) {
               jshintrc: '.jshintrc',
               ignores: ['public/lib/*']
             }
+          },
+          backend: {
+            src: ['app/**/*.js', 'server.js'],
+            options: {
+              jshintrc: '.jshintrc'
+            }
           }
         },
         compass: {
@@ -99,13 +105,13 @@ module.exports = function (grunt) {
         },
         concurrent: {
           target: {
-            tasks: ['nodemon', 'watch'],
+            tasks: ['nodemon', 'watch', 'open:server'],
             options: {
               logConcurrentOutput: true
             }
           },
           front : {
-            tasks: ['connect:front', 'open']
+            tasks: ['connect:front', 'open:server']
           }
         },
         connect: {
