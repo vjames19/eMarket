@@ -4,58 +4,65 @@ module.exports = function(app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
   // User Routes
   var users = require('../app/controllers/users');
-  app.get('/signin', users.signin);
-  app.get('/signup', users.signup);
-  app.get('/signout', users.signout);
+  app.param('userID', users.findUserByID);
+  app.get('/api/users', users.readAllUsers);
+  app.post('/api/users', users.createUser);
+  app.get('/api/users/:userID', users.readUser);
+  app.put('/api/users/:userID', users.updateUser);
+  app.del('/api/users/:userID', users.deleteUser);
 
-  // Setting up the users api
-  app.post('/users', users.create);
-
-  app.post('/users/session', passport.authenticate('local', {
-    failureRedirect: '/signin',
-    failureFlash: 'Invalid email or password.'
-  }), users.session);
-
-  app.get('/users/me', users.me);
-  app.get('/users/:userId', users.show);
-
-  // Finish with setting up the userId param
-  app.param('userId', users.user);
+//  app.get('/signin', users.signin);
+//  app.get('/signup', users.signup);
+//  app.get('/signout', users.signout);
+//
+//  // Setting up the users api
+//  app.post('/users', users.create);
+//
+//  app.post('/users/session', passport.authenticate('local', {
+//    failureRedirect: '/signin',
+//    failureFlash: 'Invalid email or password.'
+//  }), users.session);
+//
+//  app.get('/users/me', users.me);
+//  app.get('/users/:userID', users.show);
+//
+//  // Finish with setting up the userID param
+//  app.param('userID', users.user);
 
   // Category Routes
   var categories = require('../app/controllers/categories');
-  // Finish with setting up the categoryId param
-  app.param('categoryId', categories.findCategoryById);
+  // Finish with setting up the categoryID param
+  app.param('categoryID', categories.findCategoryByID);
   app.get('/api/categories', categories.readAll);
   app.post('/api/categories', categories.createCategory);
-  app.get('/api/categories/:categoryId', categories.readCategory);
-  app.put('/api/categories/:categoryId', categories.updateCategory);
-  app.del('/api/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
+  app.get('/api/categories/:categoryID', categories.readCategory);
+  app.put('/api/categories/:categoryID', categories.updateCategory);
+  app.del('/api/categories/:categoryID', auth.requiresLogin, categories.deleteCategory);
 
   // products Routes
   var products = require('../app/controllers/products');
-  app.param('productId', products.findProductById);
+  app.param('productID', products.findProductByID);
   app.get('/api/products', products.readAllProducts);
   app.post('/api/products', products.createProduct);
-  app.get('/api/products/:productId', products.readProduct);
-  app.put('/api/products/:productId', products.updateProduct);
-  app.del('/api/products/:productId', products.deleteProduct);
+  app.get('/api/products/:productID', products.readProduct);
+  app.put('/api/products/:productID', products.updateProduct);
+  app.del('/api/products/:productID', products.deleteProduct);
 
   // Bid Routes
-  app.param('bidId', products.findProductBidById);
-  app.get('/api/products/:productId/bids', products.readAllProductBids);
-  app.post('/api/products/:productId/bids', products.createProductBid);
-  app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
-  app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
+  app.param('bidID', products.findProductBidByID);
+  app.get('/api/products/:productID/bids', products.readAllProductBids);
+  app.post('/api/products/:productID/bids', products.createProductBid);
+  app.get('/api/products/:productID/bids/:bidID', products.readProductBid);
+  app.put('/api/products/:productID/bids/:bidID', products.updateProductBid);
+  app.del('/api/products/:productID/bids/:bidID', products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
-  app.param('sellerId', sellers.findSellerById);
+  app.param('sellerID', sellers.findSellerByID);
   app.get('/api/sellers', sellers.readAllSellers);
   app.post('/api/sellers', sellers.createSeller);
-  app.get('/api/sellers/:sellerId', sellers.readSeller);
-  app.put('/api/sellers/:sellerId', sellers.updateSeller);
-  app.del('/api/sellers/:sellerId', sellers.deleteSeller);
+  app.get('/api/sellers/:sellerID', sellers.readSeller);
+  app.put('/api/sellers/:sellerID', sellers.updateSeller);
+  app.del('/api/sellers/:sellerID', sellers.deleteSeller);
 
 };
