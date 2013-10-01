@@ -4,14 +4,14 @@ var _ = require('underscore');
 
 var users = {
   1: {
-    userID: 1,
+    userId: 1,
     userFirstName: 'Chencho',
     userMiddleName: 'Mata',
     userLastName: 'Vaca',
     userTelephone: '787-459-6285'
   },
   2: {
-    userID: 2,
+    userId: 2,
     userFirstName: 'Mariano',
     userMiddleName: null,
     userLastName: 'Sol',
@@ -20,7 +20,7 @@ var users = {
 };
 
 
-exports.findUserByID = function(req, res, next, id) {
+exports.findUserById = function(req, res, next, id) {
   if(!users[+id]) {
     res.jsonp(404, {message: 'user not found'});
   } else {
@@ -41,8 +41,8 @@ exports.readAllUsers = function(req, res) {
  */
 exports.createUser = function(req, res) {
   var user = req.body;
-  user.userID = _.keys(users).length + 1;
-  users[user.userID] = user;
+  user.userId = _.keys(users).length + 1;
+  users[user.userId] = user;
   res.jsonp(user);
 };
 
@@ -58,7 +58,7 @@ exports.readUser = function(req, res) {
  */
 exports.updateUser = function(req, res) {
   _.extend(req.user, req.body);
-  users[req.user.userID] = req.user;
+  users[req.user.userId] = req.user;
   res.jsonp(req.user);
 };
 
@@ -66,7 +66,7 @@ exports.updateUser = function(req, res) {
  * Delete a user
  */
 exports.deleteUser = function(req, res) {
-  delete users[req.user.userID];
+  delete users[req.user.userId];
   res.jsonp(req.user);
 };
 
