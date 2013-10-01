@@ -4,23 +4,23 @@ var _ = require('underscore');
 
 var sellers = {
   1: {
-    sellerID: 1,
+    sellerId: 1,
     sellerUserName: 'pepe',
     sellerRating: '***'
   },
   2: {
-    sellerID: 2,
+    sellerId: 2,
     sellerUserName: 'loco',
     sellerRating: '**'
   },
   3: {
-    sellerID: 3,
+    sellerId: 3,
     sellerUserName: 'valle',
     sellerRating: '*****'
   }
 };
 
-exports.findSellerByID = function(req, res, next, id) {
+exports.findSellerById = function(req, res, next, id) {
   console.log('id', id);
   if(!sellers[+id]) {
     res.jsonp(404, {message: 'Seller not found'});
@@ -36,8 +36,8 @@ exports.readAllSellers = function(req, res) {
 
 exports.createSeller = function(req, res)  {
   var seller = req.body;
-  seller.sellerID = _.keys(sellers).length + 1;
-  sellers[seller.sellerID] = seller;
+  seller.sellerId = _.keys(sellers).length + 1;
+  sellers[seller.sellerId] = seller;
   res.jsonp(seller);
 };
 
@@ -47,11 +47,11 @@ exports.readSeller = function(req, res) {
 
 exports.updateSeller = function(req, res) {
   _.extend(req.seller, req.body);
-  sellers[req.seller.sellerID] = req.seller;
+  sellers[req.seller.sellerId] = req.seller;
   res.jsonp(req.seller);
 };
 
 exports.deleteSeller = function(req, res) {
-  delete sellers[req.seller.sellerID];
+  delete sellers[req.seller.sellerId];
   res.jsonp(req.seller);
 };

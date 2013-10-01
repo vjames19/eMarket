@@ -3,12 +3,12 @@
 var _ = require('underscore');
 
 var categories = {
-  1: {categoryID: 1, categoryName: 'books', categoryParent: null},
-  2: {categoryID: 2, categoryName: 'computers', categoryParent: null},
-  3: {categoryID: 3, categoryName: 'fiction', categoryParent: 1}
+  1: {categoryId: 1, categoryName: 'books', categoryParent: null},
+  2: {categoryId: 2, categoryName: 'computers', categoryParent: null},
+  3: {categoryId: 3, categoryName: 'fiction', categoryParent: 1}
 };
 
-exports.findCategoryByID = function(req, res, next, id) {
+exports.findCategoryById = function(req, res, next, id) {
   var category = categories[+id];
   if(!category) {
     res.jsonp(404, {message: 'Not found'});
@@ -23,8 +23,8 @@ exports.findCategoryByID = function(req, res, next, id) {
  */
 exports.createCategory = function(req, res) {
   var category = req.body;
-  category.categoryID = _.keys(categories).length + 1;
-  categories[category.categoryID] = category;
+  category.categoryId = _.keys(categories).length + 1;
+  categories[category.categoryId] = category;
   res.jsonp(category);
 };
 
@@ -34,7 +34,7 @@ exports.createCategory = function(req, res) {
 exports.updateCategory = function(req, res) {
   var category = req.category;
   category = _.extend(category, req.body);
-  categories[category.categoryID] = category;
+  categories[category.categoryId] = category;
   res.jsonp(category);
 };
 
@@ -42,7 +42,7 @@ exports.updateCategory = function(req, res) {
  * Delete a category
  */
 exports.deleteCategory = function(req, res) {
-  delete categories[req.category.categoryID];
+  delete categories[req.category.categoryId];
   res.jsonp(req.category);
 };
 
