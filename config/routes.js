@@ -1,10 +1,10 @@
 'use strict';
 
-module.exports = function(app, passport, auth) {
+module.exports = function (app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
   // User Routes
   var users = require('../app/controllers/users');
-  app.post('/login', passport.authenticate('local'), function(req, res) {
+  app.post('/login', passport.authenticate('local'), function (req, res) {
     res.jsonp(req.user);
   });
   // TODO(vjames19): Secure users api
@@ -39,7 +39,8 @@ module.exports = function(app, passport, auth) {
   app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
   app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
-  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization, products.deleteProductBid);
+  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
+      products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
@@ -49,4 +50,22 @@ module.exports = function(app, passport, auth) {
   app.get('/api/sellers/:sellerId', sellers.readSeller);
   app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
   app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
+
+  // Admin Routes
+  var admins = require('../app/controllers/admins');
+  app.param('adminId', admins.findAdminById);
+  app.get('/api/admins', admins.readAllAdmins);
+  app.post('/api/admins', admins.createAdmin);
+  app.get('/api/admins/:adminId', admins.readAdmin);
+  app.put('/api/admins/:adminId', admins.updateAdmin);
+  app.del('/api/admins/:adminId', admins.deleteAdmin);
+
+  // Report Routes
+  app.param('reportId', admins.findAdminReportById);
+  app.get('/api/admins/:adminId/reports', admins.readAllAdminReports);
+  app.post('/api/admins/:adminId/reports', admins.createAdminReport);
+  app.get('/api/admins/:adminId/reports/:reportId', admins.readAdminReport);
+  app.put('/api/admins/:adminId/reports/:reportId', admins.updateAdminReport);
+  app.del('/api/admins/:adminId/reports/:reportId', admins.deleteAdminReport);
+
 };
