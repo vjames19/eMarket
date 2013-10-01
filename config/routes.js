@@ -48,4 +48,14 @@ module.exports = function(app, passport, auth) {
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
   app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
   app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
+
+  // Seller Routes
+  var sellers = require('../app/controllers/sellers');
+  app.param('sellerID', sellers.findSellerByID);
+  app.get('/api/sellers', sellers.readAllSellers);
+  app.post('/api/sellers', sellers.createSeller);
+  app.get('/api/sellers/:sellerID', sellers.readSeller);
+  app.put('/api/sellers/:sellerID', sellers.updateSeller);
+  app.del('/api/sellers/:sellerID', sellers.deleteSeller);
+
 };
