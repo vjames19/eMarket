@@ -4,7 +4,7 @@ var _ = require('underscore');
 
 var products = {
   1: {
-    productID: 1,
+    productId: 1,
     productSeller: 1,
     category: 'books',
     productName: 'harry potter',
@@ -12,7 +12,7 @@ var products = {
     startingBidPrice: 80
   },
   2: {
-    productID: 2,
+    productId: 2,
     productSeller: 2,
     category: 'cars',
     productName: '3 potes',
@@ -21,7 +21,7 @@ var products = {
   }
 };
 
-exports.findProductByID = function(req, res, next, id) {
+exports.findProductById = function(req, res, next, id) {
   console.log('id', id);
   if(!products[+id]) {
     res.jsonp(404, {message: 'product not found'});
@@ -37,8 +37,8 @@ exports.readAllProducts = function(req, res) {
 
 exports.createProduct = function(req, res)  {
   var product = req.body;
-  product.productID = _.keys(products).length + 1;
-  products[product.productID] = product;
+  product.productId = _.keys(products).length + 1;
+  products[product.productId] = product;
   res.jsonp(product);
 };
 
@@ -48,26 +48,26 @@ exports.readProduct = function(req, res) {
 
 exports.updateProduct = function(req, res) {
   _.extend(req.product, req.body);
-  products[req.product.productID] = req.product;
+  products[req.product.productId] = req.product;
   res.jsonp(req.product);
 };
 
 exports.deleteProduct = function(req, res) {
-  delete products[req.product.productID];
+  delete products[req.product.productId];
   res.jsonp(req.product);
 };
 
 // Bid methods
 var bids = {
   1: {
-    bidID: 1,
-    bidderID: 1,
-    productID: 1,
+    bidId: 1,
+    bidderId: 1,
+    productId: 1,
     bidAmount: 100
   }
 };
 
-exports.findProductBidByID = function(req, res, next, id) {
+exports.findProductBidById = function(req, res, next, id) {
   id = +id;
   if(!bids[id]) {
     res.jsonp(404, {message: 'not found'});
@@ -83,8 +83,8 @@ exports.readAllProductBids = function(req, res) {
 
 exports.createProductBid = function(req, res)  {
   var bid = req.body;
-  bid.bidID = _.keys(bids).length + 1;
-  bids[bid.bidID] = bid;
+  bid.bidId = _.keys(bids).length + 1;
+  bids[bid.bidId] = bid;
   res.jsonp(bid);
 };
 
@@ -94,11 +94,11 @@ exports.readProductBid = function(req, res) {
 
 exports.updateProductBid = function(req, res) {
   _.extend(req.bid, req.body);
-  bids[req.bid.bidID] = req.bid;
+  bids[req.bid.bidId] = req.bid;
   res.jsonp(req.bid);
 };
 
 exports.deleteProductBid = function(req, res) {
-  delete bids[req.bid.bidID];
+  delete bids[req.bid.bidId];
   res.jsonp(req.bid);
 };

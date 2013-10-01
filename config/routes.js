@@ -17,45 +17,45 @@ module.exports = function(app, passport, auth) {
   }), users.session);
 
   app.get('/users/me', users.me);
-  app.get('/users/:userID', users.show);
+  app.get('/users/:userId', users.show);
 
-  // Finish with setting up the userID param
-  app.param('userID', users.user);
+  // Finish with setting up the userId param
+  app.param('userId', users.user);
 
   // Category Routes
   var categories = require('../app/controllers/categories');
-  // Finish with setting up the categoryID param
-  app.param('categoryID', categories.findCategoryByID);
+  // Finish with setting up the categoryId param
+  app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
   app.post('/api/categories', categories.createCategory);
-  app.get('/api/categories/:categoryID', categories.readCategory);
-  app.put('/api/categories/:categoryID', categories.updateCategory);
-  app.del('/api/categories/:categoryID', auth.requiresLogin, categories.deleteCategory);
+  app.get('/api/categories/:categoryId', categories.readCategory);
+  app.put('/api/categories/:categoryId', categories.updateCategory);
+  app.del('/api/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
 
   // products Routes
   var products = require('../app/controllers/products');
-  app.param('productID', products.findProductByID);
+  app.param('productId', products.findProductById);
   app.get('/api/products', products.readAllProducts);
   app.post('/api/products', products.createProduct);
-  app.get('/api/products/:productID', products.readProduct);
-  app.put('/api/products/:productID', products.updateProduct);
-  app.del('/api/products/:productID', products.deleteProduct);
+  app.get('/api/products/:productId', products.readProduct);
+  app.put('/api/products/:productId', products.updateProduct);
+  app.del('/api/products/:productId', products.deleteProduct);
 
   // Bid Routes
-  app.param('bidID', products.findProductBidByID);
-  app.get('/api/products/:productID/bids', products.readAllProductBids);
-  app.post('/api/products/:productID/bids', products.createProductBid);
-  app.get('/api/products/:productID/bids/:bidID', products.readProductBid);
-  app.put('/api/products/:productID/bids/:bidID', products.updateProductBid);
-  app.del('/api/products/:productID/bids/:bidID', products.deleteProductBid);
+  app.param('bidId', products.findProductBidById);
+  app.get('/api/products/:productId/bids', products.readAllProductBids);
+  app.post('/api/products/:productId/bids', products.createProductBid);
+  app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
+  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
+  app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
-  app.param('sellerID', sellers.findSellerByID);
+  app.param('sellerId', sellers.findSellerById);
   app.get('/api/sellers', sellers.readAllSellers);
   app.post('/api/sellers', sellers.createSeller);
-  app.get('/api/sellers/:sellerID', sellers.readSeller);
-  app.put('/api/sellers/:sellerID', sellers.updateSeller);
-  app.del('/api/sellers/:sellerID', sellers.deleteSeller);
+  app.get('/api/sellers/:sellerId', sellers.readSeller);
+  app.put('/api/sellers/:sellerId', sellers.updateSeller);
+  app.del('/api/sellers/:sellerId', sellers.deleteSeller);
 
 };
