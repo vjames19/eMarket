@@ -19,10 +19,10 @@ module.exports = function(app, passport, auth) {
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
-  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
+  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
   app.get('/api/categories/:categoryId', categories.readCategory);
-  app.put('/api/categories/:categoryId', auth.requiresLogin,categories.updateCategory);
-  app.del('/api/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
+  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.updateCategory);
+  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.deleteCategory);
 
   // Product Routes
   var products = require('../app/controllers/products');
@@ -31,7 +31,7 @@ module.exports = function(app, passport, auth) {
   app.post('/api/products', auth.requiresLogin, products.createProduct);
   app.get('/api/products/:productId', products.readProduct);
   app.put('/api/products/:productId', auth.requiresLogin, products.updateProduct);
-  app.del('/api/products/:productId', auth.requiresLogin, products.deleteProduct);
+  app.del('/api/products/:productId', auth.requiresLogin, auth.admin.hasAuthorization, products.deleteProduct);
 
   // Bid Routes
   app.param('bidId', products.findProductBidById);
@@ -39,7 +39,7 @@ module.exports = function(app, passport, auth) {
   app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
   app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
-  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.deleteProductBid);
+  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization, products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
