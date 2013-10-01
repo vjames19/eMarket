@@ -4,6 +4,10 @@ module.exports = function(app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
   // User Routes
   var users = require('../app/controllers/users');
+  app.post('/login', passport.authenticate('local'), function(req, res) {
+    res.jsonp(req.user);
+  });
+  // TODO(vjames19): Secure users api
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/api/users', users.createUser);
@@ -11,58 +15,38 @@ module.exports = function(app, passport, auth) {
   app.put('/api/users/:userId', users.updateUser);
   app.del('/api/users/:userId', users.deleteUser);
 
-//  app.get('/signin', users.signin);
-//  app.get('/signup', users.signup);
-//  app.get('/signout', users.signout);
-//
-//  // Setting up the users api
-//  app.post('/users', users.create);
-//
-//  app.post('/users/session', passport.authenticate('local', {
-//    failureRedirect: '/signin',
-//    failureFlash: 'Invalid email or password.'
-//  }), users.session);
-//
-//  app.get('/users/me', users.me);
-//  app.get('/users/:userId', users.show);
-//
-//  // Finish with setting up the userId param
-//  app.param('userId', users.user);
-
   // Category Routes
   var categories = require('../app/controllers/categories');
-  // Finish with setting up the categoryId param
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
-  app.post('/api/categories', categories.createCategory);
+  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
   app.get('/api/categories/:categoryId', categories.readCategory);
-  app.put('/api/categories/:categoryId', categories.updateCategory);
+  app.put('/api/categories/:categoryId', auth.requiresLogin,categories.updateCategory);
   app.del('/api/categories/:categoryId', auth.requiresLogin, categories.deleteCategory);
 
-  // products Routes
+  // Product Routes
   var products = require('../app/controllers/products');
   app.param('productId', products.findProductById);
   app.get('/api/products', products.readAllProducts);
-  app.post('/api/products', products.createProduct);
+  app.post('/api/products', auth.requiresLogin, products.createProduct);
   app.get('/api/products/:productId', products.readProduct);
-  app.put('/api/products/:productId', products.updateProduct);
-  app.del('/api/products/:productId', products.deleteProduct);
+  app.put('/api/products/:productId', auth.requiresLogin, products.updateProduct);
+  app.del('/api/products/:productId', auth.requiresLogin, products.deleteProduct);
 
   // Bid Routes
   app.param('bidId', products.findProductBidById);
   app.get('/api/products/:productId/bids', products.readAllProductBids);
-  app.post('/api/products/:productId/bids', products.createProductBid);
+  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
-  app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
+  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
+  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
   app.param('sellerId', sellers.findSellerById);
   app.get('/api/sellers', sellers.readAllSellers);
-  app.post('/api/sellers', sellers.createSeller);
+  app.post('/api/sellers', auth.requiresLogin, sellers.createSeller);
   app.get('/api/sellers/:sellerId', sellers.readSeller);
-  app.put('/api/sellers/:sellerId', sellers.updateSeller);
-  app.del('/api/sellers/:sellerId', sellers.deleteSeller);
-
+  app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
+  app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
 };
