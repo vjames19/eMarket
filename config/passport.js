@@ -6,19 +6,26 @@ var LocalStrategy = require('passport-local').Strategy;//,
 
 module.exports = function(passport) {
   // TODO: Serialize sessions
-  var user = {
-    username: 'user',
-    password: 'password',
-    id: 1
+  var users = {
+    'user': {
+      username: 'user',
+      password: 'password',
+      id: 1
+    },
+    'admin': {
+      username: 'admin',
+      password: 'password',
+      id: 0
+    }
   };
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user.username);
   });
 
-  passport.deserializeUser(function(id, done) {
-    if(user.id === id) {
-      done(null, user);
+  passport.deserializeUser(function(username, done) {
+    if(users[username]) {
+      done(null, users[username]);
     } else {
       done('exploto como siqui', null);
     }
@@ -30,7 +37,8 @@ module.exports = function(passport) {
         passwordField: 'password'
       },
       function(username, password, done) {
-        if(username === 'user' && password === 'password') {
+        var user = users[username];
+        if(user && user.password === password) {
           done(null, user);
         } else {
           done('exploto como siqui', null);
