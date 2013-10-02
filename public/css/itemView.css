@@ -26,3 +26,11 @@ hr {
     display: table-cell;
     float: right;
 }
+p.item-button-text-size {
+    font-size: 75%;
+}
+
+p.item-description-text-size {
+    font-size: 100%;
+    font-weight: bold;
+}
