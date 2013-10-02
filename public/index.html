@@ -22,7 +22,7 @@
     <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
         <img src="img/logo.png" class="emarket-logo"/>
 
-        <a href="shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
 
         <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
     </div>
@@ -91,7 +91,7 @@
     </div>
 
     <div data-role="footer" data-theme="a" class="ui-bar">
-        <a href="#login-user" data-role="button" id="login-user" class="login-user"></a>
+        <a href="#login-user" data-role="button" id="sign-out" class="sign-out">Sign Out</a>
     </div>
 
 </div>
@@ -100,7 +100,7 @@
     $("#search").bind("click", function (event, ui) {
         $("#search").replaceWith('<input type="search" name="search" id="search-basic" value=""/>');
     });
-    $("#login-user").text("Sign In");
+
 </script>
 
 <!--Directives-->
