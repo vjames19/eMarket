@@ -11,11 +11,6 @@
     height:130px;
 }
 
-#shopping-cart {
-    right: 0;
-    top: 0;
-}
-
 .my-emarket-buying {
     line-height: 65px;
 }
@@ -54,5 +49,6 @@ p.index-text-size {
     left:35%;
     width:30%;
 }
+
 
 
