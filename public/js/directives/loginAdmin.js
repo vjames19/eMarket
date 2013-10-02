@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('login', function () {
+    .directive('loginAdmin', function () {
       return {
-        templateUrl: 'views/login.html',
+        templateUrl: 'views/loginAdmin.html',
         restrict: 'E',
         scope: {},
         replace: true

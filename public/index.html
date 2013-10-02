@@ -94,7 +94,7 @@
     </div>
 
     <div data-role="footer" data-theme="a" class="ui-bar">
-        <a href="#login" data-role="button" id="login" class="login"></a>
+        <a href="#login-user" data-role="button" id="login-user" class="login-user"></a>
     </div>
 
 </div>
@@ -103,14 +103,15 @@
     $("#search").bind("click", function (event, ui) {
         $("#search").replaceWith('<input type="search" name="search" id="search-basic" value=""/>');
     });
-    $("#login").text("Sign In");
+    $("#login-user").text("Sign In");
 </script>
 
 <!--Directives-->
 <categories></categories>
 <invoices></invoices>
 <item-view></item-view>
-<login></login>
+<login-admin></login-admin>
+<login-user></login-user>
 <my-emarket-buying></my-emarket-buying>
 <my-emarket-selling></my-emarket-selling>
 <notifications></notifications>
@@ -137,7 +138,8 @@
 <script src="js/directives/categories.js"></script>
 <script src="js/directives/invoices.js"></script>
 <script src="js/directives/itemView.js"></script>
-<script src="js/directives/login.js"></script>
+<script src="js/directives/loginAdmin.js"></script>
+<script src="js/directives/loginUser.js"></script>
 <script src="js/directives/myEmarketBuying.js"></script>
 <script src="js/directives/myEmarketSelling.js"></script>
 <script src="js/directives/notifications.js"></script>

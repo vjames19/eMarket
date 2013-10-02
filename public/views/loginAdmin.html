@@ -1,0 +1,30 @@
+<div data-role="page" data-theme="b" id="login-admin">
+    <div data-role="header" data-theme="a">
+        <h1>Administrator</h1>
+
+        <!--go back to the index page data-rel="back" reverse the transition back -->
+        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+        <form action="#">
+            <div data-role="fieldcontain" class="ui-btn-right">
+                <a href="" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+            </div>
+        </form>
+        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+    </div>
+
+    <div data-role="content" data-theme="b">
+        <form action="#">
+            <div style="padding:10px 20px;">
+                <h3>Administrator, Please Sign In</h3>
+                <label for="username" class="ui-hidden-accessible">Username:</label>
+                <input name="user" id="username" value="" placeholder="username" data-theme="a" type="text">
+                <label for="password" class="ui-hidden-accessible">Password:</label>
+                <input name="pass" id="password" value="" placeholder="password" autocomplete="off" data-theme="a"
+                       type="password">
+                <a href="#index-page" data-role="button" data-icon="check" data-direction="reverse">Submit</a>
+                <!--<button type="submit" data-theme="b" data-icon="check">Sign in</button>-->
+            </div>
+        </form>
+    </div>
+</div>
