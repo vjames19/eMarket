@@ -1,0 +1,34 @@
+<div data-role="page" data-theme="b" id="notifications">
+    <div data-role="header" data-theme="a" data-position="fixed">
+        <h1>Notifications</h1>
+
+        <!--go back to the index page data-rel="back" reverse the transition back -->
+        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+        <form action="#">
+            <div data-role="fieldcontain" class="ui-btn-right">
+                <a href="" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+            </div>
+        </form>
+        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+    </div>
+
+    <div data-role="content" data-theme="b">
+        <ul data-role="listview" data-theme="c" data-inset="true">
+            <li>
+                <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop">
+                    <img src="img/envelope.png">Unread <br> Preview Message</a>
+            </li>
+            <li>
+                <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop">
+                    <img src="img/envelope.png">Unread <br> sdashds</a>
+            </li>
+            <li><a href=""><img src="img/envelope.png">Unread <br> sdashds</a></li>
+            <li><a href=""><img src="img/envelope.png">Read <br> sdashds</a></li>
+            <li><a href=""><img src="img/envelope.png">Read <br> sdashds</a></li>
+        </ul>
+    </div>
+    <div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width: 320px">
+        <p>You won the new AlienWare Fusion. Congrats!</p>
+    </div>
+</div>

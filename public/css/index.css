@@ -12,17 +12,17 @@
 }
 
 #shopping-cart {
-    right: 0%;
-    top: 0%;
+    right: 0;
+    top: 0;
 }
 
-.my-emarket {
+.my-emarket-buying {
     line-height: 65px;
 }
-.category {
+.categories {
     line-height:65px;
 }
-.sell-an-item {
+.sell-item {
     line-height:65px;
 }
 .recently-viewed {
@@ -35,7 +35,7 @@
 .invoices {
     line-height:65px;
 }
-.payment-option {
+.payment-options {
     line-height:65px;
 }
 .profile {
