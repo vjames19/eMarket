@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('shoppingCart', function () {
+    .directive('invoices', function () {
       return {
-        templateUrl: 'views/shoppingCart.html',
+        templateUrl: 'views/invoices.html',
         restrict: 'E',
         scope: {},
         replace: true

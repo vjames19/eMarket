@@ -65,19 +65,19 @@
                 </a>
             </div>
             <div class="ui-block-b">
-                <a href="" data-role="button" id="invoices" class="invoices">
+                <a href="#invoices" data-role="button" id="invoices" class="invoices">
                     <p>Invoices</p>
                 </a>
             </div>
         </div>
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a href="" data-role="button" id="payment-options" class="payment-options">
-                    <p>Payment Option</p>
+                <a href="#payment-options" data-role="button" id="payment-options" class="payment-options">
+                    <p>Payment Options</p>
                 </a>
             </div>
             <div class="ui-block-b">
-                <a href="" data-role="button" id="profile" class="profile">
+                <a href="#profile" data-role="button" id="profile" class="profile">
                     <p>Profile</p>
                 </a>
             </div>
@@ -85,19 +85,16 @@
 
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a href="" data-role="button" id="settings" class="settings">
+                <a href="#settings" data-role="button" id="settings" class="settings">
                     <p>Settings</p>
                 </a>
             </div>
-            <div class="ui-block-b">
-
-
-            </div>
+            <div class="ui-block-b"></div>
         </div>
     </div>
 
     <div data-role="footer" data-theme="a" class="ui-bar">
-        <a href="" data-role="button" id="sign-out-button" class="sign-out-button">Sign Out</a>
+        <a href="#login" data-role="button" id="login" class="login"></a>
     </div>
 
 </div>
@@ -106,17 +103,23 @@
     $("#search").bind("click", function (event, ui) {
         $("#search").replaceWith('<input type="search" name="search" id="search-basic" value=""/>');
     });
+    $("#login").text("Sign In");
 </script>
 
 <!--Directives-->
+<categories></categories>
+<invoices></invoices>
+<item-view></item-view>
+<login></login>
 <my-emarket-buying></my-emarket-buying>
 <my-emarket-selling></my-emarket-selling>
-<categories></categories>
-<sell-item></sell-item>
-<recently-viewed></recently-viewed>
-<item-view></item-view>
-<shopping-cart></shopping-cart>
 <notifications></notifications>
+<payment-options></payment-options>
+<profile></profile>
+<recently-viewed></recently-viewed>
+<sell-item></sell-item>
+<settings></settings>
+<shopping-cart></shopping-cart>
 
 
 <script src="lib/angular/angular.js"></script>
@@ -131,15 +134,19 @@
 <!--<script src="scripts/controllers/main.js"></script>-->
 
 <!-- Directives JavaScripts -->
+<script src="js/directives/categories.js"></script>
+<script src="js/directives/invoices.js"></script>
+<script src="js/directives/itemView.js"></script>
+<script src="js/directives/login.js"></script>
 <script src="js/directives/myEmarketBuying.js"></script>
 <script src="js/directives/myEmarketSelling.js"></script>
-<script src="js/directives/categories.js"></script>
-<script src="js/directives/sellItem.js"></script>
-<script src="js/directives/recentlyViewed.js"></script>
-<script src="js/directives/itemView.js"></script>
-<script src="js/directives/shoppingCart.js"></script>
 <script src="js/directives/notifications.js"></script>
-<script src="js/directives/notificationView.js"></script>
+<script src="js/directives/paymentOptions.js"></script>
+<script src="js/directives/profile.js"></script>
+<script src="js/directives/recentlyViewed.js"></script>
+<script src="js/directives/sellItem.js"></script>
+<script src="js/directives/settings.js"></script>
+<script src="js/directives/shoppingCart.js"></script>
 
 </body>
 </html>
