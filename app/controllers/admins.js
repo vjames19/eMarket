@@ -15,7 +15,7 @@ var admins = {
   },
   2: {
     adminId: 2,
-    adminUserName: 'subRoot',
+    adminUserName: 'admin',
     adminFirstName: 'Jesus',
     adminMiddleName: 'Del',
     adminLastName: 'Campo',
@@ -26,7 +26,7 @@ var admins = {
 };
 
 exports.isAdmin = function (user) {
-  return user.username === 'admin';
+  return _.contains(_.pluck(admins, 'adminUserName'), user.username);
 };
 
 exports.findAdminById = function (req, res, next, id) {

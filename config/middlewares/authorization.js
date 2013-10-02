@@ -16,7 +16,7 @@ exports.admin = {
     if(admins.isAdmin(req.user)) {
       next();
     } else {
-      res.jsonp(401, {message: 'User is not an admin'});
+      res.jsonp(401, {message: req.user.username + ' is not an Administrator'});
     }
   }
 };
