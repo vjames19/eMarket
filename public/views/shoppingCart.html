@@ -1,5 +1,5 @@
-<div data-role="page" data-theme="b" id="shopping-cart">
-    <div data-role="header" data-theme="a" data-position="fixed">
+<div data-role="page" data-theme="b" id="shopping-cart-view">
+    <div data-role="header" data-position="fixed" data-theme="a">
         <h1>Shopping Cart</h1>
 
         <!--go back to the index page data-rel="back" reverse the transition back -->
@@ -9,31 +9,22 @@
     </div>
 
     <div data-role="content" data-theme="b">
-        <ul id="list" data-role="listview">
-            <li>Acura</li>
-            <li>Audi</li>
-            <li>BMW</li>
-            <li>Cadillac</li>
-            <li>Ferrari</li>
-        </ul>
-        <button id='btnDelete'>Delete</button>
+
+        <fieldset data-role="controlgroup">
+
+            <input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+            <label for="checkbox-1a">Cheetos</label>
+
+            <input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+            <label for="checkbox-2a">Doritos</label>
+
+            <input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+            <label for="checkbox-3a">Fritos</label>
+
+            <input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+            <label for="checkbox-4a">Sun Chips</label>
+        </fieldset>
+
+
     </div>
-
-    <style type="text/css">
-        #list{
-            background-color: yellow;
-        }
-    </style>
-    <script>
-        $('#list li').click(function(){
-            $(this).addClass('yellow');
-        });
-
-        $('#btnDelete').click(function(){
-            $('.yellow').each(function(){
-                $(this).animate({ marginLeft: parseInt($(this).css('marginLeft'),10) === 0 ?   $(this).outerWidth() : 0 }).fadeOut('fast');
-            });
-        });
-    </script>
-
 </div>
