@@ -19,6 +19,36 @@
     </div>
 
     <div data-role="content" data-theme="b">
+
+        <form action="#">
+            <div data-role="collapsible">
+                <h2>Edit Profile Information</h2>
+                <ul data-role="listview" data-theme="d" data-divider-theme="d">
+                    <li data-role="list-divider">UserName: <span class="ui-li-count">pedronales</span></li>
+                </ul>
+                <div data-role="fieldcontain">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" value="Pedro">
+                    <label for="middlename">Last Name</label>
+                    <input type="text" id="middlename" value="J">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" value="Rosanales">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value=" pedro.j.rosanales@pjr.np">
+                    <label for="old-password">Old Password</label>
+                    <input type="password" id="old-password" autocomplete="off" value="">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" autocomplete="off" value="">
+                    <label for="new-password-confirm">Confirm Password</label>
+                    <input type="password" id="new-password-confirm" autocomplete="off" value="">
+                </div>
+                <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
+                    <a href="#index-page" data-role="button" data-icon="delete" data-theme="a" data-transition="fade">Cancel</a>
+                    <a href="#index-page" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+                </div>
+            </div>
+        </form>
+
         <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
             <div data-role="collapsible">
                 <h2>Edit Mailing Addresses</h2>
@@ -74,30 +104,31 @@
                            data-icon="gear" data-theme="c"></a></li>
                 </ul>
             </div>
-        </div>
-        <div data-role="collapsible" data-iconpos="bottom" data-theme="b" data-content-theme="c">
-            <h2>My Ratings</h2>
-            <ul data-role="listview" data-theme="d" data-divider-theme="e">
-                <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count">****</span></li>
-                <li data-icon="false" style="text-align: center">
-                    <a href="#">
-                        <div class="ui-grid-a, text-center" style="text-align: center">
-                            <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
-                            <div class="ui-block-b"><em>Chencho<br><br>***</em></div>
-                        </div>
-                    </a>
-                </li>
-                <li data-icon="false" style="text-align: center">
-                    <a href="#">
-                        <div class="ui-grid-a, text-center">
-                            <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
-                            <div class="ui-block-b"><em>Juan<br><br>*****</em></div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            <div data-role="collapsible" data-iconpos="bottom" data-theme="b" data-content-theme="c">
+                <h2>My Ratings</h2>
+                <ul data-role="listview" data-theme="d" data-divider-theme="e">
+                    <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count">****</span></li>
+                    <li data-icon="false" style="text-align: center">
+                        <a href="#">
+                            <div class="ui-grid-a, text-center" style="text-align: center">
+                                <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
+                                <div class="ui-block-b"><em>Chencho<br><br>***</em></div>
+                            </div>
+                        </a>
+                    </li>
+                    <li data-icon="false" style="text-align: center">
+                        <a href="#">
+                            <div class="ui-grid-a, text-center">
+                                <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
+                                <div class="ui-block-b"><em>Juan<br><br>*****</em></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
 
     <div data-role="footer" data-theme="a"><h1></h1></div>
 </div>
