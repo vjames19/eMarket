@@ -38,8 +38,7 @@
     "mysql": "latest"
   },
   "devDependencies": {
-    "supertest": "latest",
-    "should": "latest",
+    "supertest": "~0.8.0",
     "mocha": "latest",
     "web-mocha": "0.0.10",
     "grunt": "~0.4.1",
@@ -61,6 +60,8 @@
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma": "~0.10.2",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "grunt-mocha-test": "~0.7.0",
+    "chai": "~1.8.0"
   }
 }
