@@ -16,126 +16,136 @@
         <form action="#">
             <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
                 <div data-role="collapsible" data-collapsed="false">
-                    <!--<form action="#">-->
                     <h3>Personal Information</h3>
-                    <label for="firstname">First Name</label>
-                    <input type="text" id="firstname" value="">
-                    <label for="lastname">Last Name</label>
-                    <input type="text" id="lastname" value="">
-                    <label for="mailing-address">Mailing Address</label>
-                    <input type="text" id="mailing-address" value="">
-                    <label for="select-country-mailing-address">Country</label>
-                    <select id="select-country-mailing-address">
-                        <option value="USA">USA</option>
-                        <option value="Venezuela">Venezuela</option>
-                        <option value="Dominican Republic">Dominican Republic</option>
-                        <option value="Cuba">Cuba</option>
-                    </select>
-                    <label for="select-state-mailing-address">State/Providence/Region</label>
-                    <select id="select-state-mailing-address">
-                        <option value="Alabama">Alabama</option>
-                        <option value="Florida">Florida</option>
-                        <option value="New York">New York</option>
-                        <option value="California">California</option>
-                    </select>
-                    <label for="city-mailing-address">City</label>
-                    <input type="text" id="city-mailing-address" value="">
-                    <label for="zip-code-mailing-address">Zip Code</label>
-                    <input type="number" id="zip-code-mailing-address" value="">
-                    <table>
-                        <tr> <!-- Table Row, is just one row -->
-                            <td> <!-- Table Data is for the column -->
-                                <label for="billing-address">Billing Address</label>
-                            </td>
-                            <td>
-                                <label><input type="checkbox" id="same-as"/>Same as Mailing Address</label>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="text" id="billing-address" value="">
-                    <label for="select-country-billing-address">Country</label>
-                    <select id="select-country-billing-address">
-                        <option value="USA">USA</option>
-                        <option value="Venezuela">Venezuela</option>
-                        <option value="Dominican Republic">Dominican Republic</option>
-                        <option value="Cuba">Cuba</option>
-                    </select>
-                    <label for="select-state-billing-address">State/Providence/Region</label>
-                    <select id="select-state-billing-address">
-                        <option value="Alabama">Alabama</option>
-                        <option value="Florida">Florida</option>
-                        <option value="New York">New York</option>
-                        <option value="California">California</option>
-                    </select>
-                    <label for="city-billing-address">City</label>
-                    <input type="text" id="city-billing-address" value="">
-                    <label for="zip-code-billing-address">Zip Code</label>
-                    <input type="number" id="zip-code-billing-address" value="">
-                    <label for="telephone">Telephone</label>
-                    <input type="tel" id="telephone" value="">
 
+                    <div data-role="fieldcontain">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" value="">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" value="">
+                        <label for="mailing-address">Mailing Address</label>
+                        <input type="email" id="mailing-address" value="">
+                        <label for="select-country-mailing-address">Country</label>
+                        <select id="select-country-mailing-address">
+                            <option value="USA">USA</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Cuba">Cuba</option>
+                        </select>
+                        <label for="select-state-mailing-address">State/Providence/Region</label>
+                        <select id="select-state-mailing-address">
+                            <option value="Alabama">Alabama</option>
+                            <option value="Florida">Florida</option>
+                            <option value="New York">New York</option>
+                            <option value="California">California</option>
+                        </select>
+                        <label for="city-mailing-address">City</label>
+                        <input type="text" id="city-mailing-address" value="">
+                        <label for="zip-code-mailing-address">Zip Code</label>
+                        <input type="number" id="zip-code-mailing-address" value="">
+                        <table>
+                            <tr> <!-- Table Row, is just one row -->
+                                <td> <!-- Table Data is for the column -->
+                                    <label for="billing-address">Billing Address</label>
+                                </td>
+                                <td>
+                                    <label><input type="checkbox" id="same-as"/>Same as Mailing Address</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="text" id="billing-address" value="">
+                        <label for="select-country-billing-address">Country</label>
+                        <select id="select-country-billing-address">
+                            <option value="USA">USA</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="Cuba">Cuba</option>
+                        </select>
+                        <label for="select-state-billing-address">State/Providence/Region</label>
+                        <select id="select-state-billing-address">
+                            <option value="Alabama">Alabama</option>
+                            <option value="Florida">Florida</option>
+                            <option value="New York">New York</option>
+                            <option value="California">California</option>
+                        </select>
+                        <label for="city-billing-address">City</label>
+                        <input type="text" id="city-billing-address" value="">
+                        <label for="zip-code-billing-address">Zip Code</label>
+                        <input type="number" id="zip-code-billing-address" value="">
+                        <label for="telephone">Telephone</label>
+                        <input type="tel" id="telephone" value="">
+                    </div>
                 </div>
                 <div data-role="collapsible" id="step-2">
                     <h3>Credit Card Information</h3>
-                    <label for="name-as-card">Name as Appear in Card</label>
-                    <input type="text" id="name-as-card" value="">
-                    <label for="card-type">Card Type</label>
-                    <select id="card-type">
-                        <option value="Visa">Visa</option>
-                        <option value="Master Card">Master Card</option>
-                        <option value="American Express">American Express</option>
-                    </select>
-                    <label for="card-number">Card Number</label>
-                    <input type="number" id="card-number" value="">
-                    <label for="expiration-date">Expiration Date</label>
-                    <input type="month" id="expiration-date" value="">
-                    <label for="card-security-code">Card Security Code</label>
-                    <input type="number" id="card-security-code" value="">
+
+                    <div data-role="fieldcontain">
+                        <label for="name-as-card">Name as Appear in Card</label>
+                        <input type="text" id="name-as-card" value="">
+                        <label for="card-type">Card Type</label>
+                        <select id="card-type">
+                            <option value="Visa">Visa</option>
+                            <option value="Master Card">Master Card</option>
+                            <option value="American Express">American Express</option>
+                        </select>
+                        <label for="card-number">Card Number</label>
+                        <input type="number" id="card-number" value="">
+                        <label for="expiration-date">Expiration Date</label>
+                        <input type="month" id="expiration-date" value="">
+                        <label for="card-security-code">Card Security Code</label>
+                        <input type="number" id="card-security-code" value="">
+                    </div>
                 </div>
-
-
                 <div data-role="collapsible">
-                    <h3>Username & Password</h3>
-                    <label for="email">Email</label>
-                    <input type="text" id="email" value="">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" value="">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" autocomplete="off" value="">
-                    <label for="password-confirm">Confirm Password</label>
-                    <input type="password" id="password-confirm" autocomplete="off" value="">
+                    <h3>Login Information</h3>
 
-                    <label for="security-questions-1">Security Questions</label>
-                    <select id="security-questions-1">
-                        <option value="0">Select a Question</option>
-                        <option value="1">What is your favorite color?</option>
-                        <option value="2">Name of your best friend?</option>
-                        <option value="3">In which city were you born?</option>
-                        <option value="4">Name of your first pet?</option>
-                        <option value="5">What is your favorite team?</option>
-                    </select>
-                    <input type="text" id="security-answer-1" value="" placeholder="Answer">
-                    <select id="security-questions-2">
-                        <option value="0">Select a Question</option>
-                        <option value="1">What is your favorite color?</option>
-                        <option value="2">Name of your best friend?</option>
-                        <option value="3">In which city were you born?</option>
-                        <option value="4">Name of your first pet?</option>
-                        <option value="5">What is your favorite team?</option>
-                    </select>
-                    <input type="text" id="security-answer-2" value="" placeholder="Answer">
-                    <select id="security-questions-3">
-                        <option value="0">Select a Question</option>
-                        <option value="1">What is your favorite color?</option>
-                        <option value="2">Name of your best friend?</option>
-                        <option value="3">In which city were you born?</option>
-                        <option value="4">Name of your first pet?</option>
-                        <option value="5">What is your favorite team?</option>
-                    </select>
-                    <input type="text" id="security-answer-3" value="" placeholder="Answer">
+                    <div data-role="fieldcontain">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" autocomplete="off" value="">
+                        <label for="password-confirm">Confirm Password</label>
+                        <input type="password" id="password-confirm" autocomplete="off" value="">
+
+                        <label for="security-questions-1">Security Questions</label>
+                        <select id="security-questions-1">
+                            <option value="0">Select a Question</option>
+                            <option value="1">What is your favorite color?</option>
+                            <option value="2">Name of your best friend?</option>
+                            <option value="3">In which city were you born?</option>
+                            <option value="4">Name of your first pet?</option>
+                            <option value="5">What is your favorite team?</option>
+                        </select>
+                        <input type="text" id="security-answer-1" value="" placeholder="Answer">
+                        <label for="security-questions-2"></label>
+                        <select id="security-questions-2">
+                            <option value="0">Select a Question</option>
+                            <option value="1">What is your favorite color?</option>
+                            <option value="2">Name of your best friend?</option>
+                            <option value="3">In which city were you born?</option>
+                            <option value="4">Name of your first pet?</option>
+                            <option value="5">What is your favorite team?</option>
+                        </select>
+                        <input type="text" id="security-answer-2" value="" placeholder="Answer">
+                        <label for="security-questions-3"></label>
+                        <select id="security-questions-3">
+                            <option value="0">Select a Question</option>
+                            <option value="1">What is your favorite color?</option>
+                            <option value="2">Name of your best friend?</option>
+                            <option value="3">In which city were you born?</option>
+                            <option value="4">Name of your first pet?</option>
+                            <option value="5">What is your favorite team?</option>
+                        </select>
+                        <input type="text" id="security-answer-3" value="" placeholder="Answer">
+                    </div>
                 </div>
+
             </div>
-            <button type="submit" data-theme="a" data-icon="check">Register</button>
+            <!-- un anchor por ahora-->
+            <a href="#login-user" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+            <!--<button type="submit" data-theme="a" data-icon="check">Register</button>-->
         </form>
     </div>
 </div>
