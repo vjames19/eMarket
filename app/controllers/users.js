@@ -24,7 +24,7 @@ exports.findUserById = function(req, res, next, id) {
   if(!users[+id]) {
     res.jsonp(404, {message: 'User not found'});
   } else {
-    res.user = users[+id];
+    req.user = users[+id];
     next();
   }
 };
