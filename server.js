@@ -14,8 +14,12 @@ var express = require('express'),
 
 // Load configurations
 // if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./config/config'),
+//var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+//    config = require('./config/config'),
+//    auth = require('./config/middlewares/authorization');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+var config = require('./config/config'),
     auth = require('./config/middlewares/authorization');
 
 // TODO: Bootstrap db connection
@@ -23,7 +27,7 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
 
 // Bootstrap models
 var modelsPath = __dirname + '/app/models';
-fs.readdirSync(modelsPath).forEach(function(file) {
+fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
 });
 

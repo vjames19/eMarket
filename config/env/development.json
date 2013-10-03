@@ -1,6 +1,8 @@
 {
-  "db": "mongodb://localhost/mean-dev",
+  "port": 9000,
   "app": {
-    "name": "MEAN - A Modern Stack - Development"
-  }
+    "name": "eMarket - Development"
+  },
+  "db": "mongodb://localhost/mean-dev"
 }
+

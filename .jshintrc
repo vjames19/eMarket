@@ -1,7 +1,7 @@
 {
   "node": true, // Enable globals available when code is running inside of the NodeJS runtime environment.
   "browser": true, // Standard browser globals e.g. `window`, `document`.
-//  "es5": true, // Allow EcmaScript 5 syntax. Removed because of a bug in jshint 2.x. es5 is true by default.
+//  "es5": true, // Allow EcmaScript 5 syntax. ---Removed because of a bug in jshint 2.x. es5 is true by default.---
   "esnext": true, // Allow ES.next specific features such as `const` and `let`.
   "bitwise": false, // Prohibit bitwise operators (&, |, ^, etc.).
   "camelcase": true, // Permit only camelcase for `var` and `object indexes`.
@@ -18,20 +18,20 @@
   "strict": false, // Require `use strict` pragma in every file.
   "trailing": true, // Prohibit trailing whitespaces.
   "smarttabs": false, // Suppresses warnings about mixed tabs and spaces
-  "predef": [ // Extra globals.
-    "define",
-    "require",
-    "exports",
-    "module",
-    "describe",
-    "before",
-    "beforeEach",
-    "after",
-    "afterEach",
-    "it",
-    "angular"
-  ],
-  "indent": false, // Specify indentation spacing
+  "predef": {// Extra globals.
+    "define": false,
+    "require": false,
+    "exports": true,
+    "module": false,
+    "describe": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "it": false,
+    "angular": false
+  },
+//  "indent": false, // Specify indentation spacing ----Not Used----
   "maxlen": 120, // Max line length, using webstorm default...
   "devel": false, // Allow development statements e.g. `console.log();`.
   "noempty": true // Prohibit use of empty blocks.

@@ -21,7 +21,7 @@ var sellers = {
 };
 
 exports.findSellerById = function(req, res, next, id) {
-  console.log('id', id);
+//  console.log('id', id);
   if(!sellers[+id]) {
     res.jsonp(404, {message: 'Seller not found'});
   } else {

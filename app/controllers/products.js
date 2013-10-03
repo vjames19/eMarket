@@ -22,7 +22,7 @@ var products = {
 };
 
 exports.findProductById = function(req, res, next, id) {
-  console.log('id', id);
+//  console.log('id', id);
   if(!products[+id]) {
     res.jsonp(404, {message: 'product not found'});
   } else {
