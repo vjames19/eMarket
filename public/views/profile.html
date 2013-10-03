@@ -10,8 +10,93 @@
         <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
     </div>
 
-    <div data-role="content" data-theme="b">
+    <div data-role="popup" id="popupMenu" data-theme="d">
+        <div style="padding:10px 20px;">
+            <h3>Choose An Action</h3>
+            <a href="#" data-role="button" data-icon="edit">Edit</a>
+            <a href="#" data-role="button" data-icon="delete">Delete</a>
+        </div>
+    </div>
 
+    <div data-role="content" data-theme="b">
+        <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+            <div data-role="collapsible">
+                <h2>Edit Mailing Addresses</h2>
+                <ul data-role="listview" data-theme="d" data-divider-theme="d">
+                    <li data-role="list-divider">Mailing Addresses on System<span class="ui-li-count">2</span></li>
+                    <li><a href="">
+                        <div class="ui-grid-a, text-center" style="font-size: 65%">
+                            <div class="ui-block-a"><strong>Name:&nbsp;<br>Address:&nbsp;<br>Country:&nbsp;<br>City:&nbsp;<br>Geographical
+                                Region:&nbsp;<br>ZipCode:&nbsp;<br>Telephone:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Juan Del Pueblo<br>Ruta #11<br>US<br>Margaritas<br>Virginia<br>080101<br>7775554444</em>
+                            </div>
+                        </div>
+                    </a>
+                        <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                           data-icon="gear" data-theme="c"></a>
+                    </li>
+                    <li><a href="">
+                        <div class="ui-grid-a, text-center" style="font-size: 65%">
+                            <div class="ui-block-a"><strong>Name:&nbsp;<br>Address:&nbsp;<br>Country:&nbsp;<br>City:&nbsp;<br>Geographical
+                                Region:&nbsp;<br>ZipCode:&nbsp;<br>Telephone:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Jose Del Pueblo<br>Ruta #11<br>US<br>Margaritas<br>Virginia<br>080101<br>7775554444</em>
+                            </div>
+                        </div>
+                    </a>
+                        <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                           data-icon="gear" data-theme="c"></a></li>
+                </ul>
+            </div>
+            <div data-role="collapsible">
+                <h2>Edit Billing Addresses</h2>
+                <ul data-role="listview" data-theme="d" data-divider-theme="d">
+                    <li data-role="list-divider">Billing Addresses on System<span class="ui-li-count">2</span></li>
+                    <li><a href="">
+                        <div class="ui-grid-a, text-center" style="font-size: 65%">
+                            <div class="ui-block-a"><strong>Name:&nbsp;<br>Address:&nbsp;<br>Country:&nbsp;<br>City:&nbsp;<br>Geographical
+                                Region:&nbsp;<br>ZipCode:&nbsp;<br>Telephone:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Juan Del Pueblo<br>Ruta #11<br>US<br>Margaritas<br>Virginia<br>080101<br>7775554444</em>
+                            </div>
+                        </div>
+                    </a>
+                        <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                           data-icon="gear" data-theme="c"></a>
+                    </li>
+                    <li><a href="">
+                        <div class="ui-grid-a, text-center" style="font-size: 65%">
+                            <div class="ui-block-a"><strong>Name:&nbsp;<br>Address:&nbsp;<br>Country:&nbsp;<br>City:&nbsp;<br>Geographical
+                                Region:&nbsp;<br>ZipCode:&nbsp;<br>Telephone:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Jose Del Pueblo<br>Ruta #11<br>US<br>Margaritas<br>Virginia<br>080101<br>7775554444</em>
+                            </div>
+                        </div>
+                    </a>
+                        <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                           data-icon="gear" data-theme="c"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="collapsible" data-iconpos="bottom" data-theme="b" data-content-theme="c">
+            <h2>My Ratings</h2>
+            <ul data-role="listview" data-theme="d" data-divider-theme="e">
+                <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count">****</span></li>
+                <li data-icon="false" style="text-align: center">
+                    <a href="#">
+                        <div class="ui-grid-a, text-center" style="text-align: center">
+                            <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Chencho<br><br>***</em></div>
+                        </div>
+                    </a>
+                </li>
+                <li data-icon="false" style="text-align: center">
+                    <a href="#">
+                        <div class="ui-grid-a, text-center">
+                            <div class="ui-block-a"><strong>User:&nbsp;<br><br>Rating:&nbsp;</strong></div>
+                            <div class="ui-block-b"><em>Juan<br><br>*****</em></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div data-role="footer" data-theme="a"><h1></h1></div>
