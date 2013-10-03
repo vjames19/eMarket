@@ -8,37 +8,59 @@
 }
 
 .ui-grid-a {
-    height:130px;
+    height: 130px;
 }
 
 .my-emarket-buying {
     line-height: 65px;
 }
+
 .categories {
-    line-height:65px;
+    line-height: 65px;
 }
+
 .sell-item {
-    line-height:65px;
+    line-height: 65px;
 }
+
 .recently-viewed {
-    line-height:65px;
+    line-height: 65px;
 }
+
 .notifications {
-    line-height:65px;
+    line-height: 65px;
+}
+
+.home-admin {
+    line-height: 65px;
 }
 
 .invoices {
-    line-height:65px;
+    line-height: 65px;
 }
+
 .payment-options {
-    line-height:65px;
+    line-height: 65px;
 }
+
 .profile {
-    line-height:65px;
+    line-height: 65px;
 }
 
 .settings {
-    line-height:65px;
+    line-height: 65px;
+}
+
+.user-accounts {
+    line-height: 65px;
+}
+
+.admin-accounts {
+    line-height: 65px;
+}
+
+.reports {
+    line-height: 65px;
 }
 
 p.index-text-size {
@@ -46,8 +68,8 @@ p.index-text-size {
 }
 
 .login-user {
-    left:35%;
-    width:30%;
+    left: 35%;
+    width: 30%;
 }
 
 
