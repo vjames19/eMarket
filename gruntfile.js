@@ -143,6 +143,12 @@ module.exports = function (grunt) {
           target: {
             files: uglyFiles('public/js/**/*.js')
           }
+        },
+        mochaTest: {
+          options: {
+            reporter: 'spec'
+          },
+          src: ['test/backend/**/*.js']
         }
       }
       // TODO : Add task to deploy in different environments (production, development).
@@ -164,5 +170,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('lint', ['jshint']);
 
-  grunt.registerTask('test', ['jshint', 'karma']);
+  grunt.registerTask('test-front', ['jshint', 'karma']);
+
+  grunt.registerTask('test-back', ['mochaTest']);
 };

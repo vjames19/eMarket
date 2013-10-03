@@ -72,5 +72,9 @@ p.index-text-size {
     width: 30%;
 }
 
-
+div.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
 
