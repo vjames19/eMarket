@@ -1,0 +1,81 @@
+<div data-role="page" data-theme="b" id="register-page"> <!-- data-role="page" delinate a page -->
+
+    <!-- Header of the page -->
+    <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+        <h1>Register</h1>
+
+        <a href="#login-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+
+        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+    </div>
+
+    <div data-role="content" data-theme="b">
+
+            <form action="#">
+                <h3>Personal Information</h3>
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" value="">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" value="">
+                <label for="mailing-address">Mailing Address</label>
+                <input type="text" id="mailing-address" value="">
+                <label for="select-country-mailing-address">Country</label>
+                <select id="select-country-mailing-address">
+                    <option value="USA">USA</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Dominican Republic">Dominican Republic</option>
+                    <option value="Cuba">Cuba</option>
+                </select>
+                <label for="select-state-mailing-address">State/Providence/Region</label>
+                <select id="select-state-mailing-address">
+                    <option value="Alabama">Alabama</option>
+                    <option value="Florida">Florida</option>
+                    <option value="New York">New York</option>
+                    <option value="California">California</option>
+                </select>
+                <label for="city-mailing-address">City</label>
+                <input type="text" id="city-mailing-address" value="">
+                <label for="zip-code-mailing-address">Zip Code</label>
+                <input type="number" id="zip-code-mailing-address" value="">
+                <table>
+                    <tr> <!-- Table Row, is just one row -->
+                        <td> <!-- Table Data is for the column -->
+                            <label for="billing-address">Billing Address</label>
+                        </td>
+                        <td>
+                            <label><input type="checkbox" id="same-as"/>Same as Mailing Address</label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="text" id="billing-address" value="">
+                <label for="select-country-billing-address">Country</label>
+                <select id="select-country-billing-address">
+                    <option value="USA">USA</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Dominican Republic">Dominican Republic</option>
+                    <option value="Cuba">Cuba</option>
+                </select>
+                <label for="select-state-billing-address">State/Providence/Region</label>
+                <select id="select-state-billing-address">
+                    <option value="Alabama">Alabama</option>
+                    <option value="Florida">Florida</option>
+                    <option value="New York">New York</option>
+                    <option value="California">California</option>
+                </select>
+                <label for="city-billing-address">City</label>
+                <input type="text" id="city-billing-address" value="">
+                <label for="zip-code-billing-address">Zip Code</label>
+                <input type="number" id="zip-code-billing-address" value="">
+                <label for="telephone">Telephone</label>
+                <input type="tel" id="telephone" value="">
+
+                <a href="" data-role="button" data-icon="check" data-transition="slide">Continue to Next Step</a>
+                <!--<button type="submit" data-theme="b" data-icon="check">Sign in</button>-->
+            </form>
+
+
+
+    </div>
+</div>
