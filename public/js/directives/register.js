@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('registerUser', function () {
+    .directive('register', function () {
       return {
-        templateUrl: 'views/registerUser.html',
+        templateUrl: 'views/register.html',
         restrict: 'E',
         scope: {},
         replace: true
