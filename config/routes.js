@@ -86,6 +86,15 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/carts/:cartId', users.updateCart);
   app.del('/api/users/:userId/carts/:cartId', users.deleteCart);
 
+  app.param('userBidId', users.findUserBidById);
+  app.get('/api/users/:userId/bids', users.readAllUserBids);
+  app.post('/api/users/:userId/bids', users.createUserBid);
+  app.get('/api/users/:userId/bids/:userBidId', users.readUserBid);
+  app.put('/api/users/:userId/bids/:userBidId', users.updateUserBid);
+  app.del('/api/users/:userId/bids/:userBidId', users.deleteUserBid);
+
+
+
   // Category Routes
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);

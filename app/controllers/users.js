@@ -793,3 +793,55 @@ exports.deleteCart = function (req, res) {
   res.jsonp(req.cart);
 };
 
+var bids = {
+  1: {
+    bidId: 1,
+    userId: 1,
+    productId: 1,
+    bidAmount: 19.99,
+    bidTime: '07/19/2013:19:20:35 EST'
+  },
+  2: {
+    bidId: 2,
+    userId: 2,
+    productId: 2,
+    bidAmount: 29.99,
+    bidTime: '07/10/2013:14:13:42 EST'
+  }
+};
+
+exports.findUserBidById = function (req, res, next, id) {
+  if (!bids[+id]) {
+    res.jsonp(404, {message: 'User Bid Not Found'});
+  } else {
+    req.bid = bids[+id];
+    next();
+  }
+};
+
+exports.readAllUserBids = function (req, res) {
+  res.jsonp(_.values(bids));
+};
+
+exports.createUserBid = function (req, res) {
+  var bid = req.body;
+  bid.bidId = _.keys(bids).length + 1;
+  bids[bid.bidId] = bid;
+  res.jsonp(bid);
+};
+
+exports.readUserBid = function (req, res) {
+  res.jsonp(req.bid);
+};
+
+exports.updateUserBid = function (req, res) {
+  _.extend(req.bid, req.body);
+  bids[req.bid.bidId] = req.bid;
+  res.jsonp(req.bid);
+};
+
+exports.deleteUserBid = function (req, res) {
+  delete bids[req.bid.bidId];
+  res.jsonp(req.bid);
+};
+
