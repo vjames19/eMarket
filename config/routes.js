@@ -121,6 +121,11 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/purchases/:purchaseId', users.updatePurchase);
   app.del('/api/users/:userId/purchases/:purchaseId', users.deletePurchase);
 
+  // User Ratings
+  app.param('ratingId', users.findRatingById);
+  app.get('/api/users/:userId/ratings', users.readAllRatings);
+  app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
+
 //=================NON USER ROUTES================//
 
   // Category Routes

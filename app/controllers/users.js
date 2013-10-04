@@ -730,7 +730,7 @@ exports.deleteUnsoldProduct = function (req, res) {
   res.jsonp(req.unsoldProduct);
 };
 
-
+// Carts
 var carts = {
   1: {
     cartId: 1,
@@ -793,6 +793,7 @@ exports.deleteCart = function (req, res) {
   res.jsonp(req.cart);
 };
 
+// Bids
 var bids = {
   1: {
     bidId: 1,
@@ -845,6 +846,7 @@ exports.deleteUserBid = function (req, res) {
   res.jsonp(req.bid);
 };
 
+// Browsed Items
 var browsedItems =
 {
   1: {
@@ -896,6 +898,7 @@ exports.deleteBrowsedItem = function (req, res) {
   res.jsonp(req.browsedItem);
 };
 
+// Purchases
 var purchases = {
     1: {
       purchaseId: 1,
@@ -946,4 +949,27 @@ res.jsonp(req.purchase);
 exports.deletePurchase = function (req, res) {
 delete purchases[req.purchase.purchaseId];
 res.jsonp(req.purchase);
+};
+
+var ratings = {
+  1: {ratingId : 1, raterId: 2, rating: '***'},
+  2: {ratingId : 2, raterId: 6, rating: '**'},
+  3: {ratingId : 3, raterId: 10, rating: '****'}
+};
+
+exports.findRatingById = function (req, res, next, id) {
+  if (!ratings[+id]) {
+    res.jsonp(404, {message: 'Rating Item Not Found'});
+  } else {
+    req.rating = ratings[+id];
+    next();
+  }
+};
+
+exports.readAllRatings = function (req, res) {
+  res.jsonp(_.values(ratings));
+};
+
+exports.readRating = function (req, res) {
+  res.jsonp(req.rating);
 };
