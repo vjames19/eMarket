@@ -895,3 +895,55 @@ exports.deleteBrowsedItem = function (req, res) {
   delete browsedItems[req.browsedItem.browsedItemId];
   res.jsonp(req.browsedItem);
 };
+
+var purchases = {
+    1: {
+      purchaseId: 1,
+      productId: 1,
+      quantity: 2,
+      soldPrice: 599.99,
+      date: '07/30/2013:01:01:01 EST'
+    },
+    2: {
+      purchaseId: 2,
+      productId: 2,
+      quantity: 4,
+      soldPrice: 999.99,
+      date: '07/30/2013:01:01:01 EST'
+    }
+};
+
+exports.findPurchaseById = function (req, res, next, id) {
+if (!purchases[+id]) {
+  res.jsonp(404, {message: 'Purchased Item Not Found'});
+} else {
+  req.purchase = purchases[+id];
+  next();
+}
+};
+
+exports.readAllPurchases = function (req, res) {
+res.jsonp(_.values(purchases));
+};
+
+exports.createPurchase = function (req, res) {
+var purchase = req.body;
+purchase.purchaseId = _.keys(purchases).length + 1;
+purchases[purchase.purchaseId] = purchase;
+res.jsonp(purchase);
+};
+
+exports.readPurchase = function (req, res) {
+res.jsonp(req.purchase);
+};
+
+exports.updatePurchase = function (req, res) {
+_.extend(req.purchase, req.body);
+purchases[req.purchase.purchaseId] = req.purchase;
+res.jsonp(req.purchase);
+};
+
+exports.deletePurchase = function (req, res) {
+delete purchases[req.purchase.purchaseId];
+res.jsonp(req.purchase);
+};
