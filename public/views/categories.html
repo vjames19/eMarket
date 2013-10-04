@@ -13,29 +13,9 @@
     <div data-role="content">
         <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
             <li data-role="list-divider">Search by Categories</li>
-            <li><a href="">Category 1</a>
-                <!--<ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">-->
-                    <!--<li data-role="list-divider">Category 1</li>-->
-                    <!--<li><a href="">Subcategory 1</a>-->
-                    <!--<li><a href="">Subcategory 2</a>-->
-                    <!--<li><a href="">Subcategory 3</a>-->
-                <!--</ul>-->
-            </li>
-
-            <li><a href="">Category 2</a></li>
-            <li><a href="">Category 3</a></li>
-
+            <li ng-repeat="category in categories"><a href="">{{ category.categoryName }}</a></li>
         </ul>
     </div>
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
-    <!--<script type="text/javascript">-->
-        <!--$(':jqmData(url^=newspage)').live('pagebeforecreate', function (event) {-->
-            <!--//var title =  $(':jqmData(url^=newspage)').find(':jqmData(role=header) h1').html();-->
-            <!--//$(this).filter(':jqmData(url*=ui-page)').find(':jqmData(role=header)').html('<h1>' + title + '</h1>');-->
-            <!--$(this).filter(':jqmData(url*=ui-page)').find(':jqmData(role=header)').html('<a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>');-->
-
-        <!--});-->
-    <!--</script>-->
-
 </div>
