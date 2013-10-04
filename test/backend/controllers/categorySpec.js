@@ -14,8 +14,8 @@ describe('Category resource', function(){
           .expect('Content-Type', /json/)
           .expect(200)
           .end(function(err, res) {
-            if(err) done(err);
-            expect(res.body).to.have.length(3);
+            if(err) {done(err);}
+            expect(res.body.length).to.eql(3);
             done();
           });
     });
