@@ -105,6 +105,15 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/bids/:userBidId', users.updateUserBid);
   app.del('/api/users/:userId/bids/:userBidId', users.deleteUserBid);
 
+  // User Browsed Item Routes
+  app.param('browsedItemId', users.findBrowsedItemById);
+  app.get('/api/users/:userId/BrowsedItems', users.readAllBrowsedItems);
+  app.post('/api/users/:userId/BrowsedItems', users.createBrowsedItem);
+  app.get('/api/users/:userId/BrowsedItems/:browsedItemId', users.readBrowsedItem);
+  app.put('/api/users/:userId/BrowsedItems/:browsedItemId', users.updateBrowsedItem);
+  app.del('/api/users/:userId/BrowsedItems/:browsedItemId', users.deleteBrowsedItem);
+
+
 //=================NON USER ROUTES================//
 
   // Category Routes

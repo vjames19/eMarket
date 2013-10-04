@@ -845,3 +845,53 @@ exports.deleteUserBid = function (req, res) {
   res.jsonp(req.bid);
 };
 
+var browsedItems =
+{
+  1: {
+    browsedItemId: 1,
+    userId: 1,
+    productId: 1,
+    dateBrowsed: '07/10/2013:14:13:42 EST'
+  },
+  2: {
+    browsedItemId: 2,
+    userId: 2,
+    productId: 2,
+    dateBrowsed: '07/30/2013:01:01:01 EST'
+  }
+};
+
+exports.findBrowsedItemById = function (req, res, next, id) {
+  if (!browsedItems[+id]) {
+    res.jsonp(404, {message: 'Browsed Item Not Found'});
+  } else {
+    req.browsedItem = browsedItems[+id];
+    next();
+  }
+};
+
+exports.readAllBrowsedItems = function (req, res) {
+  res.jsonp(_.values(browsedItems));
+};
+
+exports.createBrowsedItem = function (req, res) {
+  var browsedItem = req.body;
+  browsedItem.browsedItemId = _.keys(browsedItems).length + 1;
+  browsedItems[browsedItem.browsedItemId] = browsedItem;
+  res.jsonp(browsedItem);
+};
+
+exports.readBrowsedItem = function (req, res) {
+  res.jsonp(req.browsedItem);
+};
+
+exports.updateBrowsedItem = function (req, res) {
+  _.extend(req.browsedItem, req.body);
+  browsedItems[req.browsedItem.browsedItemId] = req.browsedItem;
+  res.jsonp(req.browsedItem);
+};
+
+exports.deleteBrowsedItem = function (req, res) {
+  delete browsedItems[req.browsedItem.browsedItemId];
+  res.jsonp(req.browsedItem);
+};
