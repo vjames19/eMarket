@@ -20,8 +20,8 @@ var users = {
 };
 
 
-exports.findUserById = function(req, res, next, id) {
-  if(!users[+id]) {
+exports.findUserById = function (req, res, next, id) {
+  if (!users[+id]) {
     res.jsonp(404, {message: 'User not found'});
   } else {
     req.user = users[+id];
@@ -32,14 +32,14 @@ exports.findUserById = function(req, res, next, id) {
 /**
  * List of users
  */
-exports.readAllUsers = function(req, res) {
+exports.readAllUsers = function (req, res) {
   res.jsonp(_.values(users));
 };
 
 /**
  * Create a user
  */
-exports.createUser = function(req, res) {
+exports.createUser = function (req, res) {
   var user = req.body;
   user.userId = _.keys(users).length + 1;
   users[user.userId] = user;
@@ -49,14 +49,14 @@ exports.createUser = function(req, res) {
 /**
  * Read a user
  */
-exports.readUser = function(req, res) {
+exports.readUser = function (req, res) {
   res.jsonp(req.user);
 };
 
 /**
  * Update a user
  */
-exports.updateUser = function(req, res) {
+exports.updateUser = function (req, res) {
   _.extend(req.user, req.body);
   users[req.user.userId] = req.user;
   res.jsonp(req.user);
@@ -65,7 +65,7 @@ exports.updateUser = function(req, res) {
 /**
  * Delete a user
  */
-exports.deleteUser = function(req, res) {
+exports.deleteUser = function (req, res) {
   delete users[req.user.userId];
   res.jsonp(req.user);
 };
@@ -84,37 +84,37 @@ var drafts = {
   }
 };
 
-exports.findDraftById = function(req, res, next, id) {
-  if(!drafts[+id]) {
-    res.jsonp(404, {message:'Draft not found'});
+exports.findDraftById = function (req, res, next, id) {
+  if (!drafts[+id]) {
+    res.jsonp(404, {message: 'Draft not found'});
   } else {
     req.draft = drafts[+id];
     next();
   }
 };
 
-exports.readAllDrafts = function(req, res) {
+exports.readAllDrafts = function (req, res) {
   res.jsonp(_.values(drafts));
 };
 
-exports.createDraft = function(req, res) {
+exports.createDraft = function (req, res) {
   var draft = req.body;
   draft.draftId = _.keys(drafts).length + 1;
   drafts[draft.draftId] = draft;
   res.jsonp(draft);
 };
 
-exports.readDraft = function(req, res) {
+exports.readDraft = function (req, res) {
   res.jsonp(req.draft);
 };
 
-exports.updateDraft = function(req, res) {
+exports.updateDraft = function (req, res) {
   _.extend(req.draft, req.body);
   drafts[req.draft.draftId] = req.draft;
   res.jsonp(req.draft);
 };
 
-exports.deleteDraft = function(req, res) {
+exports.deleteDraft = function (req, res) {
   delete drafts[req.draft.draftId];
   res.jsonp(req.draft);
 };
@@ -155,37 +155,37 @@ var invoices = {
   }
 };
 
-exports.findInvoiceById = function(req, res, next, id) {
-  if(!invoices[+id]) {
-    res.jsonp(404, {message:'Invoice not found'});
+exports.findInvoiceById = function (req, res, next, id) {
+  if (!invoices[+id]) {
+    res.jsonp(404, {message: 'Invoice not found'});
   } else {
     req.invoice = invoices[+id];
     next();
   }
 };
 
-exports.readAllInvoices = function(req, res) {
+exports.readAllInvoices = function (req, res) {
   res.jsonp(_.values(invoices));
 };
 
-exports.createInvoice = function(req, res) {
+exports.createInvoice = function (req, res) {
   var invoice = req.body;
   invoice.invoiceId = _.keys(invoices).length + 1;
   invoices[invoice.invoiceId] = invoice;
   res.jsonp(invoice);
 };
 
-exports.readInvoice = function(req, res) {
+exports.readInvoice = function (req, res) {
   res.jsonp(req.invoice);
 };
 
-exports.updateInvoice = function(req, res) {
+exports.updateInvoice = function (req, res) {
   _.extend(req.invoice, req.body);
   invoices[req.invoice.invoiceId] = req.invoice;
   res.jsonp(req.invoice);
 };
 
-exports.deleteInvoice = function(req, res) {
+exports.deleteInvoice = function (req, res) {
   delete invoices[req.invoice.invoiceId];
   res.jsonp(req.invoice);
 };
@@ -233,8 +233,8 @@ var mailAddresses = {
   }
 };
 
-exports.findMailAddressById = function(req, res, next, id) {
-  if(!mailAddresses[+id]) {
+exports.findMailAddressById = function (req, res, next, id) {
+  if (!mailAddresses[+id]) {
     res.jsonp(404, {message: 'Mail Address Not Found'});
   } else {
     req.mailAddress = mailAddresses[+id];
@@ -242,28 +242,28 @@ exports.findMailAddressById = function(req, res, next, id) {
   }
 };
 
-exports.readAllMailAddresses = function(req, res) {
+exports.readAllMailAddresses = function (req, res) {
   res.jsonp(_.values(mailAddresses));
 };
 
-exports.createMailAddress = function(req, res) {
+exports.createMailAddress = function (req, res) {
   var mailAddress = req.body;
   mailAddress.mailAddressId = _.keys(mailAddresses).length + 1;
   mailAddresses[mailAddress.mailAddressId] = mailAddress;
   res.jsonp(mailAddress);
 };
 
-exports.readMailAddress = function(req, res) {
+exports.readMailAddress = function (req, res) {
   res.jsonp(req.mailAddress);
 };
 
-exports.updateMailAddress = function(req, res) {
+exports.updateMailAddress = function (req, res) {
   _.extend(req.mailAddress, req.body);
   mailAddresses[req.mailAddress.mailAddressId] = req.mailAddress;
   res.jsonp(req.mailAddress);
 };
 
-exports.deleteMailAddress = function(req, res) {
+exports.deleteMailAddress = function (req, res) {
   delete mailAddresses[req.mailAddress.mailAddressId];
   res.jsonp(req.mailAddress);
 };
@@ -312,8 +312,8 @@ var billAddresses = {
   }
 };
 
-exports.findBillAddressById = function(req, res, next, id) {
-  if(!billAddresses[+id]) {
+exports.findBillAddressById = function (req, res, next, id) {
+  if (!billAddresses[+id]) {
     res.jsonp(404, {message: 'Mail Address Not Found'});
   } else {
     req.billAddress = billAddresses[+id];
@@ -321,28 +321,28 @@ exports.findBillAddressById = function(req, res, next, id) {
   }
 };
 
-exports.readAllBillAddresses = function(req, res) {
+exports.readAllBillAddresses = function (req, res) {
   res.jsonp(_.values(billAddresses));
 };
 
-exports.createBillAddress = function(req, res) {
+exports.createBillAddress = function (req, res) {
   var billAddress = req.body;
   billAddress.billAddressId = _.keys(billAddresses).length + 1;
   billAddresses[billAddress.billAddressId] = billAddress;
   res.jsonp(billAddress);
 };
 
-exports.readBillAddress = function(req, res) {
+exports.readBillAddress = function (req, res) {
   res.jsonp(req.billAddress);
 };
 
-exports.updateBillAddress = function(req, res) {
+exports.updateBillAddress = function (req, res) {
   _.extend(req.billAddress, req.body);
   billAddresses[req.billAddress.billAddressId] = req.billAddress;
   res.jsonp(req.billAddress);
 };
 
-exports.deleteBillAddress = function(req, res) {
+exports.deleteBillAddress = function (req, res) {
   delete billAddresses[req.billAddress.billAddressId];
   res.jsonp(req.billAddress);
 };
@@ -372,8 +372,8 @@ var notifications = {
   }
 };
 
-exports.findNotificationById = function(req, res, next, id) {
-  if(!notifications[+id]) {
+exports.findNotificationById = function (req, res, next, id) {
+  if (!notifications[+id]) {
     res.jsonp(404, {message: 'Mail Address Not Found'});
   } else {
     req.notification = notifications[+id];
@@ -381,28 +381,28 @@ exports.findNotificationById = function(req, res, next, id) {
   }
 };
 
-exports.readAllNotifications = function(req, res) {
+exports.readAllNotifications = function (req, res) {
   res.jsonp(_.values(notifications));
 };
 
-exports.createNotification = function(req, res) {
+exports.createNotification = function (req, res) {
   var notification = req.body;
   notification.notificationId = _.keys(notifications).length + 1;
   notifications[notification.notificationId] = notification;
   res.jsonp(notification);
 };
 
-exports.readNotification = function(req, res) {
+exports.readNotification = function (req, res) {
   res.jsonp(req.notification);
 };
 
-exports.updateNotification = function(req, res) {
+exports.updateNotification = function (req, res) {
   _.extend(req.notification, req.body);
   notifications[req.notification.notificationId] = req.notification;
   res.jsonp(req.notification);
 };
 
-exports.deleteNotification = function(req, res) {
+exports.deleteNotification = function (req, res) {
   delete notifications[req.notification.notificationId];
   res.jsonp(req.notification);
 };
@@ -415,7 +415,8 @@ var creditCards = {
     creditCardType: 'Visa',
     creditCardExpDate: '07/07/2018',
     creditCardNumber: 1234567887654321,
-    creditCardCvs: 123
+    creditCardCvs: 123,
+    creditCardBillingAddressId: 1
   },
   2: {
     creditCardId: 2,
@@ -423,7 +424,8 @@ var creditCards = {
     creditCardType: 'MasterCard',
     creditCardExpDate: '09/09/2028',
     creditCardNumber: 8765567843211234,
-    creditCardCvs: 7890
+    creditCardCvs: 7890,
+    creditCardBillingAddressId: 2
   },
   3: {
     creditCardId: 3,
@@ -431,7 +433,8 @@ var creditCards = {
     creditCardType: 'AmericanExpress',
     creditCardExpDate: '11/11/2038',
     creditCardNumber: 8172635445362718,
-    creditCardCvs: 4567
+    creditCardCvs: 4567,
+    creditCardBillingAddressId: 3
   }
 };
 
@@ -442,7 +445,8 @@ var bankAccounts = {
     bankAccountName: 'Apu',
     bankAccountType: 'Checking',
     bankAccountNumber: 123456789,
-    bankAccountRouting: 123456789
+    bankAccountRouting: 123456789,
+    bankBillingAddressId: 1
   },
   2: {
     bankId: 2,
@@ -450,7 +454,8 @@ var bankAccounts = {
     bankAccountName: 'Amy',
     bankAccountType: 'Savings',
     bankAccountNumber: 12345678909876543,
-    bankAccountRouting: 987654321
+    bankAccountRouting: 987654321,
+    bankBillingAddressId: 2
   },
   3: {
     bankId: 3,
@@ -458,14 +463,15 @@ var bankAccounts = {
     bankAccountName: 'Gil',
     bankAccountType: 'Growth',
     bankAccountNumber: 1029384756758,
-    bankAccountRouting: 192834756
+    bankAccountRouting: 192834756,
+    bankBillingAddressId: 3
   }
 };
 
 var soldProducts = {
   1: {
     productId: 1,
-    productSeller: 1,
+    productSellerId: 1,
     productCategory: 'books',
     productName: 'harry potter',
     productBuyItNowPrice: 100,
@@ -484,7 +490,7 @@ var soldProducts = {
   },
   2: {
     productId: 2,
-    productSeller: 9,
+    productSellerId: 9,
     productCategory: 'computers',
     productName: 'alienware',
     productBuyItNowPrice: 1000.99,
@@ -503,7 +509,7 @@ var soldProducts = {
   },
   3: {
     productId: 3,
-    productSeller: 403,
+    productSellerId: 403,
     productCategory: 'shirts',
     productName: 'American Eaglo Shirt',
     productBuyItNowPrice: 49.99,
@@ -525,7 +531,7 @@ var soldProducts = {
 var unsoldProducts = {
   1: {
     productId: 1,
-    productSeller: 1,
+    productSellerId: 1,
     productCategory: 'books',
     productName: 'harry potter',
     productBuyItNowPrice: 100,
@@ -543,7 +549,7 @@ var unsoldProducts = {
   },
   2: {
     productId: 2,
-    productSeller: 9,
+    productSellerId: 9,
     productCategory: 'computers',
     productName: 'alienware',
     productBuyItNowPrice: 1000.99,
@@ -561,7 +567,7 @@ var unsoldProducts = {
   },
   3: {
     productId: 3,
-    productSeller: 403,
+    productSellerId: 403,
     productCategory: 'shirts',
     productName: 'American Eaglo Shirt',
     productBuyItNowPrice: 49.99,

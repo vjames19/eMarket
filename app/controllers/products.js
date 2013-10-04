@@ -5,19 +5,39 @@ var _ = require('underscore');
 var products = {
   1: {
     productId: 1,
-    productSeller: 1,
+    productSellerId: 1,
     productCategory: 'books',
     productName: 'harry potter',
     productBuyItNowPrice: 100,
-    productStartingBidPrice: 80
+    productStartingBidPrice: 80,
+    productBidEndDate: '07/07/2007',
+    productShippingPrice: 18.99,
+    productQuantity: 5,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/1/z98how.png',
+      productBrand: 'pearson',
+      productModel: 'IBN:19238476',
+      productDimensions: '30x29x49'
+    }
   },
   2: {
     productId: 2,
-    productSeller: 2,
-    productCategory: 'cars',
-    productName: '3 potes',
-    productBuyItNowPrice: 1000,
-    productStartingBidPrice: 500
+    productSellerId: 9,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 1000.99,
+    productStartingBidPrice: 500.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantity: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    }
   }
 };
 
