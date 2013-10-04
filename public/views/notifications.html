@@ -13,17 +13,11 @@
 
     <div data-role="content">
         <ul data-role="listview" data-theme="c" data-inset="true">
-            <li data-icon="false" >
-                <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop">
-                    <img src="img/envelope.png">Unread <br> Preview Message</a>
+            <li data-icon="false" ng-repeat="notification in notifications">
+                <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
+                    ng-click="setMessage(notification)">
+                    <img src="img/envelope.png">{{ notification.state }}<br>{{ notification.message }}</a>
             </li>
-            <li data-icon="false" >
-                <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop">
-                    <img src="img/envelope.png">Unread <br> sdashds</a>
-            </li>
-            <li data-icon="false" ><a href=""><img src="img/envelope.png">Unread <br> sdashds</a></li>
-            <li data-icon="false" ><a href=""><img src="img/envelope.png">Read <br> sdashds</a></li>
-            <li data-icon="false" ><a href=""><img src="img/envelope.png">Read <br> sdashds</a></li>
         </ul>
     </div>
 
@@ -32,6 +26,6 @@
     <div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width: 320px">
         <a href="#notifications" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
            data-iconpos="notext" class="ui-btn-right">Close</a>
-        <p>You won the new AlienWare Fusion. Congrats!</p>
+        <p id="notificationMessage"></p>
     </div>
 </div>
