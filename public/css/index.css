@@ -77,3 +77,10 @@ div.footer {
     bottom: 0;
     width: 100%
 }
+
+img.center-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
