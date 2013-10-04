@@ -9,6 +9,7 @@ module.exports = function (app, passport, auth) {
   });
   // TODO(vjames19): Secure users api
 
+  // User Routes
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/api/users', users.createUser);
@@ -16,6 +17,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId', users.updateUser);
   app.del('/api/users/:userId', users.deleteUser);
 
+  // User Draft Routes
   app.param('draftId', users.findDraftById);
   app.get('/api/users/:userId/drafts', users.readAllDrafts);
   app.post('/api/users/:userId/drafts', users.createDraft);
@@ -23,6 +25,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/drafts/:draftId', users.updateDraft);
   app.del('/api/users/:userId/drafts/:draftId', users.deleteDraft);
 
+  // User Invoice Routes
   app.param('invoiceId', users.findInvoiceById);
   app.get('/api/users/:userId/invoices', users.readAllInvoices);
   app.post('/api/users/:userId/invoices', users.createInvoice);
@@ -30,6 +33,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/invoices/:invoiceId', users.updateInvoice);
   app.del('/api/users/:userId/invoices/:invoiceId', users.deleteInvoice);
 
+  // User Mailing Addresses Routes
   app.param('mailAddressId', users.findMailAddressById);
   app.get('/api/users/:userId/mailAddresses', users.readAllMailAddresses);
   app.post('/api/users/:userId/mailAddresses', users.createMailAddress);
@@ -37,6 +41,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/mailAddresses/:mailAddressId', users.updateMailAddress);
   app.del('/api/users/:userId/mailAddresses/:mailAddressId', users.deleteMailAddress);
 
+  // User Billing Addresses Routes
   app.param('billAddressId', users.findBillAddressById);
   app.get('/api/users/:userId/billAddresses', users.readAllBillAddresses);
   app.post('/api/users/:userId/billAddresses', users.createBillAddress);
@@ -44,6 +49,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/billAddresses/:billAddressId', users.updateBillAddress);
   app.del('/api/users/:userId/billAddresses/:billAddressId', users.deleteBillAddress);
 
+  // User Notifications Routes
   app.param('notificationId', users.findNotificationById);
   app.get('/api/users/:userId/notifications', users.readAllNotifications);
   app.post('/api/users/:userId/notifications', users.createNotification);
@@ -51,6 +57,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/notifications/:notificationId', users.updateNotification);
   app.del('/api/users/:userId/notifications/:notificationId', users.deleteNotification);
 
+  // User Credit Card Routes
   app.param('creditCardId', users.findCreditCardById);
   app.get('/api/users/:userId/creditCards', users.readAllCreditCards);
   app.post('/api/users/:userId/creditCards', users.createCreditCard);
@@ -58,6 +65,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/creditCards/:creditCardId', users.updateCreditCard);
   app.del('/api/users/:userId/creditCards/:creditCardId', users.deleteCreditCard);
 
+  // User Bank Account Routes
   app.param('bankId', users.findBankAccountById);
   app.get('/api/users/:userId/banks', users.readAllBankAccounts);
   app.post('/api/users/:userId/banks', users.createBankAccount);
@@ -65,6 +73,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/banks/:bankId', users.updateBankAccount);
   app.del('/api/users/:userId/banks/:bankId', users.deleteBankAccount);
 
+  // User Sold Products Routes
   app.param('soldProductId', users.findSoldProductById);
   app.get('/api/users/:userId/soldProducts', users.readAllSoldProducts);
   app.post('/api/users/:userId/soldProducts', users.createSoldProduct);
@@ -72,6 +81,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/soldProducts/:soldProductId', users.updateSoldProduct);
   app.del('/api/users/:userId/soldProducts/:soldProductId', users.deleteSoldProduct);
 
+  // User Unsold Products Routes
   app.param('unsoldProductId', users.findUnsoldProductById);
   app.get('/api/users/:userId/unsoldProducts', users.readAllUnsoldProducts);
   app.post('/api/users/:userId/unsoldProducts', users.createUnsoldProduct);
@@ -79,6 +89,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/unsoldProducts/:unsoldProductId', users.updateUnsoldProduct);
   app.del('/api/users/:userId/unsoldProducts/:unsoldProductId', users.deleteUnsoldProduct);
 
+  // User Cart Routes
   app.param('cartId', users.findCartById);
   app.get('/api/users/:userId/carts', users.readAllCarts);
   app.post('/api/users/:userId/carts', users.createCart);
@@ -86,6 +97,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/carts/:cartId', users.updateCart);
   app.del('/api/users/:userId/carts/:cartId', users.deleteCart);
 
+  // User Bid Routes
   app.param('userBidId', users.findUserBidById);
   app.get('/api/users/:userId/bids', users.readAllUserBids);
   app.post('/api/users/:userId/bids', users.createUserBid);
@@ -93,7 +105,7 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/bids/:userBidId', users.updateUserBid);
   app.del('/api/users/:userId/bids/:userBidId', users.deleteUserBid);
 
-
+//=================NON USER ROUTES================//
 
   // Category Routes
   var categories = require('../app/controllers/categories');
