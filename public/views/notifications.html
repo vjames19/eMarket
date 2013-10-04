@@ -15,7 +15,7 @@
         <ul data-role="listview" data-theme="c" data-inset="true">
             <li data-icon="false" ng-repeat="notification in notifications">
                 <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
-                    ng-click="setMessage(notification)">
+                    ng-click="setMessage(notification)" class="wrap-text">
                     <img src="img/envelope.png" class="center-image">{{ notification.state }}<br>{{ notification.message }}</a>
             </li>
         </ul>
@@ -26,6 +26,6 @@
     <div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width: 320px">
         <a href="#notifications" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
            data-iconpos="notext" class="ui-btn-right">Close</a>
-        <p id="notificationMessage"></p>
+        <p id="notificationMessage" class="wrap-text"></p>
     </div>
 </div>

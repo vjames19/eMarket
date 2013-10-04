@@ -84,3 +84,8 @@ img.center-image {
     bottom: 0;
     margin: auto;
 }
+
+.wrap-text {
+    white-space: normal !important;
+    font-size: 90%;
+}
