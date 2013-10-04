@@ -36,6 +36,13 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/mailAddresses/:mailAddressId', users.updateMailAddress);
   app.del('/api/users/:userId/mailAddresses/:mailAddressId', users.deleteMailAddress);
 
+  app.param('billAddressId', users.findBillAddressById);
+  app.get('/api/users/:userId/billAddresses', users.readAllBillAddresses);
+  app.post('/api/users/:userId/billAddresses', users.createBillAddress);
+  app.get('/api/users/:userId/billAddresses/:billAddressId', users.readBillAddress);
+  app.put('/api/users/:userId/billAddresses/:billAddressId', users.updateBillAddress);
+  app.del('/api/users/:userId/billAddresses/:billAddressId', users.deleteBillAddress);
+
 
   // Category Routes
   var categories = require('../app/controllers/categories');
