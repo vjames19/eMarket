@@ -20,9 +20,11 @@
     </div>
 
     <div data-role="content">
-        <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
-            <li data-role="list-divider">Drafts</li>
-            <li><a href="">Nexus 5</a></li>
+        <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true">
+            <li data-role="list-divider">Drafts<span class="ui-li-count">{{drafts.length}}</span></li>
+            <li ng-repeat="draft in drafts">
+                <a href="">{{draft.productName}}</a>
+            </li>
         </ul>
     </div>
 

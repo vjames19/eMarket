@@ -19,12 +19,16 @@
     </div>
 
     <div data-role="content">
-        <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
+        <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true">
             <li data-role="list-divider">Sold</li>
-            <li><a href="">Ultrabook</a></li>
+            <li ng-repeat="soldProduct in soldProducts">
+                <a href="#item-view" ng-click="setItem(soldProduct)">{{soldProduct.productName}}</a>
+            </li>
 
             <li data-role="list-divider">Unsold</li>
-            <li><a href="">Ultra</a></li>
+            <li ng-repeat="unsoldProduct in unsoldProducts">
+                <a href="#item-view" ng-click="setItem(unsoldProduct)">{{unsoldProduct.productName}}</a>
+            </li>
         </ul>
     </div>
 

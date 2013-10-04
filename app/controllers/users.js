@@ -74,13 +74,47 @@ exports.deleteUser = function (req, res) {
 var drafts = {
   1: {
     draftId: 1,
-    userId: 1,
-    specId: 1
+    userFirstName: 'Chencho',
+    userMiddleName: 'Mata',
+    userLastName: 'Vaca',
+    userTelephone: '787-459-6285',
+    productSellerId: 1,
+    productCategory: 'books',
+    productName: 'harry potter',
+    productBuyItNowPrice: null,
+    productStartingBidPrice: null,
+    productBidEndDate: '07/07/2007',
+    productShippingPrice: null,
+    productQuantity: 5,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/1/z98how.png',
+      productBrand: 'pearson',
+      productModel: 'IBN:19238476',
+      productDimensions: '30x29x49'
+    }
   },
   2: {
     draftId: 2,
-    userId: 2,
-    specId: 2
+    userFirstName: 'Chencho',
+    userMiddleName: 'Mata',
+    userLastName: 'Vaca',
+    userTelephone: '787-459-6285',
+    productSellerId: 9,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: null,
+    productStartingBidPrice: null,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: null,
+    productQuantity: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    }
   }
 };
 
@@ -899,16 +933,44 @@ exports.deleteBrowsedItem = function (req, res) {
 var purchases = {
     1: {
       purchaseId: 1,
-      productId: 1,
+      productCategory: 'computers',
+      productName: 'alienware',
+      productBuyItNowPrice: 599.99,
+      productStartingBidPrice: 500.99,
+      productCurrentBidPrice: 800.99,
+      productBidEndDate: '07/07/2008',
+      productShippingPrice: 8.99,
+      productQuantitySold: 3,
+      productDescription: {
+        productCondition: 'Refurbished',
+        productPicture: '/img/products/users/9/z98gyu.png',
+        productBrand: 'dell',
+        productModel: 'M179385',
+        productDimensions: '19x30x25'
+      },
       quantity: 2,
-      soldPrice: 599.99,
+      soldPrice: 1199.99,
       date: '07/30/2013:01:01:01 EST'
     },
     2: {
       purchaseId: 2,
-      productId: 2,
+      productCategory: 'computers',
+      productName: 'dell',
+      productBuyItNowPrice: 16.99,
+      productStartingBidPrice: 5.99,
+      productCurrentBidPrice: 8.99,
+      productBidEndDate: '07/07/2008',
+      productShippingPrice: 8.99,
+      productQuantitySold: 3,
+      productDescription: {
+        productCondition: 'New',
+        productPicture: '/img/products/users/9/z98gyu.png',
+        productBrand: 'dell',
+        productModel: 'M179385',
+        productDimensions: '19x30x25'
+      },
       quantity: 4,
-      soldPrice: 999.99,
+      soldPrice: 99.99,
       date: '07/30/2013:01:01:01 EST'
     }
 };

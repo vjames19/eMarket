@@ -17,8 +17,12 @@
 
         <img src="img/shopping-cart.png" id="item-photo" class="item-photo"/>
 
-        <a href="" data-role="button" id="place-bid-button" class="place-bid-button"><p class="item-button-text-size">Place bid US $562.25</p></a>
-        <a href="" data-role="button" id="buy-it-now-button" class="buy-it-now-button"><p class="item-button-text-size">Buy it now</p></a>
+        <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup" data-position-to="window" data-transition="pop">
+            <p class="item-button-text-size">Place bid US {{ item.productCurrentBidPrice + 5 | currency }}</p>
+        </a>
+        <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup" data-position-to="window" data-transition="pop">
+            <p class="item-button-text-size">But It Now</p>
+        </a>
         <hr/>
 
         <ul data-role="listview" data-theme="c" data-inset="true">
@@ -46,6 +50,35 @@
             </li>
         </ul>
     </div>
+
+    <div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
+        <form>
+            <div style="padding:10px 20px;">
+                <h3>Enter Quantity</h3>
+                <input type="number" id="quantity" value="1">
+                <a href="#item-view" data-role="button" data-rel="back">Add to Cart</a>
+                <a href="#item-view" data-role="button" data-rel="back">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
+        <form>
+            <div style="padding:10px 20px;">
+                <h3>Enter Bid</h3>
+                <a href="#item-view" data-role="button" data-rel="back">Add Min Bid: {{item.productCurrentBidPrice + 5 | currency}}</a>
+                <div data-role="fieldcontain">
+                    <label for="placeBid">Place Bid</label>
+                    <input type="text" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 | currency}}">
+                </div>
+
+                <a href="#item-view" data-role="button" data-rel="back">Bid</a>
+                <a href="#item-view" data-role="button" data-rel="back">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 

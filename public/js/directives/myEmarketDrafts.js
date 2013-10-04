@@ -6,6 +6,9 @@ angular.module('eMarketApp')
       templateUrl: 'views/myEmarketDrafts.html',
       restrict: 'E',
       scope: {},
-      replace: true
+      replace: true,
+      controller: function ($scope, Restangular) {
+        $scope.drafts = Restangular.one('api/users', 1).getList('drafts');
+      }
     };
   });

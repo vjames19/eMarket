@@ -5,8 +5,12 @@ angular.module('eMarketApp')
     return {
       templateUrl: 'views/myEmarketBuying.html',
       restrict: 'E',
-      scope: {},
-      replace: true
+      scope: true,
+      replace: true,
+      controller: function($scope, Restangular) {
+        $scope.purchases = Restangular.one('api/users', 1).getList('purchases');
+
+      }
     };
   });
 
