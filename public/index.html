@@ -1,109 +1,115 @@
 <!doctype html>
 <html>
 <head>
-    <title>eMarket</title>
-    <meta charset="UTF-8">
-    <!-- select compatibility for IE to latest and enable google chrome frame-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="eMarket Web Application">
-    <!-- sets the screen width to the pixel width of the device -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <title>eMarket</title>
+  <meta charset="UTF-8">
+  <!-- select compatibility for IE to latest and enable google chrome frame-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="eMarket Web Application">
+  <!-- sets the screen width to the pixel width of the device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <script type="text/javascript"
+          src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 </head>
 
 <body ng-app="eMarketApp">
 <!-- Page one -->
 <div data-role="page" data-theme="b" id="index-page"> <!-- data-role="page" delinate a page -->
 
-    <!-- Header of the page -->
-    <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+  <!-- Header of the page -->
+  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
 
-        <img src="img/logo.png" class="emarket-logo"/>
+    <img src="img/logo.png" class="emarket-logo"/>
 
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
 
+  </div>
+
+  <div data-role="content" data-theme="b">
+
+    <!-- Create grids or cells of buttons -->
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#my-emarket-buying" data-role="button" id="my-emarket-buying"
+           class="my-emarket-buying"
+           data-transition="fade">
+          <p class="index-text-size">My eMarket</p>
+        </a>
+      </div>
+      <div class="ui-block-b">
+        <a href="#categories" data-role="button" id="categories" class="categories"
+           data-transition="fade">
+          <p class="index-text-size">Categories</p>
+        </a>
+      </div>
+    </div>
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#sell-item" data-role="button" id="sell-item" class="sell-item"
+           data-transition="fade">
+          <p class="index-text-size">Sell Item</p>
+        </a>
+      </div>
+      <div class="ui-block-b">
+        <a href="#recently-viewed" data-role="button" id="recently-viewed" class="recently-viewed"
+           data-transition="fade">
+          <p class="index-text-size">Recently Viewed</p>
+        </a>
+      </div>
+    </div>
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#notifications" data-role="button" id="notifications" class="notifications"
+           data-transition="fade">
+          <p class="index-text-size">Notifications</p>
+        </a>
+      </div>
+      <div class="ui-block-b">
+        <a href="#invoices" data-role="button" id="invoices" class="invoices"
+           data-transition="fade">
+          <p class="index-text-size">Invoices</p>
+        </a>
+      </div>
+    </div>
+    <div class="ui-grid-a">
+      <div class="ui-block-a">
+        <a href="#payment-options" data-role="button" id="payment-options" class="payment-options"
+           data-transition="fade">
+          <p class="index-text-size">Payment Options</p>
+        </a>
+      </div>
+      <div class="ui-block-b">
+        <a href="#profile" data-role="button" id="profile" class="profile" data-transition="fade">
+          <p class="index-text-size">Profile</p>
+        </a>
+      </div>
     </div>
 
-    <div data-role="content" data-theme="b">
+    <!--<div class="ui-grid-a">-->
+    <!--<div class="ui-block-a">-->
+    <!--<a href="#settings" data-role="button" id="settings" class="settings" data-transition="fade">-->
+    <!--<p class="index-text-size">Settings</p>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--<div class="ui-block-b"></div>-->
+    <!--</div>-->
+  </div>
 
-        <!-- Create grids or cells of buttons -->
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a href="#my-emarket-buying" data-role="button" id="my-emarket-buying" class="my-emarket-buying"
-                   data-transition="fade">
-                    <p class="index-text-size">My eMarket</p>
-                </a>
-            </div>
-            <div class="ui-block-b">
-                <a href="#categories" data-role="button" id="categories" class="categories" data-transition="fade">
-                    <p class="index-text-size">Categories</p>
-                </a>
-            </div>
-        </div>
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a href="#sell-item" data-role="button" id="sell-item" class="sell-item" data-transition="fade">
-                    <p class="index-text-size">Sell Item</p>
-                </a>
-            </div>
-            <div class="ui-block-b">
-                <a href="#recently-viewed" data-role="button" id="recently-viewed" class="recently-viewed"
-                   data-transition="fade">
-                    <p class="index-text-size">Recently Viewed</p>
-                </a>
-            </div>
-        </div>
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a href="#notifications" data-role="button" id="notifications" class="notifications"
-                   data-transition="fade">
-                    <p class="index-text-size">Notifications</p>
-                </a>
-            </div>
-            <div class="ui-block-b">
-                <a href="#invoices" data-role="button" id="invoices" class="invoices" data-transition="fade">
-                    <p class="index-text-size">Invoices</p>
-                </a>
-            </div>
-        </div>
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a href="#payment-options" data-role="button" id="payment-options" class="payment-options"
-                   data-transition="fade">
-                    <p class="index-text-size">Payment Options</p>
-                </a>
-            </div>
-            <div class="ui-block-b">
-                <a href="#profile" data-role="button" id="profile" class="profile" data-transition="fade">
-                    <p class="index-text-size">Profile</p>
-                </a>
-            </div>
-        </div>
-
-        <!--<div class="ui-grid-a">-->
-            <!--<div class="ui-block-a">-->
-                <!--<a href="#settings" data-role="button" id="settings" class="settings" data-transition="fade">-->
-                    <!--<p class="index-text-size">Settings</p>-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<div class="ui-block-b"></div>-->
-        <!--</div>-->
-    </div>
-
-    <div data-role="footer" data-theme="a" class="ui-bar, footer">
-        <a href="#login-user" data-role="button" id="login-user" class="login-user">Sign Out</a>
-    </div>
+  <div data-role="footer" data-theme="a" class="ui-bar, footer">
+    <a href="#login-user" data-role="button" id="login-user" class="login-user">Sign Out</a>
+  </div>
 
 </div>
 
 <script type="text/javascript">
-    $("#search").bind("click", function (event, ui) {
-        $("#search").replaceWith('<input type="search" name="search" id="search-basic" value=""/>');
-    });
+  $("#search").bind("click", function(event, ui) {
+    $("#search").replaceWith('<input type="search" name="search" id="search-basic" value=""/>');
+  });
 
 </script>
 
@@ -134,11 +140,12 @@
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/angular-cookies/angular-cookies.js"></script>
 <!-- endbuild -->
-
+<script src="lib/restangular/dist/restangular.js"></script>
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="js/app.js"></script>
 <!--<script src="scripts/controllers/main.js"></script>-->
-
+<!-- Services -->
+<script src="js/services/category.js"></script>
 <!-- Directives -->
 <script src="js/directives/categories.js"></script>
 <script src="js/directives/forgotPassword.js"></script>

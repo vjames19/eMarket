@@ -6,7 +6,10 @@ angular.module('eMarketApp')
       templateUrl: 'views/categories.html',
       restrict: 'E',
       scope: {},
-      replace: true
+      replace: true,
+      controller: function($scope, Category) {
+        $scope.categories = Category.getList();
+      }
     };
   });
 
