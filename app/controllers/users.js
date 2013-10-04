@@ -123,16 +123,17 @@ exports.deleteDraft = function (req, res) {
 var invoices = {
   1: {
     invoiceId: 1,
+    userId: 1,
     products: {
       1: {
         productId: 1,
-        userId: 1,
-        quantity: 2
+        quantity: 2,
+        soldPrice: 599.99
       },
       2: {
         productId: 2,
-        userId: 1,
-        quantity: 4
+        quantity: 4,
+        soldPrice: 999.99
       }
     },
     date: '10-10-2013',
@@ -142,11 +143,12 @@ var invoices = {
   },
   2: {
     invoiceId: 2,
+    userId: 2,
     products: {
       1: {
         productId: 2,
-        userId: 2,
-        quantity: 17
+        quantity: 17,
+        soldPrice: 29593.58
       }
     },
     date: '09-12-2013',
@@ -727,3 +729,67 @@ exports.deleteUnsoldProduct = function (req, res) {
   delete unsoldProducts[req.unsoldProduct.productId];
   res.jsonp(req.unsoldProduct);
 };
+
+
+var carts = {
+  1: {
+    cartId: 1,
+    userId: 1,
+    products: {
+      1: {
+        productId: 1,
+        quantity: 3
+      },
+      2: {
+        productId: 2,
+        quantity: 7
+      }
+    }
+  },
+  2: {
+    cartId: 2,
+    userId: 2,
+    products: {
+      1: {
+        productId: 2,
+        quantity: 20
+      }
+    }
+  }
+};
+
+exports.findCartById = function (req, res, next, id) {
+  if (!carts[+id]) {
+    res.jsonp(404, {message: 'Shopping Cart Not Found'});
+  } else {
+    req.cart = carts[+id];
+    next();
+  }
+};
+
+exports.readAllCarts = function (req, res) {
+  res.jsonp(_.values(carts));
+};
+
+exports.createCart = function (req, res) {
+  var cart = req.body;
+  cart.cartId = _.keys(carts).length + 1;
+  carts[cart.cartId] = cart;
+  res.jsonp(cart);
+};
+
+exports.readCart = function (req, res) {
+  res.jsonp(req.cart);
+};
+
+exports.updateCart = function (req, res) {
+  _.extend(req.cart, req.body);
+  carts[req.cart.cartId] = req.cart;
+  res.jsonp(req.cart);
+};
+
+exports.deleteCart = function (req, res) {
+  delete carts[req.cart.cartId];
+  res.jsonp(req.cart);
+};
+

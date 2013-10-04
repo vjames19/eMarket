@@ -79,6 +79,13 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/unsoldProducts/:unsoldProductId', users.updateUnsoldProduct);
   app.del('/api/users/:userId/unsoldProducts/:unsoldProductId', users.deleteUnsoldProduct);
 
+  app.param('cartId', users.findCartById);
+  app.get('/api/users/:userId/carts', users.readAllCarts);
+  app.post('/api/users/:userId/carts', users.createCart);
+  app.get('/api/users/:userId/carts/:cartId', users.readCart);
+  app.put('/api/users/:userId/carts/:cartId', users.updateCart);
+  app.del('/api/users/:userId/carts/:cartId', users.deleteCart);
+
   // Category Routes
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
