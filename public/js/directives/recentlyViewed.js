@@ -6,6 +6,14 @@ angular.module('eMarketApp')
       templateUrl: 'views/recentlyViewed.html',
       restrict: 'E',
       scope: {},
-      replace: true
+      replace: true,
+      controller: function($scope) {
+        // TODO: Use the recentlyViewed route.
+        $scope.recentlyViewed = [
+          {productName: 'Samsung TV'},
+          {productName: 'Harry Potter and the Sorcerer Stick'},
+          {productName: 'Nexus 7 cover'}
+        ];
+      }
     };
   });
