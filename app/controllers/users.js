@@ -951,6 +951,7 @@ delete purchases[req.purchase.purchaseId];
 res.jsonp(req.purchase);
 };
 
+// Ratings
 var ratings = {
   1: {ratingId : 1, raterId: 2, rating: '***'},
   2: {ratingId : 2, raterId: 6, rating: '**'},
