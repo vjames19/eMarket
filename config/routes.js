@@ -8,6 +8,7 @@ module.exports = function (app, passport, auth) {
     res.jsonp(req.user);
   });
   // TODO(vjames19): Secure users api
+
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/api/users', users.createUser);
@@ -49,6 +50,34 @@ module.exports = function (app, passport, auth) {
   app.get('/api/users/:userId/notifications/:notificationId', users.readNotification);
   app.put('/api/users/:userId/notifications/:notificationId', users.updateNotification);
   app.del('/api/users/:userId/notifications/:notificationId', users.deleteNotification);
+
+  app.param('creditCardId', users.findCreditCardById);
+  app.get('/api/users/:userId/creditCards', users.readAllCreditCards);
+  app.post('/api/users/:userId/creditCards', users.createCreditCard);
+  app.get('/api/users/:userId/creditCards/:creditCardId', users.readCreditCard);
+  app.put('/api/users/:userId/creditCards/:creditCardId', users.updateCreditCard);
+  app.del('/api/users/:userId/creditCards/:creditCardId', users.deleteCreditCard);
+
+  app.param('bankId', users.findBankAccountById);
+  app.get('/api/users/:userId/banks', users.readAllBankAccounts);
+  app.post('/api/users/:userId/banks', users.createBankAccount);
+  app.get('/api/users/:userId/banks/:bankId', users.readBankAccount);
+  app.put('/api/users/:userId/banks/:bankId', users.updateBankAccount);
+  app.del('/api/users/:userId/banks/:bankId', users.deleteBankAccount);
+
+  app.param('soldProductId', users.findSoldProductById);
+  app.get('/api/users/:userId/soldProducts', users.readAllSoldProducts);
+  app.post('/api/users/:userId/soldProducts', users.createSoldProduct);
+  app.get('/api/users/:userId/soldProducts/:soldProductId', users.readSoldProduct);
+  app.put('/api/users/:userId/soldProducts/:soldProductId', users.updateSoldProduct);
+  app.del('/api/users/:userId/soldProducts/:soldProductId', users.deleteSoldProduct);
+
+  app.param('unsoldProductId', users.findUnsoldProductById);
+  app.get('/api/users/:userId/unsoldProducts', users.readAllUnsoldProducts);
+  app.post('/api/users/:userId/unsoldProducts', users.createUnsoldProduct);
+  app.get('/api/users/:userId/unsoldProducts/:unsoldProductId', users.readUnsoldProduct);
+  app.put('/api/users/:userId/unsoldProducts/:unsoldProductId', users.updateUnsoldProduct);
+  app.del('/api/users/:userId/unsoldProducts/:unsoldProductId', users.deleteUnsoldProduct);
 
   // Category Routes
   var categories = require('../app/controllers/categories');

@@ -235,7 +235,7 @@ var mailAddresses = {
 
 exports.findMailAddressById = function (req, res, next, id) {
   if (!mailAddresses[+id]) {
-    res.jsonp(404, {message: 'Mail Address Not Found'});
+    res.jsonp(404, {message: 'Mailing Address Not Found'});
   } else {
     req.mailAddress = mailAddresses[+id];
     next();
@@ -314,7 +314,7 @@ var billAddresses = {
 
 exports.findBillAddressById = function (req, res, next, id) {
   if (!billAddresses[+id]) {
-    res.jsonp(404, {message: 'Mail Address Not Found'});
+    res.jsonp(404, {message: 'Billing Address Not Found'});
   } else {
     req.billAddress = billAddresses[+id];
     next();
@@ -374,7 +374,7 @@ var notifications = {
 
 exports.findNotificationById = function (req, res, next, id) {
   if (!notifications[+id]) {
-    res.jsonp(404, {message: 'Mail Address Not Found'});
+    res.jsonp(404, {message: 'Notification Not Found'});
   } else {
     req.notification = notifications[+id];
     next();
@@ -407,7 +407,7 @@ exports.deleteNotification = function (req, res) {
   res.jsonp(req.notification);
 };
 
-
+// Credit Cards
 var creditCards = {
   1: {
     creditCardId: 1,
@@ -438,6 +438,42 @@ var creditCards = {
   }
 };
 
+exports.findCreditCardById = function (req, res, next, id) {
+  if (!creditCards[+id]) {
+    res.jsonp(404, {message: 'Credit Card Not Found'});
+  } else {
+    req.creditCard = creditCards[+id];
+    next();
+  }
+};
+
+exports.readAllCreditCards = function (req, res) {
+  res.jsonp(_.values(creditCards));
+};
+
+exports.createCreditCard = function (req, res) {
+  var creditCard = req.body;
+  creditCard.creditCardId = _.keys(creditCards).length + 1;
+  creditCards[creditCard.creditCardId] = creditCard;
+  res.jsonp(creditCard);
+};
+
+exports.readCreditCard = function (req, res) {
+  res.jsonp(req.creditCard);
+};
+
+exports.updateCreditCard = function (req, res) {
+  _.extend(req.creditCard, req.body);
+  creditCards[req.creditCard.creditCardId] = req.creditCard;
+  res.jsonp(req.creditCard);
+};
+
+exports.deleteCreditCard = function (req, res) {
+  delete creditCards[req.creditCard.creditCardId];
+  res.jsonp(req.creditCard);
+};
+
+// Bank Accounts
 var bankAccounts = {
   1: {
     bankId: 1,
@@ -468,6 +504,42 @@ var bankAccounts = {
   }
 };
 
+exports.findBankAccountById = function (req, res, next, id) {
+  if (!bankAccounts[+id]) {
+    res.jsonp(404, {message: 'Bank Account Not Found'});
+  } else {
+    req.bankAccount = bankAccounts[+id];
+    next();
+  }
+};
+
+exports.readAllBankAccounts = function (req, res) {
+  res.jsonp(_.values(bankAccounts));
+};
+
+exports.createBankAccount = function (req, res) {
+  var bankAccount = req.body;
+  bankAccount.bankId = _.keys(bankAccounts).length + 1;
+  bankAccounts[bankAccount.bankId] = bankAccount;
+  res.jsonp(bankAccount);
+};
+
+exports.readBankAccount = function (req, res) {
+  res.jsonp(req.bankAccount);
+};
+
+exports.updateBankAccount = function (req, res) {
+  _.extend(req.bankAccount, req.body);
+  bankAccounts[req.bankAccount.bankId] = req.bankAccount;
+  res.jsonp(req.bankAccount);
+};
+
+exports.deleteBankAccount = function (req, res) {
+  delete bankAccounts[req.bankAccount.bankId];
+  res.jsonp(req.bankAccount);
+};
+
+// Sold Products
 var soldProducts = {
   1: {
     productId: 1,
@@ -528,6 +600,42 @@ var soldProducts = {
   }
 };
 
+exports.findSoldProductById = function (req, res, next, id) {
+  if (!soldProducts[+id]) {
+    res.jsonp(404, {message: 'Sold Product Not Found'});
+  } else {
+    req.soldProduct = soldProducts[+id];
+    next();
+  }
+};
+
+exports.readAllSoldProducts = function (req, res) {
+  res.jsonp(_.values(soldProducts));
+};
+
+exports.createSoldProduct = function (req, res) {
+  var soldProduct = req.body;
+  soldProduct.productId = _.keys(soldProducts).length + 1;
+  soldProducts[soldProduct.productId] = soldProduct;
+  res.jsonp(soldProduct);
+};
+
+exports.readSoldProduct = function (req, res) {
+  res.jsonp(req.soldProduct);
+};
+
+exports.updateSoldProduct = function (req, res) {
+  _.extend(req.soldProduct, req.body);
+  soldProducts[req.soldProduct.productId] = req.soldProduct;
+  res.jsonp(req.soldProduct);
+};
+
+exports.deleteSoldProduct = function (req, res) {
+  delete soldProducts[req.soldProduct.productId];
+  res.jsonp(req.soldProduct);
+};
+
+// Unsold Products
 var unsoldProducts = {
   1: {
     productId: 1,
@@ -585,5 +693,37 @@ var unsoldProducts = {
   }
 };
 
+exports.findUnsoldProductById = function (req, res, next, id) {
+  if (!unsoldProducts[+id]) {
+    res.jsonp(404, {message: 'Unsold Product Not Found'});
+  } else {
+    req.unsoldProduct = unsoldProducts[+id];
+    next();
+  }
+};
 
+exports.readAllUnsoldProducts = function (req, res) {
+  res.jsonp(_.values(unsoldProducts));
+};
 
+exports.createUnsoldProduct = function (req, res) {
+  var unsoldProduct = req.body;
+  unsoldProduct.unsoldProductId = _.keys(unsoldProducts).length + 1;
+  unsoldProducts[unsoldProduct.productId] = unsoldProduct;
+  res.jsonp(unsoldProduct);
+};
+
+exports.readUnsoldProduct = function (req, res) {
+  res.jsonp(req.unsoldProduct);
+};
+
+exports.updateUnsoldProduct = function (req, res) {
+  _.extend(req.unsoldProduct, req.body);
+  unsoldProducts[req.unsoldProduct.productId] = req.unsoldProduct;
+  res.jsonp(req.unsoldProduct);
+};
+
+exports.deleteUnsoldProduct = function (req, res) {
+  delete unsoldProducts[req.unsoldProduct.productId];
+  res.jsonp(req.unsoldProduct);
+};
