@@ -55,3 +55,27 @@ exports.deleteSeller = function(req, res) {
   delete sellers[req.seller.sellerId];
   res.jsonp(req.seller);
 };
+
+// Ratings
+var ratings = {
+  1: {ratingId : 1, raterId: 2, rating: '***'},
+  2: {ratingId : 2, raterId: 6, rating: '**'},
+  3: {ratingId : 3, raterId: 10, rating: '****'}
+};
+
+exports.findRatingById = function (req, res, next, id) {
+  if (!ratings[+id]) {
+    res.jsonp(404, {message: 'Rating Item Not Found'});
+  } else {
+    req.rating = ratings[+id];
+    next();
+  }
+};
+
+exports.readAllRatings = function (req, res) {
+  res.jsonp(_.values(ratings));
+};
+
+exports.readRating = function (req, res) {
+  res.jsonp(req.rating);
+};

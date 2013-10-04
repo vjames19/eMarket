@@ -164,6 +164,11 @@ module.exports = function (app, passport, auth) {
   app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
   app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
 
+  // Seller Ratings
+  app.param('ratingId', sellers.findRatingById);
+  app.get('/api/sellers/:sellerId/ratings', sellers.readAllRatings);
+  app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
+
   // Admin Routes
   var admins = require('../app/controllers/admins');
   app.param('adminId', admins.findAdminById);
