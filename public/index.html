@@ -19,7 +19,7 @@
             src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 </head>
 
-<body ng-app="eMarketApp">
+<body ng-app="eMarketApp" ng-controller="MainCtrl">
 <!-- Page one -->
 <div data-role="page" data-theme="b" id="index-page"> <!-- data-role="page" delinate a page -->
 
@@ -121,7 +121,7 @@
 <forgot-password></forgot-password>
 <home-admin></home-admin>
 <invoices></invoices>
-<item-view></item-view>
+<item-view item="itemToBeViewed"></item-view>
 <login-admin></login-admin>
 <login-user></login-user>
 <my-emarket-buying></my-emarket-buying>
@@ -147,6 +147,8 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="js/app.js"></script>
 <!--<script src="scripts/controllers/main.js"></script>-->
+
+<script src="js/controllers/main.js"></script>
 <!-- Services -->
 <script src="js/services/category.js"></script>
 <!-- Directives -->
