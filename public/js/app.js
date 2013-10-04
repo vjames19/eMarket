@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('eMarketApp', []);
+angular.module('eMarketApp', ['restangular']);
