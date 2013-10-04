@@ -85,6 +85,11 @@ img.center-image {
     margin: auto;
 }
 
+.wrap-text {
+    white-space: normal !important;
+    font-size: 90%;
+}
+
 td.pad {
     padding-left: 5px;
     padding-right: 5px;

@@ -7,15 +7,16 @@ angular.module('eMarketApp')
         restrict: 'E',
         scope: {},
         replace: true,
-        controller: function($scope) {
-          $scope.notifications = [
-            {state: 'Unread', message: 'Asus market...'},
-            {state: 'Read', message: 'How long is it going to take'}
-          ];
+        controller: function($scope, Restangular) {
+          $scope.notifications = Restangular.one('api/users', 1).getList('notifications');
+          $scope.getStatus = function(notification) {
+            return notification.isRead ? 'Read' : 'Unread';
+          }
         },
         link: function(scope, elem) {
-          scope.setMessage = function(notification) {
+          scope.readMessage = function(notification) {
             $(elem[0]).find('#notificationMessage').text(notification.message);
+            notification.isRead = true;
           }
         }
       };
