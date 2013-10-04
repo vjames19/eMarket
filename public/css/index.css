@@ -84,3 +84,8 @@ img.center-image {
     bottom: 0;
     margin: auto;
 }
+
+td.pad {
+    padding-left: 5px;
+    padding-right: 5px;
+}
