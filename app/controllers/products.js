@@ -6,23 +6,22 @@ var products = {
   1: {
     productId: 1,
     productSeller: 1,
-    category: 'books',
+    productCategory: 'books',
     productName: 'harry potter',
-    buyItNowPrice: 100,
-    startingBidPrice: 80
+    productBuyItNowPrice: 100,
+    productStartingBidPrice: 80
   },
   2: {
     productId: 2,
     productSeller: 2,
-    category: 'cars',
+    productCategory: 'cars',
     productName: '3 potes',
-    buyItNowPrice: 1000,
-    startingBidPrice: 500
+    productBuyItNowPrice: 1000,
+    productStartingBidPrice: 500
   }
 };
 
 exports.findProductById = function(req, res, next, id) {
-//  console.log('id', id);
   if(!products[+id]) {
     res.jsonp(404, {message: 'product not found'});
   } else {
@@ -62,7 +61,7 @@ var bids = {
   1: {
     bidId: 1,
     bidderId: 1,
-    productId: 1,
+    bidProductId: 1,
     bidAmount: 100
   }
 };
