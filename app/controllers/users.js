@@ -408,5 +408,176 @@ exports.deleteNotification = function(req, res) {
 };
 
 
+var creditCards = {
+  1: {
+    creditCardId: 1,
+    creditCardName: 'Apu',
+    creditCardType: 'Visa',
+    creditCardExpDate: '07/07/2018',
+    creditCardNumber: 1234567887654321,
+    creditCardCvs: 123
+  },
+  2: {
+    creditCardId: 2,
+    creditCardName: 'Amy',
+    creditCardType: 'MasterCard',
+    creditCardExpDate: '09/09/2028',
+    creditCardNumber: 8765567843211234,
+    creditCardCvs: 7890
+  },
+  3: {
+    creditCardId: 3,
+    creditCardName: 'Gil',
+    creditCardType: 'AmericanExpress',
+    creditCardExpDate: '11/11/2038',
+    creditCardNumber: 8172635445362718,
+    creditCardCvs: 4567
+  }
+};
+
+var bankAccounts = {
+  1: {
+    bankId: 1,
+    bankName: 'SamBanks',
+    bankAccountName: 'Apu',
+    bankAccountType: 'Checking',
+    bankAccountNumber: 123456789,
+    bankAccountRouting: 123456789
+  },
+  2: {
+    bankId: 2,
+    bankName: 'EduBanks',
+    bankAccountName: 'Amy',
+    bankAccountType: 'Savings',
+    bankAccountNumber: 12345678909876543,
+    bankAccountRouting: 987654321
+  },
+  3: {
+    bankId: 3,
+    bankName: 'VicBanks',
+    bankAccountName: 'Gil',
+    bankAccountType: 'Growth',
+    bankAccountNumber: 1029384756758,
+    bankAccountRouting: 192834756
+  }
+};
+
+var soldProducts = {
+  1: {
+    productId: 1,
+    productSeller: 1,
+    productCategory: 'books',
+    productName: 'harry potter',
+    productBuyItNowPrice: 100,
+    productStartingBidPrice: 80,
+    productBidEndDate: '07/07/2007',
+    productShippingPrice: 18.99,
+    productQuantitySold: 5,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/1/z98how.png',
+      productBrand: 'pearson',
+      productModel: 'IBN:19238476',
+      productDimensions: '30x29x49'
+    },
+    productSoldDate: '07/06/2007'
+  },
+  2: {
+    productId: 2,
+    productSeller: 9,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 1000.99,
+    productStartingBidPrice: 500.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantitySold: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    },
+    productSoldDate: '07/06/2008'
+  },
+  3: {
+    productId: 3,
+    productSeller: 403,
+    productCategory: 'shirts',
+    productName: 'American Eaglo Shirt',
+    productBuyItNowPrice: 49.99,
+    productStartingBidPrice: 20.99,
+    productBidEndDate: '07/07/2009',
+    productShippingPrice: 5.99,
+    productQuantitySold: 9,
+    productDescription: {
+      productCondition: 'User',
+      productPicture: '/img/products/users/403/z89kik.png',
+      productBrand: 'AmericanEagle',
+      productModel: 'K99',
+      productDimensions: '10x20x30'
+    },
+    productSoldDate: '07/06/2009'
+  }
+};
+
+var unsoldProducts = {
+  1: {
+    productId: 1,
+    productSeller: 1,
+    productCategory: 'books',
+    productName: 'harry potter',
+    productBuyItNowPrice: 100,
+    productStartingBidPrice: 80,
+    productBidEndDate: '07/07/2007',
+    productShippingPrice: 18.99,
+    productQuantityRemaining: 5,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/1/z98how.png',
+      productBrand: 'pearson',
+      productModel: 'IBN:19238476',
+      productDimensions: '30x29x49'
+    }
+  },
+  2: {
+    productId: 2,
+    productSeller: 9,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 1000.99,
+    productStartingBidPrice: 500.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantityRemaining: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    }
+  },
+  3: {
+    productId: 3,
+    productSeller: 403,
+    productCategory: 'shirts',
+    productName: 'American Eaglo Shirt',
+    productBuyItNowPrice: 49.99,
+    productStartingBidPrice: 20.99,
+    productBidEndDate: '07/07/2009',
+    productShippingPrice: 5.99,
+    productQuantityRemaining: 9,
+    productDescription: {
+      productCondition: 'User',
+      productPicture: '/img/products/users/403/z89kik.png',
+      productBrand: 'AmericanEagle',
+      productModel: 'K99',
+      productDimensions: '10x20x30'
+    }
+  }
+};
+
 
 
