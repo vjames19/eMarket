@@ -6,6 +6,10 @@ angular.module('eMarketApp')
         templateUrl: 'views/invoices.html',
         restrict: 'E',
         scope: {},
-        replace: true
+        replace: true,
+        controller: function($scope, Restangular) {
+          // TODO: replace with real user id.
+          $scope.invoices = Restangular.one('api/users', 1).getList('invoices');
+        }
       };
     });
