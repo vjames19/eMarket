@@ -43,6 +43,12 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/billAddresses/:billAddressId', users.updateBillAddress);
   app.del('/api/users/:userId/billAddresses/:billAddressId', users.deleteBillAddress);
 
+  app.param('notificationId', users.findNotificationById);
+  app.get('/api/users/:userId/notifications', users.readAllNotifications);
+  app.post('/api/users/:userId/notifications', users.createNotification);
+  app.get('/api/users/:userId/notifications/:notificationId', users.readNotification);
+  app.put('/api/users/:userId/notifications/:notificationId', users.updateNotification);
+  app.del('/api/users/:userId/notifications/:notificationId', users.deleteNotification);
 
   // Category Routes
   var categories = require('../app/controllers/categories');

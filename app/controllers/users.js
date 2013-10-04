@@ -135,9 +135,9 @@ var invoices = {
         quantity: 4
       }
     },
-    date: "10-10-2013",
+    date: '10-10-2013',
     paymentTypeId: 54504155454,
-    paymentType: "Card"
+    paymentType: 'Card'
 
   },
   2: {
@@ -149,9 +149,9 @@ var invoices = {
         quantity: 17
       }
     },
-    date: "09-12-2013",
+    date: '09-12-2013',
     paymentTypeId: 45487899454,
-    paymentType: "Bank"
+    paymentType: 'Bank'
   }
 };
 
@@ -195,41 +195,41 @@ var mailAddresses = {
   1: {
     mailAddressId: 1,
     userId: 1,
-    mailAddress: "Urb. Mata La Vaca, Cuchillo Street",
-    city: "Camuy",
-    country: "Puerto Rico",
+    mailAddress: 'Urb. Mata La Vaca, Cuchillo Street',
+    city: 'Camuy',
+    country: 'Puerto Rico',
     geographicalRegion: null,
-    zipcode: "00746",
-    recipientName: "Tesla Quiles",
-    telephone: "787-458-6156",
+    zipCode: '00746',
+    recipientName: 'Tesla Quiles',
+    telephone: '787-458-6156',
     paymentTypeId: 54504155454,
-    paymentType: "Card"
+    paymentType: 'Card'
   },
   2: {
     mailAddressId: 2,
     userId: 1,
-    mailAddress: "Urb. Pollo Mojao, Pechuga Street",
-    city: "Mayaguez",
-    country: "Puerto Rico",
+    mailAddress: 'Urb. Pollo Mojao, Pechuga Street',
+    city: 'Mayaguez',
+    country: 'Puerto Rico',
     geographicalRegion: null,
-    zipcode: "05946",
-    recipientName: "Juan del Pueblo",
-    telephone: "787-458-1226",
+    zipCode: '05946',
+    recipientName: 'Juan del Pueblo',
+    telephone: '787-458-1226',
     paymentTypeId: 44564155454,
-    paymentType: "Bank"
+    paymentType: 'Bank'
   },
   3: {
     mailAddressId: 3,
     userId: 2,
-    mailAddress: "Barrio Palmas, Calle Perla",
-    city: "New York",
-    country: "United States",
+    mailAddress: 'Barrio Palmas, Calle Perla',
+    city: 'New York',
+    country: 'United States',
     geographicalRegion: null,
-    zipcode: "00956",
-    recipientName: "John the People",
-    telephone: "412-458-3246",
+    zipCode: '00956',
+    recipientName: 'John the People',
+    telephone: '412-458-3246',
     paymentTypeId: 54504155454,
-    paymentType: "Card"
+    paymentType: 'Card'
   }
 };
 
@@ -267,5 +267,146 @@ exports.deleteMailAddress = function(req, res) {
   delete mailAddresses[req.mailAddress.mailAddressId];
   res.jsonp(req.mailAddress);
 };
+
+
+// Bill Addresses
+var billAddresses = {
+  1: {
+    billAddressId: 1,
+    userId: 1,
+    billAddress: 'Urb. Mata La Vaca, Cuchillo Street',
+    city: 'Camuy',
+    country: 'Puerto Rico',
+    geographicalRegion: null,
+    zipCode: '00746',
+    recipientName: 'Tesla Quiles',
+    telephone: '787-458-6156',
+    paymentTypeId: 54504155454,
+    paymentType: 'Card'
+  },
+  2: {
+    billAddressId: 2,
+    userId: 1,
+    billAddress: 'Urb. Pollo Mojao, Pechuga Street',
+    city: 'Mayaguez',
+    country: 'Puerto Rico',
+    geographicalRegion: null,
+    zipCode: '05946',
+    recipientName: 'Juan del Pueblo',
+    telephone: '787-458-1226',
+    paymentTypeId: 44564155454,
+    paymentType: 'Bank'
+  },
+  3: {
+    billAddressId: 3,
+    userId: 2,
+    billAddress: 'Barrio Palmas, Calle Perla',
+    city: 'New York',
+    country: 'United States',
+    geographicalRegion: null,
+    zipCode: '00956',
+    recipientName: 'John the People',
+    telephone: '412-458-3246',
+    paymentTypeId: 54504155454,
+    paymentType: 'Card'
+  }
+};
+
+exports.findBillAddressById = function(req, res, next, id) {
+  if(!billAddresses[+id]) {
+    res.jsonp(404, {message: 'Mail Address Not Found'});
+  } else {
+    req.billAddress = billAddresses[+id];
+    next();
+  }
+};
+
+exports.readAllBillAddresses = function(req, res) {
+  res.jsonp(_.values(billAddresses));
+};
+
+exports.createBillAddress = function(req, res) {
+  var billAddress = req.body;
+  billAddress.billAddressId = _.keys(billAddresses).length + 1;
+  billAddresses[billAddress.billAddressId] = billAddress;
+  res.jsonp(billAddress);
+};
+
+exports.readBillAddress = function(req, res) {
+  res.jsonp(req.billAddress);
+};
+
+exports.updateBillAddress = function(req, res) {
+  _.extend(req.billAddress, req.body);
+  billAddresses[req.billAddress.billAddressId] = req.billAddress;
+  res.jsonp(req.billAddress);
+};
+
+exports.deleteBillAddress = function(req, res) {
+  delete billAddresses[req.billAddress.billAddressId];
+  res.jsonp(req.billAddress);
+};
+
+// Notifications
+var notifications = {
+  1: {
+    notificationId: 1,
+    userId: 1,
+    message: 'You have won an ultrabook!',
+    notificationDate: '10-10-2013',
+    isRead: true
+  },
+  2: {
+    notificationId: 2,
+    userId: 1,
+    message: 'You have won a car!',
+    notificationDate: '10-10-2013',
+    isRead: false
+  },
+  3: {
+    notificationId: 3,
+    userId: 2,
+    message: 'You have won a pig!',
+    notificationDate: '10-10-2013',
+    isRead: false
+  }
+};
+
+exports.findNotificationById = function(req, res, next, id) {
+  if(!notifications[+id]) {
+    res.jsonp(404, {message: 'Mail Address Not Found'});
+  } else {
+    req.notification = notifications[+id];
+    next();
+  }
+};
+
+exports.readAllNotifications = function(req, res) {
+  res.jsonp(_.values(notifications));
+};
+
+exports.createNotification = function(req, res) {
+  var notification = req.body;
+  notification.notificationId = _.keys(notifications).length + 1;
+  notifications[notification.notificationId] = notification;
+  res.jsonp(notification);
+};
+
+exports.readNotification = function(req, res) {
+  res.jsonp(req.notification);
+};
+
+exports.updateNotification = function(req, res) {
+  _.extend(req.notification, req.body);
+  notifications[req.notification.notificationId] = req.notification;
+  res.jsonp(req.notification);
+};
+
+exports.deleteNotification = function(req, res) {
+  delete notifications[req.notification.notificationId];
+  res.jsonp(req.notification);
+};
+
+
 
 
