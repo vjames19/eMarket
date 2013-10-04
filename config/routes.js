@@ -15,6 +15,28 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId', users.updateUser);
   app.del('/api/users/:userId', users.deleteUser);
 
+  app.param('draftId', users.findDraftById);
+  app.get('/api/users/:userId/drafts', users.readAllDrafts);
+  app.post('/api/users/:userId/drafts', users.createDraft);
+  app.get('/api/users/:userId/drafts/:draftId', users.readDraft);
+  app.put('/api/users/:userId/drafts/:draftId', users.updateDraft);
+  app.del('/api/users/:userId/drafts/:draftId', users.deleteDraft);
+
+  app.param('invoiceId', users.findInvoiceById);
+  app.get('/api/users/:userId/invoices', users.readAllInvoices);
+  app.post('/api/users/:userId/invoices', users.createInvoice);
+  app.get('/api/users/:userId/invoices/:invoiceId', users.readInvoice);
+  app.put('/api/users/:userId/invoices/:invoiceId', users.updateInvoice);
+  app.del('/api/users/:userId/invoices/:invoiceId', users.deleteInvoice);
+
+  app.param('mailAddressId', users.findMailAddressById);
+  app.get('/api/users/:userId/mailAddresses', users.readAllMailAddresses);
+  app.post('/api/users/:userId/mailAddresses', users.createMailAddress);
+  app.get('/api/users/:userId/mailAddresses/:mailAddressId', users.readMailAddress);
+  app.put('/api/users/:userId/mailAddresses/:mailAddressId', users.updateMailAddress);
+  app.del('/api/users/:userId/mailAddresses/:mailAddressId', users.deleteMailAddress);
+
+
   // Category Routes
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
