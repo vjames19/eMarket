@@ -1,10 +1,10 @@
 'use strict';
 
-module.exports = function (app, passport, auth) {
+module.exports = function(app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
   // User Routes
   var users = require('../app/controllers/users');
-  app.post('/login', passport.authenticate('local'), function (req, res) {
+  app.post('/login', passport.authenticate('local'), function(req, res) {
     res.jsonp(req.user);
   });
   // TODO(vjames19): Secure users api
@@ -126,7 +126,7 @@ module.exports = function (app, passport, auth) {
   app.get('/api/users/:userId/ratings', users.readAllRatings);
   app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
 
-//=================NON USER ROUTES================//
+  //=================NON USER ROUTES================//
 
   // Category Routes
   var categories = require('../app/controllers/categories');
@@ -185,4 +185,8 @@ module.exports = function (app, passport, auth) {
   app.put('/api/admins/:adminId/reports/:reportId', admins.updateAdminReport);
   app.del('/api/admins/:adminId/reports/:reportId', admins.deleteAdminReport);
 
+  // Should always be the last route.
+  app.get('*', function(req, res) {
+    res.redirect(404, '/');
+  });
 };
