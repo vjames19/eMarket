@@ -1,23 +1,34 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('notifications', function () {
+    .directive('notifications', function(User, Restangular) {
       return {
         templateUrl: 'views/notifications.html',
         restrict: 'E',
         scope: {},
         replace: true,
-        controller: function($scope, Restangular) {
-          $scope.notifications = Restangular.one('api/users', 1).getList('notifications');
+        controller: function($scope) {
           $scope.getStatus = function(notification) {
             return notification.isRead ? 'Read' : 'Unread';
           };
         },
         link: function(scope, elem) {
+          var page = $(elem[0]);
+          var notificationList = page.find("#notificationList");
+          var notificationPopUp = page.find('#notificationMessage');
+
           scope.readMessage = function(notification) {
-            $(elem[0]).find('#notificationMessage').text(notification.message);
+            notificationPopUp.text(notification.message);
             notification.isRead = true;
           };
+
+          page.on('pagebeforeshow', function() {
+            scope.notifications = Restangular.one('api/users', User.userId).getList('notifications');
+          });
+
+          page.on('pageshow', function() {
+            notificationList.listview('refresh');
+          });
         }
       };
     });
