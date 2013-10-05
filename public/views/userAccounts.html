@@ -7,6 +7,38 @@
     </div>
 
     <div data-role="content">
+        <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
+            <li data-role="list-divider">Users on System
+                <a href="#add-user" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
+                   class="ui-btn-right">Add User</a>
+                <span class="ui-li-count">2</span></li>
+            </li>
+            <li data-icon="gear">
+                <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">Pepe</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">Chencho</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">Wilito</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">Rolandito</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="userPopupMenu" data-theme="d">
+        <div class="form-pad">
+            <h3>Choose An Action</h3>
+            <a href="#edit-user" data-role="button" data-icon="edit">Edit</a>
+            <a href="#" data-role="button" data-icon="delete">Delete</a>
+            <a href="#user-accounts" data-role="button" data-icon="back">Cancel</a>
+        </div>
     </div>
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>

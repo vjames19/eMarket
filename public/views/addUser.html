@@ -1,14 +1,9 @@
-<div data-role="page" data-theme="b" id="register"> <!-- data-role="page" delinate a page -->
+<div data-role="page" data-theme="b" id="add-user"> <!-- data-role="page" delinate a page -->
 
     <!-- Header of the page -->
     <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
-        <h1>Register</h1>
-
-        <a href="#login-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-
-        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+        <h1>Add User</h1>
+        <a href="#home-admin" data-role="button" data-icon="back" data-direction="reverse">Back</a>
     </div>
 
     <div data-role="content">
@@ -144,8 +139,10 @@
 
             </div>
             <!-- un anchor por ahora-->
-            <a href="#login-user" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
-            <!--<button type="submit" data-theme="a" data-icon="check">Register</button>-->
+            <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
+                <a href="#user-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
+                <a href="#user-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+            </div>
         </form>
     </div>
 
