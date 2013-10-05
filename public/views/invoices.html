@@ -8,31 +8,30 @@
   </div>
   <div data-role="content">
     <ul data-role="listview" data-theme="c" data-inset="true">
-      <li ng-repeat="invoice in invoices">
-        <h1>Invoice #{{ invoice.invoiceId }}</h1>
-        <table>
-          <tr>
-            <td><strong>Date:</strong></td>
-            <td></td>
-            <td><em>{{ invoice.date | date }}</em></td>
-          </tr>
-          <tr>
-            <td><strong>Order Number:</strong></td>
-            <td></td>
-            <td><em>1994586</em></td>
-          </tr>
-          <tr>
-            <td><strong>Order Price:</strong></td>
-            <td></td>
-            <td><em>$829.99</em></td>
-          </tr>
-          <tr>
-            <td><strong>Shipping Price:</strong></td>
-            <td></td>
-            <td><em>$19.99</em></td>
-          </tr>
-        </table>
-      </li>
+        <li data-role="list-divider">Invoices <span class="ui-li-count">{{invoices.length}}</span></li>
+        <li ng-repeat="invoice in invoices">
+            <a href="">
+                <strong>Invoice #{{ invoice.invoiceId }} </strong>
+                <table>
+                  <tr>
+                    <td><strong>Date:</strong></td>
+                    <td></td>
+                    <td><em>{{ invoice.date | date }}</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Order Number:</strong></td>
+                    <td></td>
+                    <td><em>{{ invoice.invoiceNumber }}</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Order Price:</strong></td>
+                    <td></td>
+                    <td><em>{{ invoice.orderPrice | currency }}</em></td>
+                  </tr>
+                </table>
+            </a>
+        </li>
+
     </ul>
   </div>
   <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>

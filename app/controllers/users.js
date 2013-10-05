@@ -161,36 +161,42 @@ exports.deleteDraft = function (req, res) {
 var invoices = {
   1: {
     invoiceId: 1,
-    userId: 1,
+    invoiceNumber: 454505,
     products: {
       1: {
         productId: 1,
-        quantity: 2,
-        soldPrice: 599.99
+        productName: 'alienware',
+        quantity: 2
       },
       2: {
         productId: 2,
-        quantity: 4,
-        soldPrice: 999.99
+        productName: 'dell',
+        quantity: 4
       }
     },
+    orderPrice: 6560.00,
     date: '10-10-2013',
     paymentTypeId: 54504155454,
     paymentType: 'Card'
-
   },
   2: {
     invoiceId: 2,
-    userId: 2,
+    invoiceNumber: 989262,
     products: {
       1: {
+        productId: 1,
+        productName: 'pig',
+        quantity: 8
+      },
+      2: {
         productId: 2,
-        quantity: 17,
-        soldPrice: 29593.58
+        productName: 'dog',
+        quantity: 3
       }
     },
-    date: '09-12-2013',
-    paymentTypeId: 45487899454,
+    orderPrice: 877.99,
+    date: '11-29-2013',
+    paymentTypeId: 454151554,
     paymentType: 'Bank'
   }
 };
