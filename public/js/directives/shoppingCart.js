@@ -21,10 +21,10 @@ angular.module('eMarketApp')
 
           $scope.getTotalCost = function() {
             return cost;
-          }
+          };
           $scope.getTotalShipping = function() {
             return shipping;
-          }
+          };
         }
       };
     });
