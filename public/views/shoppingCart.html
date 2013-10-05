@@ -12,28 +12,15 @@
     <div data-role="content">
 
         <ul data-role="listview" data-theme="c" data-inset="true">
-            <li data-role="list-divider">Seller: Lazarito el Traquetero <span class="ui-li-count">1</span></li>
-            <li>
-                <a style="font-size: 75%; white-space: normal">
-                    <img src="img/shopping-cart.png" class="item-image">
-                    Samsung Serie 7 TouchScreen Ultrabook i5 4GB Ram 256SSD 13.3"
-                    <p class="ui-li-aside"><strong>$629.88</strong><br></p>
+            <li data-role="list-divider">Seller: Lazarito el Traquetero <span class="ui-li-count">{{shoppingCarts.length}}</span></li>
+            <li ng-repeat="shoppingCart in shoppingCarts">
+                <a href="#item-view" class="wrap-text" ng-click="setItem(shoppingCart)">
+                    <img src="img/shopping-cart.png" class="center-image">
+                    {{shoppingCart.productName}}
+                    <p class="ui-li-aside"><strong>{{shoppingCart.cost | currency}}</strong><br>{{shoppingCart.productShippingPrice}}</p>
                 </a>
                 <a href="#popupNotification" data-inline="true" data-icon="gear" data-rel="popup"
                    data-position-to="window" data-transition="pop">
-
-                </a>
-            </li>
-            <li data-role="list-divider">Seller: Panchita la del Barrio <span class="ui-li-count">1</span></li>
-            <li>
-                <a style="font-size: 75%; white-space: normal; ">
-                    <img src="img/shopping-cart.png" class="item-image">
-                    Samsung Serie 7 TouchScreen Ultrabook i5 4GB Ram 256SSD 13.3"
-                    <p class="ui-li-aside"><strong>$629.88</strong><br></p>
-                </a>
-                <a href="#popupNotification" data-inline="true" data-icon="gear" data-rel="popup"
-                   data-position-to="window" data-transition="pop">
-
                 </a>
             </li>
         </ul>
@@ -41,10 +28,10 @@
             <table align="right">
                 <tr>
                     <td align="left">
-                        Items(2):
+                        Items({{shoppingCarts.length}}):
                     </td>
                     <td align="right">
-                        $1492.96
+                        {{getTotalCost() | currency}}
                     </td>
 
                 </tr>
@@ -53,7 +40,7 @@
                         Shipping:
                     </td>
                     <td align="right" class="line">
-                        $12.96
+                        {{getTotalShipping() | currency}}
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +48,7 @@
                         Cart Subtotal:
                     </td>
                     <td align="right">
-                        $1563.99
+                        {{getTotalCost() + getTotalShipping() | currency}}
                     </td>
                 </tr>
             </table>
