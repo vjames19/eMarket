@@ -41,7 +41,7 @@ module.exports = function(passport) {
         if(user && user.password === password) {
           done(null, user);
         } else {
-          done('exploto como siqui', null);
+          done({message: 'Authentication: Incorrect user or password'}, null);
         }
       }
   ));
