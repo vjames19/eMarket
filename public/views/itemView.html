@@ -43,7 +43,36 @@
                 <p class="item-description-text-size"> Condition: {{ item.productDescription.productCondition }} </p>
             </li>
             <li>
-                <p class="item-description-text-size"> {{ item.productDescription }}</p>
+                <p class="item-description-text-size">
+                    Description
+                    <table>
+                        <tr>
+                            <td>
+                                Product Brand:
+                            </td>
+                            <td>
+                                {{item.productDescription.productBrand}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Product Model:
+                            </td>
+                            <td>
+                                {{ item.productDescription.productModel}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Product Dimensions:
+                            </td>
+                            <td>
+                                {{item.productDescription.productDimensions}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </p>
             </li>
             <li>
                 <p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>
