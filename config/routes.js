@@ -113,13 +113,18 @@ module.exports = function (app, passport, auth) {
   app.put('/api/users/:userId/browsedItems/:browsedItemId', users.updateBrowsedItem);
   app.del('/api/users/:userId/browsedItems/:browsedItemId', users.deleteBrowsedItem);
 
-  // User Browsed Item Routes
+  // User Purchases Routes
   app.param('purchaseId', users.findPurchaseById);
   app.get('/api/users/:userId/purchases', users.readAllPurchases);
   app.post('/api/users/:userId/purchases', users.createPurchase);
   app.get('/api/users/:userId/purchases/:purchaseId', users.readPurchase);
   app.put('/api/users/:userId/purchases/:purchaseId', users.updatePurchase);
   app.del('/api/users/:userId/purchases/:purchaseId', users.deletePurchase);
+
+  // User Rating Routes
+  app.param('ratingId', users.findRatingById);
+  app.get('/api/users/:userId/ratings', users.readAllRatings);
+  app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
 
 //=================NON USER ROUTES================//
 
@@ -158,6 +163,10 @@ module.exports = function (app, passport, auth) {
   app.get('/api/sellers/:sellerId', sellers.readSeller);
   app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
   app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
+
+  app.param('ratingId', sellers.findRatingById);
+  app.get('/api/sellers/:sellerId/ratings', sellers.readAllRatings);
+  app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
 
   // Admin Routes
   var admins = require('../app/controllers/admins');

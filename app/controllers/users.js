@@ -764,7 +764,7 @@ exports.deleteUnsoldProduct = function (req, res) {
   res.jsonp(req.unsoldProduct);
 };
 
-
+// Carts
 var carts = {
   1: {
     cartId: 1,
@@ -844,6 +844,7 @@ exports.deleteCart = function (req, res) {
   res.jsonp(req.cart);
 };
 
+// Bids
 var bids = {
   1: {
     bidId: 1,
@@ -896,6 +897,7 @@ exports.deleteUserBid = function (req, res) {
   res.jsonp(req.bid);
 };
 
+// Broswed Items
 var browsedItems =
 {
   1: {
@@ -975,82 +977,120 @@ exports.deleteBrowsedItem = function (req, res) {
   res.jsonp(req.browsedItem);
 };
 
+
+// Purchases
 var purchases = {
-    1: {
-      purchaseId: 1,
-      productCategory: 'computers',
-      productName: 'alienware',
-      productBuyItNowPrice: 599.99,
-      productStartingBidPrice: 500.99,
-      productCurrentBidPrice: 800.99,
-      productBidEndDate: '07/07/2008',
-      productShippingPrice: 8.99,
-      productQuantitySold: 3,
-      productDescription: {
-        productCondition: 'Refurbished',
-        productPicture: '/img/products/users/9/z98gyu.png',
-        productBrand: 'dell',
-        productModel: 'M179385',
-        productDimensions: '19x30x25'
-      },
-      quantity: 2,
-      soldPrice: 1199.99,
-      date: '07/30/2013:01:01:01 EST'
+  1: {
+    purchaseId: 1,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 599.99,
+    productStartingBidPrice: 500.99,
+    productCurrentBidPrice: 800.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantitySold: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
     },
-    2: {
-      purchaseId: 2,
-      productCategory: 'computers',
-      productName: 'dell',
-      productBuyItNowPrice: 16.99,
-      productStartingBidPrice: 5.99,
-      productCurrentBidPrice: 8.99,
-      productBidEndDate: '07/07/2008',
-      productShippingPrice: 8.99,
-      productQuantitySold: 3,
-      productDescription: {
-        productCondition: 'New',
-        productPicture: '/img/products/users/9/z98gyu.png',
-        productBrand: 'dell',
-        productModel: 'M179385',
-        productDimensions: '19x30x25'
-      },
-      quantity: 4,
-      soldPrice: 99.99,
-      date: '07/30/2013:01:01:01 EST'
-    }
+    quantity: 2,
+    soldPrice: 1199.99,
+    date: '07/30/2013:01:01:01 EST'
+  },
+  2: {
+    purchaseId: 2,
+    productCategory: 'computers',
+    productName: 'dell',
+    productBuyItNowPrice: 16.99,
+    productStartingBidPrice: 5.99,
+    productCurrentBidPrice: 8.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantitySold: 3,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    },
+    quantity: 4,
+    soldPrice: 99.99,
+    date: '07/30/2013:01:01:01 EST'
+  }
 };
 
 exports.findPurchaseById = function (req, res, next, id) {
-if (!purchases[+id]) {
-  res.jsonp(404, {message: 'Purchased Item Not Found'});
-} else {
-  req.purchase = purchases[+id];
-  next();
-}
+  if (!purchases[+id]) {
+    res.jsonp(404, {message: 'Purchased Item Not Found'});
+  } else {
+    req.purchase = purchases[+id];
+    next();
+  }
 };
 
 exports.readAllPurchases = function (req, res) {
-res.jsonp(_.values(purchases));
+  res.jsonp(_.values(purchases));
 };
 
 exports.createPurchase = function (req, res) {
-var purchase = req.body;
-purchase.purchaseId = _.keys(purchases).length + 1;
-purchases[purchase.purchaseId] = purchase;
-res.jsonp(purchase);
+  var purchase = req.body;
+  purchase.purchaseId = _.keys(purchases).length + 1;
+  purchases[purchase.purchaseId] = purchase;
+  res.jsonp(purchase);
 };
 
 exports.readPurchase = function (req, res) {
-res.jsonp(req.purchase);
+  res.jsonp(req.purchase);
 };
 
 exports.updatePurchase = function (req, res) {
-_.extend(req.purchase, req.body);
-purchases[req.purchase.purchaseId] = req.purchase;
-res.jsonp(req.purchase);
+  _.extend(req.purchase, req.body);
+  purchases[req.purchase.purchaseId] = req.purchase;
+  res.jsonp(req.purchase);
 };
 
 exports.deletePurchase = function (req, res) {
-delete purchases[req.purchase.purchaseId];
-res.jsonp(req.purchase);
+  delete purchases[req.purchase.purchaseId];
+  res.jsonp(req.purchase);
+};
+
+// Rating
+var ratings = {
+  1: {
+    ratingId: 1,
+    raterId: 1,
+    rating: '***'
+  },
+  2: {
+    ratingId: 2,
+    raterId: 9,
+    rating: '**'
+  },
+  3: {
+    ratingId: 3,
+    raterId: 15,
+    rating: '****'
+  }
+};
+
+exports.findRatingById = function (req, res, next, id) {
+  if (!ratings[+id]) {
+    res.jsonp(404, {message: 'Rating Item Not Found'});
+  } else {
+    req.rating = ratings[+id];
+    next();
+  }
+};
+
+exports.readAllRatings = function (req, res) {
+  res.jsonp(_.values(ratings));
+};
+
+exports.readRating = function (req, res) {
+  res.jsonp(req.rating);
 };
