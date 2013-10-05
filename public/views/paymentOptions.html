@@ -32,7 +32,7 @@
                             <p><strong>Card CVS:</strong> {{creditCard.creditCardCvs}}</p>
                         </a>
                         <a href="#cardPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                           data-position-to="window" data-icon="gear" data-theme="c"></a>
+                           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCardInfo(creditCard)"></a>
                     </li>
                 </ul>
             </div>
@@ -45,7 +45,7 @@
                         <span class="ui-li-count">{{bankAccounts.length}}</span></li>
                     <li ng-repeat="bankAccount in bankAccounts">
                         <a href="">
-                            <p><strong>Name:</strong> {{bankAccount.bankName}}</p>
+                            <p><strong>Bank Name:</strong> {{bankAccount.bankName}}</p>
 
                             <p><strong>Bank Account Type:</strong> {{bankAccount.bankAccountType}}</p>
 
@@ -54,7 +54,7 @@
                             <p><strong>Bank Account Routing:</strong> {{bankAccount.bankAccountRouting}}</p>
                         </a>
                         <a href="#bankPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                           data-position-to="window" data-icon="gear" data-theme="c"></a>
+                           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBankInfo(bankAccount)"></a>
                     </li>
                 </ul>
             </div>

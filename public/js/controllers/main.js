@@ -4,6 +4,8 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.itemToBeViewed = null;
   $scope.mailInfoToBeViewed = null;
   $scope.billInfoToBeViewed = null;
+  $scope.cardInfoToBeViewed = null;
+  $scope.bankInfoToBeViewed = null;
 
   // Use to set the item to be viewed
   $scope.setItem = function(item) {
@@ -16,6 +18,14 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
 
   $scope.setBillInfo = function(billInfo) {
     $scope.billInfoToBeViewed = billInfo;
+  };
+
+  $scope.setCardInfo = function(cardInfo){
+    $scope.cardInfoToBeViewed = cardInfo;
+  };
+
+  $scope.setBankInfo = function(bankInfo){
+    $scope.bankInfoToBeViewed = bankInfo;
   };
 
   $scope.logIn = function() {

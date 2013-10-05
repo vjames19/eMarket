@@ -5,7 +5,9 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/editBank.html',
         restrict: 'E',
-        scope: {},
+        scope: {
+          bankInfo: '='
+        },
         replace: true
       };
     });

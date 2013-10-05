@@ -5,7 +5,7 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/paymentOptions.html',
         restrict: 'E',
-        scope: {},
+        scope: true,
         replace: true,
         controller: function($scope, Restangular) {
             $scope.creditCards = Restangular.one('api/users', 1).getList('creditCards');

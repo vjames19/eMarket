@@ -6,7 +6,7 @@ angular.module('eMarketApp')
         templateUrl: 'views/editBillingAddress.html',
         restrict: 'E',
         scope: {
-          info: '='
+          billInfo: '='
         },
         replace: true
       };
