@@ -15,7 +15,7 @@
         <h3>Choose An Action</h3>
         <a href="#" data-role="button" data-icon="edit">Edit</a>
         <a href="#" data-role="button" data-icon="delete">Delete</a>
-        <a href="#profile" data-role="button" data-icon="back">Cancel</a>
+        <a href="#" data-role="button" data-icon="back">Cancel</a>
     </div>
 </div>
 
@@ -25,22 +25,22 @@
     <div data-role="collapsible">
         <h2>Edit Profile Information</h2>
         <ul data-role="listview" data-theme="d" data-divider-theme="d">
-            <li data-role="list-divider">UserName: <span class="ui-li-count">pedronales</span></li>
+            <li data-role="list-divider">UserName: <span class="ui-li-count">{{users.username}}</span></li>
         </ul>
         <div data-role="fieldcontain">
-            <label for="firstname">First Name</label>
-            <input type="text" id="firstname" value="Pedro">
-            <label for="middlename">Last Name</label>
-            <input type="text" id="middlename" value="J">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" value="Rosanales">
-            <label for="email">Email</label>
-            <input type="email" id="email" value=" pedro.j.rosanales@pjr.np">
-            <label for="old-password">Old Password</label>
+            <label for="firstname"><strong>First Name</strong></label>
+            <input type="text" id="firstname" value="{{users.userFirstName}}">
+            <label for="middlename"><strong>Middle Name</strong></label>
+            <input type="text" id="middlename" value="{{users.userMiddleName}}">
+            <label for="lastname"><strong>Last Name</strong></label>
+            <input type="text" id="lastname" value="{{users.userLastName}}">
+            <label for="email"><strong>Email</strong></label>
+            <input type="email" id="email" value="{{users.userEmail}}">
+            <label for="old-password"><strong>Old Password</strong></label>
             <input type="password" id="old-password" autocomplete="off" value="">
-            <label for="new-password">New Password</label>
+            <label for="new-password"><strong>New Password</strong></label>
             <input type="password" id="new-password" autocomplete="off" value="">
-            <label for="new-password-confirm">Confirm Password</label>
+            <label for="new-password-confirm"><strong>Confirm Password</strong></label>
             <input type="password" id="new-password-confirm" autocomplete="off" value="">
         </div>
         <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
@@ -54,229 +54,122 @@
 <div data-role="collapsible">
     <h2>Edit Mailing Addresses</h2>
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
-        <li data-role="list-divider">Mailing Addresses on System<span class="ui-li-count">2</span></li>
-        <li><a href="">
-            <table style="font-size: 65%">
-                <tr>
-                    <td><strong>Name:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Juan Del Pueblo</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Ruta #11</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Country:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>US</em></td>
-                </tr>
-                <tr>
-                    <td><strong>City:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Margaritas</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Geographical Region:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Virginia</em></td>
-                </tr>
-                <tr>
-                    <td><strong>ZipCode:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>080101</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Telephone:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>7775554444</em></td>
-                </tr>
-            </table>
-
-
-        </a>
+        <li data-role="list-divider">Mailing Addresses on System<span class="ui-li-count">{{mailAddresses.length}}</span></li>
+        <li ng-repeat="mailAddress in mailAddresses">
+            <a href="">
+                <table style="font-size: 65%">
+                    <tr>
+                        <td><strong>Name:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.recipientName}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.mailAddress}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Country:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.country}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>City:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.city}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Geographical Region:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.geographicalRegion}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ZipCode:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.zipCode}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telephone:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{mailAddress.telephone}}</em></td>
+                    </tr>
+                </table>
+            </a>
             <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                data-position-to="window" data-icon="gear" data-theme="c"></a>
         </li>
-        <li><a href="">
-            <table style="font-size: 65%">
-                <tr>
-                    <td><strong>Name:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Jose Del Pueblo</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Ruta #11</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Country:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>US</em></td>
-                </tr>
-                <tr>
-                    <td><strong>City:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Margaritas</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Geographical Region:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Virginia</em></td>
-                </tr>
-                <tr>
-                    <td><strong>ZipCode:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>080101</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Telephone:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>7775554444</em></td>
-                </tr>
-            </table>
-
-
-        </a>
-            <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"></a></li>
     </ul>
 </div>
 <div data-role="collapsible">
     <h2>Edit Billing Addresses</h2>
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
-        <li data-role="list-divider">Billing Addresses on System<span class="ui-li-count">2</span></li>
-        <li><a href="">
-            <table style="font-size: 65%">
-                <tr>
-                    <td><strong>Name:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Juan Del Pueblo</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Ruta #11</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Country:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>US</em></td>
-                </tr>
-                <tr>
-                    <td><strong>City:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Margaritas</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Geographical Region:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Virginia</em></td>
-                </tr>
-                <tr>
-                    <td><strong>ZipCode:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>080101</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Telephone:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>7775554444</em></td>
-                </tr>
-            </table>
-
-
-        </a>
+        <li data-role="list-divider">Billing Addresses on System<span class="ui-li-count">{{billAddresses.length}}</span></li>
+        <li ng-repeat="billAddress in billAddresses">
+            <a href="">
+                <table style="font-size: 65%">
+                    <tr>
+                        <td><strong>Name:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.recipientName}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.billAddress}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Country:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.country}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>City:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.city}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Geographical Region:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.geographicalRegion}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ZipCode:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.zipCode}}</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telephone:</strong></td>
+                        <td class="pad"></td>
+                        <td><em>{{billAddress.telephone}}</em></td>
+                    </tr>
+                </table>
+            </a>
             <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                data-position-to="window" data-icon="gear" data-theme="c"></a>
         </li>
-        <li><a href="">
-            <table style="font-size: 65%">
-                <tr>
-                    <td><strong>Name:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Jose Del Pueblo</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Ruta #11</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Country:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>US</em></td>
-                </tr>
-                <tr>
-                    <td><strong>City:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Margaritas</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Geographical Region:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>Virginia</em></td>
-                </tr>
-                <tr>
-                    <td><strong>ZipCode:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>080101</em></td>
-                </tr>
-                <tr>
-                    <td><strong>Telephone:</strong></td>
-                    <td class="pad"></td>
-                    <td><em>7775554444</em></td>
-                </tr>
-            </table>
-
-
-        </a>
-            <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"></a></li>
     </ul>
 </div>
 <div data-role="collapsible" data-iconpos="bottom" data-theme="b" data-content-theme="c">
     <h2>My Ratings</h2>
-    <ul data-role="listview" data-theme="d" data-divider-theme="e">
+    <ul data-role="listview" data-theme="c" data-divider-theme="e">
         <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count">****</span></li>
-        <li data-icon="false">
+        <li ng-repeat="rating in ratings" data-icon="false">
             <a href="#">
                 <table>
                     <tr>
                         <td><strong>User:</strong></td>
                         <td class="pad"></td>
-                        <td><em>Chencho</em></td>
+                        <td><em>{{rating.raterName}}</em></td>
                     </tr>
                     <tr>
                         <td><strong>Rating:</strong></td>
                         <td class="pad"></td>
-                        <td><em>***</em></td>
+                        <td><em>{{rating.rating}}</em></td>
                     </tr>
                 </table>
-
-
             </a>
         </li>
-        <li data-icon="false">
-            <a href="#">
-                <table>
-                    <tr>
-                        <td><strong>User:</strong></td>
-                        <td class="pad"></td>
-                        <td><em>Juan</em></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rating:</strong></td>
-                        <td class="pad"></td>
-                        <td><em>*****</em></td>
-                    </tr>
-                </table>
 
-
-            </a>
-        </li>
     </ul>
 </div>
 </div>

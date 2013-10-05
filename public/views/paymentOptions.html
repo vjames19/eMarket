@@ -24,36 +24,32 @@
             <div data-role="collapsible">
                 <h2>Edit Credit Cards</h2>
                 <ul data-role="listview" data-theme="d" data-divider-theme="d">
-                    <li data-role="list-divider">Credit Cards on System<span class="ui-li-count">2</span></li>
-                    <li><a href="">
-                        <p><strong>Name:</strong> John Mayers</p>
-
-                        <p><strong>Issuing Network:</strong> Visa</p>
-
-                        <p><strong>Card Number:</strong> 4929095139559462</p>
+                    <li data-role="list-divider">Credit Cards on System<span class="ui-li-count">{{creditCards.length}}</span></li>
+                    <li ng-repeat="creditCard in creditCards">
+                        <a href="">
+                            <p><strong>Name:</strong> {{creditCard.creditCardName}}</p>
+                            <p><strong>Issuing Network:</strong> {{creditCard.creditCardType}}</p>
+                            <p><strong>Card Number:</strong> {{creditCard.creditCardNumber}}</p>
+                            <p><strong>Card Exp Date:</strong> {{creditCard.creditCardExpDate}}</p>
+                            <p><strong>Card CVS:</strong> {{creditCard.creditCardCvs}}</p>
                         </a>
                         <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                            data-icon="gear" data-theme="c"></a>
                     </li>
-                    <li><a href="">
-                        <p><strong>Name:</strong> Mike Miyers</p>
-
-                        <p><strong>Issuing Network:</strong> American Express</p>
-
-                        <p><strong>Card Number:</strong> 349299825178906</p>
-                    </a>
-                        <a href="#popupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                           data-icon="gear" data-theme="c"></a></li>
                 </ul>
             </div>
             <div data-role="collapsible">
                 <h2>Edit Bank Accounts</h2>
                 <ul data-role="listview" data-theme="d" data-divider-theme="d">
-                    <li data-role="list-divider">TBD<span class="ui-li-count">TBD</span></li>
-                    <li><a href="">TBD
-                    </a></li>
-                    <li><a href="">TBD
-                    </a></li>
+                    <li data-role="list-divider">Bank Accounts on System<span class="ui-li-count">{{bankAccounts.length}}</span></li>
+                    <li ng-repeat="bankAccount in bankAccounts">
+                        <a href="">
+                            <p><strong>Name:</strong> {{bankAccount.bankName}}</p>
+                            <p><strong>Bank Account Type:</strong> {{bankAccount.bankAccountType}}</p>
+                            <p><strong>Bank Account Number:</strong> {{bankAccount.bankAccountNumber}}</p>
+                            <p><strong>Bank Account Routing:</strong> {{bankAccount.bankAccountRouting}}</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

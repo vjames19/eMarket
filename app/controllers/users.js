@@ -5,16 +5,20 @@ var _ = require('underscore');
 var users = {
   1: {
     userId: 1,
+    username: 'chencho_mata',
     userFirstName: 'Chencho',
     userMiddleName: 'Mata',
     userLastName: 'Vaca',
+    userEmail: 'chencho.vaca@upr.edu',
     userTelephone: '787-459-6285'
   },
   2: {
     userId: 2,
+    username: 'mariano_sol',
     userFirstName: 'Mariano',
     userMiddleName: null,
     userLastName: 'Sol',
+    userEmail: 'mariano.sol@upr.edu',
     userTelephone: '787-415-4952'
   }
 };
@@ -1064,16 +1068,19 @@ var ratings = {
   1: {
     ratingId: 1,
     raterId: 1,
+    raterName: 'Paco',
     rating: '***'
   },
   2: {
     ratingId: 2,
     raterId: 9,
+    raterName: 'Truqui',
     rating: '**'
   },
   3: {
     ratingId: 3,
     raterId: 15,
+    raterName: 'Juan',
     rating: '****'
   }
 };
