@@ -12,7 +12,7 @@
     <div data-role="content">
 
         <ul data-role="listview" data-theme="c" data-inset="true">
-            <li data-role="list-divider">Seller: Lazarito el Traquetero <span class="ui-li-count">{{shoppingCarts.length}}</span></li>
+            <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
             <li ng-repeat="shoppingCart in shoppingCarts">
                 <a href="#item-view" class="wrap-text" ng-click="setItem(shoppingCart)">
                     <img src="img/shopping-cart.png" class="center-image">

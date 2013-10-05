@@ -93,3 +93,7 @@ img.center-image {
     white-space: normal !important;
     font-size: 90%;
 }
+
+.small-text {
+    font-size: 75%;
+}
