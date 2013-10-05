@@ -5,7 +5,7 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/profile.html',
         restrict: 'E',
-        scope: {},
+        scope: true,
         replace: true,
         controller: function($scope, Restangular) {
           $scope.users = Restangular.one('api/users', 1).getList();
