@@ -7,6 +7,39 @@
     </div>
 
     <div data-role="content">
+        <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" data-filter="true" data-filter-placeholder="Search Admins" data-inset="true">
+            <li data-role="list-divider">Admins on System
+                <a href="#add-admin" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
+                   class="ui-btn-right" data-mini="true">Add Admin</a>
+                <span class="ui-li-count">4</span></li>
+            </li>
+
+            <li data-icon="gear">
+                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">root</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">adminEdu</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">adminVic</a>
+            </li>
+            <li data-icon="gear">
+                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+                   data-position-to="window" data-icon="gear" data-theme="c">adminSam</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="adminPopupMenu" data-theme="d">
+        <div class="form-pad">
+            <h3>Choose An Action</h3>
+            <a href="#edit-admin" data-role="button" data-icon="edit">Edit</a>
+            <a href="#" data-role="button" data-icon="delete">Delete</a>
+            <a href="#admin-accounts" data-role="button" data-icon="back">Cancel</a>
+        </div>
     </div>
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
