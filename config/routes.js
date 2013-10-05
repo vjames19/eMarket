@@ -186,7 +186,9 @@ module.exports = function(app, passport, auth) {
   app.del('/api/admins/:adminId/reports/:reportId', admins.deleteAdminReport);
 
   // Should always be the last route.
+  // TODO: Find a better way to redirect.
   app.get('*', function(req, res) {
-    res.redirect(404, '/');
+    //    res.redirect(404, '/');
+    res.redirect('/');
   });
 };
