@@ -5,7 +5,9 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/editAdmin.html',
         restrict: 'E',
-        scope: {},
+        scope: {
+          adminInfo: '='
+        },
         replace: true
       };
     });

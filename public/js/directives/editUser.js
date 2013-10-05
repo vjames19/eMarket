@@ -5,7 +5,9 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/editUser.html',
         restrict: 'E',
-        scope: {},
+        scope: {
+          userInfo: '='
+        },
         replace: true
       };
     });

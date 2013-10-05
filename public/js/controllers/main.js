@@ -35,4 +35,21 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
     $scope.username = '';
     $scope.password = '';
   };
+
+
+  // Admins Controllers
+  $scope.adminInfoToBeViewed = null;
+  $scope.userInfoToBeViewed = null;
+
+  $scope.setAdminInfo = function(adminInfo) {
+    $scope.adminInfoToBeViewed = adminInfo;
+  }
+
+  $scope.setUserInfo = function(userInfo) {
+    $scope.userInfoToBeViewed = userInfo;
+  }
+
+
+
+
 });

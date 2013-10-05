@@ -5,8 +5,11 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/userAccounts.html',
         restrict: 'E',
-        scope: {},
-        replace: true
+        scope: true,
+        replace: true,
+        controller: function($scope, Restangular) {
+          $scope.users = Restangular.all('api/users').getList();
+        }
       };
     });
 

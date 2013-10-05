@@ -11,24 +11,12 @@
             <li data-role="list-divider">Admins on System
                 <a href="#add-admin" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
                    class="ui-btn-right" data-mini="true">Add Admin</a>
-                <span class="ui-li-count">4</span></li>
+                <span class="ui-li-count">{{admins.length}}</span></li>
             </li>
 
-            <li data-icon="gear">
+            <li ng-repeat="admin in admins" data-icon="gear">
                 <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c">root</a>
-            </li>
-            <li data-icon="gear">
-                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c">adminEdu</a>
-            </li>
-            <li data-icon="gear">
-                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c">adminVic</a>
-            </li>
-            <li data-icon="gear">
-                <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c">adminSam</a>
+                   data-position-to="window" data-icon="gear" data-theme="c" ng-click="setAdminInfo(admin)">{{admin.adminUserName}}</a>
             </li>
         </ul>
     </div>
