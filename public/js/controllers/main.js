@@ -20,5 +20,7 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
 
   $scope.logIn = function() {
     Auth.logIn({username: $scope.username, password: $scope.password});
+    $scope.username = '';
+    $scope.password = '';
   };
 });
