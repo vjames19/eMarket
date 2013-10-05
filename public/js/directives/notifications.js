@@ -23,7 +23,7 @@ angular.module('eMarketApp')
           };
 
           page.on('pagebeforeshow', function() {
-            scope.notifications = Restangular.one('api/users', User.userId).getList('notifications');
+            scope.notifications = User.me().getList('notifications');
           });
 
           page.on('pageshow', function() {

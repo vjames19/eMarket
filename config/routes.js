@@ -187,8 +187,8 @@ module.exports = function(app, passport, auth) {
 
   // Should always be the last route.
   // TODO: Find a better way to redirect.
-  app.get('*', function(req, res) {
-    //    res.redirect(404, '/');
-    res.redirect('/');
-  });
+  //  app.get('*', function(req, res) {
+  //    //    res.redirect(404, '/');
+  //    res.redirect('/');
+  //  });
 };
