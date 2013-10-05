@@ -248,8 +248,7 @@ var mailAddresses = {
     zipCode: '00746',
     recipientName: 'Tesla Quiles',
     telephone: '787-458-6156',
-    paymentTypeId: 54504155454,
-    paymentType: 'Card'
+    isPrimary: true
   },
   2: {
     mailAddressId: 2,
@@ -261,8 +260,8 @@ var mailAddresses = {
     zipCode: '05946',
     recipientName: 'Juan del Pueblo',
     telephone: '787-458-1226',
-    paymentTypeId: 44564155454,
-    paymentType: 'Bank'
+    isPrimary: false
+
   },
   3: {
     mailAddressId: 3,
@@ -274,8 +273,7 @@ var mailAddresses = {
     zipCode: '00956',
     recipientName: 'John the People',
     telephone: '412-458-3246',
-    paymentTypeId: 54504155454,
-    paymentType: 'Card'
+    isPrimary: false
   }
 };
 

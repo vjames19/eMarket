@@ -46,7 +46,7 @@
     <h2>Edit Mailing Addresses</h2>
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
         <li data-role="list-divider">Mailing Addresses on System
-            <a href="#add-address" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
+            <a href="#add-mailing-address" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
                class="ui-btn-right">Add Mailing Address</a>
             <span class="ui-li-count">{{mailAddresses.length}}</span></li>
         <li ng-repeat="mailAddress in mailAddresses">
@@ -73,7 +73,7 @@
                         <td><em>{{mailAddress.city}}</em></td>
                     </tr>
                     <tr>
-                        <td><strong>Geographical Region:</strong></td>
+                        <td><strong>State/Region/Providence:</strong></td>
                         <td class="pad"></td>
                         <td><em>{{mailAddress.geographicalRegion}}</em></td>
                     </tr>
@@ -89,7 +89,7 @@
                     </tr>
                 </table>
             </a>
-            <a href="#addressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+            <a href="#mailingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                data-position-to="window" data-icon="gear" data-theme="c"></a>
         </li>
     </ul>
@@ -98,7 +98,7 @@
     <h2>Edit Billing Addresses</h2>
     <ul data-role="listview" data-theme="d" data-divider-theme="d">
         <li data-role="list-divider">Billing Addresses on System
-            <a href="#add-address" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
+            <a href="#add-billing-address" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
                class="ui-btn-right">Add Billing Address</a>
             <span class="ui-li-count">{{billAddresses.length}}</span></li>
         <li ng-repeat="billAddress in billAddresses">
@@ -141,7 +141,7 @@
                     </tr>
                 </table>
             </a>
-            <a href="#addressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+            <a href="#billingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                data-position-to="window" data-icon="gear" data-theme="c"></a>
         </li>
     </ul>
@@ -171,15 +171,23 @@
 </div>
 </div>
 
-<div data-role="popup" id="addressPopupMenu" data-theme="d">
+<div data-role="popup" id="mailingAddressPopupMenu" data-theme="d">
     <div style="padding:10px 20px;">
         <h3>Choose An Action</h3>
-        <a href="#edit-address" data-role="button" data-icon="edit">Edit</a>
+        <a href="#edit-mailing-address" data-role="button" data-icon="edit">Edit</a>
         <a href="#" data-role="button" data-icon="delete">Delete</a>
         <a href="#profile" data-role="button" data-icon="back">Cancel</a>
     </div>
 </div>
 
+    <div data-role="popup" id="billingAddressPopupMenu" data-theme="d">
+        <div style="padding:10px 20px;">
+            <h3>Choose An Action</h3>
+            <a href="#edit-billing-address" data-role="button" data-icon="edit">Edit</a>
+            <a href="#" data-role="button" data-icon="delete">Delete</a>
+            <a href="#profile" data-role="button" data-icon="back">Cancel</a>
+        </div>
+    </div>
 
 <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 </div>

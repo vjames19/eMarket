@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('editAddress', function () {
+    .directive('addBillingAddress', function () {
       return {
-        templateUrl: 'views/editAddress.html',
+        templateUrl: 'views/addBillingAddress.html',
         restrict: 'E',
         scope: {},
         replace: true
