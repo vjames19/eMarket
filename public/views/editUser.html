@@ -11,15 +11,15 @@
             <div class="form-pad">
                 <h4>UserName: <span class="ui-li-count">{{userInfo.username}}</span></h4>
                 <label for="firstname"><strong>First Name</strong></label>
-                <input type="text" id="firstname" value="{{userInfo.userFirstName}}">
+                <input type="text" id="firstname" ng-model="userInfo.userFirstName">
                 <label for="middlename"><strong>Middle Name</strong></label>
-                <input type="text" id="middlename" value="{{userInfo.userMiddleName}}">
+                <input type="text" id="middlename" ng-model="userInfo.userMiddleName">
                 <label for="lastname"><strong>Last Name</strong></label>
-                <input type="text" id="lastname" value="{{userInfo.userLastName}}">
+                <input type="text" id="lastname" ng-model="userInfo.userLastName">
                 <label for="telephone"><strong>Telephone</strong></label>
-                <input type="tel" id="telephone" value="{{userInfo.userPhone}}">
+                <input type="tel" id="telephone" ng-model="userInfo.userTelephone">
                 <label for="email"><strong>Email</strong></label>
-                <input type="email" id="email" value="{{userInfo.userEmail}}">
+                <input type="email" id="email" ng-model="userInfo.userEmail">
                 <label for="new-password"><strong>New Password</strong></label>
                 <input type="password" id="new-password" autocomplete="off" value="">
                 <label for="new-password-confirm"><strong>Confirm Password</strong></label>
