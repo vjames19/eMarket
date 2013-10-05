@@ -10,10 +10,10 @@
         <form action="#">
             <div class="form-pad">
                 <label for="card-name"><strong>Card Name</strong></label>
-                <input type="text" id="card-name" value="{{cardInfo.creditCardName}}">
+                <input type="text" id="card-name" ng-model="cardInfo.creditCardName">
                 <label for="card-type"><strong>Card Type</strong></label>
-                <select id="card-type">
-                    <option value="{{cardInfo.creditCardType}}" selected>{{cardInfo.creditCardType}}</option>
+                <select id="card-type" ng-model="cardInfo.creditCardType">
+                    <option value="Visa" selected>Visa</option>
                     <option value="MasterCard">MasterCard</option>
                     <option value="AmericanExpress">AmericanExpress</option>
                     <option value="Other">Other</option>
@@ -22,9 +22,9 @@
                 <input type="date" id="card-exp-date" value="2013-07-08">
                 <label for="card-number"><strong>Card Number</strong></label>
                 <!-- The type number in the phone make the last digit 0 in the card-number-->
-                <input type="number" id="card-number" value="{{cardInfo.creditCardNumber}}">
+                <input type="number" id="card-number" ng-model="cardInfo.creditCardNumber">
                 <label for="card-cvs"><strong>Card CVS</strong></label>
-                <input type="number" id="card-cvs" value="{{cardInfo.creditCardCvs}}">
+                <input type="number" id="card-cvs" ng-model="cardInfo.creditCardCvs">
                 <label for="address-relation"><strong>Associated Address</strong></label>
                 <select id="address-relation">
                     <option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>
