@@ -6,16 +6,12 @@ angular.module('eMarketApp').factory('Auth', function($http, User) {
   return {
     logIn: function(userData) {
       $http.post('login', userData).success(function(realUser) {
-        console.log('success', arguments);
         user.username = realUser.username;
         user.userId = realUser.userId;
         $.mobile.changePage('#index-page');
         isLoggedIn = true;
-      }).error(function(error) {
-            console.log('errr', arguments)
-            $('#loginError').popup()
+      }).error(function() {
             $('#loginError').popup('open');
-            console.log($('loginError'))
           })
 
     },
