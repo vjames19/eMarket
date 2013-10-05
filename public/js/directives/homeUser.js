@@ -5,6 +5,9 @@ angular.module('eMarketApp').directive('homeUser', function() {
     templateUrl: 'views/homeUser.html',
     restrict: 'E',
     scope: {},
-    replace: true
+    replace: true,
+    controller: function($scope, Auth) {
+      $scope.logOut = Auth.logOut;
+    }
   };
 });
