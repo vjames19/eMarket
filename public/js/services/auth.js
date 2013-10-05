@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('eMarketApp').factory('Auth', function($http, User) {
+angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
   var user = User;
   var isLoggedIn = false;
   return {
     logIn: function(userData) {
       $http.post('login', userData).success(function(realUser) {
         user.username = realUser.username;
-        user.userId = realUser.userId;
+        user.userId = realUser.id;
         $.mobile.changePage('#index-page');
         isLoggedIn = true;
       }).error(function() {
