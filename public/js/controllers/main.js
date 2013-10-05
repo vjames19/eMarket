@@ -6,5 +6,5 @@ angular.module('eMarketApp')
       // Use to set the item to be viewed
       $scope.setItem = function(item) {
         $scope.itemToBeViewed = item;
-      }
+      };
     });

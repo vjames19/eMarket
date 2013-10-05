@@ -51,6 +51,10 @@
     line-height: 65px;
 }
 
+.categories-admin{
+    line-height: 65px;
+}
+
 .user-accounts {
     line-height: 65px;
 }
@@ -73,7 +77,7 @@ p.index-text-size {
 }
 
 div.footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%
 }

@@ -29,7 +29,8 @@
     "after": false,
     "afterEach": false,
     "it": false,
-    "angular": false
+    "angular": false,
+    "$" : false
   },
 //  "indent": false, // Specify indentation spacing ----Not Used----
   "maxlen": 120, // Max line length, using webstorm default...
