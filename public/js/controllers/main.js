@@ -6,36 +6,35 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.billInfoToBeViewed = null;
   $scope.cardInfoToBeViewed = null;
   $scope.bankInfoToBeViewed = null;
-
+  // Important: Create a deep copy of the item to be passed accross views. To avoid integrity issues.
   // Use to set the item to be viewed
   $scope.setItem = function(item) {
-    $scope.itemToBeViewed = item;
+    $scope.itemToBeViewed = angular.copy(item);
   };
 
   $scope.setMailInfo = function(mailInfo) {
-    $scope.mailInfoToBeViewed = mailInfo;
+    $scope.mailInfoToBeViewed = angular.copy(mailInfo);
   };
 
   $scope.setBillInfo = function(billInfo) {
-    $scope.billInfoToBeViewed = billInfo;
+    $scope.billInfoToBeViewed = angular.copy(billInfo);
   };
 
-  $scope.setCardInfo = function(cardInfo){
-    $scope.cardInfoToBeViewed = cardInfo;
+  $scope.setCardInfo = function(cardInfo) {
+    $scope.cardInfoToBeViewed = angular.copy(cardInfo);
   };
 
-  $scope.setBankInfo = function(bankInfo){
-    $scope.bankInfoToBeViewed = bankInfo;
+  $scope.setBankInfo = function(bankInfo) {
+    $scope.bankInfoToBeViewed = angular.copy(bankInfo);
   };
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!
-//    Auth.logIn({username: $scope.username, password: $scope.password});
+    //    Auth.logIn({username: $scope.username, password: $scope.password});
     Auth.logIn({username: 'user', password: 'password'});
     $scope.username = '';
     $scope.password = '';
   };
-
 
   // Admins Controllers
   $scope.adminInfoToBeViewed = null;
@@ -48,8 +47,4 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.setUserInfo = function(userInfo) {
     $scope.userInfoToBeViewed = userInfo;
   }
-
-
-
-
 });
