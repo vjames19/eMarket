@@ -8,6 +8,43 @@
     </div>
 
     <div data-role="content">
+        <form action="#">
+            <div class="form-pad">
+                <label for="name"><strong>Name</strong></label>
+                <input type="text" id="name" value="">
+                <label for="address"><strong>Address</strong></label>
+                <input type="text" id="address" value="">
+                <label for="country"><strong>Country</strong></label>
+                <input type="text" id="country" value="">
+                <label for="city"><strong>City</strong></label>
+                <input type="text" id="city" value="">
+                <label for="geographical-region"><strong>State/Region/Providence</strong></label>
+                <input type="text" id="geographical-region" value="">
+                <label for="zip-code"><strong>Zip Code</strong></label>
+                <input type="number" id="zip-code" value="">
+                <label for="telephone"><strong>Telephone</strong></label>
+                <input type="tel" id="telephone" value="">
+                <h3>Associate with at least one.</h3>
+                <label for="cart-relation">Card Associated</label>
+                <select id="cart-relation">
+                    <option value="None" selected>None</option>
+                    <option value="Visa - 1827390276489382">Visa - 1827390276489382</option>
+                    <option value="American Express - 0192837291839201">American Express - 0192837291839201</option>
+                </select>
+                <label for="bank-relation">Card Type</label>
+                <select id="bank-relation">
+                    <option value="None"  selected>None</option>
+                    <option value="PNC - 92873819">PNC - 92873819</option>
+                    <option value="Popular - 01938429">PNC - 92873819</option>
+                </select>
+            </div>
+            <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
+                <a href="#profile" data-role="button" data-icon="back" data-theme="a"
+                   data-transition="fade">Cancel</a>
+                <a href="#profile" data-role="button" data-icon="check" data-theme="a"
+                   data-transition="fade">Submit</a>
+            </div>
+        </form>
     </div>
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
