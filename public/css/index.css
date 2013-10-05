@@ -102,6 +102,9 @@ td.pad {
 .small-text {
     font-size: 75%;
 }
+.xsmall-text {
+    font-size: 70%;
+}
 
 .form-pad{
     display: block;

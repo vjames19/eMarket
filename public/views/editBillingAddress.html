@@ -2,7 +2,7 @@
     <div data-role="header" data-position="fixed" data-theme="a">
         <h1>Edit Billing Address</h1>
 
-        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+        <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
         <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
         <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
     </div>
@@ -11,20 +11,20 @@
         <form action="#">
             <div class="form-pad">
                 <label for="name"><strong>Name</strong></label>
-                <input type="text" id="name" value="Chencho">
+                <input type="text" id="name" value="{{info.recipientName}}">
                 <label for="address"><strong>Address</strong></label>
-                <input type="text" id="address" value="Casa Blanca">
+                <input type="text" id="address" value="{{info.billAddress}}">
                 <label for="country"><strong>Country</strong></label>
-                <input type="text" id="country" value="Peru">
+                <input type="text" id="country" value="{{info.country}}">
                 <label for="city"><strong>City</strong></label>
-                <input type="text" id="city" value="Los Platanos">
+                <input type="text" id="city" value="{{info.city}}">
                 <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-                <input type="text" id="geographical-region" value="South America">
+                <input type="text" id="geographical-region" value="{{info.geographicalRegion}}">
                 <label for="zip-code"><strong>Zip Code</strong></label>
-                <input type="number" id="zip-code" value="112233">
+                <input type="number" id="zip-code" value="{{info.zipCode}}">
                 <label for="telephone"><strong>Telephone</strong></label>
-                <input type="tel" id="telephone" value="7-893-199-1938">
-                <h3>Associate with at least one.</h3>
+                <input type="tel" id="telephone" value="{{info.telephone}}">
+                <h3>Associate with at least one:</h3>
                 <label for="cart-relation">Card Associated</label>
                 <select id="cart-relation">
                     <option value="None" selected>None</option>

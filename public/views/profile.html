@@ -51,7 +51,7 @@
             <span class="ui-li-count">{{mailAddresses.length}}</span></li>
         <li ng-repeat="mailAddress in mailAddresses">
             <a href="">
-                <table style="font-size: 65%">
+                <table class="xsmall-text">
                     <tr>
                         <td><strong>Name:</strong></td>
                         <td class="pad"></td>
@@ -60,7 +60,7 @@
                     <tr>
                         <td><strong>Address:</strong></td>
                         <td class="pad"></td>
-                        <td><em>{{mailAddress.mailAddress}}</em></td>
+                        <td class="wrap-text"><em>{{mailAddress.mailAddress}}</em></td>
                     </tr>
                     <tr>
                         <td><strong>Country:</strong></td>
@@ -90,7 +90,7 @@
                 </table>
             </a>
             <a href="#mailingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"></a>
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setMailInfo(mailAddress)"></a>
         </li>
     </ul>
 </div>
@@ -103,7 +103,7 @@
             <span class="ui-li-count">{{billAddresses.length}}</span></li>
         <li ng-repeat="billAddress in billAddresses">
             <a href="">
-                <table style="font-size: 65%">
+                <table class="xsmall-text">
                     <tr>
                         <td><strong>Name:</strong></td>
                         <td class="pad"></td>
@@ -112,7 +112,7 @@
                     <tr>
                         <td><strong>Address:</strong></td>
                         <td class="pad"></td>
-                        <td><em>{{billAddress.billAddress}}</em></td>
+                        <td class="wrap-text"><em>{{billAddress.billAddress}}</em></td>
                     </tr>
                     <tr>
                         <td><strong>Country:</strong></td>
@@ -142,7 +142,7 @@
                 </table>
             </a>
             <a href="#billingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"></a>
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBillInfo(billAddress)"></a>
         </li>
     </ul>
 </div>

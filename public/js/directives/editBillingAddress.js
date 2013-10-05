@@ -5,7 +5,9 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/editBillingAddress.html',
         restrict: 'E',
-        scope: {},
+        scope: {
+          info: '='
+        },
         replace: true
       };
     });
