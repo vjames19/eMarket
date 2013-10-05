@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('reports', function () {
+    .directive('reportsDay', function () {
       return {
-        templateUrl: 'views/reports.html',
+        templateUrl: 'views/reportsDay.html',
         restrict: 'E',
         scope: {},
         replace: true
