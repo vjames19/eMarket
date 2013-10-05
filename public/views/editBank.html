@@ -2,7 +2,7 @@
     <div data-role="header" data-position="fixed" data-theme="a">
         <h1>Edit Bank</h1>
 
-        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+        <a href="#payment-options" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     </div>
 
@@ -10,19 +10,19 @@
         <form action="#">
             <div class="form-pad">
                 <label for="bank-name"><strong>Bank Name</strong></label>
-                <input type="text" id="bank-name" value="El Banco de Calle 13">
+                <input type="text" id="bank-name" value="{{bankInfo.bankName}}">
                 <label for="bank-account-name"><strong>Account Name</strong></label>
-                <input type="text" id="bank-account-name" value="Maripili">
+                <input type="text" id="bank-account-name" value="{{bankInfo.bankAccountName}}">
                 <label for="bank-account-type"><strong>Account Type</strong></label>
                 <select id="bank-account-type">
-                    <option value="Checking">Checking</option>
+                    <option value="Checking">{{bankInfo.bankAccountType}}</option>
                     <option value="Savings">Saving</option>
                     <option value="Other">Other</option>
                 </select>
                 <label for="bank-account-number"><strong>Account Number</strong></label>
-                <input type="number" id="bank-account-number" value="2983981">
+                <input type="number" id="bank-account-number" value="{{bankInfo.bankAccountNumber}}">
                 <label for="bank-account-routing"><strong>Routing Number</strong></label>
-                <input type="number" id="bank-account-routing" value="03984910">
+                <input type="number" id="bank-account-routing" value="{{bankInfo.bankAccountRouting}}">
                 <label for="address-relation"><strong>Associated Address</strong></label>
                 <select id="address-relation">
                     <option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>

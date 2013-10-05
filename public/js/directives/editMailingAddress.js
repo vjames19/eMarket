@@ -6,7 +6,7 @@ angular.module('eMarketApp')
         templateUrl: 'views/editMailingAddress.html',
         restrict: 'E',
         scope: {
-          info: '='
+          mailInfo: '='
         },
         replace: true
       };
