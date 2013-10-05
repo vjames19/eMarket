@@ -769,26 +769,43 @@ var carts = {
   1: {
     cartId: 1,
     userId: 1,
-    products: {
-      1: {
-        productId: 1,
-        quantity: 3
-      },
-      2: {
-        productId: 2,
-        quantity: 7
-      }
-    }
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 599.99,
+    productStartingBidPrice: 500.99,
+    productCurrentBidPrice: 800.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    },
+    quantity: 2,
+    cost: 1199.99
   },
   2: {
     cartId: 2,
-    userId: 2,
-    products: {
-      1: {
-        productId: 2,
-        quantity: 20
-      }
-    }
+    userId: 1,
+    productCategory: 'computers',
+    productName: 'dell',
+    productBuyItNowPrice: 16.99,
+    productStartingBidPrice: 5.99,
+    productCurrentBidPrice: 8.99,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantitySold: 3,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    },
+    quantity: 4,
+    cost: 99.99
   }
 };
 
@@ -884,13 +901,41 @@ var browsedItems =
   1: {
     browsedItemId: 1,
     userId: 1,
-    productId: 1,
+    productCategory: 'computers',
+    productName: 'alienware',
+    productBuyItNowPrice: 1000.99,
+    productStartingBidPrice: 500.99,
+    productCurrentBidPrice: 740.00,
+    productBidEndDate: '07/07/2008',
+    productShippingPrice: 8.99,
+    productQuantity: 3,
+    productDescription: {
+      productCondition: 'Refurbished',
+      productPicture: '/img/products/users/9/z98gyu.png',
+      productBrand: 'dell',
+      productModel: 'M179385',
+      productDimensions: '19x30x25'
+    },
     dateBrowsed: '07/10/2013:14:13:42 EST'
   },
   2: {
     browsedItemId: 2,
-    userId: 2,
-    productId: 2,
+    userId: 1,
+    productCategory: 'books',
+    productName: 'harry potter',
+    productBuyItNowPrice: 100,
+    productStartingBidPrice: 80,
+    productCurrentBidPrice: 87,
+    productBidEndDate: '07/07/2007',
+    productShippingPrice: 18.99,
+    productQuantity: 5,
+    productDescription: {
+      productCondition: 'New',
+      productPicture: '/img/products/users/1/z98how.png',
+      productBrand: 'pearson',
+      productModel: 'IBN:19238476',
+      productDimensions: '30x29x49'
+    },
     dateBrowsed: '07/30/2013:01:01:01 EST'
   }
 };

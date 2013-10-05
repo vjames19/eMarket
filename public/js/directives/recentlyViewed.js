@@ -5,15 +5,10 @@ angular.module('eMarketApp')
     return {
       templateUrl: 'views/recentlyViewed.html',
       restrict: 'E',
-      scope: {},
+      scope: true,
       replace: true,
-      controller: function($scope) {
-        // TODO: Use the recentlyViewed route.
-        $scope.recentlyViewed = [
-          {productName: 'Samsung TV'},
-          {productName: 'Harry Potter and the Sorcerer Stick'},
-          {productName: 'Nexus 7 cover'}
-        ];
+      controller: function($scope, Restangular) {
+        $scope.recentlyViewed = Restangular.one('api/users', 1).getList('browsedItems');
       }
     };
   });
