@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 var express = require('express'),
-    //helpers = require('view-helpers'),
     config = require('./config');
 
 module.exports = function(app, passport) {
@@ -45,36 +44,22 @@ module.exports = function(app, passport) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-
-//    //dynamic helpers
-//    app.use(helpers(config.app.name));
-
     //routes should be at the last
     app.use(app.router);
 
-    //Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
     app.use(function(err, req, res, next) {
-      //Treat as 404
-      if(~err.message.indexOf('not found')) {
-        return next();
+      // Authentication failed
+      if(err.message.indexOf('Authentication') >= 0) {
+        console.log('in dsnfksdfna')
+        res.jsonp(401, err);
+      } else if(~err.message.indexOf('not found')) { //Treat as 404
+        res.jsonp(404, 'Not found');
+      } else {
+        //Log it
+        console.error(err.stack);
+        //Error page
+        res.jsonp(500, {error: err.stack});
       }
-
-      //Log it
-      console.error(err.stack);
-
-      //Error page
-      res.status(500).render('500', {
-        error: err.stack
-      });
     });
-
-    //Assume 404 since no middleware responded
-    app.use(function(req, res) {
-      res.status(404).render('404', {
-        url: req.originalUrl,
-        error: 'Not found'
-      });
-    });
-
   });
 };
