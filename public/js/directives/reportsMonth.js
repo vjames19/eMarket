@@ -27,7 +27,7 @@ angular.module('eMarketApp')
                 allowPointSelect: true,
                 dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b><br/>${point.total:.1f}',
+                  format: '<b>{point.name}</b><br/>${y:.1f}',
                   distance: -35,
                   color: 'white'
                 }
