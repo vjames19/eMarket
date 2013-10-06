@@ -8,7 +8,18 @@ angular.module('eMarketApp')
         scope: {
           adminInfo: '='
         },
-        replace: true
+        replace: true,
+        controller: function($scope, Restangular) {
+          $scope.submit = function() {
+            Restangular.one('api/admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo)
+                .then(function(adminInfo) {
+                   $scope.adminInfo = adminInfo;
+                }, function(err) {
+                    alert(err);
+                });
+
+          }
+        }
       };
     });
 
