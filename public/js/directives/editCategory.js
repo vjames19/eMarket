@@ -5,9 +5,7 @@ angular.module('eMarketApp')
       return {
         templateUrl: 'views/editCategory.html',
         restrict: 'E',
-        scope: {
-          cardInfo: '='
-        },
+        scope: {},
         replace: true
       };
     });

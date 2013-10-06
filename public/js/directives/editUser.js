@@ -9,13 +9,14 @@ angular.module('eMarketApp')
           userInfo: '='
         },
         replace: true,
-        controller: function($scope, Restangular) {
-          $scope.submit = function() {
+        controller: function ($scope, Restangular) {
+          $scope.submit = function () {
             Restangular.one('api/users', $scope.userInfo.userId).customPUT($scope.userInfo)
-                .then(function(userInfo) {
+                .then(function (userInfo) {
                   $scope.userInfo = userInfo;
-                }, function(err) {
-                    alert(err);
+                  $.mobile.changePage('#user-accounts');
+                }, function (err) {
+                  alert(err);
                 });
           };
         }

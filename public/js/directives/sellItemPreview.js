@@ -13,12 +13,12 @@ angular.module('eMarketApp')
           $scope.submit = function() {
             console.log($scope.previewItemInfo);
             Restangular.all('api/products').post($scope.previewItemInfo);
-
-          };
-
-          $scope.changeToHome = function() {
             $.mobile.changePage('#index-page', {transition: 'fade'});
           };
+
+//          $scope.changeToHome = function() {
+//            $.mobile.changePage('#index-page', {transition: 'fade'});
+//          };
         }
       };
     });

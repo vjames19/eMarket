@@ -15,6 +15,7 @@ angular.module('eMarketApp')
             User.me().one('billAddresses', $scope.billInfo.billAddressId).customPUT($scope.billInfo)
                 .then(function(billInfo) {
                   $scope.billInfo = billInfo;
+                  $.mobile.changePage('#profile');
                 }, function(err) {
                   alert(err);
                 });

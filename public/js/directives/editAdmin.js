@@ -9,13 +9,14 @@ angular.module('eMarketApp')
           adminInfo: '='
         },
         replace: true,
-        controller: function($scope, Restangular) {
-          $scope.submit = function() {
+        controller: function ($scope, Restangular) {
+          $scope.submit = function () {
             Restangular.one('api/admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo)
-                .then(function(adminInfo) {
-                   $scope.adminInfo = adminInfo;
-                }, function(err) {
-                    alert(err);
+                .then(function (adminInfo) {
+                  $scope.adminInfo = adminInfo;
+                  $.mobile.changePage('#admin-accounts');
+                }, function (err) {
+                  alert(err);
                 });
 
           };
