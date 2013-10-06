@@ -26,7 +26,7 @@ angular.module('eMarketApp').factory('Auth', function ($rootScope, $http, User) 
       return isLoggedIn;
     },
     isValidUnAuthPath: function (path) {
-      return path === '' || _.some(unAuthPaths, function (unAuthPath) {
+      return path === '' || window._.some(unAuthPaths, function (unAuthPath) {
         console.log(path, unAuthPath, path.indexOf(unAuthPath) >= 0);
         return path.indexOf(unAuthPath) >= 0;
       });
