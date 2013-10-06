@@ -20,7 +20,7 @@
                         <thead>
                         <tr>
                             <th colspan="2" style="text-align: center">
-                                <strong>{{shoppingCart.productName}}</strong>
+                                <strong><abbr title="{{shoppingCart.productName}}">{{shoppingCart.productName | truncate}}</abbr></strong>
                             </th>
                         </tr>
                         </thead>
@@ -31,7 +31,7 @@
                         </tr>
                         <tr>
                             <td><strong>Shipping</strong></td>
-                            <td><em>{{shoppingCart.productShippingPrice}}</em></td>
+                            <td><em>{{shoppingCart.productShippingPrice | currency}}</em></td>
                         </tr>
                         <tr>
                             <td><strong>Quantity</strong></td>
