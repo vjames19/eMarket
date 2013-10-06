@@ -17,13 +17,13 @@ angular.module('eMarketApp')
                 }, function(err) {
                   alert(err);
                 });
-          }
+          };
 
           $scope.changeToPaymentOptionPage = function() {
             setTimeout(function () {
-              $.mobile.changePage('#payment-options', {transition: "fade"});
-            }, 500)
-          }
+              $.mobile.changePage('#payment-options', {transition: 'fade'});
+            }, 500);
+          };
 
         }
       };

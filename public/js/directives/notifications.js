@@ -14,7 +14,7 @@ angular.module('eMarketApp')
         },
         link: function(scope, elem) {
           var page = $(elem[0]);
-          var notificationList = page.find("#notificationList");
+          var notificationList = page.find('#notificationList');
           var notificationPopUp = page.find('#notificationMessage');
 
           scope.readMessage = function(notification) {

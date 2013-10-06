@@ -18,7 +18,7 @@ angular.module('eMarketApp')
                     alert(err);
                 });
 
-          }
+          };
         }
       };
     });

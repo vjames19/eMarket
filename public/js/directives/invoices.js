@@ -9,7 +9,7 @@ angular.module('eMarketApp')
         replace: true,
         link: function(scope, elem) {
           var page = $(elem[0]);
-          var invoiceList = page.find("#invoiceList");
+          var invoiceList = page.find('#invoiceList');
 
           page.on('pagebeforeshow', function() {
             scope.invoices = User.me().getList('invoices');

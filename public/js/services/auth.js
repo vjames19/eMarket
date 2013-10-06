@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('underscore');
+
 angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
   var user = User;
   var isLoggedIn = false;
@@ -13,7 +15,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
         isLoggedIn = true;
       }).error(function() {
             $('#loginError').popup('open');
-          })
+          });
 
     },
     logOut: function() {
@@ -26,7 +28,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
     },
     isValidUnAuthPath: function(path) {
       return path === '' || _.some(unAuthPaths, function(unAuthPath) {
-        console.log(path, unAuthPath, path.indexOf(unAuthPath) >= 0)
+        console.log(path, unAuthPath, path.indexOf(unAuthPath) >= 0);
         return path.indexOf(unAuthPath) >= 0;
       });
     }

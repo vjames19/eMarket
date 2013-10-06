@@ -9,9 +9,9 @@ angular.module('eMarketApp').factory('User', function(Restangular) {
       if(self.username && self.userId >= 0) {
         return Restangular.one('api/users', self.userId);
       } else {
-        throw 'User is not logged in'
+        throw 'User is not logged in';
       }
-    }
+    };
   };
   return new User();
 });

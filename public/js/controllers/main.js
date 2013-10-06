@@ -32,7 +32,7 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
 
   $scope.setPreviewItemInfo = function(itemInfo) {
     $scope.previewItemToSellInfoToBeViewed = angular.copy(itemInfo);
-  }
+  };
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!
@@ -48,9 +48,9 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
 
   $scope.setAdminInfo = function(adminInfo) {
     $scope.adminInfoToBeViewed = adminInfo;
-  }
+  };
 
   $scope.setUserInfo = function(userInfo) {
     $scope.userInfoToBeViewed = userInfo;
-  }
+  };
 });

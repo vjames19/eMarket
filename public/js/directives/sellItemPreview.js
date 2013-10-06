@@ -14,11 +14,11 @@ angular.module('eMarketApp')
             console.log($scope.previewItemInfo);
             Restangular.all('api/products').post($scope.previewItemInfo);
 
-          }
+          };
 
           $scope.changeToHome = function() {
-            $.mobile.changePage('#index-page', {transition: "fade"});
-          }
+            $.mobile.changePage('#index-page', {transition: 'fade'});
+          };
         }
-      }
+      };
     });

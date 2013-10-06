@@ -17,7 +17,7 @@ angular.module('eMarketApp')
 
           page.on('pageshow', function() {
             adminAccountList.listview('refresh');
-          })
+          });
         }
       };
     });
