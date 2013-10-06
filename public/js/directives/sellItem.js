@@ -7,18 +7,14 @@ angular.module('eMarketApp')
       restrict: 'E',
       scope: true,
       replace: true,
-      link: function(scope, elem) {
+      link: function(scope, elem, attrs) {
         var page = $(elem[0]);
         var freeShippingCheckbox = page.find('#checkbox-free-shipping');
         var shippingPriceInput = page.find('#shipping-price');
 
-        if(freeShippingCheckbox.checked) {
-          shippingPriceInput.prop('disabled', true);
-
-        }
-        else {
-          shippingPriceInput.prop('disabled', false);
-        }
+        scope.disableShipping = function() {
+          shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
+        };
       }
     };
   });

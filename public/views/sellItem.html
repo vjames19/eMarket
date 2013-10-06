@@ -133,7 +133,7 @@
                     <h3>Shipping</h3>
 
                     <label>
-                        <input type="checkbox" name="checkbox" id="checkbox-free-shipping">Free Shipping
+                        <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()">Free Shipping
                     </label>
                     Shipping Price
                     <input type="number" ng-model="item.productShippingPrice" placeholder="0.00" id="shipping-price">
