@@ -18,6 +18,12 @@ angular.module('eMarketApp')
                     alert(err);
                 });
           }
+
+          $scope.changeToPaymentOptionPage = function() {
+            setTimeout(function () {
+              $.mobile.changePage('#payment-options', {transition: "fade"});
+            }, 500)
+          }
         }
       };
     });
