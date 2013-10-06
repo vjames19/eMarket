@@ -13,8 +13,8 @@ angular.module('eMarketApp')
               plotBackgroundColor: null,
               plotBorderWidth: null,
               plotShadow: false,
-              width: 300,
-              height: 250
+              width: $.mobile.window.innerWidth() - 30, ///300,
+              height: $.mobile.window.innerHeight() / 1.75 //250
             },
             title: {
               text: 'Sales and Revenue'
@@ -27,9 +27,7 @@ angular.module('eMarketApp')
                 allowPointSelect: true,
                 dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b><br/>${y:.1f}',
-                  distance: -35,
-                  color: 'white'
+                  format: '<b>{point.name}</b><br/>${y:.1f}'
                 }
               }
             },
@@ -42,7 +40,13 @@ angular.module('eMarketApp')
                   ['Revenue', 26.8]
                 ]
               }
-            ]
+            ],
+            exporting: {
+              enabled: false
+            },
+            credits: {
+              enabled: false
+            }
           });
         }
       };
