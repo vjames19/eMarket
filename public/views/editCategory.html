@@ -12,7 +12,7 @@
                 <label for="name">Category Name</label>
                 <input type="text" id="name" ng-model="categoryInfo.categoryName">
                 <label for="parent">Category Parent</label>
-                <select id="parent" ng-model="categoryInfo.categoryParent" ng-options="category.categoryId as category.categoryName for category in categories" ng-selected="categoryInfo.categoryParent">
+                <select id="parent" ng-model="categoryInfo.categoryParent" ng-options="category.categoryId as category.categoryName for category in categories">
                     <option value="">None</option>
                 </select>
             </div>
