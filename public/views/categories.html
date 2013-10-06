@@ -1,21 +1,20 @@
 <div data-role="page" data-theme="b" id="categories">
-    <div data-role="header" data-position="fixed" data-theme="a">
-        <h1>Categories</h1>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Categories</h1>
 
-        <!--go back to the index page data-rel="back" reverse the transition back -->
-        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <!--go back to the index page data-rel="back" reverse the transition back -->
+    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <search></search>
+  </div>
 
-        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
-    </div>
+  <div data-role="content">
+    <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
+      <li data-role="list-divider">Search by Categories</li>
+      <li ng-repeat="category in categories"><a href="">{{ category.categoryName }}</a></li>
+    </ul>
+  </div>
 
-    <div data-role="content">
-        <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
-            <li data-role="list-divider">Search by Categories</li>
-            <li ng-repeat="category in categories"><a href="">{{ category.categoryName }}</a></li>
-        </ul>
-    </div>
-
-    <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 </div>

@@ -1,33 +1,33 @@
 <div data-role="page" data-theme="b" id="my-emarket-drafts">
-    <div data-role="header" class="header" data-position="fixed" data-theme="a">
-        <h1>My eMarket</h1>
+  <div data-role="header" class="header" data-position="fixed" data-theme="a">
+    <h1>My eMarket</h1>
 
-        <!--go back to the index page data-rel="back" reverse the transition back -->
-        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <!--go back to the index page data-rel="back" reverse the transition back -->
+    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <search></search>
 
-        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
 
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#my-emarket-buying">Buying</a></li>
-                <li><a href="#my-emarket-selling">Selling</a></li>
-                <li><a href="#my-emarket-drafts" class="ui-btn-active ui-state-persist">Drafts</a> </li>
-            </ul>
-        </div>
-
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#my-emarket-buying">Buying</a></li>
+        <li><a href="#my-emarket-selling">Selling</a></li>
+        <li><a href="#my-emarket-drafts" class="ui-btn-active ui-state-persist">Drafts</a></li>
+      </ul>
     </div>
 
-    <div data-role="content">
-        <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true">
-            <li data-role="list-divider">Drafts<span class="ui-li-count">{{drafts.length}}</span></li>
-            <li ng-repeat="draft in drafts">
-                <a href="">{{draft.productName}}</a>
-            </li>
-        </ul>
-    </div>
+  </div>
 
-    <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+  <div data-role="content">
+    <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true">
+      <li data-role="list-divider">Drafts<span class="ui-li-count">{{drafts.length}}</span></li>
+      <li ng-repeat="draft in drafts">
+        <a href="">{{draft.productName}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 
 </div>

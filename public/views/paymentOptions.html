@@ -1,83 +1,83 @@
 <div data-role="page" data-theme="b" id="payment-options">
-    <div data-role="header" data-position="fixed" data-theme="a">
-        <h1>Payment Options</h1>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Payment Options</h1>
 
-        <!--go back to the index page data-rel="back" reverse the transition back -->
-        <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <!--go back to the index page data-rel="back" reverse the transition back -->
+    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <search></search>
 
-        <input id="search" name="search" type="search" data-mini="true" placeholder="Search">
+  </div>
+
+  <div data-role="content">
+    <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+      <div data-role="collapsible">
+        <h2>Edit Credit Cards</h2>
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" id="cardList">
+          <li data-role="list-divider">Credit Cards on System
+            <a href="#add-card" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
+               class="ui-btn-right">Add Credit Card</a>
+            <span class="ui-li-count">{{creditCards.length}}</span></li>
+          <li ng-repeat="creditCard in creditCards">
+            <a href="">
+              <p><strong>Name:</strong> {{creditCard.creditCardName}}</p>
+
+              <p><strong>Issuing Network:</strong> {{creditCard.creditCardType}}</p>
+
+              <p><strong>Card Number:</strong> {{creditCard.creditCardNumber}}</p>
+
+              <p><strong>Card Exp Date:</strong> {{creditCard.creditCardExpDate}}</p>
+
+              <p><strong>Card CVS:</strong> {{creditCard.creditCardCvs}}</p>
+            </a>
+            <a href="#cardPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCardInfo(creditCard)"></a>
+          </li>
+        </ul>
+      </div>
+      <div data-role="collapsible">
+        <h2>Edit Bank Accounts</h2>
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" id="bankList">
+          <li data-role="list-divider">Bank Accounts on System
+            <a href="#add-bank" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
+               class="ui-btn-right">Add Bank Account</a>
+            <span class="ui-li-count">{{bankAccounts.length}}</span></li>
+          <li ng-repeat="bankAccount in bankAccounts">
+            <a href="">
+              <p><strong>Bank Name:</strong> {{bankAccount.bankName}}</p>
+
+              <p><strong>Bank Account Type:</strong> {{bankAccount.bankAccountType}}</p>
+
+              <p><strong>Bank Account Number:</strong> {{bankAccount.bankAccountNumber}}</p>
+
+              <p><strong>Bank Account Routing:</strong> {{bankAccount.bankAccountRouting}}</p>
+            </a>
+            <a href="#bankPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBankInfo(bankAccount)"></a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <div data-role="content">
-        <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
-            <div data-role="collapsible">
-                <h2>Edit Credit Cards</h2>
-                <ul data-role="listview" data-theme="d" data-divider-theme="d" id="cardList">
-                    <li data-role="list-divider">Credit Cards on System
-                        <a href="#add-card" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
-                           class="ui-btn-right">Add Credit Card</a>
-                        <span class="ui-li-count">{{creditCards.length}}</span></li>
-                    <li ng-repeat="creditCard in creditCards">
-                        <a href="">
-                            <p><strong>Name:</strong> {{creditCard.creditCardName}}</p>
-
-                            <p><strong>Issuing Network:</strong> {{creditCard.creditCardType}}</p>
-
-                            <p><strong>Card Number:</strong> {{creditCard.creditCardNumber}}</p>
-
-                            <p><strong>Card Exp Date:</strong> {{creditCard.creditCardExpDate}}</p>
-
-                            <p><strong>Card CVS:</strong> {{creditCard.creditCardCvs}}</p>
-                        </a>
-                        <a href="#cardPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCardInfo(creditCard)"></a>
-                    </li>
-                </ul>
-            </div>
-            <div data-role="collapsible">
-                <h2>Edit Bank Accounts</h2>
-                <ul data-role="listview" data-theme="d" data-divider-theme="d" id="bankList">
-                    <li data-role="list-divider">Bank Accounts on System
-                        <a href="#add-bank" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"
-                           class="ui-btn-right">Add Bank Account</a>
-                        <span class="ui-li-count">{{bankAccounts.length}}</span></li>
-                    <li ng-repeat="bankAccount in bankAccounts">
-                        <a href="">
-                            <p><strong>Bank Name:</strong> {{bankAccount.bankName}}</p>
-
-                            <p><strong>Bank Account Type:</strong> {{bankAccount.bankAccountType}}</p>
-
-                            <p><strong>Bank Account Number:</strong> {{bankAccount.bankAccountNumber}}</p>
-
-                            <p><strong>Bank Account Routing:</strong> {{bankAccount.bankAccountRouting}}</p>
-                        </a>
-                        <a href="#bankPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBankInfo(bankAccount)"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <div data-role="popup" id="cardPopupMenu" data-theme="d">
+    <div style="padding:10px 20px;">
+      <h3>Choose An Action</h3>
+      <a href="#edit-card" data-role="button" data-icon="edit">Edit</a>
+      <a href="#" data-role="button" data-icon="delete">Delete</a>
+      <a href="#payment-options" data-role="button" data-icon="back">Cancel</a>
     </div>
+  </div>
 
-    <div data-role="popup" id="cardPopupMenu" data-theme="d">
-        <div style="padding:10px 20px;">
-            <h3>Choose An Action</h3>
-            <a href="#edit-card" data-role="button" data-icon="edit">Edit</a>
-            <a href="#" data-role="button" data-icon="delete">Delete</a>
-            <a href="#payment-options" data-role="button" data-icon="back">Cancel</a>
-        </div>
+  <div data-role="popup" id="bankPopupMenu" data-theme="d">
+    <div style="padding:10px 20px;">
+      <h3>Choose An Action</h3>
+      <a href="#edit-bank" data-role="button" data-icon="edit">Edit</a>
+      <a href="#" data-role="button" data-icon="delete">Delete</a>
+      <a href="#payment-options" data-role="button" data-icon="back">Cancel</a>
     </div>
+  </div>
 
-    <div data-role="popup" id="bankPopupMenu" data-theme="d">
-        <div style="padding:10px 20px;">
-            <h3>Choose An Action</h3>
-            <a href="#edit-bank" data-role="button" data-icon="edit">Edit</a>
-            <a href="#" data-role="button" data-icon="delete">Delete</a>
-            <a href="#payment-options" data-role="button" data-icon="back">Cancel</a>
-        </div>
-    </div>
-
-    <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 </div>
