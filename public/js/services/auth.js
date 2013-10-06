@@ -3,6 +3,7 @@
 angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
   var user = User;
   var isLoggedIn = false;
+  var unAuthPaths = ['login-user', 'register', 'forgot-password'];
   return {
     logIn: function(userData) {
       $http.post('login', userData).success(function(realUser) {
@@ -22,6 +23,12 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
     },
     isLoggedIn: function() {
       return isLoggedIn;
+    },
+    isValidUnAuthPath: function(path) {
+      return path === '' || _.some(unAuthPaths, function(unAuthPath) {
+        console.log(path, unAuthPath, path.indexOf(unAuthPath) >= 0)
+        return path.indexOf(unAuthPath) >= 0;
+      });
     }
   };
 });
