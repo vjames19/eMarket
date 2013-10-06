@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('editCategory', function () {
+    .directive('editCategory', function (Restangular) {
       return {
         templateUrl: 'views/editCategory.html',
         restrict: 'E',
@@ -19,6 +19,19 @@ angular.module('eMarketApp')
                   alert(err);
                 });
           };
+        },
+        link: function (scope, elem) {
+          var page = $(elem[0]);
+          var categoryAdminList = page.find('#categoryAdminList');
+
+          page.on('pagebeforeshow', function () {
+            scope.categories = Restangular.all('api/categories').getList();
+          });
+
+          page.on('pageshow', function () {
+            categoryAdminList.listview('refresh');
+          });
+
         }
       };
     });
