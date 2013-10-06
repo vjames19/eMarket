@@ -3,7 +3,7 @@
         <h1>Item</h1>
 
         <!--go back to the index page data-rel="back" reverse the transition back -->
-        <a href="#" data-role="button" data-rel="back" data-direction="reverse" >Back</a>
+        <a href="#shopping-cart" data-role="button" data-rel="back" data-direction="reverse">Back</a>
 
         <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
 
@@ -34,10 +34,10 @@
             </li>
             <li>
                 <p class="item-description-text-size">
-                  Time Left: {{ remainingTime | date:'h:mm' }} </p>
-                <p class="item-description-text-size"> End Date: {{ item.endDate | date }} </p>
-                <p class="item-description-text-size"> Location: {{ item.location }} </p>
-                <p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>
+                  <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
+                <p class="item-description-text-size"> End Date: {{ item.productBidEndDate | date }} </p>
+                <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
+                <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
             </li>
             <li>
                 <p class="item-description-text-size"> Condition: {{ item.productDescription.productCondition }} </p>
@@ -74,9 +74,9 @@
                     </table>
                 </p>
             </li>
-            <li>
-                <p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>
-            </li>
+            <!--<li>-->
+                <!--<p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>-->
+            <!--</li>-->
         </ul>
     </div>
 

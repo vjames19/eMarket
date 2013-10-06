@@ -804,7 +804,6 @@ var carts = {
     productCurrentBidPrice: 8.99,
     productBidEndDate: '07/07/2008',
     productShippingPrice: 8.99,
-    productQuantitySold: 3,
     productDescription: {
       productCondition: 'New',
       productPicture: '/img/products/users/9/z98gyu.png',
