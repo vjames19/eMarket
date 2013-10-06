@@ -15,6 +15,7 @@ angular.module('eMarketApp')
             User.me().one('mailAddresses', $scope.mailInfo.mailAddressId).customPUT($scope.mailInfo)
                 .then(function(mailInfo) {
                   $scope.mailInfo = mailInfo;
+                  $.mobile.changePage('#profile');
                 }, function(err) {
                   alert(err);
                 });
