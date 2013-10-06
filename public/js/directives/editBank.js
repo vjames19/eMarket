@@ -8,7 +8,17 @@ angular.module('eMarketApp')
         scope: {
           bankInfo: '='
         },
-        replace: true
+        replace: true,
+        controller: function($scope, User) {
+          $scope.submit = function() {
+            User.me().one('banks', $scope.bankInfo.bankId).customPUT($scope.bankInfo)
+                .then(function(bankInfo) {
+                  $scope.bankInfo = bankInfo;
+                }, function(err) {
+                    alert(err);
+                });
+          }
+        }
       };
     });
 
