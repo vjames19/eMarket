@@ -1,53 +1,45 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('reportsDay', function() {
+    .directive('reportsDay', function () {
       return {
         templateUrl: 'views/reportsDay.html',
         restrict: 'E',
         scope: {},
         replace: true,
-        link: function(scope, elem) {
-          $(elem[0]).find('#container').highcharts({
+        link: function (scope, elem) {
+          $(elem[0]).find('#pie').highcharts({
             chart: {
               plotBackgroundColor: null,
               plotBorderWidth: null,
-              plotShadow: false
+              plotShadow: false,
+              width: 300,
+              height: 250
             },
             title: {
-              text: 'Browser market shares at a specific website, 2010'
+              text: 'Sales and Revenue'
             },
             tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              enabled: false
             },
             plotOptions: {
               pie: {
                 allowPointSelect: true,
-                cursor: 'pointer',
                 dataLabels: {
                   enabled: true,
-                  color: '#000000',
-                  connectorColor: '#000000',
-                  format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                  format: '<b>{point.name}</b><br/> {point.percentage:.1f} %',
+                  distance: -35,
+                  color: 'white'
                 }
               }
             },
             series: [
               {
                 type: 'pie',
-                name: 'Browser share',
+                name: 'Result',
                 data: [
-                  ['Firefox', 45.0],
-                  ['IE', 26.8],
-                  {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                  },
-                  ['Safari', 8.5],
-                  ['Opera', 6.2],
-                  ['Others', 0.7]
+                  ['Sales', 45.0],
+                  ['Revenue', 26.8]
                 ]
               }
             ]
