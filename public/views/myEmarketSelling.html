@@ -19,7 +19,7 @@
     </div>
 
     <div data-role="content">
-        <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true">
+        <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">
             <li data-role="list-divider">Sold</li>
             <li ng-repeat="soldProduct in soldProducts">
                 <a href="#item-view" ng-click="setItem(soldProduct)">{{soldProduct.productName}}</a>
