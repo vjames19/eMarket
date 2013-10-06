@@ -15,11 +15,15 @@
             <table>
                 <tr>
                     <td>
-                        <a href="" data-role="button" data-icon="plus" data-iconpos="bottom" data-theme="" id="add-image" class="add-image">Add Image</a>
+                    <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
+                        <span>Add Image</span><br>
+                        <input type="file" name="files[]" multiple data-role="none"/>
+                    </span>
                     </td>
                     <td class="middle"></td>
                     <td class="right">
-                        <textarea ng-model="item.productName" id="text-input-title" class="text-input-title" placeholder="Write the title of the item"></textarea
+                        <textarea ng-model="item.productName" id="text-input-title" class="text-input-title"
+                                  placeholder="Write the title of the item"></textarea
                     </td>
                 </tr>
             </table>
@@ -28,15 +32,20 @@
 
         <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
             <li><a href="">Category</a></li>
-            <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a></li>
-            <li><a href="#popupDescription" data-rel="popup" data-position-to="window" data-transition="pop">Description</a></li>
-            <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format & Price</a></li>
-            <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a></li>
+            <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
+            </li>
+            <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
+                   data-transition="pop">Description</a></li>
+            <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &
+                Price</a></li>
+            <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
+            </li>
         </ul>
     </div>
 
     <div data-role="footer" data-theme="a" class="ui-bar  footer">
-        <a href="#sell-item-preview" data-role="button" id="preview-button" class="preview-button" ng-click="setPreviewItemInfo(item)">Preview</a>
+        <a href="#sell-item-preview" data-role="button" id="preview-button" class="preview-button"
+           ng-click="setPreviewItemInfo(item)">Preview</a>
         <!--<button type="submit" class="preview-button" ng-click="setPreviewItemInfo()">Preview</button>-->
     </div>
 
@@ -45,13 +54,16 @@
         <div data-role="popup" id="popupCondition" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
-                <h3>Select the condition</h3>
+                    <h3>Select the condition</h3>
                     <fieldset data-role="controlgroup">
-                        <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New" ng-model="item.productDescription.productCondition">
+                        <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
+                               ng-model="item.productDescription.productCondition">
                         <label for="radio-choice-new">New</label>
-                        <input type="radio" name="radio-choice" id="radio-choice-used" value="Used" ng-model="item.productDescription.productCondition">
+                        <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
+                               ng-model="item.productDescription.productCondition">
                         <label for="radio-choice-used">Used</label>
-                        <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished" ng-model="item.productDescription.productCondition">
+                        <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
+                               ng-model="item.productDescription.productCondition">
                         <label for="radio-choice-refurbished">Refurbished</label>
                     </fieldset>
                     <a href="#sell-item" data-role="button">OK</a>
@@ -63,7 +75,7 @@
         <div data-role="popup" id="popupDescription" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
-                <h3>Description</h3>
+                    <h3>Description</h3>
                     Brand
                     <input type="text" id="brand" ng-model="item.productDescription.productBrand">
                     Model
@@ -85,10 +97,10 @@
                     <h3>Format & Price</h3>
                     <!--Format-->
                     <!--<fieldset data-role="controlgroup">-->
-                        <!--<input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked" value="Buy it now">-->
-                        <!--<label for="radio-choice-buy-it-now">Buy it now</label>-->
-                        <!--<input type="radio" name="radio-choice" id="radio-choice-bid" value="Bid" >-->
-                        <!--<label for="radio-choice-bid">Bid</label>-->
+                    <!--<input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked" value="Buy it now">-->
+                    <!--<label for="radio-choice-buy-it-now">Buy it now</label>-->
+                    <!--<input type="radio" name="radio-choice" id="radio-choice-bid" value="Bid" >-->
+                    <!--<label for="radio-choice-bid">Bid</label>-->
                     <!--</fieldset>-->
 
                     Buy it Now Price
@@ -99,14 +111,15 @@
 
                     <!--Duration-->
                     <!--<select name="select-duration" id="select-duration">-->
-                        <!--<option value="3">3 days</option>-->
-                        <!--<option value="5">5 days</option>-->
-                        <!--<option value="7">7 days</option>-->
-                        <!--<option value="10">10 days</option>-->
+                    <!--<option value="3">3 days</option>-->
+                    <!--<option value="5">5 days</option>-->
+                    <!--<option value="7">7 days</option>-->
+                    <!--<option value="10">10 days</option>-->
                     <!--</select>-->
 
                     Product End Date
-                    <input type="date" data-clear-btn="false" name="date" id="set-date" value="" ng-model="item.productBidEndDate">
+                    <input type="date" data-clear-btn="false" name="date" id="set-date" value=""
+                           ng-model="item.productBidEndDate">
 
 
                     <a href="#sell-item" data-role="button">OK</a>
