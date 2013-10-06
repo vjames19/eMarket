@@ -20,7 +20,8 @@
                         <thead>
                         <tr>
                             <th colspan="2" style="text-align: center">
-                                <strong><abbr title="{{shoppingCart.productName}}">{{shoppingCart.productName | truncate}}</abbr></strong>
+                                <strong><abbr title="{{shoppingCart.productName}}">{{shoppingCart.productName |
+                                    truncate:15}}</abbr></strong>
                             </th>
                         </tr>
                         </thead>
@@ -35,7 +36,7 @@
                         </tr>
                         <tr>
                             <td><strong>Quantity</strong></td>
-                            <td><em>4</em></td>
+                            <td><em>{{ shoppingCart.quantity }}</em></td>
                         </tr>
                         </tbody>
                     </table>
