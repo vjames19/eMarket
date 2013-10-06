@@ -1,4 +1,50 @@
 <div data-role="page" data-theme="b" id="reports-day">
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Browser market shares at a specific website, 2010'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    data: [
+                        ['Firefox', 45.0],
+                        ['IE', 26.8], {
+                            name: 'Chrome',
+                            y: 12.8,
+                            sliced: true,
+                            selected: true
+                        }, ['Safari', 8.5],
+                        ['Opera', 6.2],
+                        ['Others', 0.7]
+                    ]
+                }]
+            });
+        });
+    </script>
     <div data-role="header" data-position="fixed" data-theme="a">
         <h1>Reports</h1>
 
@@ -14,8 +60,17 @@
     </div>
 
     <div data-role="content">
+        <form action="">
+            <label for="select-category">Category</label>
+            <select id="select-category">
+                <option value="None" selected>None</option>
+                <option value="Books">Books</option>
+                <option value="Computers">Computers</option>
+                <option value="Clothes">Clothes</option>
+            </select>
+        </form>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
 
     <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
-
 </div>
