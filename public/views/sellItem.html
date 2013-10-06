@@ -11,17 +11,20 @@
     </div>
 
     <div data-role="content">
-        <table>
-            <tr>
-                <td>
-                    <a href="" data-role="button" data-icon="plus" data-iconpos="bottom" data-theme="" id="add-image" class="add-image">Add Image</a>
-                </td>
-                <td class="middle"></td>
-                <td class="right">
-                    <textarea id="text-input-title" class="text-input-title" placeholder="Write the title of the item"></textarea>
-                </td>
-            </tr>
-        </table>
+        <form data-ajax="false" ng-submit="submit()">
+            <table>
+                <tr>
+                    <td>
+                        <a href="" data-role="button" data-icon="plus" data-iconpos="bottom" data-theme="" id="add-image" class="add-image">Add Image</a>
+                    </td>
+                    <td class="middle"></td>
+                    <td class="right">
+                        <textarea ng-model="item.productName" id="text-input-title" class="text-input-title" placeholder="Write the title of the item"></textarea
+                    </td>
+                </tr>
+            </table>
+        </form>
+
 
         <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
             <li><a href="">Category</a></li>
@@ -33,7 +36,8 @@
     </div>
 
     <div data-role="footer" data-theme="a" class="ui-bar  footer">
-        <a href="" data-role="button" id="preview-button" class="preview-button">Preview</a>
+        <a href="#sell-item-preview" data-role="button" id="preview-button" class="preview-button" ng-click="setPreviewItemInfo(item)">Preview</a>
+        <!--<button type="submit" class="preview-button" ng-click="setPreviewItemInfo()">Preview</button>-->
     </div>
 
     <div data-role="popup" id="popupMenu" data-theme="a">
@@ -41,20 +45,17 @@
         <div data-role="popup" id="popupCondition" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
-                    <h3>Select the condition</h3>
-
-                    <form>
-                        <fieldset data-role="controlgroup">
-                            <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked">
-                            <label for="radio-choice-new">New</label>
-                            <input type="radio" name="radio-choice" id="radio-choice-used">
-                            <label for="radio-choice-used">Used</label>
-                            <input type="radio" name="radio-choice" id="radio-choice-refurbished">
-                            <label for="radio-choice-refurbished">Refurbished</label>
-                        </fieldset>
-                        <a href="#sell-item" data-role="button">OK</a>
-                        <a href="#sell-item" data-role="button">Cancel</a>
-                    </form>
+                <h3>Select the condition</h3>
+                    <fieldset data-role="controlgroup">
+                        <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New" ng-model="item.productDescription.productCondition">
+                        <label for="radio-choice-new">New</label>
+                        <input type="radio" name="radio-choice" id="radio-choice-used" value="Used" ng-model="item.productDescription.productCondition">
+                        <label for="radio-choice-used">Used</label>
+                        <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished" ng-model="item.productDescription.productCondition">
+                        <label for="radio-choice-refurbished">Refurbished</label>
+                    </fieldset>
+                    <a href="#sell-item" data-role="button">OK</a>
+                    <a href="#sell-item" data-role="button">Cancel</a>
                 </div>
             </form>
         </div>
@@ -62,21 +63,18 @@
         <div data-role="popup" id="popupDescription" data-theme="a" class="ui-corner-all">
             <form>
                 <div style="padding:10px 20px;">
-                    <h3>Description</h3>
-
-                    <form>
-                        Brand
-                        <input type="text" id="brand">
-                        Model
-                        <input type="text" id="model">
-                        Dimension
-                        <input type="text" id="dimension">
-                        Description
-                        <textarea name="description" id="description" cols="30" rows="10"
-                                  style="max-height: 75px"></textarea>
-                        <a href="#sell-item" data-role="button">OK</a>
-                        <a href="#sell-item" data-role="button">Cancel</a>
-                    </form>
+                <h3>Description</h3>
+                    Brand
+                    <input type="text" id="brand" ng-model="item.productDescription.productBrand">
+                    Model
+                    <input type="text" id="model" ng-model="item.productDescription.productModel">
+                    Dimension
+                    <input type="text" id="dimension" ng-model="item.productDescription.productDimensions">
+                    Aditional Description
+                    <textarea name="description" id="description" cols="30" rows="10"
+                              style="max-height: 75px" ng-model="item.productDescription.productDescription"></textarea>
+                    <a href="#sell-item" data-role="button">OK</a>
+                    <a href="#sell-item" data-role="button">Cancel</a>
                 </div>
             </form>
         </div>
@@ -85,34 +83,34 @@
             <form>
                 <div style="padding:10px 20px;">
                     <h3>Format & Price</h3>
+                    <!--Format-->
+                    <!--<fieldset data-role="controlgroup">-->
+                        <!--<input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked" value="Buy it now">-->
+                        <!--<label for="radio-choice-buy-it-now">Buy it now</label>-->
+                        <!--<input type="radio" name="radio-choice" id="radio-choice-bid" value="Bid" >-->
+                        <!--<label for="radio-choice-bid">Bid</label>-->
+                    <!--</fieldset>-->
 
-                    <form>
-                        Format
-                        <fieldset data-role="controlgroup">
-                            <input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked">
-                            <label for="radio-choice-buy-it-now">Buy it now</label>
-                            <input type="radio" name="radio-choice" id="radio-choice-bid">
-                            <label for="radio-choice-bid">Bid</label>
-                        </fieldset>
+                    Buy it Now Price
+                    <input type="number" ng-model="item.productBuyItNowPrice">
 
-                        Start Price
-                        <input type="text">
+                    Initial Bid Price
+                    <input type="number" ng-model="item.productStartingBidPrice">
 
-                        Duration
-                        <select name="select-duration" id="select-duration">
-                            <option value="3">3 days</option>
-                            <option value="5">5 days</option>
-                            <option value="7">7 days</option>
-                            <option value="10">10 days</option>
-                        </select>
+                    <!--Duration-->
+                    <!--<select name="select-duration" id="select-duration">-->
+                        <!--<option value="3">3 days</option>-->
+                        <!--<option value="5">5 days</option>-->
+                        <!--<option value="7">7 days</option>-->
+                        <!--<option value="10">10 days</option>-->
+                    <!--</select>-->
 
-                        End Time
-                        <input type="date" data-clear-btn="false" name="date" id="set-date" value="2013-10-20">
+                    Product End Date
+                    <input type="date" data-clear-btn="false" name="date" id="set-date" value="" ng-model="item.productBidEndDate">
 
 
-                        <a href="#sell-item" data-role="button">OK</a>
-                        <a href="#sell-item" data-role="button">Cancel</a>
-                    </form>
+                    <a href="#sell-item" data-role="button">OK</a>
+                    <a href="#sell-item" data-role="button">Cancel</a>
                 </div>
             </form>
         </div>
@@ -121,11 +119,13 @@
                 <div style="padding:10px 20px;">
                     <h3>Shipping</h3>
 
-                    <form>
-                        Domestic shipping
-                        <a href="#sell-item" data-role="button">OK</a>
-                        <a href="#sell-item" data-role="button">Cancel</a>
-                    </form>
+                    <label>
+                        <input type="checkbox" name="checkbox" id="checkbox-free-shipping">Free Shipping
+                    </label>
+                    Shipping Price
+                    <input type="number" ng-model="item.productShippingPrice" placeholder="0.00" id="shipping-price">
+                    <a href="#sell-item" data-role="button">OK</a>
+                    <a href="#sell-item" data-role="button">Cancel</a>
                 </div>
             </form>
         </div>

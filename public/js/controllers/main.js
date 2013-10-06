@@ -6,6 +6,8 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.billInfoToBeViewed = null;
   $scope.cardInfoToBeViewed = null;
   $scope.bankInfoToBeViewed = null;
+  $scope.previewItemToSellInfoToBeViewed = null;
+
   // Important: Create a deep copy of the item to be passed accross views. To avoid integrity issues.
   // Use to set the item to be viewed
   $scope.setItem = function(item) {
@@ -27,6 +29,10 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.setBankInfo = function(bankInfo) {
     $scope.bankInfoToBeViewed = angular.copy(bankInfo);
   };
+
+  $scope.setPreviewItemInfo = function(itemInfo) {
+    $scope.previewItemToSellInfoToBeViewed = angular.copy(itemInfo);
+  }
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!
