@@ -11,19 +11,19 @@
     </div>
 
     <div data-role="content">
-        <form data-ajax="false" ng-submit="submit()">
+        <form>
             <table>
                 <tr>
                     <td>
                     <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
                         <span>Add Image</span><br>
-                        <input type="file" name="files[]" multiple data-role="none"/>
+                        <input type="file" name="files[]" multiple data-role="none" ng-src="{{item.productDescription.productPicture}}"/>
                     </span>
                     </td>
                     <td class="middle"></td>
                     <td class="right">
                         <textarea ng-model="item.productName" id="text-input-title" class="text-input-title"
-                                  placeholder="Write the title of the item"></textarea
+                                  placeholder="Write the title of the item"></textarea>
                     </td>
                 </tr>
             </table>

@@ -9,8 +9,16 @@ angular.module('eMarketApp')
           previewItemInfo: '='
         },
         replace: true,
-        controller: function($scope) {
+        controller: function($scope, Restangular) {
+          $scope.submit = function() {
+            console.log($scope.previewItemInfo);
+            Restangular.all('api/products').post($scope.previewItemInfo);
 
+          }
+
+          $scope.changeToHome = function() {
+            $.mobile.changePage('#index-page', {transition: "fade"});
+          }
         }
-      };
+      }
     });

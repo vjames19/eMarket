@@ -7,9 +7,6 @@ angular.module('eMarketApp')
       restrict: 'E',
       scope: true,
       replace: true,
-      controller: function($scope) {
-
-      },
       link: function(scope, elem) {
         var page = $(elem[0]);
         var freeShippingCheckbox = page.find('#checkbox-free-shipping');
