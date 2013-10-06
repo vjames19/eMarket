@@ -8,32 +8,37 @@
 
     <div data-role="content">
         <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" data-filter="true"
-            data-filter-placeholder="Search Categories" data-inset="true">
+            data-filter-placeholder="Search Categories" data-inset="true" id="categoryAdminList">
             <li data-role="list-divider">Categories on System
                 <a href="#add-category" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
                    class="ui-btn-right" data-mini="true">Add Category</a>
-                <span class="ui-li-count">4</span></li>
+                <span class="ui-li-count">{{ categories.length }}</span></li>
             </li>
-            <li>
-                <a href="#">Books</a>
+            <li ng-repeat="category in categories">
+                <a href="#">{{ category.categoryName }}</a>
                 <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c"></a>
+                   data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCategoryInfo(category)"></a>
             </li>
-            <li>
-                <a href="#">Computers</a>
-                <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c"></a>
-            </li>
-            <li>
-                <a href="#">Clothes</a>
-                <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c"></a>
-            </li>
-            <li>
-                <a href="#">Tools</a>
-                <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c"></a>
-            </li>
+            <!--<li>-->
+            <!--<a href="#">Books</a>-->
+            <!--<a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"-->
+            <!--data-position-to="window" data-icon="gear" data-theme="c"></a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<a href="#">Computers</a>-->
+            <!--<a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"-->
+            <!--data-position-to="window" data-icon="gear" data-theme="c"></a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<a href="#">Clothes</a>-->
+            <!--<a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"-->
+            <!--data-position-to="window" data-icon="gear" data-theme="c"></a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<a href="#">Tools</a>-->
+            <!--<a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"-->
+            <!--data-position-to="window" data-icon="gear" data-theme="c"></a>-->
+            <!--</li>-->
         </ul>
     </div>
 
