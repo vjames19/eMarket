@@ -3,7 +3,7 @@
 angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
   var user = User;
   var isLoggedIn = false;
-  var unAuthPaths = ['login-user', 'register', 'forgot-password'];
+  var unAuthPaths = ['login-user', 'register', 'forgot-password', 'shopping-cart', 'item-view'];
   return {
     logIn: function(userData) {
       $http.post('login', userData).success(function(realUser) {

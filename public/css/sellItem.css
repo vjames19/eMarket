@@ -12,6 +12,25 @@
     color: greenyellow;
 }
 
+.input-button {
+    background: transparent no-repeat 0px 0px;
+    overflow: hidden;
+    border: none;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+.input-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translate(0px,30px);
+    -ms-transform: translate(0px,30px);
+    -webkit-transform: translate(0px,30px);
+}
+
 .container {
     display: table-row;
     width: 100%;
