@@ -10,7 +10,20 @@ var users = {
     userMiddleName: 'Mata',
     userLastName: 'Vaca',
     userEmail: 'chencho.vaca@upr.edu',
-    userTelephone: '787-459-6285'
+    userTelephone: '787-459-6285',
+    userPassword: '123',
+    userConfirmPassword: '123',
+    questions: {
+      1: {
+        'dog': 'blacki'
+      },
+      2:{
+        'cat': 'lola'
+      },
+      3:{
+        'fish': 'nemo'
+      }
+    }
   },
   2: {
     userId: 2,
@@ -19,7 +32,20 @@ var users = {
     userMiddleName: null,
     userLastName: 'Sol',
     userEmail: 'mariano.sol@upr.edu',
-    userTelephone: '787-415-4952'
+    userTelephone: '787-415-4952',
+    userPassword: '456',
+    userConfirmPassword: '456',
+    questions: {
+      1: {
+        'dog': 'blacki'
+      },
+      2:{
+        'cat': 'lola'
+      },
+      3:{
+        'fish': 'nemo'
+      }
+    }
   }
 };
 

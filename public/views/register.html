@@ -13,69 +13,69 @@
 
   <div data-role="content">
 
-    <form action="#">
+    <form data-ajax="false" ng-submit="submit()">
       <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
         <div data-role="collapsible" data-collapsed="false">
           <h3>Personal Information</h3>
 
           <div data-role="fieldcontain">
             <label for="firstname">First Name</label>
-            <input type="text" id="firstname" value="">
+            <input type="text" id="firstname" ng-model="newUser.user.userFirstName">
             <label for="middlename">Middle Name</label>
-            <input type="text" id="middlename" value="">
+            <input type="text" id="middlename"  ng-model="newUser.user.userMiddleName">
             <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" value="">
+            <input type="text" id="lastname" ng-model="newUser.user.userLastName">
             <label for="mailing-address">Mailing Address</label>
-            <input type="text" id="mailing-address" value="">
+            <input type="text" id="mailing-address" ng-model="newUser.mailAddress.mailAddress">
             <label for="select-country-mailing-address">Country</label>
-            <select id="select-country-mailing-address">
+            <select id="select-country-mailing-address" ng-model="newUser.mailAddress.country">
               <option value="USA">USA</option>
               <option value="Venezuela">Venezuela</option>
               <option value="Dominican Republic">Dominican Republic</option>
               <option value="Cuba">Cuba</option>
             </select>
             <label for="select-state-mailing-address">State/Providence/Region</label>
-            <select id="select-state-mailing-address">
+            <select id="select-state-mailing-address" ng-model="newUser.mailAddress.geographicalRegion">
               <option value="Alabama">Alabama</option>
               <option value="Florida">Florida</option>
               <option value="New York">New York</option>
               <option value="California">California</option>
             </select>
             <label for="city-mailing-address">City</label>
-            <input type="text" id="city-mailing-address" value="">
+            <input type="text" id="city-mailing-address" ng-model="newUser.mailAddress.city">
             <label for="zip-code-mailing-address">Zip Code</label>
-            <input type="number" id="zip-code-mailing-address" value="">
+            <input type="number" id="zip-code-mailing-address" ng-model="newUser.mailAddress.zipCode">
             <table>
               <tr>
                 <td>
                   <label for="billing-address">Billing Address</label>
                 </td>
                 <td>
-                  <label><input type="checkbox" id="same-as"/>Same as Mailing Address</label>
+                  <label><input type="checkbox" id="same-as" ng-click="disableBillAddress()"/>Same as Mailing Address</label>
                 </td>
               </tr>
             </table>
-            <input type="text" id="billing-address" value="">
+            <input type="text" id="billing-address" ng-model="newUser.billAddress.billAddress">
             <label for="select-country-billing-address">Country</label>
-            <select id="select-country-billing-address">
+            <select id="select-country-billing-address" ng-model="newUser.billAddress.country">
               <option value="USA">USA</option>
               <option value="Venezuela">Venezuela</option>
               <option value="Dominican Republic">Dominican Republic</option>
               <option value="Cuba">Cuba</option>
             </select>
             <label for="select-state-billing-address">State/Providence/Region</label>
-            <select id="select-state-billing-address">
+            <select id="select-state-billing-address" ng-model="newUser.billAddress.geographicalRegion">
               <option value="Alabama">Alabama</option>
               <option value="Florida">Florida</option>
               <option value="New York">New York</option>
               <option value="California">California</option>
             </select>
             <label for="city-billing-address">City</label>
-            <input type="text" id="city-billing-address" value="">
+            <input type="text" id="city-billing-address"  ng-model="newUser.billAddress.city">
             <label for="zip-code-billing-address">Zip Code</label>
-            <input type="number" id="zip-code-billing-address" value="">
+            <input type="number" id="zip-code-billing-address" ng-model="newUser.billAddress.zipCode">
             <label for="telephone">Telephone</label>
-            <input type="tel" id="telephone" value="">
+            <input type="tel" id="telephone" ng-model="newUser.user.telephone">
           </div>
         </div>
         <div data-role="collapsible" id="step-2">
@@ -83,19 +83,19 @@
 
           <div data-role="fieldcontain">
             <label for="name-as-card">Name as Appear in Card</label>
-            <input type="text" id="name-as-card" value="">
+            <input type="text" id="name-as-card" ng-model="newUser.creditCard.creditCardName">
             <label for="card-type">Card Type</label>
-            <select id="card-type">
+            <select id="card-type" ng-model="newUser.creditCard.creditCardType">
               <option value="Visa">Visa</option>
               <option value="Master Card">Master Card</option>
               <option value="American Express">American Express</option>
             </select>
             <label for="card-number">Card Number</label>
-            <input type="number" id="card-number" value="">
+            <input type="number" id="card-number" ng-model="newUser.creditCard.creditCardNumber">
             <label for="expiration-date">Expiration Date</label>
-            <input type="month" id="expiration-date" value="">
+            <input type="month" id="expiration-date" ng-model="newUser.creditCard.creditCardExpDate">
             <label for="card-security-code">Card Security Code</label>
-            <input type="number" id="card-security-code" value="">
+            <input type="number" id="card-security-code" ng-model="newUser.creditCard.creditCardCvs">
           </div>
         </div>
         <div data-role="collapsible">
@@ -103,16 +103,16 @@
 
           <div data-role="fieldcontain">
             <label for="email">Email</label>
-            <input type="email" id="email" value="">
+            <input type="email" id="email" ng-model="newUser.user.userEmail">
             <label for="username">Username</label>
-            <input type="text" id="username" value="">
+            <input type="text" id="username" ng-model="newUser.user.username">
             <label for="password">Password</label>
-            <input type="password" id="password" autocomplete="off" value="">
+            <input type="password" id="password" autocomplete="off" ng-model="newUser.user.userPassword">
             <label for="password-confirm">Confirm Password</label>
-            <input type="password" id="password-confirm" autocomplete="off" value="">
+            <input type="password" id="password-confirm" autocomplete="off" ng-model="newUser.user.userConfirmPassword">
 
             <label for="security-questions-1">Security Questions</label>
-            <select id="security-questions-1">
+            <select id="security-questions-1" ng-model="newUser.user.questions.question1">
               <option value="0">Select a Question</option>
               <option value="1">What is your favorite color?</option>
               <option value="2">Name of your best friend?</option>
@@ -120,9 +120,9 @@
               <option value="4">Name of your first pet?</option>
               <option value="5">What is your favorite team?</option>
             </select>
-            <input type="text" id="security-answer-1" value="" placeholder="Answer">
+            <input type="text" id="security-answer-1" value="" placeholder="Answer" ng-model="newUser.user.questions.answer1">
             <label for="security-questions-2"></label>
-            <select id="security-questions-2">
+            <select id="security-questions-2" ng-model="newUser.user.questions.question2">
               <option value="0">Select a Question</option>
               <option value="1">What is your favorite color?</option>
               <option value="2">Name of your best friend?</option>
@@ -130,9 +130,9 @@
               <option value="4">Name of your first pet?</option>
               <option value="5">What is your favorite team?</option>
             </select>
-            <input type="text" id="security-answer-2" value="" placeholder="Answer">
+            <input type="text" id="security-answer-2" value="" placeholder="Answer" ng-model="newUser.user.questions.answer2">
             <label for="security-questions-3"></label>
-            <select id="security-questions-3">
+            <select id="security-questions-3" ng-model="newUser.user.questions.question3">
               <option value="0">Select a Question</option>
               <option value="1">What is your favorite color?</option>
               <option value="2">Name of your best friend?</option>
@@ -140,14 +140,14 @@
               <option value="4">Name of your first pet?</option>
               <option value="5">What is your favorite team?</option>
             </select>
-            <input type="text" id="security-answer-3" value="" placeholder="Answer">
+            <input type="text" id="security-answer-3" value="" placeholder="Answer" ng-model="newUser.user.questions.answer3">
           </div>
         </div>
 
       </div>
       <!-- un anchor por ahora-->
-      <a href="#login-user" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
-      <!--<button type="submit" data-theme="a" data-icon="check">Register</button>-->
+      <!--<a href="#login-user" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
+      <button type="submit" data-theme="a" data-icon="check">Register</button>
     </form>
   </div>
 
