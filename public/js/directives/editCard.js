@@ -22,9 +22,9 @@ angular.module('eMarketApp')
           };
 
           $scope.cardOptions = [
-            {card: "Visa"},
-            {card: "Master Card"},
-            {card: "American Express"}
+            {card: 'Visa'},
+            {card: 'Master Card'},
+            {card: 'American Express'}
           ];
 
 //          $scope.changeToPaymentOptionPage = function() {
