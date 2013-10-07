@@ -11,9 +11,12 @@ angular.module('eMarketApp')
         replace: true,
         controller: function ($scope, Restangular) {
           $scope.submit = function () {
+            $.mobile.loading('show');
+            $scope.adminInfo.adminPassword = $scope.editAdmin.adminPassword;
             Restangular.one('api/admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo)
                 .then(function (adminInfo) {
                   $scope.adminInfo = adminInfo;
+                  $.mobile.loading('hide');
                   $.mobile.changePage('#admin-accounts');
                 }, function (err) {
                   alert(err);

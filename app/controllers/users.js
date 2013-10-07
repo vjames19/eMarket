@@ -12,7 +12,6 @@ var users = {
     userEmail: 'chencho.vaca@upr.edu',
     userTelephone: '787-459-6285',
     userPassword: '123',
-    userConfirmPassword: '123',
     questions: {
       1: {
         'dog': 'blacki'
@@ -34,7 +33,6 @@ var users = {
     userEmail: 'mariano.sol@upr.edu',
     userTelephone: '787-415-4952',
     userPassword: '456',
-    userConfirmPassword: '456',
     questions: {
       1: {
         'dog': 'blacki'

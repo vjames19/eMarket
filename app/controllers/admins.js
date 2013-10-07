@@ -11,6 +11,7 @@ var admins = {
     adminLastName: 'Pueblo',
     adminEmail: 'juan.del.pueblo@ptm.db',
     adminPhone: '7775554444',
+    adminPassword: '123',
     adminIsRoot: true
   },
   2: {
@@ -21,6 +22,7 @@ var admins = {
     adminLastName: 'Campo',
     adminEmail: 'jesus.del.campo@wtf.db',
     adminPhone: '3332221111',
+    adminPassword: '456',
     adminIsRoot: false
   }
 };

@@ -21,9 +21,9 @@
                 <label for="email"><strong>Email</strong></label>
                 <input type="email" id="email" ng-model="userInfo.userEmail">
                 <label for="new-password"><strong>New Password</strong></label>
-                <input type="password" id="new-password" autocomplete="off" value="">
+                <input type="password" id="new-password" autocomplete="off" ng-model="editUser.userPassword">
                 <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-                <input type="password" id="new-password-confirm" autocomplete="off" value="">
+                <input type="password" id="new-password-confirm" autocomplete="off" ng-model="editUser.userConfirmPassword">
             </div>
             <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
                 <a href="#user-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>

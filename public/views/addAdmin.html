@@ -12,7 +12,7 @@
                 <label for="username">Username</label>
                 <input type="text" id="username" ng-model="addAdmin.adminUserName">
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name" ng-model="addAdmin.addAdminFirstName">
+                <input type="text" id="first-name" ng-model="addAdmin.adminFirstName">
                 <label for="middle-name">Middle Name</label>
                 <input type="text" id="middle-name" ng-model="addAdmin.adminMiddleName">
                 <label for="last-name">Last Name</label>
@@ -22,9 +22,10 @@
                 <label for="telephone">Telephone</label>
                 <input type="tel" id="telephone" ng-model="addAdmin.adminPhone">
                 <label for="password"><strong>Password</strong></label>
-                <input type="password" id="password" autocomplete="off" value="">
+                <input type="password" id="password" autocomplete="off" ng-model="addAdmin.adminPassword">
                 <label for="password-confirm"><strong>Confirm Password</strong></label>
-                <input type="password" id="password-confirm" autocomplete="off" value="">
+                <input type="password" id="password-confirm" autocomplete="off"
+                       ng-model="validateAdmin.adminConfirmPassword">
                 <label for="make-root">Make Root</label>
                 <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox"
                        ng-model="addAdmin.adminIsRoot">
