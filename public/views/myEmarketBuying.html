@@ -23,7 +23,7 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">
       <li data-role="list-divider">Bidding</li>
       <li ng-repeat="bids in biddings">
-        <a href="#item-view" class="wrap-text">
+        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bids)">
           <img src="img/shopping-cart.png" class="item-image">
             <table class="small-text">
                 <tr>
