@@ -25,12 +25,6 @@ angular.module('eMarketApp')
             }
           });
 
-          page.on('popupafteropen', '.ui-popup', function() {
-            setTimeout(function() {
-              popupItemAddedToCart.popup('close');
-            }, 4000);
-          });
-
           scope.addToCart = function() {
             // Get the item quantity and multiply it by the price to get the total cost
             scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;
