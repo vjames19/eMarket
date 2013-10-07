@@ -10,6 +10,7 @@ angular.module('eMarketApp')
         },
         replace: true,
         controller: function ($scope, $filter) {
+          $scope.bid = {};
           $scope.submitBid = function () {
             $scope.bid.userId = User.userId;
             $scope.bid.productId = $scope.item.productId;
