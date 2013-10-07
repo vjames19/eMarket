@@ -9,23 +9,11 @@ angular.module('eMarketApp')
           item: '='
         },
         replace: true,
-        controller: function ($scope) {
+        controller: function ($scope, $filter) {
           $scope.submitBid = function () {
-            var date = new Date();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var year = date.getFullYear();
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-            var seconds = date.getSeconds();
-            var time = hours + ':' + minutes + ':' + seconds;
-            var zone = 'EST';
-            var dateFormatted = (('' + month).length < 2 ? '0' : '') + month + '/' +
-                (('' + day).length < 2 ? '0' : '') + day + '/' + year;
-            var timeStamp = dateFormatted + ':' + time + ' ' + zone;
             $scope.bid.userId = User.userId;
             $scope.bid.productId = $scope.item.productId;
-            $scope.bid.bidTime = timeStamp;
+            $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
             $scope.bid.productName = $scope.item.productName;
             User.me().all('bids').post($scope.bid).then(function () {
               $.mobile.changePage('#index-page');
