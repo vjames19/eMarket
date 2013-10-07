@@ -14,11 +14,9 @@
     <ul data-role="listview" data-theme="c" data-inset="true" id="resultList">
       <li ng-repeat="result in results">
         <a href="#item-view" data-transition="slide" ng-click="setItem(result)">
-
+          <img src="img/shopping-cart.png" class="item-image">
           <h3 class="ul-li-heading">{{ result.productName }}</h3>
-
           <p class="ul-li-desc"><strong>{{ result.productDescription.productBrand }}</strong></p>
-
           <p class="ul-li-desc">{{ result.productBuyItNowPrice | currency }}</p>
         </a>
       </li>
