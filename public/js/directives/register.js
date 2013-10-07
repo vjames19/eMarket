@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('register', function () {
+    .directive('register', function() {
       return {
         templateUrl: 'views/register.html',
         restrict: 'E',
@@ -12,11 +12,11 @@ angular.module('eMarketApp')
           $scope.submit = function() {
 
             $.mobile.loading('show');
-            Restangular.all('api/users').post($scope.newUser.user).then(function(user) {
+            Restangular.all('users').post($scope.newUser.user).then(function(user) {
               var newUserId = user.userId;
-              Restangular.one('api/users', newUserId).all('mailAddresses').post($scope.newUser.mailAddress);
-              Restangular.one('api/users', newUserId).all('billAddresses').post($scope.newUser.billAddress);
-              Restangular.one('api/users', newUserId).all('creditCards').post($scope.newUser.creditCard);
+              Restangular.one('users', newUserId).all('mailAddresses').post($scope.newUser.mailAddress);
+              Restangular.one('users', newUserId).all('billAddresses').post($scope.newUser.billAddress);
+              Restangular.one('users', newUserId).all('creditCards').post($scope.newUser.creditCard);
               $.mobile.loading('hide');
               $.mobile.changePage('#index-page', {transition: 'fade'});
             });
