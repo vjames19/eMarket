@@ -16,11 +16,13 @@
     <div data-role="content">
         <form action="#">
             <label for="select-category">Category</label>
-            <select id="select-category">
-                <option value="None" selected>None</option>
-                <option value="Books">Books</option>
-                <option value="Computers">Computers</option>
-                <option value="Clothes">Clothes</option>
+            <select id="select-category" ng-model="report.category"
+                    ng-options="category.categoryId as category.categoryName for category in categories">
+                <option value="" selected>None</option>
+                <!--<option value="None" selected>None</option>-->
+                <!--<option value="Books">Books</option>-->
+                <!--<option value="Computers">Computers</option>-->
+                <!--<option value="Clothes">Clothes</option>-->
             </select>
         </form>
         <div id="pie"></div>
