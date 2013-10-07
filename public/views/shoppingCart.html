@@ -44,7 +44,7 @@
           <!--<p class="ui-li-aside"><strong>{{shoppingCart.cost | currency}}</strong><br>{{shoppingCart.productShippingPrice}}</p>-->
         </a>
         <a href="#popupNotification" data-inline="true" data-icon="gear" data-rel="popup"
-           data-position-to="window" data-transition="pop" ng-click="deleteCartItem(shoppingCart)">
+           data-position-to="window" data-transition="pop" ng-click="sendCart(shoppingCart)">
         </a>
       </li>
     </ul>
@@ -86,7 +86,7 @@
   <div data-role="popup" id="popupNotification" data-theme="a" class="ui-corner-all">
     <div style="padding:10px 20px;">
       <h3>Select an action</h3>
-      <a href="#shopping-cart" data-role="button" ng-click="refresh()">Delete</a>
+      <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()">Delete</a>
       <a href="#shopping-cart" data-role="button">Cancel</a>
     </div>
   </div>

@@ -14,6 +14,8 @@ angular.module('eMarketApp')
           var cost = 0;
           var shipping = 0;
 
+          var cartSelected = null;
+
           page.on('pagebeforeshow', function() {
             scope.shoppingCarts = User.me().getList('carts').then(function (carts) {
               scope.shoppingCarts = carts;
@@ -30,11 +32,12 @@ angular.module('eMarketApp')
             };
           });
 
-          scope.deleteCartItem = function(cartItem) {
-            User.me().one('carts', cartItem.cartId).remove();
+          scope.sendCart = function(cartItem) {
+            cartSelected = cartItem;
           }
 
-          scope.refresh = function() {
+          scope.deleteCartItem = function() {
+            User.me().one('carts', cartSelected.cartId).remove();
             $.mobile.changePage("#shopping-cart", {
               allowSamePageTransition : true
             });
