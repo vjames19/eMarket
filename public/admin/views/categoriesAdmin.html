@@ -9,13 +9,14 @@
   <div data-role="content">
     <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" data-filter="true"
         data-filter-placeholder="Search Categories" data-inset="true" id="categoryAdminList">
+    <div ng-click="prev()" data-role="button" id="up-button">Up</div>
       <li data-role="list-divider">Categories on System
         <a href="#add-category" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
            class="ui-btn-right" data-mini="true">Add Category</a>
         <span class="ui-li-count">{{ categories.length }}</span></li>
       </li>
       <li ng-repeat="category in categories">
-        <a href="#">{{ category.categoryName }}</a>
+        <a href="#" ng-click="next(category)">{{ category.categoryName }}</a>
         <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear" data-theme="c"
            ng-click="setCategoryInfo(category); selectedCategory(category, $index)"></a>
@@ -30,6 +31,10 @@
       <a href="#categories-admin" data-role="button" data-icon="delete" ng-click="deleteCategory()">Delete</a>
       <a href="#categories-admin" data-role="button" data-icon="back">Cancel</a>
     </div>
+  </div>
+
+  <div data-role="popup" id="noMore" data-theme="d">
+    <p>No more subcategories</p>
   </div>
 
   <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
