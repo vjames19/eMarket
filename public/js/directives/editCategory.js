@@ -11,6 +11,9 @@ angular.module('eMarketApp')
         replace: true,
         controller: function ($scope, Restangular) {
           $scope.submit = function () {
+            if(!$scope.categoryInfo.categoryParent){
+              $scope.categoryInfo.categoryParent = null;
+            }
             Restangular.one('api/categories', $scope.categoryInfo.categoryId).customPUT($scope.categoryInfo)
                 .then(function (categoryInfo) {
                   $scope.categoryInfo = categoryInfo;
