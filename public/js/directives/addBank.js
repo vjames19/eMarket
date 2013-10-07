@@ -11,7 +11,7 @@ angular.module('eMarketApp')
           $scope.submit = function() {
             User.me().all('banks').post($scope.bank);
             $.mobile.changePage('#payment-options', {transition: 'fade'});
-          }
+          };
         }
       };
     });

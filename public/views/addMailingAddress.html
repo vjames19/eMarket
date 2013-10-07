@@ -10,30 +10,31 @@
   </div>
 
   <div data-role="content">
-    <form action="#">
+    <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="name"><strong>Name</strong></label>
-        <input type="text" id="name" value="">
+        <input type="text" id="name" ng-model="mailAddresses.recipientName">
         <label for="address"><strong>Address</strong></label>
-        <input type="text" id="address" value="">
+        <input type="text" id="address" ng-model="mailAddresses.mailAddress">
         <label for="country"><strong>Country</strong></label>
-        <input type="text" id="country" value="">
+        <input type="text" id="country" ng-model="mailAddresses.country">
         <label for="city"><strong>City</strong></label>
-        <input type="text" id="city" value="">
+        <input type="text" id="city" ng-model="mailAddresses.city">
         <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="geographical-region" value="">
+        <input type="text" id="geographical-region" ng-model="mailAddresses.geographicalRegion">
         <label for="zip-code"><strong>Zip Code</strong></label>
-        <input type="number" id="zip-code" value="">
+        <input type="number" id="zip-code" ng-model="mailAddresses.zipCode">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" value="">
+        <input type="tel" id="telephone" ng-model="mailAddresses.telephone">
         <label for="make-primary">Make Primary</label>
-        <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox">
+        <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox" ng-model="mailAddresses.isPrimary">
       </div>
       <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-theme="a"
            data-transition="fade">Cancel</a>
-        <a href="#profile" data-role="button" data-icon="check" data-theme="a"
-           data-transition="fade">Submit</a>
+          <button type="submit" data-icon="check" data-theme="a">Submit</button>
+        <!--<a href="#profile" data-role="button" data-icon="check" data-theme="a"-->
+           <!--data-transition="fade">Submit</a>-->
       </div>
     </form>
   </div>

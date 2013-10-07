@@ -6,7 +6,14 @@ angular.module('eMarketApp')
         templateUrl: 'views/addBillingAddress.html',
         restrict: 'E',
         scope: {},
-        replace: true
+        replace: true,
+        controller: function($scope, User) {
+          $scope.submit = function() {
+            $scope.billAddresses.userId = User.userId;
+            User.me().all('billAddresses').post($scope.billAddresses);
+            $.mobile.changePage('#profile', {transition: 'fade'});
+          };
+        }
       };
     });
 
