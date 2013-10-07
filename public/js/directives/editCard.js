@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('editCard', function () {
+    .directive('editCard', function (User) {
       return {
         templateUrl: 'views/editCard.html',
         restrict: 'E',
@@ -9,7 +9,7 @@ angular.module('eMarketApp')
           cardInfo: '='
         },
         replace: true,
-        controller: function ($scope, User) {
+        controller: function ($scope) {
           $scope.submit = function () {
             console.log($scope.cardInfo);
             User.me().one('creditCards', $scope.cardInfo.creditCardId).customPUT($scope.cardInfo)
@@ -20,20 +20,24 @@ angular.module('eMarketApp')
                   alert(err);
                 });
           };
+        },
+        link: function (scope, elem) {
+          var page = $(elem[0]);
+          page.on('pagebeforeshow', function () {
+            scope.billAddresses = User.me().all('billaddresses').getList();
+          });
+        }
+      };
+    });
 
-          $scope.cardOptions = [
-            {card: 'Visa'},
-            {card: 'Master Card'},
-            {card: 'American Express'}
-          ];
+//          $scope.cardOptions = [
+//            {card: 'Visa'},
+//            {card: 'Master Card'},
+//            {card: 'American Express'}
+//          ];
 
 //          $scope.changeToPaymentOptionPage = function() {
 //            setTimeout(function () {
 //              $.mobile.changePage('#payment-options', {transition: 'fade'});
 //            }, 500);
 //          };
-
-        }
-      };
-    });
-

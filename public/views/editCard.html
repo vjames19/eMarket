@@ -12,23 +12,31 @@
                 <label for="card-name"><strong>Card Name</strong></label>
                 <input type="text" id="card-name" ng-model="cardInfo.creditCardName">
                 <label for="card-type"><strong>Card Type</strong></label>
-                <select id="card-type" ng-model="cardInfo.creditCardType" ng-options="cardType.card as cardType.card for cardType in cardOptions">
-                    <option value="">Select a Card Type</option>
+                <select id="card-type" ng-model="cardInfo.creditCardType">
+                    <option value="Visa" selected>Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="AmericanExpress">AmericanExpress</option>
+                    <option value="Other">Other</option>
                 </select>
-
+                <!--<select id="card-type" ng-model="cardInfo.creditCardType" ng-options="cardType.card as cardType.card for cardType in cardOptions">-->
+                    <!--<option value="">Select a Card Type</option>-->
+                <!--</select>-->
                 <label for="card-exp-date"><strong>Expiration Date</strong></label>
-                <input type="month" id="card-exp-date" value="2013-07-08">
+                <input type="month" id="card-exp-date" ng-model="cardInfo.creditCardExpDate">
                 <label for="card-number"><strong>Card Number</strong></label>
                 <!-- The type number in the phone make the last digit 0 in the card-number-->
                 <input type="number" id="card-number" ng-model="cardInfo.creditCardNumber">
                 <label for="card-cvs"><strong>Card CVS</strong></label>
                 <input type="number" id="card-cvs" ng-model="cardInfo.creditCardCvs">
                 <label for="address-relation"><strong>Associated Address</strong></label>
-                <select id="address-relation">
-                    <option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>
-                    <option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>
-                    <option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>
+                <select id="address-relation" ng-model="cardInfo.creditCardBillingAddressId"
+                        ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
                 </select>
+                <!--<select id="address-relation">-->
+                    <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->
+                    <!--<option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>-->
+                    <!--<option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>-->
+                <!--</select>-->
             </div>
             <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
                 <a href="#payment-options" data-role="button" data-icon="back" data-theme="a"
