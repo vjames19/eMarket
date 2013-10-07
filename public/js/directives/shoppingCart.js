@@ -22,18 +22,29 @@ angular.module('eMarketApp')
                 shipping += carts[i].productShippingPrice;
               }
             });
+            scope.getTotalCost = function() {
+              return cost;
+            };
+            scope.getTotalShipping = function() {
+              return shipping;
+            };
           });
 
-          scope.getTotalCost = function() {
-            return cost;
-          };
-          scope.getTotalShipping = function() {
-            return shipping;
-          };
+          scope.deleteCartItem = function(cartItem) {
+            User.me().one('carts', cartItem.cartId).remove();
+          }
+
+          scope.refresh = function() {
+            $.mobile.changePage("#shopping-cart", {
+              allowSamePageTransition : true
+            });
+          }
 
           page.on('pageshow', function() {
             shoppingCartList.listview('refresh');
           });
+
+
 
         }
       };
