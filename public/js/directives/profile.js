@@ -1,17 +1,31 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('profile', function () {
+    .directive('profile', function (User) {
       return {
         templateUrl: 'views/profile.html',
         restrict: 'E',
         scope: true,
         replace: true,
-        controller: function($scope, Restangular, User) {
-          $scope.user = Restangular.one('api/users', 1).get();
-          $scope.mailAddresses = Restangular.one('api/users', 1).getList('mailAddresses');
-          $scope.billAddresses = Restangular.one('api/users', 1).getList('billAddresses');
-          $scope.ratings = Restangular.one('api/users', 1).getList('ratings');
+        link: function(scope, elem) {
+          var page = $(elem[0]);
+          var mailAddressList = page.find('#mailAddressList');
+          var billAddressList = page.find('#billAddressList');
+          var ratingList = page.find('#ratingList')
+
+          page.on('pagebeforeshow', function() {
+            var user = User.me();
+            scope.user = user.get();
+            scope.mailAddresses = user.getList('mailAddresses');
+            scope.billAddresses = user.getList('billAddresses');
+            scope.ratings = user.getList('ratings');
+          });
+
+          page.on('pageshow', function() {
+            mailAddressList.listview('refresh');
+            billAddressList.listview('refresh');
+            ratingList.listview('refresh');
+          });
         }
       };
     });

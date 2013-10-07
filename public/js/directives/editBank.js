@@ -22,9 +22,9 @@ angular.module('eMarketApp')
           };
 
           $scope.accountOptions = [
-            {account: "Checking"},
-            {account: "Saving"},
-            {account: "Other"}
+            {account: 'Checking'},
+            {account: 'Saving'},
+            {account: 'Other'}
           ];
 
 //          $scope.changeToPaymentOptionPage = function() {
