@@ -91,8 +91,9 @@
     <form>
       <div style="padding:10px 20px;">
         <h3>Enter Quantity</h3>
-        <input type="number" id="quantity" value="1">
-        <a href="#" data-role="button">Add to Cart</a>
+        <input type="number" id="quantity" placeholder="1" ng-model="item.quantity">
+        <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
+           data-position-to="window" data-transition="pop" ng-click="addToCart()">Add to Cart</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>
     </form>
@@ -115,6 +116,12 @@
       </div>
     </form>
   </div>
+
+    <div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
+        <div style="padding:10px 20px;">
+               <p>Product have been placed in cart</p>
+        </div>
+    </div>
 
   <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 
