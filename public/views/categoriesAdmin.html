@@ -17,7 +17,7 @@
             <li ng-repeat="category in categories">
                 <a href="#">{{ category.categoryName }}</a>
                 <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-                   data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCategoryInfo(category)"></a>
+                   data-position-to="window" data-icon="gear" data-theme="c" ng-click="setCategoryInfo(category); selectedCategory(category)"></a>
             </li>
             <!--<li>-->
             <!--<a href="#">Books</a>-->
@@ -46,7 +46,7 @@
         <div class="form-pad">
             <h3>Choose An Action</h3>
             <a href="#edit-category" data-role="button" data-icon="edit">Edit</a>
-            <a href="#" data-role="button" data-icon="delete">Delete</a>
+            <a href="#categories-admin" data-role="button" data-icon="delete" ng-click="deleteCategory()">Delete</a>
             <a href="#categories-admin" data-role="button" data-icon="back">Cancel</a>
         </div>
     </div>
