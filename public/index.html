@@ -62,30 +62,20 @@
 
 
 <!--Directives-->
-<add-admin></add-admin>
 <add-bank></add-bank>
 <add-billing-address></add-billing-address>
 <add-card></add-card>
-<add-category></add-category>
 <add-mailing-address></add-mailing-address>
-<add-user></add-user>
-<admin-accounts></admin-accounts>
 <categories></categories>
-<categories-admin></categories-admin>
-<edit-admin admin-info="adminInfoToBeViewed"></edit-admin>
 <edit-bank bank-info="bankInfoToBeViewed"></edit-bank>
 <edit-billing-address bill-info="billInfoToBeViewed"></edit-billing-address>
 <edit-card card-info="cardInfoToBeViewed"></edit-card>
-<edit-category category-info="categoryInfoToBeViewed"></edit-category>
 <edit-mailing-address mail-info="mailInfoToBeViewed"></edit-mailing-address>
-<edit-user user-info="userInfoToBeViewed"></edit-user>
 <forgot-password></forgot-password>
-<home-admin></home-admin>
 <home-user></home-user>
 <invoice-report></invoice-report>
 <invoices></invoices>
 <item-view item="itemToBeViewed"></item-view>
-<login-admin></login-admin>
 <my-emarket-buying></my-emarket-buying>
 <my-emarket-drafts></my-emarket-drafts>
 <my-emarket-selling></my-emarket-selling>
@@ -94,27 +84,19 @@
 <profile></profile>
 <recently-viewed></recently-viewed>
 <register></register>
-<reports-day></reports-day>
-<reports-month></reports-month>
-<reports-week></reports-week>
 <sell-item></sell-item>
 <sell-item-preview preview-item-info="previewItemToSellInfoToBeViewed"></sell-item-preview>
 <search-results></search-results>
 <shopping-cart></shopping-cart>
-<user-accounts></user-accounts>
 
 <script src="lib/angular/angular.js"></script>
-
-<!-- build:js scripts/modules.js -->
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/angular-cookies/angular-cookies.js"></script>
-<!-- endbuild -->
 <script src="lib/restangular/dist/restangular.js"></script>
-<!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="js/app.js"></script>
-<!--<script src="scripts/controllers/main.js"></script>-->
 
+<script src="js/app.js"></script>
 <script src="js/controllers/main.js"></script>
+
 <!-- Services -->
 <script src="js/services/auth.js"></script>
 <script src="js/services/category.js"></script>
@@ -124,31 +106,21 @@
 <script src="js/filters/truncate.js"></script>
 
 <!-- Directives -->
-<script src="js/directives/addAdmin.js"></script>
 <script src="js/directives/addBank.js"></script>
 <script src="js/directives/addBillingAddress.js"></script>
 <script src="js/directives/addCard.js"></script>
-<script src="js/directives/addCategory.js"></script>
 <script src="js/directives/addMailingAddress.js"></script>
 <script src="js/directives/addUser.js"></script>
-<script src="js/directives/adminAccounts.js"></script>
 <script src="js/directives/categories.js"></script>
-<script src="js/directives/categoriesAdmin.js"></script>
-<script src="js/directives/editAdmin.js"></script>
 <script src="js/directives/editBank.js"></script>
 <script src="js/directives/editBillingAddress.js"></script>
 <script src="js/directives/editCard.js"></script>
-<script src="js/directives/editCategory.js"></script>
 <script src="js/directives/editMailingAddress.js"></script>
-<script src="js/directives/editUser.js"></script>
 <script src="js/directives/forgotPassword.js"></script>
-<script src="js/directives/homeAdmin.js"></script>
 <script src="js/directives/homeUser.js"></script>
 <script src="js/directives/invoices.js"></script>
 <script src="js/directives/invoiceReport.js"></script>
 <script src="js/directives/itemView.js"></script>
-<script src="js/directives/loginAdmin.js"></script>
-<!--<script src="js/directives/loginUser.js"></script>-->
 <script src="js/directives/myEmarketBuying.js"></script>
 <script src="js/directives/myEmarketDrafts.js"></script>
 <script src="js/directives/myEmarketSelling.js"></script>
@@ -157,14 +129,10 @@
 <script src="js/directives/profile.js"></script>
 <script src="js/directives/recentlyViewed.js"></script>
 <script src="js/directives/register.js"></script>
-<script src="js/directives/reportsDay.js"></script>
-<script src="js/directives/reportsMonth.js"></script>
-<script src="js/directives/reportsWeek.js"></script>
 <script src="js/directives/sellItem.js"></script>
 <script src="js/directives/sellItemPreview.js"></script>
 <script src="js/directives/search.js"></script>
 <script src="js/directives/searchResults.js"></script>
 <script src="js/directives/shoppingCart.js"></script>
-<script src="js/directives/userAccounts.js"></script>
 </body>
 </html>
