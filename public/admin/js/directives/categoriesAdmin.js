@@ -31,12 +31,12 @@ angular.module('eMarketApp')
           });
 
           var refreshList = function(categories) {
-            console.log('categoridesfs', categories)
+            console.log('categoridesfs', categories);
             scope.categories = categories;
             setTimeout(function() { // It doesn't work without it -.-
               categoryAdminList.listview('refresh');
-            }, 1)
-          }
+            }, 1);
+          };
 
           scope.next = function(category) {
             if(angular.isArray(category.categories)) {
@@ -53,8 +53,8 @@ angular.module('eMarketApp')
             if(stack.length <= 1) {
               upButton.hide();
             }
-            refreshList(_.last(stack));
-          }
+            refreshList(window._.last(stack));
+          };
 
           scope.selectedCategory = function(selectedCategory, index) {
             category = selectedCategory;
