@@ -7,7 +7,7 @@
     </div>
 
     <div data-role="content">
-        <form  data-ajax="false" ng-submit="submit()">
+        <form data-ajax="false" ng-submit="submit()">
             <div class="form-pad">
                 <label for="username">Username</label>
                 <input type="text" id="username" ng-model="addAdmin.adminUserName">
@@ -26,7 +26,8 @@
                 <label for="password-confirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="password-confirm" autocomplete="off" value="">
                 <label for="make-root">Make Root</label>
-                <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox" ng-model="addAdmin.adminIsRoot">
+                <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox"
+                       ng-model="addAdmin.adminIsRoot">
             </div>
             <!-- un anchor por ahora-->
             <div data-role="controlgroup" data-type="horizontal" style="text-align: center">

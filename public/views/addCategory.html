@@ -7,22 +7,21 @@
     </div>
 
     <div data-role="content">
-        <form action="#">
+        <form data-ajax="false" ng-submit="submit()">
             <div class="form-pad">
                 <label for="name">Category Name</label>
-                <input type="text" id="name" value="">
+                <input type="text" id="name" ng-model="addCategory.categoryName">
                 <label for="parent">Category Parent</label>
-                <select id="parent">
-                    <option value="None" selected>None</option>
-                    <option value="Computer">Computer</option>
-                    <option value="Books">Books</option>
-                    <option value="Fiction">Fiction</option>
+                <select id="parent" ng-model="addCategory.categoryParent"
+                        ng-options="category.categoryId as category.categoryName for category in categories">
+                    <option value="" selected>None</option>
                 </select>
             </div>
             <!-- un anchor por ahora-->
             <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
                 <a href="#categories-admin" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
-                <a href="#categories-admin" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+                <button type="submit" data-icon="check" data-theme="a">Submit</button>
+                <!--<a href="#categories-admin" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
             </div>
         </form>
     </div>
