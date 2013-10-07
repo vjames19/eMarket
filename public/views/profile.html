@@ -12,7 +12,7 @@
 
   <div data-role="content">
 
-    <form action="#">
+    <form data-ajax="false" ng-submit="submitUser()">
       <div data-role="collapsible">
         <h2>Edit Profile Information</h2>
         <ul data-role="listview" data-theme="d" data-divider-theme="d">
@@ -38,7 +38,9 @@
         </div>
         <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
           <a href="#index-page" data-role="button" data-icon="delete" data-theme="a" data-transition="fade">Cancel</a>
-          <a href="#index-page" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+          <!--<a href="#index-page" data-role="button" data-icon="check" data-theme="a" data-transition="fade"-->
+          <!--ng-click="submitUser()">Submit</a>-->
+          <button type="submit" data-icon="check" data-theme="a">Submit</button>
         </div>
       </div>
     </form>
