@@ -61,12 +61,12 @@ angular.module('eMarketApp')
               scope.user = user;
             });
 
-            user.getList('mailAddresses').then(function (mailAddresses) {
-              scope.mailAddresses = mailAddresses;
+            user.getList('mailAddresses').then(function (mailAddressesList) {
+              scope.mailAddresses = mailAddressesList;
             });
 
-            user.getList('billAddresses').then(function (billAddresses) {
-              scope.billAddresses = billAddresses;
+            user.getList('billAddresses').then(function (billAddressesList) {
+              scope.billAddresses = billAddressesList;
             });
 
             user.getList('ratings').then(function (ratings) {

@@ -1,33 +1,40 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('adminAccounts', function(Restangular) {
+    .directive('adminAccounts', function (Restangular) {
       return {
         templateUrl: 'views/adminAccounts.html',
         restrict: 'E',
         scope: true, // make possible to pass information from this directive to other directive
         replace: true,
-        link: function(scope, elem) {
-          var admin = null;
+        link: function (scope, elem) {
           var page = $(elem[0]);
           var adminAccountList = page.find('#adminAccountList');
 
-          scope.selectedAdmin = function(selectedAdmin) {
-            admin = selectedAdmin;
+          var selectedAdmin = null;
+          var selectedAdminIndex = null;
+
+          scope.selectAdmin = function (admin, index) {
+            selectedAdmin = admin;
+            selectedAdminIndex = index;
           };
 
-          scope.deleteAdmin = function() {
+          scope.deleteAdmin = function () {
             $.mobile.loading('show');
-            Restangular.one('admins', admin.adminId).remove();
-            $.mobile.loading('hide');
-            scope.refreshDom();
+            Restangular.one('admins', selectedAdmin.adminId).remove().then(function () {
+              scope.admins.splice(selectedAdminIndex, 1);
+              adminAccountList.listview('refresh');
+              $.mobile.loading('hide');
+            });
           };
 
-          page.on('pagebeforeshow', function() {
-            scope.admins = Restangular.all('admins').getList();
+          page.on('pagebeforeshow', function () {
+            Restangular.all('admins').getList().then(function (adminList) {
+              scope.admins = adminList;
+            });
           });
 
-          page.on('pageshow', function() {
+          page.on('pageshow', function () {
             adminAccountList.listview('refresh');
           });
 

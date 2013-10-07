@@ -48,11 +48,11 @@ angular.module('eMarketApp')
 
           page.on('pagebeforeshow', function () {
 
-            User.me().getList('creditCards').then(function (creditCards) {
-              scope.creditCards = creditCards;
+            User.me().getList('creditCards').then(function (creditCardsList) {
+              scope.creditCards = creditCardsList;
             });
-            User.me().getList('banks').then(function (bankAccounts) {
-              scope.bankAccounts = bankAccounts;
+            User.me().getList('banks').then(function (bankAccountsList) {
+              scope.bankAccounts = bankAccountsList;
             });
 
           });
