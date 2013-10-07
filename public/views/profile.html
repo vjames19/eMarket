@@ -16,19 +16,19 @@
       <div data-role="collapsible">
         <h2>Edit Profile Information</h2>
         <ul data-role="listview" data-theme="d" data-divider-theme="d">
-          <li data-role="list-divider">UserName: <span class="ui-li-count">{{users.username}}</span></li>
+          <li data-role="list-divider">UserName: <span class="ui-li-count">{{user.username}}</span></li>
         </ul>
         <div data-role="fieldcontain">
           <label for="firstname"><strong>First Name</strong></label>
-          <input type="text" id="firstname" value="{{users.userFirstName}}">
+          <input type="text" id="firstname" ng-model="user.userFirstName">
           <label for="middlename"><strong>Middle Name</strong></label>
-          <input type="text" id="middlename" value="{{users.userMiddleName}}">
+          <input type="text" id="middlename" ng-model="user.userMiddleName">
           <label for="lastname"><strong>Last Name</strong></label>
-          <input type="text" id="lastname" value="{{users.userLastName}}">
+          <input type="text" id="lastname" ng-model="user.userLastName">
           <label for="email"><strong>Email</strong></label>
-          <input type="email" id="email" value="{{users.userEmail}}">
+          <input type="email" id="email" ng-model="user.userEmail">
           <label for="telephone"><strong>Telephone</strong></label>
-          <input type="tel" id="telephone" value="{{users.userPhone}}">
+          <input type="tel" id="telephone" ng-model="user.userPhone">
           <label for="old-password"><strong>Old Password</strong></label>
           <input type="password" id="old-password" autocomplete="off" value="">
           <label for="new-password"><strong>New Password</strong></label>
