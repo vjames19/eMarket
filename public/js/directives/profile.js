@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('profile', function(User, Restangular) {
+    .directive('profile', function(User) {
       return {
         templateUrl: 'views/profile.html',
         restrict: 'E',
