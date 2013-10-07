@@ -9,7 +9,7 @@ angular.module('eMarketApp')
         replace: true,
         link: function(scope, elem) {
           var page = $(elem[0]);
-          var shoppingCartList = page.find('#shoppingCartList')
+          var shoppingCartList = page.find('#shoppingCartList');
 
           var cost = null;
           var shipping = null;
@@ -40,7 +40,7 @@ angular.module('eMarketApp')
           scope.selectCart = function(cartItem, index) {
             cartSelected = cartItem;
             selectedCartIndex = index;
-          }
+          };
 
           scope.deleteCartItem = function() {
             $.mobile.loading('show');
@@ -49,7 +49,7 @@ angular.module('eMarketApp')
               shoppingCartList.listview('refresh');
               $.mobile.loading('hide');
             });
-          }
+          };
 
           page.on('pageshow', function() {
             cost = 0;

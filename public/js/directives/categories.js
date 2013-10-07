@@ -17,8 +17,8 @@ angular.module('eMarketApp')
             scope.categories = categories;
             setTimeout(function() { // It doesn't work without it -.-
               categoryList.listview('refresh');
-            }, 1)
-          }
+            }, 1);
+          };
 
           scope.next = function(category) {
             if(angular.isArray(category.categories)) {
@@ -35,8 +35,8 @@ angular.module('eMarketApp')
             if(stack.length <= 1) {
               upButton.hide();
             }
-            refreshList(_.last(stack));
-          }
+            refreshList(window._.last(stack));
+          };
 
           page.on('pagebeforeshow', function() {
             upButton.hide();
