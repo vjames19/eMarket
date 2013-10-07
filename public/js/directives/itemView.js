@@ -26,6 +26,7 @@ angular.module('eMarketApp')
             $scope.bid.userId = User.userId;
             $scope.bid.productId = $scope.item.productId;
             $scope.bid.bidTime = timeStamp;
+            $scope.bid.productName = $scope.item.productName;
             User.me().all('bids').post($scope.bid).then(function () {
               $.mobile.changePage('#index-page');
             });
