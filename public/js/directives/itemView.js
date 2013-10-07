@@ -18,7 +18,7 @@ angular.module('eMarketApp')
 
           if (scope.item.productSellerId) {
             page.on('pagebeforeshow', function () {
-              if (User.userId === scope.item.productSellerId) {
+              if(scope.item && User.userId === scope.item.productSellerId) {
                 buyItNowButton.addClass('ui-disabled');
                 bidButton.addClass('ui-disabled');
               } else {
