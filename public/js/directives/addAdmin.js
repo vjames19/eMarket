@@ -9,8 +9,9 @@ angular.module('eMarketApp')
         replace: true,
         controller: function ($scope, Restangular) {
           $scope.submit = function () {
-            console.log($scope.admin);
-            Restangular.all('api/admins').post($scope.admin);
+            console.log($scope.addAdmin);
+            $scope.addAdmin.adminId = window._.keys(Restangular.all('api/admins').get()).length + 1;
+            Restangular.all('api/admins').post($scope.addAdmin);
             $.mobile.changePage('#home-admin', {transition: 'fade'});
           };
         }
