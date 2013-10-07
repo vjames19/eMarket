@@ -3,13 +3,10 @@
 var _ = require('underscore');
 
 var categories = {
-  1: {categoryId: 1, categoryName: 'books', categoryParent: null,
-    categories: [
-      {categoryId: 3, categoryName: 'fiction', categoryParent: 1 },
-      {categoryId: 4, categoryName: 'Horror', categoryParent: 1 }
-    ]
-  },
-  2: {categoryId: 2, categoryName: 'computers', categoryParent: null}
+  1: {categoryId: 1, categoryName: 'books', categoryParent: null},
+  2: {categoryId: 2, categoryName: 'computers', categoryParent: null},
+  3: {categoryId: 3, categoryName: 'fiction', categoryParent: 1 },
+  4: {categoryId: 4, categoryName: 'Horror', categoryParent: 1 }
 };
 
 exports.findCategoryById = function(req, res, next, id) {
@@ -61,5 +58,10 @@ exports.readCategory = function(req, res) {
  * List of categories.
  */
 exports.readAll = function(req, res) {
-  res.jsonp(_.values(categories));
+  var cat = _.values(categories);
+  _.each(cat, function(category) {
+    var sub = _.where(cat, {categoryParent: category.categoryId});
+    category.categories = sub.length > 0 ? sub: null;
+  });
+  res.jsonp(_.where(cat, {categoryParent: null}));
 };
