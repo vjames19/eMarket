@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('itemView', function(User) {
+    .directive('itemView', function (User) {
       return {
         templateUrl: 'views/itemView.html',
         restrict: 'E',
@@ -11,9 +11,9 @@ angular.module('eMarketApp')
         replace: true,
         link: function(scope, elem) {
           var page = $(elem[0]);
-          var popupItemAddedToCart = page.find('#popupItemAddedToCart');
           var buyItNowButton = page.find('#buy-it-now-button');
           var bidButton = page.find('#place-bid-button');
+          var placeBidInput = page.find('#placeBid');
 
           page.on('pagebeforeshow', function() {
             if(User.userId === scope.item.productSellerId) {
@@ -29,7 +29,11 @@ angular.module('eMarketApp')
             // Get the item quantity and multiply it by the price to get the total cost
             scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;
             User.me().all('carts').post(scope.item);
-          }
+          };
+
+          scope.placeMinBid = function () {
+            placeBidInput.attr('value', scope.item.productCurrentBidPrice + 5);
+          };
 
         }
       };
