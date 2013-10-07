@@ -105,7 +105,7 @@
     <form>
       <div style="padding:10px 20px;">
         <h3>Enter Bid</h3>
-        <a href="#item-view" data-role="button" data-rel="back">Add Min Bid: {{item.productCurrentBidPrice + 5 |
+        <a href="#item-view" data-role="button" data-rel="back"  ng-click="placeMinBid()">Add Min Bid: {{item.productCurrentBidPrice + 5 |
           currency}}</a>
 
         <div data-role="fieldcontain">
@@ -113,7 +113,7 @@
           <input type="text" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 | currency}}">
         </div>
 
-        <a href="#" data-role="button">Bid</a>
+        <a href="#index-page" data-role="button">Bid</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>
     </form>
