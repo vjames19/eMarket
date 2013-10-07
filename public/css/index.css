@@ -76,10 +76,15 @@ p.index-text-size {
     width: 30%;
 }
 
-div.footer {
-    position: absolute;
+.ui-content
+{
+    margin-bottom: 20px; /* Set this to whatever your footer size is... */
+}
+
+.ui-footer {
+    position: absolute !important;
     bottom: 0;
-    width: 100%
+    width: 100%;
 }
 
 img.center-image {

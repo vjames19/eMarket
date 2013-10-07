@@ -805,7 +805,7 @@ var carts = {
     productStartingBidPrice: 500.99,
     productCurrentBidPrice: 800.99,
     productBidEndDate: '07/07/2008',
-    productShippingPrice: 8.99,
+    productShippingPrice: 5.99,
     productDescription: {
       productCondition: 'Refurbished',
       productPicture: '/img/products/users/9/z98gyu.png',
@@ -813,7 +813,7 @@ var carts = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    productQuantity: 2,
+    quantity: 2,
     cost: 1199.99
   },
   2: {
@@ -833,7 +833,7 @@ var carts = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    productQuantity: 4,
+    quantity: 4,
     cost: 99.99
   }
 };
