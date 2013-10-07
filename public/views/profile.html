@@ -94,7 +94,7 @@
               </table>
             </a>
             <a href="#mailingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setMailInfo(mailAddress); selectedMailAddress(mailAddress)"></a>
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setMailInfo(mailAddress); selectMailAddress(mailAddress, $index)"></a>
           </li>
         </ul>
       </div>
@@ -146,7 +146,7 @@
               </table>
             </a>
             <a href="#billingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBillInfo(billAddress); selectedBillAddress(billAddress)"></a>
+               data-position-to="window" data-icon="gear" data-theme="c" ng-click="setBillInfo(billAddress); selectBillAddress(billAddress, $index)"></a>
           </li>
         </ul>
       </div>
