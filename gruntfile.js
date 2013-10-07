@@ -170,7 +170,7 @@ module.exports = function (grunt) {
   // Register tasks.
   grunt.registerTask('default', ['jshint', 'concurrent:target']);
 
-  grunt.registerTask('noopen', ['jshint', 'concurrent:reload']);
+  grunt.registerTask('nopen', ['jshint', 'concurrent:reload']);
 
   grunt.registerTask('front', ['concurrent:front']);
 

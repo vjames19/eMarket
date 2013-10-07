@@ -110,7 +110,8 @@
 
                 <div data-role="fieldcontain">
                     <label for="placeBid">Place Bid</label>
-                    <input type="text" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 | currency}}">
+                    <input type="number" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 }}"
+                           ng-model="bid.bidAmount">
                 </div>
 
                 <button type="submit" data-icon="false" data-theme="b">Bid</button>
