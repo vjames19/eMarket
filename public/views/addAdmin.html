@@ -7,31 +7,32 @@
     </div>
 
     <div data-role="content">
-        <form action="#">
+        <form  data-ajax="false" ng-submit="submit()">
             <div class="form-pad">
                 <label for="username">Username</label>
-                <input type="text" id="username" value="">
+                <input type="text" id="username" ng-model="admin.adminUserName">
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name" value="">
+                <input type="text" id="first-name" ng-model="admin.adminFirstName">
                 <label for="middle-name">Middle Name</label>
-                <input type="text" id="middle-name" value="">
+                <input type="text" id="middle-name" ng-model="admin.adminMiddleName">
                 <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" value="">
+                <input type="text" id="last-name" ng-model="admin.adminLastName">
                 <label for="email">Email</label>
-                <input type="email" id="email" value="">
+                <input type="email" id="email" ng-model="admin.adminEmail">
                 <label for="telephone">Telephone</label>
-                <input type="tel" id="telephone" value="">
+                <input type="tel" id="telephone" ng-model="admin.adminPhone">
                 <label for="password"><strong>Password</strong></label>
                 <input type="password" id="password" autocomplete="off" value="">
                 <label for="password-confirm"><strong>Confirm Password</strong></label>
                 <input type="password" id="password-confirm" autocomplete="off" value="">
                 <label for="make-root">Make Root</label>
-                <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox" >
+                <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox" ng-model="adminIsRoot">
             </div>
             <!-- un anchor por ahora-->
             <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
                 <a href="#admin-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
-                <a href="#admin-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>
+                <!--<a href="#admin-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
+                <button type="submit" data-icon="check" data-theme="a">Submit</button>
             </div>
         </form>
     </div>
