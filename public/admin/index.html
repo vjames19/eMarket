@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <title>eMarket</title>
+  <meta charset="UTF-8">
+  <!-- select compatibility for IE to latest and enable google chrome frame-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="eMarket Web Application">
+  <!-- sets the screen width to the pixel width of the device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <script type="text/javascript"
+          src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+</head>
+
+<body ng-app="eMarketApp" ng-controller="MainCtrl">
+<!-- Login -->
+<div data-role="page" data-theme="b" id="login-admin">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Administrator</h1>
+  </div>
+
+  <div data-role="content">
+    <form data-ajax="false" ng-submit="logIn()">
+      <div class="form-pad">
+        <h3>Admin, Please Sign In</h3>
+        <label for="username" class="ui-hidden-accessible">Username:</label>
+        <input name="username" id="username" value="" placeholder="username" data-theme="a" type="text">
+        <label for="password" class="ui-hidden-accessible">Password:</label>
+        <input name="password" id="password" value="" placeholder="password" autocomplete="off" data-theme="a"
+               type="password">
+        <!--<a href="#index-page" data-role="button" data-icon="check" data-direction="reverse">Submit</a>-->
+        <button type="submit" data-theme="b" data-icon="check">Sign in</button>
+      </div>
+    </form>
+  </div>
+
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+
+</div>
+
+<!--Directives-->
+<add-admin></add-admin>
+<add-category></add-category>
+<add-user></add-user>
+<admin-accounts></admin-accounts>
+<categories-admin></categories-admin>
+<edit-admin admin-info="adminInfoToBeViewed"></edit-admin>
+<edit-category category-info="categoryInfoToBeViewed"></edit-category>
+<edit-user user-info="userInfoToBeViewed"></edit-user>
+<home-admin></home-admin>
+<login-admin></login-admin>
+<reports-day></reports-day>
+<reports-month></reports-month>
+<reports-week></reports-week>
+<user-accounts></user-accounts>
+
+<script src="../lib/angular/angular.js"></script>
+<script src="../lib/angular-resource/angular-resource.js"></script>
+<script src="../lib/angular-cookies/angular-cookies.js"></script>
+<script src="../lib/restangular/dist/restangular.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/controllers/main.js"></script>
+<!-- Services -->
+<script src="js/services/admin.js"></script>
+<script src="js/services/auth.js"></script>
+<script src="js/services/category.js"></script>
+
+<!-- Directives -->
+<script src="js/directives/addAdmin.js"></script>
+<script src="js/directives/addCategory.js"></script>
+<script src="js/directives/addUser.js"></script>
+<script src="js/directives/adminAccounts.js"></script>
+<script src="js/directives/categoriesAdmin.js"></script>
+<script src="js/directives/editAdmin.js"></script>
+<script src="js/directives/editCategory.js"></script>
+<script src="js/directives/editUser.js"></script>
+<script src="js/directives/homeAdmin.js"></script>
+<script src="js/directives/loginAdmin.js"></script>
+<script src="js/directives/reportsDay.js"></script>
+<script src="js/directives/reportsMonth.js"></script>
+<script src="js/directives/reportsWeek.js"></script>
+<script src="js/directives/userAccounts.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<div data-role="page" data-theme="b" id="add-user"> <!-- data-role="page" delinate a page -->
+
+  <!-- Header of the page -->
+  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+    <h1>Add User</h1>
+    <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+  </div>
+
+  <div data-role="content">
+
+    <form data-ajax="false" ng-submit="submit()">
+      <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+        <div data-role="collapsible" data-collapsed="false">
+          <h3>Personal Information</h3>
+
+          <div data-role="fieldcontain">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" ng-model="addUser.user.userFirstName">
+            <label for="middlename">Middle Name</label>
+            <input type="text" id="middlename" ng-model="addUser.user.userMiddleName">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" ng-model="addUser.user.userLastName">
+            <label for="mailing-address">Mailing Address</label>
+            <input type="text" id="mailing-address" ng-model="addUser.mailAddress.mailAddress">
+            <label for="country-mailing-address">Country</label>
+            <input type="text" id="country-mailing-address" ng-model="addUser.mailAddress.country">
+            <label for="geographical-region-mailing-address">State/Providence/Region</label>
+            <input type="text" id="geographical-region-mailing-address"
+                   ng-model="addUser.mailAddress.geographicalRegion">
+            <label for="city-mailing-address">City</label>
+            <input type="text" id="city-mailing-address" ng-model="addUser.mailAddress.city">
+            <label for="zip-code-mailing-address">Zip Code</label>
+            <input type="number" id="zip-code-mailing-address" ng-model="addUser.mailAddress.zipCode">
+            <table>
+              <tr>
+                <td>
+                  <label for="billing-address">Billing Address</label>
+                </td>
+                <td>
+                  <label><input type="checkbox" id="same-as" ng-click="disableBillAddress()"/>Same as
+                    Mailing Address</label>
+                </td>
+              </tr>
+            </table>
+            <input type="text" id="billing-address" ng-model="addUser.billAddress.billAddress">
+            <label for="country-billing-address">Country</label>
+            <input type="text" id="country-billing-address" ng-model="addUser.billAddress.country">
+            <label for="geographical-region-billing-address">State/Providence/Region</label>
+            <input type="text" id="geographical-region-billing-address"
+                   ng-model="addUser.billAddress.geographicalRegion">
+            <label for="city-billing-address">City</label>
+            <input type="text" id="city-billing-address" ng-model="addUser.billAddress.city">
+            <label for="zip-code-billing-address">Zip Code</label>
+            <input type="number" id="zip-code-billing-address" ng-model="addUser.billAddress.zipCode">
+            <label for="telephone">Telephone</label>
+            <input type="tel" id="telephone" ng-model="addUser.user.telephone">
+          </div>
+        </div>
+        <div data-role="collapsible" id="step-2">
+          <h3>Credit Card Information</h3>
+
+          <div data-role="fieldcontain">
+            <label for="name-as-card">Name as Appear in Card</label>
+            <input type="text" id="name-as-card" ng-model="addUser.creditCard.creditCardName">
+            <label for="card-type">Card Type</label>
+            <select id="card-type" ng-model="addUser.creditCard.creditCardType">
+              <option value="Visa">Visa</option>
+              <option value="Master Card">Master Card</option>
+              <option value="American Express">American Express</option>
+              <option value="Other">Other</option>
+            </select>
+            <label for="card-number">Card Number</label>
+            <input type="number" id="card-number" ng-model="addUser.creditCard.creditCardNumber">
+            <label for="expiration-date">Expiration Date</label>
+            <input type="month" id="expiration-date" ng-model="addUser.creditCard.creditCardExpDate">
+            <label for="card-security-code">Card Security Code</label>
+            <input type="number" id="card-security-code" ng-model="addUser.creditCard.creditCardCvs">
+          </div>
+        </div>
+        <div data-role="collapsible">
+          <h3>Login Information</h3>
+
+          <div data-role="fieldcontain">
+            <label for="email">Email</label>
+            <input type="email" id="email" ng-model="addUser.user.userEmail">
+            <label for="username">Username</label>
+            <input type="text" id="username" ng-model="addUser.user.username">
+            <label for="password">Password</label>
+            <input type="password" id="password" autocomplete="off" ng-model="addUser.user.userPassword">
+            <label for="password-confirm">Confirm Password</label>
+            <input type="password" id="password-confirm" autocomplete="off"
+                   ng-model="addUser.validateUser.userConfirmPassword">
+            <label for="security-questions-1">Security Questions</label>
+            <select id="security-questions-1" ng-model="addUser.user.questions.question1">
+              <option value="0">Select a Question</option>
+              <option value="1">What is your favorite color?</option>
+              <option value="2">Name of your best friend?</option>
+              <option value="3">In which city were you born?</option>
+              <option value="4">Name of your first pet?</option>
+              <option value="5">What is your favorite team?</option>
+            </select>
+            <input type="text" id="security-answer-1" placeholder="Answer"
+                   ng-model="addUser.user.questions.answer1">
+            <label for="security-questions-2"></label>
+            <select id="security-questions-2" ng-model="addUser.user.questions.question2">
+              <option value="0">Select a Question</option>
+              <option value="1">What is your favorite color?</option>
+              <option value="2">Name of your best friend?</option>
+              <option value="3">In which city were you born?</option>
+              <option value="4">Name of your first pet?</option>
+              <option value="5">What is your favorite team?</option>
+            </select>
+            <input type="text" id="security-answer-2" placeholder="Answer"
+                   ng-model="addUser.user.questions.answer2">
+            <label for="security-questions-3"></label>
+            <select id="security-questions-3" ng-model="addUser.user.questions.question3">
+              <option value="0">Select a Question</option>
+              <option value="1">What is your favorite color?</option>
+              <option value="2">Name of your best friend?</option>
+              <option value="3">In which city were you born?</option>
+              <option value="4">Name of your first pet?</option>
+              <option value="5">What is your favorite team?</option>
+            </select>
+            <input type="text" id="security-answer-3" placeholder="Answer"
+                   ng-model="addUser.user.questions.answer3">
+          </div>
+        </div>
+
+      </div>
+      <!-- un anchor por ahora-->
+      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
+        <a href="#user-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
+        <button type="submit" data-theme="a" data-icon="check">Submit</button>
+        <!--<a href="#user-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
+      </div>
+    </form>
+  </div>
+
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+
+</div>

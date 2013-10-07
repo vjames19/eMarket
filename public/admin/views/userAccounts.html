@@ -1,0 +1,35 @@
+<div data-role="page" data-theme="b" id="user-accounts">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Users</h1>
+
+    <a href="#home-admin" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" data-filter="true"
+        data-filter-placeholder="Search Users" data-inset="true" id="userAccountList">
+      <li data-role="list-divider">Users on System
+        <a href="#add-user" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="a"
+           class="ui-btn-right">Add User</a>
+        <span class="ui-li-count">{{users.length}}</span></li>
+      </li>
+      <li data-icon="gear" ng-repeat="user in users">
+        <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setUserInfo(user); selectedUser(user)">{{user.userFirstName}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div data-role="popup" id="userPopupMenu" data-theme="d">
+    <div class="form-pad">
+      <h3>Choose An Action</h3>
+      <a href="#edit-user" data-role="button" data-icon="edit">Edit</a>
+      <a href="#user-accounts" data-role="button" data-icon="delete" ng-click="deleteUser()">Delete</a>
+      <a href="#user-accounts" data-role="button" data-icon="back">Cancel</a>
+    </div>
+  </div>
+
+  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+
+</div>
