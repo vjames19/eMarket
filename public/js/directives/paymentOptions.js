@@ -7,46 +7,61 @@ angular.module('eMarketApp')
         restrict: 'E',
         scope: true,
         replace: true,
-        link: function(scope, elem) {
+        link: function (scope, elem) {
           var page = $(elem[0]);
           var cardList = page.find('#cardList');
           var bankList = page.find('#bankList');
 
-          var card = null;
-          var bank = null;
+          var selectedCard = null;
+          var selectedBank = null;
+          var selectedCardIndex = null;
+          var selectedBankIndex = null;
 
-          scope.selectedCard = function (creditCard) {
-            card = creditCard;
+          scope.selectCard = function (creditCard, index) {
+            selectedCard = creditCard;
+            selectedCardIndex = index;
           };
 
-          scope.selectedBank = function(bankAccount) {
-            bank = bankAccount;
-          }
+          scope.selectBank = function (bankAccount, index) {
+            selectedBank = bankAccount;
+            selectedBankIndex = index;
+          };
 
           scope.deleteCreditCard = function () {
             $.mobile.loading('show');
-            User.me().one('creditCards', card.creditCardId).remove();
-            $.mobile.loading('hide');
-            scope.refreshDom();
+            User.me().one('creditCards', selectedCard.creditCardId).remove().then(function () {
+              scope.creditCards.splice(selectedCardIndex, 1);
+              cardList.listview('refresh');
+              $.mobile.loading('hide');
+            });
           };
 
-          scope.deleteBankAccount = function() {
+          scope.deleteBankAccount = function () {
             $.mobile.loading('show');
-            User.me().one('banks', bank.bankId).remove();
-            $.mobile.loading('hide');
-            scope.refreshDom();
-          }
-
+            User.me().one('banks', selectedBank.bankId).remove().then(function () {
+              scope.bankAccounts.splice(selectedBankIndex, 1);
+              bankList.listview('refresh');
+              $.mobile.loading('hide');
+            });
+          };
 
 
           page.on('pagebeforeshow', function () {
-            scope.creditCards = User.me().getList('creditCards');
-            scope.bankAccounts = User.me().getList('banks');
+
+            User.me().getList('creditCards').then(function (creditCards) {
+              scope.creditCards = creditCards;
+            });
+            User.me().getList('banks').then(function (bankAccounts) {
+              scope.bankAccounts = bankAccounts;
+            });
+
           });
-          page.on('pageshow', function() {
+
+          page.on('pageshow', function () {
             cardList.listview('refresh');
             bankList.listview('refresh');
           });
+
         }
       };
     });
