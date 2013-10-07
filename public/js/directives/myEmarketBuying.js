@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-  .directive('myEmarketBuying', function (User) {
+  .directive('myEmarketBuying', function (User, Restangular) {
     return {
       templateUrl: 'views/myEmarketBuying.html',
       restrict: 'E',
@@ -13,6 +13,8 @@ angular.module('eMarketApp')
 
         page.on('pagebeforeshow', function() {
           scope.purchases = User.me().getList('purchases');
+          scope.biddings = User.me().getList('bids');
+          scope.products = Restangular.all('api/products').getList();
         });
 
         page.on('pageshow', function() {

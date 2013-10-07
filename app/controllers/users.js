@@ -881,6 +881,7 @@ var bids = {
     bidId: 1,
     userId: 1,
     productId: 1,
+    productName: 'sony laptop',
     bidAmount: 19.99,
     bidTime: '07/19/2013:19:20:35 EST'
   },
@@ -888,6 +889,7 @@ var bids = {
     bidId: 2,
     userId: 2,
     productId: 2,
+    productName: 'medalla',
     bidAmount: 29.99,
     bidTime: '07/10/2013:14:13:42 EST'
   }
