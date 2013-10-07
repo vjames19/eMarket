@@ -110,6 +110,12 @@ module.exports = function (grunt) {
               logConcurrentOutput: true
             }
           },
+          reload: {
+            tasks: ['nodemon', 'watch'],
+            options: {
+              logConcurrentOutput: true
+            }
+          },
           front : {
             tasks: ['connect:front', 'open:server']
           }
@@ -163,6 +169,8 @@ module.exports = function (grunt) {
 
   // Register tasks.
   grunt.registerTask('default', ['jshint', 'concurrent:target']);
+
+  grunt.registerTask('noopen', ['jshint', 'concurrent:reload']);
 
   grunt.registerTask('front', ['concurrent:front']);
 
