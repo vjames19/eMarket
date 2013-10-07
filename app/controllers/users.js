@@ -934,8 +934,8 @@ var browsedItems =
   1: {
     browsedItemId: 1,
     userId: 1,
-    productId: 2,
-    productSellerId: 1,
+    productId: 1,
+    productSellerId: 2,
     productCategory: 'computers',
     productName: 'alienware',
     productBuyItNowPrice: 1000.99,
@@ -956,7 +956,7 @@ var browsedItems =
   2: {
     browsedItemId: 2,
     userId: 2,
-    productId: 1,
+    productId: 2,
     productSellerId: 1,
     productCategory: 'books',
     productName: 'harry potter',
