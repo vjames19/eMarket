@@ -12,6 +12,8 @@ angular.module('eMarketApp')
           var mailAddressList = page.find('#mailAddressList');
           var billAddressList = page.find('#billAddressList');
           var ratingList = page.find('#ratingList');
+          var selectedMailAddress = null;
+          var selectedBillAddress = null;
 
           scope.submitUser = function() {
             $.mobile.loading('show');
@@ -19,6 +21,30 @@ angular.module('eMarketApp')
               $.mobile.loading('hide');
             });
           };
+
+          scope.selectedMailAddress = function(mailAddress) {
+            selectedMailAddress = mailAddress;
+          }
+
+          scope.selectedBillAddress = function(billAddress) {
+            selectedBillAddress = billAddress;
+          }
+
+          scope.deleteMailAddress = function() {
+            $.mobile.loading('show');
+            User.me().one('mailAddresses', selectedMailAddress.mailAddressId).remove();
+            $.mobile.loading('hide');
+            scope.refreshDom();
+          }
+
+          scope.deleteBillAddress = function() {
+            $.mobile.loading('show');
+            User.me().one('BillAddresses', selectedBillAddress.billAddressId).remove();
+            $.mobile.loading('hide');
+            scope.refreshDom();
+          }
+
+
 
           page.on('pagebeforeshow', function() {
             var user = User.me();

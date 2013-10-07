@@ -34,7 +34,7 @@ angular.module('eMarketApp')
 
 
 
-          scope.sendCart = function(cartItem) {
+          scope.selectedCart = function(cartItem) {
             cartSelected = cartItem;
           }
 
@@ -48,9 +48,6 @@ angular.module('eMarketApp')
           page.on('pageshow', function() {
             shoppingCartList.listview('refresh');
           });
-
-
-
         }
       };
     });
