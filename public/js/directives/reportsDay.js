@@ -15,7 +15,7 @@ angular.module('eMarketApp')
 
           page.on('pagebeforeshow', function () {
             scope.categories = Restangular.all('api/categories').getList();
-            Restangular.all('api/admins/1/reports').getList().then(function (results) {
+            Restangular.all('api/reports').getList().then(function (results) {
               scope.reports = results;
               window._.each(results, function (report) {
                 totalRevenue += report.reportRevenue;

@@ -70,25 +70,28 @@ exports.deleteAdmin = function (req, res) {
 var reports = {
   1: {
     reportId: 1,
+    reportDate: '07/08/2010',
     reportSales: 100,
     reportRevenue: 1000,
     reportCategory: null
   },
   2: {
     reportId: 2,
+    reportDate: '07/08/2010',
     reportSales: 1000,
     reportRevenue: 10000,
     reportCategory: 'computers'
   },
   3: {
     reportId: 3,
+    reportDate: '07/08/2010',
     reportSales: 10,
     reportRevenue: 100,
     reportCategory: 'books'
   }
 };
 
-exports.findAdminReportById = function (req, res, next, id) {
+exports.findReportById = function (req, res, next, id) {
   if (!reports[+id]) {
     res.jsonp(404, {message: 'Report Not Found'});
   } else {
@@ -97,28 +100,28 @@ exports.findAdminReportById = function (req, res, next, id) {
   }
 };
 
-exports.readAllAdminReports = function (req, res) {
+exports.readAllReports = function (req, res) {
   res.jsonp(_.values(reports));
 };
 
-exports.createAdminReport = function (req, res) {
+exports.createReport = function (req, res) {
   var report = req.body;
   report.reportId = _.keys(reports).length + 1;
   reports[report.reportId] = report;
   res.jsonp(report);
 };
 
-exports.readAdminReport = function (req, res) {
+exports.readReport = function (req, res) {
   res.jsonp(req.report);
 };
 
-exports.updateAdminReport = function (req, res) {
+exports.updateReport = function (req, res) {
   _.extend(req.report, req.body);
   reports[req.report.reportId] = req.report;
   res.jsonp(req.report);
 };
 
-exports.deleteAdminReport = function (req, res) {
+exports.deleteReport = function (req, res) {
   delete reports[req.report.reportId];
   res.jsonp(req.report);
 };

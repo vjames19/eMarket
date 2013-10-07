@@ -182,12 +182,12 @@ module.exports = function(app, passport, auth) {
   app.del('/api/admins/:adminId', admins.deleteAdmin);
 
   // Report Routes
-  app.param('reportId', admins.findAdminReportById);
-  app.get('/api/admins/:adminId/reports', admins.readAllAdminReports);
-  app.post('/api/admins/:adminId/reports', admins.createAdminReport);
-  app.get('/api/admins/:adminId/reports/:reportId', admins.readAdminReport);
-  app.put('/api/admins/:adminId/reports/:reportId', admins.updateAdminReport);
-  app.del('/api/admins/:adminId/reports/:reportId', admins.deleteAdminReport);
+  app.param('reportId', admins.findReportById);
+  app.get('/api/reports', admins.readAllReports);
+  app.post('/api/reports', admins.createReport);
+  app.get('/api/reports/:reportId', admins.readReport);
+  app.put('/api/reports/:reportId', admins.updateReport);
+  app.del('/api/reports/:reportId', admins.deleteReport);
 
   // Should always be the last route.
   // TODO: Find a better way to redirect.
