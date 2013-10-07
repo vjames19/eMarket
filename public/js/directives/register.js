@@ -20,14 +20,14 @@ angular.module('eMarketApp')
               $.mobile.loading('hide');
               $.mobile.changePage('#index-page', {transition: 'fade'});
             });
-          }
+          };
         },
         link: function(scope, elem) {
           var page = $(elem[0]);
           var sameAsCheckBox = page.find('#same-as');
-          var billAddress = page.find('#billing-address')
-          var selectCountryBillingAddress = page.find('#select-country-billing-address');
-          var selectStateBillingAddress = page.find('#select-state-billing-address');
+          var billAddress = page.find('#billing-address');
+          var selectCountryBillingAddress = page.find('#country-billing-address');
+          var selectStateBillingAddress = page.find('#geographical-region-billing-address');
           var cityBillingAddress = page.find('#city-billing-address');
           var zipCodeBillingAddress = page.find('#zip-code-billing-address');
 
