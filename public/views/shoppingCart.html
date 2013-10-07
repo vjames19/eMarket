@@ -11,7 +11,7 @@
 
   <div data-role="content">
 
-    <ul data-role="listview" data-theme="c" data-inset="true">
+    <ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(shoppingCart)">

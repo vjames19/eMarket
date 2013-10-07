@@ -1,14 +1,23 @@
 'use strict';
 
 angular.module('eMarketApp')
-  .directive('recentlyViewed', function () {
+  .directive('recentlyViewed', function (User) {
     return {
       templateUrl: 'views/recentlyViewed.html',
       restrict: 'E',
       scope: true,
       replace: true,
-      controller: function($scope, Restangular) {
-        $scope.recentlyViewed = Restangular.one('api/users', 1).getList('browsedItems');
+      link: function(scope, elem) {
+        var page = $(elem[0]);
+        var recentlyViewedList = page.find('#recentlyViewedList');
+
+        page.on('pagebeforeshow', function () {
+          scope.recentlyViewed = User.me().getList('browsedItems');
+        });
+        page.on('pageshow', function() {
+          recentlyViewedList.listview('refresh');
+
+        });
       }
     };
   });
