@@ -9,14 +9,13 @@ angular.module('eMarketApp')
         replace: true,
         link: function(scope, elem) {
           var page = $(elem[0]);
-          var shoppingCartList = page.find('#shoppingCartList');
-
-          var cost = 0;
-          var shipping = 0;
+          var shoppingCartList = page.find('#shoppingCartList')
 
           var cartSelected = null;
 
           page.on('pagebeforeshow', function() {
+            var cost = 0;
+            var shipping = 0;
             scope.shoppingCarts = User.me().getList('carts').then(function (carts) {
               scope.shoppingCarts = carts;
               for(var i = 0; i < carts.length; i++) {
@@ -30,17 +29,20 @@ angular.module('eMarketApp')
             scope.getTotalShipping = function() {
               return shipping;
             };
+
           });
+
+
 
           scope.sendCart = function(cartItem) {
             cartSelected = cartItem;
           }
 
           scope.deleteCartItem = function() {
+            $.mobile.loading('show');
             User.me().one('carts', cartSelected.cartId).remove();
-            $.mobile.changePage("#shopping-cart", {
-              allowSamePageTransition : true
-            });
+            $.mobile.loading('hide');
+            scope.refreshDom();
           }
 
           page.on('pageshow', function() {
