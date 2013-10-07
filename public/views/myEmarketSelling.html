@@ -22,12 +22,12 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">
       <li data-role="list-divider">Sold</li>
       <li ng-repeat="soldProduct in soldProducts">
-        <a href="#item-view" ng-click="setItem(soldProduct)">{{soldProduct.productName}}</a>
+        <a href="#item-view" ng-click="setItem(soldProduct)" data-transition="slide">{{soldProduct.productName}}</a>
       </li>
 
       <li data-role="list-divider">Unsold</li>
       <li ng-repeat="unsoldProduct in unsoldProducts">
-        <a href="#item-view" ng-click="setItem(unsoldProduct)">{{unsoldProduct.productName}}</a>
+        <a href="#item-view" ng-click="setItem(unsoldProduct)" data-transition="slide">{{unsoldProduct.productName}}</a>
       </li>
     </ul>
   </div>
