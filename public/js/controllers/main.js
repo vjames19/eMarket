@@ -62,4 +62,17 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   $scope.submitSearch = function() {
     $.mobile.changePage('#search-results', {data: $scope.searchQuery});
   };
+
+  $scope.refreshDom = function() {
+    $.mobile.changePage(
+        window.location.href,
+        {
+          allowSamePageTransition : true,
+          transition              : 'none',
+          showLoadMsg             : false,
+          reloadPage              : true
+        }
+    );
+  };
+
 });

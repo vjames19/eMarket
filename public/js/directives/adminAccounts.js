@@ -20,7 +20,7 @@ angular.module('eMarketApp')
             $.mobile.loading('show');
             Restangular.one('api/admins', admin.adminId).remove();
             $.mobile.loading('hide');
-            scope.refreshPage();
+            scope.refreshDom();
           };
 
           page.on('pagebeforeshow', function () {
@@ -30,19 +30,6 @@ angular.module('eMarketApp')
           page.on('pageshow', function () {
             adminAccountList.listview('refresh');
           });
-
-          scope.refreshPage = function() {
-            $.mobile.changePage(
-                window.location.href,
-                {
-                  allowSamePageTransition : true,
-                  transition              : 'none',
-                  showLoadMsg             : false,
-                  reloadPage              : true
-                }
-            );
-          };
-
 
         }
       };
