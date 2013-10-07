@@ -15,11 +15,11 @@
       <table>
         <tr>
           <td>
-                    <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
-                        <span>Add Image</span><br>
-                        <input type="file" name="files[]" multiple data-role="none"
-                               ng-src="{{item.productDescription.productPicture}}"/>
-                    </span>
+            <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
+                <span>Add Image</span><br>
+                <input type="file" name="files[]" multiple data-role="none"
+                       ng-src="{{item.productDescription.productPicture}}"/>
+            </span>
           </td>
           <td class="middle"></td>
           <td class="right">
@@ -109,6 +109,9 @@
 
           Initial Bid Price
           <input type="number" ng-model="item.productStartingBidPrice">
+
+         Quantity
+         <input type="number" ng-model="item.productQuantity">
 
           <!--Duration-->
           <!--<select name="select-duration" id="select-duration">-->

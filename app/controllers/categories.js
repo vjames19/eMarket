@@ -9,7 +9,7 @@ var categories = {
       {categoryId: 4, categoryName: 'Horror', categoryParent: 1 }
     ]
   },
-  2: {categoryId: 2, categoryName: 'computers', categoryParent: null},
+  2: {categoryId: 2, categoryName: 'computers', categoryParent: null}
 };
 
 exports.findCategoryById = function(req, res, next, id) {

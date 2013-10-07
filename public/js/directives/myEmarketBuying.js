@@ -32,8 +32,6 @@ angular.module('eMarketApp')
           });
         }
 
-      }
-          ;
-    })
-;
+      };
+    });
 

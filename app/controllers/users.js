@@ -189,12 +189,12 @@ var invoices = {
       1: {
         productId: 1,
         productName: 'alienware',
-        quantity: 2
+        productQuantity: 2
       },
       2: {
         productId: 2,
         productName: 'dell',
-        quantity: 4
+        productQuantity: 4
       }
     },
     orderPrice: 6560.00,
@@ -209,12 +209,12 @@ var invoices = {
       1: {
         productId: 1,
         productName: 'pig',
-        quantity: 8
+        productQuantity: 8
       },
       2: {
         productId: 2,
         productName: 'dog',
-        quantity: 3
+        productQuantity: 3
       }
     },
     orderPrice: 877.99,
@@ -712,7 +712,7 @@ var unsoldProducts = {
     productStartingBidPrice: 80,
     productBidEndDate: '07/07/2007',
     productShippingPrice: 18.99,
-    productQuantityRemaining: 5,
+    productQuantity: 5,
     productDescription: {
       productCondition: 'New',
       productPicture: '/img/products/users/1/z98how.png',
@@ -730,7 +730,7 @@ var unsoldProducts = {
     productStartingBidPrice: 500.99,
     productBidEndDate: '07/07/2008',
     productShippingPrice: 8.99,
-    productQuantityRemaining: 3,
+    productQuantity: 3,
     productDescription: {
       productCondition: 'Refurbished',
       productPicture: '/img/products/users/9/z98gyu.png',
@@ -748,7 +748,7 @@ var unsoldProducts = {
     productStartingBidPrice: 20.99,
     productBidEndDate: '07/07/2009',
     productShippingPrice: 5.99,
-    productQuantityRemaining: 9,
+    productQuantity: 9,
     productDescription: {
       productCondition: 'User',
       productPicture: '/img/products/users/403/z89kik.png',
@@ -813,7 +813,7 @@ var carts = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    quantity: 2,
+    productQuantity: 2,
     cost: 1199.99
   },
   2: {
@@ -833,7 +833,7 @@ var carts = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    quantity: 4,
+    productQuantity: 4,
     cost: 99.99
   }
 };
@@ -1031,7 +1031,7 @@ var purchases = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    quantity: 2,
+    productQuantity: 2,
     soldPrice: 1199.99,
     date: '07/30/2013:01:01:01 EST'
   },
@@ -1052,7 +1052,7 @@ var purchases = {
       productModel: 'M179385',
       productDimensions: '19x30x25'
     },
-    quantity: 4,
+    productQuantity: 4,
     soldPrice: 99.99,
     date: '07/30/2013:01:01:01 EST'
   }

@@ -21,6 +21,7 @@
                     <p class="item-description-text-size"> Current bid: {{ previewItemInfo.productStartingBidPrice | currency }} </p>
                     <p class="item-description-text-size"> Buy it Now: {{ previewItemInfo.productBuyItNowPrice | currency }} </p>
                     <p class="item-description-text-size"> Shipping: {{ previewItemInfo.productShippingPrice | currency }} </p>
+                    <p class="item-description-text-size"> Available Quantity: {{ previewItemInfo.productQuantity }} </p>
                 </li>
                 <li>
                     <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'h:mm' }} </p>
