@@ -14,7 +14,7 @@
     <ul data-role="listview" data-theme="c" data-inset="true" id="recentlyViewedList">
       <li data-role="list-divider">Last 5 Items</li>
       <li ng-repeat="item in recentlyViewed">
-        <a href="#item-view" class="wrap-text" ng-click="setItem(item)">
+        <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">{{ item.productName }}
         </a>
       </li>

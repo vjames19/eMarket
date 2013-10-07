@@ -14,7 +14,7 @@
     <ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
-        <a href="#item-view" class="wrap-text">
+        <a href="#item-view" class="wrap-text" data-transition="slide">
           <img src="img/shopping-cart.png" class="center-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>

@@ -23,7 +23,7 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">
       <li data-role="list-divider">Bidding</li>
       <li ng-repeat="bids in biddings">
-        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bids)">
+        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bids)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">
             <table class="small-text">
                 <tr>
@@ -47,7 +47,7 @@
 
       <li data-role="list-divider">Purchase History</li>
       <li ng-repeat="purchase in purchases">
-        <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)">
+        <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">{{purchase.productName}}
         </a>
       </li>
