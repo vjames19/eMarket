@@ -1,33 +1,40 @@
 'use strict';
 
 angular.module('eMarketApp')
-    .directive('userAccounts', function(Restangular) {
+    .directive('userAccounts', function (Restangular) {
       return {
         templateUrl: 'views/userAccounts.html',
         restrict: 'E',
         scope: true,
         replace: true,
-        link: function(scope, elem) {
-          var user = null;
+        link: function (scope, elem) {
           var page = $(elem[0]);
           var userAccountList = page.find('#userAccountList');
 
-          scope.selectedUser = function(selectedUser) {
-            user = selectedUser;
+          var selectedUser = null;
+          var selectedUserIndex = null;
+
+          scope.selectUser = function (user, index) {
+            selectedUser = user;
+            selectedUserIndex = index;
           };
 
-          scope.deleteUser = function() {
+          scope.deleteUser = function () {
             $.mobile.loading('show');
-            Restangular.one('users', user.userId).remove();
-            $.mobile.loading('hide');
-            scope.refreshDom();
+            Restangular.one('users', selectedUser.userId).remove().then(function () {
+              scope.users.splice(selectedUserIndex, 1);
+              userAccountList.listview('refresh');
+              $.mobile.loading('hide');
+            });
           };
 
-          page.on('pagebeforeshow', function() {
-            scope.users = Restangular.all('users').getList();
+          page.on('pagebeforeshow', function () {
+            Restangular.all('users').getList().then(function (userList) {
+              scope.users = userList;
+            });
           });
 
-          page.on('pageshow', function() {
+          page.on('pageshow', function () {
             userAccountList.listview('refresh');
           });
 
