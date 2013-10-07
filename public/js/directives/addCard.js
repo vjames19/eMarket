@@ -15,12 +15,9 @@ angular.module('eMarketApp')
         },
         link: function (scope, elem) {
           var page = $(elem[0]);
-          console.log('IM HERE BEFORE');
           page.on('pagebeforeshow', function () {
-            console.log('My ID', User.userId);
             scope.billAddresses = User.me().all('billaddresses').getList();
           });
-          console.log('IM HERE AFTER');
         }
       };
     });
