@@ -23,7 +23,9 @@ angular.module('eMarketApp')
           };
 
           page.on('pagebeforeshow', function() {
-            scope.notifications = User.me().getList('notifications');
+            User.me().getList('notifications').then(function(notifications) {
+              scope.notifications = notifications;
+            });
           });
 
           page.on('pageshow', function() {

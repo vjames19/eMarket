@@ -12,7 +12,9 @@ angular.module('eMarketApp')
         var recentlyViewedList = page.find('#recentlyViewedList');
 
         page.on('pagebeforeshow', function () {
-          scope.recentlyViewed = User.me().getList('browsedItems');
+          User.me().getList('browsedItems').then(function(items) {
+            scope.recentlyViewed = items;
+          });
         });
         page.on('pageshow', function() {
           recentlyViewedList.listview('refresh');

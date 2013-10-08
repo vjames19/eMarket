@@ -12,7 +12,9 @@ angular.module('eMarketApp')
           var invoiceList = page.find('#invoiceList');
 
           page.on('pagebeforeshow', function() {
-            scope.invoices = User.me().getList('invoices');
+            User.me().getList('invoices').then(function(invoices) {
+              scope.invoices = invoices;
+            });
           });
 
           page.on('pageshow', function() {
