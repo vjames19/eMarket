@@ -41,8 +41,11 @@ angular.module('eMarketApp')
           page.on('pagebeforeshow', function() {
             upButton.hide();
             stack = [];
-            scope.categories = Category.getList();
-            stack.push(scope.categories);
+            Category.getList().then(function(categories) {
+              scope.categories = categories;
+              console.log('returned categories', categories);
+              stack.push(categories);
+            });
           });
 
           page.on('pageshow', function() {
