@@ -38,7 +38,7 @@ app.run(function($rootScope, $location, Auth) {
     back = true;
     $.mobile.changePage('#' + history.pop(), {
       reverse: true,
-      changeHash: false,
+      changeHash: false
     });
     return false;
   });
