@@ -54,6 +54,9 @@ angular.module('eMarketApp')
 //              buyItNowButton.removeClass('ui-disabled');
 //            }
 //          });
+          page.on('pageshow', function() {
+            scope.bid.bidAmount = {};
+          });
 
           scope.addToCart = function () {
             // Get the item quantity and multiply it by the price to get the total cost
