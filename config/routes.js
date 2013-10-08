@@ -7,6 +7,11 @@ module.exports = function(app, passport, auth) {
   app.post('/login', passport.authenticate('local'), function(req, res) {
     res.jsonp(req.user);
   });
+
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.jsonp(200);
+  })
   // TODO(vjames19): Secure users api
 
   // User Routes
