@@ -58,10 +58,14 @@ exports.readCategory = function(req, res) {
  * List of categories.
  */
 exports.readAll = function(req, res) {
-  var cat = _.values(categories);
-  _.each(cat, function(category) {
-    var sub = _.where(cat, {categoryParent: category.categoryId});
-    category.categories = sub.length > 0 ? sub: null;
-  });
-  res.jsonp(_.where(cat, {categoryParent: null}));
+  if(req.query.flat) {
+    res.jsonp(_.values(categories));
+  } else {
+    var cat = _.values(categories);
+    _.each(cat, function(category) {
+      var sub = _.where(cat, {categoryParent: category.categoryId});
+      category.categories = sub.length > 0 ? sub : null;
+    });
+    res.jsonp(_.where(cat, {categoryParent: null}));
+  }
 };
