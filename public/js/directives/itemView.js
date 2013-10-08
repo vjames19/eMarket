@@ -45,15 +45,15 @@ angular.module('eMarketApp')
           var bidButton = page.find('#place-bid-button');
 //          var placeBidInput = page.find('#placeBid');
 
-          page.on('pagebeforeshow', function () {
-            if (scope.item && User.userId === scope.item.productSellerId) {
-              buyItNowButton.addClass('ui-disabled');
-              bidButton.addClass('ui-disabled');
-            } else {
-              bidButton.removeClass('ui-disabled');
-              buyItNowButton.removeClass('ui-disabled');
-            }
-          });
+//          page.on('pagebeforeshow', function () {
+//            if (scope.item && User.userId === scope.item.productSellerId) {
+//              buyItNowButton.addClass('ui-disabled');
+//              bidButton.addClass('ui-disabled');
+//            } else {
+//              bidButton.removeClass('ui-disabled');
+//              buyItNowButton.removeClass('ui-disabled');
+//            }
+//          });
 
           scope.addToCart = function () {
             // Get the item quantity and multiply it by the price to get the total cost

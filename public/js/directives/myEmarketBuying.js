@@ -14,7 +14,8 @@ angular.module('eMarketApp')
           scope.selectedBid = function(selectedBid) {
             Restangular.all('products').getList().then(function(products) {
               if(window._.contains(window._.pluck(products, 'productId'), selectedBid.productId)) {
-                Restangular.one('products', selectedBid.productId).getList().then(function(item) {
+                Restangular.one('products', selectedBid.productId).get().then(function(item) {
+                  console.log('resolved item', item);
                   scope.setItem(item);
                   $.mobile.changePage('#item-view');
                 });
