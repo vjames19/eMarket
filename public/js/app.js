@@ -42,4 +42,10 @@ app.run(function($rootScope, $location, Auth) {
     });
     return false;
   });
+
+//  $(document).find('#loginSearch').submit(function(e) {
+//    console.log("submitting");
+//    e.preventDefault();
+//    $.mobile.changePage('#search-results', { data: 'addfasdfds'});
+//  });
 });

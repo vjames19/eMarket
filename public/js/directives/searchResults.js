@@ -13,7 +13,9 @@ angular.module('eMarketApp')
 
           page.on('pagebeforeshow', function(event, searchQuery) {
             //            scope.results = Restangular.customGETLIST('search', {q: searchQuery});
-            scope.results = Restangular.all('products').getList();
+            Restangular.all('products').getList().then(function(results) {
+              scope.results = results;
+            });
           });
 
           page.on('pageshow', function() {
