@@ -10,7 +10,6 @@ angular.module('eMarketApp')
         link: function(scope, elem) {
           var page = $(elem[0]);
           var shoppingCartList = page.find('#shoppingCartList');
-          var shoppingTotalTable = page.find('#shoppingTotalTable');
 
           var cartSelected = null;
           var selectedCartIndex = null;
@@ -21,10 +20,8 @@ angular.module('eMarketApp')
           page.on('pagebeforeshow', function() {
             scope.shoppingCarts = User.me().getList('carts').then(function (carts) {
               scope.shoppingCarts = carts;
-              for(var i = 0; i < carts.length; i++) {
-                scope.cost += carts[i].cost;
-                scope.shipping += carts[i].productShippingPrice;
-              }
+
+              computeTotalCostAndShipping();
             });
           });
 
@@ -52,9 +49,7 @@ angular.module('eMarketApp')
             });
           }
 
-
           page.on('pageshow', function() {
-            console.log('page show cost', scope.cost, scope.shipping);
             shoppingCartList.listview('refresh');
           });
         }
