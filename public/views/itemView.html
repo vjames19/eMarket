@@ -104,13 +104,12 @@
     <form data-ajax="false" ng-submit="submitBid()">
       <div style="padding:10px 20px;">
         <h3>Enter Bid</h3>
-        <a href="#item-view" data-role="button" data-rel="back" ng-click="placeMinBid()">Add Min Bid:
+        <a data-role="button" ng-click="placeMinBid()">Add Min Bid:
           {{item.productCurrentBidPrice + 5 | currency}}</a>
 
         <div data-role="fieldcontain">
           <label for="placeBid">Place Bid</label>
-          <input type="number" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 }}"
-                 ng-model="bid.bidAmount">
+          <input type="number" id="placeBid" ng-model="bid.bidAmount">
         </div>
 
         <button type="submit" data-icon="false" data-theme="b">Bid</button>

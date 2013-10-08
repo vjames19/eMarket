@@ -71,11 +71,6 @@ p.index-text-size {
     font-size: 75%;
 }
 
-.login-user {
-    left: 35%;
-    width: 30%;
-}
-
 .ui-content
 {
     margin-bottom: 40px; /* Set this to whatever your footer size is... */
@@ -85,6 +80,7 @@ p.index-text-size {
     position: absolute !important;
     bottom: 0;
     width: 100%;
+    text-align: center
 }
 
 img.center-image {

@@ -55,6 +55,10 @@ angular.module('eMarketApp')
             }
           });
 
+          page.on('pageshow', function() {
+            scope.bid.bidAmount = {};
+          });
+
           scope.addToCart = function () {
             // Get the item quantity and multiply it by the price to get the total cost
             scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;

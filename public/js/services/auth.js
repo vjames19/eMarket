@@ -17,9 +17,11 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
 
     },
     logOut: function() {
+      console.log('logging out');
       user.username = null;
       user.userId = null;
       isLoggedIn = false;
+      $http.get('logout');
     },
     isLoggedIn: function() {
       return isLoggedIn;

@@ -880,7 +880,7 @@ var bids = {
     userId: 1,
     productId: 1,
     productName: 'harry potter',
-    bidAmount: 19.99,
+    bidAmount: 89.00,
     bidTime: '07/19/2013:19:20:35 EST'
   },
   2: {
@@ -888,7 +888,7 @@ var bids = {
     userId: 2,
     productId: 2,
     productName: 'alienware',
-    bidAmount: 29.99,
+    bidAmount: 800.99,
     bidTime: '07/10/2013:14:13:42 EST'
   }
 };
