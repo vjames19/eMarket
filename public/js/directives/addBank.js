@@ -16,7 +16,9 @@ angular.module('eMarketApp')
         link: function (scope, elem) {
           var page = $(elem[0]);
           page.on('pagebeforeshow', function () {
-            scope.billAddresses = User.me().all('billaddresses').getList();
+            User.me().all('billaddresses').getList().then(function(addresses) {
+              scope.billAddresses = addresses;
+            });
           });
         }
       };
