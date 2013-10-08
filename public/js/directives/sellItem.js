@@ -16,7 +16,7 @@ angular.module('eMarketApp')
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
         };
 
-        Restangular.all('categories').getList().then(function(categoryList){
+        Restangular.all('categories').getList({flat: true}).then(function(categoryList){
           scope.categories = categoryList;
         });
 
