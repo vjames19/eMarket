@@ -1,132 +1,131 @@
 <div data-role="page" data-theme="b" id="item-view">
-    <div data-role="header" data-position="fixed" data-theme="a">
-        <h1>Item</h1>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Item</h1>
 
     <!--go back to the index page data-rel="back" reverse the transition back -->
-    <!-- TODO: Implement a history api since jqm doesn't know how to do it -->
-    <a href="#recently-viewed" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
 
-        <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-        <search></search>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <search></search>
 
-    </div>
+  </div>
 
-    <div data-role="content">
+  <div data-role="content">
 
-        <h3 class="item-title">{{ item.productName }}</h3>
-        <!--<a href="" data-role="button" id="save-button" class="save-button"><p>Save</p></a><hr/>-->
+    <h3 class="item-title">{{ item.productName }}</h3>
+    <!--<a href="" data-role="button" id="save-button" class="save-button"><p>Save</p></a><hr/>-->
 
-        <img src="img/shopping-cart.png" id="item-photo" class="item-photo"/>
+    <img src="img/shopping-cart.png" id="item-photo" class="item-photo"/>
 
-        <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
-           data-position-to="window" data-transition="pop">
-            <p class="item-button-text-size">Place bid US {{ item.productCurrentBidPrice + 5 | currency }}</p>
-        </a>
-        <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup"
-           data-position-to="window" data-transition="pop">
-            <p class="item-button-text-size">Buy It Now</p>
-        </a>
-        <hr/>
+    <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
+       data-position-to="window" data-transition="pop">
+      <p class="item-button-text-size">Place bid US {{ item.productCurrentBidPrice + 5 | currency }}</p>
+    </a>
+    <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup"
+       data-position-to="window" data-transition="pop">
+      <p class="item-button-text-size">Buy It Now</p>
+    </a>
+    <hr/>
 
-        <ul data-role="listview" data-theme="c" data-inset="true">
-            <li>
-                <p class="item-description-text-size"> Starting bid: {{ item.productStartingBidPrice | currency }}</p>
+    <ul data-role="listview" data-theme="c" data-inset="true">
+      <li>
+        <p class="item-description-text-size"> Starting bid: {{ item.productStartingBidPrice | currency }}</p>
 
-                <p class="item-description-text-size"> Current bid: {{ item.productCurrentBidPrice | currency }} </p>
+        <p class="item-description-text-size"> Current bid: {{ item.productCurrentBidPrice | currency }} </p>
 
-                <p class="item-description-text-size"> Buy it Now: {{ item.productBuyItNowPrice | currency }} </p>
+        <p class="item-description-text-size"> Buy it Now: {{ item.productBuyItNowPrice | currency }} </p>
 
-                <p class="item-description-text-size"> Shipping: {{ item.productShippingPrice | currency }} </p>
+        <p class="item-description-text-size"> Shipping: {{ item.productShippingPrice | currency }} </p>
 
-                <p class="item-description-text-size"> Available Quantity: {{ item.productQuantity }} </p>
-            </li>
-            <li>
-                <p class="item-description-text-size">
-                    <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
+        <p class="item-description-text-size"> Available Quantity: {{ item.productQuantity }} </p>
+      </li>
+      <li>
+        <p class="item-description-text-size">
+          <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
 
-                <p class="item-description-text-size"> End Date: {{ item.productBidEndDate | date }} </p>
-                <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
-                <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
-            </li>
-            <li>
-                <p class="item-description-text-size"> Condition: {{ item.productDescription.productCondition }} </p>
-            </li>
-            <li>
-                <p class="item-description-text-size">
-                    Description
-                <table>
-                    <tr>
-                        <td>
-                            Brand:
-                        </td>
-                        <td>
-                            {{item.productDescription.productBrand}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Model:
-                        </td>
-                        <td>
-                            {{ item.productDescription.productModel}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Dimensions:
-                        </td>
-                        <td>
-                            {{item.productDescription.productDimensions}}
-                        </td>
-                    </tr>
+        <p class="item-description-text-size"> End Date: {{ item.productBidEndDate | date }} </p>
+        <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
+        <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
+      </li>
+      <li>
+        <p class="item-description-text-size"> Condition: {{ item.productDescription.productCondition }} </p>
+      </li>
+      <li>
+        <p class="item-description-text-size">
+          Description
+        <table>
+          <tr>
+            <td>
+              Brand:
+            </td>
+            <td>
+              {{item.productDescription.productBrand}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Model:
+            </td>
+            <td>
+              {{ item.productDescription.productModel}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Dimensions:
+            </td>
+            <td>
+              {{item.productDescription.productDimensions}}
+            </td>
+          </tr>
 
-                </table>
-                </p>
-            </li>
-            <!--<li>-->
-            <!--<p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>-->
-            <!--</li>-->
-        </ul>
-    </div>
+        </table>
+        </p>
+      </li>
+      <!--<li>-->
+      <!--<p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>-->
+      <!--</li>-->
+    </ul>
+  </div>
 
-    <div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
-        <form>
-            <div style="padding:10px 20px;">
-                <h3>Enter Quantity</h3>
-                <input type="number" id="quantity" placeholder="1" ng-model="item.quantity">
-                <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
-                   data-position-to="window" data-transition="pop" ng-click="addToCart()">Add to Cart</a>
-                <a href="#item-view" data-role="button">Cancel</a>
-            </div>
-        </form>
-    </div>
+  <div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
+    <form>
+      <div style="padding:10px 20px;">
+        <h3>Enter Quantity</h3>
+        <input type="number" id="quantity" placeholder="1" ng-model="item.quantity">
+        <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
+           data-position-to="window" data-transition="pop" ng-click="addToCart()">Add to Cart</a>
+        <a href="#item-view" data-role="button">Cancel</a>
+      </div>
+    </form>
+  </div>
 
-    <div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
-        <form data-ajax="false" ng-submit="submitBid()">
-            <div style="padding:10px 20px;">
-                <h3>Enter Bid</h3>
-                <a href="#item-view" data-role="button" data-rel="back" ng-click="placeMinBid()">Add Min Bid:
-                    {{item.productCurrentBidPrice + 5 | currency}}</a>
+  <div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
+    <form data-ajax="false" ng-submit="submitBid()">
+      <div style="padding:10px 20px;">
+        <h3>Enter Bid</h3>
+        <a href="#item-view" data-role="button" data-rel="back" ng-click="placeMinBid()">Add Min Bid:
+          {{item.productCurrentBidPrice + 5 | currency}}</a>
 
-                <div data-role="fieldcontain">
-                    <label for="placeBid">Place Bid</label>
-                    <input type="number" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 }}"
-                           ng-model="bid.bidAmount">
-                </div>
-
-                <button type="submit" data-icon="false" data-theme="b">Bid</button>
-                <!--<a href="#index-page" data-role="button">Bid</a>-->
-                <a href="#item-view" data-role="button">Cancel</a>
-            </div>
-        </form>
-    </div>
-
-    <div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
-        <div style="padding:10px 20px;">
-            <p>Product have been placed in cart</p>
+        <div data-role="fieldcontain">
+          <label for="placeBid">Place Bid</label>
+          <input type="number" id="placeBid" placeholder="{{item.productCurrentBidPrice + 5 }}"
+                 ng-model="bid.bidAmount">
         </div>
-    </div>
 
-    <div data-role="footer" data-theme="a"><h1></h1></div>
+        <button type="submit" data-icon="false" data-theme="b">Bid</button>
+        <!--<a href="#index-page" data-role="button">Bid</a>-->
+        <a href="#item-view" data-role="button">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
+    <div style="padding:10px 20px;">
+      <p>Product have been placed in cart</p>
+    </div>
+  </div>
+
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
