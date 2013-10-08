@@ -55,16 +55,16 @@
             Items({{shoppingCarts.length}}):
           </td>
           <td align="right">
-            {{getTotalCost() | currency}}
+            {{cost | currency}}
           </td>
-
+            <td align="left">
         </tr>
         <tr>
-          <td align="left">
+          <td>
             Shipping:
           </td>
           <td align="right" class="line">
-            {{getTotalShipping() | currency}}
+            {{shipping | currency}}
           </td>
         </tr>
         <tr>
@@ -72,7 +72,7 @@
             Cart Subtotal:
           </td>
           <td align="right">
-            {{getTotalCost() + getTotalShipping() | currency}}
+            {{cost + shipping | currency}}
           </td>
         </tr>
       </table>
