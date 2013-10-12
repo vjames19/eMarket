@@ -21,10 +21,12 @@ angular.module('eMarketApp')
           };
 
           scope.next = function(category) {
-            if(angular.isArray(category.categories)) {
+            var subCategories = category.categories;
+
+            if(angular.isArray(subCategories) && subCategories.length > 0) {
               upButton.show();
-              stack.push(category.categories);
-              refreshList(category.categories);
+              stack.push(subCategories);
+              refreshList(subCategories);
             } else {
               $.mobile.changePage('#search-results', {q: category.categoryName});
             }
@@ -43,7 +45,6 @@ angular.module('eMarketApp')
             stack = [];
             Category.getList().then(function(categories) {
               scope.categories = categories;
-              console.log('returned categories', categories);
               stack.push(categories);
             });
           });
