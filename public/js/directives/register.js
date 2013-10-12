@@ -18,7 +18,7 @@ angular.module('eMarketApp')
               Restangular.one('users', newUserId).all('billAddresses').post($scope.newUser.billAddress);
               Restangular.one('users', newUserId).all('creditCards').post($scope.newUser.creditCard);
               $.mobile.loading('hide');
-              $.mobile.changePage('#index-page', {transition: 'fade'});
+              $.mobile.changePage('#index-page');
             });
           };
         },

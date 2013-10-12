@@ -11,7 +11,7 @@ angular.module('eMarketApp')
           $scope.submit = function() {
             $scope.mailAddresses.userId = User.userId;
             User.me().all('mailAddresses').post($scope.mailAddresses);
-            $.mobile.changePage('#profile', {transition: 'fade'});
+            $.mobile.changePage('#profile');
           };
         }
       };

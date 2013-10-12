@@ -32,14 +32,3 @@ angular.module('eMarketApp')
       };
     });
 
-//          $scope.cardOptions = [
-//            {card: 'Visa'},
-//            {card: 'Master Card'},
-//            {card: 'American Express'}
-//          ];
-
-//          $scope.changeToPaymentOptionPage = function() {
-//            setTimeout(function () {
-//              $.mobile.changePage('#payment-options', {transition: 'fade'});
-//            }, 500);
-//          };

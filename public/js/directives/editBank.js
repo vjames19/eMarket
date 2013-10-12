@@ -32,15 +32,4 @@ angular.module('eMarketApp')
       };
     });
 
-//          $scope.accountOptions = [
-//            {account: 'Checking'},
-//            {account: 'Saving'},
-//            {account: 'Other'}
-//          ];
-
-//          $scope.changeToPaymentOptionPage = function() {
-//            setTimeout(function () {
-//              $.mobile.changePage('#payment-options', {transition: 'fade'});
-//            }, 500);
-//          };
 
