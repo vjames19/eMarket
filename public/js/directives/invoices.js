@@ -14,12 +14,12 @@ angular.module('eMarketApp')
           page.on('pagebeforeshow', function() {
             User.me().getList('invoices').then(function(invoices) {
               scope.invoices = invoices;
+              setTimeout(function() {
+                invoiceList.listview('refresh');
+              });
             });
           });
 
-          page.on('pageshow', function() {
-            invoiceList.listview('refresh');
-          });
         }
       };
     });
