@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp')
-  .directive('sellItem', function (Restangular) {
+  .directive('sellItem', function (Category) {
     return {
       templateUrl: 'views/sellItem.html',
       restrict: 'E',
@@ -16,7 +16,7 @@ angular.module('eMarketApp')
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
         };
 
-        Restangular.all('categories').getList({flat: true}).then(function(categoryList){
+        Category.getList({flat: true}).then(function(categoryList){
           scope.categories = categoryList;
         });
 
