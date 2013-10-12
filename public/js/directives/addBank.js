@@ -10,7 +10,7 @@ angular.module('eMarketApp')
         controller: function($scope) {
           $scope.submit = function() {
             User.me().all('banks').post($scope.bank);
-            $.mobile.changePage('#payment-options', {transition: 'fade'});
+            $.mobile.changePage('#payment-options');
           };
         },
         link: function (scope, elem) {
