@@ -40,12 +40,13 @@ angular.module('eMarketApp')
         },
         link: function (scope, elem) {
           var page = $(elem[0]);
-//          var popupItemAddedToCart = page.find('#popupItemAddedToCart');
           var buyItNowButton = page.find('#buy-it-now-button');
           var bidButton = page.find('#place-bid-button');
-//          var placeBidInput = page.find('#placeBid');
 
           page.on('pagebeforeshow', function () {
+            // Remove any state from the bid object.
+            scope.bid = {};
+
             if (scope.item && User.userId === scope.item.productSellerId) {
               buyItNowButton.addClass('ui-disabled');
               bidButton.addClass('ui-disabled');
@@ -53,10 +54,6 @@ angular.module('eMarketApp')
               bidButton.removeClass('ui-disabled');
               buyItNowButton.removeClass('ui-disabled');
             }
-          });
-
-          page.on('pageshow', function() {
-            scope.bid.bidAmount = {};
           });
 
           scope.addToCart = function () {
