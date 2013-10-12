@@ -16,26 +16,8 @@ angular.module('eMarketApp')
             $scope.bid.productId = $scope.item.productId;
             $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
             $scope.bid.productName = $scope.item.productName;
-            User.me().all('bids').getList().then(function (bidList) {
-              var exist = false;
-              window._.each(bidList, function (bid) {
-                if (bid.productName === $scope.bid.productName) {
-                  User.me().one('bids', bid.bidId).customPUT($scope.bid).then(function () {
-                    console.log('Custom PUT');
-                  });
-                  exist = true;
-                  return false;
-                }
-              });
-              console.log('Exist: ', exist);
-              if (!exist) {
-                User.me().all('bids').post($scope.bid).then(function () {
-                  console.log('POST');
-                });
-              }
-              $.mobile.changePage('#index-page');
-            });
-
+            User.me().all('bids').post($scope.bid);
+            $.mobile.changePage('#index-page');
           };
         },
         link: function (scope, elem) {
