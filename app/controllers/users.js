@@ -416,6 +416,7 @@ exports.deleteBillAddress = function(req, res) {
 // Notifications
 var notifications = {
   1: {
+    id: 1,
     notificationId: 1,
     userId: 1,
     message: 'You have won an ultrabook!',
@@ -423,6 +424,7 @@ var notifications = {
     isRead: true
   },
   2: {
+    id: 2,
     notificationId: 2,
     userId: 1,
     message: 'You have won a car!',
@@ -430,6 +432,7 @@ var notifications = {
     isRead: false
   },
   3: {
+    id: 3,
     notificationId: 3,
     userId: 2,
     message: 'You have won a pig!',

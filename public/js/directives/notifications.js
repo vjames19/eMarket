@@ -20,6 +20,7 @@ angular.module('eMarketApp')
           scope.readMessage = function(notification) {
             notificationPopUp.text(notification.message);
             notification.isRead = true;
+            notification.put()
           };
 
           page.on('pagebeforeshow', function() {
