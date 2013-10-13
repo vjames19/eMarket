@@ -1,5 +1,4 @@
-angular.module('eMarketApp').
-    filter('truncate', function () {
+angular.module('eMarketApp').filter('truncate', function () {
       return function (text, length, end) {
         if (isNaN(length)) {
           length = 10;
