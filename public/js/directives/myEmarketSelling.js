@@ -12,13 +12,21 @@ angular.module('eMarketApp')
         var soldAndUnsoldList = page.find('#soldAndUnsoldList');
 
         page.on('pagebeforeshow', function() {
-          scope.unsoldProducts = User.me().getList('unsoldProducts');
-          scope.soldProducts = User.me().getList('soldProducts');
+          User.me().getList('unsoldProducts').then(function(unsoldProducts) {
+            scope.unsoldProducts = unsoldProducts;
+            setTimeout(function() {
+              soldAndUnsoldList.listview('refresh');
+            });
+          });
+
+          User.me().getList('soldProducts').then(function(soldProducts) {
+            scope.soldProducts = soldProducts;
+            setTimeout(function() {
+              soldAndUnsoldList.listview('refresh');
+            });
+          });
         });
 
-        page.on('pageshow', function() {
-          soldAndUnsoldList.listview('refresh');
-        });
       }
     };
   });
