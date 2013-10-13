@@ -22,24 +22,24 @@
 
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">
       <li data-role="list-divider">Bidding</li>
-      <li ng-repeat="bids in biddings">
-        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bids)" data-transition="slide">
+      <li ng-repeat="bid in bids">
+        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bid)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">
             <table class="small-text">
                 <tr>
                     <td><strong>Product</strong></td>
                     <td class="pad"></td>
-                    <td><em>{{ bids.productName }}</em></td>
+                    <td><em>{{ bid.productName }}</em></td>
                 </tr>
                 <tr>
                     <td><strong>Bid Amount</strong></td>
                     <td class="pad"></td>
-                    <td><em>{{ bids.bidAmount | currency }}</em></td>
+                    <td><em>{{ bid.bidAmount | currency }}</em></td>
                 </tr>
                 <tr>
                     <td><strong>Bid Time</strong></td>
                     <td class="pad"></td>
-                    <td><em>{{ bids.bidTime }}</em></td>
+                    <td><em>{{ bid.bidTime }}</em></td>
                 </tr>
             </table>
         </a>
