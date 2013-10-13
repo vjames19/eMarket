@@ -19,12 +19,19 @@ angular.module('eMarketApp')
           };
 
           page.on('pagebeforeshow', function() {
-            scope.purchases = User.me().getList('purchases');
-            scope.bids = User.me().getList('bids');
-          });
+            User.me().getList('purchases').then(function(purchases) {
+              scope.purchases = purchases;
+              setTimeout(function() {
+                bidAndPurchaseList.listview('refresh');
+              });
+            });
 
-          page.on('pageshow', function() {
-            bidAndPurchaseList.listview('refresh');
+            User.me().getList('bids').then(function(bids) {
+              scope.bids = bids
+              setTimeout(function() {
+                bidAndPurchaseList.listview('refresh');
+              });
+            });
           });
         }
       };
