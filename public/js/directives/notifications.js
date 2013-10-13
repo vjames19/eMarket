@@ -25,11 +25,10 @@ angular.module('eMarketApp')
           page.on('pagebeforeshow', function() {
             User.me().getList('notifications').then(function(notifications) {
               scope.notifications = notifications;
+              setTimeout(function() {
+                notificationList.listview('refresh');
+              });
             });
-          });
-
-          page.on('pageshow', function() {
-            notificationList.listview('refresh');
           });
         }
       };
