@@ -45,23 +45,21 @@ angular.module('eMarketApp')
             });
           };
 
-
           page.on('pagebeforeshow', function () {
-
             User.me().getList('creditCards').then(function (creditCardsList) {
               scope.creditCards = creditCardsList;
+              setTimeout(function() {
+                cardList.listview('refresh');
+              });
             });
+
             User.me().getList('banks').then(function (bankAccountsList) {
               scope.bankAccounts = bankAccountsList;
+              setTimeout(function() {
+                bankList.listview('refresh');
+              });
             });
-
           });
-
-          page.on('pageshow', function () {
-            cardList.listview('refresh');
-            bankList.listview('refresh');
-          });
-
         }
       };
     });
