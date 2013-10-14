@@ -13,11 +13,10 @@ angular.module('eMarketApp').directive('recentlyViewed', function(User) {
       page.on('pagebeforeshow', function() {
         User.me().getList('browsedItems').then(function(items) {
           scope.recentlyViewed = items;
+          setTimeout(function() {
+            recentlyViewedList.listview('refresh');
+          });
         });
-      });
-      page.on('pageshow', function() {
-        recentlyViewedList.listview('refresh');
-
       });
     }
   };
