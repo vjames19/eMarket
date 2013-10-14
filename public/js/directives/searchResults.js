@@ -14,11 +14,10 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular) {
         //            scope.results = Restangular.customGETLIST('search', {q: searchQuery});
         Restangular.all('products').getList().then(function(results) {
           scope.results = results;
+          setTimeout(function() {
+            resultList.listview('refresh');
+          });
         });
-      });
-
-      page.on('pageshow', function() {
-        resultList.listview('refresh');
       });
     }
   };
