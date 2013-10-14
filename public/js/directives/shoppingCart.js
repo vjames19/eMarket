@@ -16,10 +16,21 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
       scope.cost = 0;
       scope.shipping = 0;
 
-      page.on('pagebeforeshow', function() {
-        scope.shoppingCarts = User.me().getList('carts').then(function(carts) {
-          scope.shoppingCarts = carts;
+      var computeTotalCostAndShipping = function() {
+        scope.cost = _.reduce(scope.shoppingCarts, function(prevCart, cart) {
+          return prevCart.cost + cart.cost;
+        });
+        scope.shipping = _.reduce(scope.shoppingCarts, function(prevCart, cart) {
+          return prevCart.cost + cart.cost;
+        });
+      };
 
+      page.on('pagebeforeshow', function() {
+        User.me().getList('carts').then(function(carts) {
+          scope.shoppingCarts = carts;
+          setTimeout(function() {
+            shoppingCartList.listview('refresh');
+          });
           computeTotalCostAndShipping();
         });
       });
@@ -27,17 +38,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
       scope.selectCart = function(cartItem, index) {
         cartSelected = cartItem;
         selectedCartIndex = index;
-      }
-
-      var computeTotalCostAndShipping = function() {
-        scope.cost = 0;
-        scope.shipping = 0;
-        for(var i = 0; i < scope.shoppingCarts.length; i++
-            ) {
-          scope.cost += scope.shoppingCarts[i].cost;
-          scope.shipping += scope.shoppingCarts[i].productShippingPrice;
-        }
-      }
+      };
 
       scope.deleteCartItem = function() {
         $.mobile.loading('show');
@@ -47,11 +48,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
           shoppingCartList.listview('refresh');
           $.mobile.loading('hide');
         });
-      }
-
-      page.on('pageshow', function() {
-        shoppingCartList.listview('refresh');
-      });
+      };
     }
   };
 });
