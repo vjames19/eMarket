@@ -4,6 +4,7 @@ var _ = require('underscore');
 
 var users = {
   1: {
+    id: 1,
     userId: 1,
     username: 'chencho_mata',
     userFirstName: 'Chencho',
@@ -25,6 +26,7 @@ var users = {
     }
   },
   2: {
+    id: 2,
     userId: 2,
     username: 'mariano_sol',
     userFirstName: 'Mariano',
@@ -68,7 +70,7 @@ exports.readAllUsers = function(req, res) {
  */
 exports.createUser = function(req, res) {
   var user = req.body;
-  user.userId = _.keys(users).length + 1;
+  user.id = user.userId = _.keys(users).length + 1;
   users[user.userId] = user;
   res.jsonp(user);
 };

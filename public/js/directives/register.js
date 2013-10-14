@@ -12,10 +12,9 @@ angular.module('eMarketApp').directive('register', function() {
 
         $.mobile.loading('show');
         Restangular.all('users').post($scope.newUser.user).then(function(user) {
-          var newUserId = user.userId;
-          Restangular.one('users', newUserId).all('mailAddresses').post($scope.newUser.mailAddress);
-          Restangular.one('users', newUserId).all('billAddresses').post($scope.newUser.billAddress);
-          Restangular.one('users', newUserId).all('creditCards').post($scope.newUser.creditCard);
+          user.all('mailAddresses').post($scope.newUser.mailAddress);
+          user.all('billAddresses').post($scope.newUser.billAddress);
+          user.all('creditCards').post($scope.newUser.creditCard);
           $.mobile.loading('hide');
           $.mobile.changePage('#index-page');
         });
