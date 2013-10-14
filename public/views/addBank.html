@@ -1,48 +1,48 @@
 <div data-role="page" data-theme="b" id="add-bank">
-    <div data-role="header" data-position="fixed" data-theme="a">
-        <h1>Add Bank</h1>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Add Bank</h1>
 
-        <a href="#payment-options" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <a href="#payment-options" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
-    </div>
+  </div>
 
-    <div data-role="content">
-        <form data-ajax="false" ng-submit="submit()">
-            <div class="form-pad">
-                <label for="bank-name"><strong>Bank Name</strong></label>
-                <input type="text" id="bank-name" ng-model="bank.bankName">
-                <label for="bank-account-name"><strong>Account Name</strong></label>
-                <input type="text" id="bank-account-name" ng-model="bank.bankAccountName">
-                <label for="bank-account-type"><strong>Account Type</strong></label>
-                <select id="bank-account-type" ng-model="bank.bankAccountType">
-                    <option value="Checking">Checking</option>
-                    <option value="Savings">Saving</option>
-                    <option value="Other">Other</option>
-                </select>
-                <label for="bank-account-number"><strong>Account Number</strong></label>
-                <input type="number" id="bank-account-number" ng-model="bank.bankAccountNumber">
-                <label for="bank-account-routing"><strong>Routing Number</strong></label>
-                <input type="number" id="bank-account-routing" ng-model="bank.bankAccountRouting">
-                <label for="address-relation"><strong>Associated Address</strong></label>
-                <select id="address-relation" ng-model="bank.bankBillingAddressId"
-                        ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
-                </select>
-                <!--<select id="address-relation" ng-model="bank.bankBillingAddress">-->
-                    <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->
-                    <!--<option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>-->
-                    <!--<option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>-->
-                <!--</select>-->
-            </div>
-            <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-                <a href="#payment-options" data-role="button" data-icon="back" data-theme="a"
-                   data-transition="fade">Cancel</a>
-                <!--<a href="#payment-options" data-role="button" data-icon="check" data-theme="a"-->
-                   <!--data-transition="fade">Submit</a>-->
-                <button type="submit" data-icon="check" data-theme="a">Submit</button>
-            </div>
-        </form>
-    </div>
+  <div data-role="content">
+    <form data-ajax="false" ng-submit="submit()">
+      <div class="form-pad">
+        <label for="bank-name"><strong>Bank Name</strong></label>
+        <input type="text" id="bank-name" ng-model="bank.bankName">
+        <label for="bank-account-name"><strong>Account Name</strong></label>
+        <input type="text" id="bank-account-name" ng-model="bank.bankAccountName">
+        <label for="bank-account-type"><strong>Account Type</strong></label>
+        <select id="bank-account-type" ng-model="bank.bankAccountType">
+          <option value="Checking">Checking</option>
+          <option value="Savings">Saving</option>
+          <option value="Other">Other</option>
+        </select>
+        <label for="bank-account-number"><strong>Account Number</strong></label>
+        <input type="number" id="bank-account-number" ng-model="bank.bankAccountNumber">
+        <label for="bank-account-routing"><strong>Routing Number</strong></label>
+        <input type="number" id="bank-account-routing" ng-model="bank.bankAccountRouting">
+        <label for="address-relation"><strong>Associated Address</strong></label>
+        <select id="address-relation" ng-model="bank.bankBillingAddressId"
+                ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
+        </select>
+        <!--<select id="address-relation" ng-model="bank.bankBillingAddress">-->
+        <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->
+        <!--<option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>-->
+        <!--<option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>-->
+        <!--</select>-->
+      </div>
+      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
+        <a href="#payment-options" data-role="button" data-icon="back" data-theme="a"
+           data-transition="fade">Cancel</a>
+        <!--<a href="#payment-options" data-role="button" data-icon="check" data-theme="a"-->
+        <!--data-transition="fade">Submit</a>-->
+        <button type="submit" data-icon="check" data-theme="a">Submit</button>
+      </div>
+    </form>
+  </div>
 
-    <div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
