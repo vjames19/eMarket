@@ -61,22 +61,24 @@ angular.module('eMarketApp').directive('profile', function(User) {
 
         user.getList('mailAddresses').then(function(mailAddressesList) {
           scope.mailAddresses = mailAddressesList;
+          setTimeout(function() {
+            mailAddressList.listview('refresh');
+          });
         });
 
         user.getList('billAddresses').then(function(billAddressesList) {
           scope.billAddresses = billAddressesList;
+          setTimeout(function() {
+            billAddressList.listview('refresh');
+          });
         });
 
         user.getList('ratings').then(function(ratings) {
           scope.ratings = ratings;
+          setTimeout(function() {
+            ratingList.listview('refresh');
+          });
         });
-
-      });
-
-      page.on('pageshow', function() {
-        mailAddressList.listview('refresh');
-        billAddressList.listview('refresh');
-        ratingList.listview('refresh');
       });
     }
   };
