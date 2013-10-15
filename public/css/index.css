@@ -1,117 +1,117 @@
 .emarket-logo {
-    width: 35%;
-    height: 35px;
-    background: transparent;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  width: 35%;
+  height: 35px;
+  background: transparent;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ui-grid-a {
-    height: 130px;
+  height: 130px;
 }
 
 .my-emarket-buying {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .categories {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .sell-item {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .recently-viewed {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .notifications {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .home-admin {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .invoices {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .payment-options {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .profile {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .settings {
-    line-height: 65px;
+  line-height: 65px;
 }
 
-.categories-admin{
-    line-height: 65px;
+.categories-admin {
+  line-height: 65px;
 }
 
 .user-accounts {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .admin-accounts {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 .reports {
-    line-height: 65px;
+  line-height: 65px;
 }
 
 p.index-text-size {
-    font-size: 75%;
+  font-size: 75%;
 }
 
-.ui-content
-{
-    margin-bottom: 40px; /* Set this to whatever your footer size is... */
+.ui-content {
+  margin-bottom: 40px; /* Set this to whatever your footer size is... */
 }
 
 .ui-footer {
-    position: absolute !important;
-    bottom: 0;
-    width: 100%;
-    text-align: center
+  position: absolute !important;
+  bottom: 0;
+  width: 100%;
+  text-align: center
 }
 
 img.center-image {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 td.pad {
-    padding-left: 5px;
-    padding-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .wrap-text {
-    white-space: normal !important;
-    font-size: 90%;
+  white-space: normal !important;
+  font-size: 90%;
 }
 
 .small-text {
-    font-size: 75%;
-}
-.xsmall-text {
-    font-size: 70%;
+  font-size: 75%;
 }
 
-.form-pad{
-    display: block;
-    padding: 10px 20px;
+.xsmall-text {
+  font-size: 70%;
+}
+
+.form-pad {
+  display: block;
+  padding: 10px 20px;
 }
 
 .footer-button {
-    width: 30%;
+  width: 30%;
 }
