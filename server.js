@@ -27,7 +27,7 @@ var config = require('./config/config'),
 
 // Bootstrap models
 var modelsPath = __dirname + '/app/models';
-fs.readdirSync(modelsPath).forEach(function (file) {
+fs.readdirSync(modelsPath).forEach(function(file) {
   require(modelsPath + '/' + file);
 });
 

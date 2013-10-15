@@ -27,12 +27,12 @@ var admins = {
   }
 };
 
-exports.isAdmin = function (user) {
+exports.isAdmin = function(user) {
   return _.contains(_.pluck(admins, 'adminUserName'), user.username);
 };
 
-exports.findAdminById = function (req, res, next, id) {
-  if (!admins[+id]) {
+exports.findAdminById = function(req, res, next, id) {
+  if(!admins[+id]) {
     res.jsonp(404, {message: 'Admin Not Found.'});
   } else {
     req.admin = admins[+id];
@@ -40,28 +40,28 @@ exports.findAdminById = function (req, res, next, id) {
   }
 };
 
-exports.readAllAdmins = function (req, res) {
+exports.readAllAdmins = function(req, res) {
   res.jsonp(_.values(admins));
 };
 
-exports.createAdmin = function (req, res) {
+exports.createAdmin = function(req, res) {
   var admin = req.body;
   admin.adminId = _.keys(admins).length + 1;
   admins[admin.adminId] = admin;
   res.jsonp(admin);
 };
 
-exports.readAdmin = function (req, res) {
+exports.readAdmin = function(req, res) {
   res.jsonp(req.admin);
 };
 
-exports.updateAdmin = function (req, res) {
+exports.updateAdmin = function(req, res) {
   _.extend(req.admin, req.body);
   admins[req.admin.adminId] = req.admin;
   res.jsonp(req.admin);
 };
 
-exports.deleteAdmin = function (req, res) {
+exports.deleteAdmin = function(req, res) {
   delete admins[req.admin.adminId];
   res.jsonp(req.admin);
 };
@@ -91,8 +91,8 @@ var reports = {
   }
 };
 
-exports.findReportById = function (req, res, next, id) {
-  if (!reports[+id]) {
+exports.findReportById = function(req, res, next, id) {
+  if(!reports[+id]) {
     res.jsonp(404, {message: 'Report Not Found'});
   } else {
     req.report = reports[+id];
@@ -100,28 +100,28 @@ exports.findReportById = function (req, res, next, id) {
   }
 };
 
-exports.readAllReports = function (req, res) {
+exports.readAllReports = function(req, res) {
   res.jsonp(_.values(reports));
 };
 
-exports.createReport = function (req, res) {
+exports.createReport = function(req, res) {
   var report = req.body;
   report.reportId = _.keys(reports).length + 1;
   reports[report.reportId] = report;
   res.jsonp(report);
 };
 
-exports.readReport = function (req, res) {
+exports.readReport = function(req, res) {
   res.jsonp(req.report);
 };
 
-exports.updateReport = function (req, res) {
+exports.updateReport = function(req, res) {
   _.extend(req.report, req.body);
   reports[req.report.reportId] = req.report;
   res.jsonp(req.report);
 };
 
-exports.deleteReport = function (req, res) {
+exports.deleteReport = function(req, res) {
   delete reports[req.report.reportId];
   res.jsonp(req.report);
 };

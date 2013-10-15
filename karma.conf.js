@@ -17,19 +17,19 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [],
-//    exclude: [
-//      'client/main.js'
-//    ],
+    //    exclude: [
+    //      'client/main.js'
+    //    ],
 
     // use dots reporter, as travis terminal does not support escaping sequences
     // possible values: 'dots', 'progress'
     // CLI --reporters progress
     reporters: ['progress'],
 
-//    junitReporter: {
-//      // will be resolved to basePath (in the same way as files/exclude patterns)
-//      outputFile: 'test-results.xml'
-//    },
+    //    junitReporter: {
+    //      // will be resolved to basePath (in the same way as files/exclude patterns)
+    //      outputFile: 'test-results.xml'
+    //    },
 
     // web server port
     // CLI --port 9876
@@ -58,7 +58,7 @@ module.exports = function(config) {
     // - IE (only Windows)
     // CLI --browsers Chrome,Firefox,Safari
     //browsers: [process.env.TRAVIS ? 'Firefox' : 'Chrome']
-    browsers : ['PhantomJS'],
+    browsers: ['PhantomJS'],
     // If browser does not capture in given timeout [ms], kill it
     // CLI --capture-timeout 5000
     captureTimeout: 20000,

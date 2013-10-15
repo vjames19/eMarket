@@ -21,7 +21,7 @@ var sellers = {
 };
 
 exports.findSellerById = function(req, res, next, id) {
-//  console.log('id', id);
+  //  console.log('id', id);
   if(!sellers[+id]) {
     res.jsonp(404, {message: 'Seller not found'});
   } else {
@@ -34,7 +34,7 @@ exports.readAllSellers = function(req, res) {
   res.jsonp(_.values(sellers));
 };
 
-exports.createSeller = function(req, res)  {
+exports.createSeller = function(req, res) {
   var seller = req.body;
   seller.sellerId = _.keys(sellers).length + 1;
   sellers[seller.sellerId] = seller;
@@ -74,8 +74,8 @@ var ratings = {
   }
 };
 
-exports.findRatingById = function (req, res, next, id) {
-  if (!ratings[+id]) {
+exports.findRatingById = function(req, res, next, id) {
+  if(!ratings[+id]) {
     res.jsonp(404, {message: 'Rating Item Not Found'});
   } else {
     req.rating = ratings[+id];
@@ -83,10 +83,10 @@ exports.findRatingById = function (req, res, next, id) {
   }
 };
 
-exports.readAllRatings = function (req, res) {
+exports.readAllRatings = function(req, res) {
   res.jsonp(_.values(ratings));
 };
 
-exports.readRating = function (req, res) {
+exports.readRating = function(req, res) {
   res.jsonp(req.rating);
 };

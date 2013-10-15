@@ -56,7 +56,7 @@ exports.readAllProducts = function(req, res) {
   res.jsonp(_.values(products));
 };
 
-exports.createProduct = function(req, res)  {
+exports.createProduct = function(req, res) {
   var product = req.body;
   product.productId = _.keys(products).length + 1;
   products[product.productId] = product;
@@ -102,7 +102,7 @@ exports.readAllProductBids = function(req, res) {
   res.jsonp(_.values(bids));
 };
 
-exports.createProductBid = function(req, res)  {
+exports.createProductBid = function(req, res) {
   var bid = req.body;
   bid.bidId = _.keys(bids).length + 1;
   bids[bid.bidId] = bid;

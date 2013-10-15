@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   // Project Configuration
 
-  var uglyFiles = function (srcDir) {
+  var uglyFiles = function(srcDir) {
     var results = {};
-    grunt.file.expand(srcDir).forEach(function (file) {
+    grunt.file.expand(srcDir).forEach(function(file) {
       results[file.split('.')[0] + '.min.js'] = [file];
     });
     return results;
@@ -116,7 +116,7 @@ module.exports = function (grunt) {
               logConcurrentOutput: true
             }
           },
-          front : {
+          front: {
             tasks: ['connect:front', 'open:server']
           }
         },
@@ -159,7 +159,6 @@ module.exports = function (grunt) {
       }
       // TODO : Add task to deploy in different environments (production, development).
   );
-
 
   // Load NPM tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);

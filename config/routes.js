@@ -141,10 +141,10 @@ module.exports = function(app, passport, auth) {
   app.get('/api/categories/:categoryId', categories.readCategory);
   app.put('/api/categories/:categoryId', categories.updateCategory);
   app.del('/api/categories/:categoryId', categories.deleteCategory);
-//  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
-//  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
-//  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.updateCategory);
-//  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.deleteCategory);
+  //  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
+  //  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
+  //  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.updateCategory);
+  //  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.deleteCategory);
 
   // Product Routes
   var products = require('../app/controllers/products');
