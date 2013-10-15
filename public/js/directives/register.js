@@ -23,18 +23,10 @@ angular.module('eMarketApp').directive('register', function() {
     link: function(scope, elem) {
       var page = $(elem[0]);
       var sameAsCheckBox = page.find('#same-as');
-      var billAddress = page.find('#billing-address');
-      var selectCountryBillingAddress = page.find('#country-billing-address');
-      var selectStateBillingAddress = page.find('#geographical-region-billing-address');
-      var cityBillingAddress = page.find('#city-billing-address');
-      var zipCodeBillingAddress = page.find('#zip-code-billing-address');
 
       scope.disableBillAddress = function() {
-        billAddress.prop('disabled', sameAsCheckBox.prop('checked'));
-        selectCountryBillingAddress.prop('disabled', sameAsCheckBox.prop('checked'));
-        selectStateBillingAddress.prop('disabled', sameAsCheckBox.prop('checked'));
-        cityBillingAddress.prop('disabled', sameAsCheckBox.prop('checked'));
-        zipCodeBillingAddress.prop('disabled', sameAsCheckBox.prop('checked'));
+        var disable = sameAsCheckBox.prop('checked');
+        page.find('input[id*="billing-address"]').prop('disabled', disable);
       };
     }
   };
