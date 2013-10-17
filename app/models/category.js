@@ -1,12 +1,11 @@
 'use strict';
 var _ = require('underscore');
+var mapper = require('../mapper');
 
-var Category = function(id, categoryName, categoryParent, categories) {
-  this.id = id;
-  this.categoryId = id;
-  this.categoryName = categoryName;
-  this.categoryParent = categoryParent;
-  this.categories = categories;
+var DICTIONARY = {
+  'category_id': 'id',
+  'category_name': 'categoryName',
+  'category_parent_id': 'categoryParent'
 };
 
 var executor = null;
@@ -24,10 +23,19 @@ module.exports.getAll = function(callback) {
         callback(err);
       } else {
         categories = _.map(categories, function(category) {
-          return new Category(category.category_id, category.category_name, category.category_parent_id);
+          return mapper.map(category, DICTIONARY);
         });
         callback(null, categories);
       }
+    });
+  });
+};
+
+module.exports.get = function(id, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'SELECT * FROM category_info WHERE category_status = true AND category_id = ?';
+    connection.query(sql, id, function(err, categories) {
+      callback(err, mapper.map(categories[0], DICTIONARY));
     });
   });
 };
