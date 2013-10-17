@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('eMarketApp', ['restangular'])
+var app = angular.module('eMarketApp', ['restangular']);
 
 app.config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('api/');
@@ -27,7 +27,7 @@ app.run(function($rootScope, $location, Auth) {
   $(document).on('pagebeforeshow', function(event, data) {
     // If its not logged in and not in a valid unauth page
     if(!back) {
-      console.log('pushing histor')
+      console.log('pushing histor');
       history.push(data.prevPage.attr('id'));
     } else {
       back = false;

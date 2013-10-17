@@ -11,7 +11,7 @@ module.exports = function(app, passport, auth) {
   app.get('/logout', function(req, res) {
     req.logout();
     res.jsonp(200);
-  })
+  });
   // TODO(vjames19): Secure users api
 
   // User Routes
@@ -143,8 +143,10 @@ module.exports = function(app, passport, auth) {
   app.del('/api/categories/:categoryId', categories.deleteCategory);
   //  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
   //  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
-  //  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.updateCategory);
-  //  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization, categories.deleteCategory);
+  //  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization,
+  // categories.updateCategory);
+  //  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization,
+  // categories.deleteCategory);
 
   // Product Routes
   var products = require('../app/controllers/products');

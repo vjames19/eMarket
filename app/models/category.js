@@ -24,7 +24,7 @@ module.exports.getAll = function(callback) {
         callback(err);
       } else {
         categories = _.map(categories, function(category) {
-          return new Category(category.category_id, category.category_name, category.category_parent_id)
+          return new Category(category.category_id, category.category_name, category.category_parent_id);
         });
         callback(null, categories);
       }

@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 
 module.exports = function(pool) {
   return {
@@ -16,4 +16,4 @@ module.exports = function(pool) {
       });
     }
   };
-}
+};

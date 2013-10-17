@@ -26,7 +26,7 @@ angular.module('eMarketApp').directive('myEmarketBuying', function(User, Restang
         });
 
         User.me().getList('bids').then(function(bids) {
-          scope.bids = bids
+          scope.bids = bids;
           setTimeout(function() {
             bidAndPurchaseList.listview('refresh');
           });

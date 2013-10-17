@@ -17,10 +17,10 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
       scope.shipping = 0;
 
       var computeTotalCostAndShipping = function() {
-        scope.cost = _.reduce(scope.shoppingCarts, function(prevCart, cart) {
+        scope.cost = window._.reduce(scope.shoppingCarts, function(prevCart, cart) {
           return prevCart.cost + cart.cost;
         });
-        scope.shipping = _.reduce(scope.shoppingCarts, function(prevCart, cart) {
+        scope.shipping = window._.reduce(scope.shoppingCarts, function(prevCart, cart) {
           return prevCart.cost + cart.cost;
         });
       };
