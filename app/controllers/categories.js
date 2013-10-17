@@ -27,10 +27,14 @@ exports.findCategoryById = function(req, res, next, id) {
  * Create a category
  */
 exports.createCategory = function(req, res) {
-  var category = req.body;
-  category.categoryId = _.keys(categories).length + 1;
-  categories[category.categoryId] = category;
-  res.jsonp(category);
+  console.log('category request', req.body);
+  Category.create(req.body, function(err, category) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(201, category);
+    }
+  });
 };
 
 /**
