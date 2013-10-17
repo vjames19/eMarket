@@ -19,8 +19,7 @@ exports.findCategoryById = function(req, res, next, id) {
       req.category = category;
       next();
     }
-  })
-
+  });
 };
 
 /**
@@ -51,8 +50,14 @@ exports.updateCategory = function(req, res) {
  * Delete a category
  */
 exports.deleteCategory = function(req, res) {
-  delete categories[req.category.categoryId];
-  res.jsonp(req.category);
+  Category.delete(req.category.id, function(err) {
+    console.log('delete category', arguments);
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(req.category);
+    }
+  });
 };
 
 /**

@@ -56,3 +56,10 @@ module.exports.create = function(category, callback) {
     });
   });
 };
+
+module.exports.delete = function(id, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'UPDATE category_info SET category_status=0 WHERE category_id = ?';
+    connection.query(sql, [id], callback);
+  });
+};
