@@ -28,7 +28,7 @@ module.exports = function(grunt) {
             }
           },
           js: {
-            files: ['public/js/**', 'app/**/*.js', 'config/**/*.js'],
+            files: ['public/js/**'],
             options: {
               livereload: true
             },
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
               file: 'server.js',
               args: [],
               ignoredFiles: ['LICENSE', 'README.md', 'node_modules/**', '.DS_Store', '.idea'],
-              watchedExtensions: ['js'],
+              watchedExtensions: ['js', 'json'],
               watchedFolders: ['app', 'config'],
               debug: true,
               delayTime: 1,
