@@ -4,6 +4,8 @@ VALUES
 
 -- USER CANNOT BID ON ITS OWN PRODUCT (I'm comparing from other tables) --
 
+-- (TODO) MINIMUM BID = BID STARTING PRICE + 1.00, NOT + 5.00, FIX ON CLIENT
+
 -- some use cases --
 
 -- users 3, 4, 5, 6 bid on product 2 from user 1 --
@@ -45,8 +47,8 @@ VALUES
 ( 4, 14, 60.00, CURRENT_TIMESTAMP, NULL),
 ( 8, 14, 90.00, CURRENT_TIMESTAMP, NULL),
 
--- user 3 bids minimum in product 16 from user 4 -- 
-( 3, 16, 2.62, CURRENT_TIMESTAMP, NULL),
+-- user 3 bids minimum in product 16 from user 4 --
+( 3, 16, 3.62, CURRENT_TIMESTAMP, NULL),
 
 -- general users bidding on products --
 ( 1, 18, 19.11, CURRENT_TIMESTAMP, NULL), -- user 4 --
