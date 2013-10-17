@@ -11,13 +11,16 @@ var categories = {
 };
 
 exports.findCategoryById = function(req, res, next, id) {
-  var category = categories[+id];
-  if(!category) {
-    res.jsonp(404, {message: 'Not found'});
-  } else {
-    req.category = category;
-    next();
-  }
+  Category.get(id, function(err, category) {
+    console.log('find by id', category);
+    if(!category) {
+      res.jsonp(404, {message: 'Not found'});
+    } else {
+      req.category = category;
+      next();
+    }
+  })
+
 };
 
 /**
