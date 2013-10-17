@@ -24,9 +24,6 @@ exports.findCategoryById = function(req, res, next, id) {
  * Create a category
  */
 exports.createCategory = function(req, res) {
-  Category.create(category, function(err, category) {
-
-  })
   var category = req.body;
   category.categoryId = _.keys(categories).length + 1;
   categories[category.categoryId] = category;
