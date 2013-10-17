@@ -3,6 +3,13 @@
   "app": {
     "name": "eMarket - Development"
   },
-  "db": "mongodb://localhost/mean-dev"
+  "db": {
+    "host": "mysql.phxsolutions.org",
+    "user": "phx_emarket",
+    "password": "phx_emarket_pwd",
+    "port": 3306,
+    "database": "emarket_test",
+    "connectionLimit": 100
+  }
 }
 
