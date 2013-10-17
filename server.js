@@ -5,6 +5,7 @@
  */
 var express = require('express'),
     fs = require('fs'),
+    mysql = require('mysql'),
     passport = require('passport');
 
 /**
@@ -22,13 +23,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('./config/config'),
     auth = require('./config/middlewares/authorization');
 
-// TODO: Bootstrap db connection
-// var db = mongoose.connect(config.db);
+// Create connection pools;
+var pool = mysql.createPool(config.db);
+var executor = require('./app/queryexecutor')(pool);
 
 // Bootstrap models
 var modelsPath = __dirname + '/app/models';
 fs.readdirSync(modelsPath).forEach(function(file) {
-  require(modelsPath + '/' + file);
+  require(modelsPath + '/' + file).init(executor);
 });
 
 // bootstrap passport config

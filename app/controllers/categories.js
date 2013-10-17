@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var Category = require('../models/category');
 
 var categories = {
   1: {categoryId: 1, categoryName: 'books', categoryParent: null},
@@ -23,6 +24,9 @@ exports.findCategoryById = function(req, res, next, id) {
  * Create a category
  */
 exports.createCategory = function(req, res) {
+  Category.create(category, function(err, category) {
+
+  })
   var category = req.body;
   category.categoryId = _.keys(categories).length + 1;
   categories[category.categoryId] = category;
@@ -58,14 +62,19 @@ exports.readCategory = function(req, res) {
  * List of categories.
  */
 exports.readAll = function(req, res) {
-  if(req.query.flat) {
-    res.jsonp(_.values(categories));
-  } else {
-    var cat = _.values(categories);
-    _.each(cat, function(category) {
-      var sub = _.where(cat, {categoryParent: category.categoryId});
-      category.categories = sub.length > 0 ? sub : null;
-    });
-    res.jsonp(_.where(cat, {categoryParent: null}));
-  }
+  Category.getAll(function(err, categories) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      if(req.query.flat) {
+        res.jsonp(categories);
+      } else {
+        _.each(categories, function(category) {
+          var sub = _.where(categories, {categoryParent: category.categoryId});
+          category.categories = sub.length > 0 ? sub : null;
+        });
+        res.jsonp(_.where(categories, {categoryParent: null}));
+      }
+    }
+  });
 };
