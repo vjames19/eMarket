@@ -5,6 +5,8 @@ VALUES
 -- REMINDER, WHEN A GUY ADDS A NEW PRODUCT QUANTITY IN DB = INPUT QUANTITY - 1
 -- BECAUSE THERE's ALWAYS AN ITEM SEPARATED FOR BIDDING AND THE QUANTITY IN TH DB IS FOR BUY IT NOW PRODUCTS
 
+-- BID END DATE = PRODUCT END DATE, DOESN'T MATTER IF QUANTITY > 0
+
 (1, 1, 'Beacon Hook', 453.78, 3.69, '2013-12-04 09:27:23', 13.64, 13, 'Lorem ipsum dolor sit amet.', 'New', '/pictures/1HxGwaG.png', 'OLC', 'Roundfan', '64x86x28', TRUE),
 (2, 1, 'Bitter Boiling Temple', 963.60, 1.45, '2013-12-03 02:25:33', 14.02, 36, 'Lorem ipsum dolor sit amet.', 'Used', '/pictures/2cVxvJW.png', 'NLM', 'Phys Com', '14x18x65', FALSE),
 (3, 2, 'Eternal Blue Planet', 82.23, 1.02, '2013-12-02 13:20:59', 12.80, 42, 'Lorem ipsum dolor sit amet.', 'Refurbished', '/pictures/3SMvmLL.png', 'XOX', 'Geofax', '74x44x14', TRUE),
