@@ -1,4 +1,4 @@
-INSERT INTO `emarket_test`.`mailing_info` 
+INSERT INTO `emarket_test`.`mailing_info`
 (`mailing_user_id`,`mailing_address_id`,`mailing_recipient_name`,`mailing_telephone`,`mailing_is_primary`,`mailing_status`)
 VALUES
 ( 1, 1, 'Juan Del Barrio', '5511793628', TRUE, TRUE),

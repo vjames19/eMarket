@@ -1,4 +1,4 @@
-INSERT INTO `emarket_test`.`billing_info` 
+INSERT INTO `emarket_test`.`billing_info`
 (`billing_user_id`,`billing_address_id`,`billing_recipient_name`,`billing_telephone`,`billing_status`)
 VALUES
 (1, 61, 'Juan Del Barrio', '7391392372', FALSE),

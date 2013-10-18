@@ -1,5 +1,5 @@
 INSERT INTO `emarket_test`.`user_login_info`
-(`user_login_id`, `user_login_user_name`, `user_login_password`, `user_login_email`) 
+(`user_login_id`, `user_login_user_name`, `user_login_password`, `user_login_email`)
 VALUES
 ('1', LCASE('juanba'), SHA1('juanba _pwd'), LCASE('juanba@emarket.com')),
 ('2', LCASE('josero'), SHA1('josero_pwd'), LCASE('josero@emarket.com')),
