@@ -2,13 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `emarket` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `emarket` ;
+CREATE SCHEMA IF NOT EXISTS `emarket_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `emarket_test` ;
 
 -- -----------------------------------------------------
--- Table `emarket`.`user_info`
+-- Table `emarket_test`.`user_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`user_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`user_info` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_first_name` VARCHAR(45) NOT NULL,
   `user_middle_name` VARCHAR(45) NULL DEFAULT NULL,
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS `emarket`.`user_info` (
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`user_login_info`
+-- Table `emarket_test`.`user_login_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`user_login_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`user_login_info` (
   `user_login_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_login_user_name` VARCHAR(16) NOT NULL,
   `user_login_password` VARCHAR(40) NOT NULL,
@@ -31,16 +31,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`user_login_info` (
   PRIMARY KEY (`user_login_id`),
   CONSTRAINT `login_user_id`
     FOREIGN KEY (`user_login_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`address_history`
+-- Table `emarket_test`.`address_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`address_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`address_history` (
   `address_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `address_address` VARCHAR(255) NOT NULL,
   `address_country` VARCHAR(45) NOT NULL,
@@ -52,9 +52,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`mailing_info`
+-- Table `emarket_test`.`mailing_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`mailing_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`mailing_info` (
   `mailing_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `mailing_user_id` INT UNSIGNED NOT NULL,
   `mailing_address_id` INT UNSIGNED NOT NULL,
@@ -67,21 +67,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`mailing_info` (
   INDEX `mailing_address_id_idx` (`mailing_address_id` ASC),
   CONSTRAINT `mailing_user_id`
     FOREIGN KEY (`mailing_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `mailing_address_id`
     FOREIGN KEY (`mailing_address_id`)
-    REFERENCES `emarket`.`address_history` (`address_id`)
+    REFERENCES `emarket_test`.`address_history` (`address_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`billing_info`
+-- Table `emarket_test`.`billing_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`billing_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`billing_info` (
   `billing_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `billing_user_id` INT UNSIGNED NOT NULL,
   `billing_address_id` INT UNSIGNED NOT NULL,
@@ -93,21 +93,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`billing_info` (
   INDEX `billing_address_id_idx` (`billing_address_id` ASC),
   CONSTRAINT `billing_user_id`
     FOREIGN KEY (`billing_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `billing_address_id`
     FOREIGN KEY (`billing_address_id`)
-    REFERENCES `emarket`.`address_history` (`address_id`)
+    REFERENCES `emarket_test`.`address_history` (`address_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`credit_card_info`
+-- Table `emarket_test`.`credit_card_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`credit_card_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`credit_card_info` (
   `credit_card_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `credit_card_user_id` INT UNSIGNED NOT NULL,
   `credit_card_billing_address_id` INT UNSIGNED NOT NULL,
@@ -122,21 +122,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`credit_card_info` (
   INDEX `card_billing_id_idx` (`credit_card_billing_address_id` ASC),
   CONSTRAINT `credit_user_id`
     FOREIGN KEY (`credit_card_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `credit_billing_id`
     FOREIGN KEY (`credit_card_billing_address_id`)
-    REFERENCES `emarket`.`billing_info` (`billing_id`)
+    REFERENCES `emarket_test`.`billing_info` (`billing_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`bank_info`
+-- Table `emarket_test`.`bank_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`bank_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`bank_info` (
   `bank_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `bank_user_id` INT UNSIGNED NOT NULL,
   `bank_billing_address_id` INT UNSIGNED NOT NULL,
@@ -151,21 +151,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`bank_info` (
   INDEX `bank_billing_id_idx` (`bank_billing_address_id` ASC),
   CONSTRAINT `bank_user_id`
     FOREIGN KEY (`bank_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `bank_billing_id`
     FOREIGN KEY (`bank_billing_address_id`)
-    REFERENCES `emarket`.`billing_info` (`billing_id`)
+    REFERENCES `emarket_test`.`billing_info` (`billing_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`category_info`
+-- Table `emarket_test`.`category_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`category_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`category_info` (
   `category_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(45) NOT NULL,
   `category_parent_id` INT UNSIGNED NULL DEFAULT NULL,
@@ -175,16 +175,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`category_info` (
   INDEX `category_id_idx` (`category_parent_id` ASC),
   CONSTRAINT `category_id`
     FOREIGN KEY (`category_parent_id`)
-    REFERENCES `emarket`.`category_info` (`category_id`)
+    REFERENCES `emarket_test`.`category_info` (`category_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`product_specification`
+-- Table `emarket_test`.`product_specification`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`product_specification` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`product_specification` (
   `product_spec_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_spec_category_id` INT UNSIGNED NOT NULL,
   `product_spec_name` VARCHAR(45) NOT NULL,
@@ -204,16 +204,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`product_specification` (
   INDEX `spec_category_id_idx` (`product_spec_category_id` ASC),
   CONSTRAINT `spec_category_id`
     FOREIGN KEY (`product_spec_category_id`)
-    REFERENCES `emarket`.`category_info` (`category_id`)
+    REFERENCES `emarket_test`.`category_info` (`category_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`product_info`
+-- Table `emarket_test`.`product_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`product_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`product_info` (
   `product_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_seller_id` INT UNSIGNED NOT NULL,
   `product_info_spec_id` INT UNSIGNED NOT NULL,
@@ -224,21 +224,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`product_info` (
   INDEX `product_product_spec_id_idx` (`product_info_spec_id` ASC),
   CONSTRAINT `product_user_id`
     FOREIGN KEY (`product_seller_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `product_spec_id`
     FOREIGN KEY (`product_info_spec_id`)
-    REFERENCES `emarket`.`product_specification` (`product_spec_id`)
+    REFERENCES `emarket_test`.`product_specification` (`product_spec_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`bid_history`
+-- Table `emarket_test`.`bid_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`bid_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`bid_history` (
   `bid_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `bid_user_id` INT UNSIGNED NOT NULL,
   `bid_product_id` INT UNSIGNED NOT NULL,
@@ -250,21 +250,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`bid_history` (
   INDEX `bid_product_id_idx` (`bid_product_id` ASC),
   CONSTRAINT `bid_user_id`
     FOREIGN KEY (`bid_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `bid_product_id`
     FOREIGN KEY (`bid_product_id`)
-    REFERENCES `emarket`.`product_info` (`product_id`)
+    REFERENCES `emarket_test`.`product_info` (`product_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`cart_history`
+-- Table `emarket_test`.`cart_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`cart_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`cart_history` (
   `cart_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cart_user_id` INT UNSIGNED NOT NULL,
   `cart_closed_date` TIMESTAMP NULL DEFAULT NULL,
@@ -272,16 +272,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`cart_history` (
   INDEX `cart_user_id_idx` (`cart_user_id` ASC),
   CONSTRAINT `cart_user_id`
     FOREIGN KEY (`cart_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`cart_item_history`
+-- Table `emarket_test`.`cart_item_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`cart_item_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`cart_item_history` (
   `cart_item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cart_item_cart_id` INT UNSIGNED NOT NULL,
   `cart_item_product_id` INT UNSIGNED NOT NULL,
@@ -293,77 +293,77 @@ CREATE TABLE IF NOT EXISTS `emarket`.`cart_item_history` (
   INDEX `cart_item_product_id_idx` (`cart_item_product_id` ASC),
   CONSTRAINT `cart_item_cart_id`
     FOREIGN KEY (`cart_item_cart_id`)
-    REFERENCES `emarket`.`cart_history` (`cart_id`)
+    REFERENCES `emarket_test`.`cart_history` (`cart_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `cart_item_product_id`
     FOREIGN KEY (`cart_item_product_id`)
-    REFERENCES `emarket`.`product_info` (`product_id`)
+    REFERENCES `emarket_test`.`product_info` (`product_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`invoice_history`
+-- Table `emarket_test`.`invoice_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`invoice_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`invoice_history` (
   `invoice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `invoice_user_id` INT UNSIGNED NOT NULL,
+  `invoice_bank_id` INT UNSIGNED NULL,
+  `invoice_card_id` INT UNSIGNED NULL,
   `invoice_creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`invoice_id`),
   INDEX `invoice_user_id_idx` (`invoice_user_id` ASC),
+  INDEX `invoice_card_id_idx` (`invoice_card_id` ASC),
+  INDEX `invoice_bank_id_idx` (`invoice_bank_id` ASC),
   CONSTRAINT `invoice_user_id`
     FOREIGN KEY (`invoice_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `invoice_card_id`
+    FOREIGN KEY (`invoice_card_id`)
+    REFERENCES `emarket_test`.`credit_card_info` (`credit_card_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `invoice_bank_id`
+    FOREIGN KEY (`invoice_bank_id`)
+    REFERENCES `emarket_test`.`bank_info` (`bank_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`invoice_item_history`
+-- Table `emarket_test`.`invoice_item_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`invoice_item_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`invoice_item_history` (
   `invoice_item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `invoice_item_invoice_id` INT UNSIGNED NOT NULL,
   `invoice_item_product_id` INT UNSIGNED NOT NULL,
   `invoice_item_quantity` INT UNSIGNED NOT NULL,
   `invoice_item_sold_price` DECIMAL(13,2) NOT NULL,
-  `invoice_item_bank_id` INT UNSIGNED NULL,
-  `invoice_item_card_id` INT UNSIGNED NULL,
   PRIMARY KEY (`invoice_item_id`),
   INDEX `invoice_item_invoice_id_idx` (`invoice_item_invoice_id` ASC),
   INDEX `invoice_item_product_id_idx` (`invoice_item_product_id` ASC),
-  INDEX `invoice_item_credit_card_id_idx` (`invoice_item_card_id` ASC),
-  INDEX `invoice_item_bank_id_idx` (`invoice_item_bank_id` ASC),
   CONSTRAINT `invoice_item_invoice_id`
     FOREIGN KEY (`invoice_item_invoice_id`)
-    REFERENCES `emarket`.`invoice_history` (`invoice_id`)
+    REFERENCES `emarket_test`.`invoice_history` (`invoice_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `invoice_item_product_id`
     FOREIGN KEY (`invoice_item_product_id`)
-    REFERENCES `emarket`.`product_info` (`product_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `invoice_item_credit_card_id`
-    FOREIGN KEY (`invoice_item_card_id`)
-    REFERENCES `emarket`.`credit_card_info` (`credit_card_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `invoice_item_bank_id`
-    FOREIGN KEY (`invoice_item_bank_id`)
-    REFERENCES `emarket`.`bank_info` (`bank_id`)
+    REFERENCES `emarket_test`.`product_info` (`product_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`rating_history`
+-- Table `emarket_test`.`rating_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`rating_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`rating_history` (
   `rating_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `rating_rated_user_id` INT UNSIGNED NOT NULL,
   `rating_rater_user_id` INT UNSIGNED NOT NULL,
@@ -373,21 +373,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`rating_history` (
   INDEX `rater_user_id_idx` (`rating_rater_user_id` ASC),
   CONSTRAINT `rated_user_id`
     FOREIGN KEY (`rating_rated_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `rater_user_id`
     FOREIGN KEY (`rating_rater_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`admin_info`
+-- Table `emarket_test`.`admin_info`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`admin_info` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`admin_info` (
   `admin_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `admin_user_name` VARCHAR(16) NOT NULL,
   `admin_password` VARCHAR(40) NOT NULL,
@@ -405,24 +405,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`user_account_status`
+-- Table `emarket_test`.`user_account_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`user_account_status` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`user_account_status` (
   `user_account_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_account_status` TINYINT(1) NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`user_account_id`),
   CONSTRAINT `account_user_id`
     FOREIGN KEY (`user_account_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`product_drafts`
+-- Table `emarket_test`.`product_drafts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`product_drafts` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`product_drafts` (
   `product_draft_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_draft_user_id` INT UNSIGNED NOT NULL,
   `product_draft_spec_id` INT UNSIGNED NOT NULL,
@@ -434,21 +434,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`product_drafts` (
   INDEX `drafts_product_spec_id_idx` (`product_draft_spec_id` ASC),
   CONSTRAINT `drafts_user_id`
     FOREIGN KEY (`product_draft_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `drafts_product_spec_id`
     FOREIGN KEY (`product_draft_spec_id`)
-    REFERENCES `emarket`.`product_specification` (`product_spec_id`)
+    REFERENCES `emarket_test`.`product_specification` (`product_spec_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`recently_viewed_items`
+-- Table `emarket_test`.`recently_viewed_items`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`recently_viewed_items` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`recently_viewed_items` (
   `recently_viewed_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `recently_viewed_user_id` INT UNSIGNED NOT NULL,
   `recently_viewed_product_id` INT UNSIGNED NOT NULL,
@@ -459,21 +459,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`recently_viewed_items` (
   INDEX `recently_product_id_idx` (`recently_viewed_product_id` ASC),
   CONSTRAINT `recently_user_id`
     FOREIGN KEY (`recently_viewed_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `recently_product_id`
     FOREIGN KEY (`recently_viewed_product_id`)
-    REFERENCES `emarket`.`product_info` (`product_id`)
+    REFERENCES `emarket_test`.`product_info` (`product_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`notification_history`
+-- Table `emarket_test`.`notification_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`notification_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`notification_history` (
   `notification_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `notification_user_id` INT UNSIGNED NOT NULL,
   `notification_message` TEXT NOT NULL,
@@ -483,16 +483,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`notification_history` (
   INDEX `notification_user_id_idx` (`notification_user_id` ASC),
   CONSTRAINT `notification_user_id`
     FOREIGN KEY (`notification_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`question_history`
+-- Table `emarket_test`.`question_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`question_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`question_history` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `question_content` VARCHAR(160) NOT NULL,
   PRIMARY KEY (`question_id`),
@@ -501,9 +501,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`question_answer_history`
+-- Table `emarket_test`.`question_answer_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`question_answer_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`question_answer_history` (
   `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `answer_question_id` INT UNSIGNED NOT NULL,
   `answer_user_id` INT UNSIGNED NOT NULL,
@@ -514,21 +514,21 @@ CREATE TABLE IF NOT EXISTS `emarket`.`question_answer_history` (
   INDEX `answer_question_id_idx` (`answer_question_id` ASC),
   CONSTRAINT `answer_user_id`
     FOREIGN KEY (`answer_user_id`)
-    REFERENCES `emarket`.`user_info` (`user_id`)
+    REFERENCES `emarket_test`.`user_info` (`user_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `answer_question_id`
     FOREIGN KEY (`answer_question_id`)
-    REFERENCES `emarket`.`question_history` (`question_id`)
+    REFERENCES `emarket_test`.`question_history` (`question_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`product_quantity_record`
+-- Table `emarket_test`.`product_quantity_record`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`product_quantity_record` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`product_quantity_record` (
   `product_quantity_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_quantity_spec_id` INT UNSIGNED NOT NULL,
   `product_quantity_remaining` INT UNSIGNED NOT NULL,
@@ -537,16 +537,16 @@ CREATE TABLE IF NOT EXISTS `emarket`.`product_quantity_record` (
   PRIMARY KEY (`product_quantity_id`),
   CONSTRAINT `quantity_product_spec_id`
     FOREIGN KEY (`product_quantity_spec_id`)
-    REFERENCES `emarket`.`product_specification` (`product_spec_id`)
+    REFERENCES `emarket_test`.`product_specification` (`product_spec_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emarket`.`product_transaction_history`
+-- Table `emarket_test`.`product_transaction_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket`.`product_transaction_history` (
+CREATE TABLE IF NOT EXISTS `emarket_test`.`product_transaction_history` (
   `product_transaction_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_transaction_product_id` INT UNSIGNED NOT NULL,
   `product_transaction_quantity` INT UNSIGNED NOT NULL,
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `emarket`.`product_transaction_history` (
   INDEX `transaction_product_id_idx` (`product_transaction_product_id` ASC),
   CONSTRAINT `transaction_product_id`
     FOREIGN KEY (`product_transaction_product_id`)
-    REFERENCES `emarket`.`product_info` (`product_id`)
+    REFERENCES `emarket_test`.`product_info` (`product_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
