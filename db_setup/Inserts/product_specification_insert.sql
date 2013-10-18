@@ -2,7 +2,7 @@ INSERT INTO `emarket_test`.`product_specification`
 (`product_spec_id`, `product_spec_category_id`, `product_spec_name`, `product_spec_nonbid_price`, `product_spec_starting_bid_price` ,`product_spec_bid_end_date` ,`product_spec_shipping_price` ,`product_spec_quantity` ,`product_spec_description` ,`product_spec_condition` ,`product_spec_picture` ,`product_spec_brand` ,`product_spec_model` ,`product_spec_dimensions`, `product_spec_is_draft`)
 VALUES
 
--- REMINDER, WHEN A GUY ADDS A NEW PRODUCT QUANTITY IN DB = QUANTITY - 1
+-- REMINDER, WHEN A GUY ADDS A NEW PRODUCT QUANTITY IN DB = INPUT QUANTITY - 1
 -- BECAUSE THERE's ALWAYS AN ITEM SEPARATED FOR BIDDING AND THE QUANTITY IN TH DB IS FOR BUY IT NOW PRODUCTS
 
 (1, 1, 'Beacon Hook', 453.78, 3.69, '2013-12-04 09:27:23', 13.64, 13, 'Lorem ipsum dolor sit amet.', 'New', '/pictures/1HxGwaG.png', 'OLC', 'Roundfan', '64x86x28', TRUE),
