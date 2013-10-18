@@ -1,14 +1,16 @@
 'use strict';
+
 var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
   'category_id': 'id',
   'category_name': 'categoryName',
-  'category_parent_id': 'categoryParent'
+  'category_parent_id': 'categoryParent',
+  'category_status': 'categoryStatus'
 };
 
-var WHITELIST = ['id', 'categoryName', 'categoryParent'];
+var WHITELIST = ['id', 'categoryName', 'categoryParent', 'categoryStatus'];
 
 var executor = null;
 
@@ -36,7 +38,7 @@ module.exports.getAll = function(callback) {
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT * FROM category_info WHERE category_status = true AND category_id = ?';
-    connection.query(sql, id, function(err, categories) {
+    connection.query(sql, [id], function(err, categories) {
       callback(err, mapper.map(categories[0], DICTIONARY));
     });
   });
@@ -53,6 +55,19 @@ module.exports.create = function(category, callback) {
         category.id = insertStatus.insertId;
         callback(null, category);
       }
+    });
+  });
+};
+
+module.exports.update = function(category, callback) {
+  category = _.pick(category, WHITELIST);
+  executor.execute(function(err, connection) {
+    // TODO: Verify parent id;
+    var sql = 'UPDATE category_info SET category_name=?, category_parent_id=?, category_status=? ' +
+        'WHERE category_id=?';
+    var params = [category.categoryName, category.categoryParent, category.categoryStatus, category.id];
+    connection.query(sql, params, function(err) {
+      callback(err, category);
     });
   });
 };
