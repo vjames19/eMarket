@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var Product = require('../models/product.js');
 
 var products = {
   1: {
@@ -44,16 +45,20 @@ var products = {
 };
 
 exports.findProductById = function(req, res, next, id) {
-  if(!products[+id]) {
-    res.jsonp(404, {message: 'product not found'});
-  } else {
-    req.product = products[+id];
-    next();
-  }
+  Product.get(id, function(err, product) {
+    if(_.isEmpty(product)) {
+      res.jsonp(404, {message: 'Product with id ' + id + ' not found'});
+    } else {
+      req.product = product;
+      next();
+    }
+  });
 };
 
 exports.readAllProducts = function(req, res) {
-  res.jsonp(_.values(products));
+  Product.getAll(function(err, products) {
+    res.jsonp(products);
+  });
 };
 
 exports.createProduct = function(req, res) {
