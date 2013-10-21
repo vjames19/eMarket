@@ -4,22 +4,22 @@ var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
-  "product_id": "id",
-  "product_seller_id": "sellerId",
-  "product_creation_date": "creationDate",
-  "product_spec_category_id": "categoryId",
-  "product_spec_name": "name",
-  "product_spec_nonbid_price": "nonbidPrice",
-  "product_spec_starting_bid_price": "startingBidPrice",
-  "product_spec_bid_end_date": "bidEndDate",
-  "product_spec_shipping_price": "shippingPrice",
-  "product_spec_quantity": "quantity",
-  "product_spec_description": "description",
-  "product_spec_condition": "condition",
-  "product_spec_picture": "picture",
-  "product_spec_brand": "brand",
-  "product_spec_model": "model",
-  "product_spec_dimensions": "dimensions"
+  'product_id': 'id',
+  'product_seller_id': 'sellerId',
+  'product_creation_date': 'creationDate',
+  'product_spec_category_id': 'categoryId',
+  'product_spec_name': 'name',
+  'product_spec_nonbid_price': 'nonbidPrice',
+  'product_spec_starting_bid_price': 'startingBidPrice',
+  'product_spec_bid_end_date': 'bidEndDate',
+  'product_spec_shipping_price': 'shippingPrice',
+  'product_spec_quantity': 'quantity',
+  'product_spec_description': 'description',
+  'product_spec_condition': 'condition',
+  'product_spec_picture': 'picture',
+  'product_spec_brand': 'brand',
+  'product_spec_model': 'model',
+  'product_spec_dimensions': 'dimensions'
 };
 
 //var WHITELIST = [];
