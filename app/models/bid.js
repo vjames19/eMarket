@@ -22,8 +22,8 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM bid_history' +
-        'WHERE bid_user_id = ?' +
+    var sql = 'SELECT * FROM bid_history ' +
+        'WHERE bid_user_id = ? ' +
         'ORDER BY bid_creation_date DESC';
     connection.query(sql, [userId], function(err, bids) {
       if(err) {

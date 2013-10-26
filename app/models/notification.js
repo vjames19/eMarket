@@ -21,7 +21,7 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM notification_history WHERE notification_user_id = ?' +
+    var sql = 'SELECT * FROM notification_history WHERE notification_user_id = ? ' +
         'ORDER BY notification_date DESC, notification_is_read ASC';
     connection.query(sql, [userId], function(err, notifications) {
       if(err) {
