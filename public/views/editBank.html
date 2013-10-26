@@ -12,20 +12,20 @@
         <label for="bank-name"><strong>Bank Name</strong></label>
         <input type="text" id="bank-name" ng-model="bankInfo.bankName">
         <label for="bank-account-name"><strong>Account Name</strong></label>
-        <input type="text" id="bank-account-name" ng-model="bankInfo.bankAccountName">
+        <input type="text" id="bank-account-name" ng-model="bankInfo.ownerName">
         <label for="bank-account-type"><strong>Account Type</strong></label>
         <!--<select id="bank-account-type" ng-model="bankInfo.bankAccountType" ng-options="accountType.account as accountType.account for accountType in accountOptions">-->
         <!--<option value="">Select an Account Type</option>-->
         <!--</select>-->
-        <select id="bank-account-type" ng-model="bankInfo.bankAccountType">
+        <select id="bank-account-type" ng-model="bankInfo.accountType">
           <option value="Checking">Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="bank-account-number"><strong>Account Number</strong></label>
-        <input type="number" id="bank-account-number" ng-model="bankInfo.bankAccountNumber">
+        <input type="text" id="bank-account-number" ng-model="bankInfo.accountNumber">
         <label for="bank-account-routing"><strong>Routing Number</strong></label>
-        <input type="number" id="bank-account-routing" ng-model="bankInfo.bankAccountRouting">
+        <input type="text" id="bank-account-routing" ng-model="bankInfo.routingNumber">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="bankInfo.bankBillingAddressId"
                 ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">

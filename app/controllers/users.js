@@ -4,6 +4,7 @@ var _ = require('underscore');
 var MailingAddresses = require('../models/mailingAddress.js');
 var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
+var BankAccounts = require('../models/bankAccount.js');
 
 var users = {
   1: {
@@ -593,16 +594,22 @@ var bankAccounts = {
 };
 
 exports.findBankAccountById = function(req, res, next, id) {
-  if(!bankAccounts[+id]) {
-    res.jsonp(404, {message: 'Bank Account Not Found'});
-  } else {
-    req.bankAccount = bankAccounts[+id];
-    next();
-  }
+  BankAccounts.get(req.params.userId, id, function(err, bankAccount) {
+    if(_.isEmpty(bankAccount)) {
+      res.jsonp(404, {message: 'Bank Account with id ' + id + ' not found'});
+    }
+    else {
+      req.bankAccount = bankAccount;
+      next();
+    }
+  });
 };
 
 exports.readAllBankAccounts = function(req, res) {
-  res.jsonp(_.values(bankAccounts));
+  BankAccounts.getAll(req.params.userId, function(err, bankAccounts) {
+    res.jsonp(bankAccounts);
+  });
+
 };
 
 exports.createBankAccount = function(req, res) {
