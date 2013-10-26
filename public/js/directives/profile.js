@@ -79,6 +79,14 @@ angular.module('eMarketApp').directive('profile', function(User) {
             ratingList.listview('refresh');
           });
         });
+
+        scope.getStars = function(ratingValue) {
+          var stars = '';
+          for(var i = 0; i < ratingValue; i++) {
+            stars = stars + '*';
+          }
+          return stars;
+        }
       });
     }
   };

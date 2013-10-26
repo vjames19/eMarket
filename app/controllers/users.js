@@ -5,6 +5,7 @@ var MailingAddresses = require('../models/mailingAddress.js');
 var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
 var BankAccounts = require('../models/bankAccount.js');
+var Ratings = require('../models/rating.js');
 
 var users = {
   1: {
@@ -1145,16 +1146,20 @@ var ratings = {
 };
 
 exports.findRatingById = function(req, res, next, id) {
-  if(!ratings[+id]) {
-    res.jsonp(404, {message: 'Rating Item Not Found'});
-  } else {
-    req.rating = ratings[+id];
-    next();
-  }
+  Ratings.get(req.params.userId, id, function(err, rating) {
+    if(_.isEmpty(rating)) {
+      res.jsonp(404, {message: 'Rating with id ' + id + ' not found'});
+    } else {
+      req.rating = rating;
+      next();
+    }
+  });
 };
 
 exports.readAllRatings = function(req, res) {
-  res.jsonp(_.values(ratings));
+  Ratings.getAll(req.params.userId, function(err, ratings) {
+    res.jsonp(ratings);
+  });
 };
 
 exports.readRating = function(req, res) {
