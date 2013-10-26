@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var MailingAddresses = require('../models/mailingAddress.js');
 var BillingAddresses = require('../models/billingAddress.js');
+var CreditCards = require('../models/creditCard.js');
 
 var users = {
   1: {
@@ -521,16 +522,21 @@ var creditCards = {
 };
 
 exports.findCreditCardById = function(req, res, next, id) {
-  if(!creditCards[+id]) {
-    res.jsonp(404, {message: 'Credit Card Not Found'});
-  } else {
-    req.creditCard = creditCards[+id];
-    next();
-  }
+  CreditCards.get(req.params.userId, id, function(err, creditCard) {
+    if(_.isEmpty(creditCard)) {
+      res.jsonp(404, {message: 'Credit Card with id ' + id + ' not found'});
+    }
+    else {
+      req.creditCard = creditCard;
+      next();
+    }
+  });
 };
 
 exports.readAllCreditCards = function(req, res) {
-  res.jsonp(_.values(creditCards));
+  CreditCards.getAll(req.params.userId, function(err, creditCards) {
+    res.jsonp(creditCards);
+  });
 };
 
 exports.createCreditCard = function(req, res) {

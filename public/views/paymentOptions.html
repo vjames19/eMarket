@@ -21,15 +21,15 @@
             <span class="ui-li-count">{{creditCards.length}}</span></li>
           <li ng-repeat="creditCard in creditCards">
             <a href="">
-              <p><strong>Name:</strong> {{creditCard.creditCardName}}</p>
+              <p><strong>Name:</strong> {{creditCard.ownerName}}</p>
 
-              <p><strong>Issuing Network:</strong> {{creditCard.creditCardType}}</p>
+              <p><strong>Issuing Network:</strong> {{creditCard.cardType}}</p>
 
-              <p><strong>Card Number:</strong> {{creditCard.creditCardNumber}}</p>
+              <p><strong>Card Number:</strong> {{creditCard.cardNumber}}</p>
 
-              <p><strong>Card Exp Date:</strong> {{creditCard.creditCardExpDate | date}}</p>
+              <p><strong>Card Exp Date:</strong> {{creditCard.expirationDate | date}}</p>
 
-              <p><strong>Card CVS:</strong> {{creditCard.creditCardCvs}}</p>
+              <p><strong>Card CSV:</strong> {{creditCard.cardCsv}}</p>
             </a>
             <a href="#cardPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
                data-position-to="window" data-icon="gear" data-theme="c"

@@ -10,9 +10,9 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="card-name"><strong>Card Name</strong></label>
-        <input type="text" id="card-name" ng-model="cardInfo.creditCardName">
+        <input type="text" id="card-name" ng-model="cardInfo.ownerName">
         <label for="card-type"><strong>Card Type</strong></label>
-        <select id="card-type" ng-model="cardInfo.creditCardType">
+        <select id="card-type" ng-model="cardInfo.cardType">
           <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
@@ -22,12 +22,12 @@
         <!--<option value="">Select a Card Type</option>-->
         <!--</select>-->
         <label for="card-exp-date"><strong>Expiration Date</strong></label>
-        <input type="month" id="card-exp-date" ng-model="cardInfo.creditCardExpDate">
+        <input type="month" id="card-exp-date" ng-model="cardInfo.expirationDate">
         <label for="card-number"><strong>Card Number</strong></label>
         <!-- The type number in the phone make the last digit 0 in the card-number-->
-        <input type="number" id="card-number" ng-model="cardInfo.creditCardNumber">
-        <label for="card-cvs"><strong>Card CVS</strong></label>
-        <input type="number" id="card-cvs" ng-model="cardInfo.creditCardCvs">
+        <input type="text" id="card-number" ng-model="cardInfo.cardNumber">
+        <label for="card-csv"><strong>Card CSV</strong></label>
+        <input type="text" id="card-csv" ng-model="cardInfo.cardCsv">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="cardInfo.creditCardBillingAddressId"
                 ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
