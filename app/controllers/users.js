@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var MailingAddresses = require('../models/mailingAddress.js');
 
 var users = {
   1: {
@@ -303,16 +304,20 @@ var mailAddresses = {
 };
 
 exports.findMailAddressById = function(req, res, next, id) {
-  if(!mailAddresses[+id]) {
-    res.jsonp(404, {message: 'Mailing Address Not Found'});
-  } else {
-    req.mailAddress = mailAddresses[+id];
-    next();
-  }
+  MailingAddresses.get(req.params.userId, id, function(err, mailingAddress) {
+    if(_.isEmpty(mailingAddress)) {
+      res.jsonp(404, {message: 'Mailing Address with id ' + id + ' not found'});
+    } else {
+      req.mailAddress = mailingAddress;
+      next();
+    }
+  });
 };
 
 exports.readAllMailAddresses = function(req, res) {
-  res.jsonp(_.values(mailAddresses));
+  MailingAddresses.getAll(req.params.userId, function(err, mailingAddresses) {
+    res.jsonp(mailingAddresses);
+  })
 };
 
 exports.createMailAddress = function(req, res) {
