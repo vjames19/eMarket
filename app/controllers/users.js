@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var MailingAddresses = require('../models/mailingAddress.js');
+var BillingAddresses = require('../models/billingAddress.js');
 
 var users = {
   1: {
@@ -386,16 +387,21 @@ var billAddresses = {
 };
 
 exports.findBillAddressById = function(req, res, next, id) {
-  if(!billAddresses[+id]) {
-    res.jsonp(404, {message: 'Billing Address Not Found'});
-  } else {
-    req.billAddress = billAddresses[+id];
-    next();
-  }
+  BillingAddresses.get(req.params.userId, id, function(err, billingAddress) {
+    if(_.isEmpty(billingAddress)) {
+      res.jsonp(404, {message: 'Billing Address with id ' + id + ' not found'});
+    }
+    else {
+      req.billAddress = billingAddress;
+      next();
+    }
+  });
 };
 
 exports.readAllBillAddresses = function(req, res) {
-  res.jsonp(_.values(billAddresses));
+  BillingAddresses.getAll(req.params.userId, function(err, billingAddresses) {
+    res.jsonp(billingAddresses);
+   });
 };
 
 exports.createBillAddress = function(req, res) {
