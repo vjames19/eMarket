@@ -6,6 +6,7 @@ var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
 var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
+var ShoppingCarts = require('../models/shoppingCart.js');
 
 var users = {
   1: {
@@ -869,16 +870,21 @@ var carts = {
 };
 
 exports.findCartById = function(req, res, next, id) {
-  if(!carts[+id]) {
-    res.jsonp(404, {message: 'Shopping Cart Not Found'});
-  } else {
-    req.cart = carts[+id];
-    next();
-  }
+  ShoppingCarts.get(req.params.userId, id, function(err, shoppingCart) {
+    if(_.isEmpty(shoppingCart)) {
+      res.jsonp(404, {message: 'Shopping Cart with id ' + id + ' not found'});
+    }
+    else {
+      req.cart = shoppingCart;
+      next();
+    }
+  });
 };
 
 exports.readAllCarts = function(req, res) {
-  res.jsonp(_.values(carts));
+  ShoppingCarts.getAll(req.params.userId, function(err, carts) {
+    res.jsonp(carts);
+  });
 };
 
 exports.createCart = function(req, res) {

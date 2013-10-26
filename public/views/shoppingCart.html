@@ -28,15 +28,15 @@
             <tbody>
             <tr>
               <td><strong>Product</strong></td>
-              <td><em>{{shoppingCart.cost | currency}}</em></td>
+              <td><em>{{shoppingCart.productTotalPrice | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Shipping</strong></td>
-              <td><em>{{shoppingCart.productShippingPrice | currency}}</em></td>
+              <td><em>{{shoppingCart.shippingPrice | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Quantity</strong></td>
-              <td><em>{{ shoppingCart.quantity }}</em></td>
+              <td><em>{{ shoppingCart.itemQuantity }}</em></td>
             </tr>
             </tbody>
           </table>

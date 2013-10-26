@@ -22,7 +22,8 @@ module.exports.getAll = function(userId, callback) {
     var sql = 'SELECT rating_id, user_login_user_name, rating_value ' +
               'FROM rating_history INNER JOIN user_login_info ' +
               'ON (rating_rater_user_id = user_login_info.user_login_id) ' +
-              'WHERE rating_rated_user_id = ?';
+              'WHERE rating_rated_user_id = ? ' +
+              'ORDER BY user_login_user_name';
     connection.query(sql, [userId], function(err, ratings) {
       if(err) {
         callback(err);
@@ -41,7 +42,8 @@ module.exports.get = function(userId, ratingId, callback) {
     var sql = 'SELECT rating_id, user_login_user_name, rating_value ' +
               'FROM rating_history INNER JOIN user_login_info ' +
               'ON (rating_rater_user_id = user_login_info.user_login_id) ' +
-              'WHERE rating_rated_user_id = ? AND rating_id = ?';
+              'WHERE rating_rated_user_id = ? AND rating_id = ? ' +
+              'ORDER BY user_login_user_name';
     connection.query(sql, [userId, ratingId], function(err, rating) {
       callback(err, mapper.map(rating[0], DICTIONARY));
     });

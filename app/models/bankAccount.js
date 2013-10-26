@@ -24,7 +24,8 @@ module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT bank_id, bank_name, bank_account_owner_name, bank_account_type, bank_account_number, bank_routing_number ' +
               'FROM bank_info ' +
-              'WHERE bank_info.bank_user_id = ? AND bank_info.bank_status = 1';
+              'WHERE bank_info.bank_user_id = ? AND bank_info.bank_status = 1 ' +
+              'ORDER BY bank_name';
     connection.query(sql, [userId], function(err, bankAccounts) {
       if(err) {
         callback(err);
@@ -42,7 +43,8 @@ module.exports.get = function(userId, cardId, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT bank_id, bank_name, bank_account_owner_name, bank_account_type, bank_account_number, bank_routing_number ' +
         'FROM bank_info ' +
-        'WHERE bank_info.bank_user_id = ? AND bank_info.bank_status = 1 AND bank_info.bank_id = ?';
+        'WHERE bank_info.bank_user_id = ? AND bank_info.bank_status = 1 AND bank_info.bank_id = ? ' +
+        'ORDER BY bank_name';
     connection.query(sql, [userId, cardId], function(err, bankAccount) {
       callback(err, mapper.map(bankAccount[0], DICTIONARY));
     });
