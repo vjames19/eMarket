@@ -7,6 +7,7 @@ var CreditCards = require('../models/creditCard.js');
 var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
 var ShoppingCarts = require('../models/shoppingCart.js');
+var Drafts = require('../models/draft.js');
 
 var users = {
   1: {
@@ -154,16 +155,20 @@ var drafts = {
 };
 
 exports.findDraftById = function(req, res, next, id) {
-  if(!drafts[+id]) {
-    res.jsonp(404, {message: 'Draft not found'});
-  } else {
-    req.draft = drafts[+id];
-    next();
-  }
+  Drafts.get(req.params.userId, id, function(err, draft) {
+    if(_.isEmpty(draft)) {
+      res.jsonp(404, {message: 'Draft with id ' + id + ' not found'});
+    } else {
+      req.draft = draft;
+      next();
+    }
+  });
 };
 
 exports.readAllDrafts = function(req, res) {
-  res.jsonp(_.values(drafts));
+  Drafts.getAll(req.params.userId, function(err, drafts){
+    res.jsonp(drafts);
+  });
 };
 
 exports.createDraft = function(req, res) {
