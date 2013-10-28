@@ -12,7 +12,6 @@ var Drafts = require('../models/draft.js');
 var SoldProducts = require('../models/soldProduct.js');
 var UnsoldProducts = require('../models/unsoldProduct.js');
 
-
 var users = {
   1: {
     id: 1,
@@ -174,7 +173,7 @@ exports.findDraftById = function(req, res, next, id) {
 };
 
 exports.readAllDrafts = function(req, res) {
-  Drafts.getAll(req.params.userId, function(err, drafts){
+  Drafts.getAll(req.params.userId, function(err, drafts) {
     res.jsonp(drafts);
   });
 };
@@ -418,7 +417,7 @@ exports.findBillAddressById = function(req, res, next, id) {
 exports.readAllBillAddresses = function(req, res) {
   BillingAddresses.getAll(req.params.userId, function(err, billingAddresses) {
     res.jsonp(billingAddresses);
-   });
+  });
 };
 
 exports.createBillAddress = function(req, res) {
@@ -471,6 +470,7 @@ var notifications = {
   }
 };
 
+var Notification = require('../models/notification.js');
 exports.findNotificationById = function(req, res, next, id) {
   if(!notifications[+id]) {
     res.jsonp(404, {message: 'Notification Not Found'});
@@ -481,7 +481,9 @@ exports.findNotificationById = function(req, res, next, id) {
 };
 
 exports.readAllNotifications = function(req, res) {
-  res.jsonp(_.values(notifications));
+  Notification.getAll(req.params.userId, function(err, notifications) {
+    res.jsonp(notifications);
+  });
 };
 
 exports.createNotification = function(req, res) {
@@ -719,8 +721,6 @@ exports.findSoldProductById = function(req, res, next, id) {
       next();
     }
   });
-
-
 
 };
 
