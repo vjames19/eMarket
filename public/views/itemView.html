@@ -29,26 +29,26 @@
 
     <ul data-role="listview" data-theme="c" data-inset="true">
       <li>
-        <p class="item-description-text-size"> Starting bid: {{ item.productStartingBidPrice | currency }}</p>
+        <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
 
         <p class="item-description-text-size"> Current bid: {{ item.productCurrentBidPrice | currency }} </p>
 
-        <p class="item-description-text-size"> Buy it Now: {{ item.productBuyItNowPrice | currency }} </p>
+        <p class="item-description-text-size"> Buy it Now: {{ item.nonBidPrice | currency }} </p>
 
-        <p class="item-description-text-size"> Shipping: {{ item.productShippingPrice | currency }} </p>
+        <p class="item-description-text-size"> Shipping: {{ item.shippingPrice | currency }} </p>
 
-        <p class="item-description-text-size"> Available Quantity: {{ item.productQuantity }} </p>
+        <p class="item-description-text-size"> Available Quantity: {{ item.quantity }} </p>
       </li>
       <li>
         <p class="item-description-text-size">
           <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
 
-        <p class="item-description-text-size"> End Date: {{ item.productBidEndDate | date }} </p>
+        <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date }} </p>
         <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
         <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
       </li>
       <li>
-        <p class="item-description-text-size"> Condition: {{ item.productDescription.productCondition }} </p>
+        <p class="item-description-text-size"> Condition: {{ item.condition }} </p>
       </li>
       <li>
         <p class="item-description-text-size">
@@ -59,7 +59,7 @@
               Brand:
             </td>
             <td>
-              {{item.productDescription.productBrand}}
+              {{item.brand}}
             </td>
           </tr>
           <tr>
@@ -67,7 +67,7 @@
               Model:
             </td>
             <td>
-              {{ item.productDescription.productModel}}
+              {{ item.model}}
             </td>
           </tr>
           <tr>
@@ -75,16 +75,24 @@
               Dimensions:
             </td>
             <td>
-              {{item.productDescription.productDimensions}}
+              {{item.dimensions}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Additional Description:
+            </td>
+            <td>
+              {{item.description}}
             </td>
           </tr>
 
         </table>
         </p>
       </li>
-      <!--<li>-->
-      <!--<p class="item-description-text-size"> Seller: {{ item.productSeller }} </p>-->
-      <!--</li>-->
+      <li>
+      <p class="item-description-text-size"> Seller: {{ item.sellerId }} </p>
+      </li>
     </ul>
   </div>
 

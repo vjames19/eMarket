@@ -8,6 +8,7 @@ var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
 var ShoppingCarts = require('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
+var SoldProducts = require('../models/soldProduct.js');
 
 var users = {
   1: {
@@ -703,16 +704,23 @@ var soldProducts = {
 };
 
 exports.findSoldProductById = function(req, res, next, id) {
-  if(!soldProducts[+id]) {
-    res.jsonp(404, {message: 'Sold Product Not Found'});
-  } else {
-    req.soldProduct = soldProducts[+id];
-    next();
-  }
+  SoldProducts.get(req.params.userId, id, function(err, soldProduct) {
+    if(_.isEmpty(soldProduct)) {
+      res.jsonp(404, {message: 'Sold Product with id ' + id + ' not found'});
+    } else {
+      req.soldProduct = soldProduct;
+      next();
+    }
+  });
+
+
+
 };
 
 exports.readAllSoldProducts = function(req, res) {
-  res.jsonp(_.values(soldProducts));
+  SoldProducts.getAll(req.params.userId, function(err, soldProducts) {
+    res.jsonp(soldProducts);
+  });
 };
 
 exports.createSoldProduct = function(req, res) {
