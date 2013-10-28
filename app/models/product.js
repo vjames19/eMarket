@@ -8,7 +8,7 @@ var DICTIONARY = {
   'product_seller_id': 'sellerId',
   'product_creation_date': 'creationDate',
   'product_spec_category_id': 'categoryId',
-  'product_spec_name': 'name',
+  'product_spec_name': 'productName',
   'product_spec_nonbid_price': 'nonBidPrice',
   'product_spec_starting_bid_price': 'startingBidPrice',
   'product_spec_bid_end_date': 'bidEndDate',
