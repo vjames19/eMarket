@@ -6,6 +6,7 @@ var mapper = require('../mapper');
 var DICTIONARY = {
   'cart_id': 'id',
   'cart_item_quantity': 'itemQuantity',
+  'user_login_user_name': 'sellerName',
   'product_seller_id': 'sellerId',
   'product_creation_date': 'creationDate',
   'product_spec_category_id': 'categoryId',
@@ -34,11 +35,11 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT cart_id, product_info.*, product_specification.*, product_spec_nonbid_price * cart_item_quantity AS product_total_price, ' +
-              'cart_item_quantity ' +
-              'FROM cart_history INNER JOIN cart_item_history INNER JOIN product_info INNER JOIN product_specification ' +
+    var sql = 'SELECT cart_id, cart_item_quantity, user_login_user_name, product_info.*, product_specification.*, ' +
+              'product_spec_nonbid_price * cart_item_quantity AS product_total_price ' +
+              'FROM cart_history INNER JOIN cart_item_history INNER JOIN product_info INNER JOIN user_login_info INNER JOIN product_specification ' +
               'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id ' +
-              'AND product_info_spec_id = product_spec_id) ' +
+              'AND product_seller_id = user_login_id AND product_info_spec_id = product_spec_id) ' +
               'WHERE cart_user_id = ?';
     connection.query(sql, [userId], function(err, shoppingCarts) {
       if(err) {
@@ -55,12 +56,12 @@ module.exports.getAll = function(userId, callback) {
 
 module.exports.get = function(userId, cartId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT cart_id, product_info.*, product_specification.*, product_spec_nonbid_price * cart_item_quantity AS product_total_price, ' +
-              'cart_item_quantity ' +
-              'FROM cart_history INNER JOIN cart_item_history INNER JOIN product_info INNER JOIN product_specification ' +
+    var sql = 'SELECT cart_id, cart_item_quantity, user_login_user_name, product_info.*, product_specification.*, ' +
+              'product_spec_nonbid_price * cart_item_quantity AS product_total_price ' +
+              'FROM cart_history INNER JOIN cart_item_history INNER JOIN product_info INNER JOIN user_login_info INNER JOIN product_specification ' +
               'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id ' +
-              'AND product_info_spec_id = product_spec_id) ' +
-              'WHERE cart_user_id = ?  AND cart_id = cartId';
+              'AND product_seller_id = user_login_id AND product_info_spec_id = product_spec_id) ' +
+              'WHERE cart_user_id = ? AND cart_id = ?';
     connection.query(sql, [userId, cartId], function(err, shoppingCart) {
       callback(err, mapper.map(shoppingCart[0], DICTIONARY));
     });
