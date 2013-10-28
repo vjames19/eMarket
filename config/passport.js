@@ -1,48 +1,32 @@
 'use strict';
 
-var LocalStrategy = require('passport-local').Strategy;//,
-//    config = require('./config');
-// TODO: Require the user model here.
-
+var LocalStrategy = require('passport-local').Strategy;
+var User = require('../app/models/user.js');
+var _ = require('underscore');
 module.exports = function(passport) {
-  // TODO: Serialize sessions
-  var users = {
-    'user': {
-      username: 'user',
-      password: 'password',
-      id: 1
-    },
-    'admin': {
-      username: 'admin',
-      password: 'password',
-      id: 0
-    }
-  };
-
   passport.serializeUser(function(user, done) {
-    done(null, user.username);
+    done(null, user.id);
   });
 
-  passport.deserializeUser(function(username, done) {
-    if(users[username]) {
-      done(null, users[username]);
-    } else {
-      done('exploto como siqui', null);
-    }
+  passport.deserializeUser(function(id, done) {
+    User.get(id, function(err, user) {
+      if(_.isEmpty(user)) {
+        done(null, false)
+      } else {
+        done(null, user);
+      }
+    });
   });
 
   //Use local strategy
-  passport.use(new LocalStrategy({
-        usernameField: 'username',
-        passwordField: 'password'
-      },
+  passport.use(new LocalStrategy({usernameField: 'username', passwordField: 'password'},
       function(username, password, done) {
-        var user = users[username];
-        if(user && user.password === password) {
-          done(null, user);
-        } else {
-          done({message: 'Authentication: Incorrect user or password'}, null);
-        }
-      }
-  ));
+        User.authenticate(username, password, function(err, user) {
+          if(err) {
+            done(err);
+          } else {
+            done(null, user);
+          }
+        });
+      }));
 };
