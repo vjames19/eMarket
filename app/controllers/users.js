@@ -9,6 +9,8 @@ var Ratings = require('../models/rating.js');
 var ShoppingCarts = require('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
 var SoldProducts = require('../models/soldProduct.js');
+var UnsoldProducts = require('../models/unsoldProduct.js');
+
 
 var users = {
   1: {
@@ -804,16 +806,20 @@ var unsoldProducts = {
 };
 
 exports.findUnsoldProductById = function(req, res, next, id) {
-  if(!unsoldProducts[+id]) {
-    res.jsonp(404, {message: 'Unsold Product Not Found'});
-  } else {
-    req.unsoldProduct = unsoldProducts[+id];
-    next();
-  }
+  UnsoldProducts.get(req.params.userId, id, function(err, unsoldProduct) {
+    if(_.isEmpty(unsoldProduct)) {
+      res.jsonp(404, {message: 'Mailing Address with id ' + id + ' not found'});
+    } else {
+      req.unsoldProduct = unsoldProduct;
+      next();
+    }
+  });
 };
 
 exports.readAllUnsoldProducts = function(req, res) {
-  res.jsonp(_.values(unsoldProducts));
+  UnsoldProducts.getAll(req.params.userId, function(err, unsoldProducts) {
+    res.jsonp(unsoldProducts);
+  });
 };
 
 exports.createUnsoldProduct = function(req, res) {
