@@ -20,7 +20,7 @@ var DICTIONARY = {
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
   'user_login_user_name': 'buyerName',
-  'invoice_item_quantity': 'purchasedQuantity',
+  'invoice_item_quantity': 'soldQuantity',
   'invoice_item_sold_price': 'soldPrice'
 };
 

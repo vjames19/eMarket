@@ -22,7 +22,33 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">
       <li data-role="list-divider">Sold</li>
       <li ng-repeat="soldProduct in soldProducts">
-        <a href="#item-view" ng-click="setItem(soldProduct)" data-transition="slide">{{soldProduct.productName}}</a>
+
+        <a href="#item-view" class="wrap-text" ng-click="setItem(soldProduct)" data-transition="slide">
+          <img src="img/shopping-cart.png" class="center-image">
+          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+            <thead>
+              <tr>
+                <th colspan="2" style="text-align: center">
+                  <strong><abbr title="{{soldProduct.productName}}">{{soldProduct.productName | truncate:15}}</abbr></strong>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sold Quantity</strong></td>
+                <td><em>{{soldProduct.soldQuantity}}</em></td>
+              </tr>
+              <tr>
+                <td><strong>Sold Price</strong></td>
+                <td><em>{{soldProduct.soldPrice | currency}}</em></td>
+              </tr>
+              <tr>
+                <td><strong>Buyer Name</strong></td>
+                <td><em>{{ soldProduct.buyerName }}</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </a>
       </li>
 
       <li data-role="list-divider">Unsold</li>
