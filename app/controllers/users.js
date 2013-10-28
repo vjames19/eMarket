@@ -11,6 +11,7 @@ var ShoppingCarts = require('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
 var SoldProducts = require('../models/soldProduct.js');
 var UnsoldProducts = require('../models/unsoldProduct.js');
+var PurchaseHistory = require('../models/purchasehistory.js');
 
 var users = {
   1: {
@@ -1119,16 +1120,21 @@ var purchases = {
 };
 
 exports.findPurchaseById = function(req, res, next, id) {
-  if(!purchases[+id]) {
-    res.jsonp(404, {message: 'Purchased Item Not Found'});
-  } else {
-    req.purchase = purchases[+id];
-    next();
-  }
+  PurchaseHistory.get(req.params.userId, id, function(err, purchase) {
+    if(_.isEmpty(purchase)) {
+      res.jsonp(404, {message: 'Purchase with id ' + id + ' not found'});
+    }
+    else {
+      req.purchase = purchase;
+      next();
+    }
+  });
 };
 
 exports.readAllPurchases = function(req, res) {
-  res.jsonp(_.values(purchases));
+  PurchaseHistory.getAll(req.params.userId, function(err, purchases) {
+    res.jsonp(purchases);
+  });
 };
 
 exports.createPurchase = function(req, res) {
