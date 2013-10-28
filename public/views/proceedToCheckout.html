@@ -1,0 +1,64 @@
+<div data-role="page" data-theme="b" id="checkout">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Checkout</h1>
+
+    <!--go back to the index page data-rel="back" reverse the transition back -->
+    <a href="#shopping-cart" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+  </div>
+
+  <div data-role="content">
+    <form>
+      <div data-role="fieldcontain">
+        <label for="select-payment-method"><strong> Select Payment Method </strong></label>
+        <select name="select-payment-method" id="select-payment-method" ng-model="type" ng-options="paymentMethod.value for paymentMethod in paymentMethods" ng-change="selectedPaymentMethod(type)">
+        </select>
+      </div>
+
+      <div data-role="fieldcontain">
+        <label for="select-bank-card"><strong> Select Card/Bank </strong></label>
+        <select name="select-bank-card" id="select-bank-card" ng-model="selectedOption" ng-options="bankOrCard.bankName for bankOrCard in banksOrCards">
+        </select>
+      </div>
+
+    </form>
+
+    <div>
+      <table align="right">
+        <tr>
+          <td align="left">
+            Total Items({{shoppingCarts.length}}):
+          </td>
+          <td align="right">
+            {{cost | currency}}
+          </td>
+          <td align="left">
+        </tr>
+        <tr>
+          <td>
+            Shipping:
+          </td>
+          <td align="right" class="line">
+            {{shipping | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td align="left">
+            Amount to pay:
+          </td>
+          <td align="right">
+            {{cost + shipping | currency}}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+  </div>
+
+
+
+  <div data-role="footer" data-theme="a">
+    <button type="submit" data-icon="check" data-theme="a" class="footer-button">Checkout</button>
+  </div>
+</div>
