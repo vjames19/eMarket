@@ -9,7 +9,9 @@ var DICTIONARY = {
   'user_middle_name': 'middleName',
   'user_last_name': 'lastName',
   'user_telephone': 'telephone',
+  'user_login_email': 'email',
   'user_creation_date': 'creationDate'
+
 };
 
 //var WHITELIST = [];
@@ -22,8 +24,9 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT user_info.* FROM user_info INNER JOIN user_account_status ' +
-        'ON user_info.user_id = user_account_status.user_account_id ' +
+    var sql = 'SELECT user_info.*, user_login_email ' +
+        'FROM user_info INNER JOIN user_account_status INNER JOIN user_login_info ' +
+        'ON user_info.user_id = user_account_status.user_account_id AND user_id = user_login_id ' +
         'WHERE user_account_status=1';
     connection.query(sql, function(err, users) {
       if(err) {
@@ -40,8 +43,9 @@ module.exports.getAll = function(callback) {
 
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT user_info.* FROM user_info INNER JOIN user_account_status ' +
-        'ON user_info.user_id = user_account_status.user_account_id ' +
+    var sql = 'SELECT user_info.*, user_login_email ' +
+        'FROM user_info INNER JOIN user_account_status INNER JOIN user_login_info ' +
+        'ON user_info.user_id = user_account_status.user_account_id AND user_id = user_login_id ' +
         'WHERE user_id = ? AND user_account_status=1';
     connection.query(sql, [id], function(err, users) {
       callback(err, mapper.map(users[0], DICTIONARY));

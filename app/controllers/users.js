@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var Users = require('../models/user.js');
 var MailingAddresses = require('../models/mailingAddress.js');
 var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
@@ -60,19 +61,23 @@ var users = {
 };
 
 exports.findUserById = function(req, res, next, id) {
-  if(!users[+id]) {
-    res.jsonp(404, {message: 'User not found'});
-  } else {
-    req.user = users[+id];
-    next();
-  }
+  Users.get(id, function(err, user) {
+    if(_.isEmpty(user)) {
+      res.jsonp(404, {message: 'User with id ' + id + ' not found'});
+    } else {
+      req.user = user;
+      next();
+    }
+  });
 };
 
 /**
  * List of users
  */
 exports.readAllUsers = function(req, res) {
-  res.jsonp(_.values(users));
+  Users.getAll(function(err, users) {
+    res.jsonp(users);
+  });
 };
 
 /**
