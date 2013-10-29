@@ -32,7 +32,8 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM product_info JOIN product_specification ' +
+    var sql = 'SELECT * ' +
+        'FROM product_info INNER JOIN product_specification ' +
         'ON (product_info.product_info_spec_id=product_specification.product_spec_id) ' +
         'WHERE product_specification.product_spec_is_draft=0;';
     connection.query(sql, function(err, products) {
@@ -46,16 +47,40 @@ module.exports.getAll = function(callback) {
       }
     });
   });
-
 };
 
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM product_info JOIN product_specification ' +
+    var sql = 'SELECT * ' +
+        'FROM product_info INNER JOIN product_specification ' +
         'ON (product_info.product_info_spec_id=product_specification.product_spec_id) ' +
         'WHERE product_specification.product_spec_is_draft=0 AND product_info.product_id = ?';
     connection.query(sql, [id], function(err, products) {
       callback(err, mapper.map(products[0], DICTIONARY));
+    });
+  });
+};
+
+module.exports.search = function(query, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'SELECT * ' +
+        'FROM product_info INNER JOIN product_specification ' +
+        'ON (product_info.product_info_spec_id=product_specification.product_spec_id) ' +
+        'WHERE product_specification.product_spec_is_draft=0 ' +
+        'AND (product_spec_name LIKE ? ' +
+        'OR product_spec_brand LIKE ? ' +
+        'OR product_spec_model LIKE ?);';
+    query = '%' + query + '%';
+    connection.query(sql, [query, query, query], function(err, products) {
+      console.log('model search', arguments);
+      if(err) {
+        callback(err);
+      } else {
+        products = _.map(products, function(product) {
+          return mapper.map(product, DICTIONARY);
+        });
+        callback(null, products);
+      }
     });
   });
 };

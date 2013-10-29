@@ -196,6 +196,8 @@ module.exports = function(app, passport, auth) {
   app.put('/api/reports/:reportId', admins.updateReport);
   app.del('/api/reports/:reportId', admins.deleteReport);
 
+  var search = require('../app/controllers/search.js');
+  app.get('/api/search', search.searchProduct);
   // Should always be the last route.
   // TODO: Find a better way to redirect.
   //  app.get('*', function(req, res) {
