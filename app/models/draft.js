@@ -10,6 +10,7 @@ var DICTIONARY = {
   'product_draft_update_date': 'updateDate',
   'product_draft_closed_date': 'closedDate',
   'product_spec_category_id': 'categoryId',
+  'category_name': 'categoryName',
   'product_spec_name': 'productName',
   'product_spec_nonbid_price': 'nonbidPrice',
   'product_spec_starting_bid_price': 'startingBidPrice',

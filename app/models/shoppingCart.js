@@ -6,8 +6,8 @@ var mapper = require('../mapper');
 var DICTIONARY = {
   'cart_id': 'id',
   'cart_item_quantity': 'itemQuantity',
-  'seller_name': 'sellerName',
   'product_seller_id': 'sellerId',
+  'seller_name': 'sellerName',
   'product_creation_date': 'creationDate',
   'product_spec_category_id': 'categoryId',
   'category_name': 'categoryName',
