@@ -1,5 +1,6 @@
-SELECT *, 
-(SELECT bid_amount 
+-- GET
+SELECT *,
+(SELECT bid_amount
 FROM bid_history INNER JOIN product_info as P
 ON(bid_product_id=P.product_id)
 WHERE P.product_id=pi.product_id
