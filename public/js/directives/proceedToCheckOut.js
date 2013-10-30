@@ -7,25 +7,28 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, Resta
     scope: true,
     replace: true,
     link: function(scope, elem) {
+      scope.paymentMethods = ['Bank', 'Credit Card'];
+      scope.paymentMethod = scope.paymentMethods[1];
+      scope.isCreditCard = true;
 
-      scope.paymentMethods = [
-        {
-          value: 'Bank'
-        },
-        {
-          value: 'Credit Card'
-        }
-      ];
+      var page = $(elem[0]);
+      page.on('pagebeforeshow', function() {
+        User.me().getList('creditCards').then(function(creditCardsList) {
+          scope.cards = creditCardsList;
+        });
+      });
 
-      scope.selectedPaymentMethod = function(paymentMethod) {
-        if(paymentMethod.value === 'Bank') {
+      scope.selectPaymentMethod = function() {
+        if(scope.paymentMethod === 'Bank') {
+          scope.isCreditCard = false;
           User.me().getList('banks').then(function(bankAccountsList) {
-            scope.banksOrCards = bankAccountsList;
+            scope.banks = bankAccountsList;
           });
         }
         else {
+          scope.isCreditCard = true;
           User.me().getList('creditCards').then(function(creditCardsList) {
-            scope.banksOrCards = creditCardsList;
+            scope.cards = creditCardsList;
           });
         }
       }
