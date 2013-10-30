@@ -32,15 +32,13 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT product_info.*, product_specification.* ' +
-        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN product_info ' +
-        'INNER JOIN product_specification ' +
+    var sql = 'SELECT products.* ' +
+        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
         'ON (user_id=invoice_user_id ' +
         'AND invoice_item_invoice_id=invoice_id ' +
-        'AND invoice_item_product_id=product_id ' +
-        'AND product_info_spec_id=product_spec_id) ' +
+        'AND invoice_item_product_id=product_id) ' +
         'WHERE user_id=? ' +
-        'ORDER BY invoice_creation_date DESC';
+        'ORDER BY invoice_creation_date DESC'
     connection.query(sql, [userId], function(err, products) {
       if(err) {
         callback(err);
@@ -57,15 +55,14 @@ module.exports.getAll = function(userId, callback) {
 
 module.exports.get = function(userId, invoiceItemId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT product_info.*, product_specification.* ' +
-        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN product_info ' +
-        'INNER JOIN product_specification ' +
+    var sql = 'SELECT products.* ' +
+        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
         'ON (user_id=invoice_user_id ' +
         'AND invoice_item_invoice_id=invoice_id ' +
-        'AND invoice_item_product_id=product_id ' +
-        'AND product_info_spec_id=product_spec_id) ' +
+        'AND invoice_item_product_id=product_id) ' +
         'WHERE user_id=? AND invoice_item_id=? ' +
-        'ORDER BY invoice_creation_date DESC';
+        'ORDER BY invoice_creation_date DESC'
+
     connection.query(sql, [userId, invoiceItemId], function(err, products) {
       callback(err, mapper.map(products[0], DICTIONARY));
     });
