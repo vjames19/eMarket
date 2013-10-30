@@ -19,7 +19,7 @@
 
     <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
        data-position-to="window" data-transition="pop">
-      <p class="item-button-text-size">Place bid US {{ item.productCurrentBidPrice + 5 | currency }}</p>
+      <p class="item-button-text-size">Place bid US {{ item.currentBid + 5 | currency }}</p>
     </a>
     <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup"
        data-position-to="window" data-transition="pop">
@@ -31,7 +31,7 @@
       <li>
         <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
 
-        <p class="item-description-text-size"> Current bid: {{ item.productCurrentBidPrice | currency }} </p>
+        <p class="item-description-text-size"> Current bid: {{ item.currentBid | currency }} </p>
 
         <p class="item-description-text-size"> Buy it Now: {{ item.nonbidPrice | currency }} </p>
 
