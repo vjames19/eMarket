@@ -38,7 +38,7 @@ module.exports.getAll = function(userId, callback) {
         'AND invoice_item_invoice_id=invoice_id ' +
         'AND invoice_item_product_id=product_id) ' +
         'WHERE user_id=? ' +
-        'ORDER BY invoice_creation_date DESC'
+        'ORDER BY invoice_creation_date DESC';
     connection.query(sql, [userId], function(err, products) {
       if(err) {
         callback(err);
@@ -61,7 +61,7 @@ module.exports.get = function(userId, invoiceItemId, callback) {
         'AND invoice_item_invoice_id=invoice_id ' +
         'AND invoice_item_product_id=product_id) ' +
         'WHERE user_id=? AND invoice_item_id=? ' +
-        'ORDER BY invoice_creation_date DESC'
+        'ORDER BY invoice_creation_date DESC';
 
     connection.query(sql, [userId, invoiceItemId], function(err, products) {
       callback(err, mapper.map(products[0], DICTIONARY));
