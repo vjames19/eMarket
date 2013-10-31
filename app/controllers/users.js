@@ -13,6 +13,7 @@ var SoldProducts = require('../models/soldProduct.js');
 var UnsoldProducts = require('../models/unsoldProduct.js');
 var PurchaseHistory = require('../models/purchasehistory.js');
 var BrowsedItems = require('../models/recentlyViewed.js');
+var Bids = require('../models/bid.js');
 
 var users = {
   1: {
@@ -956,16 +957,21 @@ var bids = {
 };
 
 exports.findUserBidById = function(req, res, next, id) {
-  if(!bids[+id]) {
-    res.jsonp(404, {message: 'User Bid Not Found'});
-  } else {
-    req.bid = bids[+id];
-    next();
-  }
+  Bids.get(req.params.userId, id, function(err, bid) {
+    if(_.isEmpty(bid)) {
+      res.jsonp(404, {message: 'Shopping Cart with id ' + id + ' not found'});
+    }
+    else {
+      req.bid = bid;
+      next();
+    }
+  });
 };
 
 exports.readAllUserBids = function(req, res) {
-  res.jsonp(_.values(bids));
+  Bids.getAll(req.params.userId, function(err, bids) {
+    res.jsonp(bids);
+  });
 };
 
 exports.createUserBid = function(req, res) {

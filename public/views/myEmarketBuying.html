@@ -21,31 +21,34 @@
   <div data-role="content">
 
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">
-      <li data-role="list-divider">Bidding</li>
+      <li data-role="list-divider">Bidding<span class="ui-li-count">{{bids.length}}</span></li>
       <li ng-repeat="bid in bids">
         <a href="#item-view" class="wrap-text" ng-click="selectedBid(bid)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">
-          <table class="small-text">
+          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+            <thead>
             <tr>
-              <td><strong>Product</strong></td>
-              <td class="pad"></td>
-              <td><em>{{ bid.productName }}</em></td>
+              <th colspan="2" style="text-align: center">
+                <strong><abbr title="{{bid.productName}}">{{bid.productName |
+                  truncate:15}}</abbr></strong>
+              </th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
-              <td><strong>Bid Amount</strong></td>
-              <td class="pad"></td>
-              <td><em>{{ bid.bidAmount | currency }}</em></td>
+              <td><strong>Amount</strong></td>
+              <td><em>{{bid.highestBid | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Bid Time</strong></td>
-              <td class="pad"></td>
-              <td><em>{{ bid.bidTime }}</em></td>
+              <td><em>{{bid.creationDate | date:'medium'}}</em></td>
             </tr>
+            </tbody>
           </table>
         </a>
       </li>
 
-      <li data-role="list-divider">Purchase History</li>
+      <li data-role="list-divider">Purchase History <span class="ui-li-count">{{purchases.length}}</span></li>
       <li ng-repeat="purchase in purchases">
         <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)" data-transition="slide">
           <img src="img/shopping-cart.png" class="item-image">{{purchase.productName}}
