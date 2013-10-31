@@ -16,13 +16,13 @@
         </select>
       </div>
 
-      <div data-role="fieldcontain" ng-show="isBank">
+      <div data-role="fieldcontain" ng-hide="isCreditCard">
         <label for="select-bank"><strong> Select Bank </strong></label>
         <select name="select-bank" id="select-bank" ng-model="selectedBank"
                 ng-options="bank.bankName for bank in banks">
         </select>
       </div>
-      <div data-role="fieldcontain" ng-hide="isBank">
+      <div data-role="fieldcontain" ng-show="isCreditCard">
         <label for="select-card"><strong> Select Card </strong></label>
         <select name="select-card" id="select-card" ng-model="selectedCard"
                 ng-options="card.cardNumber for card in cards">
