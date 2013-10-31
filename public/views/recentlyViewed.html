@@ -12,10 +12,30 @@
 
   <div data-role="content">
     <ul data-role="listview" data-theme="c" data-inset="true" id="recentlyViewedList">
-      <li data-role="list-divider">Last 5 Items</li>
+      <li data-role="list-divider">Last 10 Items</li>
       <li ng-repeat="item in recentlyViewed">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
-          <img src="img/shopping-cart.png" class="item-image">{{ item.productName }}
+          <img src="img/shopping-cart.png" class="item-image">
+          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+            <thead>
+            <tr>
+              <th colspan="2" style="text-align: center">
+                <strong><abbr title="{{item.productName}}">{{item.productName |
+                  truncate:15}}</abbr></strong>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><strong>Current Bid</strong></td>
+              <td><em>{{item.currentBid | currency}}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Price</strong></td>
+              <td><em>{{item.nonbidPrice | currency}}</em></td>
+            </tr>
+            </tbody>
+          </table>
         </a>
       </li>
     </ul>

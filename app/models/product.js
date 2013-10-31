@@ -22,7 +22,7 @@ var DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
-  'curren_bid': 'currentBid'
+  'current_bid': 'currentBid'
 };
 
 //var WHITELIST = [];
