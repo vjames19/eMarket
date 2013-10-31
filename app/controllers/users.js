@@ -12,6 +12,7 @@ var Drafts = require('../models/draft.js');
 var SoldProducts = require('../models/soldProduct.js');
 var UnsoldProducts = require('../models/unsoldProduct.js');
 var PurchaseHistory = require('../models/purchasehistory.js');
+var BrowsedItems = require('../models/recentlyViewed.js');
 
 var users = {
   1: {
@@ -1039,16 +1040,22 @@ var browsedItems =
 };
 
 exports.findBrowsedItemById = function(req, res, next, id) {
-  if(!browsedItems[+id]) {
-    res.jsonp(404, {message: 'Browsed Item Not Found'});
-  } else {
-    req.browsedItem = browsedItems[+id];
-    next();
-  }
+  BrowsedItems.get(req.params.userId, id, function(err, browsedItem) {
+    if(_.isEmpty(browsedItem)) {
+      res.jsonp(404, {message: 'Browsed Item with id ' + id + ' not found'});
+    }
+    else {
+      req.browsedItem = browsedItem;
+      next();
+    }
+  });
 };
 
 exports.readAllBrowsedItems = function(req, res) {
-  res.jsonp(_.values(browsedItems));
+  BrowsedItems.getAll(req.params.userId, function(err, browsedItems) {
+    res.jsonp(browsedItems);
+  });
+
 };
 
 exports.createBrowsedItem = function(req, res) {
