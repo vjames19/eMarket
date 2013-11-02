@@ -14,6 +14,7 @@ var UnsoldProducts = require('../models/unsoldProduct.js');
 var PurchaseHistory = require('../models/purchasehistory.js');
 var BrowsedItems = require('../models/recentlyViewed.js');
 var Bids = require('../models/bid.js');
+var QuestionsAnswers = require('../models/securityQuestionAnswer.js');
 
 var users = {
   1: {
@@ -115,6 +116,62 @@ exports.deleteUser = function(req, res) {
   delete users[req.user.userId];
   res.jsonp(req.user);
 };
+
+
+
+// Security Questions
+exports.findQuestionAnswerById = function(req, res, next, id) {
+  QuestionsAnswers.get(req.params.userId, id, function(err, questionAnswer) {
+    if(_.isEmpty(questionAnswer)) {
+      res.jsonp(404, {message: 'User with id ' + id + ' not found'});
+    } else {
+      req.questionAnswer = questionAnswer;
+      next();
+    }
+  });
+};
+
+/**
+ * List of questions and answers
+ */
+exports.readAllQuestionsAnswers = function(req, res) {
+  QuestionsAnswers.getAll(req.params.userId, function(err, questionsAnswers) {
+    res.jsonp(questionsAnswers);
+  });
+};
+
+/**
+ * Create a a question with answer
+ */
+exports.createQuestionAnswer = function(req, res) {
+
+};
+
+/**
+ * Read a question and answer
+ */
+exports.readQuestionAnswer = function(req, res) {
+  res.jsonp(req.questionAnswer);
+};
+
+/**
+ * Update a question and answer
+ */
+exports.updateQuestionAnswer = function(req, res) {
+
+
+};
+
+/**
+ * Delete a question and answer
+ */
+exports.deleteQuestionAnswer = function(req, res) {
+
+
+};
+
+
+
 
 // Drafts
 var drafts = {

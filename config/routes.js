@@ -131,6 +131,14 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/ratings', users.readAllRatings);
   app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
 
+  // User Question and Answer Routes
+  app.param('questionAnswerId', users.findQuestionAnswerById);
+  app.get('/api/users/:userId/questionsAnswers', users.readAllQuestionsAnswers);
+  app.post('/api/users/:userId/questionsAnswers', users.createQuestionAnswer);
+  app.get('/api/users/:userId/questionsAnswers/:questionAnswerId', users.readQuestionAnswer);
+  app.put('/api/users/:userId/questionsAnswers/:questionAnswerId', users.updateQuestionAnswer);
+  app.del('/api/users/:userId/questionsAnswers/:questionAnswerId', users.deleteQuestionAnswer);
+
   //=================NON USER ROUTES================//
 
   // Category Routes //============COMMENTS BELOW ARE TEMPORARILY TO TEST==========//
@@ -204,4 +212,6 @@ module.exports = function(app, passport, auth) {
   //    //    res.redirect(404, '/');
   //    res.redirect('/');
   //  });
+
+
 };
