@@ -6,6 +6,9 @@ angular.module('eMarketApp')
         templateUrl: 'views/homeAdmin.html',
         restrict: 'E',
         scope: {},
-        replace: true
+        replace: true,
+        controller: function($scope, Auth) {
+          $scope.logOut = Auth.logOut;
+        }
       };
     });
