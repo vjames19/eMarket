@@ -95,6 +95,10 @@ angular.module('eMarketApp').directive('profile', function(User) {
           });
         });
 
+        user.getList('avgRating').then(function (avg) {
+          scope.rating = avg;
+        });
+
         user.getList('ratings').then(function(ratings) {
           scope.ratings = ratings;
           setTimeout(function() {
@@ -104,22 +108,13 @@ angular.module('eMarketApp').directive('profile', function(User) {
                 return $(this).attr('data-score');
               },
               half: true,
-              size: 10,
+              size: 12,
+              readOnly: true,
               path: '../lib/raty/lib/img'
             });
             ratingList.listview('refresh');
           });
         });
-
-
-        scope.getStars = function(ratingValue) {
-          var stars = '';
-          for(var i = 0; i < ratingValue; i++) {
-            stars += '*';
-          }
-          return stars;
-        };
-
       });
     }
   };

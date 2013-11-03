@@ -6,7 +6,8 @@ var mapper = require('../mapper');
 var DICTIONARY = {
   'rating_id': 'id',
   'user_login_user_name': 'raterName',
-  'rating_value': 'rating'
+  'rating_value': 'rating',
+  'rating_avg': 'avgRating'
 };
 
 //var WHITELIST = [];
@@ -49,3 +50,17 @@ module.exports.get = function(userId, ratingId, callback) {
     });
   });
 };
+
+module.exports.getAvgRating = function(userId, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'SELECT rating_rated_user_id, AVG(rating_value) AS rating_avg ' +
+              'FROM rating_history ' +
+              'WHERE rating_rated_user_id = ? ' +
+              'GROUP BY rating_rated_user_id';
+    connection.query(sql, [userId], function(err, rating) {
+      callback(err, mapper.map(rating[0], DICTIONARY));
+    });
+  });
+};
+
+

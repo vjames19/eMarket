@@ -4,7 +4,11 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, Resta
   return {
     templateUrl: 'views/proceedToCheckout.html',
     restrict: 'E',
-    scope: true,
+    scope: {
+      itemsAmount: '=',
+      cost: '=',
+      shipping: '='
+    },
     replace: true,
     link: function(scope, elem) {
       scope.paymentMethods = ['Bank', 'Credit Card'];

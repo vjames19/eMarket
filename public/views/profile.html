@@ -12,8 +12,6 @@
 
   <div data-role="content">
 
-    <div class="star" data-score="3"></div>
-
     <form data-ajax="false" ng-submit="submitUser()">
       <div data-role="collapsible">
         <h2>Edit Profile Information</h2>
@@ -179,7 +177,7 @@
       <div data-role="collapsible" data-iconpos="bottom" data-theme="b" data-content-theme="c">
         <h2>My Ratings</h2>
         <ul data-role="listview" data-theme="c" data-divider-theme="e" id="ratingList">
-          <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count">****</span></li>
+          <li data-role="list-divider">Total Average User Rating:<span class="ui-li-count"> <div class="star" data-score="rating.avgRating"></div></span></li>
           <li ng-repeat="rating in ratings" data-icon="false">
             <a href="#">
               <table>

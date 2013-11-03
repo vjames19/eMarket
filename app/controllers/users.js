@@ -1280,6 +1280,13 @@ exports.readAllRatings = function(req, res) {
   });
 };
 
+
 exports.readRating = function(req, res) {
   res.jsonp(req.rating);
+};
+
+exports.readAvgRating = function (req, res) {
+  Ratings.getAvgRating(req.params.userId, function(err, avgRating) {
+    res.jsonp(avgRating);
+  });
 };
