@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('invoices', function(User, Restangular) {
+angular.module('eMarketApp').directive('invoices', function(User) {
   return {
     templateUrl: 'views/invoices.html',
     restrict: 'E',

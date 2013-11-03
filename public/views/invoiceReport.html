@@ -2,11 +2,39 @@
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Invoice Report</h1>
 
-    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <a href="#invoices" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <search></search>
 
   </div>
 
   <div data-role="content">
+
+    <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">
+      <li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>
+      <li ng-repeat="invoiceProduct in invoiceProducts">
+        <img src="img/shopping-cart.png" class="center-image">
+        <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+          <thead>
+          <tr>
+            <th colspan="2" style="text-align: center">
+              <strong><abbr title="{{invoiceProduct.productName}}">{{invoiceProduct.productName | truncate:15}}</abbr></strong>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><strong>Product Price</strong></td>
+            <td><em>{{invoiceProduct.nonbidPrice | currency}}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Purchased Quantity</strong></td>
+            <td><em>{{invoiceProduct.purchasedQuantity}}</em></td>
+          </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

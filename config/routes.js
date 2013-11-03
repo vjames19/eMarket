@@ -45,6 +45,10 @@ module.exports = function(app, passport, auth) {
   app.put('/api/users/:userId/invoices/:invoiceId', users.updateInvoice);
   app.del('/api/users/:userId/invoices/:invoiceId', users.deleteInvoice);
 
+  // Get products of invoices
+  app.get('/api/users/:userId/invoices/:invoiceId/products', users.readAllProductsInvoice);
+
+
   // User Mailing Addresses Routes
   app.param('mailAddressId', users.findMailAddressById);
   app.get('/api/users/:userId/mailAddresses', users.readAllMailAddresses);

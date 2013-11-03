@@ -9,6 +9,7 @@ var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
 var ShoppingCarts = require('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
+var Invoices = require('../models/invoice.js');
 var SoldProducts = require('../models/soldProduct.js');
 var UnsoldProducts = require('../models/unsoldProduct.js');
 var PurchaseHistory = require('../models/purchasehistory.js');
@@ -123,7 +124,7 @@ exports.deleteUser = function(req, res) {
 exports.findQuestionAnswerById = function(req, res, next, id) {
   QuestionsAnswers.get(req.params.userId, id, function(err, questionAnswer) {
     if(_.isEmpty(questionAnswer)) {
-      res.jsonp(404, {message: 'User with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Question and Answer with id ' + id + ' not found'});
     } else {
       req.questionAnswer = questionAnswer;
       next();
@@ -305,16 +306,21 @@ var invoices = {
 };
 
 exports.findInvoiceById = function(req, res, next, id) {
-  if(!invoices[+id]) {
-    res.jsonp(404, {message: 'Invoice not found'});
-  } else {
-    req.invoice = invoices[+id];
-    next();
-  }
+  Invoices.get(req.params.userId, id, function(err, invoice) {
+    if(_.isEmpty(invoice)) {
+      res.jsonp(404, {message: 'Invoice with id ' + id + ' not found'});
+    } else {
+      req.invoice = invoice;
+      next();
+    }
+  });
 };
 
 exports.readAllInvoices = function(req, res) {
-  res.jsonp(_.values(invoices));
+  Invoices.getAll(req.params.userId, function(err, invoices) {
+    res.jsonp(invoices);
+  });
+
 };
 
 exports.createInvoice = function(req, res) {
@@ -337,6 +343,12 @@ exports.updateInvoice = function(req, res) {
 exports.deleteInvoice = function(req, res) {
   delete invoices[req.invoice.invoiceId];
   res.jsonp(req.invoice);
+};
+
+exports.readAllProductsInvoice = function (req, res) {
+  Invoices.getProducts(req.params.userId, req.params.invoiceId, function(err, products) {
+    res.jsonp(products);
+  });
 };
 
 // Mail Addresses

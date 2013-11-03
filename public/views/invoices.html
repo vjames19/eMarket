@@ -10,28 +10,29 @@
     <ul data-role="listview" data-theme="c" data-inset="true" id="invoiceList" data-icon="false">
       <li data-role="list-divider">Invoices <span class="ui-li-count">{{invoices.length}}</span></li>
       <li ng-repeat="invoice in invoices">
-        <a href="">
-          <table>
+        <a href="#invoice-report" class="wrap-text" data-transition="slide">
+          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>
-              <th><strong>Invoice #{{ invoice.invoiceId }}</strong></th>
+              <th colspan="2" style="text-align: center">
+                <strong><abbr title="Invoice # {{ $index + 1 }}">Invoice # {{ $index + 1 }}</abbr></strong>
+              </th>
             </tr>
             </thead>
+            <tbody>
             <tr>
               <td><strong>Date:</strong></td>
-              <td></td>
-              <td><em>{{ invoice.date | date }}</em></td>
+              <td><em>{{invoice.creationDate | date}}</em></td>
             </tr>
             <tr>
               <td><strong>Order Number:</strong></td>
-              <td></td>
-              <td><em>{{ invoice.invoiceNumber }}</em></td>
+              <td><em>{{invoice.id}}</em></td>
             </tr>
             <tr>
               <td><strong>Order Price:</strong></td>
-              <td></td>
-              <td><em>{{ invoice.orderPrice | currency }}</em></td>
+              <td><em>{{ invoice.total | currency }}</em></td>
             </tr>
+            </tbody>
           </table>
         </a>
       </li>
