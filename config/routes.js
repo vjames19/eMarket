@@ -1,10 +1,16 @@
+  //    res.redirect('/');
+  //  });
 'use strict';
 
 module.exports = function(app, passport, auth) {
   // TODO: Create routes and its respectives controllers.
   // User Routes
   var users = require('../app/controllers/users');
-  app.post('/login', passport.authenticate('local'), function(req, res) {
+  app.post('/login', passport.authenticate('user'), function(req, res) {
+    res.jsonp(req.user);
+  });
+
+  app.post('/admin/login', passport.authenticate('admin'), function(req, res) {
     res.jsonp(req.user);
   });
 
@@ -12,6 +18,7 @@ module.exports = function(app, passport, auth) {
     req.logout();
     res.jsonp(200);
   });
+
   // TODO(vjames19): Secure users api
 
   // User Routes
@@ -180,7 +187,9 @@ module.exports = function(app, passport, auth) {
   app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
 
   // Admin Routes
+
   var admins = require('../app/controllers/admins');
+
   app.param('adminId', admins.findAdminById);
   app.get('/api/admins', admins.readAllAdmins);
   app.post('/api/admins', admins.createAdmin);

@@ -6,7 +6,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
   var unAuthPaths = ['login-admin'];
   return {
     logIn: function(adminData) {
-      $http.post('../login', adminData).success(function(realAdmin) {
+      $http.post('login', adminData).success(function(realAdmin) {
         admin.adminUserName = realAdmin.username;
         admin.adminId = realAdmin.id;
         $.mobile.changePage('#home-admin');
@@ -17,9 +17,11 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
 
     },
     logOut: function() {
+      console.log('logging out admin');
       admin.adminUserName = null;
       admin.adminId = null;
       isLoggedIn = false;
+      $http.get('../logout');
     },
     isLoggedIn: function() {
       return isLoggedIn;

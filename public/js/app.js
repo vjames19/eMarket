@@ -27,7 +27,7 @@ app.run(function($rootScope, $location, Auth) {
   $(document).on('pagebeforeshow', function(event, data) {
     // If its not logged in and not in a valid unauth page
     if(!back) {
-      console.log('pushing histor');
+      console.log('pushing user history');
       history.push(data.prevPage.attr('id'));
     } else {
       back = false;

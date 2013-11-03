@@ -18,7 +18,7 @@
       <li ng-repeat="admin in admins" data-icon="gear">
         <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear" data-theme="c"
-           ng-click="setAdminInfo(admin); selectAdmin(admin, $index)">{{admin.adminUserName}}</a>
+           ng-click="setAdminInfo(admin); selectAdmin(admin, $index)">{{admin.username}}</a>
       </li>
     </ul>
   </div>
@@ -32,6 +32,6 @@
     </div>
   </div>
 
-  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>

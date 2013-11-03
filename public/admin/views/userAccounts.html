@@ -16,7 +16,7 @@
       </li>
       <li data-icon="gear" ng-repeat="user in users">
         <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setUserInfo(user); selectUser(user, $index)">{{user.userFirstName}}</a>
+           data-position-to="window" data-icon="gear" data-theme="c" ng-click="setUserInfo(user); selectUser(user, $index)">{{user.username}}</a>
       </li>
     </ul>
   </div>
@@ -30,6 +30,6 @@
     </div>
   </div>
 
-  <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>

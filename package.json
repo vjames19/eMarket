@@ -28,7 +28,6 @@
   "dependencies": {
     "express": "latest",
     "jade": "latest",
-    "mongoose": "latest",
     "passport": "latest",
     "passport-local": "latest",
     "async": "latest",

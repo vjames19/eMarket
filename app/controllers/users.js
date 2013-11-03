@@ -337,7 +337,7 @@ exports.findMailAddressById = function(req, res, next, id) {
 exports.readAllMailAddresses = function(req, res) {
   MailingAddresses.getAll(req.params.userId, function(err, mailingAddresses) {
     res.jsonp(mailingAddresses);
-  })
+  });
 };
 
 exports.createMailAddress = function(req, res) {

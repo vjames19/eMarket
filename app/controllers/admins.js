@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var Admins = require('../models/admin.js');
 
 var admins = {
   1: {
@@ -27,22 +28,49 @@ var admins = {
   }
 };
 
-exports.isAdmin = function(user) {
-  return _.contains(_.pluck(admins, 'adminUserName'), user.username);
+exports.isAdmin = function(user, callback) {
+  Admins.getAll(function(err, admins) {
+    if(err) {
+      callback(err);
+    } else {
+      callback(null, _.contains(_.pluck(admins, 'username'), user.username));
+    }
+  });
 };
+
+//exports.isAdmin = function(user) {
+//  return _.contains(_.pluck(admins, 'adminUserName'), user.username);
+//};
 
 exports.findAdminById = function(req, res, next, id) {
-  if(!admins[+id]) {
-    res.jsonp(404, {message: 'Admin Not Found.'});
-  } else {
-    req.admin = admins[+id];
-    next();
-  }
+  Admins.get(id, function(err, admin) {
+    if(_.isEmpty(admin)) {
+      res.jsonp(404, {message: 'Admin with id ' + id + ' not found'});
+    } else {
+      req.admin = admin;
+      next();
+    }
+  });
 };
 
+//exports.findAdminById = function(req, res, next, id) {
+//  if(!admins[+id]) {
+//    res.jsonp(404, {message: 'Admin Not Found.'});
+//  } else {
+//    req.admin = admins[+id];
+//    next();
+//  }
+//};
+
 exports.readAllAdmins = function(req, res) {
-  res.jsonp(_.values(admins));
+  Admins.getAll(function(err, admins) {
+    res.jsonp(admins);
+  });
 };
+
+//exports.readAllAdmins = function(req, res) {
+//  res.jsonp(_.values(admins));
+//};
 
 exports.createAdmin = function(req, res) {
   var admin = req.body;
