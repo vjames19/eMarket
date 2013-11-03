@@ -6,7 +6,7 @@ WHERE rating_rated_user_id = ? AND rating_id = ?
 ORDER BY user_login_user_name
 
 --getAvgRating
-SELECT rating_rated_user_id, avg(rating_value) as rating_value
+SELECT rating_rated_user_id, AVG(rating_value) AS rating_avg
 FROM rating_history
-WHERE rating_rated_user_id = ?
-GROUP BY rating_rated_user_id;
+WHERE rating_rated_user_id = 1
+GROUP BY rating_rated_user_id
