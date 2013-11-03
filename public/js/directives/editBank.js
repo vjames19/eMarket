@@ -22,10 +22,12 @@ angular.module('eMarketApp').directive('editBank', function(User) {
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
+      var accountType = page.find('#bank-account-type');
       page.on('pagebeforeshow', function() {
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
         });
+        accountType.selectmenu('refresh', true);
       });
     }
   };
