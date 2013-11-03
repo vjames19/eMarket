@@ -11,7 +11,7 @@ angular.module('eMarketApp').directive('profile', function(User) {
       var mailAddressList = page.find('#mailAddressList');
       var billAddressList = page.find('#billAddressList');
       var ratingList = page.find('#ratingList');
-//      var ratingStars = page.find('.star');
+      //      var ratingStars = page.find('.star');
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;
       var selectedBillAddress = null;
@@ -95,7 +95,7 @@ angular.module('eMarketApp').directive('profile', function(User) {
           });
         });
 
-        user.getList('avgRating').then(function (avg) {
+        user.get('avgRating').then(function(avg) {
           scope.rating = avg;
         });
 
