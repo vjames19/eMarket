@@ -11,7 +11,7 @@ angular.module('eMarketApp').directive('profile', function(User) {
       var mailAddressList = page.find('#mailAddressList');
       var billAddressList = page.find('#billAddressList');
       var ratingList = page.find('#ratingList');
-      var ratingStars = page.find('.star');
+//      var ratingStars = page.find('.star');
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;
       var selectedBillAddress = null;
@@ -75,9 +75,9 @@ angular.module('eMarketApp').directive('profile', function(User) {
         user.getList('questionsAnswers').then(function(questionsAnswersList) {
           scope.questionsAnswers = questionsAnswersList;
 
-          scope.question1 = scope.questions[scope.questionsAnswers[0].id-1];
-          scope.question2 = scope.questions[scope.questionsAnswers[1].id-1];
-          scope.question3 = scope.questions[scope.questionsAnswers[2].id-1];
+          scope.question1 = scope.questions[scope.questionsAnswers[0].id - 1];
+          scope.question2 = scope.questions[scope.questionsAnswers[1].id - 1];
+          scope.question3 = scope.questions[scope.questionsAnswers[2].id - 1];
 
         });
 
@@ -98,27 +98,28 @@ angular.module('eMarketApp').directive('profile', function(User) {
         user.getList('ratings').then(function(ratings) {
           scope.ratings = ratings;
           setTimeout(function() {
+            page.find('.star').raty({
+              cancel: true,
+              score: function() {
+                return $(this).attr('data-score');
+              },
+              half: true,
+              size: 10,
+              path: '../lib/raty/lib/img'
+            });
             ratingList.listview('refresh');
           });
         });
 
+
         scope.getStars = function(ratingValue) {
           var stars = '';
           for(var i = 0; i < ratingValue; i++) {
-            stars = stars + '*';
+            stars += '*';
           }
           return stars;
-        }
+        };
 
-        ratingStars.raty({
-          cancel: true,
-          score: function() {
-            return $(this).attr('data-score');
-          },
-          half: true,
-          size: 22,
-          path: '../lib/raty/lib/img'
-        });
       });
     }
   };
