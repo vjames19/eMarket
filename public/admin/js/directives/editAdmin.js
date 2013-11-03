@@ -23,6 +23,17 @@ angular.module('eMarketApp')
                 });
 
           };
+        },
+        link: function(scope, elem) {
+          var page = $(elem[0]);
+          var rootCheckBox = page.find('#make-root');
+          page.on('pagebeforeshow', function() {
+            if(scope.adminInfo.isRoot === 1) {
+              rootCheckBox.prop('checked', true).checkboxradio('refresh');
+            } else {
+              rootCheckBox.prop('checked', false).checkboxradio('refresh');
+            }
+          });
         }
       };
     });

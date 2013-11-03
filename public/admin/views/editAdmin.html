@@ -11,22 +11,22 @@
       <div class="form-pad">
         <h4>UserName: <span class="ui-li-count">{{adminInfo.adminUserName}}</span></h4>
         <label for="firstname"><strong>First Name</strong></label>
-        <input type="text" id="firstname" ng-model="adminInfo.adminFirstName">
+        <input type="text" id="firstname" ng-model="adminInfo.firstName">
         <label for="middlename"><strong>Middle Name</strong></label>
-        <input type="text" id="middlename" ng-model="adminInfo.adminMiddleName">
+        <input type="text" id="middlename" ng-model="adminInfo.middleName">
         <label for="lastname"><strong>Last Name</strong></label>
-        <input type="text" id="lastname" ng-model="adminInfo.adminLastName">
+        <input type="text" id="lastname" ng-model="adminInfo.lastName">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="adminInfo.adminPhone">
+        <input type="tel" id="telephone" ng-model="adminInfo.telephone">
         <label for="email"><strong>Email</strong></label>
-        <input type="email" id="email" ng-model="adminInfo.adminEmail">
+        <input type="email" id="email" ng-model="adminInfo.email">
         <label for="new-password"><strong>New Password</strong></label>
         <input type="password" id="new-password" autocomplete="off" ng-model="editAdmin.adminPassword">
         <label for="new-password-confirm"><strong>Confirm Password</strong></label>
         <input type="password" id="new-password-confirm" autocomplete="off" ng-model="editAdmin.adminConfirmPassword">
         <label for="make-root"><strong>Make Root</strong></label>
         <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox"
-               ng-model="adminInfo.adminIsRoot">
+               ng-model="adminInfo.isRoot">
       </div>
       <!-- un anchor por ahora-->
       <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
