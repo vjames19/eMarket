@@ -560,6 +560,54 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`product_transaction_history` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+USE `emarket_test` ;
+
+-- -----------------------------------------------------
+-- Placeholder table for view `emarket_test`.`active_users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `emarket_test`.`active_users` (`user_id` INT, `user_first_name` INT, `user_middle_name` INT, `user_last_name` INT, `user_telephone` INT, `user_creation_date` INT, `user_login_user_name` INT, `user_login_email` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `emarket_test`.`products`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `emarket_test`.`products` (`product_id` INT, `product_seller_id` INT, `product_info_spec_id` INT, `product_creation_date` INT, `product_depletion_date` INT, `product_spec_id` INT, `product_spec_category_id` INT, `product_spec_name` INT, `product_spec_nonbid_price` INT, `product_spec_starting_bid_price` INT, `product_spec_bid_end_date` INT, `product_spec_shipping_price` INT, `product_spec_quantity` INT, `product_spec_description` INT, `product_spec_condition` INT, `product_spec_picture` INT, `product_spec_brand` INT, `product_spec_model` INT, `product_spec_dimensions` INT, `product_spec_is_draft` INT, `product_quantity_remaining` INT, `seller_name` INT, `category_id` INT, `category_name` INT, `current_bid` INT);
+
+-- -----------------------------------------------------
+-- View `emarket_test`.`active_users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `emarket_test`.`active_users`;
+USE `emarket_test`;
+CREATE  OR REPLACE VIEW active_users AS
+SELECT user_info.*, user_login_user_name, user_login_email
+FROM user_info INNER JOIN user_account_status INNER JOIN user_login_info
+ON (user_info.user_id = user_account_status.user_account_id AND user_id = user_login_id)
+WHERE user_account_status = 1;
+
+-- -----------------------------------------------------
+-- View `emarket_test`.`products`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `emarket_test`.`products`;
+USE `emarket_test`;
+CREATE  OR REPLACE VIEW products AS
+SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
+ci.category_id, ci.category_name,
+(
+  SELECT bid_amount
+  FROM bid_history INNER JOIN product_info AS P
+  ON(bid_product_id = P.product_id)
+  WHERE P.product_id = pi.product_id
+  ORDER BY bid_amount DESC
+  LIMIT 0, 1
+) AS current_bid
+FROM product_info AS pi INNER JOIN product_specification AS ps INNER JOIN active_users AS au
+INNER JOIN category_info AS ci INNER JOIN product_quantity_record as pq
+ON (
+    pi.product_info_spec_id = ps.product_spec_id
+    AND au.user_id = pi.product_seller_id
+    AND ci.category_id = ps.product_spec_category_id
+    AND pq.product_quantity_spec_id = ps.product_spec_id
+    )
+WHERE ps.product_spec_is_draft = 0;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
