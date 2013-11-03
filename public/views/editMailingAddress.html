@@ -24,7 +24,8 @@
         <label for="telephone"><strong>Telephone</strong></label>
         <input type="tel" id="telephone" ng-model="mailInfo.telephone">
         <label for="make-primary">Make Primary</label>
-        <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox">
+        <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox"
+               ng-model="mailInfo.isPrimary">
       </div>
       <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-theme="a"

@@ -19,6 +19,17 @@ angular.module('eMarketApp').directive('editMailingAddress', function() {
               alert(err);
             });
       };
+    },
+    link: function(scope, elem) {
+      var page = $(elem[0]);
+      var primaryCheckBox = page.find('#make-primary');
+      page.on('pagebeforeshow', function() {
+        if(scope.mailInfo.isPrimary === 1) {
+          primaryCheckBox.prop('checked', true).checkboxradio('refresh');
+        } else {
+          primaryCheckBox.prop('checked', false).checkboxradio('refresh');
+        }
+      });
     }
   };
 });
