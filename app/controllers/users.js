@@ -7,7 +7,8 @@ var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
 var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
-var ShoppingCarts = require('../models/shoppingCart.js');
+var ShoppingCarts = require
+('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
 var Invoices = require('../models/invoice.js');
 var SoldProducts = require('../models/soldProduct.js');
@@ -118,7 +119,29 @@ exports.deleteUser = function(req, res) {
   res.jsonp(req.user);
 };
 
-
+var questionAnswers = {
+  1 :{
+    questionAnswerId : 1,
+    questionContent : 'What was your childhood nickname?',
+    questionUserId : 1,
+    questionAnswerContent : 'Julian',
+    questionAnswerStatus : true
+  },
+  2 :{
+    questionAnswerId : 2,
+    questionContent : 'What is the name of your favorite childhood friend?',
+    questionUserId : 1,
+    questionAnswerContent : 'Josian',
+    questionAnswerStatus : true
+  },
+  3 :{
+    questionAnswerId : 3,
+    questionContent : 'Where were you when you had your first kiss?',
+    questionUserId : 1,
+    questionAnswerContent : 'Guavate',
+    questionAnswerStatus : true
+  }
+};
 
 // Security Questions
 exports.findQuestionAnswerById = function(req, res, next, id) {
@@ -145,7 +168,10 @@ exports.readAllQuestionsAnswers = function(req, res) {
  * Create a a question with answer
  */
 exports.createQuestionAnswer = function(req, res) {
-
+  var questionAnswer = req.body;
+  questionAnswer.questionAnswerId = _.keys(questionAnswer).length + 1;
+  questionAnswers[questionAnswer.questionAnswerId] = questionAnswer;
+  res.jsonp(questionAnswer);
 };
 
 /**
@@ -159,20 +185,18 @@ exports.readQuestionAnswer = function(req, res) {
  * Update a question and answer
  */
 exports.updateQuestionAnswer = function(req, res) {
-
-
+  _.extend(req.questionAnswer, req.body);
+  questionAnswers[req.questionAnswer.questionAnswerId] = req.questionAnswer;
+  res.jsonp(req.questionAnswer);
 };
 
 /**
  * Delete a question and answer
  */
 exports.deleteQuestionAnswer = function(req, res) {
-
-
+  delete questionAnswers[req.questionAnswer.questionAnswerId];
+  res.jsonp(req.questionAnswer);
 };
-
-
-
 
 // Drafts
 var drafts = {
