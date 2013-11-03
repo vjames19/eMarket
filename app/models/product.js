@@ -61,14 +61,15 @@ module.exports.get = function(id, callback) {
 
 module.exports.search = function(query, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM products' +
-        'WHERE product_specification.product_spec_is_draft=0 ' +
-        'AND (product_spec_name LIKE ? ' +
+    var sql = 'SELECT * FROM products ' +
+        'WHERE category_id=? ' +
+        'OR product_spec_name LIKE ? ' +
         'OR product_spec_brand LIKE ? ' +
-        'OR product_spec_model LIKE ?);';
+        'OR product_spec_model LIKE ?';
+    var categoryId = query;
     query = '%' + query + '%';
-    connection.query(sql, [query, query, query], function(err, products) {
-      console.log('model search', arguments);
+    connection.query(sql, [categoryId, query, query, query], function(err, products) {
+      console.log('model search', categoryId, query, arguments);
       if(err) {
         callback(err);
       } else {

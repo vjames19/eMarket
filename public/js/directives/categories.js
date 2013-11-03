@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('categories', function(Category) {
+angular.module('eMarketApp').directive('categories', function(Category, Search) {
   return {
     templateUrl: 'views/categories.html',
     restrict: 'E',
@@ -27,7 +27,8 @@ angular.module('eMarketApp').directive('categories', function(Category) {
           stack.push(subCategories);
           refreshList(subCategories);
         } else {
-          $.mobile.changePage('#search-results', {q: category.categoryName});
+          Search.searchQuery = category.id;
+          $.mobile.changePage('#search-results');
         }
       };
 
