@@ -12,6 +12,8 @@
 
   <div data-role="content">
 
+    <div class="star" data-score="3"></div>
+
     <form data-ajax="false" ng-submit="submitUser()">
       <div data-role="collapsible">
         <h2>Edit Profile Information</h2>
@@ -29,6 +31,28 @@
           <input type="email" id="email" ng-model="user.email">
           <label for="telephone"><strong>Telephone</strong></label>
           <input type="tel" id="telephone" ng-model="user.telephone">
+
+          <label for="select-question1"><strong>Question 1</strong></label>
+          <select name="select-question1" id="select-question1" ng-model="question1"
+                  ng-options="question1 for question1 in questions">
+          </select>
+          <label for="answer-question1"><strong>Answer</strong></label>
+          <input type="text" id="answer-question1" ng-model="questionsAnswers[0].answer">
+
+          <label for="select-question2"><strong>Question 2</strong></label>
+          <select id="select-question2" ng-model="question2"
+                  ng-options="question2 for question2 in questions">
+          </select>
+          <label for="answer-question2"><strong>Answer</strong></label>
+          <input type="text" id="answer-question2" ng-model="questionsAnswers[1].answer">
+
+          <label for="select-question1"><strong>Question 3</strong></label>
+          <select id="select-question3" ng-model="question3"
+                  ng-options="question3 for question3 in questions">
+          </select>
+          <label for="answer-question3"><strong>Answer</strong></label>
+          <input type="text" id="answer-question3" ng-model="questionsAnswers[2].answer">
+
           <label for="old-password"><strong>Old Password</strong></label>
           <input type="password" id="old-password" autocomplete="off" value="">
           <label for="new-password"><strong>New Password</strong></label>

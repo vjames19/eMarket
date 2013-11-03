@@ -1,5 +1,6 @@
 CREATE VIEW products AS
-SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name, ci.category_name,
+SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
+ci.category_id, ci.category_name,
 (
   SELECT bid_amount
   FROM bid_history INNER JOIN product_info AS P
