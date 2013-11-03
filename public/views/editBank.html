@@ -27,8 +27,8 @@
         <label for="bank-account-routing"><strong>Routing Number</strong></label>
         <input type="text" id="bank-account-routing" ng-model="bankInfo.routingNumber">
         <label for="address-relation"><strong>Associated Address</strong></label>
-        <select id="address-relation" ng-model="bankInfo.bankBillingAddressId"
-                ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
+        <select id="address-relation" ng-model="bankInfo.addressId"
+                ng-options="bill.addressId as bill.address for bill in billAddresses">
         </select>
         <!--<select id="address-relation">-->
         <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->

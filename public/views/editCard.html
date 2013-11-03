@@ -29,8 +29,8 @@
         <label for="card-csv"><strong>Card CSV</strong></label>
         <input type="text" id="card-csv" ng-model="cardInfo.cardCsv">
         <label for="address-relation"><strong>Associated Address</strong></label>
-        <select id="address-relation" ng-model="cardInfo.creditCardBillingAddressId"
-                ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
+        <select id="address-relation" ng-model="cardInfo.addressId"
+                ng-options="bill.addressId as bill.address for bill in billAddresses">
         </select>
         <!--<select id="address-relation">-->
         <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->

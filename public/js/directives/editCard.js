@@ -23,11 +23,13 @@ angular.module('eMarketApp').directive('editCard', function(User) {
     link: function(scope, elem) {
       var page = $(elem[0]);
       var cardType = page.find('#card-type');
+      var addressSelect = page.find('#address-relation');
 
       page.on('pagebeforeshow', function() {
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
           cardType.selectmenu('refresh', true);
+          addressSelect.selectmenu('refresh', true);
         });
 
       });
