@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('notifications', function(User, Restangular) {
+angular.module('eMarketApp').directive('notifications', function(User) {
   return {
     templateUrl: 'views/notifications.html',
     restrict: 'E',

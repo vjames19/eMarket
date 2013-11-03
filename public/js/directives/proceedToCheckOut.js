@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('proceedToCheckout', function(User, Restangular) {
+angular.module('eMarketApp').directive('proceedToCheckout', function(User) {
   return {
     templateUrl: 'views/proceedToCheckout.html',
     restrict: 'E',
@@ -35,7 +35,7 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, Resta
             scope.cards = creditCardsList;
           });
         }
-      }
+      };
     }
   };
 });

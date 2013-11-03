@@ -1242,26 +1242,26 @@ exports.deletePurchase = function(req, res) {
 };
 
 // Rating
-var ratings = {
-  1: {
-    ratingId: 1,
-    raterId: 1,
-    raterName: 'Paco',
-    rating: '***'
-  },
-  2: {
-    ratingId: 2,
-    raterId: 9,
-    raterName: 'Truqui',
-    rating: '**'
-  },
-  3: {
-    ratingId: 3,
-    raterId: 15,
-    raterName: 'Juan',
-    rating: '****'
-  }
-};
+//var ratings = {
+//  1: {
+//    ratingId: 1,
+//    raterId: 1,
+//    raterName: 'Paco',
+//    rating: '***'
+//  },
+//  2: {
+//    ratingId: 2,
+//    raterId: 9,
+//    raterName: 'Truqui',
+//    rating: '**'
+//  },
+//  3: {
+//    ratingId: 3,
+//    raterId: 15,
+//    raterName: 'Juan',
+//    rating: '****'
+//  }
+//};
 
 exports.findRatingById = function(req, res, next, id) {
   Ratings.get(req.params.userId, id, function(err, rating) {

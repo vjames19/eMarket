@@ -41,7 +41,7 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
     $scope.itemsAmountToBeViewed = items;
     $scope.costToBeViewed = cost;
     $scope.shippingToBeViewed = shipping;
-  }
+  };
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!
