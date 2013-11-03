@@ -95,7 +95,8 @@ angular.module('eMarketApp').directive('profile', function(User) {
           });
         });
 
-        user.get('avgRating').then(function(avg) {
+        user.one('avgRating').get().then(function(avg) {
+          console.log('avg rating', avg);
           scope.rating = avg;
         });
 
