@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('profile', function(User) {
+angular.module('eMarketApp').directive('profile', function(User, Restangular) {
   return {
     templateUrl: 'views/profile.html',
     restrict: 'E',
@@ -17,17 +17,9 @@ angular.module('eMarketApp').directive('profile', function(User) {
       var selectedBillAddress = null;
       var selectedBillAddressIndex = null;
 
-      scope.questions = [
-        'What was your childhood nickname?',
-        'What is the name of your favorite childhood friend?',
-        'Where were you when you had your first kiss?',
-        'In what city does your nearest sibling live?',
-        'What is your maternal grandmother\'s maiden name?',
-        'In what city or town was your first job?',
-        'What was your dream job as a child?',
-        'What is the name of the company of your first job?',
-        'Who was your childhood hero?'
-      ];
+      var question1 = page.find('#select-question1');
+      var question2 = page.find('#select-question2');
+      var question3 = page.find('#select-question3');
 
       scope.submitUser = function() {
         $.mobile.loading('show');
@@ -72,6 +64,10 @@ angular.module('eMarketApp').directive('profile', function(User) {
           scope.user = user;
         });
 
+        Restangular.one('questions').getList().then(function(questionsList) {
+          scope.questions = questionsList;
+        });
+
         user.getList('questionsAnswers').then(function(questionsAnswersList) {
           scope.questionsAnswers = questionsAnswersList;
 
@@ -79,6 +75,9 @@ angular.module('eMarketApp').directive('profile', function(User) {
           scope.question2 = scope.questions[scope.questionsAnswers[1].id - 1];
           scope.question3 = scope.questions[scope.questionsAnswers[2].id - 1];
 
+          question1.selectmenu('refresh', true);
+          question2.selectmenu('refresh', true);
+          question3.selectmenu('refresh', true);
         });
 
         user.getList('mailAddresses').then(function(mailAddressesList) {
@@ -96,7 +95,6 @@ angular.module('eMarketApp').directive('profile', function(User) {
         });
 
         user.one('avgRating').get().then(function(avg) {
-          console.log('avg rating', avg);
           scope.rating = avg;
         });
 

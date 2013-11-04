@@ -143,6 +143,14 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
   app.get('/api/users/:userId/avgRating', users.readAvgRating);
 
+  // Security Questions
+  app.param('questionId', users.findQuestionById);
+  app.get('/api/questions', users.readAllQuestions);
+  app.post('/api/questions', users.createQuestion);
+  app.get('/api/questions/:questionId', users.readQuestion);
+  app.put('/api/questions/:questionId', users.updateQuestion);
+  app.del('/api/questions/:questionId', users.deleteQuestion);
+
   // User Question and Answer Routes
   app.param('questionAnswerId', users.findQuestionAnswerById);
   app.get('/api/users/:userId/questionsAnswers', users.readAllQuestionsAnswers);
