@@ -24,7 +24,7 @@
       <li data-role="list-divider">Bidding<span class="ui-li-count">{{bids.length}}</span></li>
       <li ng-repeat="bid in bids">
         <a href="#item-view" class="wrap-text" ng-click="selectedBid(bid)" data-transition="slide">
-          <img ng-src="{{bid.picture}}" class="item-image">
+          <img ng-src="{{bid.picture}}" class="center-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>
@@ -55,7 +55,7 @@
       <li data-role="list-divider">Purchase History <span class="ui-li-count">{{purchases.length}}</span></li>
       <li ng-repeat="purchase in purchases">
         <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)" data-transition="slide">
-          <img ng-src="{{purchase.picture}}" class="item-image">{{purchase.productName}}
+          <img ng-src="{{purchase.picture}}" class="center-image">{{purchase.productName}}
         </a>
       </li>
     </ul>
