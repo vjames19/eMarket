@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
+angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth, $filter) {
   $scope.itemToBeViewed = null;
   $scope.mailInfoToBeViewed = null;
   $scope.billInfoToBeViewed = null;
@@ -26,6 +26,8 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
   };
 
   $scope.setCardInfo = function(cardInfo) {
+    // Adding Filter because node-mysql escape replaces alld dates with YYYY-mm-dd HH:ii:ss.... -.-
+    cardInfo.expirationDate = $filter('date')(new Date(cardInfo.expirationDate), 'MM-yyyy');
     $scope.cardInfoToBeViewed = angular.copy(cardInfo);
   };
 

@@ -30,9 +30,9 @@
           <p class="item-description-text-size"> Available Quantity: {{ previewItemInfo.productQuantity }} </p>
         </li>
         <li>
-          <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'h:mm' }} </p>
+          <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }} </p>
 
-          <p class="item-description-text-size"> End Date: {{ previewItemInfo.productBidEndDate | date }} </p>
+          <p class="item-description-text-size"> End Date: {{ previewItemInfo.productBidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
         </li>
         <li>
           <p class="item-description-text-size"> Condition: {{ previewItemInfo.productDescription.productCondition

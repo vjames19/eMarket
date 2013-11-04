@@ -43,7 +43,7 @@
         <p class="item-description-text-size">
           <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
 
-        <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date }} </p>
+        <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
         <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
         <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
       </li>
