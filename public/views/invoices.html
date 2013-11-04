@@ -14,7 +14,7 @@
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>
-              <th colspan="2" style="text-align: center">
+              <th>
                 <strong><abbr title="Invoice # {{ $index + 1 }}">Invoice # {{ $index + 1 }}</abbr></strong>
               </th>
             </tr>
@@ -22,7 +22,7 @@
             <tbody>
             <tr>
               <td><strong>Date:</strong></td>
-              <td><em>{{invoice.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</em></td>
+              <td><em>{{invoice.creationDate | date}}</em></td>
             </tr>
             <tr>
               <td><strong>Order Number:</strong></td>
