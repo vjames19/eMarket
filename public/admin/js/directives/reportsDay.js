@@ -12,16 +12,27 @@ angular.module('eMarketApp')
           var graph = page.find('#pie');
           var totalRevenue = 0.0;
           var totalSales = 0.0;
+          scope.reports = {};
+          scope.reports.totals = {};
 
           page.on('pagebeforeshow', function() {
-            scope.categories = Restangular.all('categories').getList();
-            Restangular.all('reports').getList().then(function(results) {
-              scope.reports = results;
-              window._.each(results, function(report) {
-                totalRevenue += report.reportRevenue;
-                totalSales += report.reportSales;
-              });
+
+            Restangular.all('categories').getList().then(function(categories) {
+              scope.categories = categories;
             });
+            Restangular.all('reportsDay').getList().then(function(results) {
+//              console.log('reports: ', JSON.stringify(results));
+              scope.reports = results;
+            });
+            Restangular.one('reportsDayTotal').get().then(function(result) {
+//              console.log('totals: ', JSON.stringify(result));
+              scope.reportTotals = result[0];
+              if(scope.reportTotals.sales >= 0 && scope.reportTotals.revenue >= 0) {
+                totalSales = scope.reportTotals.sales;
+                totalRevenue = scope.reportTotals.revenue;
+              }
+            });
+
           });
 
           page.on('pageshow', function() {

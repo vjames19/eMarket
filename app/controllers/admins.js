@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Admins = require('../models/admin.js');
+var Reports = require('../models/report.js');
 
 var admins = {
   1: {
@@ -119,18 +120,70 @@ var reports = {
   }
 };
 
-exports.findReportById = function(req, res, next, id) {
-  if(!reports[+id]) {
-    res.jsonp(404, {message: 'Report Not Found'});
-  } else {
-    req.report = reports[+id];
-    next();
-  }
+exports.findReportByIdMonth = function(req, res, next, id) {
+  Reports.get(id, 'month', function(err, report) {
+    if(_.isEmpty(report)) {
+      res.jsonp(404, {message: 'Monthly Report with id ' + id + ' not found'});
+    } else {
+      req.monthlyReport = report;
+      next();
+    }
+  });
 };
 
-exports.readAllReports = function(req, res) {
-  res.jsonp(_.values(reports));
+exports.findReportByIdWeek = function(req, res, next, id) {
+  Reports.get(id, 'week', function(err, report) {
+    if(_.isEmpty(report)) {
+      res.jsonp(404, {message: 'Weekly Report with id ' + id + ' not found'});
+    } else {
+      req.weeklyReport = report;
+      next();
+    }
+  });
 };
+
+exports.findReportByIdDay = function(req, res, next, id) {
+  Reports.get(id, 'day', function(err, report) {
+    if(_.isEmpty(report)) {
+      res.jsonp(404, {message: 'Daily Report with id ' + id + ' not found'});
+    } else {
+      req.dailyReport = report;
+      next();
+    }
+  });
+};
+
+//exports.findReportById = function(req, res, next, id) {
+//  if(!reports[+id]) {
+//    res.jsonp(404, {message: 'Report Not Found'});
+//  } else {
+//    req.report = reports[+id];
+//    next();
+//  }
+//};
+
+
+exports.readAllReportsMonth = function(req, res) {
+  Reports.getAll('month', function(err, reports) {
+    res.jsonp(reports);
+  });
+};
+
+exports.readAllReportsWeek = function(req, res) {
+  Reports.getAll('week', function(err, reports) {
+    res.jsonp(reports);
+  });
+};
+
+exports.readAllReportsDay = function(req, res) {
+  Reports.getAll('day', function(err, reports) {
+    res.jsonp(reports);
+  });
+};
+
+//exports.readAllReports = function(req, res) {
+//  res.jsonp(_.values(reports));
+//};
 
 exports.createReport = function(req, res) {
   var report = req.body;
@@ -139,9 +192,21 @@ exports.createReport = function(req, res) {
   res.jsonp(report);
 };
 
-exports.readReport = function(req, res) {
-  res.jsonp(req.report);
+exports.readReportMonth = function(req, res) {
+  res.jsonp(req.monthlyReport);
 };
+
+exports.readReportWeek = function(req, res) {
+  res.jsonp(req.weeklyReport);
+};
+
+exports.readReportDay = function(req, res) {
+  res.jsonp(req.dailyReport);
+};
+
+//exports.readReport = function(req, res) {
+//  res.jsonp(req.report);
+//};
 
 exports.updateReport = function(req, res) {
   _.extend(req.report, req.body);
@@ -152,4 +217,22 @@ exports.updateReport = function(req, res) {
 exports.deleteReport = function(req, res) {
   delete reports[req.report.reportId];
   res.jsonp(req.report);
+};
+
+exports.readReportMonthTotal = function(req, res) {
+  Reports.getTotal('month', function(err, total) {
+    res.jsonp(total);
+  });
+};
+
+exports.readReportWeekTotal = function(req, res) {
+  Reports.getTotal('week', function(err, total) {
+    res.jsonp(total);
+  });
+};
+
+exports.readReportDayTotal = function(req, res) {
+  Reports.getTotal('day', function(err, total) {
+    res.jsonp(total);
+  });
 };
