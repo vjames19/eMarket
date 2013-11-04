@@ -10,6 +10,8 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth, $filt
   $scope.costToBeViewed = null;
   $scope.shippingToBeViewed = null;
   $scope.itemsAmountToBeViewed = null;
+  $scope.draftToBeViewed = null;
+  $scope.isDraftToBeViewed = null;
 
   // Important: Create a deep copy of the item to be passed accross views. To avoid integrity issues.
   // Use to set the item to be viewed
@@ -35,15 +37,20 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth, $filt
     $scope.bankInfoToBeViewed = angular.copy(bankInfo);
   };
 
-  $scope.setPreviewItemInfo = function(itemInfo) {
-    $scope.previewItemToSellInfoToBeViewed = angular.copy(itemInfo);
-  };
+//  $scope.setPreviewItemInfo = function(itemInfo) {
+//    console.log(itemInfo);
+//    $scope.previewItemToSellInfoToBeViewed = angular.copy(itemInfo);
+//  };
 
   $scope.setCostAndShipping = function(items, cost, shipping) {
-    $scope.itemsAmountToBeViewed = items;
-    $scope.costToBeViewed = cost;
-    $scope.shippingToBeViewed = shipping;
+    $scope.itemsAmountToBeViewed = angular.copy(items);
+    $scope.costToBeViewed = angular.copy(cost);
+    $scope.shippingToBeViewed = angular.copy(shipping);
   };
+
+  $scope.setDraft = function(draft) {
+    $scope.draftToBeViewed = angular.copy(draft);
+  }
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!

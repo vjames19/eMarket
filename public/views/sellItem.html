@@ -3,7 +3,7 @@
     <h1>Sell Item</h1>
 
     <!--go back to the index page data-rel="back" reverse the transition back -->
-    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
 
     <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
     <search></search>
@@ -18,7 +18,7 @@
             <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
                 <span>Add Image</span><br>
                 <input type="file" name="files[]" multiple data-role="none"
-                       ng-src="{{item.productDescription.productPicture}}"/>
+                       ng-src="{{item.picture}}"/>
             </span>
           </td>
           <td class="middle"></td>
@@ -72,13 +72,13 @@
           <h3>Select the condition</h3>
           <fieldset data-role="controlgroup">
             <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
-                   ng-model="item.productDescription.productCondition">
+                   ng-model="item.condition">
             <label for="radio-choice-new">New</label>
             <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
-                   ng-model="item.productDescription.productCondition">
+                   ng-model="item.condition">
             <label for="radio-choice-used">Used</label>
             <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
-                   ng-model="item.productDescription.productCondition">
+                   ng-model="item.condition">
             <label for="radio-choice-refurbished">Refurbished</label>
           </fieldset>
           <a href="#sell-item" data-role="button">OK</a>
@@ -92,14 +92,14 @@
         <div style="padding:10px 20px;">
           <h3>Description</h3>
           Brand
-          <input type="text" id="brand" ng-model="item.productDescription.productBrand">
+          <input type="text" id="brand" ng-model="item.brand">
           Model
-          <input type="text" id="model" ng-model="item.productDescription.productModel">
+          <input type="text" id="model" ng-model="item.model">
           Dimension
-          <input type="text" id="dimension" ng-model="item.productDescription.productDimensions">
+          <input type="text" id="dimension" ng-model="item.dimensions">
           Aditional Description
           <textarea name="description" id="description" cols="30" rows="10"
-                    style="max-height: 75px" ng-model="item.productDescription.productDescription"></textarea>
+                    style="max-height: 75px" ng-model="item.description"></textarea>
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
         </div>
@@ -119,13 +119,13 @@
           <!--</fieldset>-->
 
           Buy it Now Price
-          <input type="number" ng-model="item.productBuyItNowPrice">
+          <input type="number" ng-model="item.nonbidPrice">
 
           Initial Bid Price
-          <input type="number" ng-model="item.productStartingBidPrice">
+          <input type="number" ng-model="item.startingBidPrice">
 
           Quantity
-          <input type="number" ng-model="item.productQuantity">
+          <input type="number" ng-model="item.quantity">
 
           <!--Duration-->
           <!--<select name="select-duration" id="select-duration">-->
@@ -136,9 +136,8 @@
           <!--</select>-->
 
           Product End Date
-          <input type="date" data-clear-btn="false" name="date" id="set-date" value=""
-                 ng-model="item.productBidEndDate">
-
+          <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" value=""
+                 ng-model="item.bidEndDate">
 
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
@@ -155,7 +154,7 @@
             Shipping
           </label>
           Shipping Price
-          <input type="number" ng-model="item.productShippingPrice" placeholder="0.00" id="shipping-price">
+          <input type="number" ng-model="item.shippingPrice" placeholder="0.00" id="shipping-price">
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
         </div>

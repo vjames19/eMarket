@@ -15,7 +15,7 @@
       <li data-role="list-divider">Last 10 Items</li>
       <li ng-repeat="item in recentlyViewed">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
-          <img src="img/shopping-cart.png" class="item-image">
+          <img ng-src="{{item.picture}}" class="item-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>

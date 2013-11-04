@@ -23,7 +23,7 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="draftList">
       <li data-role="list-divider">Drafts<span class="ui-li-count">{{drafts.length}}</span></li>
       <li ng-repeat="draft in drafts">
-        <a href="" data-transition="slide">{{draft.productName}}</a>
+        <a href="#sell-item" data-transition="slide" ng-click="setDraft(draft)" >{{draft.productName}}</a>
       </li>
     </ul>
   </div>

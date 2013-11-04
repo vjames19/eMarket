@@ -13,7 +13,7 @@
     <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">
       <li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>
       <li ng-repeat="invoiceProduct in invoiceProducts">
-        <img src="img/shopping-cart.png" class="center-image">
+        <img ng-src="{{invoiceProduct.picture}}" class="center-image">
         <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
           <thead>
           <tr>

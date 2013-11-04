@@ -24,7 +24,7 @@
       <li ng-repeat="soldProduct in soldProducts">
 
         <a href="#item-view" class="wrap-text" ng-click="setItem(soldProduct)" data-transition="slide">
-          <img src="img/shopping-cart.png" class="center-image">
+          <img ng-src="{{soldProduct.picture}}" class="center-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
               <tr>
@@ -54,7 +54,7 @@
       <li data-role="list-divider">Unsold<span class="ui-li-count">{{unsoldProducts.length}}</span></li>
       <li ng-repeat="unsoldProduct in unsoldProducts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(unsoldProduct)" data-transition="slide">
-          <img src="img/shopping-cart.png" class="center-image">
+          <img ng-src="{{unsoldProduct.picture}}" class="center-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>
