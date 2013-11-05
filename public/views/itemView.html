@@ -19,7 +19,7 @@
 
     <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
        data-position-to="window" data-transition="pop">
-      <p class="item-button-text-size">Place bid US {{ item.currentBid + 5 | currency }}</p>
+      <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
     </a>
     <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup"
        data-position-to="window" data-transition="pop">
@@ -127,12 +127,11 @@
     <form data-ajax="false" ng-submit="submitBid()">
       <div style="padding:10px 20px;">
         <h3>Enter Bid</h3>
-        <a data-role="button" ng-click="placeMinBid()">Add Min Bid:
-          {{item.productCurrentBidPrice + 5 | currency}}</a>
+        <a data-role="button" ng-click="setNextBid()">Add Min Bid: {{ nextMinBid }}</a>
 
         <div data-role="fieldcontain">
           <label for="placeBid">Place Bid</label>
-          <input type="number" id="placeBid" ng-model="bid.bidAmount">
+          <input type="number" step="any" id="placeBid" ng-model="bidAmount">
         </div>
 
         <button type="submit" data-icon="false" data-theme="b">Bid</button>

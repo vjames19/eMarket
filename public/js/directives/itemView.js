@@ -24,6 +24,7 @@ angular.module('eMarketApp').directive('itemView', function(User) {
       var buyItNowButton = page.find('#buy-it-now-button');
       var bidButton = page.find('#place-bid-button');
 
+
       page.on('pagebeforeshow', function() {
         // Remove any state from the bid object.
         scope.bid = {};
@@ -35,6 +36,14 @@ angular.module('eMarketApp').directive('itemView', function(User) {
           bidButton.removeClass('ui-disabled');
           buyItNowButton.removeClass('ui-disabled');
         }
+
+        if(scope.item.currentBid < scope.item.startingBidPrice) {
+          scope.nextMinBid = scope.item.startingBidPrice + 5;
+        }
+        else {
+          scope.nextMinBid = scope.item.currentBid + 5;
+        }
+
       });
 
       scope.addToCart = function() {
@@ -43,8 +52,8 @@ angular.module('eMarketApp').directive('itemView', function(User) {
         User.me().all('carts').post(scope.item);
       };
 
-      scope.placeMinBid = function() {
-        scope.bid.bidAmount = scope.item.productCurrentBidPrice + 5;
+      scope.setNextBid = function() {
+        scope.bidAmount = scope.nextMinBid;
       };
     }
   };

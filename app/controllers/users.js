@@ -164,7 +164,7 @@ var questions = [
 exports.findQuestionById = function(req, res, next, id) {
   Questions.get(id, function(err, question) {
     if(_.isEmpty(question)) {
-      res.jsonp(404, {message: 'Question and Answer with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Question with id ' + id + ' not found'});
     } else {
       req.question = question;
       next();
