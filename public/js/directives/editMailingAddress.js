@@ -25,9 +25,13 @@ angular.module('eMarketApp').directive('editMailingAddress', function() {
       var primaryCheckBox = page.find('#make-primary');
       page.on('pagebeforeshow', function() {
         if(scope.mailInfo.isPrimary === 1) {
-          primaryCheckBox.prop('checked', true).checkboxradio('refresh');
+          setTimeout(function() {
+            primaryCheckBox.prop('checked', true).checkboxradio('refresh');
+          });
         } else {
-          primaryCheckBox.prop('checked', false).checkboxradio('refresh');
+          setTimeout(function() {
+            primaryCheckBox.prop('checked', false).checkboxradio('refresh');
+          });
         }
       });
     }

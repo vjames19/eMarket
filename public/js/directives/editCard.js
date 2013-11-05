@@ -28,8 +28,10 @@ angular.module('eMarketApp').directive('editCard', function(User) {
       page.on('pagebeforeshow', function() {
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
-          cardType.selectmenu('refresh', true);
-          addressSelect.selectmenu('refresh', true);
+          setTimeout(function() {
+            cardType.selectmenu('refresh', true);
+            addressSelect.selectmenu('refresh', true);
+          });
         });
 
       });
