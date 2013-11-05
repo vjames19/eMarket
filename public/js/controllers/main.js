@@ -50,7 +50,7 @@ angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth, $filt
 
   $scope.setDraft = function(draft) {
     $scope.draftToBeViewed = angular.copy(draft);
-  }
+  };
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!

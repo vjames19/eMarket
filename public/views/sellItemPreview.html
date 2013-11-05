@@ -27,52 +27,50 @@
         </li>
         <li>
           <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }} </p>
-
           <p class="item-description-text-size"> End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
         </li>
         <li>
           <p class="item-description-text-size"> Condition: {{ previewItemInfo.condition }} </p>
         </li>
         <li>
-          <p class="item-description-text-size">
-            Description
+          <p class="item-description-text-size"> Description </p>
           <table>
             <tr>
               <td>
-                Brand:
+                <p class="item-description-text-size"> Brand: </p>
               </td>
               <td>
-                {{previewItemInfo.brand}}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Model:
-              </td>
-              <td>
-                {{ previewItemInfo.model}}
+                <p class="item-description-text-size"> {{previewItemInfo.brand}} </p>
               </td>
             </tr>
             <tr>
               <td>
-                Dimensions:
+                <p class="item-description-text-size"> Model: </p>
               </td>
               <td>
-                {{previewItemInfo.dimensions}}
+                <p class="item-description-text-size"> {{ previewItemInfo.model}} </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="item-description-text-size"> Dimensions: </p>
+              </td>
+              <td>
+                <p class="item-description-text-size"> {{previewItemInfo.dimensions}} </p>
               </td>
 
             </tr>
             <tr>
               <td>
-                Additional Description:
+                <p class="item-description-text-size"> Additional Description: </p>
               </td>
               <td>
-                {{previewItemInfo.description}}
+                <p class="item-description-text-size" style="text-wrap: normal !important;"> {{previewItemInfo.description}} </p>
               </td>
 
             </tr>
           </table>
-          </p>
+
         </li>
       </ul>
     </div>

@@ -17,7 +17,7 @@ angular.module('eMarketApp')
 
           page.on('pagebeforeshow', function() {
 
-            Restangular.all('categories').getList().then(function(categories) {
+            Restangular.all('categories').getList({flat: true}).then(function(categories) {
               scope.categories = categories;
             });
             Restangular.all('reportsDay').getList().then(function(results) {

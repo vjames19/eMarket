@@ -14,6 +14,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
       var shippingPriceInput = page.find('#shipping-price');
 
       page.on('pagebeforeshow', function() {
+
         scope.disableShipping = function() {
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
         };
@@ -28,7 +29,8 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
 
         scope.setPreviewItemInfo = function(item) {
           SellItem.itemPreview = item;
-        }
+        };
+
       });
 
     }
