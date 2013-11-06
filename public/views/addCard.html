@@ -10,29 +10,25 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="card-name"><strong>Card Name</strong></label>
-        <input type="text" id="card-name" ng-model="card.creditCardName">
+        <input type="text" id="card-name" ng-model="card.ownerName">
         <label for="card-type"><strong>Card Type</strong></label>
-        <select id="card-type" ng-model="card.creditCardType">
+        <select id="card-type" name="card-type" ng-model="card.cardType" required>
           <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
         <label for="card-exp-date"><strong>Expiration Date</strong></label>
-        <input type="date" id="card-exp-date" ng-model="card.creditExpDate">
+        <input type="month" id="card-exp-date" ng-model="card.expirationDate">
         <label for="card-number"><strong>Card Number</strong></label>
-        <input type="number" id="card-number" ng-model="card.creditCardNumber">
+        <input type="number" id="card-number" ng-model="card.cardNumber">
         <label for="card-cvs"><strong>Card CVS</strong></label>
-        <input type="number" id="card-cvs" ng-model="card.creditCardCvs">
+        <input type="number" id="card-cvs" ng-model="card.cardCsv">
         <label for="address-relation"><strong>Associated Address</strong></label>
-        <select id="address-relation" ng-model="card.creditCardBillingAddressId"
-                ng-options="bill.billAddressId as bill.billAddress for bill in billAddresses">
+        <select id="address-relation" ng-model="card.addressId"
+                ng-options="bill.addressId as bill.address for bill in billAddresses" required>
+          <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
-        <!--<select id="address-relation" ng-model="card.creditCardBillingAddress">-->
-        <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->
-        <!--<option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>-->
-        <!--<option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>-->
-        <!--</select>-->
       </div>
       <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
         <a href="#payment-options" data-role="button" data-icon="back" data-theme="a"

@@ -7,19 +7,27 @@ angular.module('eMarketApp').directive('addBank', function(User) {
     scope: {},
     replace: true,
     controller: function($scope) {
-      $scope.bank = {bankAccountType: 'Checking'};
+      $scope.bank = {accountType: 'Checking'};
+
       $scope.submit = function() {
         User.me().all('banks').post($scope.bank);
         $.mobile.changePage('#payment-options');
       };
+
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
+      var addressSelect = page.find('#address-relation');
+
       page.on('pagebeforeshow', function() {
-        scope.bank = {bankAccountType: 'Checking'};
+
         User.me().all('billAddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
+          setTimeout(function() {
+            addressSelect.selectmenu('refresh', true);
+          });
         });
+
       });
     }
   };
