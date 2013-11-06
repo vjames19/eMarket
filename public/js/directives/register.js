@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('register', function() {
+angular.module('eMarketApp').directive('register', function(Restangular) {
   return {
     templateUrl: 'views/register.html',
     restrict: 'E',
@@ -28,6 +28,20 @@ angular.module('eMarketApp').directive('register', function() {
         var disable = sameAsCheckBox.prop('checked');
         page.find('input[id*="billing-address"]').prop('disabled', disable);
       };
+
+      page.on('pagebeforeshow', function() {
+        Restangular.one('questions').getList().then(function(questionsList) {
+          scope.questions = questionsList;
+        });
+
+        $(window).bind("orientationchange", function(){
+          var orientation = window.orientation;
+          var new_orientation = (orientation) ? 0 : 180 + orientation;
+          $('body').css({
+            "-webkit-transform": "rotate(" + new_orientation + "deg)"
+          });
+        });
+      });
     }
   };
 });

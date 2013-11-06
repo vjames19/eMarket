@@ -92,36 +92,27 @@
             <label for="password-confirm">Confirm Password</label>
             <input type="password" id="password-confirm" autocomplete="off"
                    ng-model="newUser.validateUser.userConfirmPassword">
+
             <label for="security-questions-1">Security Questions</label>
-            <select id="security-questions-1" ng-model="newUser.user.questions.question1">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <select id="security-questions-1" ng-model="question1"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="">Select a question</option>
             </select>
             <input type="text" id="security-answer-1" placeholder="Answer"
                    ng-model="newUser.user.questions.answer1">
+
             <label for="security-questions-2"></label>
-            <select id="security-questions-2" ng-model="newUser.user.questions.question2">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <select id="security-questions-2" ng-model="question2"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="">Select a question</option>
             </select>
             <input type="text" id="security-answer-2" placeholder="Answer"
                    ng-model="newUser.user.questions.answer2">
+
             <label for="security-questions-3"></label>
-            <select id="security-questions-3" ng-model="newUser.user.questions.question3">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <select id="security-questions-3" ng-model="question3"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="">Select a question</option>
             </select>
             <input type="text" id="security-answer-3" placeholder="Answer"
                    ng-model="newUser.user.questions.answer3">
