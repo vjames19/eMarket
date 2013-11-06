@@ -94,6 +94,16 @@ td.pad {
   padding-right: 5px;
 }
 
+td.bidPad {
+     padding-left: 15px;
+     padding-right: 15px;
+}
+
+td.hugePad {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 .wrap-text {
   white-space: normal !important;
   font-size: 90%;
