@@ -115,7 +115,7 @@
     <form>
       <div style="padding:10px 20px;">
         <h3>Enter Quantity</h3>
-        <input type="number" id="quantity" placeholder="1" ng-model="item.quantity">
+        <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy">
         <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
            data-position-to="window" data-transition="pop" ng-click="addToCart()">Add to Cart</a>
         <a href="#item-view" data-role="button">Cancel</a>
@@ -131,7 +131,7 @@
 
         <div data-role="fieldcontain">
           <label for="placeBid">Place Bid</label>
-          <input type="number" step="any" id="placeBid" ng-model="bidAmount">
+          <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount">
         </div>
 
         <button type="submit" data-icon="false" data-theme="b">Bid</button>

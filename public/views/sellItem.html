@@ -91,15 +91,15 @@
       <form>
         <div style="padding:10px 20px;">
           <h3>Description</h3>
-          Brand
+          <label for="brand">Brand</label>
           <input type="text" id="brand" ng-model="item.brand">
-          Model
+          <label for="model">Model</label>
           <input type="text" id="model" ng-model="item.model">
-          Dimension
+          <label for="dimension">Dimension</label>
           <input type="text" id="dimension" ng-model="item.dimensions">
-          Aditional Description
+          <label for="description">Additional Description</label>
           <textarea name="description" id="description" cols="30" rows="10"
-                    style="max-height: 75px" ng-model="item.description"></textarea>
+                    style="resize: none" ng-model="item.description"></textarea>
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
         </div>
@@ -118,14 +118,14 @@
           <!--<label for="radio-choice-bid">Bid</label>-->
           <!--</fieldset>-->
 
-          Buy it Now Price
-          <input type="number" ng-model="item.nonbidPrice">
+          <label for="buyItNowPrice"> Buy it Now Price</label>
+          <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice">
 
-          Initial Bid Price
-          <input type="number" ng-model="item.startingBidPrice">
+          <label for="startingBid">Starting Bid Price</label>
+          <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice">
 
-          Quantity
-          <input type="number" ng-model="item.quantity">
+          <label for="quantityToSell">Quantity</label>
+          <input type="number" min="1" id="quantityToSell" ng-model="item.quantity">
 
           <!--Duration-->
           <!--<select name="select-duration" id="select-duration">-->
@@ -135,7 +135,7 @@
           <!--<option value="10">10 days</option>-->
           <!--</select>-->
 
-          Product End Date
+          <label for="set-date">Product End Date</label>
           <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" value=""
                  ng-model="item.bidEndDate">
 
@@ -149,12 +149,12 @@
         <div style="padding:10px 20px;">
           <h3>Shipping</h3>
 
-          <label>
-            <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()">Free
-            Shipping
-          </label>
-          Shipping Price
-          <input type="number" ng-model="item.shippingPrice" placeholder="0.00" id="shipping-price">
+          <label for="checkbox-free-shipping">Free Shipping</label>
+          <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()">
+
+          <label for="shipping-price">Shipping Price</label>
+          <input type="number" min="0.01" step="any" ng-model="item.shippingPrice" id="shipping-price">
+
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
         </div>
