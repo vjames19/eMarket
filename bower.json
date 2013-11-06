@@ -14,7 +14,8 @@
     "jquery-mobile": "~1.3.2",
     "restangular": "~1.1.4",
     "raty": "2.5.2",
-    "jqm-flatui": "*"
+    "jqm-flatui": "*",
+    "owlcarousel": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
