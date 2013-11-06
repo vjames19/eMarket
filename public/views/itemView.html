@@ -56,7 +56,7 @@
 
     <hr/>
 
-    <ul data-role="listview" data-theme="c" data-inset="true">
+    <ul data-role="listview" data-theme="c" data-inset="true" id="item-list-view">
       <li>
         <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
 
@@ -135,7 +135,15 @@
         </table>
       </li>
       <li>
-        <p class="item-description-text-size"> Seller: {{ item.sellerName }} </p>
+        <a href="#popupRateSeller" data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
+          <table>
+            <tr>
+              <td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>
+              <td class="pad"></td>
+              <td><div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div></td>
+            </tr>
+          </table>
+        </a>
       </li>
     </ul>
   </div>
@@ -174,6 +182,15 @@
     <div style="padding:10px 20px;">
       <p>Product have been placed in cart</p>
     </div>
+  </div>
+
+  <div data-role="popup" id="popupRateSeller" data-theme="a" class="ui-corner-all">
+    <form>
+      <div style="padding:10px 20px;">
+        <h3>Rate This Seller</h3>
+        <div id="rateSeller" data-score=""></div>
+      </div>
+    </form>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>
