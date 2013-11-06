@@ -12,19 +12,43 @@
 
   <div data-role="content">
 
-    <h3 class="item-title">{{ item.productName }}</h3>
-    <!--<a href="" data-role="button" id="save-button" class="save-button"><p>Save</p></a><hr/>-->
+    <table data-role="table" data-mode="none">
+      <thead>
+      <tr>
+        <th><h3 class="item-title">{{ item.productName }}</h3></th>
+      </tr>
+      <tr></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo"/></td>
+      </tr>
+      </tbody>
+    </table>
 
-    <img ng-src="{{item.picture}}" id="item-photo" class="item-photo"/>
+    <hr/>
 
-    <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
-       data-position-to="window" data-transition="pop">
-      <p class="item-button-text-size">Place bid US {{ item.currentBid + 5 | currency }}</p>
-    </a>
-    <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button" data-rel="popup"
-       data-position-to="window" data-transition="pop">
-      <p class="item-button-text-size">Buy It Now</p>
-    </a>
+    <table data-role="table" data-mode="none">
+      <thead><tr><th></th></tr></thead><!-- this is here for compatibility for data-role="table" -->
+      <tbody>
+      <tr>
+        <td>
+          <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
+             data-position-to="window" data-transition="pop" data-theme="a">
+            <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
+          </a>
+        </td>
+        <td>
+          <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
+             data-rel="popup"
+             data-position-to="window" data-transition="pop" data-theme="a">
+            <p class="item-button-text-size">Buy It Now</p>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
     <hr/>
 
     <ul data-role="listview" data-theme="c" data-inset="true">
