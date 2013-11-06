@@ -6,8 +6,10 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
 
     <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-    <search></search>
 
+    <form data-ajax="false" id="search-form" ng-submit="submitSearch()">
+      <input id="search" name="search" type="search" data-mini="true" placeholder="Search" ng-model="searchQuery">
+    </form>
   </div>
 
   <div data-role="content">
