@@ -21,9 +21,9 @@
         <label for="card-exp-date"><strong>Expiration Date</strong></label>
         <input type="month" id="card-exp-date" ng-model="card.expirationDate">
         <label for="card-number"><strong>Card Number</strong></label>
-        <input type="number" id="card-number" ng-model="card.cardNumber">
+        <input type="number" min="0" id="card-number" ng-model="card.cardNumber">
         <label for="card-cvs"><strong>Card CVS</strong></label>
-        <input type="number" id="card-cvs" ng-model="card.cardCsv">
+        <input type="number" min="0" id="card-cvs" ng-model="card.cardCsv">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="card.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses" required>

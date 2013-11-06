@@ -20,9 +20,9 @@
           <option value="Other">Other</option>
         </select>
         <label for="bank-account-number"><strong>Account Number</strong></label>
-        <input type="number" id="bank-account-number" ng-model="bank.accountNumber">
+        <input type="number" min="0" id="bank-account-number" ng-model="bank.accountNumber">
         <label for="bank-account-routing"><strong>Routing Number</strong></label>
-        <input type="number" id="bank-account-routing" ng-model="bank.routingNumber">
+        <input type="number" min="0" id="bank-account-routing" ng-model="bank.routingNumber">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="bank.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses" required>
