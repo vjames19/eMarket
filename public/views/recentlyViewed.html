@@ -11,7 +11,9 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-theme="c" data-inset="true" id="recentlyViewedList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="recentlyViewedList">
+    <!--<ul data-role="listview" data-theme="c" data-inset="true" id="recentlyViewedList">-->
+      <!--jqm1.3.2-->
       <li data-role="list-divider">Last 10 Items</li>
       <li ng-repeat="item in recentlyViewed">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">

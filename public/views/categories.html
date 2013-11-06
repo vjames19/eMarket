@@ -11,7 +11,9 @@
 
   <div data-role="content">
     <div ng-click="prev()" data-role="button" id="up-button">Up</div>
-    <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" id="categoryList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="categoryList">
+    <!--<ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true" id="categoryList">-->
+      <!--jqm1.3.2-->
       <li data-role="list-divider">Search by Categories</li>
       <li ng-repeat="category in categories"><a href="" ng-click="next(category)">{{ category.categoryName }}</a></li>
     </ul>

@@ -7,7 +7,9 @@
     <search></search>
   </div>
   <div data-role="content">
-    <ul data-role="listview" data-theme="c" data-inset="true" id="invoiceList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="invoiceList">
+      <!--<ul data-role="listview" data-theme="c" data-inset="true" id="invoiceList">-->
+      <!--jqm1.3.2-->
       <li data-role="list-divider">Invoices <span class="ui-li-count">{{invoices.length}}</span></li>
       <li ng-repeat="invoice in invoices">
         <a href="#invoice-report" class="wrap-text" data-transition="slide">

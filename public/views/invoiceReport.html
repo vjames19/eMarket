@@ -10,15 +10,19 @@
 
   <div data-role="content">
 
-    <ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="invoiceProductsList">
+      <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">-->
+      <!--jqm1.3.2-->
       <li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>
       <li ng-repeat="invoiceProduct in invoiceProducts">
-        <img ng-src="{{invoiceProduct.picture}}" class="center-image">
-        <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+        <img ng-src="{{invoiceProduct.picture}}" class="center-image" width="75px" height="75px">
+        <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
           <thead>
           <tr>
-            <th colspan="2" style="text-align: center">
-              <strong><abbr title="{{invoiceProduct.productName}}">{{invoiceProduct.productName | truncate:15}}</abbr></strong>
+            <th>
+              <!--<th colspan="2" style="text-align: center">-->
+              <strong><abbr title="{{invoiceProduct.productName}}">{{invoiceProduct.productName |
+                truncate:15}}</abbr></strong>
             </th>
           </tr>
           </thead>
