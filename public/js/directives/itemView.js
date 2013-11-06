@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
@@ -23,6 +23,7 @@ angular.module('eMarketApp').directive('itemView', function(User) {
       var page = $(elem[0]);
       var buyItNowButton = page.find('#buy-it-now-button');
       var bidButton = page.find('#place-bid-button');
+      var itemListView = page.find('#item-list-view');
 
 
       page.on('pagebeforeshow', function() {
@@ -44,6 +45,32 @@ angular.module('eMarketApp').directive('itemView', function(User) {
           scope.nextMinBid = scope.item.currentBid + 5;
         }
 
+        Restangular.one('users', scope.item.sellerId).one('avgRating').get().then(function(avg) {
+          scope.sellerRating = avg;
+          setTimeout(function() {
+            page.find('#avgStarRate').raty({
+              cancel: true,
+              score: function() {
+                return $(this).attr('data-score');
+              },
+              half: true,
+              size: 12,
+              readOnly: true,
+              path: '../lib/raty/lib/img'
+            });
+            itemListView.listview('refresh');
+          });
+        });
+      });
+
+      page.find('#rateSeller').raty({
+        cancel: true,
+        score: function() {
+          return $(this).attr('data-score');
+        },
+        half: true,
+        size: 16,
+        path: '../lib/raty/lib/img'
       });
 
       scope.addToCart = function() {

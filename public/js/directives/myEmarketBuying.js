@@ -10,13 +10,6 @@ angular.module('eMarketApp').directive('myEmarketBuying', function(User, Restang
       var page = $(elem[0]);
       var bidAndPurchaseList = page.find('#bidAndPurchaseList');
 
-      scope.selectedBid = function(selectedBid) {
-        Restangular.one('products', selectedBid.productId).get().then(function(product) {
-          scope.setItem(product);
-          $.mobile.changePage('#item-view');
-        });
-      };
-
       page.on('pagebeforeshow', function() {
         User.me().getList('purchases').then(function(purchases) {
           scope.purchases = purchases;

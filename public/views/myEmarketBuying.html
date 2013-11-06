@@ -24,7 +24,7 @@
     <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">-->
       <li data-role="list-divider">Bidding<span class="ui-li-count">{{bids.length}}</span></li>
       <li ng-repeat="bid in bids">
-        <a href="#item-view" class="wrap-text" ng-click="selectedBid(bid)" data-transition="slide">
+        <a href="#item-view" class="wrap-text" ng-click="setItem(bid)" data-transition="slide">
           <img ng-src="{{bid.picture}}" class="center-image">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
