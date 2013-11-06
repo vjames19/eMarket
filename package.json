@@ -22,8 +22,7 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "make start",
-    "test": "make test"
+    "postinstall": "bower install"
   },
   "dependencies": {
     "express": "latest",
@@ -34,7 +33,8 @@
     "view-helpers": "latest",
     "bower": "latest",
     "underscore": "~1.5.2",
-    "mysql": "latest"
+    "mysql": "latest",
+    "bower": "latest"
   },
   "devDependencies": {
     "supertest": "~0.8.0",
