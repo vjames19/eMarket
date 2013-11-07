@@ -7,7 +7,7 @@ angular.module('eMarketApp')
         restrict: 'E',
         scope: {},
         replace: true,
-        link: function(scope, elem) {
+        link: function(scope, elem, Highcharts) {
           var page = $(elem[0]);
           var graph = page.find('#graph');
           var selectedCategory = page.find('#select-category');

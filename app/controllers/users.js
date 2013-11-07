@@ -124,42 +124,42 @@ exports.deleteUser = function(req, res) {
 
 var questions = [
   {
-    "id": 1,
-    "question": "What was your childhood nickname?"
+    'id': 1,
+    'question': 'What was your childhood nickname?'
   },
   {
-    "id": 2,
-    "question": "What is the name of your favorite childhood friend?"
+    'id': 2,
+    'question': 'What is the name of your favorite childhood friend?'
   },
   {
-    "id": 3,
-    "question": "Where were you when you had your first kiss?"
+    'id': 3,
+    'question': 'Where were you when you had your first kiss?'
   },
   {
-    "id": 4,
-    "question": "In what city does your nearest sibling live?"
+    'id': 4,
+    'question': 'In what city does your nearest sibling live?'
   },
   {
-    "id": 5,
-    "question": "What is your maternal grandmother's maiden name?"
+    'id': 5,
+    'question': 'What is your maternal grandmother\'s maiden name?'
   },
   {
-    "id": 6,
-    "question": "In what city or town was your first job?"
+    'id': 6,
+    'question': 'In what city or town was your first job?'
   },
   {
-    "id": 7,
-    "question": "What was your dream job as a child?"
+    'id': 7,
+    'question': 'What was your dream job as a child?'
   },
   {
-    "id": 8,
-    "question": "What is the name of the company of your first job?"
+    'id': 8,
+    'question': 'What is the name of the company of your first job?'
   },
   {
-    "id": 9,
-    "question": "Who was your childhood hero?"
+    'id': 9,
+    'question': 'Who was your childhood hero?'
   }
-]
+];
 
 // Security Questions
 exports.findQuestionById = function(req, res, next, id) {
@@ -217,28 +217,27 @@ exports.deleteQuestion = function(req, res) {
 };
 
 
-
 var questionAnswers = {
-  1 :{
-    questionAnswerId : 1,
-    questionContent : 'What was your childhood nickname?',
-    questionUserId : 1,
-    questionAnswerContent : 'Julian',
-    questionAnswerStatus : true
+  1: {
+    questionAnswerId: 1,
+    questionContent: 'What was your childhood nickname?',
+    questionUserId: 1,
+    questionAnswerContent: 'Julian',
+    questionAnswerStatus: true
   },
-  2 :{
-    questionAnswerId : 2,
-    questionContent : 'What is the name of your favorite childhood friend?',
-    questionUserId : 1,
-    questionAnswerContent : 'Josian',
-    questionAnswerStatus : true
+  2: {
+    questionAnswerId: 2,
+    questionContent: 'What is the name of your favorite childhood friend?',
+    questionUserId: 1,
+    questionAnswerContent: 'Josian',
+    questionAnswerStatus: true
   },
-  3 :{
-    questionAnswerId : 3,
-    questionContent : 'Where were you when you had your first kiss?',
-    questionUserId : 1,
-    questionAnswerContent : 'Guavate',
-    questionAnswerStatus : true
+  3: {
+    questionAnswerId: 3,
+    questionContent: 'Where were you when you had your first kiss?',
+    questionUserId: 1,
+    questionAnswerContent: 'Guavate',
+    questionAnswerStatus: true
   }
 };
 
@@ -468,7 +467,7 @@ exports.deleteInvoice = function(req, res) {
   res.jsonp(req.invoice);
 };
 
-exports.readAllProductsInvoice = function (req, res) {
+exports.readAllProductsInvoice = function(req, res) {
   Invoices.getProducts(req.params.userId, req.params.invoiceId, function(err, products) {
     res.jsonp(products);
   });
@@ -1408,7 +1407,7 @@ exports.readRating = function(req, res) {
   res.jsonp(req.rating);
 };
 
-exports.readAvgRating = function (req, res) {
+exports.readAvgRating = function(req, res) {
   Ratings.getAvgRating(req.params.userId, function(err, avgRating) {
     res.jsonp(avgRating);
   });

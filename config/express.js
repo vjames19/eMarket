@@ -61,5 +61,6 @@ module.exports = function(app, passport) {
         res.jsonp(500, {error: err.stack});
       }
     });
+
   });
 };

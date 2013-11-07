@@ -40,7 +40,7 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
 
             // Navigation
             navigation : false,
-            navigationText : ["prev","next"],
+            navigationText : ['prev','next'],
             rewindNav : true,
             scrollPerPage : false,
 
@@ -54,13 +54,13 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
             responsiveBaseWidth: window,
 
             // CSS Styles
-            baseClass : "../lib/OwlCarousel-master/owl-carousel",
-            theme : "../lib/OwlCarousel-master/owl-carousel/owl-theme",
+            baseClass : '../lib/OwlCarousel-master/owl-carousel',
+            theme : '../lib/OwlCarousel-master/owl-carousel/owl-theme',
 
             //Lazy load
             lazyLoad : false,
             lazyFollow : true,
-            lazyEffect : "fade",
+            lazyEffect : 'fade',
 
             //Auto height
             autoHeight : false,
@@ -98,7 +98,7 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
 
       scope.isDraft = function(isDraft) {
         SellItem.isDraft = isDraft;
-      }
+      };
     }
   };
 });
