@@ -162,7 +162,6 @@ module.exports = function(app, passport, auth) {
   // User Carousel Routes
   app.param('carouselId', users.findCarouselById);
   app.get('/api/users/:userId/carousels', users.readAllCarousels);
-  app.get('/api/products/:productId/bids/:bidId', users.readCarousel);
 
   //=================NON USER ROUTES================//
 
