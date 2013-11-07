@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Product = require('../models/product.js');
+var ProductBids = require('../models/productBids');
 
 var products = {
   1: {
@@ -93,19 +94,19 @@ var bids = {
   }
 };
 
-exports.findProductBidById = function(req, res, next, id) {
-  id = +id;
-  if(!bids[id]) {
-    res.jsonp(404, {message: 'not found'});
-  } else {
-    req.bid = bids[id];
-    next();
-  }
-};
-
-exports.readAllProductBids = function(req, res) {
-  res.jsonp(_.values(bids));
-};
+//exports.findProductBidById = function(req, res, next, id) {
+//  id = +id;
+//  if(!bids[id]) {
+//    res.jsonp(404, {message: 'not found'});
+//  } else {
+//    req.bid = bids[id];
+//    next();
+//  }
+//};
+//
+//exports.readAllProductBids = function(req, res) {
+//  res.jsonp(_.values(bids));
+//};
 
 exports.createProductBid = function(req, res) {
   var bid = req.body;
@@ -114,9 +115,9 @@ exports.createProductBid = function(req, res) {
   res.jsonp(bid);
 };
 
-exports.readProductBid = function(req, res) {
-  res.jsonp(req.bid);
-};
+//exports.readProductBid = function(req, res) {
+//  res.jsonp(req.bid);
+//};
 
 exports.updateProductBid = function(req, res) {
   _.extend(req.bid, req.body);
@@ -127,4 +128,25 @@ exports.updateProductBid = function(req, res) {
 exports.deleteProductBid = function(req, res) {
   delete bids[req.bid.bidId];
   res.jsonp(req.bid);
+};
+
+exports.findProductBidById = function(req, res, next, id) {
+  ProductBids.get(req.params.productId, id, function(err, productBid) {
+    if(_.isEmpty(productBid)) {
+      res.jsonp(404, {message: 'Product Bid with id ' + id + ' not found'});
+    } else {
+      req.productBid = productBid;
+      next();
+    }
+  });
+};
+
+exports.readAllProductBids = function(req, res) {
+  ProductBids.getAll(req.params.productId, function(err, productBids) {
+    res.jsonp(productBids);
+  });
+};
+
+exports.readProductBid = function(req, res) {
+  res.jsonp(req.productBid);
 };

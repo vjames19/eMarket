@@ -1,5 +1,5 @@
-  //    res.redirect('/');
-  //  });
+//    res.redirect('/');
+//  });
 'use strict';
 
 module.exports = function(app, passport, auth) {
@@ -193,11 +193,11 @@ module.exports = function(app, passport, auth) {
   // Bid Routes
   app.param('bidId', products.findProductBidById);
   app.get('/api/products/:productId/bids', products.readAllProductBids);
-  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
+//  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
-  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
-      products.deleteProductBid);
+//  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
+//  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
+//      products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
