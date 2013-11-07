@@ -21,8 +21,12 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
 
       scope.next = function(category) {
         var subCategories = category.categories;
-
         if(angular.isArray(subCategories) && subCategories.length > 0) {
+          subCategories = subCategories.slice(0);
+          var parentCategory = angular.copy(category);
+          parentCategory.categoryName = 'Search all ' + category.categoryName;
+          parentCategory.categories = null;
+          subCategories.unshift(parentCategory);
           upButton.show();
           stack.push(subCategories);
           refreshList(subCategories);
