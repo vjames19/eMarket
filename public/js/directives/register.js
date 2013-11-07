@@ -7,9 +7,9 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
     scope: {},
     replace: true,
     controller: function($scope, Restangular) {
+      $scope.newUser = { creditCard: {creditCardType : 'Visa'} };
 
       $scope.submit = function() {
-
         $.mobile.loading('show');
         Restangular.all('users').post($scope.newUser.user).then(function(user) {
           user.all('mailAddresses').post($scope.newUser.mailAddress);
@@ -19,6 +19,7 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
           $.mobile.changePage('#index-page');
         });
       };
+
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
@@ -34,13 +35,14 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
           scope.questions = questionsList;
         });
 
-        $(window).bind("orientationchange", function(){
-          var orientation = window.orientation;
-          var new_orientation = (orientation) ? 0 : 180 + orientation;
-          $('body').css({
-            "-webkit-transform": "rotate(" + new_orientation + "deg)"
-          });
-        });
+//        $(window).bind("orientationchange", function(){
+//          var orientation = window.orientation;
+//          var new_orientation = (orientation) ? 0 : 180 + orientation;
+//          $('body').css({
+//            "-webkit-transform": "rotate(" + new_orientation + "deg)"
+//          });
+//        });
+
       });
     }
   };

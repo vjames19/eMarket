@@ -66,7 +66,7 @@
             <input type="text" id="name-as-card" ng-model="newUser.creditCard.creditCardName">
             <label for="card-type">Card Type</label>
             <select id="card-type" ng-model="newUser.creditCard.creditCardType">
-              <option value="Visa">Visa</option>
+              <option value="Visa" selected>Visa</option>
               <option value="Master Card">Master Card</option>
               <option value="American Express">American Express</option>
               <option value="Other">Other</option>
@@ -96,7 +96,7 @@
             <label for="security-questions-1">Security Questions</label>
             <select id="security-questions-1" ng-model="question1"
                     ng-options="question.id as question.question for question in questions">
-              <option value="">Select a question</option>
+              <option value="" ng-hide="question1">Select a question</option>
             </select>
             <input type="text" id="security-answer-1" placeholder="Answer"
                    ng-model="newUser.user.questions.answer1">
@@ -104,7 +104,7 @@
             <label for="security-questions-2"></label>
             <select id="security-questions-2" ng-model="question2"
                     ng-options="question.id as question.question for question in questions">
-              <option value="">Select a question</option>
+              <option value="" ng-hide="question2">Select a question</option>
             </select>
             <input type="text" id="security-answer-2" placeholder="Answer"
                    ng-model="newUser.user.questions.answer2">
@@ -112,7 +112,7 @@
             <label for="security-questions-3"></label>
             <select id="security-questions-3" ng-model="question3"
                     ng-options="question.id as question.question for question in questions">
-              <option value="">Select a question</option>
+              <option value="" ng-hide="question3">Select a question</option>
             </select>
             <input type="text" id="security-answer-3" placeholder="Answer"
                    ng-model="newUser.user.questions.answer3">
