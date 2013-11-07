@@ -4,7 +4,7 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
   return {
     templateUrl: 'views/categories.html',
     restrict: 'E',
-    scope: {},
+    scope: true,
     replace: true,
     link: function(scope, elem) {
       var page = $(elem[0]);
