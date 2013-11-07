@@ -27,7 +27,9 @@
         </li>
         <li>
           <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }} </p>
-          <p class="item-description-text-size"> End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
+
+          <p class="item-description-text-size"> End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss'
+            }} </p>
         </li>
         <li>
           <p class="item-description-text-size"> Condition: {{ previewItemInfo.condition }} </p>
@@ -65,7 +67,8 @@
                 <p class="item-description-text-size"> Additional Description: </p>
               </td>
               <td>
-                <p class="item-description-text-size" style="text-wrap: normal !important;"> {{previewItemInfo.description}} </p>
+                <p class="item-description-text-size" style="text-wrap: normal !important;">
+                  {{previewItemInfo.description}} </p>
               </td>
 
             </tr>
@@ -76,7 +79,9 @@
     </div>
 
     <div data-role="footer" data-theme="a">
-      <button type="submit" class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all">Submit</button>
+      <button type="submit" class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right
+      ui-btn-corner-all ui-btn-inline">Submit
+      </button>
 
       <!--<a href="" data-role="button" id="submit-button" class="preview-button">Submit</a>-->
       <!--<button type="submit" data-icon="check" data-theme="a" class="footer-button">Submit</button>-->
