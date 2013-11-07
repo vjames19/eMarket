@@ -24,8 +24,8 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
             itemsDesktop : [1199,4],
             itemsDesktopSmall : [980,3],
             itemsTablet: [768,3],
-            itemsTabletSmall: false,
-            itemsMobile : [479,2],
+            itemsTabletSmall: [479, 2],
+            itemsMobile : [280,1],
             singleItem : false,
             itemsScaleUp : false,
 
