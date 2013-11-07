@@ -12,7 +12,17 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-theme="c" data-inset="true" id="notificationList">
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="notificationList">
+      <!--<ul data-role="listview" data-theme="c" data-inset="true" id="notificationList">-->
+      <!--jqm1.3.2-->
+      <li data-role="list-divider">
+        <table>
+          <tr>
+            <td>Notifications</td>
+            <td><span class="ui-li-count">{{notifications.length}}</span></td>
+          </tr>
+        </table>
+      </li>
       <li data-icon="false" ng-repeat="notification in notifications">
         <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
            ng-click="readMessage(notification)">
@@ -25,10 +35,17 @@
 
   <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 
-  <div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width: 320px">
-    <a href="#notifications" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+  <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width: 320px">
+    <a href="#notifications" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
        data-iconpos="notext" class="ui-btn-right">Close</a>
-
     <p id="notificationMessage"></p>
   </div>
+
+  <!--jqm1.3.2-->
+  <!--<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width: 320px">-->
+    <!--<a href="#notifications" data-rel="external" data-role="button" data-theme="a" data-icon="delete"-->
+       <!--data-iconpos="notext" class="ui-btn-right">Close</a>-->
+    <!--<p id="notificationMessage"></p>-->
+  <!--</div>-->
+
 </div>

@@ -10,10 +10,18 @@
 
   <div data-role="content">
 
-    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="invoiceProductsList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="invoiceProductsList">
       <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">-->
       <!--jqm1.3.2-->
-      <li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>
+      <li data-role="list-divider">
+        <table>
+          <tr>
+            <td>Products</td>
+            <td><span class="ui-li-count">{{invoiceProducts.length}}</span></td>
+          </tr>
+        </table>
+      </li>
+      <!--<li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>-->
       <li ng-repeat="invoiceProduct in invoiceProducts">
         <img ng-src="{{invoiceProduct.picture}}" class="center-image" width="75px" height="75px">
         <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
