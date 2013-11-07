@@ -10,9 +10,9 @@
 
   <div data-role="content">
 
-    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="shoppingCartList">
-    <!--<ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">-->
-    <!--jqm1.3.2-->
+    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="shoppingCartList">
+      <!--<ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">-->
+      <!--jqm1.3.2-->
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
         <a href="#item-view" class="wrap-text" data-transition="slide" ng-click="setItem(shoppingCart)"
@@ -83,14 +83,18 @@
   </div>
 
   <div data-role="footer" data-theme="a">
-    <a href="#checkout" data-role="button" class="footer-button" ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)">Proceed to Checkout</a>
+    <a href="#checkout" data-role="button" class="footer-button"
+       ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)" data-theme="b">Proceed to Checkout</a>
   </div>
 
   <div data-role="popup" id="popupNotification" data-theme="a" class="ui-corner-all">
     <div style="padding:10px 20px;">
       <h3>Select an action</h3>
-      <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()">Delete</a>
-      <a href="#shopping-cart" data-role="button">Cancel</a>
+      <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()" data-theme="b">Delete</a>
+      <a href="#shopping-cart" data-role="button" data-theme="b">Cancel</a>
+      <!--<a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()">Delete</a>-->
+      <!--<a href="#shopping-cart" data-role="button">Cancel</a>-->
+      <!--jqm1.3.2-->
     </div>
   </div>
 

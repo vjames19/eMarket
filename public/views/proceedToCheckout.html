@@ -20,12 +20,14 @@
         <label for="select-bank"><strong> Select Bank </strong></label>
         <select name="select-bank" id="select-bank" ng-model="selectedBank"
                 ng-options="bank.bankName for bank in banks">
+          <option value="" ng-hide="selectedBank">Please Select a Bank</option>
         </select>
       </div>
       <div data-role="fieldcontain" ng-show="isCreditCard">
         <label for="select-card"><strong> Select Card </strong></label>
         <select name="select-card" id="select-card" ng-model="selectedCard"
                 ng-options="card.cardNumber for card in cards">
+          <option value="" ng-hide="selectedCard">Please Select a Card</option>
         </select>
       </div>
     </form>
@@ -62,6 +64,8 @@
   </div>
 
   <div data-role="footer" data-theme="a">
-    <button type="submit" data-icon="check" data-theme="a" class="footer-button">Checkout</button>
+    <button type="submit" data-icon="check" data-theme="a"
+            class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all">Checkout
+    </button>
   </div>
 </div>

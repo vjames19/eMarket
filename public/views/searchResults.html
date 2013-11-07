@@ -13,10 +13,20 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-theme="c" data-inset="true" id="resultList">
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="resultList">
+    <!--<ul data-role="listview" data-theme="c" data-inset="true" id="resultList">-->
+    <!--jqm1.3.2-->
+      <li data-role="list-divider">
+        <table>
+          <tr>
+            <td>Products</td>
+            <td><span class="ui-li-count">{{results.length}}</span></td>
+          </tr>
+        </table>
+      </li>
       <li ng-repeat="result in results">
         <a href="#item-view" data-transition="slide" ng-click="setItem(result)">
-          <img ng-src="{{result.picture}}" class="center-image">
+          <img ng-src="{{result.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
 
           <h3 class="ul-li-heading">{{ result.productName | truncate:15 }}</h3>
 

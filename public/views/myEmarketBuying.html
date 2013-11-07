@@ -23,9 +23,10 @@
     <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="bidAndPurchaseList">
       <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">-->
       <li data-role="list-divider">Bidding<span class="ui-li-count">{{bids.length}}</span></li>
+
       <li ng-repeat="bid in bids">
         <a href="#item-view" class="wrap-text" ng-click="setItem(bid)" data-transition="slide">
-          <img ng-src="{{bid.picture}}" class="center-image">
+          <img ng-src="{{bid.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
           <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
             <thead>
             <tr>
@@ -54,17 +55,26 @@
         </a>
       </li>
 
-      <li data-role="list-divider">Purchase History <span class="ui-li-count">{{purchases.length}}</span></li>
+      <li data-role="list-divider">Purchase History<span class="ui-li-count">{{purchases.length}}</span></li>
+
       <li ng-repeat="purchase in purchases">
         <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)" data-transition="slide">
-          <img ng-src="{{purchase.picture}}" class="center-image">
+          <img ng-src="{{purchase.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
           <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
             <thead>
             <tr>
-              <th>{{purchase.productName}}</th>
+              <th>
+                <strong>
+                  <abbr title="{{purchase.productName}}">{{purchase.productName | truncate:15}}</abbr>
+                </strong>
+              </th>
             </tr>
             </thead>
-            <tbody><tr><td></td></tr></tbody>
+            <tbody>
+            <tr>
+              <td></td>
+            </tr>
+            </tbody>
           </table>
         </a>
       </li>

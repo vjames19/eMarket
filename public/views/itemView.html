@@ -21,7 +21,8 @@
       </thead>
       <tbody>
       <tr>
-        <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo"/></td>
+        <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo ui-corner-all" width="200px"
+                                height="200px"/></td>
       </tr>
       </tbody>
     </table>
@@ -140,7 +141,9 @@
             <tr>
               <td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>
               <td class="pad"></td>
-              <td><div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div></td>
+              <td>
+                <div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div>
+              </td>
             </tr>
           </table>
         </a>
@@ -188,6 +191,7 @@
     <form>
       <div style="padding:10px 20px;">
         <h3>Rate This Seller</h3>
+
         <div id="rateSeller" data-score=""></div>
       </div>
     </form>

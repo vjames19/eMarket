@@ -19,13 +19,13 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="soldAndUnsoldList">
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="soldAndUnsoldList">
     <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">-->
       <!--jqm1.3.2-->
       <li data-role="list-divider">Sold<span class="ui-li-count">{{soldProducts.length}}</span></li>
       <li ng-repeat="soldProduct in soldProducts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(soldProduct)" data-transition="slide">
-          <img ng-src="{{soldProduct.picture}}" class="center-image" width="75px" height="75px">
+          <img ng-src="{{soldProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
               <tr>
@@ -56,7 +56,7 @@
       <li data-role="list-divider">Unsold<span class="ui-li-count">{{unsoldProducts.length}}</span></li>
       <li ng-repeat="unsoldProduct in unsoldProducts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(unsoldProduct)" data-transition="slide">
-          <img ng-src="{{unsoldProduct.picture}}" class="center-image">
+          <img ng-src="{{unsoldProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
             <tr>
