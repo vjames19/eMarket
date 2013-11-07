@@ -7,7 +7,7 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
     scope: {},
     replace: true,
     controller: function($scope, Restangular) {
-      $scope.newUser = { creditCard: {creditCardType : 'Visa'} };
+      $scope.newUser = { creditCard: {creditCardType: 'Visa'} };
 
       $scope.submit = function() {
         $.mobile.loading('show');
@@ -16,7 +16,8 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
           user.all('billAddresses').post($scope.newUser.billAddress);
           user.all('creditCards').post($scope.newUser.creditCard);
           $.mobile.loading('hide');
-          $.mobile.changePage('#index-page');
+          $.mobile.changePage('#index-user'); //Force user to put hes newly registered credentials
+//          $.mobile.changePage('#home-user');
         });
       };
 

@@ -10,11 +10,12 @@ app.run(function($rootScope, $location, Auth) {
 
   var history = [];
   var back = false;
-  var loginPath = 'login-user';
+//  var loginPath = 'login-user';
+  var loginPath = 'index-page';
 
   $(window).on('hashchange', function() {
     // If its not logged in and not in a valid unauth page
-    if($location.path().indexOf('index-page') >= 0) {
+    if($location.path().indexOf('home-user') >= 0) {
       history = [];
       back = false;
     }

@@ -3,13 +3,14 @@
 angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
   var user = User;
   var isLoggedIn = false;
-  var unAuthPaths = ['login-user', 'register', 'forgot-password', 'shopping-cart', 'item-view', 'search-results'];
+  var unAuthPaths = ['index-page', 'register', 'forgot-password'];
+//  var unAuthPaths = ['index-page', 'register', 'forgot-password', 'shopping-cart', 'item-view', 'search-results'];
   return {
     logIn: function(userData) {
       $http.post('login', userData).success(function(realUser) {
         user.username = realUser.username;
         user.userId = realUser.id;
-        $.mobile.changePage('#index-page');
+        $.mobile.changePage('#home-user');
         isLoggedIn = true;
       }).error(function() {
             $('#loginError').popup('open');

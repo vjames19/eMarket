@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
         $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
         $scope.bid.productName = $scope.item.productName;
         User.me().all('bids').post($scope.bid);
-        $.mobile.changePage('#index-page');
+        $.mobile.changePage('#home-user');
       };
     },
     link: function(scope, elem) {
