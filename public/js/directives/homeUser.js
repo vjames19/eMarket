@@ -20,80 +20,78 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
 
         $(document).ready(function() {
           carousel.owlCarousel({
-            items : 5,
-            itemsDesktop : [1199,4],
-            itemsDesktopSmall : [980,3],
-            itemsTablet: [768,3],
-            itemsTabletSmall: [479, 2],
-            itemsMobile : [280,1],
-            singleItem : false,
-            itemsScaleUp : false,
+            items: 5,
+            itemsDesktop: [850, 5],
+            itemsDesktopSmall: [705, 4],
+            itemsTablet: [560, 3],
+            itemsTabletSmall: [415, 2],
+            itemsMobile: [270, 1],
+            singleItem: false,
+            itemsScaleUp: false,
 
             //Basic Speeds
-            slideSpeed : 200,
-            paginationSpeed : 800,
-            rewindSpeed : 1000,
+            slideSpeed: 200,
+            paginationSpeed: 800,
+            rewindSpeed: 1000,
 
             //Autoplay
-            autoPlay : false,
-            stopOnHover : false,
+            autoPlay: false,
+            stopOnHover: false,
 
             // Navigation
-            navigation : false,
-            navigationText : ['prev','next'],
-            rewindNav : true,
-            scrollPerPage : false,
+            navigation: false,
+            navigationText: ['prev', 'next'],
+            rewindNav: true,
+            scrollPerPage: false,
 
             //Pagination
-            pagination : true,
+            pagination: true,
             paginationNumbers: false,
 
             // Responsive
             responsive: true,
-            responsiveRefreshRate : 200,
+            responsiveRefreshRate: 200,
             responsiveBaseWidth: window,
 
             // CSS Styles
-            baseClass : '../lib/OwlCarousel-master/owl-carousel',
-            theme : '../lib/OwlCarousel-master/owl-carousel/owl-theme',
+            baseClass: '../lib/OwlCarousel-master/owl-carousel',
+            theme: '../lib/OwlCarousel-master/owl-carousel/owl-theme',
 
             //Lazy load
-            lazyLoad : false,
-            lazyFollow : true,
-            lazyEffect : 'fade',
+            lazyLoad: false,
+            lazyFollow: true,
+            lazyEffect: 'fade',
 
             //Auto height
-            autoHeight : false,
+            autoHeight: false,
 
             //JSON
-            jsonPath : false,
-            jsonSuccess : false,
+            jsonPath: false,
+            jsonSuccess: false,
 
             //Mouse Events
-            dragBeforeAnimFinish : true,
-            mouseDrag : true,
-            touchDrag : true,
+            dragBeforeAnimFinish: true,
+            mouseDrag: true,
+            touchDrag: true,
 
             //Transitions
-            transitionStyle : false,
+            transitionStyle: false,
 
             // Other
-            addClassActive : false,
+            addClassActive: false,
 
             //Callbacks
-            beforeUpdate : false,
-            afterUpdate : false,
+            beforeUpdate: false,
+            afterUpdate: false,
             beforeInit: false,
             afterInit: false,
             beforeMove: false,
             afterMove: false,
             afterAction: false,
-            startDragging : false
+            startDragging: false
           });
         });
       });
-
-
 
 
       scope.isDraft = function(isDraft) {
