@@ -46,14 +46,12 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
         Category.getList().then(function(categories) {
           scope.categories = categories;
           stack.push(categories);
+          setTimeout(function() {
+            categoryList.listview('refresh');
+          });
         });
       });
-
-      page.on('pageshow', function() {
-        categoryList.listview('refresh');
-      });
     }
-
   };
 });
 
