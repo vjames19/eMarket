@@ -15,7 +15,8 @@
     "restangular": "~1.1.4",
     "raty": "2.5.2",
     "jqm-flatui": "*",
-    "owlcarousel": "*"
+    "owlcarousel": "*",
+    "underscore": "~1.4.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
