@@ -14,7 +14,6 @@
     "restangular": "~1.1.4",
     "raty": "2.5.2",
     "owlcarousel": "*",
-    "highcharts.com": "~3.0.7",
     "underscore": "~1.4.4"
   },
   "devDependencies": {
