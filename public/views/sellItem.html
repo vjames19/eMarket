@@ -1,195 +1,228 @@
 <div data-role="page" data-theme="b" id="sell-item">
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1>Sell Item</h1>
+<div data-role="header" data-position="fixed" data-theme="a">
+  <h1>Sell Item</h1>
 
-    <!--go back to the index page data-rel="back" reverse the transition back -->
-    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
+  <!--go back to the index page data-rel="back" reverse the transition back -->
+  <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
 
-    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-    <search></search>
+  <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+  <search></search>
 
-  </div>
+</div>
 
-  <div data-role="content">
-    <form>
-      <table data-role="table" data-mode="none">
-        <thead>
-        <tr>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="left">
-            <button id="add-image" data-icon="plus" data-iconpos="bottom">
-              Add Image
-            </button>
-            <!--<button data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">Add Image-->
-            <!--<span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">-->
-            <!--<span>Add Image</span>-->
-            <!--<br>-->
-            <!--<input type="file" name="files[]" multiple data-role="none"-->
-            <!--ng-src="{{item.picture}}"/>-->
-            <!--</span>-->
-            <!--jqm1.3.2-->
-          </td>
-          <td class="middle"></td>
-          <td class="right">
-            <textarea ng-model="item.productName" id="text-input-title" class="text-input-title"
-                      placeholder="Write the title of the item"></textarea>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </form>
+<div data-role="content">
+  <form>
+    <table data-role="table" data-mode="none">
+      <thead>
+      <tr>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="left">
+          <button id="add-image" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-bottom ui-btn-corner-all">
+            Add<br/>Image
+          </button>
+          <!--<button data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">Add Image-->
+          <!--<span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">-->
+          <!--<span>Add Image</span>-->
+          <!--<br>-->
+          <!--<input type="file" name="files[]" multiple data-role="none"-->
+          <!--ng-src="{{item.picture}}"/>-->
+          <!--</span>-->
+          <!--jqm1.3.2-->
+        </td>
+        <td class="middle"></td>
+        <td class="right">
+          <textarea ng-model="item.productName" id="text-input-title" class="text-input-title"
+                    placeholder="Write the title of the item" data-theme="a"></textarea>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
 
 
-    <ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">
-      <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
-      <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
-      </li>
-      <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
-             data-transition="pop">Description</a></li>
-      <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &amp;
-        Price</a></li>
-      <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
-      </li>
-    </ul>
-  </div>
+  <ul data-role="listview" data-theme="a" data-inset="true">
+    <!--<ul data-role="listview" data-dividertheme="d" data-theme="c" data-inset="true">-->
+    <!--jqm1.3.2-->
+    <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
+    <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
+    </li>
+    <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
+           data-transition="pop">Description</a></li>
+    <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &amp;
+      Price</a></li>
+    <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
+    </li>
+  </ul>
+</div>
 
-  <div data-role="footer" data-theme="a" class="ui-footer">
-    <a href="#sell-item-preview" data-role="button" id="preview-button"
-       ng-click="setPreviewItemInfo(item)" class="footer-button">Preview</a>
-    <!--<button type="submit" class="preview-button" ng-click="setPreviewItemInfo()">Preview</button>-->
-  </div>
+<div data-role="footer" data-theme="a" class="ui-footer">
+  <a href="#sell-item-preview" data-role="button" id="preview-button"
+     ng-click="setPreviewItemInfo(item)" class="footer-button">Preview</a>
+  <!--<button type="submit" class="preview-button" ng-click="setPreviewItemInfo()">Preview</button>-->
+</div>
 
-  <!--<div data-role="popup" id="popupMenu" data-theme="a">-->
+<!--<div data-role="popup" id="popupMenu" data-theme="a">-->
 
-  <!--TODO BUG HERE, ng-repeat removes data enhancement DUNNO WHY!????-->
-  <div data-role="popup" id="popupCategory" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Select the Category</h3>
-        <fieldset data-role="controlgroup">
-          <div data-role="none" ng-repeat="category in categories">
-            <label for="category-choice-{{ category.id }}">{{ category.categoryName }}</label>
-            <input type="radio" name="category-choice" id="category-choice-{{ category.id }}"
-                   ng-model="item.categoryName">
-          </div>
-        </fieldset>
-        <a href="#sell-item" data-role="button">OK</a>
-        <a href="#sell-item" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupCondition" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Select the condition</h3>
-        <fieldset data-role="controlgroup">
-          <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
-                 ng-model="item.condition">
-          <label for="radio-choice-new">New</label>
-          <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
-                 ng-model="item.condition">
-          <label for="radio-choice-used">Used</label>
-          <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
-                 ng-model="item.condition">
-          <label for="radio-choice-refurbished">Refurbished</label>
-        </fieldset>
-        <a href="#sell-item" data-role="button">OK</a>
-        <a href="#sell-item" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupDescription" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Description</h3>
-        <label for="brand">Brand</label>
-        <input type="text" id="brand" ng-model="item.brand">
-        <label for="model">Model</label>
-        <input type="text" id="model" ng-model="item.model">
-        <label for="dimension">Dimension</label>
-        <input type="text" id="dimension" ng-model="item.dimensions">
-        <label for="description">Additional Description</label>
-        <textarea name="description" id="description" cols="30" rows="10"
-                  style="resize: none" ng-model="item.description"></textarea>
-        <a href="#sell-item" data-role="button">OK</a>
-        <a href="#sell-item" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupFormatPrice" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Format & Price</h3>
-        <!--Format-->
+<!--TODO BUG HERE, ng-repeat removes data enhancement DUNNO WHY!????-->
+<div data-role="popup" id="popupCategory" data-theme="b" class="ui-corner-all">
+  <!--<div data-role="popup" id="popupCategory" data-theme="a" class="ui-corner-all">-->
+  <!--jqm1.3.2-->
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Select the Category</h3>
+      <fieldset data-role="controlgroup" data-theme="a">
         <!--<fieldset data-role="controlgroup">-->
-        <!--<input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked" value="Buy it now">-->
-        <!--<label for="radio-choice-buy-it-now">Buy it now</label>-->
-        <!--<input type="radio" name="radio-choice" id="radio-choice-bid" value="Bid" >-->
-        <!--<label for="radio-choice-bid">Bid</label>-->
-        <!--</fieldset>-->
+        <!--jqm1.3.2-->
+        <div data-role="none" ng-repeat="category in categories">
+          <label for="category-choice-{{ category.id }}">{{ category.categoryName }}</label>
+          <input type="radio" name="category-choice" id="category-choice-{{ category.id }}"
+                 ng-model="item.categoryName">
+        </div>
+      </fieldset>
+      <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+      <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <!--<a href="#sell-item" data-role="button">OK</a>-->
+      <!--<a href="#sell-item" data-role="button">Cancel</a>-->
+      <!--jqm1.3.2-->
+    </div>
+  </form>
+</div>
 
-        <label for="buyItNowPrice"> Buy it Now Price</label>
-        <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice">
+<div data-role="popup" id="popupCondition" data-theme="b" class="ui-corner-all">
+  <!--<div data-role="popup" id="popupCondition" data-theme="a" class="ui-corner-all">-->
+  <!--jqm1.3.2-->
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Select the condition</h3>
+      <fieldset data-role="controlgroup" data-theme="a">
+        <!--<fieldset data-role="controlgroup">-->
+        <!--jqm1.3.2-->
+        <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
+               ng-model="item.condition">
+        <label for="radio-choice-new">New</label>
+        <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
+               ng-model="item.condition">
+        <label for="radio-choice-used">Used</label>
+        <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
+               ng-model="item.condition">
+        <label for="radio-choice-refurbished">Refurbished</label>
+      </fieldset>
+      <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+      <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <!--<a href="#sell-item" data-role="button">OK</a>-->
+      <!--<a href="#sell-item" data-role="button">Cancel</a>-->
+    </div>
+  </form>
+</div>
 
-        <label for="startingBid">Starting Bid Price</label>
-        <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice">
+<div data-role="popup" id="popupDescription" data-theme="b" class="ui-corner-all">
+  <!--<div data-role="popup" id="popupDescription" data-theme="a" class="ui-corner-all">-->
+  <!--jqm1.3.2-->
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Description</h3>
+      <label for="brand">Brand</label>
+      <input type="text" id="brand" ng-model="item.brand" data-theme="a">
+      <label for="model">Model</label>
+      <input type="text" id="model" ng-model="item.model" data-theme="a">
+      <label for="dimension">Dimension</label>
+      <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a">
+      <label for="description">Additional Description</label>
+      <textarea name="description" id="description" cols="30" rows="10"
+                style="resize: none" ng-model="item.description" data-theme="a"></textarea>
+      <br/>
+      <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+      <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <!--<a href="#sell-item" data-role="button">OK</a>-->
+      <!--<a href="#sell-item" data-role="button">Cancel</a>-->
+      <!--jqm1.3.2-->
+    </div>
+  </form>
+</div>
 
-        <label for="quantityToSell">Quantity</label>
-        <input type="number" min="1" id="quantityToSell" ng-model="item.quantity">
+<div data-role="popup" id="popupFormatPrice" data-theme="b" class="ui-corner-all">
+  <!--<div data-role="popup" id="popupFormatPrice" data-theme="a" class="ui-corner-all">-->
+  <!--jqm1.3.2-->
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Format & Price</h3>
+      <!--Format-->
+      <!--<fieldset data-role="controlgroup">-->
+      <!--<input type="radio" name="radio-choice" id="radio-choice-buy-it-now" checked="checked" value="Buy it now">-->
+      <!--<label for="radio-choice-buy-it-now">Buy it now</label>-->
+      <!--<input type="radio" name="radio-choice" id="radio-choice-bid" value="Bid" >-->
+      <!--<label for="radio-choice-bid">Bid</label>-->
+      <!--</fieldset>-->
 
-        <!--Duration-->
-        <!--<select name="select-duration" id="select-duration">-->
-        <!--<option value="3">3 days</option>-->
-        <!--<option value="5">5 days</option>-->
-        <!--<option value="7">7 days</option>-->
-        <!--<option value="10">10 days</option>-->
-        <!--</select>-->
+      <label for="buyItNowPrice"> Buy it Now Price</label>
+      <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice" data-theme="a">
 
-        <label for="set-date">Product End Date</label>
-        <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" value=""
-               ng-model="item.bidEndDate">
+      <label for="startingBid">Starting Bid Price</label>
+      <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice" data-theme="a">
 
-        <a href="#sell-item" data-role="button">OK</a>
-        <a href="#sell-item" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
+      <label for="quantityToSell">Quantity</label>
+      <input type="number" min="1" id="quantityToSell" ng-model="item.quantity" data-theme="a">
 
-  <div data-role="popup" id="popupShipping" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Shipping</h3>
+      <!--Duration-->
+      <!--<select name="select-duration" id="select-duration">-->
+      <!--<option value="3">3 days</option>-->
+      <!--<option value="5">5 days</option>-->
+      <!--<option value="7">7 days</option>-->
+      <!--<option value="10">10 days</option>-->
+      <!--</select>-->
 
-        <label for="checkbox-free-shipping">Free Shipping</label>
-        <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()">
+      <label for="set-date">Product End Date</label>
+      <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" value=""
+             ng-model="item.bidEndDate" data-theme="a">
+      <br/>
+      <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+      <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <!--<a href="#sell-item" data-role="button">OK</a>-->
+      <!--<a href="#sell-item" data-role="button">Cancel</a>-->
+      <!--jqm1.3.2-->
+    </div>
+  </form>
+</div>
 
-        <label for="shipping-price">Shipping Price</label>
-        <input type="number" min="0" ng-model="item.shippingPrice" id="shipping-price">
+<div data-role="popup" id="popupShipping" data-theme="b" class="ui-corner-all">
+  <!--<div data-role="popup" id="popupShipping" data-theme="a" class="ui-corner-all">-->
+  <!--jqm1.3.2-->
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Shipping</h3>
 
-        <a href="#sell-item" data-role="button">OK</a>
-        <a href="#sell-item" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
+      <label for="checkbox-free-shipping">Free Shipping</label>
+      <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()" data-theme="a">
 
-  <!--</div>-->
-  <!--<script type="text/javascript">-->
+      <label for="shipping-price">Shipping Price</label>
+      <input type="number" min="0" ng-model="item.shippingPrice" id="shipping-price" data-theme="a">
 
-  <!--var today = new Date();-->
-  <!--var dd = today.getDate();-->
-  <!--var mm = today.getMonth() + 1; //January is 0!-->
+      <br/>
 
-  <!--var yyyy = today.getFullYear();-->
+      <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+      <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <!--<a href="#sell-item" data-role="button">OK</a>-->
+      <!--<a href="#sell-item" data-role="button">Cancel</a>-->
+      <!--jqm1.3.2-->
+    </div>
+  </form>
+</div>
 
-  <!--$('#set-date').val(yyyy + "-" + mm + "-" + dd);-->
+<!--</div>-->
+<!--<script type="text/javascript">-->
 
-  <!--</script>-->
+<!--var today = new Date();-->
+<!--var dd = today.getDate();-->
+<!--var mm = today.getMonth() + 1; //January is 0!-->
+
+<!--var yyyy = today.getFullYear();-->
+
+<!--$('#set-date').val(yyyy + "-" + mm + "-" + dd);-->
+
+<!--</script>-->
 
 </div>
