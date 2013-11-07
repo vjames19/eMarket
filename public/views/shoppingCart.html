@@ -10,7 +10,9 @@
 
   <div data-role="content">
 
-    <ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="shoppingCartList">
+    <!--<ul data-role="listview" data-theme="c" data-inset="true" id="shoppingCartList">-->
+    <!--jqm1.3.2-->
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
         <a href="#item-view" class="wrap-text" data-transition="slide" ng-click="setItem(shoppingCart)"
