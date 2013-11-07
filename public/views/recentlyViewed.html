@@ -18,10 +18,11 @@
       <li ng-repeat="item in recentlyViewed">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
           <img ng-src="{{item.picture}}" class="center-image">
-          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
+          <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
             <thead>
             <tr>
-              <th colspan="2" style="text-align: center">
+              <th colspan="2">
+              <!--<th colspan="2" style="text-align: center">-->
                 <strong><abbr title="{{item.productName}}">{{item.productName |
                   truncate:15}}</abbr></strong>
               </th>
