@@ -10,7 +10,7 @@ adminApp.run(function($rootScope, $location, Auth) {
 
   var history = [];
   var back = false;
-  var loginPath = 'login-admin';
+  var loginPath = 'index-page';
 
   $(window).on('hashchange', function() {
 
