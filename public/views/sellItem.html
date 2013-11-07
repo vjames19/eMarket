@@ -69,9 +69,12 @@
       <form>
         <div style="padding:10px 20px;">
           <h3>Select the Category</h3>
-          <fieldset data-role="controlgroup" ng-repeat="category in categories">
-            <label for="category-choice">{{ category.categoryName }}</label>
-            <input type="radio" name="category-choice" id="category-choice" ng-model="item.categoryName">
+          <fieldset data-role="controlgroup">
+            <div data-role="none" ng-repeat="category in categories">
+              <label for="category-choice-{{ category.id }}">{{ category.categoryName }}</label>
+              <input type="radio" name="category-choice" id="category-choice-{{ category.id }}"
+                     ng-model="item.categoryName">
+            </div>
           </fieldset>
           <a href="#sell-item" data-role="button">OK</a>
           <a href="#sell-item" data-role="button">Cancel</a>
