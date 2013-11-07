@@ -75,9 +75,12 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular) {
           scope.question2 = scope.questions[scope.questionsAnswers[1].id - 1];
           scope.question3 = scope.questions[scope.questionsAnswers[2].id - 1];
 
-          question1.selectmenu('refresh', true);
-          question2.selectmenu('refresh', true);
-          question3.selectmenu('refresh', true);
+          setTimeout(function() {
+            question1.selectmenu('refresh', true);
+            question2.selectmenu('refresh', true);
+            question3.selectmenu('refresh', true);
+          });
+
         });
 
         user.getList('mailAddresses').then(function(mailAddressesList) {
