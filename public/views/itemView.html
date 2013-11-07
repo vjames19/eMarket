@@ -1,202 +1,216 @@
 <div data-role="page" data-theme="b" id="item-view">
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1>Item</h1>
+<div data-role="header" data-position="fixed" data-theme="a">
+  <h1>Item</h1>
 
-    <!--go back to the index page data-rel="back" reverse the transition back -->
-    <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
+  <!--go back to the index page data-rel="back" reverse the transition back -->
+  <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
 
-    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
-    <search></search>
+  <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+  <search></search>
 
-  </div>
+</div>
 
-  <div data-role="content">
+<div data-role="content">
 
-    <table data-role="table" data-mode="none">
-      <thead>
-      <tr>
-        <th><h3 class="item-title">{{ item.productName }}</h3></th>
-      </tr>
-      <tr></tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo ui-corner-all" width="200px"
-                                height="200px"/></td>
-      </tr>
-      </tbody>
-    </table>
+  <table data-role="table" data-mode="none">
+    <thead>
+    <tr>
+      <th><h3 class="item-title">{{ item.productName }}</h3></th>
+    </tr>
+    <tr></tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo ui-corner-all" width="200px"
+                              height="200px"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
-    <hr/>
+  <hr/>
 
-    <table data-role="table" data-mode="none">
-      <thead>
-      <tr>
-        <th></th>
-      </tr>
-      </thead>
-      <!-- this is here for compatibility for data-role="table" -->
-      <tbody>
-      <tr>
-        <td>
-          <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
-             data-position-to="window" data-transition="pop" data-theme="a">
-            <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
-          </a>
-        </td>
-        <td>
-          <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
-             data-rel="popup"
-             data-position-to="window" data-transition="pop" data-theme="a">
-            <p class="item-button-text-size">Buy It Now</p>
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <table data-role="table" data-mode="none">
+    <thead>
+    <tr>
+      <th></th>
+    </tr>
+    </thead>
+    <!-- this is here for compatibility for data-role="table" -->
+    <tbody>
+    <tr>
+      <td>
+        <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
+           data-position-to="window" data-transition="pop" data-theme="a">
+          <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
+        </a>
+      </td>
+      <td>
+        <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
+           data-rel="popup"
+           data-position-to="window" data-transition="pop" data-theme="a">
+          <p class="item-button-text-size">Buy It Now</p>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
-    <hr/>
+  <hr/>
 
-    <ul data-role="listview" data-theme="c" data-inset="true" id="item-list-view">
-      <li>
-        <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
+  <ul data-role="listview" data-theme="a" data-inset="true" id="item-list-view">
+    <!--<ul data-role="listview" data-theme="c" data-inset="true" id="item-list-view">-->
+    <!--jqm1.3.2-->
+    <li>
+      <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
 
-        <p class="item-description-text-size"> Current bid: {{ item.currentBid | currency }} </p>
+      <p class="item-description-text-size"> Current bid: {{ item.currentBid | currency }} </p>
 
-        <p class="item-description-text-size"> Buy it Now: {{ item.nonbidPrice | currency }} </p>
+      <p class="item-description-text-size"> Buy it Now: {{ item.nonbidPrice | currency }} </p>
 
-        <p class="item-description-text-size"> Shipping: {{ item.shippingPrice | currency }} </p>
+      <p class="item-description-text-size"> Shipping: {{ item.shippingPrice | currency }} </p>
 
-        <p class="item-description-text-size"> Available Quantity: {{ item.quantity }} </p>
-      </li>
-      <li>
-        <p class="item-description-text-size">
-          <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
+      <p class="item-description-text-size"> Available Quantity: {{ item.quantity }} </p>
+    </li>
+    <li>
+      <p class="item-description-text-size">
+        <!--Time Left: {{ remainingTime | date:'h:mm' }} </p>-->
 
-        <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
-        <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
-        <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
-      </li>
-      <li>
-        <p class="item-description-text-size"> Condition: {{ item.condition }} </p>
-      </li>
-      <li>
-        <p class="item-description-text-size">
-          Description </p>
+      <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
+      <!--<p class="item-description-text-size"> Location: {{ item.location }} </p>-->
+      <!--<p class="item-description-text-size"> Ships to: {{ item.shipsTo }} </p>-->
+    </li>
+    <li>
+      <p class="item-description-text-size"> Condition: {{ item.condition }} </p>
+    </li>
+    <li>
+      <p class="item-description-text-size">
+        Description </p>
+      <table>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Brand:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{item.brand}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Model:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{ item.model}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Dimensions:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{item.dimensions}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Additional Description:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size" style="white-space: normal !important;">
+              {{item.description}}
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </li>
+    <li>
+      <a href="#popupProductBids" data-rel="popup" data-position-to="window" data-transition="pop" data-inline="true"
+         data-theme="b">
+        <p class="item-description-text-size">Product Bids</p>
+      </a>
+    </li>
+    <li>
+      <a href="#popupRateSeller" data-rel="popup" data-position-to="window" data-transition="pop" data-inline="true"
+         data-theme="b">
         <table>
           <tr>
+            <td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>
+            <td class="pad"></td>
             <td>
-              <p class="item-description-text-size">
-                Brand:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{item.brand}}
-              </p>
+              <div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div>
             </td>
           </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Model:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{ item.model}}
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Dimensions:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{item.dimensions}}
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Additional Description:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size" style="white-space: normal !important;">
-                {{item.description}}
-              </p>
-            </td>
-          </tr>
-
         </table>
-      </li>
-      <li>
-        <a href="#popupRateSeller" data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
-          <table>
-            <tr>
-              <td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>
-              <td class="pad"></td>
-              <td>
-                <div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div>
-              </td>
-            </tr>
-          </table>
-        </a>
-      </li>
-    </ul>
-  </div>
+      </a>
+    </li>
+  </ul>
 
-  <div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Enter Quantity</h3>
-        <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy">
-        <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
-           data-position-to="window" data-transition="pop" ng-click="addToCart()">Add to Cart</a>
-        <a href="#item-view" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
+</div>
 
-  <div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
-    <form data-ajax="false" ng-submit="submitBid()">
-      <div style="padding:10px 20px;">
-        <h3>Enter Bid</h3>
-        <a data-role="button" ng-click="setNextBid()">Add Min Bid: {{ nextMinBid }}</a>
-
-        <div data-role="fieldcontain">
-          <label for="placeBid">Place Bid</label>
-          <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount">
-        </div>
-
-        <button type="submit" data-icon="false" data-theme="b">Bid</button>
-        <!--<a href="#home-user" data-role="button">Bid</a>-->
-        <a href="#item-view" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
+<div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
+  <form>
     <div style="padding:10px 20px;">
-      <p>Product have been placed in cart</p>
+      <h3>Enter Quantity</h3>
+      <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy">
+      <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
+         data-position-to="window" data-transition="pop" ng-click="addToCart()" data-theme="b">Add to Cart</a>
+      <a href="#item-view" data-role="button">Cancel</a>
     </div>
-  </div>
+  </form>
+</div>
 
-  <div data-role="popup" id="popupRateSeller" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Rate This Seller</h3>
+<div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
+  <form data-ajax="false" ng-submit="submitBid()">
+    <div style="padding:10px 20px;">
+      <h3>Enter Bid</h3>
+      <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid }}</a>
 
-        <div id="rateSeller" data-score=""></div>
+      <div data-role="fieldcontain">
+        <label for="placeBid">Place Bid</label>
+        <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount">
       </div>
-    </form>
-  </div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+      <button type="submit" data-icon="false" data-theme="b">Bid</button>
+      <!--<a href="#home-user" data-role="button">Bid</a>-->
+      <a href="#item-view" data-role="button">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<div data-role="popup" id="popupItemAddedToCart" data-theme="b" class="ui-corner-all">
+  <div style="padding:10px 20px;">
+    <p>Product have been placed in cart</p>
+  </div>
+</div>
+
+<div data-role="popup" id="popupRateSeller" data-theme="b" class="ui-content ui-corner-all" style="max-width:280px">
+  <a href="#item-view" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+     data-iconpos="notext" class="ui-btn-right">Close</a>
+
+  <form>
+    <div style="padding:10px 20px;">
+      <h3>Rate This Seller</h3>
+
+      <div id="rateSeller" data-score=""></div>
+    </div>
+  </form>
+</div>
+
+<div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
