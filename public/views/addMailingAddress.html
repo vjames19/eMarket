@@ -8,7 +8,7 @@
 
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="name"><strong>Name</strong></label>
@@ -29,13 +29,18 @@
         <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox"
                ng-model="mailAddresses.isPrimary">
       </div>
-      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-        <a href="#profile" data-role="button" data-icon="back" data-theme="a"
-           data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check" data-theme="a">Submit</button>
-        <!--<a href="#profile" data-role="button" data-icon="check" data-theme="a"-->
-        <!--data-transition="fade">Submit</a>-->
+      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+        <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <button type="submit" data-icon="check">Submit</button>
       </div>
+      <!--jqm1.3.2-->
+      <!--<div data-role="controlgroup" data-type="horizontal" style="text-align: center">-->
+      <!--<a href="#profile" data-role="button" data-icon="back" data-theme="a"-->
+      <!--data-transition="fade">Cancel</a>-->
+      <!--<button type="submit" data-icon="check" data-theme="a">Submit</button>-->
+      <!--&lt;!&ndash;<a href="#profile" data-role="button" data-icon="check" data-theme="a"&ndash;&gt;-->
+      <!--&lt;!&ndash;data-transition="fade">Submit</a>&ndash;&gt;-->
+      <!--</div>-->
     </form>
   </div>
 

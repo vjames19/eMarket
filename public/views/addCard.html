@@ -6,7 +6,7 @@
 
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="card-name"><strong>Card Name</strong></label>
@@ -30,11 +30,16 @@
           <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
       </div>
-      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-        <a href="#payment-options" data-role="button" data-icon="back" data-theme="a"
-           data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check" data-theme="a">Submit</button>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <button type="submit" data-icon="check">Submit</button>
       </div>
+      <!--jqm1.3.2-->
+      <!--<div data-role="controlgroup" data-type="horizontal" style="text-align: center">-->
+        <!--<a href="#payment-options" data-role="button" data-icon="back" data-theme="a"-->
+           <!--data-transition="fade">Cancel</a>-->
+        <!--<button type="submit" data-icon="check" data-theme="a">Submit</button>-->
+      <!--</div>-->
     </form>
   </div>
 
