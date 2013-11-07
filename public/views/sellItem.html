@@ -12,14 +12,26 @@
 
   <div data-role="content">
     <form>
-      <table>
+      <table data-role="table" data-mode="none">
+        <thead>
         <tr>
-          <td>
-            <span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">
-                <span>Add Image</span><br>
-                <input type="file" name="files[]" multiple data-role="none"
-                       ng-src="{{item.picture}}"/>
-            </span>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="left">
+            <button id="add-image" data-icon="plus" data-iconpos="bottom">
+              Add Image
+            </button>
+            <!--<button data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">Add Image-->
+            <!--<span data-role="button" data-icon="plus" data-iconpos="bottom" id="add-image" class="input-button">-->
+            <!--<span>Add Image</span>-->
+            <!--<br>-->
+            <!--<input type="file" name="files[]" multiple data-role="none"-->
+            <!--ng-src="{{item.picture}}"/>-->
+            <!--</span>-->
+            <!--jqm1.3.2-->
           </td>
           <td class="middle"></td>
           <td class="right">
@@ -27,6 +39,7 @@
                       placeholder="Write the title of the item"></textarea>
           </td>
         </tr>
+        </tbody>
       </table>
     </form>
 
