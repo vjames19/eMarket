@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('homeUser', function(SellItem) {
+angular.module('eMarketApp').directive('homeUser', function(SellItem, User) {
   return {
     templateUrl: 'views/homeUser.html',
     restrict: 'E',
@@ -13,75 +13,87 @@ angular.module('eMarketApp').directive('homeUser', function(SellItem) {
       var page = $(elem[0]);
       var carousel = page.find('#owl-example');
 
-      $(document).ready(function() {
-        carousel.owlCarousel({
-          items : 5,
-          itemsMobile : [200,1],
-          singleItem : false,
-          itemsScaleUp : false,
+      page.on('pagebeforeshow', function() {
+        User.me().getList('carousels').then(function(products) {
+          scope.carouselProducts = products;
+        });
 
-          //Basic Speeds
-          slideSpeed : 200,
-          paginationSpeed : 800,
-          rewindSpeed : 1000,
+        $(document).ready(function() {
+          carousel.owlCarousel({
+            items : 5,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [980,3],
+            itemsTablet: [768,3],
+            itemsTabletSmall: false,
+            itemsMobile : [479,2],
+            singleItem : false,
+            itemsScaleUp : false,
 
-          //Autoplay
-          autoPlay : false,
-          stopOnHover : false,
+            //Basic Speeds
+            slideSpeed : 200,
+            paginationSpeed : 800,
+            rewindSpeed : 1000,
 
-          // Navigation
-          navigation : false,
-          navigationText : ["prev","next"],
-          rewindNav : true,
-          scrollPerPage : false,
+            //Autoplay
+            autoPlay : false,
+            stopOnHover : false,
 
-          //Pagination
-          pagination : true,
-          paginationNumbers: false,
+            // Navigation
+            navigation : false,
+            navigationText : ["prev","next"],
+            rewindNav : true,
+            scrollPerPage : false,
 
-          // Responsive
-          responsive: true,
-          responsiveRefreshRate : 200,
-          responsiveBaseWidth: window,
+            //Pagination
+            pagination : true,
+            paginationNumbers: false,
 
-          // CSS Styles
-          baseClass : "../lib/OwlCarousel-master/owl-carousel",
-          theme : "../lib/OwlCarousel-master/owl-carousel/owl-theme",
+            // Responsive
+            responsive: true,
+            responsiveRefreshRate : 200,
+            responsiveBaseWidth: window,
 
-          //Lazy load
-          lazyLoad : false,
-          lazyFollow : true,
-          lazyEffect : "fade",
+            // CSS Styles
+            baseClass : "../lib/OwlCarousel-master/owl-carousel",
+            theme : "../lib/OwlCarousel-master/owl-carousel/owl-theme",
 
-          //Auto height
-          autoHeight : false,
+            //Lazy load
+            lazyLoad : false,
+            lazyFollow : true,
+            lazyEffect : "fade",
 
-          //JSON
-          jsonPath : false,
-          jsonSuccess : false,
+            //Auto height
+            autoHeight : false,
 
-          //Mouse Events
-          dragBeforeAnimFinish : true,
-          mouseDrag : true,
-          touchDrag : true,
+            //JSON
+            jsonPath : false,
+            jsonSuccess : false,
 
-          //Transitions
-          transitionStyle : false,
+            //Mouse Events
+            dragBeforeAnimFinish : true,
+            mouseDrag : true,
+            touchDrag : true,
 
-          // Other
-          addClassActive : false,
+            //Transitions
+            transitionStyle : false,
 
-          //Callbacks
-          beforeUpdate : false,
-          afterUpdate : false,
-          beforeInit: false,
-          afterInit: false,
-          beforeMove: false,
-          afterMove: false,
-          afterAction: false,
-          startDragging : false
+            // Other
+            addClassActive : false,
+
+            //Callbacks
+            beforeUpdate : false,
+            afterUpdate : false,
+            beforeInit: false,
+            afterInit: false,
+            beforeMove: false,
+            afterMove: false,
+            afterAction: false,
+            startDragging : false
+          });
         });
       });
+
+
 
 
       scope.isDraft = function(isDraft) {

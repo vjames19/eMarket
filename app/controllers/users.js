@@ -18,6 +18,7 @@ var BrowsedItems = require('../models/recentlyViewed.js');
 var Bids = require('../models/bid.js');
 var QuestionsAnswers = require('../models/questionAnswer.js');
 var Questions = require('../models/question.js');
+var Carousels = require('../models/carousel.js');
 
 var users = {
   1: {
@@ -1411,4 +1412,26 @@ exports.readAvgRating = function (req, res) {
   Ratings.getAvgRating(req.params.userId, function(err, avgRating) {
     res.jsonp(avgRating);
   });
+};
+
+// Carousel
+exports.findCarouselById = function(req, res, next, id) {
+  Carousels.get(req.params.userId, id, function(err, carousel) {
+    if(_.isEmpty(carousel)) {
+      res.jsonp(404, {message: 'Carousel with id ' + id + ' not found'});
+    } else {
+      req.carousel = carousel;
+      next();
+    }
+  });
+};
+
+exports.readAllCarousels = function(req, res) {
+  Carousels.getAll(req.params.userId, function(err, carousels) {
+    res.jsonp(carousels);
+  });
+};
+
+exports.readCarousel = function(req, res) {
+  res.jsonp(req.carousel);
 };

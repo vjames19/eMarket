@@ -159,6 +159,11 @@ module.exports = function(app, passport, auth) {
   app.put('/api/users/:userId/questionsAnswers/:questionAnswerId', users.updateQuestionAnswer);
   app.del('/api/users/:userId/questionsAnswers/:questionAnswerId', users.deleteQuestionAnswer);
 
+  // User Carousel Routes
+  app.param('carouselId', users.findCarouselById);
+  app.get('/api/users/:userId/carousels', users.readAllCarousels);
+  app.get('/api/products/:productId/bids/:bidId', users.readCarousel);
+
   //=================NON USER ROUTES================//
 
   // Category Routes //============COMMENTS BELOW ARE TEMPORARILY TO TEST==========//
@@ -184,6 +189,7 @@ module.exports = function(app, passport, auth) {
   app.get('/api/products/:productId', products.readProduct);
   app.put('/api/products/:productId', auth.requiresLogin, products.updateProduct);
   app.del('/api/products/:productId', auth.requiresLogin, auth.admin.hasAuthorization, products.deleteProduct);
+
 
   // Bid Routes
   app.param('bidId', products.findProductBidById);
