@@ -30,7 +30,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
         });
 
         if(!SellItem.isDraft) {
-          scope.item = null;
+          scope.item = {};
         }
 
         scope.setPreviewItemInfo = function(item) {
