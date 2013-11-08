@@ -7,18 +7,26 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
 //  var unAuthPaths = ['index-page', 'register', 'forgot-password', 'shopping-cart', 'item-view', 'search-results'];
   return {
     logIn: function(userData) {
+      $.mobile.loading('show', {
+        text: 'Signing In...',
+        textVisible: true,
+        theme: $.mobile.loader.prototype.options.theme
+      });
+      console.log('Logging In: ', userData.username);
       $http.post('login', userData).success(function(realUser) {
         user.username = realUser.username;
         user.userId = realUser.id;
         $.mobile.changePage('#home-user');
         isLoggedIn = true;
+        $.mobile.loading('hide');
       }).error(function() {
+            $.mobile.loading('hide');
             $('#loginError').popup('open');
           });
 
     },
     logOut: function() {
-      console.log('logging out');
+      console.log('Logging Out: ', user.username);
       user.username = null;
       user.userId = null;
       isLoggedIn = false;
