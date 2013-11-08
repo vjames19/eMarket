@@ -5,11 +5,9 @@ var mapper = require('../mapper');
 
 var DICTIONARY = {
   'bid_id': 'id',
-  'bid_user_id': 'userId',
-  'bid_product_id': 'productId',
   'bid_amount': 'bidAmount',
   'bid_creation_date': 'creationDate',
-  'bid_closed_date': 'closedDate'
+  'seller_name': 'seller'
 };
 
 //var WHITELIST = [];
@@ -22,15 +20,12 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(productId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT bid_history.* ' +
-        'FROM bid_history INNER JOIN product_info ' +
-        'ON (bid_history.bid_product_id = product_info.product_id) ' +
-        'INNER JOIN product_specification ' +
-        'ON (product_info.product_info_spec_id = product_specification.product_spec_id) ' +
-        'WHERE ' +
-        'product_specification.product_spec_is_draft = FALSE ' +
-        'AND ' +
-        'product_specification.product_spec_id = ?' +
+    var sql = 'SELECT bid_history.bid_id, bid_history.bid_amount, bid_history.bid_creation_date, ' +
+        'products.seller_name ' +
+        'FROM bid_history INNER JOIN products ' +
+        'ON (bid_history.bid_product_id = products.product_id) ' +
+        'WHERE bid_history.bid_closed_date IS NULL AND ' +
+        'products.product_id = ? ' +
         'ORDER BY bid_amount DESC';
     connection.query(sql, [productId], function(err, bids) {
       if(err) {
@@ -47,17 +42,12 @@ module.exports.getAll = function(productId, callback) {
 
 module.exports.get = function(productId, bidId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT bid_history.* ' +
-        'FROM bid_history INNER JOIN product_info ' +
-        'ON (bid_history.bid_product_id = product_info.product_id) ' +
-        'INNER JOIN product_specification ' +
-        'ON (product_info.product_info_spec_id = product_specification.product_spec_id) ' +
-        'WHERE ' +
-        'product_specification.product_spec_is_draft = FALSE ' +
-        'AND ' +
-        'product_specification.product_spec_id = ?' +
-        'AND ' +
-        'bid_history.bid_id = ?' +
+    var sql = 'SELECT bid_history.bid_id, bid_history.bid_amount, bid_history.bid_creation_date, ' +
+        'products.seller_name ' +
+        'FROM bid_history INNER JOIN products ' +
+        'ON (bid_history.bid_product_id = products.product_id) ' +
+        'WHERE bid_history.bid_closed_date IS NULL AND ' +
+        'products.product_id = ? AND bid_history.bid_id = ? ' +
         'ORDER BY bid_amount DESC';
     connection.query(sql, [productId, bidId], function(err, bids) {
       callback(err, mapper.map(bids[0], DICTIONARY));

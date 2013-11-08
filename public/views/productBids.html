@@ -1,0 +1,45 @@
+<div data-role="page" data-theme="b" id="product-bids">
+
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Product Bids</h1>
+    <a href="#item-view" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
+    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+      <a href="#home-user" id="home-user" data-role="button" data-icon="home"
+         data-iconpos="right">Home</a>
+      <a href="#shopping-cart" id="shopping-cart" data-role="button" data-icon="shop"
+         data-iconpos="right">Cart</a>
+    </div>
+    <search></search>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="productBidsList">
+      <li data-role="list-divider">
+        <table>
+          <tr>
+            <td>Product Bids</td>
+            <td><span class="ui-li-count">{{productBids.length}}</span></td>
+          </tr>
+        </table>
+      </li>
+      <li ng-repeat="productBid in productBids">
+        <table>
+          <tr>
+            <td><strong>Bidder:</strong></td>
+            <td class="pad"></td>
+            <td><em>{{ productBid.seller }}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Bid Amount:</strong></td>
+            <td class="pad"></td>
+            <td><em>{{ productBid.bidAmount }}</em></td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+  </div>
+
+  <div data-role="footer" data-theme="a"><h1></h1></div>
+
+</div>

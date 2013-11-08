@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
@@ -24,11 +24,18 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
       var buyItNowButton = page.find('#buy-it-now-button');
       var bidButton = page.find('#place-bid-button');
       var itemListView = page.find('#item-list-view');
+      var productBidsBtn = page.find('#product-bids-btn');
 
 
       page.on('pagebeforeshow', function() {
         // Remove any state from the bid object.
         scope.bid = {};
+
+        if(scope.item && scope.item.currentBid === null) {
+          productBidsBtn.addClass('ui-disabled');
+        } else {
+          productBidsBtn.removeClass('ui-disabled');
+        }
 
         if(scope.item && User.userId === scope.item.productSellerId) {
           buyItNowButton.addClass('ui-disabled');
@@ -82,6 +89,11 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
       scope.setNextBid = function() {
         scope.bidAmount = scope.nextMinBid;
       };
+
+      scope.setProductId = function(productId){
+        ProductBids.productId = productId;
+      };
+
     }
   };
 });
