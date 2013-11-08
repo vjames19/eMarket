@@ -1,38 +1,38 @@
-<div data-role="page" data-theme="b" id="home-admin">
-  <div data-role="header" data-position="fixed" data-theme="a">
+<div data-role="page" data-theme="a" id="home-admin">
+
+  <div data-role="header" data-position="fixed" data-theme="b">
     <h1>Admin Panel</h1>
   </div>
 
   <div data-role="content">
-    <div class="ui-grid-a">
-      <div class="ui-block-a">
-        <a href="#user-accounts" data-role="button" id="user-accounts" class="user-accounts" data-transition="fade">
-          <p class="index-text-size">User Accounts</p>
-        </a>
-      </div>
-      <div class="ui-block-b">
-        <a href="#admin-accounts" data-role="button" id="admin-accounts" class="admin-accounts" data-transition="fade">
-          <p class="index-text-size">Admin Accounts</p>
-        </a>
-      </div>
+    <div class="ui-grid-solo">
+      <a href="#user-accounts" data-role="button" id="user-accounts" class="user-accounts" data-transition="fade"
+         data-theme="b">
+        <p class="index-text-size">User Accounts</p>
+      </a>
     </div>
-    <div class="ui-grid-a">
-      <div class="ui-block-a">
-        <a href="#categories-admin" data-role="button" id="categories-admin" class="categories-admin"
-           data-transition="fade">
-          <p class="index-text-size">Edit Categories</p>
-        </a>
-      </div>
-      <div class="ui-block-b">
-        <a href="#reports-day" data-role="button" id="reports" class="reports" data-transition="fade">
-          <p class="index-text-size">View Reports</p>
-        </a>
-      </div>
+    <div class="ui-grid-solo">
+      <a href="#admin-accounts" data-role="button" id="admin-accounts" class="admin-accounts" data-transition="fade"
+         data-theme="b">
+        <p class="index-text-size">Admin Accounts</p>
+      </a>
+    </div>
+    <div class="ui-grid-solo">
+      <a href="#categories-admin" data-role="button" id="categories-admin" class="categories-admin"
+         data-transition="fade" data-theme="b">
+        <p class="index-text-size">System Categories</p>
+      </a>
+    </div>
+    <div class="ui-grid-solo">
+      <a href="#reports-day" data-role="button" id="reports" class="reports" data-transition="fade" data-theme="b">
+        <p class="index-text-size">View Reports</p>
+      </a>
     </div>
   </div>
 
-  <div data-role="footer" data-theme="a">
-    <a href="#index-page" data-role="button" id="login-user" ng-click="logOut()" class="footer-button">Sign Out</a>
+  <div data-role="footer" data-theme="b">
+    <a href="#index-page" data-role="button" id="login-user" data-theme="a" ng-click="logOut()"
+       class="footer-button">Sign Out</a>
   </div>
 
 </div>

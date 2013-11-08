@@ -98,7 +98,9 @@
             <label for="password-confirm">Confirm Password</label>
             <input type="password" id="password-confirm" autocomplete="off"
                    ng-model="newUser.validateUser.userConfirmPassword">
-            <label for="security-questions-1">Security Questions</label>
+            <label for="security-questions">Security Questions</label>
+            <input type="hidden" id="security-questions">
+            <label for="security-questions-1"></label>
             <select id="security-questions-1" ng-model="question1"
                     ng-options="question.id as question.question for question in questions">
               <option value="" ng-hide="question1">Select a question</option>

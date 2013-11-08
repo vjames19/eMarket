@@ -1,7 +1,7 @@
-<div data-role="page" data-theme="b" id="reports-week">
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1>Reports</h1>
+<div data-role="page" data-theme="a" id="reports-week">
 
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h1>Reports</h1>
     <a href="#home-admin" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="navbar">
@@ -14,20 +14,16 @@
   </div>
 
   <div data-role="content">
-    <form action="#">
+    <form>
       <label for="select-category">Category</label>
-      <select id="select-category" ng-model="selectedCategory"
+      <select id="select-category" data-theme="b" ng-model="selectedCategory"
               ng-options="category.id as category.categoryName for category in categories">
         <option value="" selected>None</option>
-        <!--<option value="None" selected>None</option>-->
-        <!--<option value="Books">Books</option>-->
-        <!--<option value="Computers">Computers</option>-->
-        <!--<option value="Clothes">Clothes</option>-->
       </select>
     </form>
     <div id="graph"></div>
   </div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="b"><h1></h1></div>
 
 </div>

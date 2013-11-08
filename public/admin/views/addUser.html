@@ -1,19 +1,18 @@
-<div data-role="page" data-theme="b" id="add-user"> <!-- data-role="page" delinate a page -->
+<div data-role="page" data-theme="a" id="add-user">
 
-  <!-- Header of the page -->
-  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
     <h1>Add User</h1>
     <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
   <div data-role="content">
-
     <form data-ajax="false" ng-submit="submit()">
-      <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
-        <div data-role="collapsible" data-collapsed="false">
+      <div data-role="collapsible-set" data-theme="b" data-content-theme="false">
+
+        <div data-role="collapsible">
           <h3>Personal Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="firstname">First Name</label>
             <input type="text" id="firstname" ng-model="addUser.user.userFirstName">
             <label for="middlename">Middle Name</label>
@@ -56,15 +55,16 @@
             <input type="tel" id="telephone" ng-model="addUser.user.telephone">
           </div>
         </div>
-        <div data-role="collapsible" id="step-2">
+
+        <div data-role="collapsible">
           <h3>Credit Card Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="name-as-card">Name as Appear in Card</label>
             <input type="text" id="name-as-card" ng-model="addUser.creditCard.creditCardName">
             <label for="card-type">Card Type</label>
             <select id="card-type" ng-model="addUser.creditCard.creditCardType">
-              <option value="Visa">Visa</option>
+              <option value="Visa" selected>Visa</option>
               <option value="Master Card">Master Card</option>
               <option value="American Express">American Express</option>
               <option value="Other">Other</option>
@@ -77,10 +77,11 @@
             <input type="number" id="card-security-code" ng-model="addUser.creditCard.creditCardCvs">
           </div>
         </div>
+
         <div data-role="collapsible">
           <h3>Login Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="email">Email</label>
             <input type="email" id="email" ng-model="addUser.user.userEmail">
             <label for="username">Username</label>
@@ -90,36 +91,26 @@
             <label for="password-confirm">Confirm Password</label>
             <input type="password" id="password-confirm" autocomplete="off"
                    ng-model="addUser.validateUser.userConfirmPassword">
-            <label for="security-questions-1">Security Questions</label>
-            <select id="security-questions-1" ng-model="addUser.user.questions.question1">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <label for="security-questions">Security Questions</label>
+            <input type="hidden" id="security-questions">
+            <label for="security-questions-1"></label>
+            <select id="security-questions-1" ng-model="question1"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="" ng-hide="question1">Select a question</option>
             </select>
             <input type="text" id="security-answer-1" placeholder="Answer"
                    ng-model="addUser.user.questions.answer1">
             <label for="security-questions-2"></label>
-            <select id="security-questions-2" ng-model="addUser.user.questions.question2">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <select id="security-questions-2" ng-model="question2"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="" ng-hide="question2">Select a question</option>
             </select>
             <input type="text" id="security-answer-2" placeholder="Answer"
                    ng-model="addUser.user.questions.answer2">
             <label for="security-questions-3"></label>
-            <select id="security-questions-3" ng-model="addUser.user.questions.question3">
-              <option value="0">Select a Question</option>
-              <option value="1">What is your favorite color?</option>
-              <option value="2">Name of your best friend?</option>
-              <option value="3">In which city were you born?</option>
-              <option value="4">Name of your first pet?</option>
-              <option value="5">What is your favorite team?</option>
+            <select id="security-questions-3" ng-model="question3"
+                    ng-options="question.id as question.question for question in questions">
+              <option value="" ng-hide="question3">Select a question</option>
             </select>
             <input type="text" id="security-answer-3" placeholder="Answer"
                    ng-model="addUser.user.questions.answer3">
@@ -127,15 +118,13 @@
         </div>
 
       </div>
-      <!-- un anchor por ahora-->
-      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-        <a href="#user-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
-        <button type="submit" data-theme="a" data-icon="check">Submit</button>
-        <!--<a href="#user-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
+      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+        <a href="#user-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <button type="submit" data-icon="check">Submit</button>
       </div>
     </form>
   </div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="b"><h1></h1></div>
 
 </div>

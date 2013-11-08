@@ -1,7 +1,6 @@
-<div data-role="page" data-theme="b" id="edit-admin"> <!-- data-role="page" delinate a page -->
+<div data-role="page" data-theme="a" id="edit-admin">
 
-  <!-- Header of the page -->
-  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
     <h1>Edit Admin</h1>
     <a href="#admin-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
@@ -9,34 +8,35 @@
   <div data-role="content">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <h4>UserName: <span class="ui-li-count">{{adminInfo.adminUserName}}</span></h4>
+        <strong>UserName:</strong>
+        <em>{{adminInfo.username}}</em>
+        <hr/>
         <label for="firstname"><strong>First Name</strong></label>
-        <input type="text" id="firstname" ng-model="adminInfo.firstName">
+        <input type="text" id="firstname" data-theme="b" ng-model="adminInfo.firstName">
         <label for="middlename"><strong>Middle Name</strong></label>
-        <input type="text" id="middlename" ng-model="adminInfo.middleName">
+        <input type="text" id="middlename" data-theme="b" ng-model="adminInfo.middleName">
         <label for="lastname"><strong>Last Name</strong></label>
-        <input type="text" id="lastname" ng-model="adminInfo.lastName">
+        <input type="text" id="lastname" data-theme="b" ng-model="adminInfo.lastName">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="adminInfo.telephone">
+        <input type="tel" id="telephone" data-theme="b" ng-model="adminInfo.telephone">
         <label for="email"><strong>Email</strong></label>
-        <input type="email" id="email" ng-model="adminInfo.email">
+        <input type="email" id="email" data-theme="b" ng-model="adminInfo.email">
         <label for="new-password"><strong>New Password</strong></label>
-        <input type="password" id="new-password" autocomplete="off" ng-model="editAdmin.adminPassword">
+        <input type="password" id="new-password" autocomplete="off" data-theme="b" ng-model="editAdmin.adminPassword">
         <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="new-password-confirm" autocomplete="off" ng-model="editAdmin.adminConfirmPassword">
+        <input type="password" id="new-password-confirm" autocomplete="off" data-theme="b"
+               ng-model="editAdmin.adminConfirmPassword">
         <label for="make-root"><strong>Make Root</strong></label>
-        <input name="make-root" id="make-root" class="custom" data-mini="true" type="checkbox"
-               ng-model="adminInfo.isRoot">
+        <input name="make-root" id="make-root" data-mini="true" type="checkbox"
+               data-theme="b" ng-model="adminInfo.isRoot">
       </div>
-      <!-- un anchor por ahora-->
-      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-        <a href="#admin-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
-        <!--<a href="#admin-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
-        <button type="submit" data-icon="check" data-theme="a">Submit</button>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+        <a href="#admin-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <button type="submit" data-icon="check">Submit</button>
       </div>
     </form>
   </div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="b"><h1></h1></div>
 
 </div>

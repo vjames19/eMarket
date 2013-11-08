@@ -1,7 +1,6 @@
-<div data-role="page" data-theme="b" id="edit-user"> <!-- data-role="page" delinate a page -->
+<div data-role="page" data-theme="a" id="edit-user">
 
-  <!-- Header of the page -->
-  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
+  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
     <h1>Edit User</h1>
     <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
@@ -9,30 +8,32 @@
   <div data-role="content">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <h4>UserName: <span class="ui-li-count">{{userInfo.username}}</span></h4>
+        <strong>UserName:</strong>
+        <em>{{userInfo.username}}</em>
+        <hr/>
         <label for="firstname"><strong>First Name</strong></label>
-        <input type="text" id="firstname" ng-model="userInfo.firstName">
+        <input type="text" id="firstname" data-theme="b" ng-model="userInfo.firstName">
         <label for="middlename"><strong>Middle Name</strong></label>
-        <input type="text" id="middlename" ng-model="userInfo.middleName">
+        <input type="text" id="middlename" data-theme="b" ng-model="userInfo.middleName">
         <label for="lastname"><strong>Last Name</strong></label>
-        <input type="text" id="lastname" ng-model="userInfo.lastName">
+        <input type="text" id="lastname" data-theme="b" ng-model="userInfo.lastName">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="userInfo.telephone">
+        <input type="tel" id="telephone" data-theme="b" ng-model="userInfo.telephone">
         <label for="email"><strong>Email</strong></label>
-        <input type="email" id="email" ng-model="userInfo.email">
+        <input type="email" id="email" data-theme="b" ng-model="userInfo.email">
         <label for="new-password"><strong>New Password</strong></label>
-        <input type="password" id="new-password" autocomplete="off" ng-model="editUser.userPassword">
+        <input type="password" id="new-password" autocomplete="off" data-theme="b" ng-model="editUser.userPassword">
         <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="new-password-confirm" autocomplete="off" ng-model="editUser.userConfirmPassword">
+        <input type="password" id="new-password-confirm" autocomplete="off" data-theme="b"
+               ng-model="editUser.userConfirmPassword">
       </div>
-      <div data-role="controlgroup" data-type="horizontal" style="text-align: center">
-        <a href="#user-accounts" data-role="button" data-icon="back" data-theme="a" data-transition="fade">Cancel</a>
-        <!--<a href="#user-accounts" data-role="button" data-icon="check" data-theme="a" data-transition="fade">Submit</a>-->
-        <button type="submit" data-icon="check" data-theme="a">Submit</button>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+        <a href="#user-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <button type="submit" data-icon="check">Submit</button>
       </div>
     </form>
   </div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="b"><h1></h1></div>
 
 </div>

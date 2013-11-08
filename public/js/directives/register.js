@@ -17,7 +17,6 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
           user.all('creditCards').post($scope.newUser.creditCard);
           $.mobile.loading('hide');
           $.mobile.changePage('#index-user'); //Force user to put hes newly registered credentials
-//          $.mobile.changePage('#home-user');
         });
       };
 
@@ -32,17 +31,13 @@ angular.module('eMarketApp').directive('register', function(Restangular) {
       };
 
       page.on('pagebeforeshow', function() {
+
         Restangular.one('questions').getList().then(function(questionsList) {
           scope.questions = questionsList;
+          setTimeout(function() {
+            page.find('select[id*="security-questions"]').selectmenu('refresh', true);
+          });
         });
-
-//        $(window).bind("orientationchange", function(){
-//          var orientation = window.orientation;
-//          var new_orientation = (orientation) ? 0 : 180 + orientation;
-//          $('body').css({
-//            "-webkit-transform": "rotate(" + new_orientation + "deg)"
-//          });
-//        });
 
       });
     }
