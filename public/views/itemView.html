@@ -144,22 +144,23 @@
       </table>
     </li>
     <li>
-      <a href="#product-bids" id="product-bids-btn" class="ui-btn ui-btn-a" ng-click="setProductId(item.id)">
+      <a href="#product-bids" data-inline="true" id="product-bids-btn" data-theme="a" data-transition="slide" ng-click="setProductId(item.id)">
         <p class="item-description-text-size">Product Bids</p>
       </a>
     </li>
     <li>
       <a href="#seller-profile" data-inline="true"
-         data-theme="b" data-transition="slide">
-        <table>
-          <tr>
-            <td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>
-            <td class="pad"></td>
-            <td>
-              <div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div>
-            </td>
-          </tr>
-        </table>
+         data-theme="a" data-transition="slide">
+        <p class="item-description-text-size"> Seller: {{ item.sellerName }}</p>
+        <!--<table>-->
+          <!--<tr>-->
+            <!--<td><p class="item-description-text-size"> Seller: {{ item.sellerName }}</p></td>-->
+            <!--<td class="pad"></td>-->
+            <!--<td>-->
+              <!--<div id="avgStarRate" data-score="{{ sellerRating.avgRating }}"></div>-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</table>-->
       </a>
     </li>
   </ul>
