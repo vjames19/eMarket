@@ -5,7 +5,8 @@
     <!--go back to the index page data-rel="back" reverse the transition back -->
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
-    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right">Cart</a>
+    <a href="#shopping-cart" id="shopping-cart" data-role="button" class="ui-btn-right" data-icon="shop"
+       data-iconpos="right">Cart</a>
     <search></search>
 
     <div data-role="navbar">
@@ -20,7 +21,7 @@
 
   <div data-role="content">
     <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="soldAndUnsoldList">
-    <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">-->
+      <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="soldAndUnsoldList">-->
       <!--jqm1.3.2-->
       <li data-role="list-divider">Sold<span class="ui-li-count">{{soldProducts.length}}</span></li>
       <li ng-repeat="soldProduct in soldProducts">
@@ -28,26 +29,27 @@
           <img ng-src="{{soldProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
           <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
             <thead>
-              <tr>
-                <th>
+            <tr>
+              <th>
                 <!--<th colspan="2" style="text-align: center">-->
-                  <strong><abbr title="{{soldProduct.productName}}">{{soldProduct.productName | truncate:15}}</abbr></strong>
-                </th>
-              </tr>
+                <strong><abbr title="{{soldProduct.productName}}">{{soldProduct.productName |
+                  truncate:15}}</abbr></strong>
+              </th>
+            </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>Sold Quantity</strong></td>
-                <td><em>{{soldProduct.soldQuantity}}</em></td>
-              </tr>
-              <tr>
-                <td><strong>Sold Price</strong></td>
-                <td><em>{{soldProduct.soldPrice | currency}}</em></td>
-              </tr>
-              <tr>
-                <td><strong>Buyer Name</strong></td>
-                <td><em>{{ soldProduct.buyerName }}</em></td>
-              </tr>
+            <tr>
+              <td><strong>Sold Quantity</strong></td>
+              <td><em>{{soldProduct.soldQuantity}}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Sold Price</strong></td>
+              <td><em>{{soldProduct.soldPrice | currency}}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Buyer Name</strong></td>
+              <td><em>{{ soldProduct.buyerName }}</em></td>
+            </tr>
             </tbody>
           </table>
         </a>
@@ -61,7 +63,8 @@
             <thead>
             <tr>
               <th colspan="2" style="text-align: center">
-                <strong><abbr title="{{unsoldProduct.productName}}">{{unsoldProduct.productName | truncate:15}}</abbr></strong>
+                <strong><abbr title="{{unsoldProduct.productName}}">{{unsoldProduct.productName |
+                  truncate:15}}</abbr></strong>
               </th>
             </tr>
             </thead>
