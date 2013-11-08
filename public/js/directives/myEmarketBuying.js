@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('myEmarketBuying', function(User, Restangular) {
+angular.module('eMarketApp').directive('myEmarketBuying', function(User) {
   return {
     templateUrl: 'views/myEmarketBuying.html',
     restrict: 'E',
