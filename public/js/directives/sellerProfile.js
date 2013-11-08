@@ -9,6 +9,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
     link: function(scope, elem) {
       var page = $(elem[0]);
       var sellerProductList = page.find('#sellerProductList');
+      var sellerRatingList = page.find('#sellerRatingList');
 
       page.on('pagebeforeshow', function() {
         Restangular.one('users', SellerInfo.sellerId).getList('unsoldProducts').then(function(products) {
@@ -31,7 +32,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
             readOnly: true,
             path: '../lib/raty/lib/img'
           });
-          sellerProductList.listview('refresh');
+          sellerRatingList.listview('refresh');
         });
       });
 
