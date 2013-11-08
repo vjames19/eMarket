@@ -11,11 +11,15 @@
   <div data-role="content">
 
     <form data-ajax="false" ng-submit="submit()">
-      <div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+
+      <!--<div data-role="collapsible-set" data-theme="b" data-content-theme="d">-->
+      <!--jqm1.3.2-->
+      <div data-role="collapsible-set" data-theme="a" data-content-theme="false">
+
         <div data-role="collapsible" data-collapsed="false">
           <h3>Personal Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="firstname">First Name</label>
             <input type="text" id="firstname" ng-model="newUser.user.userFirstName">
             <label for="middlename">Middle Name</label>
@@ -58,10 +62,11 @@
             <input type="tel" id="telephone" ng-model="newUser.user.telephone">
           </div>
         </div>
-        <div data-role="collapsible" id="step-2">
+
+        <div data-role="collapsible">
           <h3>Credit Card Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="name-as-card">Name as Appear in Card</label>
             <input type="text" id="name-as-card" ng-model="newUser.creditCard.creditCardName">
             <label for="card-type">Card Type</label>
@@ -79,10 +84,11 @@
             <input type="number" id="card-security-code" ng-model="newUser.creditCard.creditCardCvs">
           </div>
         </div>
+
         <div data-role="collapsible">
           <h3>Login Information</h3>
 
-          <div data-role="fieldcontain">
+          <div class="form-pad">
             <label for="email">Email</label>
             <input type="email" id="email" ng-model="newUser.user.userEmail">
             <label for="username">Username</label>
@@ -92,7 +98,6 @@
             <label for="password-confirm">Confirm Password</label>
             <input type="password" id="password-confirm" autocomplete="off"
                    ng-model="newUser.validateUser.userConfirmPassword">
-
             <label for="security-questions-1">Security Questions</label>
             <select id="security-questions-1" ng-model="question1"
                     ng-options="question.id as question.question for question in questions">
@@ -100,7 +105,6 @@
             </select>
             <input type="text" id="security-answer-1" placeholder="Answer"
                    ng-model="newUser.user.questions.answer1">
-
             <label for="security-questions-2"></label>
             <select id="security-questions-2" ng-model="question2"
                     ng-options="question.id as question.question for question in questions">
@@ -108,7 +112,6 @@
             </select>
             <input type="text" id="security-answer-2" placeholder="Answer"
                    ng-model="newUser.user.questions.answer2">
-
             <label for="security-questions-3"></label>
             <select id="security-questions-3" ng-model="question3"
                     ng-options="question.id as question.question for question in questions">
@@ -120,6 +123,7 @@
         </div>
 
       </div>
+
       <button type="submit" data-theme="a" data-icon="check">Register</button>
     </form>
   </div>
