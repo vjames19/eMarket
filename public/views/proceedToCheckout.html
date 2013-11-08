@@ -7,26 +7,26 @@
   </div>
 
   <div data-role="content">
+
     <form>
-      <div data-role="fieldcontain">
-        <label for="select-payment-method"><strong> Select Payment Method </strong></label>
+      <div class="form-pad">
+        <label for="select-payment-method"><strong>Select Payment Method</strong></label>
         <select name="select-payment-method" id="select-payment-method" ng-model="paymentMethod"
                 ng-options="paymentMethod for paymentMethod in paymentMethods"
-                ng-change="selectPaymentMethod()">
+                ng-change="selectPaymentMethod()" data-theme="a">
         </select>
       </div>
-
-      <div data-role="fieldcontain" ng-hide="isCreditCard">
+      <div class="form-pad" ng-hide="isCreditCard">
         <label for="select-bank"><strong> Select Bank </strong></label>
         <select name="select-bank" id="select-bank" ng-model="selectedBank"
-                ng-options="bank.bankName for bank in banks">
+                ng-options="bank.bankName for bank in banks" data-theme="a">
           <option value="" ng-hide="selectedBank">Please Select a Bank</option>
         </select>
       </div>
-      <div data-role="fieldcontain" ng-show="isCreditCard">
+      <div class="form-pad" ng-show="isCreditCard">
         <label for="select-card"><strong> Select Card </strong></label>
         <select name="select-card" id="select-card" ng-model="selectedCard"
-                ng-options="card.cardNumber for card in cards">
+                ng-options="card.cardNumber for card in cards" data-theme="a">
           <option value="" ng-hide="selectedCard">Please Select a Card</option>
         </select>
       </div>
