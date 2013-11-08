@@ -4,9 +4,10 @@ angular.module('eMarketApp').directive('reportsDay', function(Restangular) {
   return {
     templateUrl: 'views/reportsDay.html',
     restrict: 'E',
-    scope: {},
+    scope: true,
     replace: true,
     link: function(scope, elem, Highcharts) {
+
       var page = $(elem[0]);
       var graph = page.find('#graph');
       var selectedCategory = page.find('#select-category');
@@ -21,24 +22,14 @@ angular.module('eMarketApp').directive('reportsDay', function(Restangular) {
         if(scope.selectedCategory === null) {
           Restangular.one('reportsDayTotal').get().then(function(result) {
             scope.reportTotals = result[0];
-            if(!isNaN(scope.reportTotals.sales) && !isNaN(scope.reportTotals.revenue)) {
-              totalSales = scope.reportTotals.sales;
-              totalRevenue = scope.reportTotals.revenue;
-              graph.series[0].setData([totalSales]);
-              graph.series[1].setData([totalRevenue]);
-              graph.redraw();
-            }
+            totalSales = scope.reportTotals.sales;
+            totalRevenue = scope.reportTotals.revenue;
           });
         } else {
           Restangular.one('reportsDay', [scope.selectedCategory]).get().then(function(result) {
             scope.reportTotals = result;
-            if(!isNaN(scope.reportTotals.sales) && !isNaN(scope.reportTotals.revenue)) {
-              totalSales = scope.reportTotals.sales;
-              totalRevenue = scope.reportTotals.revenue;
-              graph.series[0].setData([totalSales]);
-              graph.series[1].setData([totalRevenue]);
-              graph.redraw();
-            }
+            totalSales = scope.reportTotals.sales;
+            totalRevenue = scope.reportTotals.revenue;
           });
         }
 
@@ -48,62 +39,13 @@ angular.module('eMarketApp').directive('reportsDay', function(Restangular) {
 
         Restangular.all('categories').getList({flat: true}).then(function(categories) {
           scope.categories = categories;
-          setTimeout(function() {
-            selectedCategory.selectmenu('refresh', true);
-          });
+          scope.refreshSelect(selectedCategory);
         });
 
       });
 
       page.on('pageshow', function() {
-        graph.highcharts({
-          chart: {
-            type: 'column',
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            width: $.mobile.window.innerWidth() - 30, ///300,
-            height: $.mobile.window.innerHeight() / 1.75 //250
-          },
-          title: {
-            text: 'Sales and Revenue'
-          },
-          xAxis: {
-            categories: ['Sales and Revenue']
-          },
-          yAxis: {
-            title: {
-              text: 'Amount (USD)'
-            }
-          },
-          tooltip: {
-            formatter: function() {
-              var number = Highcharts.numberFormat(this.y, 2);
-              if(this.y >= 0) {
-                return '<b>' + this.series.name + '</b>: $' + number;
-              } else {
-                number = number.replace('-', '-$');
-                return '<b>' + this.series.name + '</b>: ' + number;
-              }
-            }
-          },
-          exporting: {
-            enabled: false
-          },
-          credits: {
-            enabled: false
-          },
-          series: [
-            {
-              name: 'Sales',
-              data: [totalSales]
-            },
-            {
-              name: 'Revenue',
-              data: [totalRevenue]
-            }
-          ]
-        });
+        graph.highcharts(scope.setGraphOptions(totalSales, totalRevenue, Highcharts));
       });
 
       scope.$digest();
