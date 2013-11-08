@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular, SellerInfo) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
@@ -27,6 +27,11 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
 
 
       page.on('pagebeforeshow', function() {
+        // Set sellerId into a service
+        SellerInfo.sellerId = scope.item.sellerId;
+        SellerInfo.sellerName = scope.item.sellerName;
+
+
         // Remove any state from the bid object.
         scope.bid = {};
 
@@ -47,6 +52,8 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
 
         Restangular.one('users', scope.item.sellerId).one('avgRating').get().then(function(avg) {
           scope.sellerRating = avg;
+          SellerInfo.sellerAvgRate = avg.avgRating;
+
           setTimeout(function() {
             page.find('#avgStarRate').raty({
               cancel: true,
@@ -61,16 +68,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular) {
             itemListView.listview('refresh');
           });
         });
-      });
-
-      page.find('#rateSeller').raty({
-        cancel: true,
-        score: function() {
-          return $(this).attr('data-score');
-        },
-        half: true,
-        size: 16,
-        path: '../lib/raty/lib/img'
       });
 
       scope.addToCart = function() {

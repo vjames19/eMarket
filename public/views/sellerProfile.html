@@ -1,0 +1,70 @@
+<div data-role="page" data-theme="b" id="seller-profile">
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Seller Profile</h1>
+
+    <!--go back to the index page data-rel="back" reverse the transition back -->
+    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
+
+    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+      <a href="#home-user" id="home-user" data-role="button" data-icon="home"
+         data-iconpos="right">Home</a>
+      <a href="#shopping-cart" id="shopping-cart" data-role="button" data-icon="shop"
+         data-iconpos="right">Cart</a>
+    </div>
+    <search></search>
+
+  </div>
+
+  <div data-role="content">
+
+    <ul data-role="listview" data-divider-theme="a" data-theme="a" data-inset="true" id="sellerProductList">
+      <!--<ul data-role="listview" data-theme="c" data-inset="true" id="recentlyViewedList">-->
+      <!--jqm1.3.2-->
+      <li data-role="list-divider">{{sellerName}}<span class="ui-li-count"><div id="sellerAvgRate" data-score="{{ sellerAvgRate }}"></div></span></li>
+      <li>
+        <table>
+          <tr>
+            <td>
+              <strong>Rate This Seller</strong>
+            </td>
+            <td class="pad"></td>
+            <td>
+              <div id="rateSeller" data-score=""></div>
+            </td>
+          </tr>
+        </table>
+      </li>
+      <li data-role="list-divider">Seller Products<span class="ui-li-count">{{products.length}}</span></li>
+      <li ng-repeat="item in products">
+        <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
+          <img ng-src="{{item.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
+          <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
+            <thead>
+            <tr>
+              <th colspan="2">
+                <!--<th colspan="2" style="text-align: center">-->
+                <strong><abbr title="{{item.productName}}">{{item.productName |
+                  truncate:15}}</abbr></strong>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><strong>Current Bid</strong></td>
+              <td><em>{{item.currentBid | currency}}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Price</strong></td>
+              <td><em>{{item.nonbidPrice | currency}}</em></td>
+            </tr>
+            </tbody>
+          </table>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div data-role="footer" data-theme="a"><h1></h1></div>
+
+</div>
+
