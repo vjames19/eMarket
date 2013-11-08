@@ -11,25 +11,28 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
       var page = $(elem[0]);
       var graph = page.find('#graph');
       var selectedCategory = page.find('#select-category');
-      var totalRevenue = 0.0;
-      var totalSales = 0.0;
+
+      scope.totalSales = 0.0;
+      scope.totalRevenue = 0.0;
       scope.selectedCategory = null;
 
       scope.$watch('selectedCategory', function() {
 
-        scope.reportTotals = {sales: 0.0, revenue: 0.0};
-
         if(scope.selectedCategory === null) {
           Restangular.one('reportsWeekTotal').get().then(function(result) {
-            scope.reportTotals = result[0];
-            totalSales = scope.reportTotals.sales;
-            totalRevenue = scope.reportTotals.revenue;
+            scope.totalSales = result[0].sales;
+            scope.totalRevenue = result[0].revenue;
+            setTimeout(function() {
+              graph.highcharts(scope.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+            });
           });
         } else {
-          Restangular.one('reportsWeek', [scope.selectedCategory]).get().then(function(result) {
-            scope.reportTotals = result;
-            totalSales = scope.reportTotals.sales;
-            totalRevenue = scope.reportTotals.revenue;
+          Restangular.one('reportsWeek', scope.selectedCategory).get().then(function(result) {
+            scope.totalSales = result.sales;
+            scope.totalRevenue = result.revenue;
+            setTimeout(function() {
+              graph.highcharts(scope.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+            });
           });
         }
 
@@ -42,10 +45,6 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
           scope.refreshSelect(selectedCategory);
         });
 
-      });
-
-      page.on('pageshow', function() {
-        graph.highcharts(scope.setGraphOptions(totalSales, totalRevenue, Highcharts));
       });
 
       scope.$digest();
