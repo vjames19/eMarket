@@ -1,12 +1,18 @@
 'use strict';
 
-angular.module('eMarketApp').directive('userAccounts', function(Restangular) {
+angular.module('eMarketApp').directive('userAccounts', function(Restangular, Helper) {
   return {
     templateUrl: 'views/userAccounts.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
+    controller: function($scope, UserInfo) {
+      $scope.setUserInfo = function(userInfo) {
+        UserInfo.userInfo = angular.copy(userInfo);
+      };
+    },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var userAccountList = page.find('#userAccountList');
 
@@ -22,7 +28,7 @@ angular.module('eMarketApp').directive('userAccounts', function(Restangular) {
         $.mobile.loading('show');
         Restangular.one('users', selectedUser.userId).remove().then(function() {
           scope.users.splice(selectedUserIndex, 1);
-          userAccountList.listview('refresh');
+          Helper.refreshList(userAccountList, true); // no callback
           $.mobile.loading('hide');
         });
       };
@@ -30,9 +36,7 @@ angular.module('eMarketApp').directive('userAccounts', function(Restangular) {
       page.on('pagebeforeshow', function() {
         Restangular.all('users').getList().then(function(userList) {
           scope.users = userList;
-          setTimeout(function() {
-            userAccountList.listview('refresh');
-          });
+          Helper.refreshList(userAccountList);
         });
       });
 

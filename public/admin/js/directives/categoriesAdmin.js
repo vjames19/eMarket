@@ -1,11 +1,16 @@
 'use strict';
 
-angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular) {
+angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, Helper) {
   return {
     templateUrl: 'views/categoriesAdmin.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
+    controller: function($scope, CategoryInfo) {
+      $scope.setCategoryInfo = function(categoryInfo) {
+        CategoryInfo.categoryInfo = angular.copy(categoryInfo);
+      };
+    },
     link: function(scope, elem) {
       var category = null;
       var selectedIndex = null;
@@ -29,19 +34,16 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular) 
         categoryAdminList.listview('refresh');
       });
 
-      var refreshList = function(categories) {
-        console.log('categoridesfs', categories);
+      var refreshCatList = function(categories) {
         scope.categories = categories;
-        setTimeout(function() { // It doesn't work without it -.-
-          categoryAdminList.listview('refresh');
-        }, 1);
+        Helper.refreshList(categoryAdminList);
       };
 
       scope.next = function(category) {
         if(angular.isArray(category.categories)) {
           upButton.show();
           stack.push(category.categories);
-          refreshList(category.categories);
+          refreshCatList(category.categories);
         } else {
           noMore.popup('open');
         }
@@ -52,7 +54,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular) 
         if(stack.length <= 1) {
           upButton.hide();
         }
-        refreshList(window._.last(stack));
+        refreshCatList(window._.last(stack));
       };
 
       scope.selectedCategory = function(selectedCategory, index) {
@@ -63,8 +65,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular) 
       scope.deleteCategory = function() {
         Restangular.one('categories', category.categoryId).remove().then(function() {
           scope.categories.splice(selectedIndex, 1);
-          console.log('scope cat del', scope.categories);
-          categoryAdminList.listview('refresh');
+          Helper.refreshList(categoryAdminList, true);
         });
       };
 

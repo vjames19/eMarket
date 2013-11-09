@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
+angular.module('eMarketApp').directive('reportsWeek', function(Restangular, Report, Helper) {
   return {
     templateUrl: 'views/reportsWeek.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     link: function(scope, elem, Highcharts) {
 
@@ -23,7 +23,7 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
             scope.totalSales = result[0].sales;
             scope.totalRevenue = result[0].revenue;
             setTimeout(function() {
-              graph.highcharts(scope.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+              graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
             });
           });
         } else {
@@ -31,7 +31,7 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
             scope.totalSales = result.sales;
             scope.totalRevenue = result.revenue;
             setTimeout(function() {
-              graph.highcharts(scope.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+              graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
             });
           });
         }
@@ -42,7 +42,7 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular) {
 
         Restangular.all('categories').getList({flat: true}).then(function(categories) {
           scope.categories = categories;
-          scope.refreshSelect(selectedCategory);
+          Helper.refreshSelect(selectedCategory);
         });
 
       });

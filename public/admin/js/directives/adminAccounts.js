@@ -1,12 +1,18 @@
 'use strict';
 
-angular.module('eMarketApp').directive('adminAccounts', function(Restangular) {
+angular.module('eMarketApp').directive('adminAccounts', function(Restangular, Helper) {
   return {
     templateUrl: 'views/adminAccounts.html',
     restrict: 'E',
-    scope: true, // make possible to pass information from this directive to other directive
+    scope: {},
     replace: true,
+    controller: function($scope, AdminInfo) {
+      $scope.setAdminInfo = function(adminInfo) {
+        AdminInfo.adminInfo = angular.copy(adminInfo);
+      };
+    },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var adminAccountList = page.find('#adminAccountList');
 
@@ -22,7 +28,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular) {
         $.mobile.loading('show');
         Restangular.one('admins', selectedAdmin.adminId).remove().then(function() {
           scope.admins.splice(selectedAdminIndex, 1);
-          adminAccountList.listview('refresh');
+          Helper.refreshList(adminAccountList, true);
           $.mobile.loading('hide');
         });
       };
@@ -31,9 +37,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular) {
 
         Restangular.all('admins').getList().then(function(adminList) {
           scope.admins = adminList;
-          setTimeout(function() {
-            adminAccountList.listview('refresh');
-          });
+          Helper.refreshList(adminAccountList);
         });
 
       });

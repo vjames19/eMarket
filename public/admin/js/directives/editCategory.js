@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editCategory', function(Restangular) {
+angular.module('eMarketApp').directive('editCategory', function(Restangular, CategoryInfo, Helper) {
   return {
     templateUrl: 'views/editCategory.html',
     restrict: 'E',
-    scope: {
-      categoryInfo: '='
-    },
+    scope: {},
     replace: true,
     controller: function($scope, Restangular) {
       $scope.submit = function() {
@@ -25,24 +23,25 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
+
       var categoryAdminList = page.find('#categoryAdminList');
       var categorySelectMenu = page.find('#parent');
 
       page.on('pagebeforeshow', function() {
 
-        Restangular.all('categories').getList().then(function(categories) {
+        scope.categoryInfo = CategoryInfo.categoryInfo;
+
+        Restangular.all('categories').getList({flat: true}).then(function(categories) {
           scope.categories = categories;
-          setTimeout(function() {
-            categoryAdminList.listview('refresh');
-            categorySelectMenu.selectmenu('refresh');
-          });
+          Helper.refreshList(categoryAdminList);
+          Helper.refreshSelect(categorySelectMenu);
         });
 
       });
 
       page.on('pageshow', function() {
-        categoryAdminList.listview('refresh');
-        categorySelectMenu.selectmenu('refresh');
+        Helper.refreshList(categoryAdminList, true);
+        Helper.refreshSelect(categorySelectMenu, true);
       });
 
     }

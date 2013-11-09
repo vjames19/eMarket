@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('addUser', function(Restangular) {
+angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) {
   return {
     templateUrl: 'views/addUser.html',
     restrict: 'E',
@@ -23,6 +23,7 @@ angular.module('eMarketApp').directive('addUser', function(Restangular) {
     link: function(scope, elem) {
       var page = $(elem[0]);
       var sameAsCheckBox = page.find('#same-as');
+      var securityQuestions = page.find('select[id*="security-questions"]');
 
       scope.disableBillAddress = function() {
         var disable = sameAsCheckBox.prop('checked');
@@ -33,9 +34,10 @@ angular.module('eMarketApp').directive('addUser', function(Restangular) {
 
         Restangular.one('questions').getList().then(function(questionsList) {
           scope.questions = questionsList;
-          setTimeout(function() {
-            page.find('select[id*="security-questions"]').selectmenu('refresh', true);
-          });
+          Helper.refreshSelect(securityQuestions);
+//          setTimeout(function() {
+//            securityQuestions.selectmenu('refresh', true);
+//          });
         });
 
       });

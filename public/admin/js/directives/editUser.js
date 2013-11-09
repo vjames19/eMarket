@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editUser', function() {
+angular.module('eMarketApp').directive('editUser', function(UserInfo) {
   return {
     templateUrl: 'views/editUser.html',
     restrict: 'E',
-    scope: {
-      userInfo: '='
-    },
+    scope: {},
     replace: true,
     controller: function($scope, Restangular) {
       $scope.submit = function() {
@@ -20,6 +18,17 @@ angular.module('eMarketApp').directive('editUser', function() {
           alert(err);
         });
       };
+    },
+    link: function(scope, elem) {
+
+      var page = $(elem[0]);
+
+      page.on('pagebeforeshow', function() {
+
+        scope.userInfo = UserInfo.userInfo;
+
+      });
+
     }
   };
 });

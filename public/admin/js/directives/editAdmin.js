@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editAdmin', function() {
+angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper) {
   return {
     templateUrl: 'views/editAdmin.html',
     restrict: 'E',
-    scope: {
-      adminInfo: '='
-    },
+    scope: {},
     replace: true,
     controller: function($scope, Restangular) {
       $scope.submit = function() {
@@ -22,15 +20,21 @@ angular.module('eMarketApp').directive('editAdmin', function() {
       };
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var rootCheckBox = page.find('#make-root');
+
       page.on('pagebeforeshow', function() {
+
+        scope.adminInfo = AdminInfo.adminInfo;
+
         if(scope.adminInfo.isRoot === 1) {
-          rootCheckBox.prop('checked', true).checkboxradio('refresh');
+          Helper.refreshCheckBoxRadio(rootCheckBox.prop('checked', true), true);
         } else {
-          rootCheckBox.prop('checked', false).checkboxradio('refresh');
+          Helper.refreshCheckBoxRadio(rootCheckBox.prop('checked', false), true);
         }
       });
+
     }
   };
 });
