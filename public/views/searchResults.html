@@ -39,13 +39,24 @@
       </li>
       <li ng-repeat="result in results | orderBy: selectedSortOption.property">
         <a href="#item-view" data-transition="slide" ng-click="setItem(result)">
-          <img ng-src="{{result.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-
-          <h3 class="ul-li-heading">{{ result.productName | truncate:15 }}</h3>
-
-          <p class="ul-li-desc"><strong>{{ result.brand }}</strong></p>
-
-          <p class="ul-li-desc">{{ result.nonbidPrice | currency }}</p>
+          <table class="ui-responsive wrap-text">
+            <tr>
+              <th rowspan="3">
+                <img ng-src="{{result.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="3" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th>
+                <strong><abbr title="{{ result.productName | truncate:15 }}">
+                  {{ result.productName | truncate:15 }}</abbr></strong>
+              </th>
+            </tr>
+            <tr>
+              <td><em>{{ result.brand }}</em></td>
+            </tr>
+            <tr>
+              <td><em>{{ result.nonbidPrice | currency }}</em></td>
+            </tr>
+          </table>
         </a>
       </li>
     </ul>

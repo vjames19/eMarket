@@ -18,17 +18,17 @@
       <li ng-repeat="shoppingCart in shoppingCarts">
         <a href="#item-view" class="wrap-text" data-transition="slide" ng-click="setItem(shoppingCart)"
            data-transition="slide">
-          <img ng-src="{{shoppingCart.picture}}" class="center-image ui-corner-all">
-          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
-              <th colspan="2" style="text-align: center">
-                <strong><abbr title="{{shoppingCart.productName}}">{{shoppingCart.productName |
-                  truncate:15}}</abbr></strong>
+              <th rowspan="4">
+                <img ng-src="{{shoppingCart.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="4" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th colspan="2">
+                <strong><abbr title="{{shoppingCart.productName}}">
+                  {{shoppingCart.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
               <td><strong>Product</strong></td>
               <td><em>{{shoppingCart.productTotalPrice | currency}}</em></td>
@@ -41,7 +41,6 @@
               <td><strong>Quantity</strong></td>
               <td><em>{{ shoppingCart.itemQuantity }}</em></td>
             </tr>
-            </tbody>
           </table>
         </a>
         <a href="#popupNotification" data-inline="true" data-icon="gear" data-rel="popup"
