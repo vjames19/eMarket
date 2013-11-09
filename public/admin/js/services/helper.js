@@ -39,13 +39,13 @@ angular.module('eMarketApp').factory('Helper', function() {
         radioSelector.checkboxradio('refresh');
       }
     },
-    recreatePage: function(page, noTimeOut) {
+    triggerCreate: function(element, noTimeOut) {
       if(!noTimeOut) {
         setTimeout(function() {
-          page.trigger('create');
+          element.trigger('create');
         });
       } else {
-        page.trigger('create');
+        element.trigger('create');
       }
     }
   };

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) {
+angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, Helper) {
   return {
     templateUrl: 'views/sellItem.html',
     restrict: 'E',
@@ -46,6 +46,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
 
         Category.getList({flat: true}).then(function(categoryList) {
           scope.categories = categoryList;
+          Helper.triggerCreate(categoryPopup);
         });
 
         if(SellItem.isDraft && scope.item.condition === 'New') {
