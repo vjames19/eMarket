@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('homeUser', function(User, Helper, Carousel) {
+angular.module('eMarketApp').directive('homeUser', function(User, Carousel) {
   return {
     templateUrl: 'views/homeUser.html',
     restrict: 'E',
@@ -23,11 +23,10 @@ angular.module('eMarketApp').directive('homeUser', function(User, Helper, Carous
 
         User.me().getList('carousels').then(function(products) {
           scope.carouselProducts = products;
-          setTimeout(function() {
-            carousel.owlCarousel(Carousel.options);
-            Helper.triggerCreate(carousel);
-          });
+        });
 
+        $(document).ready(function() {
+          carousel.owlCarousel(Carousel.options);
         });
 
       });
