@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('eMarketApp').filter('truncate', function() {
   return function(text, length, end) {
     if(isNaN(length)) {
