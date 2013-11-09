@@ -24,15 +24,13 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       var itemListView = page.find('#item-list-view');
       var productBidsBtn = page.find('#product-bids-btn');
 
-
       page.on('pagebeforeshow', function() {
         // Set the product to scope item
-        scope.item = Product.item;
+        scope.item = Product.getItem();
 
         // Set sellerId into a service
-        SellerInfo.sellerId = Product.item.sellerId;
-        SellerInfo.sellerName = Product.item.sellerName;
-
+        SellerInfo.sellerId = scope.item.sellerId;
+        SellerInfo.sellerName = scope.item.sellerName;
 
         // Remove any state from the bid object.
         scope.bid = {};
@@ -88,7 +86,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.bidAmount = scope.nextMinBid;
       };
 
-      scope.setProductId = function(productId){
+      scope.setProductId = function(productId) {
         ProductBids.productId = productId;
       };
 
