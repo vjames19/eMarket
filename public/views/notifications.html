@@ -24,8 +24,20 @@
       <li data-icon="false" ng-repeat="notification in notifications">
         <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
            ng-click="readMessage(notification)">
-          <img src="img/envelope.png" class="center-image">
-          {{ getStatus(notification) }}<br>{{notification.message }}
+          <table class="ui-responsive wrap-text">
+            <tr>
+              <th rowspan="2">
+                <img src="img/envelope.png" width="75px" height="49px">
+              </th>
+              <th rowspan="2" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th>
+                <strong><abbr title="{{ getStatus(notification) }}">{{ getStatus(notification) }}</abbr></strong>
+              </th>
+            </tr>
+            <tr>
+              <td><em>{{notification.message }}</em></td>
+            </tr>
+          </table>
         </a>
       </li>
     </ul>
