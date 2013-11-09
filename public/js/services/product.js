@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('eMarketApp').factory('Product', function() {
+
+  var item = {};
   return {
-    item: {}
+    setItem: function(product) {
+      item = angular.copy(product);
+    },
+    getItem: function() {
+      return item;
+    }
   };
 });
