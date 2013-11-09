@@ -21,7 +21,7 @@ var DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
-  'product_quantity_remaining' : 'quantityRemaining',
+  'product_quantity_remaining': 'quantityRemaining',
   'product_seller_id': 'sellerId',
   'seller_name': 'sellerName'
 };
@@ -38,13 +38,19 @@ module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT products.* ' +
         'FROM products ' +
-        'WHERE product_seller_id = ? AND product_id NOT IN (' +
-        'SELECT product_id ' +
-        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
-        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
-        'user_login_id AND invoice_item_product_id = product_id) ' +
-        'WHERE product_seller_id = ?)';
-    connection.query(sql, [userId, userId], function(err, unsoldProducts) {
+        'WHERE product_seller_id = ? AND ' +
+        'product_quantity_remaining > 0 AND ' +
+        'product_depletion_date IS NULL';
+//    var sql = 'SELECT products.* ' +
+//        'FROM products ' +
+//        'WHERE product_seller_id = ? AND product_id NOT IN (' +
+//        'SELECT product_id ' +
+//        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
+//        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
+//        'user_login_id AND invoice_item_product_id = product_id) ' +
+//        'WHERE product_seller_id = ?)';
+//    connection.query(sql, [userId, userId], function(err, unsoldProducts) {
+    connection.query(sql, [userId], function(err, unsoldProducts) {
       if(err) {
         callback(err);
       } else {
@@ -61,13 +67,20 @@ module.exports.get = function(userId, unsoldProductId, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT products.* ' +
         'FROM products ' +
-        'WHERE product_seller_id = ? AND product_id NOT IN (' +
-        'SELECT product_id ' +
-        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
-        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
-        'user_login_id AND invoice_item_product_id = product_id) ' +
-        'WHERE product_seller_id = ? AND product_id = ?)';
-    connection.query(sql, [userId, userId, unsoldProductId], function(err, unsoldProduct) {
+        'WHERE product_seller_id = ? AND ' +
+        'product_quantity_remaining > 0 AND ' +
+        'product_depletion_date IS NULL AND ' +
+        'product_id = ?';
+//    var sql = 'SELECT products.* ' +
+//        'FROM products ' +
+//        'WHERE product_seller_id = ? AND product_id NOT IN (' +
+//        'SELECT product_id ' +
+//        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
+//        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
+//        'user_login_id AND invoice_item_product_id = product_id) ' +
+//        'WHERE product_seller_id = ? AND product_id = ?)';
+//    connection.query(sql, [userId, userId, unsoldProductId], function(err, unsoldProduct) {
+    connection.query(sql, [userId, unsoldProductId], function(err, unsoldProduct) {
       callback(err, mapper.map(unsoldProduct[0], DICTIONARY));
     });
   });
