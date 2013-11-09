@@ -7,7 +7,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
     scope: true,
     replace: true,
     controller: function($scope) {
-      $scope.setPreviewItemInfo = SellItem.setItemPreview
+      $scope.setPreviewItemInfo = SellItem.setItemPreview;
     },
     link: function(scope, elem) {
 
@@ -19,7 +19,17 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
       var UsedCheckBox = page.find('#radio-choice-used');
       var RefurbishedCheckBox = page.find('#radio-choice-refurbished');
 
+      var categoryPopup = page.find('#popupCategory');
+
       page.on('pagebeforeshow', function() {
+
+        categoryPopup.on({
+          popupbeforeposition: function() {
+            var maxHeight = $.mobile.window.innerHeight() / 1.75;
+            categoryPopup.css('overflow-y', 'scroll');
+            categoryPopup.height(maxHeight);
+          }
+        });
 
         if(!SellItem.isDraft) {
           scope.item = {};
