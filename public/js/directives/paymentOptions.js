@@ -6,6 +6,19 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, CardInfo
     restrict: 'E',
     scope: true,
     replace: true,
+    controller: function($scope) {
+
+      $scope.setCardInfo = function(cardInfo) {
+        // Adding Filter because node-mysql escape replaces all dates with YYYY-mm-dd HH:ii:ss.
+        cardInfo.expirationDate = $filter('date')(new Date(cardInfo.expirationDate), 'yyyy-MM');
+        angular.copy(cardInfo, CardInfo.cardInfo);
+      };
+
+      $scope.setBankInfo = function(bankInfo) {
+        angular.copy(bankInfo, BankInfo.bankInfo);
+      };
+
+    },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var cardList = page.find('#cardList');
@@ -15,16 +28,6 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, CardInfo
       var selectedBank = null;
       var selectedCardIndex = null;
       var selectedBankIndex = null;
-
-      scope.setCardInfo = function(cardInfo) {
-        // Adding Filter because node-mysql escape replaces all dates with YYYY-mm-dd HH:ii:ss.
-        cardInfo.expirationDate = $filter('date')(new Date(cardInfo.expirationDate), 'yyyy-MM');
-        angular.copy(cardInfo, CardInfo.cardInfo);
-      };
-
-      scope.setBankInfo = function(bankInfo) {
-        angular.copy(bankInfo, BankInfo.bankInfo);
-      };
 
       scope.selectCard = function(creditCard, index) {
         selectedCard = creditCard;

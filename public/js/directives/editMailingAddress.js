@@ -7,6 +7,9 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
     scope: true,
     replace: true,
     controller: function($scope, User) {
+
+      $scope.mailInfo = MailingAddressInfo.mailInfo;
+
       $scope.submit = function() {
         console.log($scope.mailInfo);
         User.me().one('mailAddresses', $scope.mailInfo.mailAddressId).customPUT($scope.mailInfo)
@@ -19,10 +22,9 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
       };
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var primaryCheckBox = page.find('#make-primary');
-
-      scope.mailInfo = MailingAddressInfo.mailInfo;
 
       page.on('pagebeforeshow', function() {
 
@@ -37,6 +39,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
         }
 
       });
+
     }
   };
 });

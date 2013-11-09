@@ -7,6 +7,9 @@ angular.module('eMarketApp').directive('editBillingAddress', function(BillingAdd
     scope: true,
     replace: true,
     controller: function($scope, User) {
+
+      $scope.billInfo = BillingAddressInfo.billInfo;
+
       $scope.submit = function() {
         console.log($scope.billInfo);
         User.me().one('billAddresses', $scope.billInfo.billAddressId).customPUT($scope.billInfo)
@@ -17,12 +20,11 @@ angular.module('eMarketApp').directive('editBillingAddress', function(BillingAdd
               alert(err);
             });
       };
+
     },
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-
-      scope.billInfo = BillingAddressInfo.billInfo;
 
       page.on('pagebeforeshow', function() {
 

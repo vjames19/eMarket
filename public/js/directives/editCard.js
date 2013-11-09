@@ -7,6 +7,9 @@ angular.module('eMarketApp').directive('editCard', function(User, CardInfo) {
     scope: true,
     replace: true,
     controller: function($scope) {
+
+      $scope.cardInfo = CardInfo.cardInfo;
+
       $scope.submit = function() {
         console.log($scope.cardInfo);
         User.me().one('creditCards', $scope.cardInfo.creditCardId).customPUT($scope.cardInfo)
@@ -17,13 +20,12 @@ angular.module('eMarketApp').directive('editCard', function(User, CardInfo) {
               alert(err);
             });
       };
+
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var cardType = page.find('#card-type');
       var addressSelect = page.find('#address-relation');
-
-      scope.cardInfo = CardInfo.cardInfo;
 
       page.on('pagebeforeshow', function() {
 

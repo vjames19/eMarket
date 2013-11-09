@@ -6,6 +6,17 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, Ma
     restrict: 'E',
     scope: true,
     replace: true,
+    controller: function($scope) {
+
+      $scope.setMailInfo = function(mailInfo) {
+        angular.copy(mailInfo, MailingAddressInfo.mailInfo);
+      };
+
+      $scope.setBillInfo = function(billInfo) {
+        angular.copy(billInfo, BillingAddressInfo.billInfo);
+      };
+
+    },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var mailAddressList = page.find('#mailAddressList');
@@ -26,14 +37,6 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, Ma
         scope.user.customPUT(scope.user, scope.user.userId).then(function() {
           $.mobile.loading('hide');
         });
-      };
-
-      scope.setMailInfo = function(mailInfo) {
-        angular.copy(mailInfo, MailingAddressInfo.mailInfo);
-      };
-
-      scope.setBillInfo = function(billInfo) {
-        angular.copy(billInfo, BillingAddressInfo.billInfo);
       };
 
       scope.selectMailAddress = function(mailAddress, index) {

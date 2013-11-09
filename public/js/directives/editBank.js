@@ -7,6 +7,9 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo) {
     scope: true,
     replace: true,
     controller: function($scope) {
+
+      $scope.bankInfo = BankInfo.bankInfo;
+
       $scope.submit = function() {
         console.log($scope.cardInfo);
         User.me().one('banks', $scope.bankInfo.bankId).customPUT($scope.bankInfo)
@@ -17,13 +20,12 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo) {
               alert(err);
             });
       };
+
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var accountType = page.find('#bank-account-type');
       var addressSelect = page.find('#address-relation');
-
-      scope.bankInfo = BankInfo.bankInfo;
 
       page.on('pagebeforeshow', function() {
 
