@@ -1,3 +1,5 @@
 <form data-ajax="false" id="search-form" ng-submit="submitSearch()">
-  <input id="search" name="search" type="search" data-mini="true" placeholder="Search Products" ng-model="searchQuery">
+  <label for="search" class="ui-hidden-accessible"></label>
+  <input name="search" id="search" type="search" data-mini="true" placeholder="Search Products..."
+         ng-model="searchQuery">
 </form>
