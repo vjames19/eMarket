@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editMailingAddress', function() {
+angular.module('eMarketApp').directive('editMailingAddress', function(MailingAddressInfo) {
   return {
     templateUrl: 'views/editMailingAddress.html',
     restrict: 'E',
-    scope: {
-      mailInfo: '='
-    },
+    scope: true,
     replace: true,
     controller: function($scope, User) {
       $scope.submit = function() {
@@ -23,7 +21,11 @@ angular.module('eMarketApp').directive('editMailingAddress', function() {
     link: function(scope, elem) {
       var page = $(elem[0]);
       var primaryCheckBox = page.find('#make-primary');
+
+      scope.mailInfo = MailingAddressInfo.mailInfo;
+
       page.on('pagebeforeshow', function() {
+
         if(scope.mailInfo.isPrimary === 1) {
           setTimeout(function() {
             primaryCheckBox.prop('checked', true).checkboxradio('refresh');
@@ -33,6 +35,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function() {
             primaryCheckBox.prop('checked', false).checkboxradio('refresh');
           });
         }
+
       });
     }
   };

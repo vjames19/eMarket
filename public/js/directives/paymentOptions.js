@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('paymentOptions', function(User) {
+angular.module('eMarketApp').directive('paymentOptions', function(User, CardInfo, BankInfo, $filter) {
   return {
     templateUrl: 'views/paymentOptions.html',
     restrict: 'E',
@@ -15,6 +15,16 @@ angular.module('eMarketApp').directive('paymentOptions', function(User) {
       var selectedBank = null;
       var selectedCardIndex = null;
       var selectedBankIndex = null;
+
+      scope.setCardInfo = function(cardInfo) {
+        // Adding Filter because node-mysql escape replaces all dates with YYYY-mm-dd HH:ii:ss.
+        cardInfo.expirationDate = $filter('date')(new Date(cardInfo.expirationDate), 'yyyy-MM');
+        angular.copy(cardInfo, CardInfo.cardInfo);
+      };
+
+      scope.setBankInfo = function(bankInfo) {
+        angular.copy(bankInfo, BankInfo.bankInfo);
+      };
 
       scope.selectCard = function(creditCard, index) {
         selectedCard = creditCard;

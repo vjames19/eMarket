@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editBillingAddress', function() {
+angular.module('eMarketApp').directive('editBillingAddress', function(BillingAddressInfo) {
   return {
     templateUrl: 'views/editBillingAddress.html',
     restrict: 'E',
-    scope: {
-      billInfo: '='
-    },
+    scope: true,
     replace: true,
     controller: function($scope, User) {
       $scope.submit = function() {
@@ -19,6 +17,18 @@ angular.module('eMarketApp').directive('editBillingAddress', function() {
               alert(err);
             });
       };
+    },
+    link: function(scope, elem) {
+
+      var page = $(elem[0]);
+
+      scope.billInfo = BillingAddressInfo.billInfo;
+
+      page.on('pagebeforeshow', function() {
+
+      });
+
+
     }
   };
 });

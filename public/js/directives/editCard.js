@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editCard', function(User) {
+angular.module('eMarketApp').directive('editCard', function(User, CardInfo) {
   return {
     templateUrl: 'views/editCard.html',
     restrict: 'E',
-    scope: {
-      cardInfo: '='
-    },
+    scope: true,
     replace: true,
     controller: function($scope) {
       $scope.submit = function() {
@@ -25,7 +23,11 @@ angular.module('eMarketApp').directive('editCard', function(User) {
       var cardType = page.find('#card-type');
       var addressSelect = page.find('#address-relation');
 
+      scope.cardInfo = CardInfo.cardInfo;
+
       page.on('pagebeforeshow', function() {
+
+        console.log(CardInfo);
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
           setTimeout(function() {

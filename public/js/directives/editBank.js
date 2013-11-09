@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editBank', function(User) {
+angular.module('eMarketApp').directive('editBank', function(User, BankInfo) {
   return {
     templateUrl: 'views/editBank.html',
     restrict: 'E',
-    scope: {
-      bankInfo: '='
-    },
+    scope: true,
     replace: true,
     controller: function($scope) {
       $scope.submit = function() {
@@ -25,7 +23,10 @@ angular.module('eMarketApp').directive('editBank', function(User) {
       var accountType = page.find('#bank-account-type');
       var addressSelect = page.find('#address-relation');
 
+      scope.bankInfo = BankInfo.bankInfo;
+
       page.on('pagebeforeshow', function() {
+
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
           setTimeout(function() {
@@ -33,6 +34,7 @@ angular.module('eMarketApp').directive('editBank', function(User) {
             addressSelect.selectmenu('refresh', true);
           });
         });
+
       });
     }
   };
