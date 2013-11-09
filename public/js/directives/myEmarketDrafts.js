@@ -7,10 +7,8 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User) {
     scope: true,
     replace: true,
     controller: function($scope, SellItem) {
-      $scope.setDraft = function(draft) {
-        SellItem.draft = angular.copy(draft);
-        SellItem.isDraft = true;
-      };
+      $scope.setDraft = SellItem.setDraft;
+      SellItem.isDraft = true;
     },
     link: function(scope, elem) {
       var page = $(elem[0]);

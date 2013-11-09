@@ -18,7 +18,7 @@ angular.module('eMarketApp').directive('sellItemPreview', function(SellItem) {
       var page = $(elem[0]);
 
       page.on('pagebeforeshow', function() {
-        scope.previewItemInfo = SellItem.itemPreview;
+        scope.previewItemInfo = SellItem.getItemPreview();
         SellItem.isDraft = true;
       });
     }

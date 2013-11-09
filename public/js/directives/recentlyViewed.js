@@ -7,9 +7,7 @@ angular.module('eMarketApp').directive('recentlyViewed', function(User) {
     scope: true,
     replace: true,
     controller: function($scope, Product) {
-      $scope.setItem = function(product) {
-        Product.item = angular.copy(product);
-      };
+      $scope.setItem = Product.setItem;
     },
     link: function(scope, elem) {
       var page = $(elem[0]);

@@ -7,9 +7,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
     scope: true,
     replace: true,
     controller: function($scope) {
-      $scope.setPreviewItemInfo = function(item) {
-        SellItem.itemPreview = item;
-      };
+      $scope.setPreviewItemInfo = SellItem.setItemPreview
     },
     link: function(scope, elem) {
 
@@ -25,11 +23,11 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
 
         if(!SellItem.isDraft) {
           scope.item = {};
-          SellItem.draft = {};
+          SellItem.setDraft({});
         }
 
-        // Set Draft if it is a a draft, if not set an empty object
-        scope.item = SellItem.draft;
+        // Get Draft if it is a a draft, if not set an empty object
+        scope.item = SellItem.getDraft();
 
         scope.disableShipping = function() {
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));

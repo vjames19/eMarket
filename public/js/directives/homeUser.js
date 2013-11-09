@@ -9,9 +9,7 @@ angular.module('eMarketApp').directive('homeUser', function(User) {
     controller: function($scope, Auth, SellItem, Product) {
       $scope.logOut = Auth.logOut;
 
-      $scope.setItem = function(product) {
-        Product.item = angular.copy(product);
-      };
+      $scope.setItem = Product.setItem;
 
       $scope.isDraft = function(isDraft) {
         SellItem.isDraft = angular.copy(isDraft);
