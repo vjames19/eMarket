@@ -16,12 +16,13 @@
       <li data-role="list-divider">Last 10 Items</li>
       <li ng-repeat="item in recentlyViewed">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
-          <table class="ui-responsive wrap-text">
+          <table style="float: left; margin-right: 10px">
             <tr>
-              <th rowspan="3">
-                <img ng-src="{{item.picture}}" class="ui-corner-all" width="75px" height="75px">
-              </th>
-              <th rowspan="3" style="padding-left: 5px; padding-right: 5px;"></th>
+              <td><img ng-src="{{item.picture}}" class="ui-corner-all" width="75px" height="75px"></td>
+            </tr>
+          </table>
+          <table class="ui-responsive wrap-text" style="float: left">
+            <tr>
               <th colspan="2">
                 <strong><abbr title="{{item.productName}}">{{item.productName |
                   truncate:15}}</abbr></strong>

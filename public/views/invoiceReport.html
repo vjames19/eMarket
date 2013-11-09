@@ -24,17 +24,18 @@
         </table>
       </li>
       <li ng-repeat="invoiceProduct in invoiceProducts">
-        <img ng-src="{{invoiceProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-        <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
-          <thead>
+        <table style="float: left; margin-right: 10px">
+          <tr>
+            <td><img ng-src="{{invoiceProduct.picture}}" class="ui-corner-all" width="75px" height="75px"></td>
+          </tr>
+        </table>
+        <table class="ui-responsive wrap-text" style="float: left">
           <tr>
             <th>
               <strong><abbr title="{{invoiceProduct.productName}}">{{invoiceProduct.productName |
                 truncate:15}}</abbr></strong>
             </th>
           </tr>
-          </thead>
-          <tbody>
           <tr>
             <td><strong>Product Price</strong></td>
             <td><em>{{invoiceProduct.nonbidPrice | currency}}</em></td>
@@ -43,7 +44,6 @@
             <td><strong>Purchased Quantity</strong></td>
             <td><em>{{invoiceProduct.purchasedQuantity}}</em></td>
           </tr>
-          </tbody>
         </table>
       </li>
     </ul>
