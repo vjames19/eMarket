@@ -29,9 +29,9 @@ angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper) 
         scope.adminInfo = AdminInfo.adminInfo;
 
         if(scope.adminInfo.isRoot === 1) {
-          Helper.refreshCheckBoxRadio(rootCheckBox.prop('checked', true), true);
+          Helper.refreshCheckBox(rootCheckBox.prop('checked', true), true);
         } else {
-          Helper.refreshCheckBoxRadio(rootCheckBox.prop('checked', false), true);
+          Helper.refreshCheckBox(rootCheckBox.prop('checked', false), true);
         }
       });
 
