@@ -4,9 +4,9 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
   return {
     templateUrl: 'views/sellItem.html',
     restrict: 'E',
-    scope: {},
+    scope: true,
     replace: true,
-    controller: function($scope, SellItem) {
+    controller: function($scope) {
       $scope.setPreviewItemInfo = function(item) {
         SellItem.itemPreview = item;
       };

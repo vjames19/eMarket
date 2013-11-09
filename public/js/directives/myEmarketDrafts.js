@@ -4,13 +4,13 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User) {
   return {
     templateUrl: 'views/myEmarketDrafts.html',
     restrict: 'E',
-    scope: {},
+    scope: true,
     replace: true,
     controller: function($scope, SellItem) {
       $scope.setDraft = function(draft) {
         SellItem.draft = angular.copy(draft);
         SellItem.isDraft = true;
-      }
+      };
     },
     link: function(scope, elem) {
       var page = $(elem[0]);

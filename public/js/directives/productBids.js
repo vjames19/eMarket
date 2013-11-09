@@ -13,7 +13,9 @@ angular.module('eMarketApp').directive('productBids', function(Restangular, Prod
 
       page.on('pagebeforeshow', function() {
 
-        Restangular.one('products', ProductBids.productId).getList('bids').then(function(bids) {
+        scope.productId = ProductBids.productId;
+
+        Restangular.one('products', scope.productId).getList('bids').then(function(bids) {
           scope.productBids = bids;
           setTimeout(function(){
             productBidList.listview('refresh');
