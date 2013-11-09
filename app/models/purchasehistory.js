@@ -22,7 +22,8 @@ var DICTIONARY = {
   'product_spec_picture': 'picture',
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
-  'product_spec_dimensions': 'dimensions'
+  'product_spec_dimensions': 'dimensions',
+  'invoice_creation_date' : 'purchaseDate'
 };
 
 //var WHITELIST = [];
@@ -35,7 +36,7 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
+    var sql = 'SELECT products.*, invoice_history.invoice_creation_date ' +
         'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
         'ON (user_id=invoice_user_id ' +
         'AND invoice_item_invoice_id=invoice_id ' +

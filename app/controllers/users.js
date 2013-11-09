@@ -7,8 +7,7 @@ var BillingAddresses = require('../models/billingAddress.js');
 var CreditCards = require('../models/creditCard.js');
 var BankAccounts = require('../models/bankAccount.js');
 var Ratings = require('../models/rating.js');
-var ShoppingCarts = require
-('../models/shoppingCart.js');
+var ShoppingCarts = require('../models/shoppingCart.js');
 var Drafts = require('../models/draft.js');
 var Invoices = require('../models/invoice.js');
 var SoldProducts = require('../models/soldProduct.js');

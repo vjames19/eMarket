@@ -26,17 +26,17 @@
 
       <li ng-repeat="bid in bids">
         <a href="#item-view" class="wrap-text" ng-click="setItem(bid)" data-transition="slide">
-          <img ng-src="{{bid.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-          <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
+              <th rowspan="4">
+                <img ng-src="{{bid.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="4" style="padding-left: 5px; padding-right: 5px;"></th>
               <th colspan="2">
-                <strong><abbr title="{{bid.productName}}">{{bid.productName |
-                  truncate:15}}</abbr></strong>
+                <strong><abbr title="{{bid.productName}}">
+                  {{bid.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
               <td><strong>Your Bid</strong></td>
               <td><em>{{bid.highestBid | currency}}</em></td>
@@ -49,7 +49,6 @@
               <td><strong>Bid Time</strong></td>
               <td><em>{{bid.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</em></td>
             </tr>
-            </tbody>
           </table>
         </a>
       </li>
@@ -58,22 +57,24 @@
 
       <li ng-repeat="purchase in purchases">
         <a href="#item-view" class="wrap-text" ng-click="setItem(purchase)" data-transition="slide">
-          <img ng-src="{{purchase.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-          <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
-              <th>
-                <strong>
-                  <abbr title="{{purchase.productName}}">{{purchase.productName | truncate:15}}</abbr>
-                </strong>
+              <th rowspan="3">
+                <img ng-src="{{purchase.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="3" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th colspan="2">
+                <strong><abbr title="{{purchase.productName}}">{{purchase.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
-              <td></td>
+              <td><strong>Seller Name</strong></td>
+              <td><em>{{ purchase.sellerName }}</em></td>
             </tr>
-            </tbody>
+            <tr>
+              <td><strong>Purchase Date</strong></td>
+              <td><em>{{ purchase.purchaseDate | date:'yyyy-MM-dd HH:mm:ss' }}</em></td>
+            </tr>
           </table>
         </a>
       </li>

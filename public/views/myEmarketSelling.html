@@ -24,17 +24,17 @@
       <li data-role="list-divider">Sold<span class="ui-li-count">{{soldProducts.length}}</span></li>
       <li ng-repeat="soldProduct in soldProducts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(soldProduct)" data-transition="slide">
-          <img ng-src="{{soldProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
-              <th>
-                <strong><abbr title="{{soldProduct.productName}}">{{soldProduct.productName |
-                  truncate:15}}</abbr></strong>
+              <th rowspan="4">
+                <img ng-src="{{soldProduct.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="4" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th colspan="2">
+                <strong><abbr title="{{soldProduct.productName}}">
+                  {{soldProduct.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
               <td><strong>Sold Quantity</strong></td>
               <td><em>{{soldProduct.soldQuantity}}</em></td>
@@ -47,7 +47,6 @@
               <td><strong>Buyer Name</strong></td>
               <td><em>{{ soldProduct.buyerName }}</em></td>
             </tr>
-            </tbody>
           </table>
         </a>
       </li>
@@ -55,25 +54,27 @@
       <li data-role="list-divider">Unsold<span class="ui-li-count">{{unsoldProducts.length}}</span></li>
       <li ng-repeat="unsoldProduct in unsoldProducts">
         <a href="#item-view" class="wrap-text" ng-click="setItem(unsoldProduct)" data-transition="slide">
-          <img ng-src="{{unsoldProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
-              <th colspan="2" style="text-align: center">
-                <strong><abbr title="{{unsoldProduct.productName}}">{{unsoldProduct.productName |
-                  truncate:15}}</abbr></strong>
+              <th rowspan="3">
+                <img ng-src="{{unsoldProduct.picture}}" class="ui-corner-all" width="75px" height="75px">
+              </th>
+              <th rowspan="3" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th colspan="2">
+                <strong><abbr title="{{ unsoldProduct.productName }}">
+                  {{ unsoldProduct.productName | truncate:15 }}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
-              <td><strong>Available Quantity</strong></td>
-              <td><em>{{unsoldProduct.quantity}}</em></td>
+              <td><strong>Quantity Remaining</strong></td>
+              <td><em>{{ unsoldProduct.quantityRemaining }}</em></td>
             </tr>
-            </tbody>
+            <tr>
+              <td><strong>Creation Date</strong></td>
+              <td><em>{{ unsoldProduct.creationDate | date:'yyyy-MM-dd HH:mm:ss' }}</em></td>
+            </tr>
           </table>
         </a>
-
       </li>
     </ul>
   </div>
