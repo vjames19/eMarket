@@ -41,19 +41,25 @@
         <a href="#item-view" data-transition="slide" ng-click="setItem(result)">
           <table class="ui-responsive wrap-text">
             <tr>
-              <th rowspan="3">
+              <th rowspan="4">
                 <img ng-src="{{result.picture}}" class="ui-corner-all" width="75px" height="75px">
               </th>
-              <th rowspan="3" style="padding-left: 5px; padding-right: 5px;"></th>
-              <th>
+              <th rowspan="4" style="padding-left: 5px; padding-right: 5px;"></th>
+              <th colspan="2">
                 <strong><abbr title="{{ result.productName | truncate:15 }}">
                   {{ result.productName | truncate:15 }}</abbr></strong>
               </th>
             </tr>
             <tr>
+              <td><strong>Brand</strong></td>
               <td><em>{{ result.brand }}</em></td>
             </tr>
             <tr>
+              <td><strong>Current Bid</strong></td>
+              <td><em>{{ result.currentBid | currency }}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Price</strong></td>
               <td><em>{{ result.nonbidPrice | currency }}</em></td>
             </tr>
           </table>
