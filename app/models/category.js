@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var async = require('async');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -26,10 +27,7 @@ module.exports.getAll = function(callback) {
       if(err) {
         callback(err);
       } else {
-        categories = _.map(categories, function(category) {
-          return mapper.map(category, DICTIONARY);
-        });
-        callback(null, categories);
+        callback(null, mapper.mapCollection(categories, DICTIONARY));
       }
     });
   });
@@ -78,3 +76,32 @@ module.exports.delete = function(id, callback) {
     connection.query(sql, [id], callback);
   });
 };
+
+module.exports.getAllChildrenIds = function(categoryParentId, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'SELECT category_id FROM category_info ' +
+        'WHERE category_status=1 AND category_parent_id=?';
+    connection.query(sql, [categoryParentId], function(err, categories) {
+      callback(err, mapper.mapCollection(categories, DICTIONARY));
+    });
+  });
+};
+
+module.exports.getAllSubTreeIds = function(categoryParentId, callback) {
+  var results = [];
+  getAllSubtreeIdsHelper(categoryParentId, results, callback);
+};
+
+function getAllSubtreeIdsHelper(categoryParentId, results, allDone) {
+  module.exports.getAllChildrenIds(categoryParentId, function(err, categories) {
+    if(err) {
+      allDone(err);
+    }
+    async.forEach(categories, function(category, callback) {
+      results.push(category.id);
+      getAllSubtreeIdsHelper(category.id, results, callback);
+    }, function() {
+      allDone(null, results);
+    });
+  });
+}

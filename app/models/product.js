@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var mapper = require('../mapper');
+var Category = require('./category.js');
 
 var DICTIONARY = {
   'product_id': 'id',
@@ -81,3 +82,21 @@ module.exports.search = function(query, callback) {
     });
   });
 };
+
+module.exports.searchByCategory = function(parentCategoryId, callback) {
+  Category.getAllSubTreeIds(parentCategoryId, function(err, categoryIds) {
+    executor.execute(function(err, connection) {
+      categoryIds.push(parentCategoryId);
+      var sql = 'SELECT * FROM products ' +
+          'WHERE category_id IN (?)';
+      connection.query(sql, [categoryIds], function(err, products) {
+        if(err) {
+          callback(err);
+        } else {
+          callback(null, mapper.mapCollection(products, DICTIONARY));
+        }
+      });
+    });
+  });
+};
+
