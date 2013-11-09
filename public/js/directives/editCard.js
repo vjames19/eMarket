@@ -27,7 +27,6 @@ angular.module('eMarketApp').directive('editCard', function(User, CardInfo) {
 
       page.on('pagebeforeshow', function() {
 
-        console.log(CardInfo);
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
           setTimeout(function() {
