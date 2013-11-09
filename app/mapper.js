@@ -1,8 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-
-module.exports.map = function(object, dictionary) {
+var mapObject = function(object, dictionary) {
 
   var obj = {};
   if(!_.isEmpty(object) && !_.isEmpty(dictionary)) {
@@ -14,4 +13,12 @@ module.exports.map = function(object, dictionary) {
     });
   }
   return obj;
+};
+
+module.exports.map = mapObject;
+
+module.exports.mapCollection = function(collection, dictionary) {
+  return _.map(collection, function(object) {
+    return mapObject(object, dictionary);
+  });
 };
