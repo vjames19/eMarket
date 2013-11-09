@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('paymentOptions', function(User, CardInfo, BankInfo, $filter) {
+angular.module('eMarketApp').directive('paymentOptions', function(User) {
   return {
     templateUrl: 'views/paymentOptions.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, $filter, CardInfo, BankInfo) {
 
       $scope.setCardInfo = function(cardInfo) {
         // Adding Filter because node-mysql escape replaces all dates with YYYY-mm-dd HH:ii:ss.

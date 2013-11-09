@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editCard', function(User, CardInfo) {
+angular.module('eMarketApp').directive('editCard', function(User) {
   return {
     templateUrl: 'views/editCard.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, CardInfo) {
 
       $scope.cardInfo = CardInfo.cardInfo;
 

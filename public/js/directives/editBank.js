@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editBank', function(User, BankInfo) {
+angular.module('eMarketApp').directive('editBank', function(User) {
   return {
     templateUrl: 'views/editBank.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, BankInfo) {
 
       $scope.bankInfo = BankInfo.bankInfo;
 
