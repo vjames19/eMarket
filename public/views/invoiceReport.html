@@ -5,9 +5,8 @@
     <a href="#invoices" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-      <a href="#home-user" id="home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
-      <a href="#shopping-cart" id="shopping-cart"
-         class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
+      <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
+      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
 
     <search></search>
@@ -16,8 +15,6 @@
   <div data-role="content">
 
     <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="invoiceProductsList">
-      <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="invoiceProductsList">-->
-      <!--jqm1.3.2-->
       <li data-role="list-divider">
         <table>
           <tr>
@@ -26,14 +23,12 @@
           </tr>
         </table>
       </li>
-      <!--<li data-role="list-divider">Products<span class="ui-li-count">{{invoiceProducts.length}}</span></li>-->
       <li ng-repeat="invoiceProduct in invoiceProducts">
         <img ng-src="{{invoiceProduct.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
         <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
           <thead>
           <tr>
             <th>
-              <!--<th colspan="2" style="text-align: center">-->
               <strong><abbr title="{{invoiceProduct.productName}}">{{invoiceProduct.productName |
                 truncate:15}}</abbr></strong>
             </th>

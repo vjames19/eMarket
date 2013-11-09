@@ -2,12 +2,10 @@
   <div data-role="header" class="header" data-position="fixed" data-theme="a">
     <h1>My eMarket</h1>
 
-    <!--go back to the index page data-rel="back" reverse the transition back -->
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-      <a href="#shopping-cart" id="shopping-cart"
-         class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
+      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
 
     <search></search>
@@ -24,7 +22,6 @@
   <div data-role="content">
 
     <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="bidAndPurchaseList">
-      <!--<ul data-role="listview" data-dividertheme="b" data-theme="c" data-inset="true" id="bidAndPurchaseList">-->
       <li data-role="list-divider">Bidding<span class="ui-li-count">{{bids.length}}</span></li>
 
       <li ng-repeat="bid in bids">
@@ -34,7 +31,6 @@
             <thead>
             <tr>
               <th colspan="2">
-                <!--<th colspan="2" style="text-align: center">-->
                 <strong><abbr title="{{bid.productName}}">{{bid.productName |
                   truncate:15}}</abbr></strong>
               </th>

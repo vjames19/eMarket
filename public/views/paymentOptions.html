@@ -2,12 +2,10 @@
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Payment Options</h1>
 
-    <!--go back to the index page data-rel="back" reverse the transition back -->
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-      <a href="#shopping-cart" id="shopping-cart"
-         class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
+      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
 
     <search></search>
@@ -15,13 +13,9 @@
 
   <div data-role="content">
     <div data-role="collapsible-set" data-theme="a">
-      <!--<div data-role="collapsible-set" data-theme="b" data-content-theme="d">-->
-      <!--jqm1.3.2-->
       <div data-role="collapsible">
         <h2>Edit Credit Cards</h2>
         <ul data-role="listview" data-theme="a" data-divider-theme="b" id="cardList" data-inset="true">
-          <!--<ul data-role="listview" data-theme="d" data-divider-theme="d" id="cardList">-->
-          <!--jqm1.3.2-->
           <li data-role="list-divider">
             <table>
               <tr>
@@ -32,10 +26,6 @@
                 <td><span class="ui-li-count">{{creditCards.length}}</span></td>
               </tr>
             </table>
-            <!--<a href="#add-card" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"-->
-            <!--class="ui-btn-right">Add Credit Card</a>-->
-            <!--<span class="ui-li-count">{{creditCards.length}}</span>-->
-            <!--jqm1.3.2-->
           </li>
           <li ng-repeat="creditCard in creditCards">
             <a href="">
@@ -58,8 +48,6 @@
       <div data-role="collapsible">
         <h2>Edit Bank Accounts</h2>
         <ul data-role="listview" data-theme="a" data-divider-theme="b" id="bankList" data-inset="true">
-          <!--<ul data-role="listview" data-theme="d" data-divider-theme="d" id="bankList">-->
-          <!--jqm1.3.2-->
           <li data-role="list-divider">
             <table>
               <tr>
@@ -70,11 +58,6 @@
                 <td><span class="ui-li-count">{{bankAccounts.length}}</span></td>
               </tr>
             </table>
-            <!--Bank Accounts on System-->
-            <!--<a href="#add-bank" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b"-->
-            <!--class="ui-btn-right">Add Bank Account</a>-->
-            <!--<span class="ui-li-count">{{bankAccounts.length}}</span>-->
-            <!--jqm1.3.2-->
           </li>
           <li ng-repeat="bankAccount in bankAccounts">
             <a href="">
@@ -95,16 +78,6 @@
     </div>
   </div>
 
-  <!--jqm1.3.2-->
-  <!--<div data-role="popup" id="cardPopupMenu" data-theme="d">-->
-  <!--<div style="padding:10px 20px;">-->
-  <!--<h3>Choose An Action</h3>-->
-  <!--<a href="#edit-card" data-role="button" data-icon="edit">Edit</a>-->
-  <!--<a href="#payment-options" data-role="button" data-icon="delete" ng-click="deleteCreditCard()">Delete</a>-->
-  <!--<a href="#payment-options" data-role="button" data-icon="back">Cancel</a>-->
-  <!--</div>-->
-  <!--</div>-->
-
   <div data-role="popup" id="cardPopupMenu" data-theme="b">
     <div style="padding:10px 20px;">
       <h3>Choose An Action</h3>
@@ -114,16 +87,6 @@
       <a href="#payment-options" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
     </div>
   </div>
-
-  <!--jqm1.3.2-->
-  <!--<div data-role="popup" id="bankPopupMenu" data-theme="d">-->
-  <!--<div style="padding:10px 20px;">-->
-  <!--<h3>Choose An Action</h3>-->
-  <!--<a href="#edit-bank" data-role="button" data-icon="edit">Edit</a>-->
-  <!--<a href="#payment-options" data-role="button" data-icon="delete" ng-click="deleteBankAccount()">Delete</a>-->
-  <!--<a href="#payment-options" data-role="button" data-icon="back">Cancel</a>-->
-  <!--</div>-->
-  <!--</div>-->
 
   <div data-role="popup" id="bankPopupMenu" data-theme="b">
     <div style="padding:10px 20px;">

@@ -1,9 +1,9 @@
 <div data-role="page" data-theme="b" id="sell-item-preview">
   <form data-ajax="false" ng-submit="submit()">
+
     <div data-role="header" data-position="fixed" data-theme="a">
       <h1>Preview</h1>
 
-      <!--go back to the index page data-rel="back" reverse the transition back -->
       <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
     </div>
 
@@ -19,8 +19,7 @@
         </thead>
         <tbody>
         <tr>
-          <td align="center"><img src="{{previewItemInfo.picture}}" id="item-photo" class="item-photo ui-corner-all"
-                                  width="150px" height="150px"/>
+          <td align="center"><img src="{{previewItemInfo.picture}}" id="item-photo" class="item-photo ui-corner-all"/>
           </td>
         </tr>
         </tbody>
@@ -28,8 +27,6 @@
 
       <hr/>
 
-      <!--<ul data-role="listview" data-theme="c" data-inset="true">-->
-      <!--jqm1.3.2-->
       <ul data-role="listview" data-theme="a" data-inset="true">
         <li>
           <p class="item-description-text-size"> Starting bid: {{ previewItemInfo.startingBidPrice | currency }}</p>
@@ -97,10 +94,6 @@
       <button type="submit" class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right
       ui-btn-corner-all ui-btn-inline">Submit
       </button>
-
-      <!--<a href="" data-role="button" id="submit-button" class="preview-button">Submit</a>-->
-      <!--<button type="submit" data-icon="check" data-theme="a" class="footer-button">Submit</button>-->
-      <!--<button type="submit" data-icon="check" data-theme="a" class="submit-item-button" ng-click="changeToHome()">Submit</button>-->
     </div>
   </form>
 </div>

@@ -18,9 +18,6 @@
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
-        <!--<select id="card-type" ng-model="cardInfo.creditCardType" ng-options="cardType.card as cardType.card for cardType in cardOptions">-->
-        <!--<option value="">Select a Card Type</option>-->
-        <!--</select>-->
         <label for="card-exp-date"><strong>Expiration Date</strong></label>
         <input type="month" id="card-exp-date" ng-model="cardInfo.expirationDate">
         <label for="card-number"><strong>Card Number</strong></label>
@@ -32,25 +29,11 @@
         <select id="address-relation" ng-model="cardInfo.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses">
         </select>
-        <!--<select id="address-relation">-->
-        <!--<option value="Urb. Mata La Vaca, Cuchillo Street"  selected>Urb. Mata La Vaca, Cuchillo Street</option>-->
-        <!--<option value="Urb. Pollo Mojao, Pechuga Street">Urb. Pollo Mojao, Pechuga Street</option>-->
-        <!--<option value="Barrio Palmas, Calle Perla">Barrio Palmas, Calle Perla</option>-->
-        <!--</select>-->
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check">Submit</button>
       </div>
-      <!--jqm1.3.2-->
-      <!--<div data-role="controlgroup" data-type="horizontal" style="text-align: center">-->
-        <!--<a href="#payment-options" data-role="button" data-icon="back" data-theme="a"-->
-           <!--data-transition="fade">Cancel</a>-->
-        <!--&lt;!&ndash;<a href="#payment-options" data-role="button" data-icon="check" data-theme="a"&ndash;&gt;-->
-        <!--&lt;!&ndash;data-transition="fade">Submit</a>&ndash;&gt;-->
-        <!--<button type="submit" data-icon="check" data-theme="a">Submit</button>-->
-        <!--&lt;!&ndash;<button type="submit" data-icon="check" data-theme="a" ng-click="changeToPaymentOptionPage()">Submit</button>&ndash;&gt;-->
-      <!--</div>-->
     </form>
   </div>
 
