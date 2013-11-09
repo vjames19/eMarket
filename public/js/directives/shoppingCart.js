@@ -4,8 +4,13 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
   return {
     templateUrl: 'views/shoppingCart.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
+    controller: function($scope, Product) {
+      $scope.setItem = function(product) {
+        Product.item = angular.copy(product);
+      }
+    },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var shoppingCartList = page.find('#shoppingCartList');

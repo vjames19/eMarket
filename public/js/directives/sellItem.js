@@ -4,10 +4,13 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
   return {
     templateUrl: 'views/sellItem.html',
     restrict: 'E',
-    scope: {
-      item: '='
-    },
+    scope: {},
     replace: true,
+    controller: function($scope, SellItem) {
+      $scope.setPreviewItemInfo = function(item) {
+        SellItem.itemPreview = item;
+      };
+    },
     link: function(scope, elem) {
 
       var page = $(elem[0]);
@@ -20,6 +23,14 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
 
       page.on('pagebeforeshow', function() {
 
+        if(!SellItem.isDraft) {
+          scope.item = {};
+          SellItem.draft = {};
+        }
+
+        // Set Draft if it is a a draft, if not set an empty object
+        scope.item = SellItem.draft;
+
         scope.disableShipping = function() {
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
           scope.item.shippingPrice = 0;
@@ -28,14 +39,6 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem) 
         Category.getList({flat: true}).then(function(categoryList) {
           scope.categories = categoryList;
         });
-
-        if(!SellItem.isDraft) {
-          scope.item = {};
-        }
-
-        scope.setPreviewItemInfo = function(item) {
-          SellItem.itemPreview = item;
-        };
 
         if(SellItem.isDraft && scope.item.condition === 'New') {
           setTimeout(function() {

@@ -2,28 +2,15 @@
 
 angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
 
-  $scope.itemToBeViewed = null;
-  $scope.previewItemToSellInfoToBeViewed = null;
   $scope.costToBeViewed = null;
   $scope.shippingToBeViewed = null;
   $scope.itemsAmountToBeViewed = null;
-  $scope.draftToBeViewed = null;
-  $scope.isDraftToBeViewed = null;
 
-  // Important: Create a deep copy of the item to be passed accross views. To avoid integrity issues.
-  // Use to set the item to be viewed
-  $scope.setItem = function(item) {
-    $scope.itemToBeViewed = angular.copy(item);
-  };
-
+  // Important: Create a deep copy to avoid integrity issues.
   $scope.setCostAndShipping = function(items, cost, shipping) {
     $scope.itemsAmountToBeViewed = angular.copy(items);
     $scope.costToBeViewed = angular.copy(cost);
     $scope.shippingToBeViewed = angular.copy(shipping);
-  };
-
-  $scope.setDraft = function(draft) {
-    $scope.draftToBeViewed = angular.copy(draft);
   };
 
   $scope.logIn = function() {

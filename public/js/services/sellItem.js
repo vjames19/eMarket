@@ -2,7 +2,8 @@
 
 angular.module('eMarketApp').factory('SellItem', function() {
   return {
-    itemPreview: '',
+    draft: {},
+    itemPreview: {},
     isDraft: ''
   };
 });

@@ -1,13 +1,21 @@
 'use strict';
 
-angular.module('eMarketApp').directive('homeUser', function(User, SellItem) {
+angular.module('eMarketApp').directive('homeUser', function(User) {
   return {
     templateUrl: 'views/homeUser.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
-    controller: function($scope, Auth) {
+    controller: function($scope, Auth, SellItem, Product) {
       $scope.logOut = Auth.logOut;
+
+      $scope.setItem = function(product) {
+        Product.item = angular.copy(product);
+      };
+
+      $scope.isDraft = function(isDraft) {
+        SellItem.isDraft = angular.copy(isDraft);
+      };
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
@@ -92,11 +100,6 @@ angular.module('eMarketApp').directive('homeUser', function(User, SellItem) {
           });
         });
       });
-
-
-      scope.isDraft = function(isDraft) {
-        SellItem.isDraft = isDraft;
-      };
     }
   };
 });

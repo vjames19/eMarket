@@ -6,6 +6,11 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
     restrict: 'E',
     scope: {},
     replace: true,
+    controller: function($scope, Product) {
+      $scope.setItem = function(product) {
+        Product.item = angular.copy(product);
+      }
+    },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var sellerProductList = page.find('#sellerProductList');

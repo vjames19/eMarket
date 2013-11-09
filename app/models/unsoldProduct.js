@@ -20,7 +20,9 @@ var DICTIONARY = {
   'product_spec_picture': 'picture',
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
-  'product_spec_dimensions': 'dimensions'
+  'product_spec_dimensions': 'dimensions',
+  'product_seller_id': 'sellerId',
+  'seller_name': 'sellerName'
 };
 
 //var WHITELIST = [];

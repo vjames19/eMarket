@@ -1,12 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo, Product) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
-    scope: {
-      item: '='
-    },
+    scope: {},
     replace: true,
     controller: function($scope, $filter) {
       $scope.bid = {};
@@ -28,9 +26,12 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
 
       page.on('pagebeforeshow', function() {
+        // Set the product to scope item
+        scope.item = Product.item;
+
         // Set sellerId into a service
-        SellerInfo.sellerId = scope.item.sellerId;
-        SellerInfo.sellerName = scope.item.sellerName;
+        SellerInfo.sellerId = Product.item.sellerId;
+        SellerInfo.sellerName = Product.item.sellerName;
 
 
         // Remove any state from the bid object.
@@ -42,7 +43,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           productBidsBtn.removeClass('ui-disabled');
         }
 
-        if(scope.item && User.userId === scope.item.productSellerId) {
+        if(scope.item && User.userId === scope.item.sellerId) {
           buyItNowButton.addClass('ui-disabled');
           bidButton.addClass('ui-disabled');
         } else {

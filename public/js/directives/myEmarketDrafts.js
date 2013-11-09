@@ -1,11 +1,17 @@
 'use strict';
 
-angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellItem) {
+angular.module('eMarketApp').directive('myEmarketDrafts', function(User) {
   return {
     templateUrl: 'views/myEmarketDrafts.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
+    controller: function($scope, SellItem) {
+      $scope.setDraft = function(draft) {
+        SellItem.draft = angular.copy(draft);
+        SellItem.isDraft = true;
+      }
+    },
     link: function(scope, elem) {
       var page = $(elem[0]);
       var draftList = page.find('#draftList');
@@ -16,7 +22,6 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
           setTimeout(function() {
             draftList.listview('refresh');
           });
-          SellItem.isDraft = true;
         });
       });
     }

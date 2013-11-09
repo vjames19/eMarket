@@ -4,8 +4,13 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
   return {
     templateUrl: 'views/searchResults.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
+    controller: function($scope, Product) {
+      $scope.setItem = function(product) {
+        Product.item = angular.copy(product);
+      }
+    },
     link: function($scope, elem) {
       var page = $(elem[0]);
       var resultList = page.find('#resultList');

@@ -13,7 +13,6 @@ angular.module('eMarketApp').directive('productBids', function(Restangular, Prod
 
       page.on('pagebeforeshow', function() {
 
-
         Restangular.one('products', ProductBids.productId).getList('bids').then(function(bids) {
           scope.productBids = bids;
           setTimeout(function(){
