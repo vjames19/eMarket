@@ -24,7 +24,7 @@
       <li data-icon="false" ng-repeat="notification in notifications">
         <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
            ng-click="readMessage(notification)">
-          <img src="img/envelope.png" class="center-image">
+          <img ng-src="img/envelope.png" class="center-image">
           {{ getStatus(notification) }}<br>{{notification.message }}
         </a>
       </li>

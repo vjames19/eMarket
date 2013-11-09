@@ -7,73 +7,73 @@
     margin-right: auto;
 }
 
-.ui-grid-solo {
-    height: 100px;
+.eMarket-logo {
+    width: 35%;
+    height: 35px;
+    background: transparent;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.my-emarket-buying {
+/* Centers if displayed alone */
+img.center-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.wrap-text {
+    white-space: normal !important;
+    font-size: 90%;
+}
+
+/* Grid Manipulation */
+
+.grid-height {
     line-height: 65px;
 }
 
-.categories {
-    line-height: 65px;
+/* Padding */
+
+.form-pad {
+    display: block;
+    padding: 10px 20px;
 }
 
-.sell-item {
-    line-height: 65px;
+.pad {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.recently-viewed {
-    line-height: 65px;
+.bidPad {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.notifications {
-    line-height: 65px;
+.hugePad {
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-.home-admin {
-    line-height: 65px;
-}
+/* Font Manipulation*/
 
-.invoices {
-    line-height: 65px;
-}
-
-.payment-options {
-    line-height: 65px;
-}
-
-.profile {
-    line-height: 65px;
-}
-
-.settings {
-    line-height: 65px;
-}
-
-.categories-admin {
-    line-height: 65px;
-}
-
-.user-accounts {
-    line-height: 65px;
-}
-
-.admin-accounts {
-    line-height: 65px;
-}
-
-.reports {
-    line-height: 65px;
-}
-
-p.index-text-size {
+.small-text {
     font-size: 75%;
 }
 
-.ui-content {
-    margin-bottom: 40px; /* Set this to whatever your footer size is... */
+.x-small-text {
+    font-size: 70%;
 }
+
+/* Button Manipulation*/
+
+.footer-button {
+    width: 40%;
+}
+
+/* JQM Class Override*/
 
 .ui-footer {
     position: absolute !important;
@@ -82,36 +82,10 @@ p.index-text-size {
     text-align: center
 }
 
-img.center-image {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+.ui-content {
+    margin-bottom: 40px; /* Set this to whatever your footer size is... */
 }
 
-td.pad {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.wrap-text {
-    white-space: normal !important;
-    font-size: 90%;
-}
-
-.small-text {
-    font-size: 75%;
-}
-
-.xsmall-text {
-    font-size: 70%;
-}
-
-.form-pad {
-    display: block;
-    padding: 10px 20px;
-}
-
-.footer-button {
-    width: 40%;
+.ui-grid-solo {
+    height: 100px;
 }

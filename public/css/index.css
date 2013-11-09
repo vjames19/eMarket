@@ -1,127 +1,79 @@
-.emarket-logo {
-  width: 35%;
-  height: 35px;
-  background: transparent;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.eMarket-logo {
+    width: 35%;
+    height: 35px;
+    background: transparent;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/*.ui-grid-a {*/
-  /*height: 130px;*/
-/*}*/
-
-.my-emarket-buying {
-  line-height: 65px;
+/* Centers if displayed alone */
+img.center-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
-.categories {
-  line-height: 65px;
+.wrap-text {
+    white-space: normal !important;
+    font-size: 90%;
 }
 
-.sell-item {
-  line-height: 65px;
+/* Grid Manipulation */
+
+.grid-height {
+    line-height: 65px;
 }
 
-.recently-viewed {
-  line-height: 65px;
+/* Padding */
+
+.form-pad {
+    display: block;
+    padding: 10px 20px;
 }
 
-.notifications {
-  line-height: 65px;
+.pad {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.home-admin {
-  line-height: 65px;
+.bidPad {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.invoices {
-  line-height: 65px;
+.hugePad {
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-.payment-options {
-  line-height: 65px;
+/* Font Manipulation*/
+
+.small-text {
+    font-size: 75%;
 }
 
-.profile {
-  line-height: 65px;
+.x-small-text {
+    font-size: 70%;
 }
 
-.settings {
-  line-height: 65px;
+/* Button Manipulation*/
+
+.footer-button {
+    width: 40%;
 }
 
-.categories-admin {
-  line-height: 65px;
-}
+/* JQM Class Override*/
 
-.user-accounts {
-  line-height: 65px;
-}
-
-.admin-accounts {
-  line-height: 65px;
-}
-
-.reports {
-  line-height: 65px;
-}
-
-p.index-text-size {
-  font-size: 75%;
+.ui-footer {
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+    text-align: center
 }
 
 .ui-content {
   margin-bottom: 40px; /* Set this to whatever your footer size is... */
 }
 
-.ui-footer {
-  position: absolute !important;
-  bottom: 0;
-  width: 100%;
-  text-align: center
-}
-
-img.center-image {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
-
-td.pad {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-td.bidPad {
-     padding-left: 15px;
-     padding-right: 15px;
-}
-
-td.hugePad {
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.wrap-text {
-  white-space: normal !important;
-  font-size: 90%;
-}
-
-.small-text {
-  font-size: 75%;
-}
-
-.xsmall-text {
-  font-size: 70%;
-}
-
-.form-pad {
-  display: block;
-  padding: 10px 20px;
-}
-
-.footer-button {
-  width: 40%;
-}
