@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('profile', function(User, Restangular, MailingAddressInfo, BillingAddressInfo) {
+angular.module('eMarketApp').directive('profile', function(User, Restangular) {
   return {
     templateUrl: 'views/profile.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, MailingAddressInfo, BillingAddressInfo) {
 
       $scope.setMailInfo = function(mailInfo) {
         angular.copy(mailInfo, MailingAddressInfo.mailInfo);

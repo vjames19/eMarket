@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editBillingAddress', function(BillingAddressInfo) {
+angular.module('eMarketApp').directive('editBillingAddress', function() {
   return {
     templateUrl: 'views/editBillingAddress.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope, User) {
+    controller: function($scope, User, BillingAddressInfo) {
 
       $scope.billInfo = BillingAddressInfo.billInfo;
 

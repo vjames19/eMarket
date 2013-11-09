@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editMailingAddress', function(MailingAddressInfo) {
+angular.module('eMarketApp').directive('editMailingAddress', function() {
   return {
     templateUrl: 'views/editMailingAddress.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope, User) {
+    controller: function($scope, User, MailingAddressInfo) {
 
       $scope.mailInfo = MailingAddressInfo.mailInfo;
 
