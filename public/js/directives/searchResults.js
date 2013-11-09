@@ -8,6 +8,16 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
     replace: true,
     controller: function($scope, Product) {
       $scope.setItem = Product.setItem;
+      $scope.selectedSortOption = null;
+      $scope.sortOptions = [
+        {name: 'Name', property: 'productName'},
+        {name: 'Brand', property: 'brand'},
+        {name: 'Price', property: 'nonbidPrice'}
+      ];
+
+      $scope.sortBy = function(sortOption) {
+        $scope.selectedSortOption = sortOption;
+      };
     },
     link: function($scope, elem) {
       var page = $(elem[0]);
