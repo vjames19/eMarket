@@ -16,8 +16,8 @@
   <div data-role="content" data-theme="b">
 
     <!-- Carousel of 10 elements -->
-    <div id="owl-example" class="owl-carousel">
-      <div data-role="fieldcontain" ng-repeat="carouselProduct in carouselProducts">
+    <div data-role="fieldcontain" id="owl-example" class="owl-carousel">
+      <div ng-repeat="carouselProduct in carouselProducts">
         <a href="#item-view" ng-click="setItem(carouselProduct)">
           <img ng-src="{{carouselProduct.picture}}" style="width: 125px; height: 125px;" class="ui-corner-all">
         </a>
