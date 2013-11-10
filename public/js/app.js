@@ -20,7 +20,6 @@ app.run(function($rootScope, $location, Auth, Product) {
       history = [];
       itemHistory = [];
       back = false;
-      Product.setItem({});
     }
 
     if(!Auth.isLoggedIn() && !Auth.isValidUnAuthPath($location.path())) {
