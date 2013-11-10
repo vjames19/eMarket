@@ -578,6 +578,7 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`payment_history` (
   INDEX `payment_recipient_user_id_idx` (`payment_recipient_user_id` ASC),
   INDEX `payment_card_id_idx` (`payment_card_id` ASC),
   INDEX `payment_bank_id_idx` (`payment_bank_id` ASC),
+  PRIMARY KEY (`payment_id`),
   CONSTRAINT `payment_sender_user_id`
     FOREIGN KEY (`payment_sender_user_id`)
     REFERENCES `emarket_test`.`user_info` (`user_id`)
