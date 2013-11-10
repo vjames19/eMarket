@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       var RefurbishedCheckBox = page.find('#radio-choice-refurbished');
 
       var categoryPopup = page.find('#popupCategory');
+      var descriptionPopup = page.find('#popupDescription');
 //      var categoryRadios = page.find('input[id*="category-choice"]');
 
       var pictureSelector = page.find('#add-image');
@@ -92,9 +93,17 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
         categoryPopup.on({
           popupbeforeposition: function() {
-            var maxHeight = $.mobile.window.innerHeight() / 1.75;
+            var maxHeight = $.mobile.window.innerHeight() / 1.25;
             categoryPopup.css('overflow-y', 'scroll');
             categoryPopup.height(maxHeight);
+          }
+        });
+
+        descriptionPopup.on({
+          popupbeforeposition: function() {
+            var maxHeight = $.mobile.window.innerHeight() / 1.25;
+            descriptionPopup.css('overflow-y', 'scroll');
+            descriptionPopup.height(maxHeight);
           }
         });
 

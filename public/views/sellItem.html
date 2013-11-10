@@ -26,12 +26,10 @@
         </tr>
       </table>
 
-      <div data-role="fieldcontain">
-        <label for="product-title"></label>
-        <textarea ng-model="item.productName" id="product-title" style="resize: none; min-height: 100px"
-                  placeholder="Product Title..." data-theme="a"
-                  maxlength="45" ng-minlength="10" ng-maxlength="45" cols="30" rows="10" ng-required="true"></textarea>
-      </div>
+      <label for="product-title"></label>
+      <textarea ng-model="item.productName" id="product-title" style="resize: none; min-height: 100px"
+                placeholder="Product Title..." data-theme="a"
+                maxlength="45" ng-required="true"></textarea>
 
       <ul data-role="listview" data-theme="a" data-inset="true">
         <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
@@ -83,7 +81,7 @@
                  ng-model="item.condition" ng-required="true">
           <label for="radio-choice-used">Used</label>
           <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
-                 ng-model="item.condition" ng-required="true" >
+                 ng-model="item.condition" ng-required="true">
           <label for="radio-choice-refurbished">Refurbished</label>
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
@@ -103,9 +101,9 @@
         <label for="dimension">Dimension</label>
         <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
         <label for="description">Additional Description</label>
-        <textarea name="description" id="description" cols="30" rows="10"
-                  style="resize: none" ng-model="item.description" data-theme="a" ng-required="true"
-                  ng-minlength="10" ng-maxlength="255"></textarea>
+        <textarea name="description" id="description"
+                  style="resize: none" ng-model="item.description" data-theme="a"
+                  maxlength="255" ng-required="true"></textarea>
         <br/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
