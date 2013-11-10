@@ -87,14 +87,14 @@ module.exports.getAllChildrenIds = function(categoryParentId, callback) {
   });
 };
 
-module.exports.getAllSubtreeIdsHelper = function(categoryParentId, results, allDone) {
+var getAllSubtreeIdsHelper = function(categoryParentId, results, allDone) {
   module.exports.getAllChildrenIds(categoryParentId, function(err, categories) {
     if(err) {
       allDone(err);
     }
     async.forEach(categories, function(category, callback) {
       results.push(category.id);
-      module.exports.getAllSubtreeIdsHelper(category.id, results, callback);
+      getAllSubtreeIdsHelper(category.id, results, callback);
     }, function() {
       allDone(null, results);
     });
@@ -103,5 +103,5 @@ module.exports.getAllSubtreeIdsHelper = function(categoryParentId, results, allD
 
 module.exports.getAllSubTreeIds = function(categoryParentId, callback) {
   var results = [];
-  module.exports.getAllSubtreeIdsHelper(categoryParentId, results, callback);
+  getAllSubtreeIdsHelper(categoryParentId, results, callback);
 };
