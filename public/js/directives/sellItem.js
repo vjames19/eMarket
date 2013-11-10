@@ -9,9 +9,10 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
     controller: function($scope) {
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
     },
-    link: function(scope, elem) {
+    link: function(scope, elem, Dropzone) {
 
       var page = $(elem[0]);
+
       var freeShippingCheckbox = page.find('#checkbox-free-shipping');
       var shippingPriceInput = page.find('#shipping-price');
 
@@ -24,7 +25,34 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
       var pictureSelector = page.find('#add-image');
 
+      var setPreviewTemplate = function() {
+        return '<div id="dz-thumb" class="dz-preview dz-file-preview">' +
+            '<div class="dz-details">' +
+            '<div class="dz-filename"><span data-dz-name></span></div>' +
+            '<div class="dz-size" data-dz-size></div>' +
+            '<img data-dz-thumbnail />' +
+            '</div>' +
+            '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+            '<div class="dz-success-mark"></div>' +
+            '<div class="dz-error-mark"></div>' +
+            '<div class="dz-error-message"></div>' +
+            '</div>';
+//        Default
+//        '<div class="dz-preview dz-file-preview">' +
+//            '<div class="dz-details">' +
+//            '<div class="dz-filename"><span data-dz-name></span></div>' +
+//            '<div class="dz-size" data-dz-size></div>' +
+//            '<img data-dz-thumbnail />' +
+//            '</div>' +
+//            '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+//            '<div class="dz-success-mark"><span>✔</span></div>' +
+//            '<div class="dz-error-mark"><span>✘</span></div>' +
+//            '<div class="dz-error-message"><span data-dz-errormessage></span></div>' +
+//        '</div>'
+      };
+
       page.on('pageshow', function() {
+
         pictureSelector.dropzone({
               url: 'pictures',
               method: 'post',
@@ -42,41 +70,22 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
               accept: function(file, done) {
                 return done();
               },
-//              Default
-//              previewTemplate: '<div class="dz-preview dz-file-preview">' +
-//                  '<div class="dz-details">' +
-//                  '<div class="dz-filename"><span data-dz-name></span></div>' +
-//                  '<div class="dz-size" data-dz-size></div>' +
-//                  '<img data-dz-thumbnail />' +
-//                  '</div>' +
-//                  '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
-//                  '<div class="dz-success-mark"><span>✔</span></div>' +
-//                  '<div class="dz-error-mark"><span>✘</span></div>' +
-//                  '<div class="dz-error-message"><span data-dz-errormessage></span></div>' +
-//                  '</div>'
-//            Custom
-              previewTemplate: '<div class="dz-preview dz-file-preview">' +
-                  '<div class="dz-details">' +
-                  '<div class="dz-filename"><span data-dz-name></span></div>' +
-                  '<div class="dz-size" data-dz-size></div>' +
-                  '<img data-dz-thumbnail />' +
-                  '</div>' +
-                  '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
-                  '<div class="dz-success-mark"></div>' +
-                  '<div class="dz-error-mark"></div>' +
-                  '<div class="dz-error-message"></div>' +
-                  '</div>',
+              previewTemplate: setPreviewTemplate(),
               init: function() {
-                this.on('drop', function() {
-                  this.options.clickable = false;
-                  this.options.createImageThumbnails = false;
-                });
                 this.on('maxfilesexceeded', function(file) {
                   this.removeFile(file);
                 });
               }
             }
         );
+
+      });
+
+      page.on('pagehide', function() {
+
+        // For now until full functionality is implemented
+        page.find('div[id*=dz-thumb]').remove();
+
       });
 
       page.on('pagebeforeshow', function() {
