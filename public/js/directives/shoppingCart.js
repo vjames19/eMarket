@@ -6,8 +6,14 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope, Product) {
+    controller: function($scope, Product, CartInfo) {
+
       $scope.setItem = Product.setItem;
+
+      $scope.setCostAndShipping = function(items, cost, shipping) {
+        CartInfo.setCartInfo(items, cost, shipping);
+      };
+
     },
     link: function(scope, elem) {
       var page = $(elem[0]);
@@ -24,8 +30,8 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
           scope.cost += cart.productTotalPrice;
 
         });
-       window._.each(scope.shoppingCarts, function(cart) {
-         scope.shipping += cart.shippingPrice;
+        window._.each(scope.shoppingCarts, function(cart) {
+          scope.shipping += cart.shippingPrice;
         });
       };
 
