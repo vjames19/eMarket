@@ -10,22 +10,22 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="name"><strong>Name</strong></label>
-        <input type="text" id="name" ng-model="mailAddresses.recipientName">
+        <input type="text" id="name" ng-model="mailAddresses.recipientName" ng-required="true">
         <label for="address"><strong>Address</strong></label>
-        <input type="text" id="address" ng-model="mailAddresses.mailAddress">
+        <input type="text" id="address" ng-model="mailAddresses.mailAddress" ng-required="true">
         <label for="country"><strong>Country</strong></label>
-        <input type="text" id="country" ng-model="mailAddresses.country">
+        <input type="text" id="country" ng-model="mailAddresses.country" ng-required="true">
         <label for="city"><strong>City</strong></label>
-        <input type="text" id="city" ng-model="mailAddresses.city">
+        <input type="text" id="city" ng-model="mailAddresses.city" ng-required="true">
         <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="geographical-region" ng-model="mailAddresses.geographicalRegion">
+        <input type="text" id="geographical-region" ng-model="mailAddresses.geographicalRegion" ng-required="false">
         <label for="zip-code"><strong>Zip Code</strong></label>
-        <input type="tel" id="zip-code" ng-model="mailAddresses.zipCode">
+        <input type="tel" id="zip-code" ng-model="mailAddresses.zipCode" ng-required="true">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="mailAddresses.telephone">
+        <input type="tel" id="telephone" ng-model="mailAddresses.telephone" ng-required="true">
         <label for="make-primary">Make Primary</label>
         <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox"
-               ng-model="mailAddresses.isPrimary">
+               ng-model="mailAddresses.isPrimary" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>

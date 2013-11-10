@@ -29,36 +29,36 @@
     </ul>
     <div class="form-pad">
       <label for="firstname"><strong>First Name</strong></label>
-      <input type="text" id="firstname" ng-model="user.firstName">
+      <input type="text" id="firstname" ng-model="user.firstName" ng-required="true">
       <label for="middlename"><strong>Middle Name</strong></label>
-      <input type="text" id="middlename" ng-model="user.middleName">
+      <input type="text" id="middlename" ng-model="user.middleName" ng-required="false">
       <label for="lastname"><strong>Last Name</strong></label>
-      <input type="text" id="lastname" ng-model="user.lastName">
+      <input type="text" id="lastname" ng-model="user.lastName" ng-required="true">
       <label for="email"><strong>Email</strong></label>
-      <input type="email" id="email" ng-model="user.email">
+      <input type="email" id="email" ng-model="user.email" ng-required="true">
       <label for="telephone"><strong>Telephone</strong></label>
-      <input type="tel" id="telephone" ng-model="user.telephone">
+      <input type="tel" id="telephone" ng-model="user.telephone" ng-required="true">
 
       <label for="select-question1"><strong>Question 1</strong></label>
       <select id="select-question1" ng-model="question1.id"
-              ng-options="question.id as question.question for question in questions">
+              ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question1"><strong>Answer</strong></label>
-      <input type="text" id="answer-question1" ng-model="questionsAnswers[0].answer">
+      <input type="text" id="answer-question1" ng-model="questionsAnswers[0].answer" ng-required="true">
 
       <label for="select-question2"><strong>Question 2</strong></label>
       <select id="select-question2" ng-model="question2.id"
-              ng-options="question.id as question.question for question in questions">
+              ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question2"><strong>Answer</strong></label>
-      <input type="text" id="answer-question2" ng-model="questionsAnswers[1].answer">
+      <input type="text" id="answer-question2" ng-model="questionsAnswers[1].answer" ng-required="true">
 
       <label for="select-question1"><strong>Question 3</strong></label>
       <select id="select-question3" ng-model="question3.id"
-              ng-options="question.id as question.question for question in questions">
+              ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question3"><strong>Answer</strong></label>
-      <input type="text" id="answer-question3" ng-model="questionsAnswers[2].answer">
+      <input type="text" id="answer-question3" ng-model="questionsAnswers[2].answer" ng-required="true">
 
       <label for="old-password"><strong>Old Password</strong></label>
       <input type="password" id="old-password" autocomplete="off" value="">

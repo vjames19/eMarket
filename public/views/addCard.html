@@ -10,23 +10,23 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="card-name"><strong>Card Name</strong></label>
-        <input type="text" id="card-name" ng-model="card.ownerName">
+        <input type="text" id="card-name" ng-model="card.ownerName" ng-required="true">
         <label for="card-type"><strong>Card Type</strong></label>
-        <select id="card-type" name="card-type" ng-model="card.cardType" required>
+        <select id="card-type" name="card-type" ng-model="card.cardType" ng-required="true">
           <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
         <label for="card-exp-date"><strong>Expiration Date</strong></label>
-        <input type="month" id="card-exp-date" ng-model="card.expirationDate">
+        <input type="month" id="card-exp-date" ng-model="card.expirationDate" ng-required="true">
         <label for="card-number"><strong>Card Number</strong></label>
-        <input type="number" min="0" id="card-number" ng-model="card.cardNumber">
+        <input type="number" min="0" id="card-number" ng-model="card.cardNumber" ng-required="true">
         <label for="card-cvs"><strong>Card CVS</strong></label>
-        <input type="number" min="0" id="card-cvs" ng-model="card.cardCsv">
+        <input type="number" min="0" id="card-cvs" ng-model="card.cardCsv" ng-required="true">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="card.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses" required>
+                ng-options="bill.addressId as bill.address for bill in billAddresses" ng-required="true">
           <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
       </div>

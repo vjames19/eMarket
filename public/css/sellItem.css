@@ -1,75 +1,77 @@
-.add-image {
-    background-size: 100%;
+/* Commented stuff are not being used anywhere... */
+
+/*.add-image {*/
+    /*background-size: 100%;*/
     /* make the button transparent */
     /* make the background image appear only once */
     /* equivalent to 'top left' */
-    background: transparent url(../img/button-add-icon.png) no-repeat 0 0;
-    border: none; /* assuming we don't want any borders */
-    width: 100%;
-    height: 100px;
+    /*background: transparent url(../img/button-add-icon.png) no-repeat 0 0;*/
+    /*border: none; *//* assuming we don't want any borders */
+    /*width: 100%;*/
+    /*height: 100px;*/
     /*height: 100%;*/
-    text-align: center;
-    color: greenyellow;
-}
+    /*text-align: center;*/
+    /*color: greenyellow;*/
+/*}*/
 
-.input-button {
-    background: transparent no-repeat 0 0;
-    overflow: hidden;
-    border: none;
-    width: 100%;
-    height: 100px;
-    text-align: center;
-}
+/*.input-button {*/
+    /*background: transparent no-repeat 0 0;*/
+    /*overflow: hidden;*/
+    /*border: none;*/
+    /*width: 100%;*/
+    /*height: 100px;*/
+    /*text-align: center;*/
+/*}*/
 
-.input-button input {
-position: absolute;
-top: 0;
-right: 0;
-margin: 0;
-opacity: 0;
-transform: translate(0px, 30px);
--ms-transform: translate(0px, 30px);
--webkit-transform: translate(0px, 30px);
-}
+/*.input-button input {*/
+/*position: absolute;*/
+/*top: 0;*/
+/*right: 0;*/
+/*margin: 0;*/
+/*opacity: 0;*/
+/*transform: translate(0px, 30px);*/
+/*-ms-transform: translate(0px, 30px);*/
+/*-webkit-transform: translate(0px, 30px);*/
+/*}*/
 
-.container {
-    display: table-row;
-    width: 100%;
-    overflow: hidden; /* add this to contain floated children */
-}
+/*.container {*/
+    /*display: table-row;*/
+    /*width: 100%;*/
+    /*overflow: hidden; *//* add this to contain floated children */
+/*}*/
 
-.left {
-    display: table-cell;
-    width: 25%;
-    height: 120px;
-    padding-right: 10px;
-    padding-bottom: 20px;
-}
+/*.left {*/
+    /*display: table-cell;*/
+    /*width: 25%;*/
+    /*height: 120px;*/
+    /*padding-right: 10px;*/
+    /*padding-bottom: 20px;*/
+/*}*/
 
-.right {
-    display: table-cell;
-    width: 150%;
-}
+/*.right {*/
+    /*display: table-cell;*/
+    /*width: 150%;*/
+/*}*/
 
-.text-input-title {
-    top: 0;
-    resize: both;
-    min-height: 75px;
-    max-height: 150px;
-    width: 100%;
-}
+/*.text-input-title {*/
+    /*top: 0;*/
+    /*resize: both;*/
+    /*min-height: 75px;*/
+    /*max-height: 150px;*/
+    /*width: 100%;*/
+/*}*/
 
-td.left{
-    vertical-align: middle;
-    width: 100px;
-}
+/*td.left{*/
+    /*vertical-align: middle;*/
+    /*width: 100px;*/
+/*}*/
 
-td.middle {
-    padding-left: 5px;
-    padding-right: 5px;
-}
+/*td.middle {*/
+    /*padding-left: 5px;*/
+    /*padding-right: 5px;*/
+/*}*/
 
-td.right {
-    vertical-align: middle;
-    width: 65%;
-}
+/*td.right {*/
+    /*vertical-align: middle;*/
+    /*width: 65%;*/
+/*}*/

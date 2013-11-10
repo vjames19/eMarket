@@ -28,24 +28,25 @@
 
       <div data-role="fieldcontain">
         <label for="product-title"></label>
-        <textarea ng-model="item.productName" id="product-title" class="text-input-title"
+        <textarea ng-model="item.productName" id="product-title" style="resize: none; min-height: 100px"
                   placeholder="Product Title..." data-theme="a"
-                  maxlength="255" ng-required="item.productName"></textarea>
+                  maxlength="45" ng-minlength="10" ng-maxlength="45" cols="30" rows="10" ng-required="true"></textarea>
       </div>
+
+      <ul data-role="listview" data-theme="a" data-inset="true">
+        <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
+        <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
+        </li>
+        <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
+               data-transition="pop">Description</a></li>
+        <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &amp;
+          Price</a></li>
+        <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
+        </li>
+      </ul>
 
     </form>
 
-    <ul data-role="listview" data-theme="a" data-inset="true">
-      <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
-      <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
-      </li>
-      <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
-             data-transition="pop">Description</a></li>
-      <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &amp;
-        Price</a></li>
-      <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
-      </li>
-    </ul>
   </div>
 
   <div data-role="footer" data-theme="a" class="ui-footer">
@@ -61,7 +62,7 @@
           <div data-role="none" ng-repeat="category in categories">
             <label for="category-choice-{{ category.id }}">{{ category.categoryName }}</label>
             <input type="radio" name="category-choice" id="category-choice-{{ category.id }}"
-                   ng-model="item.categoryName">
+                   ng-model="item.categoryName" ng-required="true">
           </div>
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
@@ -76,13 +77,13 @@
         <h3>Select the condition</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
-                 ng-model="item.condition">
+                 ng-model="item.condition" ng-required="true">
           <label for="radio-choice-new">New</label>
           <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
-                 ng-model="item.condition">
+                 ng-model="item.condition" ng-required="true">
           <label for="radio-choice-used">Used</label>
           <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
-                 ng-model="item.condition">
+                 ng-model="item.condition" ng-required="true" >
           <label for="radio-choice-refurbished">Refurbished</label>
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
@@ -96,14 +97,15 @@
       <div class="form-pad">
         <h3>Description</h3>
         <label for="brand">Brand</label>
-        <input type="text" id="brand" ng-model="item.brand" data-theme="a">
+        <input type="text" id="brand" ng-model="item.brand" data-theme="a" ng-required="true">
         <label for="model">Model</label>
-        <input type="text" id="model" ng-model="item.model" data-theme="a">
+        <input type="text" id="model" ng-model="item.model" data-theme="a" ng-required="true">
         <label for="dimension">Dimension</label>
-        <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a">
+        <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
         <label for="description">Additional Description</label>
         <textarea name="description" id="description" cols="30" rows="10"
-                  style="resize: none" ng-model="item.description" data-theme="a"></textarea>
+                  style="resize: none" ng-model="item.description" data-theme="a" ng-required="true"
+                  ng-minlength="10" ng-maxlength="255"></textarea>
         <br/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
@@ -117,17 +119,19 @@
         <h3>Format & Price</h3>
 
         <label for="buyItNowPrice"> Buy it Now Price</label>
-        <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice" data-theme="a">
+        <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice" data-theme="a"
+               ng-required="true">
 
         <label for="startingBid">Starting Bid Price</label>
-        <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice" data-theme="a">
+        <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice" data-theme="a"
+               ng-required="true">
 
         <label for="quantityToSell">Quantity</label>
-        <input type="number" min="1" id="quantityToSell" ng-model="item.quantity" data-theme="a">
+        <input type="number" min="1" id="quantityToSell" ng-model="item.quantity" data-theme="a" ng-required="true">
 
         <label for="set-date">Product End Date</label>
-        <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" value=""
-               ng-model="item.bidEndDate" data-theme="a">
+        <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" ng-model="item.bidEndDate"
+               data-theme="a" ng-required="true">
         <br/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
@@ -145,7 +149,8 @@
         <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()" data-theme="a">
 
         <label for="shipping-price">Shipping Price</label>
-        <input type="number" min="0" ng-model="item.shippingPrice" id="shipping-price" data-theme="a">
+        <input type="number" min="0" ng-model="item.shippingPrice" id="shipping-price" data-theme="a"
+               ng-required="true">
 
         <br/>
 

@@ -10,22 +10,22 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="bank-name"><strong>Bank Name</strong></label>
-        <input type="text" id="bank-name" ng-model="bank.bankName">
+        <input type="text" id="bank-name" ng-model="bank.bankName" ng-required="true">
         <label for="bank-account-name"><strong>Account Name</strong></label>
-        <input type="text" id="bank-account-name" ng-model="bank.ownerName">
+        <input type="text" id="bank-account-name" ng-model="bank.ownerName" ng-required="true">
         <label for="bank-account-type"><strong>Account Type</strong></label>
-        <select id="bank-account-type" ng-model="bank.accountType" required>
+        <select id="bank-account-type" ng-model="bank.accountType" ng-required="true">
           <option value="Checking" selected>Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="bank-account-number"><strong>Account Number</strong></label>
-        <input type="number" min="0" id="bank-account-number" ng-model="bank.accountNumber">
+        <input type="number" min="0" id="bank-account-number" ng-model="bank.accountNumber" ng-required="true">
         <label for="bank-account-routing"><strong>Routing Number</strong></label>
-        <input type="number" min="0" id="bank-account-routing" ng-model="bank.routingNumber">
+        <input type="number" min="0" id="bank-account-routing" ng-model="bank.routingNumber" ng-required="true">
         <label for="address-relation"><strong>Associated Address</strong></label>
         <select id="address-relation" ng-model="bank.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses" required>
+                ng-options="bill.addressId as bill.address for bill in billAddresses" ng-required="true">
           <option value="" ng-hide="bank.addressId">Please Choose</option>
         </select>
       </div>

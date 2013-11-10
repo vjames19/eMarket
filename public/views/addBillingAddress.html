@@ -10,19 +10,19 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="name"><strong>Name</strong></label>
-        <input type="text" id="name" ng-model="billAddresses.recipientName">
+        <input type="text" id="name" ng-model="billAddresses.recipientName" ng-required="true">
         <label for="address"><strong>Address</strong></label>
-        <input type="text" id="address" ng-model="billAddresses.billAddress">
+        <input type="text" id="address" ng-model="billAddresses.billAddress" ng-required="true">
         <label for="country"><strong>Country</strong></label>
-        <input type="text" id="country" ng-model="billAddresses.country">
+        <input type="text" id="country" ng-model="billAddresses.country" ng-required="true">
         <label for="city"><strong>City</strong></label>
-        <input type="text" id="city" ng-model="billAddresses.city">
+        <input type="text" id="city" ng-model="billAddresses.city" ng-required="true">
         <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="geographical-region" ng-model="billAddresses.geographicalRegion">
+        <input type="text" id="geographical-region" ng-model="billAddresses.geographicalRegion" ng-required="false">
         <label for="zip-code"><strong>Zip Code</strong></label>
-        <input type="tel" id="zip-code" ng-model="billAddresses.zipCode">
+        <input type="tel" id="zip-code" ng-model="billAddresses.zipCode" ng-required="true">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="billAddresses.telephone">
+        <input type="tel" id="telephone" ng-model="billAddresses.telephone" ng-required="true">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
