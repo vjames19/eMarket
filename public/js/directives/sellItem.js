@@ -9,7 +9,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
     controller: function($scope) {
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
     },
-    link: function(scope, elem, Dropzone) {
+    link: function(scope, elem) {
 
       var page = $(elem[0]);
 
@@ -21,7 +21,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       var RefurbishedCheckBox = page.find('#radio-choice-refurbished');
 
       var categoryPopup = page.find('#popupCategory');
-      var categoryRadios = page.find('input[id*="category-choice"]');
+//      var categoryRadios = page.find('input[id*="category-choice"]');
 
       var pictureSelector = page.find('#add-image');
 

@@ -87,21 +87,21 @@ module.exports.getAllChildrenIds = function(categoryParentId, callback) {
   });
 };
 
-module.exports.getAllSubTreeIds = function(categoryParentId, callback) {
-  var results = [];
-  getAllSubtreeIdsHelper(categoryParentId, results, callback);
-};
-
-function getAllSubtreeIdsHelper(categoryParentId, results, allDone) {
+module.exports.getAllSubtreeIdsHelper = function(categoryParentId, results, allDone) {
   module.exports.getAllChildrenIds(categoryParentId, function(err, categories) {
     if(err) {
       allDone(err);
     }
     async.forEach(categories, function(category, callback) {
       results.push(category.id);
-      getAllSubtreeIdsHelper(category.id, results, callback);
+      module.exports.getAllSubtreeIdsHelper(category.id, results, callback);
     }, function() {
       allDone(null, results);
     });
   });
-}
+};
+
+module.exports.getAllSubTreeIds = function(categoryParentId, callback) {
+  var results = [];
+  module.exports.getAllSubtreeIdsHelper(categoryParentId, results, callback);
+};
