@@ -7,10 +7,10 @@ var DICTIONARY = {
   'admin_id': 'id',
   'admin_user_name': 'username',
   'admin_email': 'email',
-  'admin_first_name' : 'firstName',
-  'admin_middle_name' : 'middleName',
-  'admin_last_name' : 'lastName',
-  'admin_telephone' : 'telephone',
+  'admin_first_name': 'firstName',
+  'admin_middle_name': 'middleName',
+  'admin_last_name': 'lastName',
+  'admin_telephone': 'telephone',
   'admin_is_root': 'isRoot'
 };
 
@@ -57,8 +57,14 @@ module.exports.authenticate = function(username, password, callback) {
         'FROM admin_info ' +
         'WHERE admin_user_name = ? AND admin_password = SHA1(?) AND admin_account_status = 1';
     connection.query(sql, [username, password], function(err, admins) {
-//      console.log('authenticate', arguments);
-      callback(err, mapper.map(admins[0], DICTIONARY));
+      //      console.log('authenticate', arguments);
+      var admin = mapper.map(admins[0], DICTIONARY);
+      admin.isAdmin = true;
+      callback(err, admin);
     });
   });
+};
+
+module.exports.isAdmin = function(admin) {
+  return admin.hasOwnProperty('isAdmin') && admin.isAdmin;
 };

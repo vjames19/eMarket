@@ -8,7 +8,7 @@ exports.requiresLogin = function(req, res, next) {
   if(req.isAuthenticated()) {
     next();
   } else {
-    res.jsonp(401, 'User is not authorized');
+    res.jsonp(401, {message: 'User needs to be logged in'});
   }
 };
 
@@ -17,7 +17,7 @@ exports.admin = {
     if(admins.isAdmin(req.user)) {
       next();
     } else {
-      res.jsonp(401, {message: req.user.username + ' is not an Administrator'});
+      res.jsonp(403, {message: req.user + ' is not an Administrator'});
     }
   }
 };

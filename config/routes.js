@@ -1,5 +1,3 @@
-//    res.redirect('/');
-//  });
 'use strict';
 
 module.exports = function(app, passport, auth) {
@@ -22,6 +20,10 @@ module.exports = function(app, passport, auth) {
   // TODO(vjames19): Secure users api
 
   // User Routes
+  app.post('/api/*', auth.requiresLogin);
+  app.put('/api/*', auth.requiresLogin);
+  app.del('/api/*', auth.requiresLogin);
+
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/api/users', users.createUser);
@@ -47,7 +49,6 @@ module.exports = function(app, passport, auth) {
 
   // Get products of invoices
   app.get('/api/users/:userId/invoices/:invoiceId/products', users.readAllProductsInvoice);
-
 
   // User Mailing Addresses Routes
   app.param('mailAddressId', users.findMailAddressById);
@@ -189,15 +190,14 @@ module.exports = function(app, passport, auth) {
   app.put('/api/products/:productId', auth.requiresLogin, products.updateProduct);
   app.del('/api/products/:productId', auth.requiresLogin, auth.admin.hasAuthorization, products.deleteProduct);
 
-
   // Bid Routes
   app.param('bidId', products.findProductBidById);
   app.get('/api/products/:productId/bids', products.readAllProductBids);
-//  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
+  //  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-//  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
-//  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
-//      products.deleteProductBid);
+  //  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
+  //  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
+  //      products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
@@ -213,8 +213,10 @@ module.exports = function(app, passport, auth) {
   app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
 
   // Admin Routes
-
   var admins = require('../app/controllers/admins');
+
+  app.all('/api/admins', auth.requiresLogin, auth.admin.hasAuthorization);
+  app.all('/api/admins/*', auth.requiresLogin, auth.admin.hasAuthorization);
 
   app.param('adminId', admins.findAdminById);
   app.get('/api/admins', admins.readAllAdmins);
@@ -241,7 +243,7 @@ module.exports = function(app, passport, auth) {
   app.get('/api/reportsDayTotal', admins.readReportDayTotal);
 
   app.post('/api/reports', admins.createReport);
-//  app.get('/api/reports/:reportId', admins.readReport);
+  //  app.get('/api/reports/:reportId', admins.readReport);
   app.put('/api/reports/:reportId', admins.updateReport);
   app.del('/api/reports/:reportId', admins.deleteReport);
 
@@ -253,6 +255,4 @@ module.exports = function(app, passport, auth) {
   //    //    res.redirect(404, '/');
   //    res.redirect('/');
   //  });
-
-
 };
