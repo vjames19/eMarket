@@ -10,7 +10,7 @@
     "password": "phx_emarket_pwd",
     "database": "emarket_test",
     "supportBigNumbers": true,
-    "debug": false,
+    "debug": true,
     "connectionLimit": 100,
     "queueLimit": 50
   }
