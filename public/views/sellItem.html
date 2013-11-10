@@ -12,30 +12,28 @@
   </div>
 
   <div data-role="content">
+
     <form>
-      <table data-role="table" data-mode="none">
-        <thead>
+
+      <table align="center">
         <tr>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="left">
-            <button id="add-image" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-bottom ui-btn-corner-all">
-              Add<br/>Image
+          <td>
+            <button id="add-image" ng-model="item.image"
+                    class="ui-btn ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-bottom ui-mini ui-btn-corner-all">
+              <strong>Add Image</strong>
             </button>
           </td>
-          <td class="middle"></td>
-          <td class="right">
-            <textarea ng-model="item.productName" id="text-input-title" class="text-input-title"
-                      placeholder="Write the title of the item" data-theme="a"></textarea>
-          </td>
         </tr>
-        </tbody>
       </table>
-    </form>
 
+      <div data-role="fieldcontain">
+        <label for="product-title"></label>
+        <textarea ng-model="item.productName" id="product-title" class="text-input-title"
+                  placeholder="Product Title..." data-theme="a"
+                  maxlength="255" ng-required="item.productName"></textarea>
+      </div>
+
+    </form>
 
     <ul data-role="listview" data-theme="a" data-inset="true">
       <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>

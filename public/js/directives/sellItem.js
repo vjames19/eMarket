@@ -20,6 +20,64 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       var RefurbishedCheckBox = page.find('#radio-choice-refurbished');
 
       var categoryPopup = page.find('#popupCategory');
+      var categoryRadios = page.find('input[id*="category-choice"]');
+
+      var pictureSelector = page.find('#add-image');
+
+      page.on('pageshow', function() {
+        pictureSelector.dropzone({
+              url: 'pictures',
+              method: 'post',
+              parallelUploads: 1,
+              maxFiles: 1,
+              maxFilesize: 1, // MB
+              paramName: 'file',
+              addRemoveLinks: false,
+              previewsContainer: null,
+              clickable: true,
+              createImageThumbnails: true,
+              thumbnailWidth: 150,
+              thumbnailHeight: 150,
+              uploadMultiple: false,
+              accept: function(file, done) {
+                return done();
+              },
+//              Default
+//              previewTemplate: '<div class="dz-preview dz-file-preview">' +
+//                  '<div class="dz-details">' +
+//                  '<div class="dz-filename"><span data-dz-name></span></div>' +
+//                  '<div class="dz-size" data-dz-size></div>' +
+//                  '<img data-dz-thumbnail />' +
+//                  '</div>' +
+//                  '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+//                  '<div class="dz-success-mark"><span>✔</span></div>' +
+//                  '<div class="dz-error-mark"><span>✘</span></div>' +
+//                  '<div class="dz-error-message"><span data-dz-errormessage></span></div>' +
+//                  '</div>'
+//            Custom
+              previewTemplate: '<div class="dz-preview dz-file-preview">' +
+                  '<div class="dz-details">' +
+                  '<div class="dz-filename"><span data-dz-name></span></div>' +
+                  '<div class="dz-size" data-dz-size></div>' +
+                  '<img data-dz-thumbnail />' +
+                  '</div>' +
+                  '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+                  '<div class="dz-success-mark"></div>' +
+                  '<div class="dz-error-mark"></div>' +
+                  '<div class="dz-error-message"></div>' +
+                  '</div>',
+              init: function() {
+                this.on('drop', function() {
+                  this.options.clickable = false;
+                  this.options.createImageThumbnails = false;
+                });
+                this.on('maxfilesexceeded', function(file) {
+                  this.removeFile(file);
+                });
+              }
+            }
+        );
+      });
 
       page.on('pagebeforeshow', function() {
 

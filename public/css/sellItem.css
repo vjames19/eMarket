@@ -54,7 +54,8 @@ transform: translate(0px, 30px);
 .text-input-title {
     top: 0;
     resize: both;
-    max-height: 100px;
+    min-height: 75px;
+    max-height: 150px;
     width: 100%;
 }
 
