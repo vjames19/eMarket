@@ -6,9 +6,10 @@ app.config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('api/');
 });
 
-app.run(function($rootScope, $location, Auth) {
+app.run(function($rootScope, $location, Auth, Product) {
 
   var history = [];
+  var itemHistory = [];
   var back = false;
 //  var loginPath = 'login-user';
   var loginPath = 'index-page';
@@ -17,7 +18,9 @@ app.run(function($rootScope, $location, Auth) {
     // If its not logged in and not in a valid unauth page
     if($location.path().indexOf('home-user') >= 0) {
       history = [];
+      itemHistory = [];
       back = false;
+      Product.setItem({});
     }
 
     if(!Auth.isLoggedIn() && !Auth.isValidUnAuthPath($location.path())) {
@@ -30,6 +33,7 @@ app.run(function($rootScope, $location, Auth) {
     if(!back) {
       console.log('pushing user history');
       history.push(data.prevPage.attr('id'));
+      itemHistory.push(Product.getItem());
     } else {
       back = false;
     }
@@ -37,6 +41,7 @@ app.run(function($rootScope, $location, Auth) {
 
   $(document).on('click vclick', '[data-rel=back]', function() {
     back = true;
+    Product.setItem(itemHistory.pop());
     $.mobile.changePage('#' + history.pop(), {
       reverse: true,
       changeHash: false
