@@ -165,7 +165,7 @@
     <form data-ajax="false" ng-submit="submitBid()">
       <div style="padding:10px 20px;">
         <h3>Enter Bid</h3>
-        <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid }}</a>
+        <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid | number:2 }}</a>
 
         <div data-role="fieldcontain">
           <label for="placeBid">Place Bid</label>
