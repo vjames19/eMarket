@@ -226,26 +226,22 @@ module.exports = function(app, passport, auth) {
   app.del('/api/admins/:adminId', admins.deleteAdmin);
 
   // Report Routes
-  app.param('reportIdMonth', admins.findReportByIdMonth);
-  app.param('reportIdWeek', admins.findReportByIdWeek);
+
   app.param('reportIdDay', admins.findReportByIdDay);
+  app.param('reportIdWeek', admins.findReportByIdWeek);
+  app.param('reportIdMonth', admins.findReportByIdMonth);
 
-  app.get('/api/reportsMonth', admins.readAllReportsMonth);
-  app.get('/api/reportsWeek', admins.readAllReportsWeek);
   app.get('/api/reportsDay', admins.readAllReportsDay);
+  app.get('/api/reportsWeek', admins.readAllReportsWeek);
+  app.get('/api/reportsMonth', admins.readAllReportsMonth);
 
-  app.get('/api/reportsMonth/:reportIdMonth', admins.readReportMonth);
-  app.get('/api/reportsWeek/:reportIdWeek', admins.readReportWeek);
   app.get('/api/reportsDay/:reportIdDay', admins.readReportDay);
+  app.get('/api/reportsWeek/:reportIdWeek', admins.readReportWeek);
+  app.get('/api/reportsMonth/:reportIdMonth', admins.readReportMonth);
 
-  app.get('/api/reportsMonthTotal', admins.readReportMonthTotal);
-  app.get('/api/reportsWeekTotal', admins.readReportWeekTotal);
   app.get('/api/reportsDayTotal', admins.readReportDayTotal);
-
-  app.post('/api/reports', admins.createReport);
-  //  app.get('/api/reports/:reportId', admins.readReport);
-  app.put('/api/reports/:reportId', admins.updateReport);
-  app.del('/api/reports/:reportId', admins.deleteReport);
+  app.get('/api/reportsWeekTotal', admins.readReportWeekTotal);
+  app.get('/api/reportsMonthTotal', admins.readReportMonthTotal);
 
   var search = require('../app/controllers/search.js');
   app.get('/api/search', search.searchProduct);

@@ -1,7 +1,7 @@
 {
   "name": "eMarket",
   "description": "Database Class Project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "contributors": [
     {
@@ -33,12 +33,11 @@
     "view-helpers": "latest",
     "bower": "latest",
     "underscore": "~1.5.2",
-    "mysql": "latest",
-    "bower": "latest"
+    "mysql": "latest"
   },
   "devDependencies": {
     "supertest": "~0.8.0",
-    "mocha": "latest",
+    "mocha": "1.13.0",
     "web-mocha": "0.0.10",
     "grunt": "~0.4.1",
     "grunt-contrib-compass": "~0.3.0",

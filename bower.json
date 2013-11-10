@@ -1,6 +1,6 @@
 {
   "name": "eMarket",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": "true",
   "dependencies": {
     "angular": "~1.0.8",
@@ -14,7 +14,7 @@
     "restangular": "~1.1.4",
     "raty": "2.5.2",
     "owlcarousel": "*",
-    "underscore": "~1.4.4",
+    "underscore": "~1.5.2",
     "dropzone" : "~3.7.1"
   },
   "devDependencies": {
