@@ -10,7 +10,7 @@ angular.module('eMarketApp').directive('search', function(Search) {
       $scope.submitSearch = function() {
         // It doesn't recognize ng-model -.-
         var searchInput = $(elem[0]).find('#search');
-        Search.searchQuery = searchInput.val();
+        Search.setSearchQuery(searchInput.val());
         $.mobile.changePage('#search-results');
       };
     }

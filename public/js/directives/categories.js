@@ -31,7 +31,7 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
           stack.push(subCategories);
           refreshList(subCategories);
         } else {
-          Search.searchQuery = category.id;
+          Search.setSearchByCategory(category.id);
           $.mobile.changePage('#search-results');
         }
       };

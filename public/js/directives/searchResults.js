@@ -23,7 +23,7 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
       var page = $(elem[0]);
       var resultList = page.find('#resultList');
       var search = function() {
-        $http.get('api/search', {params: {q: Search.searchQuery}}).success(function(results) {
+        $http.get('api/search', {params: Search.getSearchParams()}).success(function(results) {
           $scope.results = results;
           setTimeout(function() {
             resultList.listview('refresh');
@@ -32,7 +32,7 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
       };
 
       $scope.submitSearch = function() {
-        Search.searchQuery = page.find('#search').val();
+        Search.setSearchQuery(page.find('#search').val());
         search();
       };
 
