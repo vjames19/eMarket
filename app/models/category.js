@@ -61,8 +61,9 @@ module.exports.update = function(category, callback) {
   category = _.pick(category, WHITELIST);
   executor.execute(function(err, connection) {
     // TODO: Verify parent id;
-    var sql = 'UPDATE category_info SET category_name=?, category_parent_id=?, category_status=? ' +
-        'WHERE category_id=?';
+    var sql = 'UPDATE category_info ' +
+        'SET category_name = ?, category_parent_id = ?, category_status = ? ' +
+        'WHERE category_id = ?';
     var params = [category.categoryName, category.categoryParent, category.categoryStatus, category.id];
     connection.query(sql, params, function(err) {
       callback(err, category);
@@ -72,15 +73,15 @@ module.exports.update = function(category, callback) {
 
 module.exports.delete = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'UPDATE category_info SET category_status=0 WHERE category_id = ?';
+    var sql = 'UPDATE category_info SET category_status = 0 WHERE category_id = ?';
     connection.query(sql, [id], callback);
   });
 };
 
-module.exports.getAllChildrenIds = function(categoryParentId, callback) {
+var getAllChildrenIds = function(categoryParentId, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT category_id FROM category_info ' +
-        'WHERE category_status=1 AND category_parent_id=?';
+        'WHERE category_status = 1 AND category_parent_id = ?';
     connection.query(sql, [categoryParentId], function(err, categories) {
       callback(err, mapper.mapCollection(categories, DICTIONARY));
     });
@@ -88,7 +89,7 @@ module.exports.getAllChildrenIds = function(categoryParentId, callback) {
 };
 
 var getAllSubtreeIdsHelper = function(categoryParentId, results, allDone) {
-  module.exports.getAllChildrenIds(categoryParentId, function(err, categories) {
+  getAllChildrenIds(categoryParentId, function(err, categories) {
     if(err) {
       allDone(err);
     }
