@@ -7,26 +7,26 @@
 
   <div data-role="content">
 
-    <form>
+    <form data-ajax="false" ng-submit="submit()" id="checkout-submit">
       <div class="form-pad">
         <label for="select-payment-method"><strong>Select Payment Method</strong></label>
         <select name="select-payment-method" id="select-payment-method" ng-model="paymentMethod"
                 ng-options="paymentMethod for paymentMethod in paymentMethods"
-                ng-change="selectPaymentMethod()" data-theme="a">
+                ng-change="selectPaymentMethod()" data-theme="a" ng-required="false">
         </select>
       </div>
       <div class="form-pad" ng-hide="isCreditCard">
         <label for="select-bank"><strong> Select Bank </strong></label>
         <select name="select-bank" id="select-bank" ng-model="selectedBank"
                 ng-options="bank.bankName for bank in banks" data-theme="a">
-          <option value="" ng-hide="selectedBank">Please Select a Bank</option>
+          <option value="" ng-hide="selectedBank" ng-required="true">Please Select a Bank</option>
         </select>
       </div>
       <div class="form-pad" ng-show="isCreditCard">
         <label for="select-card"><strong> Select Card </strong></label>
         <select name="select-card" id="select-card" ng-model="selectedCard"
                 ng-options="card.cardNumber for card in cards" data-theme="a">
-          <option value="" ng-hide="selectedCard">Please Select a Card</option>
+          <option value="" ng-hide="selectedCard" ng-required="true">Please Select a Card</option>
         </select>
       </div>
     </form>
@@ -63,9 +63,10 @@
   </div>
 
   <div data-role="footer" data-theme="a">
-    <button type="submit" data-icon="check" data-theme="a"
+    <button type="submit" form="checkout-submit" data-icon="check" data-theme="a"
             class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right
             ui-btn-corner-all ui-btn-inline">Checkout
     </button>
   </div>
+
 </div>
