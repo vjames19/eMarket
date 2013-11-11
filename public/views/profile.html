@@ -40,32 +40,33 @@
       <input type="tel" id="telephone" ng-model="user.telephone" ng-required="true">
 
       <label for="select-question1"><strong>Question 1</strong></label>
-      <select id="select-question1" ng-model="question1.id"
+      <select id="select-question1" ng-model="user.question1"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question1"><strong>Answer</strong></label>
-      <input type="text" id="answer-question1" ng-model="questionsAnswers[0].answer" ng-required="true">
+      <input type="text" id="answer-question1" ng-model="user.questionAnswer1" ng-required="true">
 
       <label for="select-question2"><strong>Question 2</strong></label>
-      <select id="select-question2" ng-model="question2.id"
+      <select id="select-question2" ng-model="user.question2"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question2"><strong>Answer</strong></label>
-      <input type="text" id="answer-question2" ng-model="questionsAnswers[1].answer" ng-required="true">
+      <input type="text" id="answer-question2" ng-model="user.questionAnswer2" ng-required="true">
 
       <label for="select-question1"><strong>Question 3</strong></label>
-      <select id="select-question3" ng-model="question3.id"
+      <select id="select-question3" ng-model="user.question3"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
       <label for="answer-question3"><strong>Answer</strong></label>
-      <input type="text" id="answer-question3" ng-model="questionsAnswers[2].answer" ng-required="true">
+      <input type="text" id="answer-question3" ng-model="user.questionAnswer3" ng-required="true">
 
       <label for="old-password"><strong>Old Password</strong></label>
-      <input type="password" id="old-password" autocomplete="off" value="">
+      <input type="password" id="old-password" autocomplete="off" ng-model="user.oldPassword" ng-required="false">
       <label for="new-password"><strong>New Password</strong></label>
-      <input type="password" id="new-password" autocomplete="off" value="">
+      <input type="password" id="new-password" autocomplete="off" ng-model="user.newPassword" ng-required="false">
       <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-      <input type="password" id="new-password-confirm" autocomplete="off" value="">
+      <input type="password" id="new-password-confirm" autocomplete="off" ng-model="user.newPasswordConfirm"
+             ng-required="false">
     </div>
     <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
       <a href="#home-user" data-role="button" data-icon="delete" data-transition="fade">Cancel</a>

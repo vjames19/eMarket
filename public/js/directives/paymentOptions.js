@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('paymentOptions', function(User) {
+angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) {
   return {
     templateUrl: 'views/paymentOptions.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     controller: function($scope, $filter, CardInfo, BankInfo) {
 
@@ -20,6 +20,7 @@ angular.module('eMarketApp').directive('paymentOptions', function(User) {
 
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var cardList = page.find('#cardList');
       var bankList = page.find('#bankList');
@@ -41,37 +42,36 @@ angular.module('eMarketApp').directive('paymentOptions', function(User) {
 
       scope.deleteCreditCard = function() {
         $.mobile.loading('show');
-        User.me().one('creditCards', selectedCard.creditCardId).remove().then(function() {
-          scope.creditCards.splice(selectedCardIndex, 1);
-          cardList.listview('refresh');
-          $.mobile.loading('hide');
-        });
+//        User.me().one('creditCards', selectedCard.creditCardId).remove().then(function() {
+        scope.creditCards.splice(selectedCardIndex, 1);
+        Helper.refreshList(cardList);
+        $.mobile.loading('hide');
+//        });
       };
 
       scope.deleteBankAccount = function() {
         $.mobile.loading('show');
-        User.me().one('banks', selectedBank.bankId).remove().then(function() {
-          scope.bankAccounts.splice(selectedBankIndex, 1);
-          bankList.listview('refresh');
-          $.mobile.loading('hide');
-        });
+//        User.me().one('banks', selectedBank.bankId).remove().then(function() {
+        scope.bankAccounts.splice(selectedBankIndex, 1);
+        Helper.refreshList(bankList);
+        $.mobile.loading('hide');
+//        });
       };
 
       page.on('pagebeforeshow', function() {
+
         User.me().getList('creditCards').then(function(creditCardsList) {
           scope.creditCards = creditCardsList;
-          setTimeout(function() {
-            cardList.listview('refresh');
-          });
+          Helper.refreshList(cardList);
         });
 
         User.me().getList('banks').then(function(bankAccountsList) {
           scope.bankAccounts = bankAccountsList;
-          setTimeout(function() {
-            bankList.listview('refresh');
-          });
+          Helper.refreshList(bankList);
         });
+
       });
+
     }
   };
 });

@@ -4,7 +4,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
   return {
     templateUrl: 'views/editMailingAddress.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     controller: function($scope, User) {
 
