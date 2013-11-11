@@ -220,10 +220,10 @@ module.exports = function(app, passport, auth) {
 
   app.param('adminId', admins.findAdminById);
   app.get('/api/admins', admins.readAllAdmins);
-  app.post('/api/admins', admins.createAdmin);
+//  app.post('/api/admins', admins.createAdmin);
   app.get('/api/admins/:adminId', admins.readAdmin);
-  app.put('/api/admins/:adminId', admins.updateAdmin);
-  app.del('/api/admins/:adminId', admins.deleteAdmin);
+//  app.put('/api/admins/:adminId', admins.updateAdmin);
+//  app.del('/api/admins/:adminId', admins.deleteAdmin);
 
   // Report Routes
 
