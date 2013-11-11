@@ -4,21 +4,29 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
   var admin = Admin;
   var isLoggedIn = false;
   var unAuthPaths = ['index-page'];
-  
+
   return {
     logIn: function(adminData) {
+      $.mobile.loading('show', {
+        text: 'Signing In...',
+        textVisible: true,
+        theme: $.mobile.loader.prototype.options.theme
+      });
+      console.log('Logging In: ', adminData.username);
       $http.post('login', adminData).success(function(realAdmin) {
         admin.adminUserName = realAdmin.username;
         admin.adminId = realAdmin.id;
         $.mobile.changePage('#home-admin');
         isLoggedIn = true;
+        $.mobile.loading('hide');
       }).error(function() {
+            $.mobile.loading('hide');
             $('#loginError').popup('open');
           });
 
     },
     logOut: function() {
-      console.log('logging out admin');
+      console.log('Logging Out: ', admin.username);
       admin.adminUserName = null;
       admin.adminId = null;
       isLoggedIn = false;
