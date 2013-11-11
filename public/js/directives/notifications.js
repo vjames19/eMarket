@@ -1,17 +1,20 @@
 'use strict';
 
-angular.module('eMarketApp').directive('notifications', function(User) {
+angular.module('eMarketApp').directive('notifications', function(User, Helper) {
   return {
     templateUrl: 'views/notifications.html',
     restrict: 'E',
     scope: {},
     replace: true,
     controller: function($scope) {
+
       $scope.getStatus = function(notification) {
         return notification.isRead ? 'Read' : 'Unread';
       };
+
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var notificationList = page.find('#notificationList');
       var notificationPopUp = page.find('#notificationMessage');
@@ -19,17 +22,18 @@ angular.module('eMarketApp').directive('notifications', function(User) {
       scope.readMessage = function(notification) {
         notificationPopUp.text(notification.message);
         notification.isRead = true;
-        notification.put();
+//        notification.put();
       };
 
       page.on('pagebeforeshow', function() {
+
         User.me().getList('notifications').then(function(notifications) {
           scope.notifications = notifications;
-          setTimeout(function() {
-            notificationList.listview('refresh');
-          });
+          Helper.refreshList(notificationList);
         });
+
       });
+
     }
   };
 });
