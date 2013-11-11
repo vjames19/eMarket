@@ -46,7 +46,9 @@ module.exports.get = function(id, callback) {
         'FROM admin_info ' +
         'WHERE admin_id = ? AND admin_account_status = 1';
     connection.query(sql, [id], function(err, admins) {
-      callback(err, mapper.map(admins[0], DICTIONARY));
+      var admin = mapper.map(admins[0], DICTIONARY);
+      admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
+      callback(err, admin);
     });
   });
 };
@@ -57,10 +59,7 @@ module.exports.authenticate = function(username, password, callback) {
         'FROM admin_info ' +
         'WHERE admin_user_name = ? AND admin_password = SHA1(?) AND admin_account_status = 1';
     connection.query(sql, [username, password], function(err, admins) {
-      //      console.log('authenticate', arguments);
-      var admin = mapper.map(admins[0], DICTIONARY);
-      admin.isAdmin = !_.isEmpty(admins);
-      callback(err, admin);
+      callback(err, mapper.map(admins[0], DICTIONARY));
     });
   });
 };

@@ -14,7 +14,6 @@ exports.requiresLogin = function(req, res, next) {
 
 exports.admin = {
   hasAuthorization: function(req, res, next) {
-    console.log(admins.isAdmin(req.user));
     if(admins.isAdmin(req.user)) {
       next();
     } else {
