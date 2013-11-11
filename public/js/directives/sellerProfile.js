@@ -14,8 +14,12 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
     link: function(scope, elem) {
 
       var page = $(elem[0]);
+
       var sellerProductList = page.find('#sellerProductList');
       var sellerRatingList = page.find('#sellerRatingList');
+
+      var sellerAvgRate = page.find('#sellerAvgRate');
+      var rateSellerBox = page.find('#rateSeller');
 
       page.on('pagebeforeshow', function() {
 
@@ -29,7 +33,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
 
         setTimeout(function() {
 
-          page.find('#sellerAvgRate').raty({
+          sellerAvgRate.raty({
             cancel: true,
             score: function() {
               return $(this).attr('data-score');
@@ -40,7 +44,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
             path: '../lib/raty/lib/img'
           });
 
-          page.find('#rateSeller').raty({
+          rateSellerBox.raty({
             cancel: true,
             score: function() {
               return $(this).attr('data-score');
