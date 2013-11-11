@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('shoppingCart', function(User) {
+angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
   return {
     templateUrl: 'views/shoppingCart.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     controller: function($scope, Product, CartInfo) {
 
@@ -16,6 +16,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
 
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var shoppingCartList = page.find('#shoppingCartList');
 
@@ -26,23 +27,22 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
       scope.shipping = 0;
 
       var computeTotalCostAndShipping = function() {
+        scope.cost = 0;
+        scope.shipping = 0;
         window._.each(scope.shoppingCarts, function(cart) {
           scope.cost += cart.productTotalPrice;
-
-        });
-        window._.each(scope.shoppingCarts, function(cart) {
           scope.shipping += cart.shippingPrice;
         });
       };
 
       page.on('pagebeforeshow', function() {
+
         User.me().getList('carts').then(function(carts) {
           scope.shoppingCarts = carts;
-          setTimeout(function() {
-            shoppingCartList.listview('refresh');
-          });
+          Helper.refreshList(shoppingCartList);
           computeTotalCostAndShipping();
         });
+
       });
 
       scope.selectCart = function(cartItem, index) {
@@ -52,13 +52,14 @@ angular.module('eMarketApp').directive('shoppingCart', function(User) {
 
       scope.deleteCartItem = function() {
         $.mobile.loading('show');
-        User.me().one('carts', cartSelected.cartId).remove().then(function() {
-          scope.shoppingCarts.splice(selectedCartIndex, 1);
-          computeTotalCostAndShipping();
-          shoppingCartList.listview('refresh');
-          $.mobile.loading('hide');
-        });
+//        User.me().one('carts', cartSelected.cartId).remove().then(function() {
+        scope.shoppingCarts.splice(selectedCartIndex, 1);
+        computeTotalCostAndShipping();
+        Helper.refreshList(shoppingCartList);
+        $.mobile.loading('hide');
+//        });
       };
+
     }
   };
 });
