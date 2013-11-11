@@ -59,7 +59,7 @@ module.exports.authenticate = function(username, password, callback) {
     connection.query(sql, [username, password], function(err, admins) {
       //      console.log('authenticate', arguments);
       var admin = mapper.map(admins[0], DICTIONARY);
-      admin.isAdmin = true;
+      admin.isAdmin = !_.isEmpty(admins);
       callback(err, admin);
     });
   });

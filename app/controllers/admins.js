@@ -6,16 +6,6 @@ var Reports = require('../models/report.js');
 
 // Admin
 
-exports.isAdmin = function(user, callback) {
-  Admins.getAll(function(err, admins) {
-    if(err) {
-      callback(err);
-    } else {
-      callback(null, _.contains(_.pluck(admins, 'username'), user.username));
-    }
-  });
-};
-
 exports.findAdminById = function(req, res, next, id) {
   Admins.get(id, function(err, admin) {
     if(_.isEmpty(admin)) {
