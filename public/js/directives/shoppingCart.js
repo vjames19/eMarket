@@ -27,7 +27,6 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
 
       scope.cost = 0;
       scope.shipping = 0;
-      scope.cartHasItems = false;
 
       var computeTotalCostAndShipping = function() {
         scope.cost = 0;
