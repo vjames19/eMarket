@@ -94,16 +94,20 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         categoryPopup.on({
           popupbeforeposition: function() {
             var maxHeight = $.mobile.window.innerHeight() / 1.25;
-            categoryPopup.css('overflow-y', 'scroll');
-            categoryPopup.height(maxHeight);
+            if(categoryPopup.height() > maxHeight) {
+              categoryPopup.css('overflow-y', 'scroll');
+              categoryPopup.height(maxHeight);
+            }
           }
         });
 
         descriptionPopup.on({
           popupbeforeposition: function() {
             var maxHeight = $.mobile.window.innerHeight() / 1.25;
-            descriptionPopup.css('overflow-y', 'scroll');
-            descriptionPopup.height(maxHeight);
+            if(descriptionPopup.height() > maxHeight) {
+              descriptionPopup.css('overflow-y', 'scroll');
+              descriptionPopup.height(maxHeight);
+            }
           }
         });
 
