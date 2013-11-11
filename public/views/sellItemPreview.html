@@ -7,7 +7,6 @@
       <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
     </div>
 
-
     <div data-role="content">
 
       <table data-role="table" data-mode="none">
@@ -29,60 +28,71 @@
 
       <ul data-role="listview" data-theme="a" data-inset="true">
         <li>
-          <p class="item-description-text-size"> Starting bid: {{ previewItemInfo.startingBidPrice | currency }}</p>
+          <p class="item-description-text-size">
+            Starting bid: {{ previewItemInfo.startingBidPrice | currency }}
+          </p>
 
-          <p class="item-description-text-size"> Buy it Now: {{ previewItemInfo.nonbidPrice | currency }} </p>
+          <p class="item-description-text-size">
+            Buy it Now: {{ previewItemInfo.nonbidPrice | currency }}
+          </p>
 
-          <p class="item-description-text-size"> Shipping: {{ previewItemInfo.shippingPrice | currency }} </p>
+          <p class="item-description-text-size">
+            Shipping: {{ previewItemInfo.shippingPrice | currency }}
+          </p>
 
-          <p class="item-description-text-size"> Available Quantity: {{ previewItemInfo.quantity }} </p>
+          <p class="item-description-text-size">
+            Available Quantity: {{ previewItemInfo.quantity }}
+          </p>
         </li>
         <li>
-          <p class="item-description-text-size"> Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }} </p>
-
-          <p class="item-description-text-size"> End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss'
-            }} </p>
+          <!--<p class="item-description-text-size">-->
+          <!--Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }}-->
+          <!--</p>-->
+          <p class="item-description-text-size">
+            End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }}
+          </p>
         </li>
         <li>
-          <p class="item-description-text-size"> Condition: {{ previewItemInfo.condition }} </p>
+          <p class="item-description-text-size">
+            Condition: {{ previewItemInfo.condition }}
+          </p>
         </li>
         <li>
-          <p class="item-description-text-size"> Description </p>
+          <p class="item-description-text-size">Description</p>
           <table>
             <tr>
               <td>
-                <p class="item-description-text-size"> Brand: </p>
+                <p class="item-description-text-size">Brand:</p>
               </td>
               <td>
-                <p class="item-description-text-size"> {{previewItemInfo.brand}} </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p class="item-description-text-size"> Model: </p>
-              </td>
-              <td>
-                <p class="item-description-text-size"> {{ previewItemInfo.model}} </p>
+                <p class="item-description-text-size">{{ previewItemInfo.brand }}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p class="item-description-text-size"> Dimensions: </p>
+                <p class="item-description-text-size">Model:</p>
               </td>
               <td>
-                <p class="item-description-text-size"> {{previewItemInfo.dimensions}} </p>
+                <p class="item-description-text-size">{{ previewItemInfo.model }}</p>
               </td>
-
             </tr>
             <tr>
               <td>
-                <p class="item-description-text-size"> Additional Description: </p>
+                <p class="item-description-text-size">Dimensions:</p>
+              </td>
+              <td>
+                <p class="item-description-text-size">{{ previewItemInfo.dimensions }}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="item-description-text-size">Additional Description:</p>
               </td>
               <td>
                 <p class="item-description-text-size" style="text-wrap: normal !important;">
-                  {{previewItemInfo.description}} </p>
+                  {{ previewItemInfo.description }}
+                </p>
               </td>
-
             </tr>
           </table>
 
@@ -91,8 +101,9 @@
     </div>
 
     <div data-role="footer" data-theme="a">
-      <button type="submit" class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right
-      ui-btn-corner-all ui-btn-inline">Submit
+      <button type="submit"
+              class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all ui-btn-inline">
+        Submit
       </button>
     </div>
   </form>
