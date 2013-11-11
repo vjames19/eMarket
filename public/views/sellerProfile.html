@@ -18,7 +18,7 @@
       <li data-role="list-divider">
         <table>
           <tr>
-            <td><strong>{{sellerName}}</strong></td>
+            <td><strong>{{ sellerName }}</strong></td>
             <td><span class="ui-li-count"><div id="sellerAvgRate" data-score="{{ sellerAvgRate }}"></div></span></td>
           </tr>
         </table>
@@ -40,7 +40,7 @@
         <table>
           <tr>
             <td><strong>Seller Products</strong></td>
-            <td><span class="ui-li-count">{{products.length}}</span></td>
+            <td><span class="ui-li-count">{{ products.length }}</span></td>
           </tr>
         </table>
       </li>
@@ -51,18 +51,18 @@
             <thead>
             <tr>
               <th colspan="2">
-                <strong><abbr title="{{item.productName}}">{{item.productName | truncate:15}}</abbr></strong>
+                <strong><abbr title="{{item.productName}}">{{ item.productName | truncate:15 }}</abbr></strong>
               </th>
             </tr>
             </thead>
             <tbody>
             <tr>
               <td><strong>Current Bid</strong></td>
-              <td><em>{{item.currentBid | currency}}</em></td>
+              <td><em>{{ item.currentBid | currency }}</em></td>
             </tr>
             <tr>
               <td><strong>Price</strong></td>
-              <td><em>{{item.nonbidPrice | currency}}</em></td>
+              <td><em>{{ item.nonbidPrice | currency }}</em></td>
             </tr>
             </tbody>
           </table>
