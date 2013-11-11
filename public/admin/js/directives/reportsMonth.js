@@ -12,50 +12,40 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
       var graph = page.find('#graph');
       var selectedCategory = page.find('#select-category');
 
-      scope.totalSales = 0.0;
-      scope.totalRevenue = 0.0;
+      var updateGraph = function(totalSales, totalRevenue) {
+        setTimeout(function() {
+          graph.highcharts(Report.setGraphOptions(totalSales, totalRevenue, Highcharts));
+        });
+      };
+
+      var totalSales = 0.0;
+      var totalRevenue = 0.0;
+
       scope.selectedCategory = null;
 
-      scope.$watch('selectedCategory',
-          // listener
-          function() {
-            if(scope.selectedCategory === null) {
-              Restangular.one('reportsMonthTotal').get().then(function(result) {
-                scope.totalSales = result[0].sales;
-                scope.totalRevenue = result[0].revenue;
-                setTimeout(function() {
-                  graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-                });
-              });
-            } else {
-              Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
-                scope.totalSales = result.sales;
-                scope.totalRevenue = result.revenue;
-                setTimeout(function() {
-                  graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-                });
-              });
-            }
-          },
+      scope.$watch('selectedCategory', function() {
+        if(scope.selectedCategory === null) {
+          Restangular.one('reportsMonthTotal').get().then(function(result) {
+            totalSales = result[0].sales;
+            totalRevenue = result[0].revenue;
+            updateGraph(totalSales, totalRevenue);
+          });
+        } else {
+          Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
+            totalSales = result.sales;
+            totalRevenue = result.revenue;
+            updateGraph(totalSales, totalRevenue);
+          });
+        }
+      });
 
-          function(newValue, oldValue) {
-            // init
-            if(newValue === oldValue) {
-              setTimeout(function() {
-                graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-              });
-            }
-            // change and no digest running
-            else if(!scope.$$phase) {
-              scope.$digest();
-            }
-          }
-      );
+      page.on('pageinit', function() {
 
-      scope.$apply(function() {
-        setTimeout(function() {
-          graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-        });
+        if(!scope.$$phase) {
+          console.log('Firing Month Watcher');
+          scope.$digest();
+        }
+
       });
 
       page.on('pagebeforeshow', function() {
