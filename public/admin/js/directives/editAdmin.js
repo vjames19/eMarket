@@ -1,23 +1,25 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper) {
+angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper, Admin) {
   return {
     templateUrl: 'views/editAdmin.html',
     restrict: 'E',
     scope: {},
     replace: true,
     controller: function($scope, Restangular) {
+
       $scope.submit = function() {
         $.mobile.loading('show');
-        $scope.adminInfo.adminPassword = $scope.editAdmin.adminPassword;
-        Restangular.one('admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo).then(function(adminInfo) {
-          $scope.adminInfo = adminInfo;
-          $.mobile.loading('hide');
-          $.mobile.changePage('#admin-accounts');
-        }, function(err) {
-          alert(err);
-        });
+//        $scope.adminInfo.adminPassword = $scope.editAdmin.adminPassword;
+//        Restangular.one('admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo).then(function(adminInfo) {
+//          $scope.adminInfo = adminInfo;
+        $.mobile.loading('hide');
+        $.mobile.changePage('#admin-accounts');
+//        }, function(err) {
+//          alert(err);
+//        });
       };
+
     },
     link: function(scope, elem) {
 
@@ -29,10 +31,21 @@ angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper) 
         scope.adminInfo = AdminInfo.adminInfo;
 
         if(scope.adminInfo.isRoot === 1) {
-          Helper.refreshCheckBox(rootCheckBox.prop('checked', true), true);
+          rootCheckBox.prop('checked', true);
+          Helper.refreshCheckBox(rootCheckBox);
         } else {
-          Helper.refreshCheckBox(rootCheckBox.prop('checked', false), true);
+          rootCheckBox.prop('checked', false);
+          Helper.refreshCheckBox(rootCheckBox);
         }
+
+        if(Admin.isRoot === 0 || scope.adminInfo.username === 'root') {
+          rootCheckBox.checkboxradio('disable');
+          Helper.refreshCheckBox(rootCheckBox);
+        } else {
+          rootCheckBox.checkboxradio('enable');
+          Helper.refreshCheckBox(rootCheckBox);
+        }
+
       });
 
     }

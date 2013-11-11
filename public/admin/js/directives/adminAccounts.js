@@ -1,15 +1,17 @@
 'use strict';
 
-angular.module('eMarketApp').directive('adminAccounts', function(Restangular, Helper) {
+angular.module('eMarketApp').directive('adminAccounts', function(Restangular, Helper, Admin) {
   return {
     templateUrl: 'views/adminAccounts.html',
     restrict: 'E',
     scope: {},
     replace: true,
     controller: function($scope, AdminInfo) {
+
       $scope.setAdminInfo = function(adminInfo) {
         AdminInfo.adminInfo = angular.copy(adminInfo);
       };
+
     },
     link: function(scope, elem) {
 
@@ -26,11 +28,13 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
 
       scope.deleteAdmin = function() {
         $.mobile.loading('show');
-        Restangular.one('admins', selectedAdmin.adminId).remove().then(function() {
+//        Restangular.one('admins', selectedAdmin.adminId).remove().then(function() {
+        if(selectedAdmin.isRoot === 0) { // Cannot Delete Root Admins Ever!
           scope.admins.splice(selectedAdminIndex, 1);
-          Helper.refreshList(adminAccountList, true);
-          $.mobile.loading('hide');
-        });
+          Helper.refreshList(adminAccountList);
+        }
+        $.mobile.loading('hide');
+//        });
       };
 
       page.on('pagebeforeshow', function() {

@@ -7,20 +7,24 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
     scope: {},
     replace: true,
     controller: function($scope, Restangular) {
-      $scope.addUser = { creditCard: {creditCardType: 'Visa'} };
+
+      // initial value for display
+      $scope.addUser = { creditCard: { creditCardType: 'Visa' } };
 
       $scope.submit = function() {
         $.mobile.loading('show');
-        Restangular.all('users').post($scope.addUser.user).then(function(user) {
-          Restangular.one('users', user.userId).all('mailAddresses').post($scope.addUser.mailAddress);
-          Restangular.one('users', user.userId).all('billAddresses').post($scope.addUser.billAddress);
-          Restangular.one('users', user.userId).all('creditCards').post($scope.addUser.creditCard);
-          $.mobile.loading('hide');
-          $.mobile.changePage('#user-accounts');
-        });
+//        Restangular.all('users').post($scope.addUser.user).then(function(user) {
+//          Restangular.one('users', user.userId).all('mailAddresses').post($scope.addUser.mailAddress);
+//          Restangular.one('users', user.userId).all('billAddresses').post($scope.addUser.billAddress);
+//          Restangular.one('users', user.userId).all('creditCards').post($scope.addUser.creditCard);
+        $.mobile.loading('hide');
+        $.mobile.changePage('#user-accounts');
+//        });
       };
+
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var sameAsCheckBox = page.find('#same-as');
       var securityQuestions = page.find('select[id*="security-questions"]');
@@ -35,9 +39,6 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
         Restangular.one('questions').getList().then(function(questionsList) {
           scope.questions = questionsList;
           Helper.refreshSelect(securityQuestions);
-//          setTimeout(function() {
-//            securityQuestions.selectmenu('refresh', true);
-//          });
         });
 
       });

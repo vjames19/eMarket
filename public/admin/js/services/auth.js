@@ -16,6 +16,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
       $http.post('login', adminData).success(function(realAdmin) {
         admin.adminUserName = realAdmin.username;
         admin.adminId = realAdmin.id;
+        admin.isRoot = realAdmin.isRoot;
         $.mobile.changePage('#home-admin');
         isLoggedIn = true;
         $.mobile.loading('hide');
@@ -29,6 +30,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
       console.log('Logging Out: ', admin.username);
       admin.adminUserName = null;
       admin.adminId = null;
+      admin.isRoot = null;
       isLoggedIn = false;
       $http.get('../logout');
     },

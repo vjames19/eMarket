@@ -9,25 +9,26 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="username">Username</label>
-        <input type="text" id="username" data-theme="b" ng-model="addAdmin.adminUserName">
+        <input type="text" id="username" data-theme="b" ng-model="addAdmin.adminUserName" ng-required="true">
         <label for="first-name">First Name</label>
-        <input type="text" id="first-name" data-theme="b" ng-model="addAdmin.adminFirstName">
+        <input type="text" id="first-name" data-theme="b" ng-model="addAdmin.adminFirstName" ng-required="true">
         <label for="middle-name">Middle Name</label>
-        <input type="text" id="middle-name" data-theme="b" ng-model="addAdmin.adminMiddleName">
+        <input type="text" id="middle-name" data-theme="b" ng-model="addAdmin.adminMiddleName" ng-required="false">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" data-theme="b" ng-model="addAdmin.adminLastName">
+        <input type="text" id="last-name" data-theme="b" ng-model="addAdmin.adminLastName" ng-required="true">
         <label for="email">Email</label>
-        <input type="email" id="email" data-theme="b" ng-model="addAdmin.adminEmail">
+        <input type="email" id="email" data-theme="b" ng-model="addAdmin.adminEmail" ng-required="true">
         <label for="telephone">Telephone</label>
-        <input type="tel" id="telephone" data-theme="b" ng-model="addAdmin.adminPhone">
+        <input type="tel" id="telephone" data-theme="b" ng-model="addAdmin.adminPhone" ng-required="true">
         <label for="password"><strong>Password</strong></label>
-        <input type="password" id="password" autocomplete="off" data-theme="b" ng-model="addAdmin.adminPassword">
+        <input type="password" id="password" autocomplete="off" data-theme="b" ng-model="addAdmin.adminPassword"
+               ng-required="true">
         <label for="password-confirm"><strong>Confirm Password</strong></label>
         <input type="password" id="password-confirm" autocomplete="off"
-               data-theme="b" ng-model="validateAdmin.adminConfirmPassword">
+               data-theme="b" ng-model="validateAdmin.adminConfirmPassword" ng-required="true">
         <label for="make-root">Make Root</label>
         <input name="make-root" id="make-root" data-mini="true" type="checkbox"
-               data-theme="b" ng-model="addAdmin.adminIsRoot">
+               data-theme="b" ng-model="addAdmin.adminIsRoot" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#admin-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>

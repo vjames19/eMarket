@@ -9,10 +9,10 @@
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="name">Category Name</label>
-        <input type="text" id="name" data-theme="b" ng-model="addCategory.categoryName">
+        <input type="text" id="name" data-theme="b" ng-model="addCategory.categoryName" ng-required="true">
         <label for="parent">Category Parent</label>
         <select id="parent" data-theme="b" ng-model="addCategory.categoryParent"
-                ng-options="category.id as category.categoryName for category in categories">
+                ng-options="category.id as category.categoryName for category in categories" ng-required="false">
           <option value="" selected>None</option>
         </select>
       </div>

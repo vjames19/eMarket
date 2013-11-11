@@ -12,20 +12,21 @@
         <em>{{userInfo.username}}</em>
         <hr/>
         <label for="firstname"><strong>First Name</strong></label>
-        <input type="text" id="firstname" data-theme="b" ng-model="userInfo.firstName">
+        <input type="text" id="firstname" data-theme="b" ng-model="userInfo.firstName" ng-required="true">
         <label for="middlename"><strong>Middle Name</strong></label>
-        <input type="text" id="middlename" data-theme="b" ng-model="userInfo.middleName">
+        <input type="text" id="middlename" data-theme="b" ng-model="userInfo.middleName" ng-required="false">
         <label for="lastname"><strong>Last Name</strong></label>
-        <input type="text" id="lastname" data-theme="b" ng-model="userInfo.lastName">
+        <input type="text" id="lastname" data-theme="b" ng-model="userInfo.lastName" ng-required="true">
         <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" data-theme="b" ng-model="userInfo.telephone">
+        <input type="tel" id="telephone" data-theme="b" ng-model="userInfo.telephone" ng-required="true">
         <label for="email"><strong>Email</strong></label>
-        <input type="email" id="email" data-theme="b" ng-model="userInfo.email">
+        <input type="email" id="email" data-theme="b" ng-model="userInfo.email" ng-required="true">
         <label for="new-password"><strong>New Password</strong></label>
-        <input type="password" id="new-password" autocomplete="off" data-theme="b" ng-model="editUser.userPassword">
+        <input type="password" id="new-password" autocomplete="off" data-theme="b" ng-model="editUser.userPassword"
+               ng-required="false">
         <label for="new-password-confirm"><strong>Confirm Password</strong></label>
         <input type="password" id="new-password-confirm" autocomplete="off" data-theme="b"
-               ng-model="editUser.userConfirmPassword">
+               ng-model="editUser.userConfirmPassword" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#user-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>

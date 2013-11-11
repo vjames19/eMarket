@@ -53,7 +53,7 @@ module.exports.get = function(id, callback) {
 
 module.exports.authenticate = function(username, password, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT admin_id, admin_user_name ' +
+    var sql = 'SELECT admin_id, admin_user_name, admin_is_root ' +
         'FROM admin_info ' +
         'WHERE admin_user_name = ? AND admin_password = SHA1(?) AND admin_account_status = 1';
     connection.query(sql, [username, password], function(err, admins) {

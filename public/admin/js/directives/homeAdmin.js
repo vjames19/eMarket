@@ -7,7 +7,9 @@ angular.module('eMarketApp').directive('homeAdmin', function() {
     scope: {},
     replace: true,
     controller: function($scope, Auth) {
+
       $scope.logOut = Auth.logOut;
+
     }
   };
 });

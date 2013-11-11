@@ -7,13 +7,14 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
     scope: {},
     replace: true,
     controller: function($scope, CategoryInfo) {
+
       $scope.setCategoryInfo = function(categoryInfo) {
         CategoryInfo.categoryInfo = angular.copy(categoryInfo);
       };
+
     },
     link: function(scope, elem) {
-      var category = null;
-      var selectedIndex = null;
+
       var page = $(elem[0]);
       var categoryAdminList = page.find('#categoryAdminList');
       var noMore = page.find('#noMore');
@@ -21,18 +22,22 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
       var upButton = page.find('#up-button');
       var stack = [];
 
+      var category = null;
+      var selectedIndex = null;
+
       page.on('pagebeforeshow', function() {
         stack = [];
         upButton.hide();
         Restangular.all('categories').getList().then(function(categories) {
           scope.categories = categories;
+          Helper.refreshList(categoryAdminList);
           stack.push(categories);
         });
       });
 
-      page.on('pageshow', function() {
-        categoryAdminList.listview('refresh');
-      });
+//      page.on('pageshow', function() {
+//        categoryAdminList.listview('refresh');
+//      });
 
       var refreshCatList = function(categories) {
         scope.categories = categories;
@@ -63,10 +68,12 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
       };
 
       scope.deleteCategory = function() {
-        Restangular.one('categories', category.categoryId).remove().then(function() {
-          scope.categories.splice(selectedIndex, 1);
-          Helper.refreshList(categoryAdminList, true);
-        });
+        $.mobile.loading('show');
+//        Restangular.one('categories', category.categoryId).remove().then(function() {
+        scope.categories.splice(selectedIndex, 1);
+        Helper.refreshList(categoryAdminList);
+        $.mobile.loading('hide');
+//        });
       };
 
     }

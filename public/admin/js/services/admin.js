@@ -5,8 +5,9 @@ angular.module('eMarketApp').factory('Admin', function(Restangular) {
     var self = this;
     this.adminId = null;
     this.adminUserName = null;
+    this.isRoot = null;
     this.me = function() {
-      if(self.adminUserName && self.adminId >= 0) {
+      if(self.adminUserName && self.isRoot >= 0 && self.adminId >= 0) {
         return Restangular.one('admins', self.adminId);
       } else {
         throw 'Admin is not logged in';
