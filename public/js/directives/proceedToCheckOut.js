@@ -27,7 +27,7 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
       var cardSelect = page.find('#select-card');
 
       scope.selectPaymentMethod = function() {
-        scope.isCreditCard = scope.paymentMethod !== 'Bank';
+        scope.isCreditCard = scope.paymentMethod === 'Credit Card';
       };
 
       page.on('pagebeforeshow', function() {
