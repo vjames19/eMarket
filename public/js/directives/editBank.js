@@ -1,43 +1,45 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editBank', function(User) {
+angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Helper) {
   return {
     templateUrl: 'views/editBank.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
-    controller: function($scope, BankInfo) {
-
-      $scope.bankInfo = BankInfo.bankInfo;
+    controller: function($scope) {
 
       $scope.submit = function() {
-        console.log($scope.cardInfo);
-        User.me().one('banks', $scope.bankInfo.bankId).customPUT($scope.bankInfo)
-            .then(function(bankInfo) {
-              $scope.bankInfo = bankInfo;
-              $.mobile.changePage('#payment-options');
-            }, function(err) {
-              alert(err);
-            });
+//        console.log($scope.cardInfo);
+        $.mobile.loading('show');
+//        User.me().one('banks', $scope.bankInfo.bankId).customPUT($scope.bankInfo)
+//            .then(function(bankInfo) {
+//              $scope.bankInfo = bankInfo;
+        $.mobile.loading('hide');
+        $.mobile.changePage('#payment-options');
+//            }, function(err) {
+//              alert(err);
+//            });
       };
 
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var accountType = page.find('#bank-account-type');
       var addressSelect = page.find('#address-relation');
 
       page.on('pagebeforeshow', function() {
 
+        scope.bankInfo = BankInfo.bankInfo;
+
         User.me().all('billaddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
-          setTimeout(function() {
-            accountType.selectmenu('refresh', true);
-            addressSelect.selectmenu('refresh', true);
-          });
+          Helper.refreshSelect(accountType);
+          Helper.refreshSelect(addressSelect);
         });
 
       });
+
     }
   };
 });

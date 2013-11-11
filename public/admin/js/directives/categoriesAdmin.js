@@ -30,8 +30,8 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
         upButton.hide();
         Restangular.all('categories').getList().then(function(categories) {
           scope.categories = categories;
-          Helper.refreshList(categoryAdminList);
           stack.push(categories);
+          Helper.refreshList(categoryAdminList);
         });
       });
 

@@ -7,11 +7,15 @@ angular.module('eMarketApp').directive('addBillingAddress', function() {
     scope: {},
     replace: true,
     controller: function($scope, User) {
+
       $scope.submit = function() {
-        $scope.billAddresses.userId = User.userId;
-        User.me().all('billAddresses').post($scope.billAddresses);
+//        $scope.billAddresses.userId = User.userId;
+        $.mobile.loading('show');
+//        User.me().all('billAddresses').post($scope.billAddresses); // TODO <-- missing .then()
+        $.mobile.loading('hide');
         $.mobile.changePage('#profile');
       };
+
     }
   };
 });

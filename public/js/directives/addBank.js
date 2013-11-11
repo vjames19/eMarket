@@ -1,21 +1,25 @@
 'use strict';
 
-angular.module('eMarketApp').directive('addBank', function(User) {
+angular.module('eMarketApp').directive('addBank', function(User, Helper) {
   return {
     templateUrl: 'views/addBank.html',
     restrict: 'E',
     scope: {},
     replace: true,
     controller: function($scope) {
+
       $scope.bank = {accountType: 'Checking'};
 
       $scope.submit = function() {
-        User.me().all('banks').post($scope.bank);
+        $.mobile.loading('show');
+//        User.me().all('banks').post($scope.bank); // TODO <-- missing .then()
+        $.mobile.loading('hide');
         $.mobile.changePage('#payment-options');
       };
 
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var addressSelect = page.find('#address-relation');
 
@@ -23,12 +27,11 @@ angular.module('eMarketApp').directive('addBank', function(User) {
 
         User.me().all('billAddresses').getList().then(function(addresses) {
           scope.billAddresses = addresses;
-          setTimeout(function() {
-            addressSelect.selectmenu('refresh', true);
-          });
+          Helper.refreshSelect(addressSelect);
         });
 
       });
+
     }
   };
 });

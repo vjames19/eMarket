@@ -1,25 +1,26 @@
 'use strict';
 
-angular.module('eMarketApp').directive('editMailingAddress', function() {
+angular.module('eMarketApp').directive('editMailingAddress', function(MailingAddressInfo, Helper) {
   return {
     templateUrl: 'views/editMailingAddress.html',
     restrict: 'E',
     scope: true,
     replace: true,
-    controller: function($scope, User, MailingAddressInfo) {
-
-      $scope.mailInfo = MailingAddressInfo.mailInfo;
+    controller: function($scope, User) {
 
       $scope.submit = function() {
-        console.log($scope.mailInfo);
-        User.me().one('mailAddresses', $scope.mailInfo.mailAddressId).customPUT($scope.mailInfo)
-            .then(function(mailInfo) {
-              $scope.mailInfo = mailInfo;
-              $.mobile.changePage('#profile');
-            }, function(err) {
-              alert(err);
-            });
+//        console.log($scope.mailInfo);
+        $.mobile.loading('show');
+//        User.me().one('mailAddresses', $scope.mailInfo.mailAddressId).customPUT($scope.mailInfo)
+//            .then(function(mailInfo) {
+//              $scope.mailInfo = mailInfo;
+        $.mobile.loading('hide');
+        $.mobile.changePage('#profile');
+//            }, function(err) {
+//              alert(err);
+//            });
       };
+
     },
     link: function(scope, elem) {
 
@@ -28,14 +29,14 @@ angular.module('eMarketApp').directive('editMailingAddress', function() {
 
       page.on('pagebeforeshow', function() {
 
+        scope.mailInfo = MailingAddressInfo.mailInfo;
+
         if(scope.mailInfo.isPrimary === 1) {
-          setTimeout(function() {
-            primaryCheckBox.prop('checked', true).checkboxradio('refresh');
-          });
+          primaryCheckBox.prop('checked', true);
+          Helper.refreshCheckBox(primaryCheckBox);
         } else {
-          setTimeout(function() {
-            primaryCheckBox.prop('checked', false).checkboxradio('refresh');
-          });
+          primaryCheckBox.prop('checked', false);
+          Helper.refreshCheckBox(primaryCheckBox);
         }
 
       });

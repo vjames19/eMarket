@@ -1,22 +1,21 @@
 'use strict';
 
-angular.module('eMarketApp').directive('categories', function(Category, Search) {
+angular.module('eMarketApp').directive('categories', function(Category, Search, Helper) {
   return {
     templateUrl: 'views/categories.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     link: function(scope, elem) {
+
       var page = $(elem[0]);
       var upButton = page.find('#up-button');
       var categoryList = page.find('#categoryList');
       var stack = [];
 
-      var refreshList = function(categories) {
+      var refreshCatList = function(categories) {
         scope.categories = categories;
-        setTimeout(function() { // It doesn't work without it -.-
-          categoryList.listview('refresh');
-        });
+        Helper.refreshList(categoryList);
       };
 
       scope.next = function(category) {
@@ -29,7 +28,7 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
           subCategories.unshift(parentCategory);
           upButton.show();
           stack.push(subCategories);
-          refreshList(subCategories);
+          refreshCatList(subCategories);
         } else {
           Search.setSearchByCategory(category.id);
           $.mobile.changePage('#search-results');
@@ -41,7 +40,7 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
         if(stack.length <= 1) {
           upButton.hide();
         }
-        refreshList(window._.last(stack));
+        refreshCatList(window._.last(stack));
       };
 
       page.on('pagebeforeshow', function() {
@@ -50,11 +49,10 @@ angular.module('eMarketApp').directive('categories', function(Category, Search) 
         Category.getList().then(function(categories) {
           scope.categories = categories;
           stack.push(categories);
-          setTimeout(function() {
-            categoryList.listview('refresh');
-          });
+          Helper.refreshList(categoryList);
         });
       });
+
     }
   };
 });

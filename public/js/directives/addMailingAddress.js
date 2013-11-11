@@ -7,11 +7,15 @@ angular.module('eMarketApp').directive('addMailingAddress', function() {
     scope: {},
     replace: true,
     controller: function($scope, User) {
+
       $scope.submit = function() {
-        $scope.mailAddresses.userId = User.userId;
-        User.me().all('mailAddresses').post($scope.mailAddresses);
+        $.mobile.loading('show');
+//        $scope.mailAddresses.userId = User.userId;
+//        User.me().all('mailAddresses').post($scope.mailAddresses); // TODO <-- missing .then()
+        $.mobile.loading('hide');
         $.mobile.changePage('#profile');
       };
+
     }
   };
 });
