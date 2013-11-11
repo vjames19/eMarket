@@ -16,26 +16,46 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
       scope.totalRevenue = 0.0;
       scope.selectedCategory = null;
 
-      scope.$watch('selectedCategory', function() {
+      scope.$watch('selectedCategory',
+          // listener
+          function() {
+            if(scope.selectedCategory === null) {
+              Restangular.one('reportsMonthTotal').get().then(function(result) {
+                scope.totalSales = result[0].sales;
+                scope.totalRevenue = result[0].revenue;
+                setTimeout(function() {
+                  graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+                });
+              });
+            } else {
+              Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
+                scope.totalSales = result.sales;
+                scope.totalRevenue = result.revenue;
+                setTimeout(function() {
+                  graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+                });
+              });
+            }
+          },
 
-        if(scope.selectedCategory === null) {
-          Restangular.one('reportsMonthTotal').get().then(function(result) {
-            scope.totalSales = result[0].sales;
-            scope.totalRevenue = result[0].revenue;
-            setTimeout(function() {
-              graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-            });
-          });
-        } else {
-          Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
-            scope.totalSales = result.sales;
-            scope.totalRevenue = result.revenue;
-            setTimeout(function() {
-              graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
-            });
-          });
-        }
+          function(newValue, oldValue) {
+            // init
+            if(newValue === oldValue) {
+              setTimeout(function() {
+                graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+              });
+            }
+            // change and no digest running
+            else if(!scope.$$phase) {
+              scope.$digest();
+            }
+          }
+      );
 
+      scope.$apply(function() {
+        setTimeout(function() {
+          graph.highcharts(Report.setGraphOptions(scope.totalSales, scope.totalRevenue, Highcharts));
+        });
       });
 
       page.on('pagebeforeshow', function() {
@@ -46,8 +66,6 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
         });
 
       });
-
-      scope.$digest();
 
     }
   };
