@@ -4,11 +4,13 @@ DROP VIEW IF EXISTS `emarket_test`.`report_month`;
 DROP VIEW IF EXISTS `emarket_test`.`report_week`;
 DROP VIEW IF EXISTS `emarket_test`.`report_day`;
 
-CREATE VIEW emarket_test.report_params AS
+CREATE OR REPLACE VIEW emarket_test.report_params AS
 SELECT  5000 as operation_cost,
-        0.05 as sales_fee_percent;
+        0.05 as sales_fee_percent,
+        (SELECT COUNT(*) FROM category_info WHERE category_status = 1) as active_category_count,
+        TRUNCATE(((SELECT operation_cost)/(SELECT active_category_count)), 2) as operation_cost_per_category;
 
-CREATE VIEW emarket_test.report_items AS
+CREATE OR REPLACE VIEW emarket_test.report_items AS
 SELECT  category_info.category_id,
     category_info.category_name,
     invoice_history.invoice_creation_date,
@@ -25,12 +27,12 @@ WHERE
     product_specification.product_spec_is_draft = 0 AND
     category_info.category_status = 1;
 
-CREATE VIEW emarket_test.report_month AS
+CREATE OR REPLACE VIEW emarket_test.report_month AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
@@ -46,12 +48,12 @@ WHERE  category_info.category_status = 1 AND
 GROUP BY category_info.category_id, category_info.category_name;
 
 
-CREATE VIEW emarket_test.report_week AS
+CREATE OR REPLACE VIEW emarket_test.report_week AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
@@ -66,12 +68,12 @@ WHERE  category_info.category_status = 1 AND
       )
 GROUP BY category_info.category_id, category_info.category_name;
 
-CREATE VIEW emarket_test.report_day AS
+CREATE OR REPLACE VIEW emarket_test.report_day AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
