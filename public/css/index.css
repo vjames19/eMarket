@@ -64,6 +64,13 @@ img.center-image {
     width: 40%;
 }
 
+/* Border Manipulation */
+
+.bottom-line {
+    border-bottom: solid 2px;
+}
+
+
 /* JQM Class Override*/
 
 .ui-footer {
