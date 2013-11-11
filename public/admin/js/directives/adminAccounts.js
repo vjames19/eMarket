@@ -29,7 +29,12 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
       scope.deleteAdmin = function() {
         $.mobile.loading('show');
 //        Restangular.one('admins', selectedAdmin.adminId).remove().then(function() {
-        if(selectedAdmin.isRoot === 0) { // Cannot Delete Root Admins Ever!
+        if(selectedAdmin.isRoot === 0) { // Non-Root Cannot Delete Root Admins Ever!
+          scope.admins.splice(selectedAdminIndex, 1);
+          Helper.refreshList(adminAccountList);
+        }
+        // Root Cannot Be Deleted Ever but Root people can delete other root people
+        else if(Admin.isRoot === 1 && selectedAdmin.username !== 'root') {
           scope.admins.splice(selectedAdminIndex, 1);
           Helper.refreshList(adminAccountList);
         }
