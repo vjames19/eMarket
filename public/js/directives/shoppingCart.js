@@ -18,13 +18,16 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
+
       var shoppingCartList = page.find('#shoppingCartList');
+      var proceedToCheckOut = page.find('#proceed-to-checkout-button');
 
       var cartSelected = null;
       var selectedCartIndex = null;
 
       scope.cost = 0;
       scope.shipping = 0;
+      scope.cartHasItems = false;
 
       var computeTotalCostAndShipping = function() {
         scope.cost = 0;
@@ -41,6 +44,11 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           scope.shoppingCarts = carts;
           Helper.refreshList(shoppingCartList);
           computeTotalCostAndShipping();
+          if(scope.shoppingCarts.length === 0) {
+            proceedToCheckOut.addClass('ui-disabled');
+          } else {
+            proceedToCheckOut.removeClass('ui-disabled');
+          }
         });
 
       });
@@ -55,6 +63,9 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
 //        User.me().one('carts', cartSelected.cartId).remove().then(function() {
         scope.shoppingCarts.splice(selectedCartIndex, 1);
         computeTotalCostAndShipping();
+        if(scope.shoppingCarts.length === 0) {
+          proceedToCheckOut.addClass('ui-disabled');
+        }
         Helper.refreshList(shoppingCartList);
         $.mobile.loading('hide');
 //        });
