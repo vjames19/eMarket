@@ -41,8 +41,10 @@
                   <label for="billing-address">Billing Address</label>
                 </td>
                 <td>
-                  <label><input type="checkbox" id="same-as" ng-click="disableBillAddress()"/>Same as
-                    Mailing Address</label>
+                  <label>
+                    <input type="checkbox" id="same-as" ng-click="disableBillAddress()" ng-required="false">
+                    Same as Mailing Address
+                  </label>
                 </td>
               </tr>
             </table>
