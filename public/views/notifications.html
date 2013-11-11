@@ -35,7 +35,7 @@
               </th>
             </tr>
             <tr>
-              <td><em>{{notification.message }}</em></td>
+              <td><em>{{ notification.message | truncate:45 }}</em></td>
             </tr>
           </table>
         </a>
@@ -48,8 +48,7 @@
   <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width: 320px">
     <a href="#notifications" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
        data-iconpos="notext" class="ui-btn-right">Close</a>
-
-    <p id="notificationMessage"></p>
+    <p id="notificationMessage" style="text-align: center"></p>
   </div>
 
 </div>
