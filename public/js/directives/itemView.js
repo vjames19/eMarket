@@ -30,11 +30,11 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
       var page = $(elem[0]);
 
-      var buyItNowButton = page.find('#buy-it-now-button');
-      var bidButton = page.find('#place-bid-button');
-      var productBidsBtn = page.find('#product-bids-btn');
-      var addedToCartPopup = page.find('#popupItemAddedToCart');
-      var quantityPopup = page.find('#popupQuantity');
+      var placeBidBtn = page.find('#itemView-placeBidBtn');
+      var buyItNowBtn = page.find('#itemView-buyItNowBtn');
+      var productBidsLink = page.find('#itemView-productBidsLink');
+      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
+      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
 
       page.on('pagebeforeshow', function() {
 
@@ -53,17 +53,17 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.amountToBuy = null;
 
         if(scope.item && scope.item.currentBid === null) {
-          productBidsBtn.addClass('ui-disabled');
+          productBidsLink.addClass('ui-disabled');
         } else {
-          productBidsBtn.removeClass('ui-disabled');
+          productBidsLink.removeClass('ui-disabled');
         }
 
         if(scope.item && User.userId === scope.item.sellerId) {
-          buyItNowButton.addClass('ui-disabled');
-          bidButton.addClass('ui-disabled');
+          buyItNowBtn.addClass('ui-disabled');
+          placeBidBtn.addClass('ui-disabled');
         } else {
-          bidButton.removeClass('ui-disabled');
-          buyItNowButton.removeClass('ui-disabled');
+          placeBidBtn.removeClass('ui-disabled');
+          buyItNowBtn.removeClass('ui-disabled');
         }
 
         if(scope.item.currentBid < scope.item.startingBidPrice) {

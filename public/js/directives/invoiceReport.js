@@ -9,7 +9,7 @@ angular.module('eMarketApp').directive('invoiceReport', function(User, Helper) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var invoiceProductsList = page.find('#invoiceProductsList');
+      var invoiceProductsList = page.find('#invoiceReport-invoiceProductsList');
 
       page.on('pagebeforeshow', function() {
 

@@ -9,8 +9,8 @@ angular.module('eMarketApp').directive('categories', function(Category, Search, 
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var upButton = page.find('#up-button');
-      var categoryList = page.find('#categoryList');
+      var upButton = page.find('#categories-upButton');
+      var categoryList = page.find('#categories-categoryList');
       var stack = [];
 
       var refreshCatList = function(categories) {

@@ -1,78 +1,69 @@
 <div data-role="page" data-theme="b" id="home-user">
 
-  <div data-role="header" data-theme="a" data-position="fixed" id="index-header">
-
-    <img src="img/logo.png" class="eMarket-logo"/>
+  <div data-role="header" data-theme="a" data-position="fixed">
+    <img src="img/logo.png" class="eMarket-logo">
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content" data-theme="b">
 
     <!-- Carousel of 10 elements -->
-    <div data-role="fieldcontain" id="owl-example" class="owl-carousel">
+    <div data-role="fieldcontain" id="homeUser-carousel" class="owl-carousel">
       <div ng-repeat="carouselProduct in carouselProducts">
         <a href="#item-view" ng-click="setItem(carouselProduct)">
-          <img title="{{ carouselProduct.productName }}" ng-src="{{carouselProduct.picture}}" style="width: 125px; height: 125px;" class="ui-corner-all">
+          <img title="{{ carouselProduct.productName }}" ng-src="{{carouselProduct.picture}}"
+               style="width: 125px; height: 125px;" class="ui-corner-all">
         </a>
       </div>
     </div>
 
     <!-- Create grids or cells of buttons -->
     <div class="ui-grid-solo">
-      <a href="#my-emarket-buying" data-role="button" id="grid-height"
-         class="grid-height"
-         data-transition="fade">
+      <a href="#my-emarket-buying" data-role="button" class="grid-height" data-transition="fade">
         <p class="small-text">My eMarket</p>
       </a>
     </div>
     <div class="ui-grid-solo">
-      <a href="#categories" data-role="button" id="categories" class="grid-height"
-         data-transition="fade">
+      <a href="#categories" data-role="button" class="grid-height" data-transition="fade">
         <p class="small-text">Categories</p>
       </a>
     </div>
     <div class="ui-grid-a">
       <div class="ui-block-a">
-        <a href="#sell-item" data-role="button" id="sell-item" class="grid-height"
-           data-transition="fade" ng-click="isDraft(false)">
+        <a href="#sell-item" data-role="button" class="grid-height" data-transition="fade" ng-click="isDraft(false)">
           <p class="small-text">Sell Item</p>
         </a>
       </div>
       <div class="ui-block-b">
-        <a href="#recently-viewed" data-role="button" id="recently-viewed" class="grid-height"
-           data-transition="fade">
+        <a href="#recently-viewed" data-role="button" class="grid-height" data-transition="fade">
           <p class="small-text">Recently Viewed</p>
         </a>
       </div>
     </div>
     <div class="ui-grid-a">
       <div class="ui-block-a">
-        <a href="#notifications" data-role="button" id="notifications" class="grid-height"
-           data-transition="fade">
+        <a href="#notifications" data-role="button" class="grid-height" data-transition="fade">
           <p class="small-text">Notifications</p>
         </a>
       </div>
       <div class="ui-block-b">
-        <a href="#invoices" data-role="button" id="invoices" class="grid-height"
-           data-transition="fade">
+        <a href="#invoices" data-role="button" class="grid-height" data-transition="fade">
           <p class="small-text">Invoices</p>
         </a>
       </div>
     </div>
     <div class="ui-grid-a">
       <div class="ui-block-a">
-        <a href="#payment-options" data-role="button" id="payment-options" class="grid-height"
-           data-transition="fade">
+        <a href="#payment-options" data-role="button" class="grid-height" data-transition="fade">
           <p class="small-text">Payment Options</p>
         </a>
       </div>
       <div class="ui-block-b">
-        <a href="#profile" data-role="button" id="profile" class="grid-height" data-transition="fade">
+        <a href="#profile" data-role="button" class="grid-height" data-transition="fade">
           <p class="small-text">Profile</p>
         </a>
       </div>

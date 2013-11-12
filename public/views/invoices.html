@@ -1,17 +1,17 @@
 <div data-role="page" data-theme="b" id="invoices">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Invoices</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
+
   <div data-role="content">
-    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="invoiceList">
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="invoices-invoiceList">
       <li data-role="list-divider">
         <table>
           <tr>
@@ -22,15 +22,12 @@
       </li>
       <li ng-repeat="invoice in invoices">
         <a href="#invoice-report" class="wrap-text" data-transition="slide">
-          <table data-rel="table" data-mode="reflow" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
               <th>
                 <strong><abbr title="Invoice # {{ $index + 1 }}">Invoice # {{ $index + 1 }}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
               <td><strong>Date:</strong></td>
               <td><em>{{invoice.creationDate | date}}</em></td>
@@ -43,11 +40,12 @@
               <td><strong>Order Price:</strong></td>
               <td><em>{{ invoice.total | currency }}</em></td>
             </tr>
-            </tbody>
           </table>
         </a>
       </li>
     </ul>
   </div>
+
   <div data-role="footer" data-theme="a"><h1></h1></div>
+
 </div>

@@ -1,23 +1,25 @@
 <div data-role="page" data-theme="b" id="categories">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Categories</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content">
-    <button ng-click="prev()" class="ui-btn ui-corner-all ui-btn-a" id="up-button">Up</button>
-    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="categoryList">
+    <button ng-click="prev()" class="ui-btn ui-corner-all ui-btn-a" id="categories-upButton">Up</button>
+    <ul data-role="listview" data-divider-theme="a" data-theme="c" data-inset="true" id="categories-categoryList">
       <li data-role="list-divider">Search by Categories</li>
-      <li ng-repeat="category in categories"><a href="" ng-click="next(category)">{{ category.categoryName }}</a></li>
+      <li ng-repeat="category in categories">
+        <a href="" ng-click="next(category)">{{ category.categoryName }}</a>
+      </li>
     </ul>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>
+
 </div>

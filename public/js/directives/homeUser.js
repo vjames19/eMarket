@@ -20,7 +20,7 @@ angular.module('eMarketApp').directive('homeUser', function(User, Carousel, Help
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var carousel = page.find('#owl-example');
+      var carousel = page.find('#homeUser-carousel');
 
       page.on('pagebeforeshow', function() {
 

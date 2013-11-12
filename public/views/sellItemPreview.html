@@ -1,13 +1,13 @@
 <div data-role="page" data-theme="b" id="sell-item-preview">
-  <form data-ajax="false" ng-submit="submit()">
 
-    <div data-role="header" data-position="fixed" data-theme="a">
-      <h1>Preview</h1>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Preview</h1>
+    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
+  </div>
 
-      <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
-    </div>
+  <div data-role="content">
 
-    <div data-role="content">
+    <form data-ajax="false" ng-submit="submit()">
 
       <table data-role="table" data-mode="none">
         <thead>
@@ -19,7 +19,7 @@
         <tbody>
         <tr>
           <td align="center">
-            <img ng-src="{{previewItemInfo.picture}}" id="item-photo" class="item-photo-big ui-corner-all"/>
+            <img ng-src="{{previewItemInfo.picture}}" class="item-photo-big ui-corner-all"/>
           </td>
         </tr>
         </tbody>
@@ -29,84 +29,80 @@
 
       <ul data-role="listview" data-theme="a" data-inset="true">
         <li>
-          <p class="bold-font">
-            Starting bid: {{ previewItemInfo.startingBidPrice | currency }}
-          </p>
-
-          <p class="bold-font">
-            Buy it Now: {{ previewItemInfo.nonbidPrice | currency }}
-          </p>
-
-          <p class="bold-font">
-            Shipping: {{ previewItemInfo.shippingPrice | currency }}
-          </p>
-
-          <p class="bold-font">
-            Available Quantity: {{ previewItemInfo.quantity }}
-          </p>
-        </li>
-        <li>
-          <!--<p class="bold-font">-->
-          <!--Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }}-->
-          <!--</p>-->
-          <p class="bold-font">
-            End Date: {{ previewItemInfo.bidEndDate | date:'medium' }}
-          </p>
-        </li>
-        <li>
-          <p class="bold-font">
-            Condition: {{ previewItemInfo.condition }}
-          </p>
-        </li>
-        <li>
-          <p class="bold-font">Description</p>
           <table>
             <tr>
-              <td>
-                <p class="bold-font">Brand:</p>
-              </td>
-              <td>
-                <p class="bold-font">{{ previewItemInfo.brand }}</p>
-              </td>
+              <td><strong>Starting bid:</strong></td>
+              <td><em>{{ previewItemInfo.startingBidPrice | currency }}</em></td>
             </tr>
             <tr>
-              <td>
-                <p class="bold-font">Model:</p>
-              </td>
-              <td>
-                <p class="bold-font">{{ previewItemInfo.model }}</p>
-              </td>
+              <td><strong>Buy It Now:</strong></td>
+              <td><em>{{ previewItemInfo.nonbidPrice | currency }}</em></td>
             </tr>
             <tr>
-              <td>
-                <p class="bold-font">Dimensions:</p>
-              </td>
-              <td>
-                <p class="bold-font">{{ previewItemInfo.dimensions }}</p>
-              </td>
+              <td><strong>Shipping:</strong></td>
+              <td><em>{{ previewItemInfo.shippingPrice | currency }}</em></td>
             </tr>
             <tr>
-              <td>
-                <p class="bold-font">Additional Description:</p>
-              </td>
-              <td>
-                <p class="bold-font" style="text-wrap: normal !important;">
-                  {{ previewItemInfo.description }}
-                </p>
-              </td>
+              <td><strong>Available Quantity:</strong></td>
+              <td><em>{{ previewItemInfo.quantity }}</em></td>
+            </tr>
+            <tr>
+              <td><strong></strong></td>
+              <td><em></em></td>
             </tr>
           </table>
-
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td><strong>End Date:</strong></td>
+              <td><em>{{ previewItemInfo.bidEndDate | date:'medium' }}</em></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <td><strong>Condition:</strong></td>
+              <td><em>{{ previewItemInfo.condition }}</em></td>
+            </tr>
+          </table>
+        </li>
+        <li>
+          <table>
+            <tr>
+              <th colspan="2"><strong>Description</strong></th>
+            </tr>
+            <tr>
+              <td><strong>Brand:</strong></td>
+              <td><em>{{ previewItemInfo.brand }}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Model:</strong></td>
+              <td><em>{{ previewItemInfo.model }}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Dimensions:</strong></td>
+              <td><em>{{ previewItemInfo.dimensions }}</em></td>
+            </tr>
+            <tr>
+              <td><strong>Additional Description:</strong></td>
+              <td><em class="wrap-text">{{ previewItemInfo.description }}</em></td>
+            </tr>
+          </table>
         </li>
       </ul>
-    </div>
 
-    <div data-role="footer" data-theme="a">
-      <button type="submit"
-              class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all ui-btn-inline">
-        Submit
-      </button>
-    </div>
-  </form>
+    </form>
+
+  </div>
+
+  <div data-role="footer" data-theme="a">
+    <button type="submit"
+            class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all ui-btn-inline">
+      Submit
+    </button>
+  </div>
+
 </div>
 

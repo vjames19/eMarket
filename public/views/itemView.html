@@ -1,204 +1,182 @@
 <div data-role="page" data-theme="b" id="item-view">
-<div data-role="header" data-position="fixed" data-theme="a">
-  <h1>Item</h1>
 
-  <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Item</h1>
+    <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
 
-  <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-    <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
-    <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
-  </div>
-
-  <search></search>
-</div>
-
-<div data-role="content">
-
-  <table data-role="table" data-mode="none">
-    <thead>
-    <tr>
-      <th><h3 class="item-title">{{ item.productName }}</h3></th>
-    </tr>
-    <tr></tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo-big ui-corner-all"/>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-  <hr/>
-
-  <table data-role="table" data-mode="none">
-    <thead>
-    <tr>
-      <th></th>
-    </tr>
-    </thead>
-    <!-- this is here for compatibility for data-role="table" -->
-    <tbody>
-    <tr>
-      <td>
-        <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
-           data-position-to="window" data-transition="pop" data-theme="a">
-          <p class="small-text">Place bid US {{ nextMinBid | currency }}</p>
-        </a>
-      </td>
-      <td>
-        <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
-           data-rel="popup"
-           data-position-to="window" data-transition="pop" data-theme="a">
-          <p class="small-text">Buy It Now</p>
-        </a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-  <hr/>
-
-  <ul data-role="listview" data-theme="a" data-inset="true" id="item-list-view">
-    <li>
-      <p class="bold-font">
-        Starting bid: {{ item.startingBidPrice | currency }}
-      </p>
-
-      <p class="bold-font">
-        Current bid: {{ item.currentBid | currency }}
-      </p>
-
-      <p class="bold-font">
-        Buy it Now: {{ item.nonbidPrice | currency }}
-      </p>
-
-      <p class="bold-font">
-        Shipping: {{ item.shippingPrice | currency }}
-      </p>
-
-      <p class="bold-font">
-        Available Quantity: {{ item.quantity }}
-      </p>
-    </li>
-    <li>
-      <p class="bold-font">
-        End Date: {{ item.bidEndDate | date:'medium' }}
-      </p>
-    </li>
-    <li>
-      <p class="bold-font">
-        Condition: {{ item.condition }}
-      </p>
-    </li>
-    <li>
-      <p class="bold-font">
-        Description
-      </p>
-      <table>
-        <tr>
-          <td>
-            <p class="bold-font">
-              Brand:
-            </p>
-          </td>
-          <td>
-            <p class="bold-font">
-              {{item.brand}}
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="bold-font">
-              Model:
-            </p>
-          </td>
-          <td>
-            <p class="bold-font">
-              {{ item.model}}
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="bold-font">
-              Dimensions:
-            </p>
-          </td>
-          <td>
-            <p class="bold-font">
-              {{item.dimensions}}
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="bold-font">
-              Additional Description:
-            </p>
-          </td>
-          <td>
-            <p class="bold-font" style="white-space: normal !important;">
-              {{item.description}}
-            </p>
-          </td>
-        </tr>
-
-      </table>
-    </li>
-    <li>
-      <a href="#product-bids" data-inline="true" id="product-bids-btn" data-theme="a" data-transition="slide"
-         ng-click="setProductId(item.id)">
-        <p class="bold-font">Product Bids</p>
-      </a>
-    </li>
-    <li>
-      <a href="#seller-profile" data-inline="true" data-theme="a" data-transition="slide">
-        <p class="bold-font">Seller: {{ item.sellerName }}</p>
-      </a>
-    </li>
-  </ul>
-
-</div>
-
-<div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
-  <div style="padding:10px 20px;">
-    <p>Product have been placed in cart</p>
-  </div>
-</div>
-
-<div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
-  <form data-ajax="false" ng-submit="submitCart()">
-    <div style="padding:10px 20px;">
-      <h3>Enter Quantity</h3>
-      <label for="quantity"></label>
-      <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy"
-             ng-required="true">
-      <button type="submit" data-icon="false" data-theme="b">Add to Cart</button>
-      <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" ng-click="addToCart()">Add to Cart</a>-->
-      <a href="#item-view" data-role="button">Cancel</a>
+    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+      <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
+      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-  </form>
-</div>
+    <search></search>
+  </div>
 
-<div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
-  <form data-ajax="false" ng-submit="submitBid()">
-    <div style="padding:10px 20px;">
-      <h3>Enter Bid</h3>
-      <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid | number:2 }}</a>
+  <div data-role="content">
 
-      <div data-role="fieldcontain">
-        <label for="placeBid">Place Bid</label>
-        <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount" ng-required="true">
+    <table data-role="table" data-mode="none">
+      <thead>
+      <tr>
+        <th><h3 class="item-title">{{ item.productName }}</h3></th>
+      </tr>
+      <tr></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td align="center">
+          <img ng-src="{{item.picture}}" class="item-photo-big ui-corner-all"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr/>
+
+    <table data-role="table" data-mode="none">
+      <thead>
+      <tr>
+        <th></th>
+      </tr>
+      </thead>
+      <!-- this is here for compatibility for data-role="table" -->
+      <tbody>
+      <tr>
+        <td>
+          <a href="#itemView-placeBidPopup" data-role="button" id="itemView-placeBidBtn" class="place-bid-button"
+             data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
+            <p class="small-text">Place bid US {{ nextMinBid | currency }}</p>
+          </a>
+        </td>
+        <td>
+          <a href="#itemView-buyItNowPopup" data-role="button" id="itemView-buyItNowBtn" class="buy-it-now-button"
+             data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
+            <p class="small-text">Buy It Now</p>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr/>
+
+    <ul data-role="listview" data-theme="a" data-inset="true">
+      <li>
+        <table>
+          <tr>
+            <td><strong>Starting bid:</strong></td>
+            <td><em>{{ item.startingBidPrice | currency }}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Buy It Now:</strong></td>
+            <td><em>{{ item.nonbidPrice | currency }}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Shipping:</strong></td>
+            <td><em>{{ item.shippingPrice | currency }}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Available Quantity:</strong></td>
+            <td><em>{{ item.quantity }}</em></td>
+          </tr>
+          <tr>
+            <td><strong></strong></td>
+            <td><em></em></td>
+          </tr>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tr>
+            <td><strong>End Date:</strong></td>
+            <td><em>{{ item.bidEndDate | date:'medium' }}</em></td>
+          </tr>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tr>
+            <td><strong>Condition:</strong></td>
+            <td><em>{{ item.condition }}</em></td>
+          </tr>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tr>
+            <th colspan="2"><strong>Description</strong></th>
+          </tr>
+          <tr>
+            <td><strong>Brand:</strong></td>
+            <td><em>{{item.brand}}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Model:</strong></td>
+            <td><em>{{ item.model}}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Dimensions:</strong></td>
+            <td><em>{{item.dimensions}}</em></td>
+          </tr>
+          <tr>
+            <td><strong>Additional Description:</strong></td>
+            <td><em class="wrap-text">{{item.description}}</em></td>
+          </tr>
+        </table>
+      </li>
+      <li>
+        <a href="#product-bids" data-inline="true" id="itemView-productBidsLink" data-theme="a" data-transition="slide"
+           ng-click="setProductId(item.id)">
+          <p class="bold-font">Product Bids</p>
+        </a>
+      </li>
+      <li>
+        <a href="#seller-profile" data-inline="true" data-theme="a" data-transition="slide">
+          <p class="bold-font">Seller: {{ item.sellerName }}</p>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
+  <div data-role="popup" id="itemView-placeBidPopup" data-theme="a" class="ui-corner-all">
+    <form data-ajax="false" ng-submit="submitBid()">
+      <div class="form-pad">
+        <h3>Enter Bid</h3>
+        <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid | number:2 }}</a>
+
+        <div data-role="fieldcontain">
+          <label for="itemView-bidAmount">Place Bid</label>
+          <input type="number" id="itemView-bidAmount" step="any" min="{{ nextMinBid | number:2 }}"
+                 placeholder="{{ nextMinBid | number:2 }}"
+                 ng-model="bidAmount" ng-required="true">
+        </div>
+        <button type="submit" data-icon="false" data-theme="b">Bid</button>
+        <a href="#item-view" data-role="button">Cancel</a>
       </div>
+    </form>
+  </div>
 
-      <button type="submit" data-icon="false" data-theme="b">Bid</button>
-      <a href="#item-view" data-role="button">Cancel</a>
+  <div data-role="popup" id="itemView-buyItNowPopup" data-theme="a" class="ui-corner-all">
+    <form data-ajax="false" ng-submit="submitCart()">
+      <div class="form-pad">
+        <h3>Enter Quantity</h3>
+
+        <div data-role="fieldcontain">
+          <label for="itemView-quantityAmount"></label>
+          <input type="number" id="itemView-quantityAmount" min="1" max="{{item.quantity}}" placeholder="1"
+                 ng-model="amountToBuy" ng-required="true">
+        </div>
+        <button type="submit" data-icon="false" data-theme="b">Add to Cart</button>
+        <a href="#item-view" data-role="button">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <div data-role="popup" id="itemView-addedToCartPopup" data-theme="a" class="ui-corner-all">
+    <div class="form-pad">
+      <p>Product(s) have been placed in cart.</p>
     </div>
-  </form>
-</div>
+  </div>
 
-<div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
