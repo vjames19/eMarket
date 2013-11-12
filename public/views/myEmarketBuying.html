@@ -29,22 +29,25 @@
                 <img ng-src="{{bid.picture}}" class="item-photo-small ui-corner-all">
               </th>
               <th rowspan="4" class="pad"></th>
-              <th colspan="2">
+              <th colspan="3">
                 <strong><abbr title="{{bid.productName}}">
                   {{bid.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
             <tr>
               <td><strong>Your Bid</strong></td>
+              <td class="pad"></td>
               <td><em>{{bid.highestBid | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Current Bid</strong></td>
+              <td class="pad"></td>
               <td><em>{{bid.currentBid | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Bid Time</strong></td>
-              <td><em>{{bid.creationDate | date:'yyyy-MM-dd HH:mm:ss'}}</em></td>
+              <td class="pad"></td>
+              <td><em>{{bid.creationDate | date:'medium'}}</em></td>
             </tr>
           </table>
         </a>
@@ -58,17 +61,19 @@
                 <img ng-src="{{purchase.picture}}" class="item-photo-small ui-corner-all">
               </th>
               <th rowspan="3" class="pad"></th>
-              <th colspan="2">
+              <th colspan="3">
                 <strong><abbr title="{{purchase.productName}}">{{purchase.productName | truncate:15}}</abbr></strong>
               </th>
             </tr>
             <tr>
               <td><strong>Seller Name</strong></td>
+              <td class="pad"></td>
               <td><em>{{ purchase.sellerName }}</em></td>
             </tr>
             <tr>
               <td><strong>Purchase Date</strong></td>
-              <td><em>{{ purchase.purchaseDate | date:'yyyy-MM-dd HH:mm:ss' }}</em></td>
+              <td class="pad"></td>
+              <td><em>{{ purchase.purchaseDate | date:'medium' }}</em></td>
             </tr>
           </table>
         </a>
