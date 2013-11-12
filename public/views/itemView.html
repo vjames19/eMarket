@@ -1,189 +1,204 @@
 <div data-role="page" data-theme="b" id="item-view">
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1>Item</h1>
+<div data-role="header" data-position="fixed" data-theme="a">
+  <h1>Item</h1>
 
-    <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
+  <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
 
-    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-      <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
-      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
-    </div>
-
-    <search></search>
+  <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+    <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
+    <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
   </div>
 
-  <div data-role="content">
+  <search></search>
+</div>
 
-    <table data-role="table" data-mode="none">
-      <thead>
-      <tr>
-        <th><h3 class="item-title">{{ item.productName }}</h3></th>
-      </tr>
-      <tr></tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo-big ui-corner-all"/>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+<div data-role="content">
 
-    <hr/>
+  <table data-role="table" data-mode="none">
+    <thead>
+    <tr>
+      <th><h3 class="item-title">{{ item.productName }}</h3></th>
+    </tr>
+    <tr></tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td align="center"><img ng-src="{{item.picture}}" id="item-photo" class="item-photo-big ui-corner-all"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
-    <table data-role="table" data-mode="none">
-      <thead>
-      <tr>
-        <th></th>
-      </tr>
-      </thead>
-      <!-- this is here for compatibility for data-role="table" -->
-      <tbody>
-      <tr>
-        <td>
-          <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
-             data-position-to="window" data-transition="pop" data-theme="a">
-            <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
-          </a>
-        </td>
-        <td>
-          <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
-             data-rel="popup"
-             data-position-to="window" data-transition="pop" data-theme="a">
-            <p class="item-button-text-size">Buy It Now</p>
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <hr/>
 
-    <hr/>
-
-    <ul data-role="listview" data-theme="a" data-inset="true" id="item-list-view">
-      <li>
-        <p class="item-description-text-size"> Starting bid: {{ item.startingBidPrice | currency }}</p>
-
-        <p class="item-description-text-size"> Current bid: {{ item.currentBid | currency }} </p>
-
-        <p class="item-description-text-size"> Buy it Now: {{ item.nonbidPrice | currency }} </p>
-
-        <p class="item-description-text-size"> Shipping: {{ item.shippingPrice | currency }} </p>
-
-        <p class="item-description-text-size"> Available Quantity: {{ item.quantity }} </p>
-      </li>
-      <li>
-        <p class="item-description-text-size">
-
-        <p class="item-description-text-size"> End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }} </p>
-      </li>
-      <li>
-        <p class="item-description-text-size"> Condition: {{ item.condition }} </p>
-      </li>
-      <li>
-        <p class="item-description-text-size">
-          Description </p>
-        <table>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Brand:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{item.brand}}
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Model:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{ item.model}}
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Dimensions:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size">
-                {{item.dimensions}}
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="item-description-text-size">
-                Additional Description:
-              </p>
-            </td>
-            <td>
-              <p class="item-description-text-size" style="white-space: normal !important;">
-                {{item.description}}
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </li>
-      <li>
-        <a href="#product-bids" data-inline="true" id="product-bids-btn" data-theme="a" data-transition="slide"
-           ng-click="setProductId(item.id)">
-          <p class="item-description-text-size">Product Bids</p>
+  <table data-role="table" data-mode="none">
+    <thead>
+    <tr>
+      <th></th>
+    </tr>
+    </thead>
+    <!-- this is here for compatibility for data-role="table" -->
+    <tbody>
+    <tr>
+      <td>
+        <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
+           data-position-to="window" data-transition="pop" data-theme="a">
+          <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
         </a>
-      </li>
-      <li>
-        <a href="#seller-profile" data-inline="true" data-theme="a" data-transition="slide">
-          <p class="item-description-text-size"> Seller: {{ item.sellerName }}</p>
+      </td>
+      <td>
+        <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
+           data-rel="popup"
+           data-position-to="window" data-transition="pop" data-theme="a">
+          <p class="item-button-text-size">Buy It Now</p>
         </a>
-      </li>
-    </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
+  <hr/>
+
+  <ul data-role="listview" data-theme="a" data-inset="true" id="item-list-view">
+    <li>
+      <p class="item-description-text-size">
+        Starting bid: {{ item.startingBidPrice | currency }}
+      </p>
+
+      <p class="item-description-text-size">
+        Current bid: {{ item.currentBid | currency }}
+      </p>
+
+      <p class="item-description-text-size">
+        Buy it Now: {{ item.nonbidPrice | currency }}
+      </p>
+
+      <p class="item-description-text-size">
+        Shipping: {{ item.shippingPrice | currency }}
+      </p>
+
+      <p class="item-description-text-size">
+        Available Quantity: {{ item.quantity }}
+      </p>
+    </li>
+    <li>
+      <p class="item-description-text-size">
+        End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }}
+      </p>
+    </li>
+    <li>
+      <p class="item-description-text-size">
+        Condition: {{ item.condition }}
+      </p>
+    </li>
+    <li>
+      <p class="item-description-text-size">
+        Description
+      </p>
+      <table>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Brand:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{item.brand}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Model:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{ item.model}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Dimensions:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size">
+              {{item.dimensions}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="item-description-text-size">
+              Additional Description:
+            </p>
+          </td>
+          <td>
+            <p class="item-description-text-size" style="white-space: normal !important;">
+              {{item.description}}
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </li>
+    <li>
+      <a href="#product-bids" data-inline="true" id="product-bids-btn" data-theme="a" data-transition="slide"
+         ng-click="setProductId(item.id)">
+        <p class="item-description-text-size">Product Bids</p>
+      </a>
+    </li>
+    <li>
+      <a href="#seller-profile" data-inline="true" data-theme="a" data-transition="slide">
+        <p class="item-description-text-size">Seller: {{ item.sellerName }}</p>
+      </a>
+    </li>
+  </ul>
+
+</div>
+
+<div data-role="popup" id="popupItemAddedToCart" data-theme="a" class="ui-corner-all">
+  <div style="padding:10px 20px;">
+    <p>Product have been placed in cart</p>
   </div>
+</div>
 
-  <div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
-    <form>
-      <div style="padding:10px 20px;">
-        <h3>Enter Quantity</h3>
-        <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy">
-        <a href="#popupItemAddedToCart" data-role="button" data-rel="popup"
-           data-position-to="window" data-transition="pop" ng-click="addToCart()" data-theme="b">Add to Cart</a>
-        <a href="#item-view" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
-    <form data-ajax="false" ng-submit="submitBid()">
-      <div style="padding:10px 20px;">
-        <h3>Enter Bid</h3>
-        <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid | number:2 }}</a>
-
-        <div data-role="fieldcontain">
-          <label for="placeBid">Place Bid</label>
-          <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount">
-        </div>
-
-        <button type="submit" data-icon="false" data-theme="b">Bid</button>
-        <a href="#item-view" data-role="button">Cancel</a>
-      </div>
-    </form>
-  </div>
-
-  <div data-role="popup" id="popupItemAddedToCart" data-theme="b" class="ui-corner-all">
+<div data-role="popup" id="popupQuantity" data-theme="a" class="ui-corner-all">
+  <form data-ajax="false" ng-submit="submitCart()">
     <div style="padding:10px 20px;">
-      <p>Product have been placed in cart</p>
+      <h3>Enter Quantity</h3>
+      <label for="quantity"></label>
+      <input type="number" min="1" max="{{item.quantity}}" id="quantity" placeholder="1" ng-model="amountToBuy"
+             ng-required="true">
+      <button type="submit" data-icon="false" data-theme="b">Add to Cart</button>
+      <!--<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" ng-click="addToCart()">Add to Cart</a>-->
+      <a href="#item-view" data-role="button">Cancel</a>
     </div>
-  </div>
+  </form>
+</div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+<div data-role="popup" id="popupPlaceBid" data-theme="a" class="ui-corner-all">
+  <form data-ajax="false" ng-submit="submitBid()">
+    <div style="padding:10px 20px;">
+      <h3>Enter Bid</h3>
+      <a data-role="button" ng-click="setNextBid()" data-theme="b">Add Min Bid: {{ nextMinBid | number:2 }}</a>
+
+      <div data-role="fieldcontain">
+        <label for="placeBid">Place Bid</label>
+        <input type="number" step="any" min="{{nextMinBid}}" id="placeBid" ng-model="bidAmount" ng-required="true">
+      </div>
+
+      <button type="submit" data-icon="false" data-theme="b">Bid</button>
+      <a href="#item-view" data-role="button">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
