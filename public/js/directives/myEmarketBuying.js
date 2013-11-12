@@ -1,33 +1,36 @@
 'use strict';
 
-angular.module('eMarketApp').directive('myEmarketBuying', function(User) {
+angular.module('eMarketApp').directive('myEmarketBuying', function(User, Helper) {
   return {
     templateUrl: 'views/myEmarketBuying.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     controller: function($scope, Product) {
+
       $scope.setItem = Product.setItem;
+
     },
     link: function(scope, elem) {
+
       var page = $(elem[0]);
+
       var bidAndPurchaseList = page.find('#bidAndPurchaseList');
 
       page.on('pagebeforeshow', function() {
+
         User.me().getList('purchases').then(function(purchases) {
           scope.purchases = purchases;
-          setTimeout(function() {
-            bidAndPurchaseList.listview('refresh');
-          });
+          Helper.refreshList(bidAndPurchaseList);
         });
 
         User.me().getList('bids').then(function(bids) {
           scope.bids = bids;
-          setTimeout(function() {
-            bidAndPurchaseList.listview('refresh');
-          });
+          Helper.refreshList(bidAndPurchaseList);
         });
+
       });
+
     }
   };
 });

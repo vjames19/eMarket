@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('eMarketApp').directive('productBids', function(Restangular, ProductBids) {
+angular.module('eMarketApp').directive('productBids', function(Restangular, ProductBids, Helper) {
   return {
     templateUrl: 'views/productBids.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     link: function(scope, elem) {
 
@@ -17,11 +17,8 @@ angular.module('eMarketApp').directive('productBids', function(Restangular, Prod
 
         Restangular.one('products', scope.productId).getList('bids').then(function(bids) {
           scope.productBids = bids;
-          setTimeout(function(){
-            productBidList.listview('refresh');
-          });
+          Helper.refreshList(productBidList);
         });
-
 
       });
 
