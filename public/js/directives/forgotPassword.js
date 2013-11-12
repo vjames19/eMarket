@@ -20,7 +20,7 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
 
       var page = $(elem[0]);
 
-      var securityQuestions = page.find('select[id*="security-questions"]');
+      var securityQuestions = page.find('select[id*="forgot-securityQuestion"]');
 
       page.on('pagebeforeshow', function() {
 

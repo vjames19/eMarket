@@ -25,13 +25,12 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var sameAsCheckBox = page.find('#same-as');
-      var securityQuestions = page.find('select[id*="security-questions"]');
-      var billingAddressFields = page.find('input[id*="billing-address"]');
+      var sameAsCheckBox = page.find('#register-sameAsMailing');
+      var securityQuestions = page.find('select[id*="register-securityQuestion"]');
+      var billingAddressFields = page.find('input[id*="register-billing"]');
 
       scope.disableBillAddress = function() {
-        var disable = sameAsCheckBox.prop('checked');
-        billingAddressFields.prop('disabled', disable);
+        billingAddressFields.prop('disabled', sameAsCheckBox.prop('checked'));
       };
 
       page.on('pagebeforeshow', function() {
