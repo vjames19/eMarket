@@ -25,8 +25,8 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var accountType = page.find('#bank-account-type');
-      var addressSelect = page.find('#address-relation');
+      var accountType = page.find('#editBank-accountType');
+      var addressSelect = page.find('#editBank-associatedAddress');
 
       page.on('pagebeforeshow', function() {
 

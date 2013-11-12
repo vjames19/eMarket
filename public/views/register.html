@@ -2,9 +2,7 @@
 
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Register</h1>
-
     <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
   </div>
 
   <div data-role="content">
@@ -38,7 +36,7 @@
             <label for="register-mailingCity">City</label>
             <input type="text" id="register-mailingCity" ng-model="newUser.mailAddress.city" ng-required="true">
             <label for="register-mailingZipCode">Zip Code</label>
-            <input type="text" id="register-mailingZipCode" ng-model="newUser.mailAddress.zipCode"
+            <input type="tel" id="register-mailingZipCode" ng-model="newUser.mailAddress.zipCode"
                    ng-required="true">
             <hr/>
             <label for="register-billing"><strong>Billing Address</strong></label>
@@ -57,7 +55,7 @@
             <label for="register-billingCity">City</label>
             <input type="text" id="register-billingCity" ng-model="newUser.billAddress.city" ng-required="true">
             <label for="register-billingZipCode">Zip Code</label>
-            <input type="text" id="register-billingZipCode" ng-model="newUser.billAddress.zipCode"
+            <input type="tel" id="register-billingZipCode" ng-model="newUser.billAddress.zipCode"
                    ng-required="true">
             <label for="register-telephone">Telephone</label>
             <input type="tel" id="register-telephone" ng-model="newUser.user.telephone" ng-required="true">

@@ -25,7 +25,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var primaryCheckBox = page.find('#make-primary');
+      var primaryCheckBox = page.find('#editMail-makePrimary');
 
       page.on('pagebeforeshow', function() {
 

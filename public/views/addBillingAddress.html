@@ -1,28 +1,28 @@
 <div data-role="page" data-theme="b" id="add-billing-address">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Add Billing Address</h1>
-
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
-
   </div>
 
   <div data-role="content" data-theme="a">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="name"><strong>Name</strong></label>
-        <input type="text" id="name" ng-model="billAddresses.recipientName" ng-required="true">
-        <label for="address"><strong>Address</strong></label>
-        <input type="text" id="address" ng-model="billAddresses.billAddress" ng-required="true">
-        <label for="country"><strong>Country</strong></label>
-        <input type="text" id="country" ng-model="billAddresses.country" ng-required="true">
-        <label for="city"><strong>City</strong></label>
-        <input type="text" id="city" ng-model="billAddresses.city" ng-required="true">
-        <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="geographical-region" ng-model="billAddresses.geographicalRegion" ng-required="false">
-        <label for="zip-code"><strong>Zip Code</strong></label>
-        <input type="tel" id="zip-code" ng-model="billAddresses.zipCode" ng-required="true">
-        <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="billAddresses.telephone" ng-required="true">
+        <label for="addBill-name"><strong>Name</strong></label>
+        <input type="text" id="addBill-name" ng-model="billAddresses.recipientName" ng-required="true">
+        <label for="addBill-address"><strong>Address</strong></label>
+        <input type="text" id="addBill-address" ng-model="billAddresses.billAddress" ng-required="true">
+        <label for="addBill-country"><strong>Country</strong></label>
+        <input type="text" id="addBill-country" ng-model="billAddresses.country" ng-required="true">
+        <label for="addBill-city"><strong>City</strong></label>
+        <input type="text" id="addBill-city" ng-model="billAddresses.city" ng-required="true">
+        <label for="addBill-geographicalRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" id="addBill-geographicalRegion" ng-model="billAddresses.geographicalRegion"
+               ng-required="false">
+        <label for="addBill-zipCode"><strong>Zip Code</strong></label>
+        <input type="tel" id="addBill-zipCode" ng-model="billAddresses.zipCode" ng-required="true">
+        <label for="addBill-telephone"><strong>Telephone</strong></label>
+        <input type="tel" id="addBill-telephone" ng-model="billAddresses.telephone" ng-required="true">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>

@@ -22,7 +22,7 @@ angular.module('eMarketApp').directive('addCard', function(User, Helper) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var addressSelect = page.find('#address-relation');
+      var addressSelect = page.find('#associatedAddress');
 
       page.on('pagebeforeshow', function() {
 

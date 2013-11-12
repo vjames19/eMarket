@@ -51,20 +51,19 @@
 
   <div data-role="content">
     <form ng-submit="logIn()" data-ajax="false">
-      <div style="padding:10px 20px;">
+      <div class="form-pad">
         <h3>Welcome, Please Sign In</h3>
-        <label for="username" class="ui-hidden-accessible">Username:</label>
-        <input name="username" id="username" value="" placeholder="username" data-theme="a" type="text"
+        <label for="index-username" class="ui-hidden-accessible">Username:</label>
+        <input name="username" id="index-username" value="" placeholder="username" data-theme="a" type="text"
                ng-model="username">
-        <label for="password" class="ui-hidden-accessible">Password:</label>
-        <input name="password" id="password" value="" placeholder="password" autocomplete="off" data-theme="a"
+        <label for="index-password" class="ui-hidden-accessible">Password:</label>
+        <input name="password" id="index-password" value="" placeholder="password" autocomplete="off" data-theme="a"
                type="password" ng-model="password">
         <button type="submit" data-theme="b" data-icon="check">Sign in</button>
         <a href="#register" data-role="button" data-icon="star" data-transition="slide">Register</a>
         <a href="#forgot-password" data-role="button" data-icon="info" data-theme="a" data-mini="true">Forgot
           password?</a>
       </div>
-
     </form>
   </div>
 
@@ -77,6 +76,7 @@
   <div data-role="popup" id="loginError">
     <p>Incorrect username or password</p>
   </div>
+
 </div>
 
 <!--Directives-->

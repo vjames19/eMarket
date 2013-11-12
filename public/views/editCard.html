@@ -1,32 +1,31 @@
 <div data-role="page" data-theme="b" id="edit-card">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Edit Card</h1>
-
-    <a href="#payment-options" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
+    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
   <div data-role="content" data-theme="a">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="card-name"><strong>Card Name</strong></label>
-        <input type="text" id="card-name" ng-model="cardInfo.ownerName" ng-required="true">
-        <label for="card-type"><strong>Card Type</strong></label>
-        <select id="card-type" ng-model="cardInfo.cardType" ng-required="true">
+        <label for="editCard-name"><strong>Card Name</strong></label>
+        <input type="text" id="editCard-name" ng-model="cardInfo.ownerName" ng-required="true">
+        <label for="editCard-type"><strong>Card Type</strong></label>
+        <select id="editCard-type" ng-model="cardInfo.cardType" ng-required="true">
           <option value="Visa">Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
-        <label for="card-exp-date"><strong>Expiration Date</strong></label>
-        <input type="month" id="card-exp-date" ng-model="cardInfo.expirationDate" ng-required="true">
-        <label for="card-number"><strong>Card Number</strong></label>
+        <label for="editCard-expDate"><strong>Expiration Date</strong></label>
+        <input type="month" id="editCard-expDate" ng-model="cardInfo.expirationDate" ng-required="true">
         <!-- The type number in the phone make the last digit 0 in the card-number-->
-        <input type="text" id="card-number" ng-model="cardInfo.cardNumber" ng-required="true">
-        <label for="card-csv"><strong>Card CSV</strong></label>
-        <input type="text" id="card-csv" ng-model="cardInfo.cardCsv" ng-required="true">
-        <label for="address-relation"><strong>Associated Address</strong></label>
-        <select id="address-relation" ng-model="cardInfo.addressId"
+        <label for="editCard-number"><strong>Card Number</strong></label>
+        <input type="text" id="editCard-number" ng-model="cardInfo.cardNumber" ng-required="true">
+        <label for="editCard-csv"><strong>Card CSV</strong></label>
+        <input type="text" id="editCard-csv" ng-model="cardInfo.cardCsv" ng-required="true">
+        <label for="editCard-associatedAddress"><strong>Associated Address</strong></label>
+        <select id="editCard-associatedAddress" ng-model="cardInfo.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses" ng-required="true">
         </select>
       </div>

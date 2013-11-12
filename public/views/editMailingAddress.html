@@ -1,30 +1,29 @@
 <div data-role="page" data-theme="b" id="edit-mailing-address">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Edit Mailing Address</h1>
-
-    <a href="#profile" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
+    <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
   <div data-role="content" data-theme="a">
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="name"><strong>Name</strong></label>
-        <input type="text" id="name" ng-model="mailInfo.recipientName" ng-required="true">
-        <label for="address"><strong>Address</strong></label>
-        <input type="text" id="address" ng-model="mailInfo.address" ng-required="true">
-        <label for="country"><strong>Country</strong></label>
-        <input type="text" id="country" ng-model="mailInfo.country" ng-required="true">
-        <label for="city"><strong>City</strong></label>
-        <input type="text" id="city" ng-model="mailInfo.city" ng-required="true">
-        <label for="geographical-region"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="geographical-region" ng-model="mailInfo.geographicalRegion" ng-required="false">
-        <label for="zip-code"><strong>Zip Code</strong></label>
-        <input type="tel" id="zip-code" ng-model="mailInfo.zipCode" ng-required="true">
-        <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" ng-model="mailInfo.telephone" ng-required="true">
-        <label for="make-primary">Make Primary</label>
-        <input name="make-primary" id="make-primary" class="custom" data-mini="true" type="checkbox"
+        <label for="editMail-name"><strong>Name</strong></label>
+        <input type="text" id="editMail-name" ng-model="mailInfo.recipientName" ng-required="true">
+        <label for="editMail-address"><strong>Address</strong></label>
+        <input type="text" id="editMail-address" ng-model="mailInfo.address" ng-required="true">
+        <label for="editMail-country"><strong>Country</strong></label>
+        <input type="text" id="editMail-country" ng-model="mailInfo.country" ng-required="true">
+        <label for="editMail-city"><strong>City</strong></label>
+        <input type="text" id="editMail-city" ng-model="mailInfo.city" ng-required="true">
+        <label for="editMail-geographicalRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" id="editMail-geographicalRegion" ng-model="mailInfo.geographicalRegion" ng-required="false">
+        <label for="editMail-zipCode"><strong>Zip Code</strong></label>
+        <input type="tel" id="editMail-zipCode" ng-model="mailInfo.zipCode" ng-required="true">
+        <label for="editMail-telephone"><strong>Telephone</strong></label>
+        <input type="tel" id="editMail-telephone" ng-model="mailInfo.telephone" ng-required="true">
+        <label for="editMail-makePrimary">Make Primary</label>
+        <input name="make-primary" id="editMail-makePrimary" class="custom" data-mini="true" type="checkbox"
                ng-model="mailInfo.isPrimary" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
