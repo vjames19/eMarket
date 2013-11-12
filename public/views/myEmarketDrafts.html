@@ -1,15 +1,13 @@
 <div data-role="page" data-theme="b" id="my-emarket-drafts">
+
   <div data-role="header" class="header" data-position="fixed" data-theme="a">
     <h1>My eMarket</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
-
     <div data-role="navbar">
       <ul>
         <li><a href="#my-emarket-buying">Buying</a></li>
@@ -20,12 +18,14 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="draftList">
+
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="myEmDrafts-draftList">
       <li data-role="list-divider">Drafts<span class="ui-li-count">{{drafts.length}}</span></li>
       <li ng-repeat="draft in drafts">
         <a href="#sell-item" data-transition="slide" ng-click="setDraft(draft)">{{draft.productName}}</a>
       </li>
     </ul>
+
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

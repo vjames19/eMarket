@@ -28,10 +28,11 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var mailAddressList = page.find('#mailAddressList');
-      var billAddressList = page.find('#billAddressList');
-      var questionSelects = page.find('select[id*=select-question]');
-      var ratingList = page.find('#ratingList');
+
+      var ratingList = page.find('#profile-ratingList');
+      var mailAddressList = page.find('#profile-mailAddressList');
+      var billAddressList = page.find('#profile-billAddressList');
+      var questionSelects = page.find('select[id*=profile-securityQuestion]');
 
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;

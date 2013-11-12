@@ -23,8 +23,8 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
 
       var page = $(elem[0]);
 
-      var bankSelect = page.find('#select-bank');
-      var cardSelect = page.find('#select-card');
+      var bankSelect = page.find('#checkout-bankSelect');
+      var cardSelect = page.find('#checkout-cardSelect');
 
       scope.selectPaymentMethod = function() {
         scope.isCreditCard = scope.paymentMethod === 'Credit Card';

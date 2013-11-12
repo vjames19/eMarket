@@ -1,23 +1,23 @@
 <div data-role="page" data-theme="b" id="payment-options">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Payment Options</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content">
+
     <div data-role="collapsible-set" data-theme="a">
       <div data-role="collapsible">
         <h2>Edit Credit Cards</h2>
-        <ul data-role="listview" data-theme="a" data-divider-theme="b" id="cardList" data-inset="true">
+        <ul data-role="listview" data-theme="a" data-divider-theme="b" id="paymentOptions-cardList" data-inset="true">
           <li data-role="list-divider">
-            <table>
+            <table class="wrap-text">
               <tr>
                 <td>Credit Cards on System</td>
                 <td class="pad"></td>
@@ -29,27 +29,45 @@
           </li>
           <li ng-repeat="creditCard in creditCards">
             <a href="">
-              <p><strong>Name:</strong> {{creditCard.ownerName}}</p>
-
-              <p><strong>Issuing Network:</strong> {{creditCard.cardType}}</p>
-
-              <p><strong>Card Number:</strong> {{creditCard.cardNumber}}</p>
-
-              <p><strong>Card Exp Date:</strong> {{creditCard.expirationDate | date:'yyyy-MM'}}</p>
-
-              <p><strong>Card CSV:</strong> {{creditCard.cardCsv}}</p>
+              <table class="small-text wrap-text">
+                <tr>
+                  <td><strong>Name:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{creditCard.ownerName}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Issuing Network:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{creditCard.cardType}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Card Number:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{creditCard.cardNumber}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Card Exp. Date:</strong></td>
+                  <td class="pad"></td>
+                  <td>{{creditCard.expirationDate | date:'yyyy-MM'}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Card CSV:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{creditCard.cardCsv}}</em></td>
+                </tr>
+              </table>
             </a>
-            <a href="#cardPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"
+            <a href="#paymentOptions-cardOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="a"
                ng-click="setCardInfo(creditCard); selectCard(creditCard, $index)"></a>
           </li>
         </ul>
       </div>
       <div data-role="collapsible">
         <h2>Edit Bank Accounts</h2>
-        <ul data-role="listview" data-theme="a" data-divider-theme="b" id="bankList" data-inset="true">
+        <ul data-role="listview" data-theme="a" data-divider-theme="b" id="paymentOptions-bankList" data-inset="true">
           <li data-role="list-divider">
-            <table>
+            <table class="wrap-text">
               <tr>
                 <td>Bank Accounts on System</td>
                 <td class="pad"></td>
@@ -61,25 +79,41 @@
           </li>
           <li ng-repeat="bankAccount in bankAccounts">
             <a href="">
-              <p><strong>Bank Name:</strong> {{bankAccount.bankName}}</p>
-
-              <p><strong>Bank Account Type:</strong> {{bankAccount.accountType}}</p>
-
-              <p><strong>Bank Account Number:</strong> {{bankAccount.accountNumber}}</p>
-
-              <p><strong>Bank Account Routing:</strong> {{bankAccount.routingNumber}}</p>
+              <table class="small-text wrap-text">
+                <tr>
+                  <td><strong>Bank Name:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{bankAccount.bankName}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Bank Account Type:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{bankAccount.accountType}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Bank Account Number:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{bankAccount.accountNumber}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Bank Account Routing:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{bankAccount.routingNumber}}</em></td>
+                </tr>
+              </table>
             </a>
-            <a href="#bankPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
-               data-position-to="window" data-icon="gear" data-theme="c"
+            <a href="#paymentOptions-bankOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="a"
                ng-click="setBankInfo(bankAccount); selectBank(bankAccount, $index)"></a>
           </li>
         </ul>
       </div>
     </div>
+
   </div>
 
-  <div data-role="popup" id="cardPopupMenu" data-theme="b">
-    <div style="padding:10px 20px;">
+  <div data-role="popup" id="paymentOptions-cardOptionsPopup" data-theme="b">
+    <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-card" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
       <a href="#payment-options" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
@@ -88,8 +122,8 @@
     </div>
   </div>
 
-  <div data-role="popup" id="bankPopupMenu" data-theme="b">
-    <div style="padding:10px 20px;">
+  <div data-role="popup" id="paymentOptions-bankOptionsPopup" data-theme="b">
+    <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-bank" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
       <a href="#payment-options" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"

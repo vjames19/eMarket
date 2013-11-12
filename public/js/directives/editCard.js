@@ -25,6 +25,7 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
     link: function(scope, elem) {
 
       var page = $(elem[0]);
+
       var cardType = page.find('#editCard-type');
       var addressSelect = page.find('#editCard-associatedAddress');
 

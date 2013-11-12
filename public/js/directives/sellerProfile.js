@@ -15,11 +15,11 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
 
       var page = $(elem[0]);
 
-      var sellerProductList = page.find('#sellerProductList');
-      var sellerRatingList = page.find('#sellerRatingList');
+      var sellerProductList = page.find('#sellerProfile-sellerProductList');
+      var sellerRatingList = page.find('#sellerProfile-sellerRatingList');
 
-      var sellerAvgRate = page.find('#sellerAvgRate');
-      var rateSellerBox = page.find('#rateSeller');
+      var sellerAvgRate = page.find('#sellerProfile-sellerAvgRate');
+      var rateSellerBox = page.find('#sellerProfile-rateSeller');
 
       page.on('pagebeforeshow', function() {
 

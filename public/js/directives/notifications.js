@@ -16,9 +16,10 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var notificationList = page.find('#notificationList');
-      var notificationMessage = page.find('#notificationMessage');
-      var notificationPopup = page.find('#popupInfo');
+
+      var notificationList = page.find('#notifications-notificationList');
+      var notificationMessage = page.find('#notifications-message');
+      var notificationPopup = page.find('#notifications-infoPopup');
 
       scope.readMessage = function(notification) {
         notificationMessage.text(notification.message);

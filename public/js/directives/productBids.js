@@ -9,7 +9,8 @@ angular.module('eMarketApp').directive('productBids', function(Restangular, Prod
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var productBidList = page.find('#productBidsList');
+
+      var productBidList = page.find('#productBids-bidList');
 
       page.on('pagebeforeshow', function() {
 

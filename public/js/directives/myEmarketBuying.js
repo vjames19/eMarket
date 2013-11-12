@@ -15,7 +15,7 @@ angular.module('eMarketApp').directive('myEmarketBuying', function(User, Helper)
 
       var page = $(elem[0]);
 
-      var bidAndPurchaseList = page.find('#bidAndPurchaseList');
+      var bidAndPurchaseList = page.find('#myEmBuying-bidAndPurchaseList');
 
       page.on('pagebeforeshow', function() {
 

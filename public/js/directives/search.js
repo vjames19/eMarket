@@ -8,9 +8,10 @@ angular.module('eMarketApp').directive('search', function(Search) {
     replace: true,
     link: function($scope, elem) {
 
+      var page = $(elem[0]);
+
       $scope.submitSearch = function() {
-        var searchInput = $(elem[0]).find('#search');
-        Search.setSearchQuery(searchInput.val());
+        Search.setSearchQuery(page.find('.search').val());
         $.mobile.changePage('#search-results');
       };
 

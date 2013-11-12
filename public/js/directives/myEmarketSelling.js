@@ -15,7 +15,7 @@ angular.module('eMarketApp').directive('myEmarketSelling', function(User, Helper
 
       var page = $(elem[0]);
 
-      var soldAndUnsoldList = page.find('#soldAndUnsoldList');
+      var soldAndUnsoldList = page.find('#myEmSelling-soldAndUnsoldList');
 
       page.on('pagebeforeshow', function() {
 

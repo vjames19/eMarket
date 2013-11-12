@@ -14,7 +14,8 @@ angular.module('eMarketApp').directive('recentlyViewed', function(User, Helper) 
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var recentlyViewedList = page.find('#recentlyViewedList');
+
+      var recentlyViewedList = page.find('#recentViewed-recentlyViewedList');
 
       page.on('pagebeforeshow', function() {
 

@@ -1,18 +1,19 @@
 <div data-role="page" data-theme="b" id="notifications">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Notifications</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true" id="notificationList">
+
+    <ul data-role="listview" data-theme="b" data-divider-theme="a" data-inset="true"
+        id="notifications-notificationList">
       <li data-role="list-divider">
         <table>
           <tr>
@@ -22,9 +23,9 @@
         </table>
       </li>
       <li data-icon="false" ng-repeat="notification in notifications">
-        <a href="#popupInfo" data-rel="popup" data-inline="true" data-transition="pop"
+        <a href="#notifications-infoPopup" data-rel="popup" data-inline="true" data-transition="pop"
            ng-click="readMessage(notification)">
-          <table class="ui-responsive wrap-text">
+          <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th rowspan="2">
                 <img src="img/envelope.png" class="ui-corner-all" width="75px" height="49px">
@@ -41,14 +42,16 @@
         </a>
       </li>
     </ul>
+
   </div>
 
   <div data-role="footer" data-theme="a" class="footer"><h1></h1></div>
 
-  <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width: 320px">
+  <div data-role="popup" id="notifications-infoPopup" class="ui-content" data-theme="a" style="max-width: 320px">
     <a href="#notifications" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
        data-iconpos="notext" class="ui-btn-right">Close</a>
-    <p id="notificationMessage" style="text-align: center"></p>
+
+    <p id="notifications-message" style="text-align: center"></p>
   </div>
 
 </div>

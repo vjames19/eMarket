@@ -19,8 +19,8 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
 
       var page = $(elem[0]);
 
-      var shoppingCartList = page.find('#shoppingCartList');
-      var proceedToCheckOut = page.find('#proceed-to-checkout-button');
+      var shoppingCartList = page.find('#cart-shoppingCartList');
+      var proceedToCheckOut = page.find('#cart-proceedToCheckoutBtn');
 
       var cartSelected = null;
       var selectedCartIndex = null;

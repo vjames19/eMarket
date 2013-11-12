@@ -1,22 +1,23 @@
 <div data-role="page" data-theme="b" id="recently-viewed">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Recently Viewed</h1>
-
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="recentlyViewedList">
+
+    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true"
+        id="recentViewed-recentlyViewedList">
       <li data-role="list-divider">Last 10 Items</li>
       <li ng-repeat="item in recentlyViewed">
-        <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
-          <table class="ui-responsive wrap-text">
+        <a href="#item-view" ng-click="setItem(item)" data-transition="slide">
+          <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th rowspan="3">
                 <img ng-src="{{item.picture}}" class="item-photo-small ui-corner-all">
@@ -39,6 +40,7 @@
         </a>
       </li>
     </ul>
+
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

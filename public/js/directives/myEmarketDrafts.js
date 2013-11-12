@@ -15,7 +15,7 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
 
       var page = $(elem[0]);
 
-      var draftList = page.find('#draftList');
+      var draftList = page.find('#myEmDrafts-draftList');
 
       page.on('pagebeforeshow', function() {
 

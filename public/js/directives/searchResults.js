@@ -24,7 +24,7 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var resultList = page.find('#resultList');
+      var resultList = page.find('#searchResult-resultList');
 
       var search = function() {
         $.mobile.loading('show');
@@ -36,7 +36,7 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
       };
 
       scope.submitSearch = function() {
-        Search.setSearchQuery(page.find('#search').val());
+        Search.setSearchQuery(page.find('#searchResults-search').val());
         search();
       };
 

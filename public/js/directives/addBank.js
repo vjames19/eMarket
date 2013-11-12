@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
     link: function(scope, elem) {
 
       var page = $(elem[0]);
+
       var addressSelect = page.find('#associatedAddress');
 
       page.on('pagebeforeshow', function() {

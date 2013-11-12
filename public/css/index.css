@@ -38,7 +38,6 @@ img.item-photo-small {
 
 .wrap-text {
     white-space: normal !important;
-    font-size: 90%;
 }
 
 /* Grid Manipulation */
@@ -70,6 +69,10 @@ img.item-photo-small {
 }
 
 /* Font Manipulation*/
+
+.medium-text{
+    font-size: 80%;
+}
 
 .small-text {
     font-size: 75%;

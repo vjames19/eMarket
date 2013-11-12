@@ -22,8 +22,9 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var cardList = page.find('#cardList');
-      var bankList = page.find('#bankList');
+
+      var cardList = page.find('#paymentOptions-cardList');
+      var bankList = page.find('#paymentOptions-bankList');
 
       var selectedCard = null;
       var selectedBank = null;

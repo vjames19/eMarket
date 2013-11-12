@@ -1,13 +1,12 @@
 <div data-role="page" data-theme="b" id="profile">
+
 <div data-role="header" data-position="fixed" data-theme="a">
   <h1>Profile</h1>
-
   <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
 
   <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
     <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
   </div>
-
   <search></search>
 </div>
 
@@ -28,44 +27,45 @@
       </li>
     </ul>
     <div class="form-pad">
-      <label for="firstname"><strong>First Name</strong></label>
-      <input type="text" id="firstname" ng-model="user.firstName" ng-required="true">
-      <label for="middlename"><strong>Middle Name</strong></label>
-      <input type="text" id="middlename" ng-model="user.middleName" ng-required="false">
-      <label for="lastname"><strong>Last Name</strong></label>
-      <input type="text" id="lastname" ng-model="user.lastName" ng-required="true">
-      <label for="email"><strong>Email</strong></label>
-      <input type="email" id="email" ng-model="user.email" ng-required="true">
-      <label for="telephone"><strong>Telephone</strong></label>
-      <input type="tel" id="telephone" ng-model="user.telephone" ng-required="true">
-
-      <label for="select-question1"><strong>Question 1</strong></label>
-      <select id="select-question1" ng-model="user.question1"
+      <label for="profile-firstName"><strong>First Name</strong></label>
+      <input type="text" id="profile-firstName" ng-model="user.firstName" ng-required="true">
+      <label for="profile-middleName"><strong>Middle Name</strong></label>
+      <input type="text" id="profile-middleName" ng-model="user.middleName" ng-required="false">
+      <label for="profile-lastName"><strong>Last Name</strong></label>
+      <input type="text" id="profile-lastName" ng-model="user.lastName" ng-required="true">
+      <label for="profile-email"><strong>Email</strong></label>
+      <input type="email" id="profile-email" ng-model="user.email" ng-required="true">
+      <label for="profile-telephone"><strong>Telephone</strong></label>
+      <input type="tel" id="profile-telephone" ng-model="user.telephone" ng-required="true">
+      <label for="profile-securityQuestion-1"><strong>Question 1</strong></label>
+      <select id="profile-securityQuestion-1" ng-model="user.question1"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
-      <label for="answer-question1"><strong>Answer</strong></label>
-      <input type="text" id="answer-question1" ng-model="user.questionAnswer1" ng-required="true">
+      <label for="profile-securityAnswer-1"><strong>Answer</strong></label>
+      <input type="text" id="profile-securityAnswer-1" ng-model="user.questionAnswer1" ng-required="true">
 
-      <label for="select-question2"><strong>Question 2</strong></label>
-      <select id="select-question2" ng-model="user.question2"
+      <label for="profile-securityQuestion-2"><strong>Question 2</strong></label>
+      <select id="profile-securityQuestion-2" ng-model="user.question2"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
-      <label for="answer-question2"><strong>Answer</strong></label>
-      <input type="text" id="answer-question2" ng-model="user.questionAnswer2" ng-required="true">
+      <label for="profile-securityAnswer-2"><strong>Answer</strong></label>
+      <input type="text" id="profile-securityAnswer-2" ng-model="user.questionAnswer2" ng-required="true">
 
-      <label for="select-question1"><strong>Question 3</strong></label>
-      <select id="select-question3" ng-model="user.question3"
+      <label for="profile-securityQuestion-3"><strong>Question 3</strong></label>
+      <select id="profile-securityQuestion-3" ng-model="user.question3"
               ng-options="question.id as question.question for question in questions" ng-required="true">
       </select>
-      <label for="answer-question3"><strong>Answer</strong></label>
-      <input type="text" id="answer-question3" ng-model="user.questionAnswer3" ng-required="true">
+      <label for="profile-securityAnswer-3"><strong>Answer</strong></label>
+      <input type="text" id="profile-securityAnswer-3" ng-model="user.questionAnswer3" ng-required="true">
 
-      <label for="old-password"><strong>Old Password</strong></label>
-      <input type="password" id="old-password" autocomplete="off" ng-model="user.oldPassword" ng-required="false">
-      <label for="new-password"><strong>New Password</strong></label>
-      <input type="password" id="new-password" autocomplete="off" ng-model="user.newPassword" ng-required="false">
-      <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-      <input type="password" id="new-password-confirm" autocomplete="off" ng-model="user.newPasswordConfirm"
+      <label for="profile-oldPassword"><strong>Old Password</strong></label>
+      <input type="password" id="profile-oldPassword" autocomplete="off" ng-model="user.oldPassword"
+             ng-required="true">
+      <label for="profile-newPassword"><strong>New Password</strong></label>
+      <input type="password" id="profile-newPassword" autocomplete="off" ng-model="user.newPassword"
+             ng-required="false">
+      <label for="profile-newPasswordConfirm"><strong>Confirm Password</strong></label>
+      <input type="password" id="profile-newPasswordConfirm" autocomplete="off" ng-model="user.newPasswordConfirm"
              ng-required="false">
     </div>
     <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
@@ -79,9 +79,9 @@
 
   <div data-role="collapsible" data-theme="a" data-content-theme="false">
     <h2>Edit Mailing Addresses</h2>
-    <ul data-role="listview" id="mailAddressList" data-theme="a" data-divider-theme="b">
+    <ul data-role="listview" id="profile-mailAddressList" data-theme="a" data-divider-theme="b">
       <li data-role="list-divider">
-        <table>
+        <table class="wrap-text">
           <tr>
             <td><strong>Mail Addresses on System</strong></td>
             <td class="pad"></td>
@@ -95,7 +95,7 @@
       </li>
       <li ng-repeat="mailAddress in mailAddresses">
         <a href="">
-          <table class="x-small-text">
+          <table class="x-small-text wrap-text">
             <tr>
               <td><strong>Name:</strong></td>
               <td class="pad"></td>
@@ -104,7 +104,7 @@
             <tr>
               <td><strong>Address:</strong></td>
               <td class="pad"></td>
-              <td class="wrap-text"><em>{{mailAddress.address}}</em></td>
+              <td><em>{{mailAddress.address}}</em></td>
             </tr>
             <tr>
               <td><strong>Country:</strong></td>
@@ -133,17 +133,18 @@
             </tr>
           </table>
         </a>
-        <a href="#mailingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+        <a href="#profile-mailAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear" data-theme="c"
            ng-click="setMailInfo(mailAddress); selectMailAddress(mailAddress, $index)"></a>
       </li>
     </ul>
   </div>
+
   <div data-role="collapsible" data-theme="a" data-content-theme="false">
     <h2>Edit Billing Addresses</h2>
-    <ul data-role="listview" id="billAddressList" data-theme="a" data-divider-theme="b">
+    <ul data-role="listview" id="profile-billAddressList" data-theme="a" data-divider-theme="b">
       <li data-role="list-divider">
-        <table>
+        <table class="wrap-text">
           <tr>
             <td><strong>Bill Addresses on System</strong></td>
             <td class="pad"></td>
@@ -157,7 +158,7 @@
       </li>
       <li ng-repeat="billAddress in billAddresses">
         <a href="">
-          <table class="x-small-text">
+          <table class="x-small-text wrap-text">
             <tr>
               <td><strong>Name:</strong></td>
               <td class="pad"></td>
@@ -166,7 +167,7 @@
             <tr>
               <td><strong>Address:</strong></td>
               <td class="pad"></td>
-              <td class="wrap-text"><em>{{billAddress.address}}</em></td>
+              <td><em>{{billAddress.address}}</em></td>
             </tr>
             <tr>
               <td><strong>Country:</strong></td>
@@ -195,7 +196,7 @@
             </tr>
           </table>
         </a>
-        <a href="#billingAddressPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+        <a href="#profile-billAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear" data-theme="c"
            ng-click="setBillInfo(billAddress); selectBillAddress(billAddress, $index)"></a>
       </li>
@@ -206,7 +207,7 @@
 
 <div data-role="collapsible" data-theme="a" data-content-theme="false">
   <h2>My Ratings</h2>
-  <ul data-role="listview" data-theme="a" data-divider-theme="b" id="ratingList">
+  <ul data-role="listview" data-theme="a" data-divider-theme="b" id="profile-ratingList">
     <li data-role="list-divider">
       <table>
         <tr>
@@ -242,8 +243,8 @@
 
 </div>
 
-<div data-role="popup" id="mailingAddressPopupMenu" data-theme="b">
-  <div style="padding:10px 20px;">
+<div data-role="popup" id="profile-mailAddressOptionsPopup" data-theme="b">
+  <div class="form-pad">
     <h3>Choose An Action</h3>
     <a href="#edit-mailing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
     <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
@@ -252,8 +253,8 @@
   </div>
 </div>
 
-<div data-role="popup" id="billingAddressPopupMenu" data-theme="b">
-  <div style="padding:10px 20px;">
+<div data-role="popup" id="profile-billAddressOptionsPopup" data-theme="b">
+  <div class="form-pad">
     <h3>Choose An Action</h3>
     <a href="#edit-billing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
     <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"

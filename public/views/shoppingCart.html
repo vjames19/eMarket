@@ -1,24 +1,23 @@
 <div data-role="page" data-theme="b" id="shopping-cart">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Shopping Cart</h1>
-
     <a href="#" data-role="button" data-icon="back" data-rel="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#home-user" class="ui-btn ui-shadow ui-icon-home ui-btn-icon-notext ui-mini">Home</a>
     </div>
-
     <search></search>
   </div>
 
   <div data-role="content">
 
-    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="shoppingCartList">
+    <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="cart-shoppingCartList">
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
-        <a href="#item-view" class="wrap-text" data-transition="slide" ng-click="setItem(shoppingCart)"
+        <a href="#item-view" data-transition="slide" ng-click="setItem(shoppingCart)"
            data-transition="slide">
-          <table class="ui-responsive wrap-text">
+          <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th rowspan="4">
                 <img ng-src="{{shoppingCart.picture}}" class="item-photo-small ui-corner-all">
@@ -49,6 +48,7 @@
         </a>
       </li>
     </ul>
+
     <div>
       <table align="right">
         <tr>
@@ -78,15 +78,16 @@
         </tr>
       </table>
     </div>
+
   </div>
 
   <div data-role="footer" data-theme="a">
-    <a href="#checkout" id="proceed-to-checkout-button" data-role="button" class="footer-button"
+    <a href="#proceed-to-checkout" id="cart-proceedToCheckoutBtn" data-role="button" class="footer-button"
        ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)" data-theme="b">Proceed to Checkout</a>
   </div>
 
   <div data-role="popup" id="popupNotification" data-theme="a" class="ui-corner-all">
-    <div style="padding:10px 20px;">
+    <div class="form-pad">
       <h3>Select an action</h3>
       <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()" data-theme="b">Delete</a>
       <a href="#shopping-cart" data-role="button" data-theme="b">Cancel</a>
