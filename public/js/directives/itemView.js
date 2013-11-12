@@ -19,6 +19,12 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         $.mobile.changePage('#home-user');
       };
 
+      $scope.submitCart = function() {
+        $.mobile.loading('show');
+        $.mobile.loading('hide');
+        $.mobile.changePage('#home-user');
+      };
+
     },
     link: function(scope, elem) {
 
@@ -74,21 +80,21 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
         });
 
-        scope.submitCart = function() {
-          $.mobile.loading('show');
-          quantityPopup.popup('close');
-          // User.me().all('carts').post(scope.item); // TODO <-- add .then later
-          setTimeout(function() {
-            scope.item.cost = scope.item.quantity * scope.item.nonbidPrice;
-            $.mobile.loading('hide');
-            addedToCartPopup.popup('open');
-            setTimeout(function() {
-              addedToCartPopup.popup('close');
-            }, 2000);
-          });
-        };
-
       });
+
+//        scope.submitCart = function() {
+//          $.mobile.loading('show');
+//          quantityPopup.popup('close');
+//          // User.me().all('carts').post(scope.item); // TODO <-- add .then later
+//          setTimeout(function() {
+//            scope.item.cost = scope.item.quantity * scope.item.nonbidPrice;
+//            $.mobile.loading('hide');
+//            addedToCartPopup.popup('open');
+//            setTimeout(function() {
+//              addedToCartPopup.popup('close');
+//            }, 2000);
+//          });
+//        };
 
 //      scope.addToCart = function() {
       // Get the item quantity and multiply it by the price to get the total cost
