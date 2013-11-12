@@ -7,12 +7,13 @@ angular.module('eMarketApp').directive('search', function(Search) {
     scope: {},
     replace: true,
     link: function($scope, elem) {
+
       $scope.submitSearch = function() {
-        // It doesn't recognize ng-model -.-
         var searchInput = $(elem[0]).find('#search');
         Search.setSearchQuery(searchInput.val());
         $.mobile.changePage('#search-results');
       };
+
     }
   };
 });
