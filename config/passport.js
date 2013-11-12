@@ -13,18 +13,18 @@ module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
     if(authUser) {
-      console.log('Serializing User');
+//      console.log('Serializing User');
       done(null, user.id);
     }
     if(authAdmin) {
-      console.log('Serializing Admin');
+//      console.log('Serializing Admin');
       done(null, user.id);
     }
   });
 
   passport.deserializeUser(function(id, done) {
     if(authUser) {
-      console.log('Deserializing User');
+//      console.log('Deserializing User');
       User.get(id, function(err, user) {
         if(_.isEmpty(user)) {
           done(null, false);
@@ -34,7 +34,7 @@ module.exports = function(passport) {
       });
     }
     if(authAdmin) {
-      console.log('Deserializing Admin');
+//      console.log('Deserializing Admin');
       Admin.get(id, function(err, admin) {
         if(_.isEmpty(admin)) {
           done(null, false);
