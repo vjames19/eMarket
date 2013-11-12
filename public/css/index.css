@@ -11,6 +11,8 @@
 
 /* Image Manipulation */
 
+/* Only Works on Chrome, currently not in use. */
+/* table align=center works on all browsers. */
 img.center-image {
     position: absolute;
     top: 0;
@@ -32,6 +34,18 @@ img.item-photo-small {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Table Manipulations */
+
+.table-cell-left {
+    display: table-cell;
+    float: left;
+}
+
+.table-cell-right {
+    display: table-cell;
+    float: right;
 }
 
 /* Text Wrapping */
@@ -116,4 +130,8 @@ img.item-photo-small {
 hr {
     clear: both;
     visibility: hidden;
+}
+
+textarea {
+    resize: none !important;
 }

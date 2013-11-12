@@ -27,7 +27,7 @@
       </table>
 
       <label for="product-title"></label>
-      <textarea ng-model="item.productName" id="product-title" style="resize: none; min-height: 100px"
+      <textarea ng-model="item.productName" id="product-title"
                 placeholder="Product Title..." data-theme="a"
                 maxlength="45" ng-required="true"></textarea>
 
@@ -54,7 +54,7 @@
 
   <div data-role="popup" id="popupCategory" data-theme="b" class="ui-corner-all">
     <form>
-      <div style="padding:10px 20px;">
+      <div class="form-pad">
         <h3>Select the Category</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <div data-role="none" ng-repeat="category in categories">
@@ -71,7 +71,7 @@
 
   <div data-role="popup" id="popupCondition" data-theme="b" class="ui-corner-all">
     <form>
-      <div style="padding:10px 20px;">
+      <div class="form-pad">
         <h3>Select the condition</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
@@ -102,7 +102,7 @@
         <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
         <label for="description">Additional Description</label>
         <textarea name="description" id="description"
-                  style="resize: none" ng-model="item.description" data-theme="a"
+                  ng-model="item.description" data-theme="a"
                   maxlength="255" ng-required="true"></textarea>
         <br/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>

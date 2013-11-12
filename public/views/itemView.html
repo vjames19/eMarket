@@ -16,7 +16,7 @@
     <table data-role="table" data-mode="none">
       <thead>
       <tr>
-        <th><h3 class="item-title">{{ item.productName }}</h3></th>
+        <th><h3>{{ item.productName }}</h3></th>
       </tr>
       <tr></tr>
       </thead>
@@ -41,13 +41,13 @@
       <tbody>
       <tr>
         <td>
-          <a href="#itemView-placeBidPopup" data-role="button" id="itemView-placeBidBtn" class="place-bid-button"
+          <a href="#itemView-placeBidPopup" data-role="button" id="itemView-placeBidBtn" class="table-cell-left"
              data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
             <p class="small-text">Place bid US {{ nextMinBid | currency }}</p>
           </a>
         </td>
         <td>
-          <a href="#itemView-buyItNowPopup" data-role="button" id="itemView-buyItNowBtn" class="buy-it-now-button"
+          <a href="#itemView-buyItNowPopup" data-role="button" id="itemView-buyItNowBtn" class="table-cell-right"
              data-rel="popup" data-position-to="window" data-transition="pop" data-theme="a">
             <p class="small-text">Buy It Now</p>
           </a>
