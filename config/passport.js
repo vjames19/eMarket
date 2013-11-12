@@ -6,26 +6,27 @@ var Admin = require('../app/models/admin.js');
 
 var _ = require('underscore');
 
-var authUser = false;
-var authAdmin = false;
-
 module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
-    if(authUser) {
-//      console.log('Serializing User');
-      done(null, user.id);
-    }
-    if(authAdmin) {
-//      console.log('Serializing Admin');
-      done(null, user.id);
+    if(Admin.isAdmin(user)) {
+      done(null, {id: user.id, role: 'admin'});
+    } else {
+      done(null, {id: user.id, role: 'user'});
     }
   });
 
-  passport.deserializeUser(function(id, done) {
-    if(authUser) {
-//      console.log('Deserializing User');
-      User.get(id, function(err, user) {
+  passport.deserializeUser(function(user, done) {
+    if(user.role === 'admin') {
+      Admin.get(user.id, function(err, admin) {
+        if(_.isEmpty(admin)) {
+          done(null, false);
+        } else {
+          done(null, admin);
+        }
+      });
+    } else {
+      User.get(user.id, function(err, user) {
         if(_.isEmpty(user)) {
           done(null, false);
         } else {
@@ -33,22 +34,10 @@ module.exports = function(passport) {
         }
       });
     }
-    if(authAdmin) {
-//      console.log('Deserializing Admin');
-      Admin.get(id, function(err, admin) {
-        if(_.isEmpty(admin)) {
-          done(null, false);
-        } else {
-          done(null, admin);
-        }
-      });
-    }
   });
 
   passport.use('user', new LocalStrategy({usernameField: 'username', passwordField: 'password'},
       function(username, password, done) {
-        authUser = true;
-        authAdmin = false;
         User.authenticate(username, password, function(err, user) {
           console.log('Local User Strategy', arguments);
           if(err) {
@@ -63,8 +52,6 @@ module.exports = function(passport) {
 
   passport.use('admin', new LocalStrategy({usernameField: 'username', passwordField: 'password'},
       function(username, password, done) {
-        authUser = false;
-        authAdmin = true;
         Admin.authenticate(username, password, function(err, admin) {
           console.log('Local Admin Strategy', arguments);
           if(err) {
@@ -76,5 +63,4 @@ module.exports = function(passport) {
           }
         });
       }));
-
 };
