@@ -1,28 +1,29 @@
 'use strict';
 
-angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, Helper) {
+angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, Helper, $filter) {
   return {
     templateUrl: 'views/sellItem.html',
     restrict: 'E',
-    scope: true,
+    scope: {},
     replace: true,
     controller: function($scope) {
+
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
+
     },
     link: function(scope, elem) {
 
       var page = $(elem[0]);
 
-      var freeShippingCheckbox = page.find('#checkbox-free-shipping');
-      var shippingPriceInput = page.find('#shipping-price');
+      var freeShippingCheckbox = page.find('#sellItem-freeShipping');
+      var shippingPriceInput = page.find('#sellItem-shippingPrice');
 
-      var newCheckBox = page.find('#radio-choice-new');
-      var UsedCheckBox = page.find('#radio-choice-used');
-      var RefurbishedCheckBox = page.find('#radio-choice-refurbished');
+      var newCheckBox = page.find('#sellItem-conditionNew');
+      var usedCheckBox = page.find('#sellItem-conditionUsed');
+      var refurbishedCheckBox = page.find('#sellItem-conditionRefurbished');
 
-      var categoryPopup = page.find('#popupCategory');
-      var descriptionPopup = page.find('#popupDescription');
-//      var categoryRadios = page.find('input[id*="category-choice"]');
+      var categoryPopup = page.find('#sellItem-categoryPopup');
+      var descriptionPopup = page.find('#sellItem-descriptionPopup');
 
       var pictureSelector = page.find('#add-image');
 
@@ -119,6 +120,13 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         // Get Draft if it is a a draft, if not set an empty object
         scope.item = SellItem.getDraft();
 
+        if(SellItem.isDraft) {
+
+          // Format for datetime-local input correct display
+          scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
+
+        }
+
         scope.disableShipping = function() {
           shippingPriceInput.prop('disabled', freeShippingCheckbox.prop('checked'));
           scope.item.shippingPrice = 0;
@@ -132,26 +140,26 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         if(SellItem.isDraft && scope.item.condition === 'New') {
           setTimeout(function() {
             newCheckBox.prop('checked', true).checkboxradio('refresh');
-            UsedCheckBox.prop('checked', false).checkboxradio('refresh');
-            RefurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
+            usedCheckBox.prop('checked', false).checkboxradio('refresh');
+            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
           });
         } else if(SellItem.isDraft && scope.item.condition === 'Used') {
           setTimeout(function() {
             newCheckBox.prop('checked', false).checkboxradio('refresh');
-            UsedCheckBox.prop('checked', true).checkboxradio('refresh');
-            RefurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
+            usedCheckBox.prop('checked', true).checkboxradio('refresh');
+            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
           });
         } else if(SellItem.isDraft && scope.item.condition === 'Refurbished') {
           setTimeout(function() {
             newCheckBox.prop('checked', false).checkboxradio('refresh');
-            UsedCheckBox.prop('checked', false).checkboxradio('refresh');
-            RefurbishedCheckBox.prop('checked', true).checkboxradio('refresh');
+            usedCheckBox.prop('checked', false).checkboxradio('refresh');
+            refurbishedCheckBox.prop('checked', true).checkboxradio('refresh');
           });
         } else {
           setTimeout(function() {
             newCheckBox.prop('checked', false).checkboxradio('refresh');
-            UsedCheckBox.prop('checked', false).checkboxradio('refresh');
-            RefurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
+            usedCheckBox.prop('checked', false).checkboxradio('refresh');
+            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
           });
         }
 

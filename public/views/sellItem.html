@@ -1,13 +1,12 @@
 <div data-role="page" data-theme="b" id="sell-item">
+
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Sell Item</h1>
-
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
 
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
-
     <search></search>
   </div>
 
@@ -18,48 +17,60 @@
       <table align="center">
         <tr>
           <td>
-            <button id="add-image" ng-model="item.image"
-                    class="ui-btn ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-bottom ui-mini ui-btn-corner-all">
+            <button id="sellItem-addImage" ng-model="item.image"
+                    class="ui-btn ui-shadow ui-btn-a ui-icon-plus
+                    ui-btn-icon-bottom ui-mini ui-btn-corner-all">
               <strong>Add Image</strong>
             </button>
           </td>
         </tr>
       </table>
 
-      <label for="product-title"></label>
-      <textarea ng-model="item.productName" id="product-title"
+      <label for="sellItem-productTitle"></label>
+      <textarea ng-model="item.productName" id="sellItem-productTitle"
                 placeholder="Product Title..." data-theme="a"
                 maxlength="45" ng-required="true"></textarea>
 
-      <ul data-role="listview" data-theme="a" data-inset="true">
-        <li><a href="#popupCategory" data-rel="popup" data-position-to="window" data-transition="pop">Category</a></li>
-        <li><a href="#popupCondition" data-rel="popup" data-position-to="window" data-transition="pop">Condition</a>
-        </li>
-        <li><a href="#popupDescription" data-rel="popup" data-position-to="window"
-               data-transition="pop">Description</a></li>
-        <li><a href="#popupFormatPrice" data-rel="popup" data-position-to="window" data-transition="pop">Format &amp;
-          Price</a></li>
-        <li><a href="#popupShipping" data-rel="popup" data-position-to="window" data-transition="pop">Shipping</a>
-        </li>
-      </ul>
-
     </form>
+
+    <ul data-role="listview" data-theme="a" data-inset="true">
+      <li>
+        <a href="#sellItem-categoryPopup" data-rel="popup" data-position-to="window"
+           data-transition="pop">Category</a>
+      </li>
+      <li>
+        <a href="#sellItem-conditionPopup" data-rel="popup" data-position-to="window"
+           data-transition="pop">Condition</a>
+      </li>
+      <li>
+        <a href="#sellItem-descriptionPopup" data-rel="popup" data-position-to="window"
+           data-transition="pop">Product Description</a>
+      </li>
+      <li>
+        <a href="#sellItem-formatPricePopup" data-rel="popup" data-position-to="window"
+           data-transition="pop">Format &amp; Price</a>
+      </li>
+      <li>
+        <a href="#sellItem-shippingPopup" data-rel="popup" data-position-to="window"
+           data-transition="pop">Shipping</a>
+      </li>
+    </ul>
 
   </div>
 
   <div data-role="footer" data-theme="a" class="ui-footer">
-    <a href="#sell-item-preview" data-role="button" id="preview-button"
-       ng-click="setPreviewItemInfo(item)" class="footer-button" data-theme="b">Preview</a>
+    <a href="#sell-item-preview" data-role="button" class="footer-button" data-theme="b"
+       ng-click="setPreviewItemInfo(item)">Preview</a>
   </div>
 
-  <div data-role="popup" id="popupCategory" data-theme="b" class="ui-corner-all">
+  <div data-role="popup" id="sellItem-categoryPopup" data-theme="b" class="ui-corner-all">
     <form>
       <div class="form-pad">
         <h3>Select the Category</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <div data-role="none" ng-repeat="category in categories">
-            <label for="category-choice-{{ category.id }}">{{ category.categoryName }}</label>
-            <input type="radio" name="category-choice" id="category-choice-{{ category.id }}"
+            <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
+            <input type="radio" name="category-choice" id="sellItem-categoryChoice-{{ category.id }}"
                    ng-model="item.categoryName" ng-required="true">
           </div>
         </fieldset>
@@ -69,20 +80,20 @@
     </form>
   </div>
 
-  <div data-role="popup" id="popupCondition" data-theme="b" class="ui-corner-all">
+  <div data-role="popup" id="sellItem-conditionPopup" data-theme="b" class="ui-corner-all">
     <form>
       <div class="form-pad">
         <h3>Select the condition</h3>
         <fieldset data-role="controlgroup" data-theme="a">
-          <input type="radio" name="radio-choice" id="radio-choice-new" checked="checked" value="New"
+          <label for="sellItem-conditionNew">New</label>
+          <input type="radio" name="radio-choice" id="sellItem-conditionNew" value="New"
                  ng-model="item.condition" ng-required="true">
-          <label for="radio-choice-new">New</label>
-          <input type="radio" name="radio-choice" id="radio-choice-used" value="Used"
+          <label for="sellItem-conditionUsed">Used</label>
+          <input type="radio" name="radio-choice" id="sellItem-conditionUsed" value="Used"
                  ng-model="item.condition" ng-required="true">
-          <label for="radio-choice-used">Used</label>
-          <input type="radio" name="radio-choice" id="radio-choice-refurbished" value="Refurbished"
+          <label for="sellItem-conditionRefurbished">Refurbished</label>
+          <input type="radio" name="radio-choice" id="sellItem-conditionRefurbished" value="Refurbished"
                  ng-model="item.condition" ng-required="true">
-          <label for="radio-choice-refurbished">Refurbished</label>
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
@@ -90,71 +101,62 @@
     </form>
   </div>
 
-  <div data-role="popup" id="popupDescription" data-theme="b" class="ui-corner-all">
+  <div data-role="popup" id="sellItem-descriptionPopup" data-theme="b" class="ui-corner-all">
     <form>
       <div class="form-pad">
-        <h3>Description</h3>
-        <label for="brand">Brand</label>
-        <input type="text" id="brand" ng-model="item.brand" data-theme="a" ng-required="true">
-        <label for="model">Model</label>
-        <input type="text" id="model" ng-model="item.model" data-theme="a" ng-required="true">
-        <label for="dimension">Dimension</label>
-        <input type="text" id="dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
-        <label for="description">Additional Description</label>
-        <textarea name="description" id="description"
+        <h3>Product Description</h3>
+        <label for="sellItem-brand">Brand</label>
+        <input type="text" id="sellItem-brand" ng-model="item.brand" data-theme="a" ng-required="true">
+        <label for="sellItem-model">Model</label>
+        <input type="text" id="sellItem-model" ng-model="item.model" data-theme="a" ng-required="true">
+        <label for="sellItem-dimension">Dimension</label>
+        <input type="text" id="sellItem-dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
+        <label for="sellItem-AddDescription">Additional Description</label>
+        <textarea name="description" id="sellItem-AddDescription"
                   ng-model="item.description" data-theme="a"
                   maxlength="255" ng-required="true"></textarea>
-        <br/>
+        <hr/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
       </div>
     </form>
   </div>
 
-  <div data-role="popup" id="popupFormatPrice" data-theme="b" class="ui-corner-all">
+  <div data-role="popup" id="sellItem-formatPricePopup" data-theme="b" class="ui-corner-all">
     <form>
       <div class="form-pad">
-        <h3>Format & Price</h3>
-
-        <label for="buyItNowPrice"> Buy it Now Price</label>
-        <input type="number" min="0.01" step="any" id="buyItNowPrice" ng-model="item.nonbidPrice" data-theme="a"
-               ng-required="true">
-
-        <label for="startingBid">Starting Bid Price</label>
-        <input type="number" min="0.01" step="any" id="startingBid" ng-model="item.startingBidPrice" data-theme="a"
-               ng-required="true">
-
-        <label for="quantityToSell">Quantity</label>
-        <input type="number" min="1" id="quantityToSell" ng-model="item.quantity" data-theme="a" ng-required="true">
-
-        <label for="set-date">Product End Date</label>
-        <input type="datetime-local" data-clear-btn="false" name="date" id="set-date" ng-model="item.bidEndDate"
-               data-theme="a" ng-required="true">
-        <br/>
+        <h3>Format &amp; Price</h3>
+        <label for="sellItem-buyItNowPrice"> Buy it Now Price</label>
+        <input type="number" min="0.01" step="any" id="sellItem-buyItNowPrice" data-theme="a"
+               ng-model="item.nonbidPrice" ng-required="true">
+        <label for="sellItem-startingBid">Starting Bid Price</label>
+        <input type="number" min="0.01" step="any" id="sellItem-startingBid" data-theme="a"
+               ng-model="item.startingBidPrice" ng-required="true">
+        <label for="sellItem-quantity">Quantity</label>
+        <input type="number" min="1" id="sellItem-quantity" data-theme="a"
+               ng-model="item.quantity" ng-required="true">
+        <label for="sellItem-endDate">Product End Date</label>
+        <input type="datetime-local" id="sellItem-endDate" data-theme="a"
+               ng-model="item.bidEndDate" ng-required="true">
+        <hr/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
-
       </div>
     </form>
   </div>
 
-  <div data-role="popup" id="popupShipping" data-theme="b" class="ui-corner-all">
+  <div data-role="popup" id="sellItem-shippingPopup" data-theme="b" class="ui-corner-all">
     <form>
       <div class="form-pad">
         <h3>Shipping</h3>
-
-        <label for="checkbox-free-shipping">Free Shipping</label>
-        <input type="checkbox" name="checkbox" id="checkbox-free-shipping" ng-click="disableShipping()" data-theme="a">
-
-        <label for="shipping-price">Shipping Price</label>
-        <input type="number" min="0" ng-model="item.shippingPrice" id="shipping-price" data-theme="a"
-               ng-required="true">
-
-        <br/>
-
+        <label for="sellItem-freeShipping">Free Shipping</label>
+        <input type="checkbox" id="sellItem-freeShipping" ng-click="disableShipping()" data-theme="a">
+        <label for="sellItem-shippingPrice">Shipping Price</label>
+        <input type="number" min="0" id="sellItem-shippingPrice" data-theme="a"
+               ng-model="item.shippingPrice" ng-required="true">
+        <hr/>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
         <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
-
       </div>
     </form>
   </div>
