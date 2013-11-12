@@ -43,14 +43,14 @@
       <td>
         <a href="#popupPlaceBid" data-role="button" id="place-bid-button" class="place-bid-button" data-rel="popup"
            data-position-to="window" data-transition="pop" data-theme="a">
-          <p class="item-button-text-size">Place bid US {{ nextMinBid | currency }}</p>
+          <p class="small-text">Place bid US {{ nextMinBid | currency }}</p>
         </a>
       </td>
       <td>
         <a href="#popupQuantity" data-role="button" id="buy-it-now-button" class="buy-it-now-button"
            data-rel="popup"
            data-position-to="window" data-transition="pop" data-theme="a">
-          <p class="item-button-text-size">Buy It Now</p>
+          <p class="small-text">Buy It Now</p>
         </a>
       </td>
     </tr>
@@ -61,85 +61,85 @@
 
   <ul data-role="listview" data-theme="a" data-inset="true" id="item-list-view">
     <li>
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Starting bid: {{ item.startingBidPrice | currency }}
       </p>
 
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Current bid: {{ item.currentBid | currency }}
       </p>
 
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Buy it Now: {{ item.nonbidPrice | currency }}
       </p>
 
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Shipping: {{ item.shippingPrice | currency }}
       </p>
 
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Available Quantity: {{ item.quantity }}
       </p>
     </li>
     <li>
-      <p class="item-description-text-size">
+      <p class="bold-font">
         End Date: {{ item.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }}
       </p>
     </li>
     <li>
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Condition: {{ item.condition }}
       </p>
     </li>
     <li>
-      <p class="item-description-text-size">
+      <p class="bold-font">
         Description
       </p>
       <table>
         <tr>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               Brand:
             </p>
           </td>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               {{item.brand}}
             </p>
           </td>
         </tr>
         <tr>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               Model:
             </p>
           </td>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               {{ item.model}}
             </p>
           </td>
         </tr>
         <tr>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               Dimensions:
             </p>
           </td>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               {{item.dimensions}}
             </p>
           </td>
         </tr>
         <tr>
           <td>
-            <p class="item-description-text-size">
+            <p class="bold-font">
               Additional Description:
             </p>
           </td>
           <td>
-            <p class="item-description-text-size" style="white-space: normal !important;">
+            <p class="bold-font" style="white-space: normal !important;">
               {{item.description}}
             </p>
           </td>
@@ -150,12 +150,12 @@
     <li>
       <a href="#product-bids" data-inline="true" id="product-bids-btn" data-theme="a" data-transition="slide"
          ng-click="setProductId(item.id)">
-        <p class="item-description-text-size">Product Bids</p>
+        <p class="bold-font">Product Bids</p>
       </a>
     </li>
     <li>
       <a href="#seller-profile" data-inline="true" data-theme="a" data-transition="slide">
-        <p class="item-description-text-size">Seller: {{ item.sellerName }}</p>
+        <p class="bold-font">Seller: {{ item.sellerName }}</p>
       </a>
     </li>
   </ul>

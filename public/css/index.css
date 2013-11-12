@@ -79,6 +79,10 @@ img.item-photo-small {
     font-size: 70%;
 }
 
+.bold-font {
+    font-weight: bold;
+}
+
 /* Button Manipulation*/
 
 .footer-button {
@@ -91,7 +95,6 @@ img.item-photo-small {
     border-bottom: solid 2px;
 }
 
-
 /* JQM Class Override*/
 
 .ui-footer {
@@ -102,6 +105,12 @@ img.item-photo-small {
 }
 
 .ui-content {
-  margin-bottom: 40px; /* Set this to whatever your footer size is... */
+    margin-bottom: 40px; /* Set this to whatever your footer size is... */
 }
 
+/* HTML Manipulation*/
+
+hr {
+    clear: both;
+    visibility: hidden;
+}

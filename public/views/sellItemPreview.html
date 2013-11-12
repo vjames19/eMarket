@@ -29,68 +29,68 @@
 
       <ul data-role="listview" data-theme="a" data-inset="true">
         <li>
-          <p class="item-description-text-size">
+          <p class="bold-font">
             Starting bid: {{ previewItemInfo.startingBidPrice | currency }}
           </p>
 
-          <p class="item-description-text-size">
+          <p class="bold-font">
             Buy it Now: {{ previewItemInfo.nonbidPrice | currency }}
           </p>
 
-          <p class="item-description-text-size">
+          <p class="bold-font">
             Shipping: {{ previewItemInfo.shippingPrice | currency }}
           </p>
 
-          <p class="item-description-text-size">
+          <p class="bold-font">
             Available Quantity: {{ previewItemInfo.quantity }}
           </p>
         </li>
         <li>
-          <!--<p class="item-description-text-size">-->
+          <!--<p class="bold-font">-->
           <!--Time Left: {{ remainingTime | date:'yyyy-MM-dd HH:mm:ss' }}-->
           <!--</p>-->
-          <p class="item-description-text-size">
+          <p class="bold-font">
             End Date: {{ previewItemInfo.bidEndDate | date:'yyyy-MM-dd HH:mm:ss' }}
           </p>
         </li>
         <li>
-          <p class="item-description-text-size">
+          <p class="bold-font">
             Condition: {{ previewItemInfo.condition }}
           </p>
         </li>
         <li>
-          <p class="item-description-text-size">Description</p>
+          <p class="bold-font">Description</p>
           <table>
             <tr>
               <td>
-                <p class="item-description-text-size">Brand:</p>
+                <p class="bold-font">Brand:</p>
               </td>
               <td>
-                <p class="item-description-text-size">{{ previewItemInfo.brand }}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p class="item-description-text-size">Model:</p>
-              </td>
-              <td>
-                <p class="item-description-text-size">{{ previewItemInfo.model }}</p>
+                <p class="bold-font">{{ previewItemInfo.brand }}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p class="item-description-text-size">Dimensions:</p>
+                <p class="bold-font">Model:</p>
               </td>
               <td>
-                <p class="item-description-text-size">{{ previewItemInfo.dimensions }}</p>
+                <p class="bold-font">{{ previewItemInfo.model }}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p class="item-description-text-size">Additional Description:</p>
+                <p class="bold-font">Dimensions:</p>
               </td>
               <td>
-                <p class="item-description-text-size" style="text-wrap: normal !important;">
+                <p class="bold-font">{{ previewItemInfo.dimensions }}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="bold-font">Additional Description:</p>
+              </td>
+              <td>
+                <p class="bold-font" style="text-wrap: normal !important;">
                   {{ previewItemInfo.description }}
                 </p>
               </td>
