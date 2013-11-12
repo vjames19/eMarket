@@ -14,13 +14,13 @@ hr {
   visibility: hidden;
 }
 
-.item-photo {
-  width: 150px;
-  height: 150px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+/*.item-photo {*/
+  /*width: 150px;*/
+  /*height: 150px;*/
+  /*display: block;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+/*}*/
 
 .place-bid-button {
   display: table-cell;

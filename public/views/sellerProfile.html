@@ -46,16 +46,16 @@
       </li>
       <li ng-repeat="item in products">
         <a href="#item-view" class="wrap-text" ng-click="setItem(item)" data-transition="slide">
-          <img ng-src="{{item.picture}}" class="center-image ui-corner-all" width="75px" height="75px">
-          <table data-role="table" data-mode="none" class="ui-responsive wrap-text">
-            <thead>
+          <table class="ui-responsive wrap-text">
             <tr>
+              <th rowspan="3">
+                <img ng-src="{{item.picture}}" class="item-photo-small ui-corner-all">
+              </th>
+              <th rowspan="3" class="pad"></th>
               <th colspan="2">
                 <strong><abbr title="{{item.productName}}">{{ item.productName | truncate:15 }}</abbr></strong>
               </th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
               <td><strong>Current Bid</strong></td>
               <td><em>{{ item.currentBid | currency }}</em></td>
@@ -64,7 +64,6 @@
               <td><strong>Price</strong></td>
               <td><em>{{ item.nonbidPrice | currency }}</em></td>
             </tr>
-            </tbody>
           </table>
         </a>
       </li>

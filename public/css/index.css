@@ -1,3 +1,5 @@
+/* eMarket Logo CSS*/
+
 .eMarket-logo {
     width: 35%;
     height: 35px;
@@ -7,13 +9,32 @@
     margin-right: auto;
 }
 
-/* Centers if displayed alone */
+/* Image Manipulation */
+
 img.center-image {
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
 }
+
+img.item-photo-big {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.item-photo-small {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Text Wrapping */
 
 .wrap-text {
     white-space: normal !important;
