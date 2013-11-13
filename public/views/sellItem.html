@@ -68,7 +68,7 @@
             <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
             <input type="radio" name="sellItem-categoryChoice"
                    id="sellItem-categoryChoice-{{ category.id }}"
-                   ng-model="item.categoryName" ng-required="true">
+                   value="{{ category.id }}" ng-model="item.categoryName" ng-required="true">
           </div>
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>

@@ -135,6 +135,17 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         Category.getList({flat: true}).then(function(categoryList) {
           scope.categories = categoryList;
           Helper.triggerCreate(categoryPopup);
+
+          setTimeout(function() {
+            if(SellItem.isDraft) {
+              var categoryRadio = page.find('#sellItem-categoryChoice-' + scope.item.categoryId + '');
+              categoryRadio.prop('checked', true).checkboxradio('refresh');
+            } else {
+              var categoryRadios = page.find('radio[id*=i"sellItem-categoryChoice"]');
+              categoryRadios.prop('checked', false).checkboxradio('refresh');
+            }
+          });
+
         });
 
         if(SellItem.isDraft && scope.item.condition !== null) {
@@ -147,15 +158,13 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
           refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
         }
 
-        if(SellItem.isDraft && scope.item.shippingPrice === 0) {
-          setTimeout(function() {
-            freeShippingCheckbox.prop('checked', true).checkboxradio('refresh');
-          });
+        if(SellItem.isDraft && scope.item.shippingPrice !== null) {
+          freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
         } else {
-          setTimeout(function() {
-            freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
-          });
+          freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
         }
+
+//        if(SellItem.isDraft)
 
       });
 
