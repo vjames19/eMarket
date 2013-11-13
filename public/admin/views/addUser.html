@@ -42,7 +42,8 @@
             <input type="hidden" id="addUser-billing">
             <hr/>
             <label for="addUser-sameAsMailing">Same as Mailing Address</label>
-            <input type="checkbox" id="addUser-sameAsMailing" ng-click="disableBillAddress()" ng-required="false">
+            <input type="checkbox" id="addUser-sameAsMailing" name="addUser-sameAsMailing"
+                   ng-click="disableBillAddress()" ng-required="false">
             <label for="addUser-billingAddress">Address</label>
             <input type="text" id="addUser-billingAddress" ng-model="addUser.billAddress.billAddress"
                    ng-required="true">

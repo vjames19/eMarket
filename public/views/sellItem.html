@@ -28,6 +28,7 @@
 
       <label for="sellItem-productTitle"></label>
       <textarea ng-model="item.productName" id="sellItem-productTitle"
+                name="sellItem-productTitle"
                 placeholder="Product Title..." data-theme="a"
                 maxlength="45" ng-required="true"></textarea>
 
@@ -65,7 +66,8 @@
         <fieldset data-role="controlgroup" data-theme="a">
           <div data-role="none" ng-repeat="category in categories">
             <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
-            <input type="radio" id="sellItem-categoryChoice-{{ category.id }}"
+            <input type="radio" name="sellItem-categoryChoice"
+                   id="sellItem-categoryChoice-{{ category.id }}"
                    ng-model="item.categoryName" ng-required="true">
           </div>
         </fieldset>
@@ -81,13 +83,13 @@
         <h3>Select the condition</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <label for="sellItem-conditionNew">New</label>
-          <input type="radio" id="sellItem-conditionNew" value="New"
+          <input type="radio" name="sellItem-condition" id="sellItem-conditionNew" value="New"
                  ng-model="item.condition" ng-required="true">
           <label for="sellItem-conditionUsed">Used</label>
-          <input type="radio" id="sellItem-conditionUsed" value="Used"
+          <input type="radio" name="sellItem-condition" id="sellItem-conditionUsed" value="Used"
                  ng-model="item.condition" ng-required="true">
           <label for="sellItem-conditionRefurbished">Refurbished</label>
-          <input type="radio" id="sellItem-conditionRefurbished" value="Refurbished"
+          <input type="radio" name="sellItem-condition" id="sellItem-conditionRefurbished" value="Refurbished"
                  ng-model="item.condition" ng-required="true">
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
@@ -107,7 +109,7 @@
         <label for="sellItem-dimension">Dimension</label>
         <input type="text" id="sellItem-dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
         <label for="sellItem-AddDescription">Additional Description</label>
-        <textarea id="sellItem-AddDescription"
+        <textarea id="sellItem-AddDescription" name="sellItem-AddDescription"
                   ng-model="item.description" data-theme="a"
                   maxlength="255" ng-required="true"></textarea>
         <hr/>
@@ -145,7 +147,8 @@
       <div class="form-pad">
         <h3>Shipping</h3>
         <label for="sellItem-freeShipping">Free Shipping</label>
-        <input type="checkbox" id="sellItem-freeShipping" ng-click="disableShipping()" data-theme="a">
+        <input type="checkbox" id="sellItem-freeShipping"
+               name="sellItem-freeShipping" ng-click="disableShipping()" data-theme="a">
         <label for="sellItem-shippingPrice">Shipping Price</label>
         <input type="number" min="0" id="sellItem-shippingPrice" data-theme="a"
                ng-model="item.shippingPrice" ng-required="true">
