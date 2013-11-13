@@ -10,21 +10,21 @@
     <form data-ajax="false" ng-submit="submit()" id="checkout-form">
       <div class="form-pad">
         <label for="checkout-paymentMethod"><strong>Select Payment Method</strong></label>
-        <select name="checkout-paymentMethod" id="checkout-paymentMethod" ng-model="paymentMethod"
+        <select id="checkout-paymentMethod" ng-model="paymentMethod"
                 ng-options="paymentMethod for paymentMethod in paymentMethods"
                 ng-change="selectPaymentMethod()" data-theme="a" ng-required="false">
         </select>
       </div>
       <div class="form-pad" ng-hide="isCreditCard">
         <label for="checkout-bankSelect"><strong>Select Bank</strong></label>
-        <select name="select-bank" id="checkout-bankSelect" ng-model="selectedBank"
+        <select id="checkout-bankSelect" ng-model="selectedBank"
                 ng-options="bank.bankName for bank in banks" data-theme="a">
           <option value="" ng-hide="selectedBank" ng-required="true">Please Select a Bank</option>
         </select>
       </div>
       <div class="form-pad" ng-show="isCreditCard">
         <label for="checkout-cardSelect"><strong>Select Card</strong></label>
-        <select name="select-card" id="checkout-cardSelect" ng-model="selectedCard"
+        <select id="checkout-cardSelect" ng-model="selectedCard"
                 ng-options="card.cardNumber for card in cards" data-theme="a">
           <option value="" ng-hide="selectedCard" ng-required="true">Please Select a Card</option>
         </select>

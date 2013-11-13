@@ -86,7 +86,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       page.on('pagehide', function() {
 
         // For now until full functionality is implemented
-        page.find('div[id*=dz-thumb]').remove();
+        page.find('div[id*="dz-thumb"]').remove();
 
       });
 

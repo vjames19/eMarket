@@ -65,7 +65,7 @@
         <fieldset data-role="controlgroup" data-theme="a">
           <div data-role="none" ng-repeat="category in categories">
             <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
-            <input type="radio" name="category-choice" id="sellItem-categoryChoice-{{ category.id }}"
+            <input type="radio" id="sellItem-categoryChoice-{{ category.id }}"
                    ng-model="item.categoryName" ng-required="true">
           </div>
         </fieldset>
@@ -81,13 +81,13 @@
         <h3>Select the condition</h3>
         <fieldset data-role="controlgroup" data-theme="a">
           <label for="sellItem-conditionNew">New</label>
-          <input type="radio" name="radio-choice" id="sellItem-conditionNew" value="New"
+          <input type="radio" id="sellItem-conditionNew" value="New"
                  ng-model="item.condition" ng-required="true">
           <label for="sellItem-conditionUsed">Used</label>
-          <input type="radio" name="radio-choice" id="sellItem-conditionUsed" value="Used"
+          <input type="radio" id="sellItem-conditionUsed" value="Used"
                  ng-model="item.condition" ng-required="true">
           <label for="sellItem-conditionRefurbished">Refurbished</label>
-          <input type="radio" name="radio-choice" id="sellItem-conditionRefurbished" value="Refurbished"
+          <input type="radio" id="sellItem-conditionRefurbished" value="Refurbished"
                  ng-model="item.condition" ng-required="true">
         </fieldset>
         <a href="#sell-item" data-role="button" data-theme="a">OK</a>
@@ -107,7 +107,7 @@
         <label for="sellItem-dimension">Dimension</label>
         <input type="text" id="sellItem-dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
         <label for="sellItem-AddDescription">Additional Description</label>
-        <textarea name="description" id="sellItem-AddDescription"
+        <textarea id="sellItem-AddDescription"
                   ng-model="item.description" data-theme="a"
                   maxlength="255" ng-required="true"></textarea>
         <hr/>

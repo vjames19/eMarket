@@ -32,7 +32,7 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
       var ratingList = page.find('#profile-ratingList');
       var mailAddressList = page.find('#profile-mailAddressList');
       var billAddressList = page.find('#profile-billAddressList');
-      var questionSelects = page.find('select[id*=profile-securityQuestion]');
+      var questionSelects = page.find('select[id*="profile-securityQuestion"]');
 
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;
