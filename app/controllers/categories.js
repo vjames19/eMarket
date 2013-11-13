@@ -71,7 +71,7 @@ exports.readAll = function(req, res) {
     if(err) {
       res.jsonp(500, {message: err});
     } else {
-      if(req.query.flat) {
+      if(req.query.flat === 'true') {
         res.jsonp(categories);
       } else {
         _.each(categories, function(category) {
