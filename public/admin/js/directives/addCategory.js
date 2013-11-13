@@ -10,13 +10,18 @@ angular.module('eMarketApp').directive('addCategory', function(Restangular, Help
 
       $scope.submit = function() {
         $.mobile.loading('show');
-//        if(!$scope.addCategory.categoryParent) {
-//          $scope.addCategory.categoryParent = null;
-//        }
-//        Restangular.all('categories').post($scope.addCategory).then(function() {
-        $.mobile.loading('hide');
-        $.mobile.changePage('#categories-admin');
-//        });
+        if(!$scope.addCategory.categoryParent) {
+          $scope.addCategory.categoryParent = null;
+        }
+        Restangular.all('categories').post($scope.addCategory).then(function() {
+          $.mobile.loading('hide');
+          $.mobile.changePage('#categories-admin');
+        }, function(err) {
+          $.mobile.loading('hide');
+          alert('Create Not Successful.');
+          console.log('Create Category failed: ', err);
+          $.mobile.changePage('#categories-admin');
+        });
       };
 
     },

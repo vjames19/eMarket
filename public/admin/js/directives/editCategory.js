@@ -20,10 +20,9 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
               $.mobile.changePage('#categories-admin');
             }, function(err) {
               $.mobile.loading('hide');
-              $.mobile.changePage('#categories-admin');
-              // Change Page?
-//              alert(err);
               alert('Update Not Successful.');
+              console.log('Update Category failed: ', err);
+              $.mobile.changePage('#categories-admin');
             });
       };
 
