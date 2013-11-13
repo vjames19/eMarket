@@ -1,31 +1,32 @@
 <div data-role="page" data-theme="a" id="edit-user">
 
-  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
+  <div data-role="header" data-theme="b" data-position="fixed">
     <h1>Edit User</h1>
     <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
   <div data-role="content">
+
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <strong>UserName:</strong>
         <em>{{userInfo.username}}</em>
         <hr/>
-        <label for="firstname"><strong>First Name</strong></label>
-        <input type="text" id="firstname" data-theme="b" ng-model="userInfo.firstName" ng-required="true">
-        <label for="middlename"><strong>Middle Name</strong></label>
-        <input type="text" id="middlename" data-theme="b" ng-model="userInfo.middleName" ng-required="false">
-        <label for="lastname"><strong>Last Name</strong></label>
-        <input type="text" id="lastname" data-theme="b" ng-model="userInfo.lastName" ng-required="true">
-        <label for="telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="telephone" data-theme="b" ng-model="userInfo.telephone" ng-required="true">
-        <label for="email"><strong>Email</strong></label>
-        <input type="email" id="email" data-theme="b" ng-model="userInfo.email" ng-required="true">
-        <label for="new-password"><strong>New Password</strong></label>
-        <input type="password" id="new-password" autocomplete="off" data-theme="b" ng-model="editUser.userPassword"
-               ng-required="false">
-        <label for="new-password-confirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="new-password-confirm" autocomplete="off" data-theme="b"
+        <label for="editUser-firstName"><strong>First Name</strong></label>
+        <input type="text" id="editUser-firstName" data-theme="b" ng-model="userInfo.firstName" ng-required="true">
+        <label for="editUser-middleName"><strong>Middle Name</strong></label>
+        <input type="text" id="editUser-middleName" data-theme="b" ng-model="userInfo.middleName" ng-required="false">
+        <label for="editUser-lastName"><strong>Last Name</strong></label>
+        <input type="text" id="editUser-lastName" data-theme="b" ng-model="userInfo.lastName" ng-required="true">
+        <label for="editUser-telephone"><strong>Telephone</strong></label>
+        <input type="tel" id="editUser-telephone" data-theme="b" ng-model="userInfo.telephone" ng-required="true">
+        <label for="editUser-email"><strong>Email</strong></label>
+        <input type="email" id="editUser-email" data-theme="b" ng-model="userInfo.email" ng-required="true">
+        <label for="editUser-newPassword"><strong>New Password</strong></label>
+        <input type="password" id="editUser-newPassword" autocomplete="off" data-theme="b"
+               ng-model="editUser.userPassword" ng-required="false">
+        <label for="editUser-newPasswordConfirm"><strong>Confirm Password</strong></label>
+        <input type="password" id="editUser-newPasswordConfirm" autocomplete="off" data-theme="b"
                ng-model="editUser.userConfirmPassword" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
@@ -33,6 +34,7 @@
         <button type="submit" data-icon="check">Submit</button>
       </div>
     </form>
+
   </div>
 
   <div data-role="footer" data-theme="b"><h1></h1></div>

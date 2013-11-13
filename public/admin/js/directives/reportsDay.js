@@ -9,8 +9,8 @@ angular.module('eMarketApp').directive('reportsDay', function(Restangular, Repor
     link: function(scope, elem, Highcharts) {
 
       var page = $(elem[0]);
-      var graph = page.find('#graph');
-      var selectedCategory = page.find('#select-category');
+      var graph = page.find('div[id*="graph"]');
+      var selectedCategory = page.find('select[id*="selectCategory"]');
 
       var updateGraph = function(totalSales, totalRevenue) {
         setTimeout(function() {

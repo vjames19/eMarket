@@ -16,10 +16,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var categoryAdminList = page.find('#categoryAdminList');
-      var noMore = page.find('#noMore');
+      var categoryAdminList = page.find('#categories-categoryAdminList');
+      var noMore = page.find('#category-noMoreCategories');
 
-      var upButton = page.find('#up-button');
+      var upButton = page.find('#categories-upBtn');
       var stack = [];
 
       var category = null;

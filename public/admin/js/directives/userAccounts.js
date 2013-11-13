@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('userAccounts', function(Restangular, Hel
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var userAccountList = page.find('#userAccountList');
+      var userAccountList = page.find('#userAcc-userAccountList');
 
       var selectedUser = null;
       var selectedUserIndex = null;

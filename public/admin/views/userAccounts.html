@@ -8,7 +8,7 @@
   <div data-role="content">
     <ul data-role="listview" data-divider-theme="b" data-theme="a"
         data-filter-theme="a" data-inset="true" data-filter="true"
-        data-filter-placeholder="Search Users" id="userAccountList">
+        data-filter-placeholder="Search Users" id="userAcc-userAccountList">
       <li data-role="list-divider">
         <table>
           <tr>
@@ -22,14 +22,14 @@
       </li>
       </li>
       <li data-icon="gear" ng-repeat="user in users">
-        <a href="#userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+        <a href="#userAcc-userPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear"
            ng-click="setUserInfo(user); selectUser(user, $index)">{{user.username}}</a>
       </li>
     </ul>
   </div>
 
-  <div data-role="popup" id="userPopupMenu" data-theme="a">
+  <div data-role="popup" id="userAcc-userPopupMenu" data-theme="a">
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-user" data-role="button" data-icon="edit" data-theme="b">Edit</a>

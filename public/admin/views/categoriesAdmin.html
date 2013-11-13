@@ -8,8 +8,8 @@
   <div data-role="content">
     <ul data-role="listview" data-divider-theme="b" data-theme="a"
         data-filter-theme="a" data-inset="true" data-filter="true"
-        data-filter-placeholder="Search Categories" id="categoryAdminList">
-      <button ng-click="prev()" class="ui-btn ui-corner-all ui-btn-b" id="up-button">Up</button>
+        data-filter-placeholder="Search Categories" id="categories-categoryAdminList">
+      <button ng-click="prev()" class="ui-btn ui-corner-all ui-btn-b" id="categories-upBtn">Up</button>
       <li data-role="list-divider">
         <table>
           <tr>
@@ -24,14 +24,14 @@
       </li>
       <li ng-repeat="category in categories">
         <a href="#" ng-click="next(category)">{{ category.categoryName }}</a>
-        <a href="#categoryPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+        <a href="#categories-categoryOptionMenu" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear"
            ng-click="setCategoryInfo(category); selectedCategory(category, $index)"></a>
       </li>
     </ul>
   </div>
 
-  <div data-role="popup" id="categoryPopupMenu" data-theme="a">
+  <div data-role="popup" id="categories-categoryOptionMenu" data-theme="a">
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-category" data-role="button" data-icon="edit" data-theme="b">Edit</a>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div data-role="popup" id="noMore" data-theme="a" style="max-width:280px">
+  <div data-role="popup" id="category-noMoreCategories" data-theme="a" style="max-width:280px" class="ui-content">
     <a href="#categories-admin" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
        data-iconpos="notext" data-mini="true" class="ui-btn-right">Close</a>
     <h3>No More Subcategories</h3>

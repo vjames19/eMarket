@@ -28,7 +28,7 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
 
       var page = $(elem[0]);
 
-      var categorySelectMenu = page.find('#parent');
+      var categorySelectMenu = page.find('#editCategory-parent');
 
       page.on('pagebeforeshow', function() {
 

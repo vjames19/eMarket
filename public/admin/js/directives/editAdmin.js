@@ -24,7 +24,7 @@ angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper, 
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var rootCheckBox = page.find('#make-root');
+      var rootCheckBox = page.find('#editAdmin-makeRoot');
 
       page.on('pagebeforeshow', function() {
 
