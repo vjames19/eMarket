@@ -125,6 +125,10 @@ img.item-photo-small {
     margin-bottom: 40px; /* Set this to whatever your footer size is... */
 }
 
+.ui-grid-solo {
+    height: 100px;
+}
+
 /* HTML Manipulation*/
 
 hr {

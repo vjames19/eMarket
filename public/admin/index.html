@@ -44,19 +44,18 @@
     <form data-ajax="false" ng-submit="logIn()">
       <div class="form-pad">
         <h3>Admin, Please Sign In</h3>
-        <label for="username" class="ui-hidden-accessible">Username:</label>
-        <input name="username" id="username" value="" placeholder="username" data-theme="b" type="text"
+        <label for="index-username" class="ui-hidden-accessible">Username:</label>
+        <input name="username" id="index-username" value="" placeholder="username" data-theme="b" type="text"
                ng-model="username">
-        <label for="password" class="ui-hidden-accessible">Password:</label>
-        <input name="password" id="password" value="" placeholder="password" autocomplete="off" data-theme="b"
+        <label for="index-password" class="ui-hidden-accessible">Password:</label>
+        <input name="password" id="index-password" value="" placeholder="password" autocomplete="off" data-theme="b"
                type="password" ng-model="password">
-        <!--<a href="#index-page" data-role="button" data-icon="check" data-direction="reverse">Submit</a>-->
         <button type="submit" data-theme="b" data-icon="check">Sign in</button>
       </div>
     </form>
   </div>
 
-  <div data-role="popup" id="loginError">
+  <div data-role="popup" id="index-loginError">
     <p>Incorrect username or password</p>
   </div>
 
@@ -100,7 +99,6 @@
 <script src="js/services/report.js"></script>
 <script src="js/services/userInfo.js"></script>
 
-
 <!-- Directives -->
 <script src="js/directives/addAdmin.js"></script>
 <script src="js/directives/addCategory.js"></script>
@@ -115,5 +113,7 @@
 <script src="js/directives/reportsMonth.js"></script>
 <script src="js/directives/reportsWeek.js"></script>
 <script src="js/directives/userAccounts.js"></script>
+
 </body>
+
 </html>

@@ -22,7 +22,7 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) 
         $.mobile.loading('hide');
       }).error(function() {
             $.mobile.loading('hide');
-            $('#loginError').popup('open');
+            $('#index-loginError').popup('open');
           });
 
     },

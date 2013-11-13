@@ -24,7 +24,7 @@ angular.module('eMarketApp').directive('addCategory', function(Restangular, Help
 
       var page = $(elem[0]);
 
-      var categorySelectMenu = page.find('#parent');
+      var categorySelectMenu = page.find('#addCategory-parent');
 
       page.on('pagebeforeshow', function() {
 

@@ -20,7 +20,7 @@ angular.module('eMarketApp').directive('addAdmin', function(Admin, Helper) {
 
       var page = $(elem[0]);
 
-      var rootCheckBox = page.find('#make-root');
+      var rootCheckBox = page.find('#addAdmin-makeRoot');
 
       page.on('pagebeforeshow', function() {
 

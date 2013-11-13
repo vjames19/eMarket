@@ -45,7 +45,7 @@
             </tr>
           </table>
         </a>
-        <a href="#popupNotification" data-inline="true" data-icon="gear" data-rel="popup"
+        <a href="#cart-notificationPopup" data-inline="true" data-icon="gear" data-rel="popup"
            data-position-to="window" data-transition="pop"
            ng-click="selectCart(shoppingCart, $index)">
         </a>
@@ -84,17 +84,17 @@
 
   </div>
 
-  <div data-role="footer" data-theme="a">
-    <a href="#proceed-to-checkout" id="cart-proceedToCheckoutBtn" data-role="button" class="footer-button"
-       ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)" data-theme="b">Proceed to Checkout</a>
-  </div>
-
-  <div data-role="popup" id="popupNotification" data-theme="a" class="ui-corner-all">
+  <div data-role="popup" id="cart-notificationPopup" data-theme="a" class="ui-corner-all">
     <div class="form-pad">
       <h3>Select an action</h3>
       <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()" data-theme="b">Delete</a>
       <a href="#shopping-cart" data-role="button" data-theme="b">Cancel</a>
     </div>
+  </div>
+
+  <div data-role="footer" data-theme="a">
+    <a href="#proceed-to-checkout" id="cart-proceedToCheckoutBtn" data-role="button" class="footer-button"
+       ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)" data-theme="b">Proceed to Checkout</a>
   </div>
 
 </div>

@@ -1,11 +1,4 @@
-.emarket-logo {
-    width: 35%;
-    height: 35px;
-    background: transparent;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* eMarket Logo CSS*/
 
 .eMarket-logo {
     width: 35%;
@@ -16,7 +9,10 @@
     margin-right: auto;
 }
 
-/* Centers if displayed alone */
+/* Image Manipulation */
+
+/* Only Works on Chrome, currently not in use. */
+/* table align=center works on all browsers. */
 img.center-image {
     position: absolute;
     top: 0;
@@ -24,9 +20,38 @@ img.center-image {
     margin: auto;
 }
 
+img.item-photo-big {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.item-photo-small {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Table Manipulations */
+
+.table-cell-left {
+    display: table-cell;
+    float: left;
+}
+
+.table-cell-right {
+    display: table-cell;
+    float: right;
+}
+
+/* Text Wrapping */
+
 .wrap-text {
     white-space: normal !important;
-    font-size: 90%;
 }
 
 /* Grid Manipulation */
@@ -59,6 +84,10 @@ img.center-image {
 
 /* Font Manipulation*/
 
+.medium-text{
+    font-size: 80%;
+}
+
 .small-text {
     font-size: 75%;
 }
@@ -67,10 +96,20 @@ img.center-image {
     font-size: 70%;
 }
 
+.bold-font {
+    font-weight: bold;
+}
+
 /* Button Manipulation*/
 
 .footer-button {
     width: 40%;
+}
+
+/* Border Manipulation */
+
+.bottom-line {
+    border-bottom: solid 2px;
 }
 
 /* JQM Class Override*/
@@ -88,4 +127,15 @@ img.center-image {
 
 .ui-grid-solo {
     height: 100px;
+}
+
+/* HTML Manipulation*/
+
+hr {
+    clear: both;
+    visibility: hidden;
+}
+
+textarea {
+    resize: none !important;
 }

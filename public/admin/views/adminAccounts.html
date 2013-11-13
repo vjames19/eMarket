@@ -8,7 +8,7 @@
   <div data-role="content">
     <ul data-role="listview" data-divider-theme="b" data-theme="a"
         data-filter-theme="a" data-inset="true" data-filter="true"
-        data-filter-placeholder="Search Admins" id="adminAccountList">
+        data-filter-placeholder="Search Admins" id="adminAcc-adminAccountList">
       <li data-role="list-divider">
         <table>
           <tr>
@@ -22,14 +22,14 @@
       </li>
       </li>
       <li ng-repeat="admin in admins" data-icon="gear">
-        <a href="#adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
+        <a href="#adminAcc-adminPopupMenu" data-rel="popup" data-inline="true" data-transition="slideup"
            data-position-to="window" data-icon="gear"
            ng-click="setAdminInfo(admin); selectAdmin(admin, $index)">{{admin.username}}</a>
       </li>
     </ul>
   </div>
 
-  <div data-role="popup" id="adminPopupMenu" data-theme="a">
+  <div data-role="popup" id="adminAcc-adminPopupMenu" data-theme="a">
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-admin" data-role="button" data-icon="edit" data-theme="b">Edit</a>

@@ -1,33 +1,35 @@
 <div data-role="page" data-theme="a" id="add-admin">
 
-  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
+  <div data-role="header" data-theme="b" data-position="fixed">
     <h1>Add Admin</h1>
     <a href="#admin-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
   <div data-role="content">
+
     <form data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="username">Username</label>
-        <input type="text" id="username" data-theme="b" ng-model="addAdmin.adminUserName" ng-required="true">
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" data-theme="b" ng-model="addAdmin.adminFirstName" ng-required="true">
-        <label for="middle-name">Middle Name</label>
-        <input type="text" id="middle-name" data-theme="b" ng-model="addAdmin.adminMiddleName" ng-required="false">
-        <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" data-theme="b" ng-model="addAdmin.adminLastName" ng-required="true">
-        <label for="email">Email</label>
-        <input type="email" id="email" data-theme="b" ng-model="addAdmin.adminEmail" ng-required="true">
-        <label for="telephone">Telephone</label>
-        <input type="tel" id="telephone" data-theme="b" ng-model="addAdmin.adminPhone" ng-required="true">
-        <label for="password"><strong>Password</strong></label>
-        <input type="password" id="password" autocomplete="off" data-theme="b" ng-model="addAdmin.adminPassword"
-               ng-required="true">
-        <label for="password-confirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="password-confirm" autocomplete="off"
+        <label for="addAdmin-username">Username</label>
+        <input type="text" id="addAdmin-username" data-theme="b" ng-model="addAdmin.adminUserName" ng-required="true">
+        <label for="addAdmin-firstName">First Name</label>
+        <input type="text" id="addAdmin-firstName" data-theme="b" ng-model="addAdmin.adminFirstName" ng-required="true">
+        <label for="addAdmin-middleName">Middle Name</label>
+        <input type="text" id="addAdmin-middleName" data-theme="b" ng-model="addAdmin.adminMiddleName"
+               ng-required="false">
+        <label for="addAdmin-lastName">Last Name</label>
+        <input type="text" id="addAdmin-lastName" data-theme="b" ng-model="addAdmin.adminLastName" ng-required="true">
+        <label for="addAdmin-email">Email</label>
+        <input type="email" id="addAdmin-email" data-theme="b" ng-model="addAdmin.adminEmail" ng-required="true">
+        <label for="addAdmin-telephone">Telephone</label>
+        <input type="tel" id="addAdmin-telephone" data-theme="b" ng-model="addAdmin.adminPhone" ng-required="true">
+        <label for="addAdmin-password"><strong>Password</strong></label>
+        <input type="password" id="addAdmin-password" autocomplete="off" data-theme="b"
+               ng-model="addAdmin.adminPassword" ng-required="true">
+        <label for="addAdmin-passwordConfirm"><strong>Confirm Password</strong></label>
+        <input type="password" id="addAdmin-passwordConfirm" autocomplete="off"
                data-theme="b" ng-model="validateAdmin.adminConfirmPassword" ng-required="true">
-        <label for="make-root">Make Root</label>
-        <input name="make-root" id="make-root" data-mini="true" type="checkbox"
+        <label for="addAdmin-makeRoot">Make Root</label>
+        <input id="addAdmin-makeRoot" data-mini="true" type="checkbox"
                data-theme="b" ng-model="addAdmin.adminIsRoot" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
@@ -35,6 +37,7 @@
         <button type="submit" data-icon="check">Submit</button>
       </div>
     </form>
+
   </div>
 
   <div data-role="footer" data-theme="b"><h1></h1></div>

@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
     link: function(scope, elem) {
 
       var page = $(elem[0]);
-      var adminAccountList = page.find('#adminAccountList');
+      var adminAccountList = page.find('#adminAcc-adminAccountList');
 
       var selectedAdmin = null;
       var selectedAdminIndex = null;
