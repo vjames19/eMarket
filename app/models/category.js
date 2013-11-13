@@ -65,12 +65,15 @@ module.exports.update = function(category, callback) {
         'SET category_name = ?, category_parent_id = ?, category_status = ? ' +
         'WHERE category_id = ?';
     var params = [category.categoryName, category.categoryParent, category.categoryStatus, category.id];
+    console.log(params);
     connection.query(sql, params, function(err) {
       callback(err, category);
     });
   });
 };
 
+// TODO We need to recursevely 'delete' the childs or move them
+// TODO and other cases, not simply 'delete' the category
 module.exports.delete = function(id, callback) {
   executor.execute(function(err, connection) {
     var sql = 'UPDATE category_info SET category_status = 0 WHERE category_id = ?';

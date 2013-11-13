@@ -10,17 +10,21 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
 
       $scope.submit = function() {
         $.mobile.loading('show');
-//        if(!$scope.categoryInfo.categoryParent) {
-//          $scope.categoryInfo.categoryParent = null;
-//        }
-//        Restangular.one('categories', $scope.categoryInfo.categoryId).customPUT($scope.categoryInfo)
-//            .then(function(categoryInfo) {
-//              $scope.categoryInfo = categoryInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#categories-admin');
-//            }, function(err) {
+        if(!$scope.categoryInfo.categoryParent) {
+          $scope.categoryInfo.categoryParent = null;
+        }
+        Restangular.one('categories', $scope.categoryInfo.id).customPUT($scope.categoryInfo)
+            .then(function(categoryInfo) {
+              $scope.categoryInfo = categoryInfo;
+              $.mobile.loading('hide');
+              $.mobile.changePage('#categories-admin');
+            }, function(err) {
+              $.mobile.loading('hide');
+              $.mobile.changePage('#categories-admin');
+              // Change Page?
 //              alert(err);
-//            });
+              alert('Update Not Successful.');
+            });
       };
 
     },
@@ -40,11 +44,6 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
         });
 
       });
-
-//      page.on('pageshow', function() {
-//        Helper.refreshList(categoryAdminList, true);
-//        Helper.refreshSelect(categorySelectMenu, true);
-//      });
 
     }
   };
