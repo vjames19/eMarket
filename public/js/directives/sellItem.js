@@ -137,30 +137,14 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
           Helper.triggerCreate(categoryPopup);
         });
 
-        if(SellItem.isDraft && scope.item.condition === 'New') {
-          setTimeout(function() {
-            newCheckBox.prop('checked', true).checkboxradio('refresh');
-            usedCheckBox.prop('checked', false).checkboxradio('refresh');
-            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
-          });
-        } else if(SellItem.isDraft && scope.item.condition === 'Used') {
-          setTimeout(function() {
-            newCheckBox.prop('checked', false).checkboxradio('refresh');
-            usedCheckBox.prop('checked', true).checkboxradio('refresh');
-            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
-          });
-        } else if(SellItem.isDraft && scope.item.condition === 'Refurbished') {
-          setTimeout(function() {
-            newCheckBox.prop('checked', false).checkboxradio('refresh');
-            usedCheckBox.prop('checked', false).checkboxradio('refresh');
-            refurbishedCheckBox.prop('checked', true).checkboxradio('refresh');
-          });
+        if(SellItem.isDraft && scope.item.condition !== null) {
+          newCheckBox.prop('checked', scope.item.condition === 'New').checkboxradio('refresh');
+          usedCheckBox.prop('checked', scope.item.condition === 'Used').checkboxradio('refresh');
+          refurbishedCheckBox.prop('checked', scope.item.condition === 'Refurbished').checkboxradio('refresh');
         } else {
-          setTimeout(function() {
-            newCheckBox.prop('checked', false).checkboxradio('refresh');
-            usedCheckBox.prop('checked', false).checkboxradio('refresh');
-            refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
-          });
+          newCheckBox.prop('checked', false).checkboxradio('refresh');
+          usedCheckBox.prop('checked', false).checkboxradio('refresh');
+          refurbishedCheckBox.prop('checked', false).checkboxradio('refresh');
         }
 
         if(SellItem.isDraft && scope.item.shippingPrice === 0) {
