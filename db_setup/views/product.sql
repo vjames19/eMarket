@@ -1,4 +1,6 @@
-CREATE VIEW products AS
+DROP VIEW IF EXISTS `emarket_test`.`products`;
+
+CREATE OR REPLACE VIEW emarket_test.products AS
 SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
 ci.category_id, ci.category_name,
 (

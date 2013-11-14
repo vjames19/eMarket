@@ -22,7 +22,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
       var upButton = page.find('#categories-upBtn');
       var stack = [];
 
-      var category = null;
+      var selectedCategory = null;
       var selectedIndex = null;
 
       page.on('pagebeforeshow', function() {
@@ -34,10 +34,6 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
           Helper.refreshList(categoryAdminList);
         });
       });
-
-//      page.on('pageshow', function() {
-//        categoryAdminList.listview('refresh');
-//      });
 
       var refreshCatList = function(categories) {
         scope.categories = categories;
@@ -62,18 +58,26 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
         refreshCatList(window._.last(stack));
       };
 
-      scope.selectedCategory = function(selectedCategory, index) {
-        category = selectedCategory;
+      scope.selectedCategory = function(category, index) {
+        selectedCategory = category;
         selectedIndex = index;
       };
 
       scope.deleteCategory = function() {
         $.mobile.loading('show');
-//        Restangular.one('categories', category.categoryId).remove().then(function() {
-        scope.categories.splice(selectedIndex, 1);
-        Helper.refreshList(categoryAdminList);
-        $.mobile.loading('hide');
-//        });
+        if(selectedCategory.categoryName.toLowerCase() !== 'other') { // Special Category
+          Restangular.one('categories', selectedCategory.id).remove().then(function() {
+            scope.categories.splice(selectedIndex, 1);
+            Helper.refreshList(categoryAdminList);
+            $.mobile.loading('hide');
+          }, function(err) {
+            $.mobile.loading('hide');
+            alert('Could not delete category');
+            console.log('Error Removing Category', err);
+          });
+        } else {
+          $.mobile.loading('hide');
+        }
       };
 
     }

@@ -13,17 +13,22 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
         if(!$scope.categoryInfo.categoryParent) {
           $scope.categoryInfo.categoryParent = null;
         }
-        Restangular.one('categories', $scope.categoryInfo.id).customPUT($scope.categoryInfo)
-            .then(function(categoryInfo) {
-              $scope.categoryInfo = categoryInfo;
-              $.mobile.loading('hide');
-              $.mobile.changePage('#categories-admin');
-            }, function(err) {
-              $.mobile.loading('hide');
-              alert('Update Not Successful.');
-              console.log('Update Category failed: ', err);
-              $.mobile.changePage('#categories-admin');
-            });
+        if($scope.categoryInfo.categoryName.toLowerCase() !== 'other') {  // Special Category
+          Restangular.one('categories', $scope.categoryInfo.id).customPUT($scope.categoryInfo)
+              .then(function(categoryInfo) {
+                $scope.categoryInfo = categoryInfo;
+                $.mobile.loading('hide');
+                $.mobile.changePage('#categories-admin');
+              }, function(err) {
+                $.mobile.loading('hide');
+                alert('Update Not Successful.');
+                console.log('Update Category failed: ', err);
+                $.mobile.changePage('#categories-admin');
+              });
+        } else {
+          $.mobile.loading('hide');
+          $.mobile.changePage('#categories-admin');
+        }
       };
 
     },
