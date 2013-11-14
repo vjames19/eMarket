@@ -26,8 +26,8 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
       scope.$watch('selectedCategory', function() {
         if(scope.selectedCategory === null) {
           Restangular.one('reportsMonthTotal').get().then(function(result) {
-            totalSales = result[0].sales;
-            totalRevenue = result[0].revenue;
+            totalSales = result.sales;
+            totalRevenue = result.revenue;
             updateGraph(totalSales, totalRevenue);
           });
         } else {

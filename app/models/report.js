@@ -66,7 +66,7 @@ module.exports.getTotal = function(timeFrame, callback) {
       if(err) {
         callback(err);
       } else {
-        callback(null, mapper.mapCollection(report, DICTIONARY));
+        callback(null, mapper.map(report[0], DICTIONARY));
       }
     });
   });

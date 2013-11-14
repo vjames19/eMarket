@@ -26,8 +26,8 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular, Repo
       scope.$watch('selectedCategory', function() {
         if(scope.selectedCategory === null) {
           Restangular.one('reportsWeekTotal').get().then(function(result) {
-            totalSales = result[0].sales;
-            totalRevenue = result[0].revenue;
+            totalSales = result.sales;
+            totalRevenue = result.revenue;
             updateGraph(totalSales, totalRevenue);
           });
         } else {
