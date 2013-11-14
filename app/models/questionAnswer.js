@@ -28,10 +28,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        securityQuestions = _.map(securityQuestions, function(securityQuestion) {
-          return mapper.map(securityQuestion, DICTIONARY);
-        });
-        callback(null, securityQuestions);
+        callback(null, mapper.mapCollection(securityQuestions, DICTIONARY));
       }
     });
   });

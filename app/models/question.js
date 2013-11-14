@@ -25,10 +25,7 @@ module.exports.getAll = function(callback) {
       if(err) {
         callback(err);
       } else {
-        questions = _.map(questions, function(question) {
-          return mapper.map(question, DICTIONARY);
-        });
-        callback(null, questions);
+        callback(null, mapper.mapCollection(questions, DICTIONARY));
       }
     });
   });

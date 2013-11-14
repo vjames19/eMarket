@@ -36,10 +36,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        billingAddresses = _.map(billingAddresses, function(billingAddress) {
-          return mapper.map(billingAddress, DICTIONARY);
-        });
-        callback(null, billingAddresses);
+        callback(null, mapper.mapCollection(billingAddresses, DICTIONARY));
       }
     });
   });

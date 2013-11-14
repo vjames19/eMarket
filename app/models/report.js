@@ -32,10 +32,7 @@ module.exports.getAll = function(timeFrame, callback) {
       if(err) {
         callback(err);
       } else {
-        reports = _.map(reports, function(report) {
-          return mapper.map(report, DICTIONARY);
-        });
-        callback(null, reports);
+        callback(null, mapper.mapCollection(reports, DICTIONARY));
       }
     });
   });
@@ -69,10 +66,7 @@ module.exports.getTotal = function(timeFrame, callback) {
       if(err) {
         callback(err);
       } else {
-        report = _.map(report, function(reportData) {
-          return mapper.map(reportData, DICTIONARY);
-        });
-        callback(null, report);
+        callback(null, mapper.mapCollection(report, DICTIONARY));
       }
     });
   });

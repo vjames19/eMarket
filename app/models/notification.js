@@ -27,10 +27,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        notifications = _.map(notifications, function(notification) {
-          return mapper.map(notification, DICTIONARY);
-        });
-        callback(null, notifications);
+        callback(null, mapper.mapCollection(notifications, DICTIONARY));
       }
     });
   });

@@ -32,10 +32,7 @@ module.exports.getAll = function(callback) {
       if(err) {
         callback(err);
       } else {
-        users = _.map(users, function(user) {
-          return mapper.map(user, DICTIONARY);
-        });
-        callback(null, users);
+        callback(null, mapper.mapCollection(users, DICTIONARY));
       }
     });
   });
@@ -60,7 +57,6 @@ module.exports.authenticate = function(username, password, callback) {
         'ON (user_login_id=user_id AND user_id=user_account_id) ' +
         'WHERE user_login_user_name = ? AND user_login_password = SHA1(?) AND user_account_status=1';
     connection.query(sql, [username, password], function(err, users) {
-//      console.log('authenticate', arguments);
       callback(err, mapper.map(users[0], DICTIONARY));
     });
   });

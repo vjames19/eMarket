@@ -29,10 +29,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        ratings = _.map(ratings, function(rating) {
-          return mapper.map(rating, DICTIONARY);
-        });
-        callback(null, ratings);
+        callback(null, mapper.mapCollection(ratings, DICTIONARY));
       }
     });
   });

@@ -31,10 +31,7 @@ module.exports.getAll = function(callback) {
       if(err) {
         callback(err);
       } else {
-        admins = _.map(admins, function(admin) {
-          return mapper.map(admin, DICTIONARY);
-        });
-        callback(null, admins);
+        callback(null, mapper.mapCollection(admins, DICTIONARY));
       }
     });
   });

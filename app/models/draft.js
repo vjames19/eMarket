@@ -44,10 +44,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        drafts = _.map(drafts, function(draft) {
-          return mapper.map(draft, DICTIONARY);
-        });
-        callback(null, drafts);
+        callback(null, mapper.mapCollection(drafts, DICTIONARY));
       }
     });
   });

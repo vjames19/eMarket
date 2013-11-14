@@ -31,10 +31,7 @@ module.exports.getAll = function(productId, callback) {
       if(err) {
         callback(err);
       } else {
-        bids = _.map(bids, function(bid) {
-          return mapper.map(bid, DICTIONARY);
-        });
-        callback(null, bids);
+        callback(null, mapper.mapCollection(bids, DICTIONARY));
       }
     });
   });

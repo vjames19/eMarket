@@ -52,10 +52,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        invoices = _.map(invoices, function(invoice) {
-          return mapper.map(invoice, DICTIONARY);
-        });
-        callback(null, invoices);
+        callback(null, mapper.mapCollection(invoices, DICTIONARY));
       }
     });
   });
@@ -87,10 +84,7 @@ module.exports.getProducts = function(userId, invoiceId, callback) {
       if(err) {
         callback(err);
       } else {
-        products = _.map(products, function(product) {
-          return mapper.map(product, PRODUCT_DICTIONARY);
-        });
-        callback(null, products);
+        callback(null, mapper.mapCollection(products, PRODUCT_DICTIONARY));
       }
     });
   });

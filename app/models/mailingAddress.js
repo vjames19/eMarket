@@ -37,10 +37,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        mailingAddresses = _.map(mailingAddresses, function(mailingAddress) {
-          return mapper.map(mailingAddress, DICTIONARY);
-        });
-        callback(null, mailingAddresses);
+        callback(null, mapper.mapCollection(mailingAddresses, DICTIONARY));
       }
     });
   });

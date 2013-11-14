@@ -10,7 +10,7 @@ var DICTIONARY = {
   'bank_account_type': 'accountType',
   'bank_account_number': 'accountNumber',
   'bank_routing_number': 'routingNumber',
-  'billing_address_id' : 'addressId'
+  'billing_address_id': 'addressId'
 };
 
 //var WHITELIST = [];
@@ -33,10 +33,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        bankAccounts = _.map(bankAccounts, function(bankAccount) {
-          return mapper.map(bankAccount, DICTIONARY);
-        });
-        callback(null, bankAccounts);
+        callback(null, mapper.mapCollection(bankAccounts, DICTIONARY));
       }
     });
   });

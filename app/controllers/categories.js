@@ -47,7 +47,7 @@ exports.updateCategory = function(req, res) {
  * Delete a category
  */
 exports.deleteCategory = function(req, res) {
-  Category.delete(req.category.id, function(err) {
+  Category.remove(req.category.id, function(err) {
     if(err) {
       res.jsonp(500, err);
     } else {

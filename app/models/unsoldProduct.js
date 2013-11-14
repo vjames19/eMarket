@@ -41,23 +41,11 @@ module.exports.getAll = function(userId, callback) {
         'WHERE product_seller_id = ? AND ' +
         'product_quantity_remaining > 0 AND ' +
         'product_depletion_date IS NULL';
-//    var sql = 'SELECT products.* ' +
-//        'FROM products ' +
-//        'WHERE product_seller_id = ? AND product_id NOT IN (' +
-//        'SELECT product_id ' +
-//        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
-//        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
-//        'user_login_id AND invoice_item_product_id = product_id) ' +
-//        'WHERE product_seller_id = ?)';
-//    connection.query(sql, [userId, userId], function(err, unsoldProducts) {
     connection.query(sql, [userId], function(err, unsoldProducts) {
       if(err) {
         callback(err);
       } else {
-        unsoldProducts = _.map(unsoldProducts, function(unsoldProduct) {
-          return mapper.map(unsoldProduct, DICTIONARY);
-        });
-        callback(null, unsoldProducts);
+        callback(null, mapper.mapCollection(unsoldProducts, DICTIONARY));
       }
     });
   });
@@ -71,15 +59,6 @@ module.exports.get = function(userId, unsoldProductId, callback) {
         'product_quantity_remaining > 0 AND ' +
         'product_depletion_date IS NULL AND ' +
         'product_id = ?';
-//    var sql = 'SELECT products.* ' +
-//        'FROM products ' +
-//        'WHERE product_seller_id = ? AND product_id NOT IN (' +
-//        'SELECT product_id ' +
-//        'FROM invoice_history INNER JOIN invoice_item_history INNER JOIN user_login_info INNER JOIN products ' +
-//        'ON (invoice_id = invoice_item_invoice_id AND invoice_user_id = ' +
-//        'user_login_id AND invoice_item_product_id = product_id) ' +
-//        'WHERE product_seller_id = ? AND product_id = ?)';
-//    connection.query(sql, [userId, userId, unsoldProductId], function(err, unsoldProduct) {
     connection.query(sql, [userId, unsoldProductId], function(err, unsoldProduct) {
       callback(err, mapper.map(unsoldProduct[0], DICTIONARY));
     });

@@ -41,10 +41,7 @@ module.exports.getAll = function(callback) {
       if(err) {
         callback(err);
       } else {
-        products = _.map(products, function(product) {
-          return mapper.map(product, DICTIONARY);
-        });
-        callback(null, products);
+        callback(null, mapper.mapCollection(products, DICTIONARY));
       }
     });
   });
@@ -74,10 +71,7 @@ module.exports.search = function(query, callback) {
       if(err) {
         callback(err);
       } else {
-        products = _.map(products, function(product) {
-          return mapper.map(product, DICTIONARY);
-        });
-        callback(null, products);
+        callback(null, mapper.mapCollection(products, DICTIONARY));
       }
     });
   });

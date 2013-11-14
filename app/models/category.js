@@ -60,7 +60,7 @@ module.exports.create = function(category, callback) {
 module.exports.update = function(category, callback) {
   category = _.pick(category, WHITELIST);
   executor.execute(function(err, connection) {
-    // TODO: Verify parent id;
+    // TODO: Verify parent id; <-- This Still needs to be done?
     var sql = 'UPDATE category_info ' +
         'SET category_name = ?, category_parent_id = ?, category_status = ? ' +
         'WHERE category_id = ?';
@@ -72,7 +72,7 @@ module.exports.update = function(category, callback) {
   });
 };
 
-module.exports.delete = function(id, callback) {
+module.exports.remove = function(id, callback) {
   executor.execute(function(err, connection) {
 
     connection.beginTransaction(function(err) {

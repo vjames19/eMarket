@@ -46,10 +46,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        shoppingCarts = _.map(shoppingCarts, function(shoppingCart) {
-          return mapper.map(shoppingCart, DICTIONARY);
-        });
-        callback(null, shoppingCarts);
+        callback(null, mapper.mapCollection(shoppingCarts, DICTIONARY));
       }
     });
   });

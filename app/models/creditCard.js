@@ -34,10 +34,7 @@ module.exports.getAll = function(userId, callback) {
       if(err) {
         callback(err);
       } else {
-        creditCards = _.map(creditCards, function(creditCard) {
-          return mapper.map(creditCard, DICTIONARY);
-        });
-        callback(null, creditCards);
+        callback(null, mapper.mapCollection(creditCards, DICTIONARY));
       }
     });
   });
