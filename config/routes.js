@@ -26,7 +26,7 @@ module.exports = function(app, passport, auth) {
 
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
-  app.post('/api/users', users.createUser);
+  app.post('/register', users.createUser); // Doest not require login.
   app.get('/api/users/:userId', users.readUser);
   app.put('/api/users/:userId', users.updateUser);
   app.del('/api/users/:userId', users.deleteUser);

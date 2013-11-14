@@ -3,9 +3,14 @@
 var _ = require('underscore');
 var mapper = require('../mapper');
 
-var DICTIONARY = {};
-
-var WHITELIST = [];
+var WHITELIST = [
+  'firstName', 'middleName', 'lastName', 'telephone', 'email', 'username', 'password',
+  'mailingAddress', 'mailingCountry', 'mailingGeographicalRegion', 'mailingCity', 'mailingZipCode',
+  'sameAsMailing',
+  'billingAddress', 'billingCountry', 'billingGeographicalRegion', 'billingCity', 'billingZipCode',
+  'cardName', 'cardType', 'cardNumber', 'cardExpirationDate', 'cardSecurityCode',
+  'securityQuestion1', 'securityQuestion2', 'securityQuestion3',
+  'securityAnswer1', 'securityAnswer2', 'securityAnswer3'];
 
 var executor = null;
 
@@ -14,9 +19,11 @@ module.exports.init = function(realExecutor) {
   return module.exports;
 };
 
-module.exports.create = function(registrationValues, callback) {
+module.exports.create = function(register, callback) {
 
   executor.execute(function(err, connection) {
+
+    register = _.pick(register, WHITELIST);
 
     connection.beginTransaction(function(err) {
       if(err) {
@@ -27,7 +34,8 @@ module.exports.create = function(registrationValues, callback) {
           '(user_first_name, user_middle_name, user_last_name, user_telephone, user_creation_date) ' +
           'VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)';
 
-      connection.query(sql1, ['', '', '', ''], function(err, firstResult) {
+      var params1 = [register.firstName, register.middleName, register.lastName, register.telephone];
+      connection.query(sql1, params1, function(err, firstResult) {
         if(err) {
           connection.rollback(function() {
             callback(err);
@@ -48,34 +56,71 @@ module.exports.create = function(registrationValues, callback) {
 
           var sql3 = 'INSERT INTO user_login_info ' +
               '(user_login_id, user_login_user_name, user_login_password, user_login_email) ' +
-              'VALUES (?, ?, ?, ?)';
+              'VALUES (?, LCASE(?), SHA1(?), LCASE(?))';
 
-          connection.query(sql3, [userId, '', '', ''], function(err) {
+          var params3 = [userId, register.username, register.password, register.email];
+          connection.query(sql3, params3, function(err) {
             if(err) {
               connection.rollback(function() {
                 callback(err);
               });
             }
 
-            var sql4 = 'INSERT INTO address_history ' +
-                '(address_address, address_country, address_city, address_geographical_region, address_zipcode) ' +
-                'VALUES (?, ?, ?, ?, ?)';
+            var sql4;
+            var params4;
+            if(register.sameAsMailing === true) {
+              sql4 = 'INSERT INTO address_history ' +
+                  '(address_address, address_country, address_city, address_geographical_region, address_zipcode) ' +
+                  'VALUES ?';
+              params4 = [
+                [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
+                  register.mailingCity, register.mailingZipCode]
+              ];
+            }
+            else {
+              sql4 = 'INSERT INTO address_history ' +
+                  '(address_address, address_country, address_city, address_geographical_region, address_zipcode) ' +
+                  'VALUES ?';
+              params4 = [
+                [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
+                  register.mailingCity, register.mailingZipCode],
+                [register.billingAddress, register.billingCountry, register.billingGeographicalRegion,
+                  register.billingCity, register.billingZipCode]
+              ];
+            }
 
-            connection.query(sql4, ['', '', '', '', ''], function(err, fourthResult) {
+            connection.query(sql4, [params4], function(err, fourthResult) {
               if(err) {
                 connection.rollback(function() {
                   callback(err);
                 });
               }
 
-              var addressId = fourthResult.insertId;
+              var mailAddressId;
+              var billAddressId;
+              if(register.sameAsMailing === true) {
+                // TODO <-- Verify if InsertId is the last inserted or the first.. Should be the first.
+                mailAddressId = fourthResult.insertId;
+                billAddressId = fourthResult.insertId;
+              } else {
+                mailAddressId = fourthResult.insertId;
+                billAddressId = fourthResult.insertId + 1;
+              }
 
               var sql5 = 'INSERT INTO mailing_info ' +
                   '(mailing_user_id, mailing_address_id, mailing_recipient_name, mailing_telephone, ' +
                   'mailing_is_primary, mailing_status) ' +
                   'VALUES (?, ?, ?, ?, TRUE, TRUE)';
 
-              connection.query(sql5, [userId, addressId, '', ''], function(err) {
+              var recipient;
+              if(register.middleName === null) {
+                recipient = register.firstName + ' ' + register.lastName;
+              } else {
+                recipient = register.firstName + ' ' + register.middleName + ' ' + register.lastName;
+              }
+
+              var params5 = [userId, mailAddressId, recipient, register.telephone];
+              connection.query(sql5, params5, function(err) {
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -87,7 +132,8 @@ module.exports.create = function(registrationValues, callback) {
                     'billing_telephone, billing_status) ' +
                     'VALUES (?, ?, ?, ?, TRUE)';
 
-                connection.query(sql6, [userId, addressId, '', ''], function(err, sixthResult) {
+                var params6 = [userId, billAddressId, recipient, register.telephone];
+                connection.query(sql6, params6, function(err, sixthResult) {
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
@@ -102,7 +148,9 @@ module.exports.create = function(registrationValues, callback) {
                       'credit_card_csv, credit_card_status) ' +
                       'VALUES (?, ?, ?, ?, ?, ?, ?, TRUE)';
 
-                  connection.query(sql7, [userId, billId, '', '', '', '', ''], function(err) {
+                  var params7 = [userId, billId, register.cardType, register.cardName,
+                    register.cardExpirationDate, register.cardNumber, register.cardSecurityCode];
+                  connection.query(sql7, params7, function(err) {
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
@@ -111,14 +159,14 @@ module.exports.create = function(registrationValues, callback) {
 
                     var sql8 = 'INSERT INTO question_answer_history ' +
                         '(answer_question_id, answer_user_id, answer_content, answer_status) ' +
-                        'VALUES (?, ?, ?, TRUE), (?, ?, ?, TRUE), (?, ?, ?, TRUE)';
+                        'VALUES ?';
 
-                    connection.query(sql8, [
-                      [userId, '', ''],
-                      [userId, '', ''],
-                      [userId, '', '']
-                    ], function(err) {
-
+                    var params8 = [
+                      [register.securityQuestion1, userId, register.securityAnswer1, true],
+                      [register.securityQuestion2, userId , register.securityAnswer2, true],
+                      [register.securityQuestion3, userId, register.securityAnswer3, true]
+                    ];
+                    connection.query(sql8, [params8], function(err) {
                       if(err) {
                         connection.rollback(function() {
                           callback(err);
@@ -131,7 +179,7 @@ module.exports.create = function(registrationValues, callback) {
                             callback(err);
                           });
                         }
-                        callback(null, registrationValues);
+                        callback(null, register);
                         console.log('Finished Registration!');
                       });
 

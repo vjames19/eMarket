@@ -8,17 +8,35 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
     replace: true,
     controller: function($scope, Restangular) {
 
-      $scope.newUser = { creditCard: {creditCardType: 'Visa'} };
+      $scope.register = { cardType: 'Visa' };
 
       $scope.submit = function() {
         $.mobile.loading('show');
-//        Restangular.all('users').post($scope.newUser.user).then(function(user) {
-//          user.all('mailAddresses').post($scope.newUser.mailAddress);
-//          user.all('billAddresses').post($scope.newUser.billAddress);
-//          user.all('creditCards').post($scope.newUser.creditCard);
-        $.mobile.loading('hide');
-        $.mobile.changePage('#index-page'); //Force user to put hes newly registered credentials
-//        });
+        if(!$scope.register.middleName) {
+          $scope.register.middleName = null;
+        }
+        if(!$scope.register.mailingGeographicalRegion) {
+          $scope.register.mailingGeographicalRegion = null;
+        }
+        if(!$scope.register.billingGeographicalRegion) {
+          $scope.register.billingGeographicalRegion = null;
+        }
+        if($scope.register.sameAsMailing === true) {
+          $scope.register.billingAddress = $scope.register.mailingAddress;
+          $scope.register.billingCountry = $scope.register.mailingCountry;
+          $scope.register.billingGeographicalRegion = $scope.register.mailingGeographicalRegion;
+          $scope.register.billingCity = $scope.register.mailingCity;
+          $scope.register.billingZipCode = $scope.register.mailingZipCode;
+        }
+        Restangular.all('../register').post($scope.register).then(function() {
+          $.mobile.loading('hide');
+          $.mobile.changePage('#index-page'); //Force user to put hes newly registered credentials
+        }, function(err) {
+          $.mobile.loading('hide');
+          alert('Could not Finish Registration.');
+          console.log('Registration Error', err);
+          $.mobile.changePage('#index-page');
+        });
       };
 
     },

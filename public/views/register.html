@@ -16,50 +16,50 @@
 
           <div class="form-pad">
             <label for="register-firstName">First Name</label>
-            <input type="text" id="register-firstName" ng-model="newUser.user.userFirstName" ng-required="true">
+            <input type="text" id="register-firstName" ng-model="register.firstName" ng-required="true">
             <label for="register-middleName">Middle Name</label>
-            <input type="text" id="register-middleName" ng-model="newUser.user.userMiddleName" ng-required="false">
+            <input type="text" id="register-middleName" ng-model="register.middleName" ng-required="false">
             <label for="register-lastName">Last Name</label>
-            <input type="text" id="register-lastName" ng-model="newUser.user.userLastName" ng-required="true">
+            <input type="text" id="register-lastName" ng-model="register.lastName" ng-required="true">
             <hr/>
             <label for="register-mailing"><strong>Mailing Address</strong></label>
             <input type="hidden" id="register-mailing">
             <hr/>
             <label for="register-mailingAddress">Address</label>
-            <input type="text" id="register-mailingAddress" ng-model="newUser.mailAddress.mailAddress"
+            <input type="text" id="register-mailingAddress" ng-model="register.mailingAddress"
                    ng-required="true">
             <label for="register-mailingCountry">Country</label>
-            <input type="text" id="register-mailingCountry" ng-model="newUser.mailAddress.country" ng-required="true">
+            <input type="text" id="register-mailingCountry" ng-model="register.mailingCountry" ng-required="true">
             <label for="register-mailingGeographicalRegion">State/Providence/Region</label>
             <input type="text" id="register-mailingGeographicalRegion"
-                   ng-model="newUser.mailAddress.geographicalRegion" ng-required="false">
+                   ng-model="register.mailingGeographicalRegion" ng-required="false">
             <label for="register-mailingCity">City</label>
-            <input type="text" id="register-mailingCity" ng-model="newUser.mailAddress.city" ng-required="true">
+            <input type="text" id="register-mailingCity" ng-model="register.mailingCity" ng-required="true">
             <label for="register-mailingZipCode">Zip Code</label>
-            <input type="tel" id="register-mailingZipCode" ng-model="newUser.mailAddress.zipCode"
+            <input type="tel" id="register-mailingZipCode" ng-model="register.mailingZipCode"
                    ng-required="true">
             <hr/>
             <label for="register-billing"><strong>Billing Address</strong></label>
             <input type="hidden" id="register-billing">
             <hr/>
             <label for="register-sameAsMailing">Same as Mailing Address</label>
-            <input type="checkbox" id="register-sameAsMailing"
+            <input type="checkbox" id="register-sameAsMailing" ng-model="register.sameAsMailing"
                    name="register-sameAsMailing" ng-click="disableBillAddress()" ng-required="false">
             <label for="register-billingAddress">Address</label>
-            <input type="text" id="register-billingAddress" ng-model="newUser.billAddress.billAddress"
+            <input type="text" id="register-billingAddress" ng-model="register.billingAddress"
                    ng-required="true">
             <label for="register-billingCountry">Country</label>
-            <input type="text" id="register-billingCountry" ng-model="newUser.billAddress.country" ng-required="true">
+            <input type="text" id="register-billingCountry" ng-model="register.billingCountry" ng-required="true">
             <label for="register-billingGeographicalRegion">State/Providence/Region</label>
             <input type="text" id="register-billingGeographicalRegion"
-                   ng-model="newUser.billAddress.geographicalRegion" ng-required="false">
+                   ng-model="register.billingGeographicalRegion" ng-required="false">
             <label for="register-billingCity">City</label>
-            <input type="text" id="register-billingCity" ng-model="newUser.billAddress.city" ng-required="true">
+            <input type="text" id="register-billingCity" ng-model="register.billingCity" ng-required="true">
             <label for="register-billingZipCode">Zip Code</label>
-            <input type="tel" id="register-billingZipCode" ng-model="newUser.billAddress.zipCode"
+            <input type="tel" id="register-billingZipCode" ng-model="register.billingZipCode"
                    ng-required="true">
             <label for="register-telephone">Telephone</label>
-            <input type="tel" id="register-telephone" ng-model="newUser.user.telephone" ng-required="true">
+            <input type="tel" id="register-telephone" ng-model="register.telephone" ng-required="true">
           </div>
         </div>
 
@@ -68,22 +68,22 @@
 
           <div class="form-pad">
             <label for="register-cardName">Name as Appear in Card</label>
-            <input type="text" id="register-cardName" ng-model="newUser.creditCard.creditCardName" ng-required="true">
+            <input type="text" id="register-cardName" ng-model="register.cardName" ng-required="true">
             <label for="register-cardType">Card Type</label>
-            <select id="register-cardType" ng-model="newUser.creditCard.creditCardType" ng-required="true">
+            <select id="register-cardType" ng-model="register.cardType" ng-required="true">
               <option value="Visa" selected>Visa</option>
               <option value="Master Card">Master Card</option>
               <option value="American Express">American Express</option>
               <option value="Other">Other</option>
             </select>
             <label for="register-cardNumber">Card Number</label>
-            <input type="number" id="register-cardNumber" ng-model="newUser.creditCard.creditCardNumber"
+            <input type="number" id="register-cardNumber" ng-model="register.cardNumber"
                    ng-required="true">
             <label for="register-cardExpirationDate">Expiration Date</label>
-            <input type="month" id="register-cardExpirationDate" ng-model="newUser.creditCard.creditCardExpDate"
+            <input type="month" id="register-cardExpirationDate" ng-model="register.cardExpirationDate"
                    ng-required="true">
             <label for="register-cardSecurityCode">Card Security Code</label>
-            <input type="number" id="register-cardSecurityCode" ng-model="newUser.creditCard.creditCardCvs"
+            <input type="number" id="register-cardSecurityCode" ng-model="register.cardSecurityCode"
                    ng-required="true">
           </div>
         </div>
@@ -93,41 +93,41 @@
 
           <div class="form-pad">
             <label for="register-email">Email</label>
-            <input type="email" id="register-email" ng-model="newUser.user.userEmail" ng-required="true">
+            <input type="email" id="register-email" ng-model="register.email" ng-required="true">
             <label for="register-username">Username</label>
-            <input type="text" id="register-username" ng-model="newUser.user.username" ng-required="true">
+            <input type="text" id="register-username" ng-model="register.username" ng-required="true">
             <label for="register-password">Password</label>
-            <input type="password" id="register-password" autocomplete="off" ng-model="newUser.user.userPassword"
+            <input type="password" id="register-password" autocomplete="off" ng-model="register.password"
                    ng-required="true">
             <label for="register-passwordConfirm">Confirm Password</label>
             <input type="password" id="register-passwordConfirm" autocomplete="off"
-                   ng-model="newUser.validateUser.userConfirmPassword" ng-required="true">
+                   ng-model="register.passwordConfirm" ng-required="true">
             <label for="register-securityQuestions">Security Questions</label>
             <input type="hidden" id="register-securityQuestions">
             <label for="register-securityQuestion-1"></label>
-            <select id="register-securityQuestion-1" ng-model="question1"
+            <select id="register-securityQuestion-1" ng-model="register.securityQuestion1"
                     ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question1">Select a question</option>
+              <option value="" ng-hide="register.securityQuestion1">Select a question</option>
             </select>
             <label for="register-securityAnswer-1"></label>
             <input type="text" id="register-securityAnswer-1" placeholder="Answer"
-                   ng-model="newUser.user.questions.answer1" ng-required="true">
+                   ng-model="register.securityAnswer1" ng-required="true">
             <label for="register-securityQuestion-2"></label>
-            <select id="register-securityQuestion-2" ng-model="question2"
+            <select id="register-securityQuestion-2" ng-model="register.securityQuestion2"
                     ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question2">Select a question</option>
+              <option value="" ng-hide="register.securityQuestion-2">Select a question</option>
             </select>
             <label for="register-securityAnswer-2"></label>
             <input type="text" id="register-securityAnswer-2" placeholder="Answer"
-                   ng-model="newUser.user.questions.answer2" ng-required="true">
+                   ng-model="register.securityAnswer2" ng-required="true">
             <label for="register-securityQuestion-3"></label>
-            <select id="register-securityQuestion-3" ng-model="question3"
+            <select id="register-securityQuestion-3" ng-model="register.securityQuestion3"
                     ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question3">Select a question</option>
+              <option value="" ng-hide="register.securityQuestion3">Select a question</option>
             </select>
             <label for="register-securityAnswer-3"></label>
             <input type="text" id="register-securityAnswer-3" placeholder="Answer"
-                   ng-model="newUser.user.questions.answer3" ng-required="true">
+                   ng-model="register.securityAnswer3" ng-required="true">
           </div>
         </div>
 

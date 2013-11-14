@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Users = require('../models/user.js');
+var Register = require('../models/register.js');
 
 var nestedControllersPath = __dirname + '/user';
 require('fs').readdirSync(nestedControllersPath).forEach(function(file) {
@@ -79,11 +80,21 @@ exports.readAllUsers = function(req, res) {
  * Create a user
  */
 exports.createUser = function(req, res) {
-  var user = req.body;
-  user.id = user.userId = _.keys(users).length + 1;
-  users[user.userId] = user;
-  res.jsonp(user);
+  Register.create(req.body, function(err, registration) {
+    if(err) {
+      console.log('Controller Err', err);
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(201, registration);
+    }
+  });
 };
+//exports.createUser = function(req, res) {
+//  var user = req.body;
+//  user.id = user.userId = _.keys(users).length + 1;
+//  users[user.userId] = user;
+//  res.jsonp(user);
+//};
 
 /**
  * Read a user
