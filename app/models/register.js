@@ -20,7 +20,7 @@ module.exports.create = function(registrationValues, callback) {
 
     connection.beginTransaction(function(err) {
       if(err) {
-        throw err;
+        callback(err);
       }
 
       var sql1 = 'INSERT INTO user_info ' +
@@ -30,7 +30,7 @@ module.exports.create = function(registrationValues, callback) {
       connection.query(sql1, ['', '', '', ''], function(err, firstResult) {
         if(err) {
           connection.rollback(function() {
-            throw err;
+            callback(err);
           });
         }
 
@@ -42,7 +42,7 @@ module.exports.create = function(registrationValues, callback) {
         connection.query(sql2, [userId], function(err) {
           if(err) {
             connection.rollback(function() {
-              throw err;
+              callback(err);
             });
           }
 
@@ -53,7 +53,7 @@ module.exports.create = function(registrationValues, callback) {
           connection.query(sql3, [userId, '', '', ''], function(err) {
             if(err) {
               connection.rollback(function() {
-                throw err;
+                callback(err);
               });
             }
 
@@ -64,7 +64,7 @@ module.exports.create = function(registrationValues, callback) {
             connection.query(sql4, ['', '', '', '', ''], function(err, fourthResult) {
               if(err) {
                 connection.rollback(function() {
-                  throw err;
+                  callback(err);
                 });
               }
 
@@ -78,7 +78,7 @@ module.exports.create = function(registrationValues, callback) {
               connection.query(sql5, [userId, addressId, '', ''], function(err) {
                 if(err) {
                   connection.rollback(function() {
-                    throw err;
+                    callback(err);
                   });
                 }
 
@@ -90,7 +90,7 @@ module.exports.create = function(registrationValues, callback) {
                 connection.query(sql6, [userId, addressId, '', ''], function(err, sixthResult) {
                   if(err) {
                     connection.rollback(function() {
-                      throw err;
+                      callback(err);
                     });
                   }
 
@@ -105,7 +105,7 @@ module.exports.create = function(registrationValues, callback) {
                   connection.query(sql7, [userId, billId, '', '', '', '', ''], function(err) {
                     if(err) {
                       connection.rollback(function() {
-                        throw err;
+                        callback(err);
                       });
                     }
 
@@ -121,16 +121,17 @@ module.exports.create = function(registrationValues, callback) {
 
                       if(err) {
                         connection.rollback(function() {
-                          throw err;
+                          callback(err);
                         });
                       }
 
                       connection.commit(function(err) {
                         if(err) {
                           connection.rollback(function() {
-                            throw err;
+                            callback(err);
                           });
                         }
+                        callback(null, registrationValues);
                         console.log('Finished Registration!');
                       });
 
