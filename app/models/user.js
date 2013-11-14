@@ -55,7 +55,7 @@ module.exports.authenticate = function(username, password, callback) {
     var sql = 'SELECT user_id, user_login_user_name ' +
         'FROM user_login_info INNER JOIN user_info INNER JOIN user_account_status ' +
         'ON (user_login_id=user_id AND user_id=user_account_id) ' +
-        'WHERE user_login_user_name = ? AND user_login_password = SHA1(?) AND user_account_status=1';
+        'WHERE user_login_user_name = LCASE(?) AND user_login_password = SHA1(?) AND user_account_status = 1';
     connection.query(sql, [username, password], function(err, users) {
       callback(err, mapper.map(users[0], DICTIONARY));
     });
