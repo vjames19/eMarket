@@ -33,11 +33,11 @@
     "view-helpers": "latest",
     "bower": "latest",
     "underscore": "~1.5.2",
-    "mysql": "latest"
+    "mysql": "git://github.com/felixge/node-mysql"
   },
   "devDependencies": {
     "supertest": "~0.8.0",
-    "mocha": "~1.14.0",
+    "mocha": "~1.13.0",
     "web-mocha": "~0.0.10",
     "grunt": "~0.4.1",
     "grunt-contrib-compass": "~0.6.0",
