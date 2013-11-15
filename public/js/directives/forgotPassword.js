@@ -12,7 +12,7 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
         $.mobile.loading('show');
         Restangular.all('../forgot').post($scope.forgot).then(function() {
           $.mobile.loading('hide');
-          alert('Password Changed.');
+          alert('Password Changed to ' + $scope.forgot.newPassword);
           $.mobile.changePage('#index-page');
         }, function(err) {
           $.mobile.loading('hide');
