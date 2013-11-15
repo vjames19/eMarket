@@ -6,12 +6,31 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular) {
+    controller: function($scope, $element, Restangular) {
 
       $scope.register = { cardType: 'Visa' };
 
+      var page = $($element[0]);
+
+      var changedPopup = page.find('#register-changeStatus');
+      var changedMessage = page.find('#register-changeStatusMessage');
+
       $scope.submit = function() {
-        $.mobile.loading('show');
+        if($scope.register.password !== $scope.register.passwordConfirm) {
+          changedMessage.text('Passwords do not match.');
+          changedPopup.popup('open');
+          return;
+        }
+        var questions = [
+          $scope.register.securityQuestion1,
+          $scope.register.securityQuestion2,
+          $scope.register.securityQuestion3
+        ];
+        if(window._.uniq(questions).length !== 3) {
+          changedMessage.text('All three questions must be different.');
+          changedPopup.popup('open');
+          return;
+        }
         if(!$scope.register.middleName) {
           $scope.register.middleName = null;
         }
@@ -28,14 +47,24 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
           $scope.register.billingCity = $scope.register.mailingCity;
           $scope.register.billingZipCode = $scope.register.mailingZipCode;
         }
+        $.mobile.loading('show');
         Restangular.all('../register').post($scope.register).then(function() {
           $.mobile.loading('hide');
-          $.mobile.changePage('#index-page'); //Force user to put hes newly registered credentials
+          changedMessage.text('Registration successful. ' +
+              'Your username is ' + $scope.register.username + '. ' +
+              'Your password is ' + $scope.register.password + '.');
+          changedPopup.popup('open');
+          changedPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#index-page'); //Force user to put hes newly registered credentials
+            }
+          });
         }, function(err) {
           $.mobile.loading('hide');
-          alert('Could not Finish Registration.');
+          changedMessage.text('Could not Finish Registration. ' +
+              'Username or Email might be already registered.');
+          changedPopup.popup('open');
           console.log('Registration Error', err);
-          $.mobile.changePage('#index-page');
         });
       };
 
