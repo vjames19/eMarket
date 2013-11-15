@@ -98,7 +98,11 @@ exports.createUser = function(req, res) {
   Register.create(req.body, function(err, registration) {
     if(err) {
       res.jsonp(500, err);
-    } else {
+    }
+    else if(registration === null) {
+      res.jsonp(409, 'Username or Email Already Exists.');
+    }
+    else {
       res.jsonp(201, registration);
     }
   });
