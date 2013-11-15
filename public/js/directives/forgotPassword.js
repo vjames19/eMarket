@@ -14,6 +14,17 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
       var changedMessage = page.find('#forgot-changeStatusMessage');
 
       $scope.submit = function() {
+        var questions = [$scope.forgot.question1, $scope.forgot.question2, $scope.forgot.question3];
+        if(window._.uniq(questions).length !== 3) {
+          changedMessage.text('All three questions must be different.');
+          changedPopup.popup('open');
+          return;
+        }
+        if($scope.forgot.newPassword !== $scope.forgot.newPasswordConfirm) {
+          changedMessage.text('Passwords do not match.');
+          changedPopup.popup('open');
+          return;
+        }
         $.mobile.loading('show');
         Restangular.all('../forgot').post($scope.forgot).then(function() {
           $.mobile.loading('hide');
