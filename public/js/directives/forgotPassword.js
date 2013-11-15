@@ -6,19 +6,29 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, $element) {
+
+      var page = $($element[0]);
+
+      var changedPopup = page.find('#forgot-changeStatus');
+      var changedMessage = page.find('#forgot-changeStatusMessage');
 
       $scope.submit = function() {
         $.mobile.loading('show');
         Restangular.all('../forgot').post($scope.forgot).then(function() {
           $.mobile.loading('hide');
-          alert('Password Changed to ' + $scope.forgot.newPassword);
-          $.mobile.changePage('#index-page');
+          changedMessage.text('Password Changed to ' + $scope.forgot.newPassword);
+          changedPopup.popup('open');
+          changedPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#index-page');
+            }
+          });
         }, function(err) {
           $.mobile.loading('hide');
-          alert('Incorrect Information.');
+          changedMessage.text('Incorrect Information');
+          changedPopup.popup('open');
           console.log(err);
-          $.mobile.changePage('#index-page');
         });
       };
 
