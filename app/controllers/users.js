@@ -77,12 +77,26 @@ exports.readAllUsers = function(req, res) {
 };
 
 /**
+ * Change user Password
+ */
+exports.changeUserPassword = function(req, res) {
+  Users.changePassword(req.body, function(err, forgotInfo) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(forgotInfo === null) {
+      res.jsonp(404, 'Information not Found');
+    } else {
+      res.jsonp(201, forgotInfo);
+    }
+  });
+};
+
+/**
  * Create a user
  */
 exports.createUser = function(req, res) {
   Register.create(req.body, function(err, registration) {
     if(err) {
-      console.log('Controller Err', err);
       res.jsonp(500, err);
     } else {
       res.jsonp(201, registration);
