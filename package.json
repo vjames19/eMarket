@@ -26,11 +26,9 @@
   },
   "dependencies": {
     "express": "latest",
-    "jade": "latest",
     "passport": "latest",
     "passport-local": "latest",
     "async": "latest",
-    "view-helpers": "latest",
     "bower": "latest",
     "underscore": "~1.5.2",
     "mysql": "git://github.com/felixge/node-mysql"
