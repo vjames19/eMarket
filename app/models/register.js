@@ -111,21 +111,19 @@ module.exports.create = function(register, callback) {
                   });
                 }
 
-                var sql4;
+                var sql4 = 'INSERT INTO address_history ' +
+                    '(address_address, address_country, address_city, ' +
+                    'address_geographical_region, address_zipcode) ' +
+                    'VALUES ?';
+
                 var params4;
                 if(register.sameAsMailing === true) {
-                  sql4 = 'INSERT INTO address_history ' +
-                      '(address_address, address_country, address_city, address_geographical_region, address_zipcode) ' +
-                      'VALUES ?';
                   params4 = [
                     [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
                       register.mailingCity, register.mailingZipCode]
                   ];
                 }
                 else {
-                  sql4 = 'INSERT INTO address_history ' +
-                      '(address_address, address_country, address_city, address_geographical_region, address_zipcode) ' +
-                      'VALUES ?';
                   params4 = [
                     [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
                       register.mailingCity, register.mailingZipCode],
@@ -144,7 +142,7 @@ module.exports.create = function(register, callback) {
                   var mailAddressId;
                   var billAddressId;
                   if(register.sameAsMailing === true) {
-                    // TODO <-- Verify if InsertId is the last inserted or the first.. Should be the first.
+                    // .insertId seems to be the first inserted.
                     mailAddressId = fourthResult.insertId;
                     billAddressId = fourthResult.insertId;
                   } else {
