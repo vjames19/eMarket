@@ -31,7 +31,8 @@
     "async": "latest",
     "bower": "latest",
     "underscore": "~1.5.2",
-    "mysql": "git://github.com/felixge/node-mysql"
+    "mysql": "git://github.com/felixge/node-mysql",
+    "jsonschema": "~0.4.0"
   },
   "devDependencies": {
     "supertest": "~0.8.0",
