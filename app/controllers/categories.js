@@ -6,7 +6,7 @@ var Category = require('../models/category');
 exports.validate = function(req, res, next) {
   var objectToValidate = null;
   if(req.hasOwnProperty("category")) {
-    objectToValidate = req.category;
+    objectToValidate = _.extend(req.category, req.body);
   } else {
     objectToValidate = req.body;
   }
