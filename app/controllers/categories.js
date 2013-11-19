@@ -3,6 +3,25 @@
 var _ = require('underscore');
 var Category = require('../models/category');
 
+exports.validate = function(req, res, next) {
+  var objectToValidate = null;
+  if(req.hasOwnProperty("category")) {
+    objectToValidate = req.category;
+  } else {
+    objectToValidate = req.body;
+  }
+
+  var errors = Category.validate(objectToValidate);
+  if(errors.length > 0) {
+    res.jsonp(422, {
+      message: 'Validation Failed',
+      errors: errors
+    });
+  } else {
+    next();
+  }
+};
+
 exports.findCategoryById = function(req, res, next, id) {
   Category.get(id, function(err, category) {
     if(_.isEmpty(category)) {
