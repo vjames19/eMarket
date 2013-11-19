@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('underscore');
+
 module.exports.validate = function(reqProperty, model, req, res, next) {
   var objectToValidate = null;
   if(req.hasOwnProperty(reqProperty)) {
@@ -9,7 +11,7 @@ module.exports.validate = function(reqProperty, model, req, res, next) {
   }
 
   var errors = model.validate(objectToValidate);
-  if(errors.length > 0) {
+  if(!_.isEmpty(errors)) {
     res.jsonp(422, {
       message: 'Validation Failed.',
       errors: errors
