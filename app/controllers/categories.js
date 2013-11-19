@@ -2,24 +2,10 @@
 
 var _ = require('underscore');
 var Category = require('../models/category');
+var validator = require('./helpers/validator.js');
 
 exports.validate = function(req, res, next) {
-  var objectToValidate = null;
-  if(req.hasOwnProperty("category")) {
-    objectToValidate = _.extend(req.category, req.body);
-  } else {
-    objectToValidate = req.body;
-  }
-
-  var errors = Category.validate(objectToValidate);
-  if(errors.length > 0) {
-    res.jsonp(422, {
-      message: 'Validation Failed',
-      errors: errors
-    });
-  } else {
-    next();
-  }
+  validator.validate('category', Category, req, res, next);
 };
 
 exports.findCategoryById = function(req, res, next, id) {
