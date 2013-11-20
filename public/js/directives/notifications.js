@@ -23,7 +23,15 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
 
       scope.readMessage = function(notification) {
         notificationMessage.text(notification.message);
-        notification.isRead = true;
+        if(!notification.isRead) {
+          notification.isRead = 1;
+          notification.put().then(function success(notification) {
+            console.log('notification updated', notification);
+          }, function error() {
+            notification.isRead = 0;
+            console.log('Couldnt update notification', arguments);
+          });
+        }
       };
 
       page.on('pagebeforeshow', function() {
