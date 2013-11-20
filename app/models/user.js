@@ -116,35 +116,37 @@ module.exports.changePassword = function(forgotInfo, callback) {
             callback(err);
           });
         }
-        // Correct Info
-        if(result.length === 3) {
+        else {
+          // Correct Info
+          if(result.length === 3) {
 
-          connection.query(sql2, params2, function(err) {
-            if(err) {
-              connection.rollback(function() {
-                callback(err);
-              });
-            }
-
-            connection.commit(function(err) {
+            connection.query(sql2, params2, function(err) {
               if(err) {
                 connection.rollback(function() {
                   callback(err);
                 });
               }
-              callback(null, forgotInfo);
-              console.log('Finished Changing Password');
+              else {
+                connection.commit(function(err) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    callback(null, forgotInfo);
+                    console.log('Finished Changing Password');
+                  }
+                });
+              }
             });
 
-          });
-
+          }
+          // Bad Info
+          else {
+            callback(null, null);
+            console.log('Could not Change Password');
+          }
         }
-        // Bad Info
-        else {
-          callback(null, null);
-          console.log('Could not Change Password');
-        }
-
       });
 
     });
