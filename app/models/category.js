@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var async = require('async');
 var mapper = require('../mapper');
+var validate = require('jsonschema').validate;
 
 var DICTIONARY = {
   'category_id': 'id',
@@ -11,7 +12,34 @@ var DICTIONARY = {
   'category_status': 'categoryStatus'
 };
 
-var WHITELIST = ['id', 'categoryName', 'categoryParent', 'categoryStatus'];
+var SCHEMA = {
+  "type": "object",
+  "properties": {
+    "categoryName": {
+      "type": "string",
+      "required": true
+    },
+    "categoryParent": {
+      "type": "integer",
+      "minimum": 1,
+      "required": true
+    },
+    "categoryStatus": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "required": true
+    },
+    "id": {
+      "type": "integer",
+      "required": true
+    }
+  }
+};
+
+module.exports.validate = function(object) {
+  return validate(object, SCHEMA).errors;
+};
 
 var executor = null;
 
@@ -45,7 +73,6 @@ module.exports.get = function(id, callback) {
 module.exports.create = function(category, callback) {
   executor.execute(function(err, connection) {
     var sql = 'INSERT INTO category_info (category_name, category_parent_id) VALUES (?, ?)';
-    category = _.pick(category, WHITELIST);
     connection.query(sql, [category.categoryName, category.categoryParent], function(err, insertStatus) {
       if(err) {
         callback(err);

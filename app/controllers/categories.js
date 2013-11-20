@@ -2,6 +2,11 @@
 
 var _ = require('underscore');
 var Category = require('../models/category');
+var validator = require('./helpers/validator.js');
+
+exports.validate = function(req, res, next) {
+  validator.validate('category', Category, req, res, next);
+};
 
 exports.findCategoryById = function(req, res, next, id) {
   Category.get(id, function(err, category) {

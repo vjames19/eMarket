@@ -70,10 +70,9 @@ module.exports = function(app, passport, auth) {
   // User Notifications Routes
   app.param('notificationId', users.findNotificationById);
   app.get('/api/users/:userId/notifications', users.readAllNotifications);
-  app.post('/api/users/:userId/notifications', users.createNotification);
+  app.post('/api/users/:userId/notifications', users.validateNotification, users.createNotification);
   app.get('/api/users/:userId/notifications/:notificationId', users.readNotification);
-  app.put('/api/users/:userId/notifications/:notificationId', users.updateNotification);
-  app.del('/api/users/:userId/notifications/:notificationId', users.deleteNotification);
+  app.put('/api/users/:userId/notifications/:notificationId', users.validateNotification, users.updateNotification);
 
   // User Credit Card Routes
   app.param('creditCardId', users.findCreditCardById);
@@ -171,9 +170,9 @@ module.exports = function(app, passport, auth) {
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
-  app.post('/api/categories', categories.createCategory);
+  app.post('/api/categories', categories.validate, categories.createCategory);
   app.get('/api/categories/:categoryId', categories.readCategory);
-  app.put('/api/categories/:categoryId', categories.updateCategory);
+  app.put('/api/categories/:categoryId', categories.validate, categories.updateCategory);
   app.del('/api/categories/:categoryId', categories.deleteCategory);
   //  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
   //  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
@@ -221,10 +220,10 @@ module.exports = function(app, passport, auth) {
 
   app.param('adminId', admins.findAdminById);
   app.get('/api/admins', admins.readAllAdmins);
-//  app.post('/api/admins', admins.createAdmin);
+  //  app.post('/api/admins', admins.createAdmin);
   app.get('/api/admins/:adminId', admins.readAdmin);
-//  app.put('/api/admins/:adminId', admins.updateAdmin);
-//  app.del('/api/admins/:adminId', admins.deleteAdmin);
+  //  app.put('/api/admins/:adminId', admins.updateAdmin);
+  //  app.del('/api/admins/:adminId', admins.deleteAdmin);
 
   // Report Routes
 
