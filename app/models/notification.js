@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var mapper = require('../mapper');
+var validate = require('jsonschema').validate;
 
 var DICTIONARY = {
   'notification_id': 'id',
@@ -11,7 +12,37 @@ var DICTIONARY = {
   'notification_is_read': 'isRead'
 };
 
-//var WHITELIST = [];
+var SCHEMA = {
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "required": true
+    },
+    "id": {
+      "type": "integer",
+      "required": true
+    },
+    "isRead": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "required": true
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "userId": {
+      "type": "integer",
+      "required": false
+    }
+  }
+};
+
+module.exports.validate = function(object) {
+  return validate(object, SCHEMA).errors;
+};
 
 var executor = null;
 module.exports.init = function(realExecutor) {
@@ -38,6 +69,33 @@ module.exports.get = function(userId, notificationId, callback) {
     var sql = 'SELECT * FROM notification_history WHERE notification_user_id = ? AND notification_id = ?';
     connection.query(sql, [userId, notificationId], function(err, notifications) {
       callback(err, mapper.map(notifications[0], DICTIONARY));
+    });
+  });
+};
+
+module.exports.create = function(userId, notification, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'INSERT INTO notification_history ' +
+        '(notification_user_id, notification_message) ' +
+        'VALUES (?,?)';
+    connection.query(sql, [userId, notification.message], function(err, insertStatus) {
+      if(err) {
+        callback(err);
+      } else {
+        notification.id = insertStatus.insertId;
+        callback(null, notification);
+      }
+    });
+  });
+};
+
+module.exports.update = function(notification, callback) {
+  executor.execute(function(err, connection) {
+    var sql = 'UPDATE notification_history ' +
+        'SET notification_is_read=? ' +
+        'WHERE notification_id=?';
+    connection.query(sql, [notification.isRead, notification.id], function(err) {
+      callback(err, notification);
     });
   });
 };

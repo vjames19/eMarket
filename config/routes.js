@@ -70,10 +70,9 @@ module.exports = function(app, passport, auth) {
   // User Notifications Routes
   app.param('notificationId', users.findNotificationById);
   app.get('/api/users/:userId/notifications', users.readAllNotifications);
-  app.post('/api/users/:userId/notifications', users.createNotification);
+  app.post('/api/users/:userId/notifications', users.validateNotification, users.createNotification);
   app.get('/api/users/:userId/notifications/:notificationId', users.readNotification);
-  app.put('/api/users/:userId/notifications/:notificationId', users.updateNotification);
-  app.del('/api/users/:userId/notifications/:notificationId', users.deleteNotification);
+  app.put('/api/users/:userId/notifications/:notificationId', users.validateNotification, users.updateNotification);
 
   // User Credit Card Routes
   app.param('creditCardId', users.findCreditCardById);
