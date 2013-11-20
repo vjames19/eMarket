@@ -22,7 +22,7 @@
           </tr>
         </table>
       </li>
-      <li data-icon="false" ng-repeat="notification in notifications">
+      <li data-icon="false" ng-repeat="notification in notifications | orderBy:'+isRead'">
         <a href="#notifications-infoPopup" data-rel="popup" data-inline="true" data-transition="pop"
            ng-click="readMessage(notification)">
           <table class="ui-responsive medium-text wrap-text">
