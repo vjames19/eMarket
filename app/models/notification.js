@@ -13,29 +13,29 @@ var DICTIONARY = {
 };
 
 var SCHEMA = {
-  "type": "object",
-  "properties": {
-    "date": {
-      "type": "string",
-      "required": true
+  'type': 'object',
+  'properties': {
+    'date': {
+      'type': 'string',
+      'required': true
     },
-    "id": {
-      "type": "integer",
-      "required": true
+    'id': {
+      'type': 'integer',
+      'required': true
     },
-    "isRead": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 1,
-      "required": true
+    'isRead': {
+      'type': 'integer',
+      'minimum': 0,
+      'maximum': 1,
+      'required': true
     },
-    "message": {
-      "type": "string",
-      "required": true
+    'message': {
+      'type': 'string',
+      'required': true
     },
-    "userId": {
-      "type": "integer",
-      "required": false
+    'userId': {
+      'type': 'integer',
+      'required': false
     }
   }
 };

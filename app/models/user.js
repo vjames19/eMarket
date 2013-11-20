@@ -109,46 +109,46 @@ module.exports.changePassword = function(forgotInfo, callback) {
       if(err) {
         callback(err);
       }
-
-      connection.query(sql1, params1, function(err, result) {
-        if(err) {
-          connection.rollback(function() {
-            callback(err);
-          });
-        }
-        else {
-          // Correct Info
-          if(result.length === 3) {
-
-            connection.query(sql2, params2, function(err) {
-              if(err) {
-                connection.rollback(function() {
-                  callback(err);
-                });
-              }
-              else {
-                connection.commit(function(err) {
-                  if(err) {
-                    connection.rollback(function() {
-                      callback(err);
-                    });
-                  } else {
-                    callback(null, forgotInfo);
-                    console.log('Finished Changing Password');
-                  }
-                });
-              }
+      else {
+        connection.query(sql1, params1, function(err, result) {
+          if(err) {
+            connection.rollback(function() {
+              callback(err);
             });
-
           }
-          // Bad Info
           else {
-            callback(null, null);
-            console.log('Could not Change Password');
-          }
-        }
-      });
+            // Correct Info
+            if(result.length === 3) {
 
+              connection.query(sql2, params2, function(err) {
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                }
+                else {
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, forgotInfo);
+                      console.log('Finished Changing Password');
+                    }
+                  });
+                }
+              });
+
+            }
+            // Bad Info
+            else {
+              callback(null, null);
+              console.log('Could not Change Password');
+            }
+          }
+        });
+      }
     });
 
   });
