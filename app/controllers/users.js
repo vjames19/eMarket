@@ -61,7 +61,7 @@ exports.findUserById = function(req, res, next, id) {
     if(_.isEmpty(user)) {
       res.jsonp(404, {message: 'User with id ' + id + ' not found'});
     } else {
-      req.user = user;
+      req.requestedUser = user;
       next();
     }
   });
@@ -118,22 +118,22 @@ exports.createUser = function(req, res) {
  * Read a user
  */
 exports.readUser = function(req, res) {
-  res.jsonp(req.user);
+  res.jsonp(req.requestedUser);
 };
 
 /**
  * Update a user
  */
 exports.updateUser = function(req, res) {
-  _.extend(req.user, req.body);
-  users[req.user.userId] = req.user;
-  res.jsonp(req.user);
+  _.extend(req.requestedUser, req.body);
+  users[req.requestedUser.userId] = req.requestedUser;
+  res.jsonp(req.requestedUser);
 };
 
 /**
  * Delete a user
  */
 exports.deleteUser = function(req, res) {
-  delete users[req.user.userId];
-  res.jsonp(req.user);
+  delete users[req.requestedUser.userId];
+  res.jsonp(req.requestedUser);
 };
