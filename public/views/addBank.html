@@ -28,13 +28,13 @@
           <option value="Other">Other</option>
         </select>
         <label for="addBank-accountNumber"><strong>Account Number</strong></label>
-        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber"
+        <input type="number" name="addBankAccountNumber" id="addBank-accountNumber"
                ng-model="bank.accountNumber" ng-pattern="/^[0-9]{4,17}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountRouting"><strong>Routing Number</strong></label>
-        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting"
+        <input type="number" name="addBankAccountRouting" id="addBank-accountRouting"
                ng-model="bank.routingNumber" ng-pattern="/^[0-9]{9}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>

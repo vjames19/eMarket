@@ -123,7 +123,7 @@
 <div data-role="collapsible">
   <h3>Credit Card Information</h3>
   <div class="form-pad">
-    <label for="register-cardName">Name as Appear in Card</label>
+    <label for="register-cardName">Card Owner Full Name</label>
     <input type="text" name="registerCardName" id="register-cardName"
            ng-model="register.cardName"
            ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/"
@@ -139,20 +139,20 @@
       <option value="American Express">American Express</option>
       <option value="Other">Other</option>
     </select>
+    <label for="register-cardExpirationDate">Expiration Date</label>
+    <input type="month" name="registerCardExpirationDate" id="register-cardExpirationDate"
+           ng-model="register.cardExpirationDate" ng-pattern="/^20\d\d-(0[1-9]|1[012])$/" ng-required="true">
+    <div ng-show="registerForm.registerCardExpirationDate.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
     <label for="register-cardNumber">Card Number</label>
-    <input type="text" name="registerCardNumber" id="register-cardNumber"
+    <input type="number" name="registerCardNumber" id="register-cardNumber"
            ng-model="register.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
     <div ng-show="registerForm.registerCardNumber.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
-    <label for="register-cardExpirationDate">Expiration Date</label>
-    <input type="month" name="registerCardExpirationDate" id="register-cardExpirationDate"
-           ng-model="register.cardExpirationDate" ng-pattern="/20\d\d-(0[1-9]|1[012])/" ng-required="true">
-    <div ng-show="registerForm.registerCardExpirationDate.$error.pattern" class="labelError">
-      <strong><em>Wrong Format.</em></strong>
-    </div>
     <label for="register-cardSecurityCode">Card Security Code</label>
-    <input type="text" name="registerCardSecurityCode" id="register-cardSecurityCode"
+    <input type="number" name="registerCardSecurityCode" id="register-cardSecurityCode"
            ng-model="register.cardSecurityCode" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
     <div ng-show="registerForm.registerCardSecurityCode.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
