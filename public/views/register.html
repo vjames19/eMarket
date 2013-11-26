@@ -39,7 +39,7 @@
     <label for="register-mailingAddress">Address</label>
     <input type="text" name="registerMailingAddress" id="register-mailingAddress"
            ng-model="register.mailingAddress"
-           ng-pattern="/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,. \-'#]{4,254}$/"
+           ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){5,255}$/"
            ng-required="true">
     <div ng-show="registerForm.registerMailingAddress.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
@@ -80,7 +80,7 @@
     <label for="register-billingAddress">Address</label>
     <input type="text" name="registerBillingAddress" id="register-billingAddress"
            ng-model="register.billingAddress"
-           ng-pattern="/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ,.'#\-]{4,254}$/"
+           ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){5,255}$/"
            ng-required="true">
     <div ng-show="registerForm.registerBillingAddress.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
@@ -126,7 +126,7 @@
     <label for="register-cardName">Name as Appear in Card</label>
     <input type="text" name="registerCardName" id="register-cardName"
            ng-model="register.cardName"
-           ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{1}([a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,44}){1}(\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]{1}([a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,44}){1}){1,2}$/"
+           ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/"
            ng-required="true">
     <div ng-show="registerForm.registerCardName.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
@@ -171,19 +171,19 @@
     </div>
     <label for="register-username">Username</label>
     <input type="text" name="registerUsername" id="register-username"
-           ng-model="register.username" ng-pattern="/^[a-zA-Z0-9_-]{3,16}$/" ng-required="true">
+           ng-model="register.username" ng-pattern="/^[a-zA-Z0-9_]{3,16}$/" ng-required="true">
     <div ng-show="registerForm.registerUsername.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
     <label for="register-password">Password</label>
     <input type="password" name="registerPassword" id="register-password" autocomplete="off"
-           ng-model="register.password" ng-pattern="/^[a-zA-Z0-9_-]{4,40}$/" ng-required="true">
+           ng-model="register.password" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="true">
     <div ng-show="registerForm.registerPassword.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
     <label for="register-passwordConfirm">Password Confirm</label>
     <input type="password" name="registerPasswordConfirm" id="register-passwordConfirm" autocomplete="off"
-           ng-model="register.passwordConfirm" ng-pattern="/^[a-zA-Z0-9_-]{4,40}$/" ng-required="true">
+           ng-model="register.passwordConfirm" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="true">
     <div ng-show="registerForm.registerPasswordConfirm.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
@@ -198,7 +198,9 @@
     </select>
     <label for="register-securityAnswer-1"></label>
     <input type="text" name="registerSecurityAnswer1" id="register-securityAnswer-1" placeholder="Answer"
-           ng-model="register.securityAnswer1" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+           ng-model="register.securityAnswer1"
+           ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
+           ng-required="true">
     <div ng-show="registerForm.registerSecurityAnswer1.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
@@ -211,7 +213,9 @@
     </select>
     <label for="register-securityAnswer-2"></label>
     <input type="text" name="registerSecurityAnswer2" id="register-securityAnswer-2" placeholder="Answer"
-           ng-model="register.securityAnswer2" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+           ng-model="register.securityAnswer2"
+           ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
+           ng-required="true">
     <div ng-show="registerForm.registerSecurityAnswer2.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
@@ -224,7 +228,9 @@
     </select>
     <label for="register-securityAnswer-3"></label>
     <input type="text" name="registerSecurityAnswer3" id="register-securityAnswer-3" placeholder="Answer"
-           ng-model="register.securityAnswer3" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+           ng-model="register.securityAnswer3"
+           ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
+           ng-required="true">
     <div ng-show="registerForm.registerSecurityAnswer3.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
