@@ -1,149 +1,252 @@
 <div data-role="page" data-theme="b" id="register">
 
-  <div data-role="header" data-position="fixed" data-theme="a">
-    <h1>Register</h1>
-    <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+<div data-role="header" data-position="fixed" data-theme="a">
+  <h1>Register</h1>
+  <a href="#index-page" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+</div>
+
+<div data-role="content">
+
+<form name="registerForm" data-ajax="false" ng-submit="submit()">
+
+<div data-role="collapsible-set" data-theme="a" data-content-theme="false">
+
+<div data-role="collapsible" data-collapsed="false">
+  <h3>Personal Information</h3>
+  <div class="form-pad">
+    <label for="register-firstName">First Name</label>
+    <input type="text" name="registerFirstName" id="register-firstName"
+           ng-model="register.firstName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerFirstName.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-middleName">Middle Name</label>
+    <input type="text" name="registerMiddleName" id="register-middleName"
+           ng-model="register.middleName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="false">
+    <div ng-show="registerForm.registerMiddleName.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-lastName">Last Name</label>
+    <input type="text" name="registerLastName" id="register-lastName"
+           ng-model="register.lastName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerLastName.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <hr/>
+    <label for="register-mailing"><strong>Mailing Address</strong></label>
+    <input type="hidden" name="registerMailing" id="register-mailing">
+    <hr/>
+    <label for="register-mailingAddress">Address</label>
+    <input type="text" name="registerMailingAddress" id="register-mailingAddress"
+           ng-model="register.mailingAddress"
+           ng-pattern="/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,. \-'#]{4,254}$/"
+           ng-required="true">
+    <div ng-show="registerForm.registerMailingAddress.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-mailingCountry">Country</label>
+    <input type="text" name="registerMailingCountry" id="register-mailingCountry"
+           ng-model="register.mailingCountry" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerMailingCountry.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-mailingGeographicalRegion">State/Providence/Region</label>
+    <input type="text" name="registerMailingGeographicalRegion" id="register-mailingGeographicalRegion"
+           ng-model="register.mailingGeographicalRegion"
+           ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/"
+           ng-required="false">
+    <div ng-show="registerForm.registerMailingGeographicalRegion.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-mailingCity">City</label>
+    <input type="text" name="registerMailingCity" id="register-mailingCity"
+           ng-model="register.mailingCity" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerMailingCity.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-mailingZipCode">Zip Code</label>
+    <input type="tel" name="registerMailingZipCode" id="register-mailingZipCode"
+           ng-model="register.mailingZipCode" ng-pattern="/^\d{5}(?:[-]\d{4})?$/" ng-required="true">
+    <div ng-show="registerForm.registerMailingZipCode.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <hr/>
+    <label for="register-billing"><strong>Billing Address</strong></label>
+    <input type="hidden" name="registerBilling" id="register-billing">
+    <hr/>
+    <label for="register-sameAsMailing">Same as Mailing Address</label>
+    <input type="checkbox" name="registerSameAsMailing" id="register-sameAsMailing"
+           ng-model="register.sameAsMailing" ng-click="disableBillAddress()" ng-required="false">
+    <label for="register-billingAddress">Address</label>
+    <input type="text" name="registerBillingAddress" id="register-billingAddress"
+           ng-model="register.billingAddress"
+           ng-pattern="/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ,.'#\-]{4,254}$/"
+           ng-required="true">
+    <div ng-show="registerForm.registerBillingAddress.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-billingCountry">Country</label>
+    <input type="text" name="registerBillingCountry" id="register-billingCountry"
+           ng-model="register.billingCountry" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerBillingCountry.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-billingGeographicalRegion">State/Providence/Region</label>
+    <input type="text" name="registerBillingGeographicalRegion" id="register-billingGeographicalRegion"
+           ng-model="register.billingGeographicalRegion"
+           ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/"
+           ng-required="false">
+    <div ng-show="registerForm.registerBillingGeographicalRegion.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-billingCity">City</label>
+    <input type="text" name="registerBillingCity" id="register-billingCity"
+           ng-model="register.billingCity" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerBillingCity.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-billingZipCode">Zip Code</label>
+    <input type="tel" name="registerBillingZipCode" id="register-billingZipCode"
+           ng-model="register.billingZipCode" ng-pattern="/^\d{5}(?:[-]\d{4})?$/" ng-required="true">
+    <div ng-show="registerForm.registerBillingZipCode.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-telephone">Telephone</label>
+    <input type="tel" name="registerTelephone" id="register-telephone"
+           ng-model="register.telephone" ng-pattern="/\d{3}[-]{1}\d{3}[-]{1}\d{4}/" ng-required="true">
+    <div ng-show="registerForm.registerTelephone.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
   </div>
+</div>
 
-  <div data-role="content">
-
-    <form data-ajax="false" ng-submit="submit()">
-
-      <div data-role="collapsible-set" data-theme="a" data-content-theme="false">
-
-        <div data-role="collapsible" data-collapsed="false">
-          <h3>Personal Information</h3>
-
-          <div class="form-pad">
-            <label for="register-firstName">First Name</label>
-            <input type="text" id="register-firstName" ng-model="register.firstName" ng-required="true">
-            <label for="register-middleName">Middle Name</label>
-            <input type="text" id="register-middleName" ng-model="register.middleName" ng-required="false">
-            <label for="register-lastName">Last Name</label>
-            <input type="text" id="register-lastName" ng-model="register.lastName" ng-required="true">
-            <hr/>
-            <label for="register-mailing"><strong>Mailing Address</strong></label>
-            <input type="hidden" id="register-mailing">
-            <hr/>
-            <label for="register-mailingAddress">Address</label>
-            <input type="text" id="register-mailingAddress" ng-model="register.mailingAddress"
-                   ng-required="true">
-            <label for="register-mailingCountry">Country</label>
-            <input type="text" id="register-mailingCountry" ng-model="register.mailingCountry" ng-required="true">
-            <label for="register-mailingGeographicalRegion">State/Providence/Region</label>
-            <input type="text" id="register-mailingGeographicalRegion"
-                   ng-model="register.mailingGeographicalRegion" ng-required="false">
-            <label for="register-mailingCity">City</label>
-            <input type="text" id="register-mailingCity" ng-model="register.mailingCity" ng-required="true">
-            <label for="register-mailingZipCode">Zip Code</label>
-            <input type="tel" id="register-mailingZipCode" ng-model="register.mailingZipCode"
-                   ng-required="true">
-            <hr/>
-            <label for="register-billing"><strong>Billing Address</strong></label>
-            <input type="hidden" id="register-billing">
-            <hr/>
-            <label for="register-sameAsMailing">Same as Mailing Address</label>
-            <input type="checkbox" id="register-sameAsMailing" ng-model="register.sameAsMailing"
-                   name="register-sameAsMailing" ng-click="disableBillAddress()" ng-required="false">
-            <label for="register-billingAddress">Address</label>
-            <input type="text" id="register-billingAddress" ng-model="register.billingAddress"
-                   ng-required="true">
-            <label for="register-billingCountry">Country</label>
-            <input type="text" id="register-billingCountry" ng-model="register.billingCountry" ng-required="true">
-            <label for="register-billingGeographicalRegion">State/Providence/Region</label>
-            <input type="text" id="register-billingGeographicalRegion"
-                   ng-model="register.billingGeographicalRegion" ng-required="false">
-            <label for="register-billingCity">City</label>
-            <input type="text" id="register-billingCity" ng-model="register.billingCity" ng-required="true">
-            <label for="register-billingZipCode">Zip Code</label>
-            <input type="tel" id="register-billingZipCode" ng-model="register.billingZipCode"
-                   ng-required="true">
-            <label for="register-telephone">Telephone</label>
-            <input type="tel" id="register-telephone" ng-model="register.telephone" ng-required="true">
-          </div>
-        </div>
-
-        <div data-role="collapsible">
-          <h3>Credit Card Information</h3>
-
-          <div class="form-pad">
-            <label for="register-cardName">Name as Appear in Card</label>
-            <input type="text" id="register-cardName" ng-model="register.cardName" ng-required="true">
-            <label for="register-cardType">Card Type</label>
-            <select id="register-cardType" ng-model="register.cardType" ng-required="true">
-              <option value="Visa" selected>Visa</option>
-              <option value="Master Card">Master Card</option>
-              <option value="American Express">American Express</option>
-              <option value="Other">Other</option>
-            </select>
-            <label for="register-cardNumber">Card Number</label>
-            <input type="number" id="register-cardNumber" ng-model="register.cardNumber"
-                   ng-required="true">
-            <label for="register-cardExpirationDate">Expiration Date</label>
-            <input type="month" id="register-cardExpirationDate" ng-model="register.cardExpirationDate"
-                   ng-required="true">
-            <label for="register-cardSecurityCode">Card Security Code</label>
-            <input type="number" id="register-cardSecurityCode" ng-model="register.cardSecurityCode"
-                   ng-required="true">
-          </div>
-        </div>
-
-        <div data-role="collapsible">
-          <h3>Login Information</h3>
-
-          <div class="form-pad">
-            <label for="register-email">Email</label>
-            <input type="email" id="register-email" ng-model="register.email" ng-required="true">
-            <label for="register-username">Username</label>
-            <input type="text" id="register-username" ng-model="register.username" ng-required="true">
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" autocomplete="off" ng-model="register.password"
-                   ng-required="true">
-            <label for="register-passwordConfirm">Confirm Password</label>
-            <input type="password" id="register-passwordConfirm" autocomplete="off"
-                   ng-model="register.passwordConfirm" ng-required="true">
-            <label for="register-securityQuestions">Security Questions</label>
-            <input type="hidden" id="register-securityQuestions">
-            <label for="register-securityQuestion-1"></label>
-            <select id="register-securityQuestion-1" ng-model="register.securityQuestion1"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="register.securityQuestion1">Select a question</option>
-            </select>
-            <label for="register-securityAnswer-1"></label>
-            <input type="text" id="register-securityAnswer-1" placeholder="Answer"
-                   ng-model="register.securityAnswer1" ng-required="true">
-            <label for="register-securityQuestion-2"></label>
-            <select id="register-securityQuestion-2" ng-model="register.securityQuestion2"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="register.securityQuestion-2">Select a question</option>
-            </select>
-            <label for="register-securityAnswer-2"></label>
-            <input type="text" id="register-securityAnswer-2" placeholder="Answer"
-                   ng-model="register.securityAnswer2" ng-required="true">
-            <label for="register-securityQuestion-3"></label>
-            <select id="register-securityQuestion-3" ng-model="register.securityQuestion3"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="register.securityQuestion3">Select a question</option>
-            </select>
-            <label for="register-securityAnswer-3"></label>
-            <input type="text" id="register-securityAnswer-3" placeholder="Answer"
-                   ng-model="register.securityAnswer3" ng-required="true">
-          </div>
-        </div>
-
-      </div>
-
-      <button type="submit" data-theme="a" data-icon="check">Register</button>
-    </form>
+<div data-role="collapsible">
+  <h3>Credit Card Information</h3>
+  <div class="form-pad">
+    <label for="register-cardName">Name as Appear in Card</label>
+    <input type="text" name="registerCardName" id="register-cardName"
+           ng-model="register.cardName"
+           ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{1}([a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,44}){1}(\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]{1}([a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,44}){1}){1,2}$/"
+           ng-required="true">
+    <div ng-show="registerForm.registerCardName.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-cardType">Card Type</label>
+    <select name="registerCardType" id="register-cardType"
+            ng-model="register.cardType" ng-required="true">
+      <option value="Visa" selected>Visa</option>
+      <option value="Master Card">Master Card</option>
+      <option value="American Express">American Express</option>
+      <option value="Other">Other</option>
+    </select>
+    <label for="register-cardNumber">Card Number</label>
+    <input type="text" name="registerCardNumber" id="register-cardNumber"
+           ng-model="register.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
+    <div ng-show="registerForm.registerCardNumber.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-cardExpirationDate">Expiration Date</label>
+    <input type="month" name="registerCardExpirationDate" id="register-cardExpirationDate"
+           ng-model="register.cardExpirationDate" ng-pattern="/20\d\d-(0[1-9]|1[012])/" ng-required="true">
+    <div ng-show="registerForm.registerCardExpirationDate.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-cardSecurityCode">Card Security Code</label>
+    <input type="text" name="registerCardSecurityCode" id="register-cardSecurityCode"
+           ng-model="register.cardSecurityCode" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
+    <div ng-show="registerForm.registerCardSecurityCode.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
   </div>
+</div>
 
-  <div data-role="popup" id="register-changeStatus" data-theme="a" class="ui-corner-all ui-content">
-    <a href="#register" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
-       data-iconpos="notext" class="ui-btn-right">Close</a>
-
-    <p id="register-changeStatusMessage" style="text-align: center"></p>
+<div data-role="collapsible">
+  <h3>Login Information</h3>
+  <div class="form-pad">
+    <label for="register-email">Email</label>
+    <input type="email" name="registerEmail" id="register-email"
+           ng-model="register.email" ng-required="true">
+    <div ng-show="registerForm.registerEmail.$error.email" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-username">Username</label>
+    <input type="text" name="registerUsername" id="register-username"
+           ng-model="register.username" ng-pattern="/^[a-zA-Z0-9_-]{3,16}$/" ng-required="true">
+    <div ng-show="registerForm.registerUsername.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-password">Password</label>
+    <input type="password" name="registerPassword" id="register-password" autocomplete="off"
+           ng-model="register.password" ng-pattern="/^[a-zA-Z0-9_-]{4,40}$/" ng-required="true">
+    <div ng-show="registerForm.registerPassword.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-passwordConfirm">Password Confirm</label>
+    <input type="password" name="registerPasswordConfirm" id="register-passwordConfirm" autocomplete="off"
+           ng-model="register.passwordConfirm" ng-pattern="/^[a-zA-Z0-9_-]{4,40}$/" ng-required="true">
+    <div ng-show="registerForm.registerPasswordConfirm.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-securityQuestions">Security Questions</label>
+    <input type="hidden" name="registerSecurityQuestions" id="register-securityQuestions">
+    <label for="register-securityQuestion-1"></label>
+    <select name="registerSecurityQuestion1" id="register-securityQuestion-1"
+            ng-model="register.securityQuestion1"
+            ng-options="question.id as question.question for question in questions"
+            ng-required="true">
+      <option value="" ng-hide="register.securityQuestion1">Select a question</option>
+    </select>
+    <label for="register-securityAnswer-1"></label>
+    <input type="text" name="registerSecurityAnswer1" id="register-securityAnswer-1" placeholder="Answer"
+           ng-model="register.securityAnswer1" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerSecurityAnswer1.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-securityQuestion-2"></label>
+    <select name="registerSecurityQuestion2" id="register-securityQuestion-2"
+            ng-model="register.securityQuestion2"
+            ng-options="question.id as question.question for question in questions"
+            ng-required="true">
+      <option value="" ng-hide="register.securityQuestion-2">Select a question</option>
+    </select>
+    <label for="register-securityAnswer-2"></label>
+    <input type="text" name="registerSecurityAnswer2" id="register-securityAnswer-2" placeholder="Answer"
+           ng-model="register.securityAnswer2" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerSecurityAnswer2.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
+    <label for="register-securityQuestion-3"></label>
+    <select name="registerSecurityQuestion3" id="register-securityQuestion-3"
+            ng-model="register.securityQuestion3"
+            ng-options="question.id as question.question for question in questions"
+            ng-required="true">
+      <option value="" ng-hide="register.securityQuestion3">Select a question</option>
+    </select>
+    <label for="register-securityAnswer-3"></label>
+    <input type="text" name="registerSecurityAnswer3" id="register-securityAnswer-3" placeholder="Answer"
+           ng-model="register.securityAnswer3" ng-pattern="/^[a-zA-Z0-9_-]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerSecurityAnswer3.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
   </div>
+</div>
 
-  <div data-role="footer" data-theme="a"><h1></h1></div>
+</div>
+
+<button type="submit" data-theme="a" data-icon="check" ng-class="{false: 'ui-disabled'}[registerForm.$valid]">
+  Register
+</button>
+
+</form>
+
+</div>
+
+<div data-role="popup" id="register-changeStatus" data-theme="a" class="ui-corner-all ui-content">
+  <a href="#register" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
+     data-iconpos="notext" class="ui-btn-right">Close</a>
+  <p id="register-changeStatusMessage" style="text-align: center"></p>
+</div>
+
+<div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>
