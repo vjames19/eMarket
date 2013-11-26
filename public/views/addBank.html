@@ -23,18 +23,18 @@
         <label for="addBank-accountType"><strong>Account Type</strong></label>
         <select name="addBankAccountType" id="addBank-accountType"
                 ng-model="bank.accountType" ng-required="true">
-        <option value="Checking" selected>Checking</option>
+          <option value="Checking" selected>Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="addBank-accountNumber"><strong>Account Number</strong></label>
-        <input type="text" name="addBankAccountNumber" id="addBank-accountNumber"
+        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber"
                ng-model="bank.accountNumber" ng-pattern="/^[0-9]{4,17}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountRouting"><strong>Routing Number</strong></label>
-        <input type="text" name="addBankAccountRouting" id="addBank-accountRouting"
+        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting"
                ng-model="bank.routingNumber" ng-pattern="/^[0-9]{9}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
@@ -44,7 +44,7 @@
                 ng-model="bank.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses"
                 ng-required="true">
-        <option value="" ng-hide="bank.addressId">Please Choose</option>
+          <option value="" ng-hide="bank.addressId">Please Choose</option>
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">

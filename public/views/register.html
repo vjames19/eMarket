@@ -50,18 +50,18 @@
     <div ng-show="registerForm.registerMailingCountry.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
+    <label for="register-mailingCity">City</label>
+    <input type="text" name="registerMailingCity" id="register-mailingCity"
+           ng-model="register.mailingCity" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+    <div ng-show="registerForm.registerMailingCity.$error.pattern" class="labelError">
+      <strong><em>Wrong Format.</em></strong>
+    </div>
     <label for="register-mailingGeographicalRegion">State/Providence/Region</label>
     <input type="text" name="registerMailingGeographicalRegion" id="register-mailingGeographicalRegion"
            ng-model="register.mailingGeographicalRegion"
            ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/"
            ng-required="false">
     <div ng-show="registerForm.registerMailingGeographicalRegion.$error.pattern" class="labelError">
-      <strong><em>Wrong Format.</em></strong>
-    </div>
-    <label for="register-mailingCity">City</label>
-    <input type="text" name="registerMailingCity" id="register-mailingCity"
-           ng-model="register.mailingCity" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
-    <div ng-show="registerForm.registerMailingCity.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
     <label for="register-mailingZipCode">Zip Code</label>
@@ -113,7 +113,7 @@
     </div>
     <label for="register-telephone">Telephone</label>
     <input type="tel" name="registerTelephone" id="register-telephone"
-           ng-model="register.telephone" ng-pattern="/\d{3}[-]{1}\d{3}[-]{1}\d{4}/" ng-required="true">
+           ng-model="register.telephone" ng-pattern="/^\d{3}[\-]{1}\d{3}[\-]{1}\d{4}$/" ng-required="true">
     <div ng-show="registerForm.registerTelephone.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
