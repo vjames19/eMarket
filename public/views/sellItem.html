@@ -12,7 +12,7 @@
 
   <div data-role="content">
 
-    <form>
+    <form name="sellItemForm">
 
       <table align="center">
         <tr>
@@ -27,136 +27,166 @@
       </table>
 
       <label for="sellItem-productTitle"></label>
-      <textarea ng-model="item.productName" id="sellItem-productTitle"
-                name="sellItem-productTitle"
-                placeholder="Product Title..." data-theme="a"
-                maxlength="45" ng-required="true"></textarea>
+      <input type="text" name="sellItemProductTitle" id="sellItem-productTitle"
+             placeholder="Product Title..." data-theme="a"
+             ng-model="item.productName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+      <div ng-show="sellItemForm.sellItemProductTitle.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
 
-    </form>
+      <ul data-role="listview" data-theme="a" data-inset="true">
+        <li>
+          <a href="#sellItem-categoryPopup" data-rel="popup" data-position-to="window"
+             data-transition="pop">Category</a>
+        </li>
+        <li>
+          <a href="#sellItem-conditionPopup" data-rel="popup" data-position-to="window"
+             data-transition="pop">Condition</a>
+        </li>
+        <li>
+          <a href="#sellItem-descriptionPopup" data-rel="popup" data-position-to="window"
+             data-transition="pop">Product Description</a>
+        </li>
+        <li>
+          <a href="#sellItem-formatPricePopup" data-rel="popup" data-position-to="window"
+             data-transition="pop">Format &amp; Price</a>
+        </li>
+        <li>
+          <a href="#sellItem-shippingPopup" data-rel="popup" data-position-to="window"
+             data-transition="pop">Shipping</a>
+        </li>
+      </ul>
 
-    <ul data-role="listview" data-theme="a" data-inset="true">
-      <li>
-        <a href="#sellItem-categoryPopup" data-rel="popup" data-position-to="window"
-           data-transition="pop">Category</a>
-      </li>
-      <li>
-        <a href="#sellItem-conditionPopup" data-rel="popup" data-position-to="window"
-           data-transition="pop">Condition</a>
-      </li>
-      <li>
-        <a href="#sellItem-descriptionPopup" data-rel="popup" data-position-to="window"
-           data-transition="pop">Product Description</a>
-      </li>
-      <li>
-        <a href="#sellItem-formatPricePopup" data-rel="popup" data-position-to="window"
-           data-transition="pop">Format &amp; Price</a>
-      </li>
-      <li>
-        <a href="#sellItem-shippingPopup" data-rel="popup" data-position-to="window"
-           data-transition="pop">Shipping</a>
-      </li>
-    </ul>
+      <!--Popups-->
 
-  </div>
+      <div data-role="popup" id="sellItem-categoryPopup" data-theme="b" class="ui-corner-all">
+        <div class="form-pad">
+          <h3>Select the Category</h3>
+          <fieldset data-role="controlgroup" data-theme="a">
+            <div data-role="none" ng-repeat="category in categories">
+              <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
+              <input type="radio" name="sellItemCategoryChoice" id="sellItem-categoryChoice-{{ category.id }}"
+                     value="{{ category.id }}" ng-model="item.categoryName" ng-required="true">
+            </div>
+          </fieldset>
+          <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+          <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+        </div>
+      </div>
 
-  <div data-role="popup" id="sellItem-categoryPopup" data-theme="b" class="ui-corner-all">
-    <form>
-      <div class="form-pad">
-        <h3>Select the Category</h3>
-        <fieldset data-role="controlgroup" data-theme="a">
-          <div data-role="none" ng-repeat="category in categories">
-            <label for="sellItem-categoryChoice-{{ category.id }}">{{ category.categoryName }}</label>
-            <input type="radio" name="sellItem-categoryChoice"
-                   id="sellItem-categoryChoice-{{ category.id }}"
-                   value="{{ category.id }}" ng-model="item.categoryName" ng-required="true">
+      <div data-role="popup" id="sellItem-conditionPopup" data-theme="b" class="ui-corner-all">
+        <div class="form-pad">
+          <h3>Select the condition</h3>
+          <fieldset data-role="controlgroup" data-theme="a">
+            <label for="sellItem-conditionNew">New</label>
+            <input type="radio" name="sellItemCondition" id="sellItem-conditionNew"
+                   value="New" ng-model="item.condition" ng-required="true">
+            <label for="sellItem-conditionUsed">Used</label>
+            <input type="radio" name="sellItemCondition" id="sellItem-conditionUsed"
+                   value="Used" ng-model="item.condition" ng-required="true">
+            <label for="sellItem-conditionRefurbished">Refurbished</label>
+            <input type="radio" name="sellItemCondition" id="sellItem-conditionRefurbished"
+                   value="Refurbished" ng-model="item.condition" ng-required="true">
+          </fieldset>
+          <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+          <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+        </div>
+      </div>
+
+      <div data-role="popup" id="sellItem-descriptionPopup" data-theme="b" class="ui-corner-all">
+        <div class="form-pad">
+          <h3>Product Description</h3>
+          <label for="sellItem-brand">Brand</label>
+          <input type="text" name="sellItemBrand" id="sellItem-brand" data-theme="a"
+                 ng-model="item.brand" ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][\s\-]?){2,45}$/" ng-required="true">
+          <div ng-show="sellItemForm.sellItemBrand.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
           </div>
-        </fieldset>
-        <a href="#sell-item" data-role="button" data-theme="a">OK</a>
-        <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+          <label for="sellItem-model">Model</label>
+          <input type="text" name="sellItemModel" id="sellItem-model" data-theme="a"
+                 ng-model="item.model" ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][\s\-]?){2,45}$/" ng-required="true">
+          <div ng-show="sellItemForm.sellItemModel.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="sellItem-dimension">Dimension</label>
+          <input type="text" name="sellItemDimension" id="sellItem-dimension" data-theme="a"
+                 ng-model="item.dimensions" ng-pattern="/^([0-9]{1,7}[a-zA-Z]{1,7}){1,3}$/" ng-required="true">
+          <div ng-show="sellItemForm.sellItemDimension.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="sellItem-addDescription">Additional Description</label>
+          <textarea name="sellItemAddDescription" id="sellItem-addDescription" data-theme="a"
+                    ng-model="item.description"
+                    ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-\'#&\(\)]*){5,255}$/"
+                    ng-required="true"></textarea>
+          <div ng-show="sellItemForm.sellItemAddDescription.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <hr/>
+          <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+          <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+        </div>
       </div>
-    </form>
-  </div>
 
-  <div data-role="popup" id="sellItem-conditionPopup" data-theme="b" class="ui-corner-all">
-    <form>
-      <div class="form-pad">
-        <h3>Select the condition</h3>
-        <fieldset data-role="controlgroup" data-theme="a">
-          <label for="sellItem-conditionNew">New</label>
-          <input type="radio" name="sellItem-condition" id="sellItem-conditionNew" value="New"
-                 ng-model="item.condition" ng-required="true">
-          <label for="sellItem-conditionUsed">Used</label>
-          <input type="radio" name="sellItem-condition" id="sellItem-conditionUsed" value="Used"
-                 ng-model="item.condition" ng-required="true">
-          <label for="sellItem-conditionRefurbished">Refurbished</label>
-          <input type="radio" name="sellItem-condition" id="sellItem-conditionRefurbished" value="Refurbished"
-                 ng-model="item.condition" ng-required="true">
-        </fieldset>
-        <a href="#sell-item" data-role="button" data-theme="a">OK</a>
-        <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <div data-role="popup" id="sellItem-formatPricePopup" data-theme="b" class="ui-corner-all">
+        <div class="form-pad">
+          <h3>Format &amp; Price</h3>
+          <label for="sellItem-buyItNowPrice">Buy it Now Price</label>
+          <input type="number" name="sellItemBuyItNowPrice" id="sellItem-buyItNowPrice"
+                 min="1" step="any" data-theme="a"
+                 ng-model="item.nonbidPrice" ng-pattern="/^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/" ng-required="true">
+          <div ng-show="sellItemForm.sellItemBuyItNowPrice.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="sellItem-startingBid">Starting Bid Price</label>
+          <input type="number" name="sellItemStartingBid" id="sellItem-startingBid"
+                 min="1" step="any" data-theme="a"
+                 ng-model="item.startingBidPrice"
+                 ng-pattern="/^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/"
+                 ng-required="true">
+          <div ng-show="sellItemForm.sellItemStartingBid.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="sellItem-quantity">Quantity</label>
+          <input type="number" name="sellItemQuantity" id="sellItem-quantity" min="1" data-theme="a"
+                 ng-model="item.quantity" ng-pattern="/^[1-9]{1}([0-9]{1,2})?$/" ng-required="true">
+          <div ng-show="sellItemForm.sellItemQuantity.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="sellItem-endDate">Product End Date</label>
+          <input type="datetime-local" name="sellItemEndDate" id="sellItem-endDate" data-theme="a"
+                 ng-model="item.bidEndDate" ng-pattern="" ng-required="true">
+          <div ng-show="sellItemForm.sellItemEndDate.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <hr/>
+          <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+          <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+        </div>
       </div>
-    </form>
-  </div>
 
-  <div data-role="popup" id="sellItem-descriptionPopup" data-theme="b" class="ui-corner-all">
-    <form>
-      <div class="form-pad">
-        <h3>Product Description</h3>
-        <label for="sellItem-brand">Brand</label>
-        <input type="text" id="sellItem-brand" ng-model="item.brand" data-theme="a" ng-required="true">
-        <label for="sellItem-model">Model</label>
-        <input type="text" id="sellItem-model" ng-model="item.model" data-theme="a" ng-required="true">
-        <label for="sellItem-dimension">Dimension</label>
-        <input type="text" id="sellItem-dimension" ng-model="item.dimensions" data-theme="a" ng-required="true">
-        <label for="sellItem-AddDescription">Additional Description</label>
-        <textarea id="sellItem-AddDescription" name="sellItem-AddDescription"
-                  ng-model="item.description" data-theme="a"
-                  maxlength="255" ng-required="true"></textarea>
-        <hr/>
-        <a href="#sell-item" data-role="button" data-theme="a">OK</a>
-        <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+      <div data-role="popup" id="sellItem-shippingPopup" data-theme="b" class="ui-corner-all">
+        <div class="form-pad">
+          <h3>Shipping</h3>
+          <label for="sellItem-freeShipping">Free Shipping</label>
+          <input type="checkbox" name="sellItemFreeShipping" id="sellItem-freeShipping" data-theme="a"
+                 ng-click="disableShipping()" ng-required="false">
+          <label for="sellItem-shippingPrice">Shipping Price</label>
+          <input type="number" name="sellItemShippingPrice" id="sellItem-shippingPrice" min="0" data-theme="a"
+                 ng-model="item.shippingPrice"
+                 ng-pattern="/^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/"
+                 ng-required="true">
+          <div ng-show="sellItemForm.sellItemShippingPrice.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <hr/>
+          <a href="#sell-item" data-role="button" data-theme="a">OK</a>
+          <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
+        </div>
       </div>
-    </form>
-  </div>
 
-  <div data-role="popup" id="sellItem-formatPricePopup" data-theme="b" class="ui-corner-all">
-    <form>
-      <div class="form-pad">
-        <h3>Format &amp; Price</h3>
-        <label for="sellItem-buyItNowPrice"> Buy it Now Price</label>
-        <input type="number" min="0.01" step="any" id="sellItem-buyItNowPrice" data-theme="a"
-               ng-model="item.nonbidPrice" ng-required="true">
-        <label for="sellItem-startingBid">Starting Bid Price</label>
-        <input type="number" min="0.01" step="any" id="sellItem-startingBid" data-theme="a"
-               ng-model="item.startingBidPrice" ng-required="true">
-        <label for="sellItem-quantity">Quantity</label>
-        <input type="number" min="1" id="sellItem-quantity" data-theme="a"
-               ng-model="item.quantity" ng-required="true">
-        <label for="sellItem-endDate">Product End Date</label>
-        <input type="datetime-local" id="sellItem-endDate" data-theme="a"
-               ng-model="item.bidEndDate" ng-required="true">
-        <hr/>
-        <a href="#sell-item" data-role="button" data-theme="a">OK</a>
-        <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
-      </div>
     </form>
-  </div>
 
-  <div data-role="popup" id="sellItem-shippingPopup" data-theme="b" class="ui-corner-all">
-    <form>
-      <div class="form-pad">
-        <h3>Shipping</h3>
-        <label for="sellItem-freeShipping">Free Shipping</label>
-        <input type="checkbox" id="sellItem-freeShipping"
-               name="sellItem-freeShipping" ng-click="disableShipping()" data-theme="a">
-        <label for="sellItem-shippingPrice">Shipping Price</label>
-        <input type="number" min="0" id="sellItem-shippingPrice" data-theme="a"
-               ng-model="item.shippingPrice" ng-required="true">
-        <hr/>
-        <a href="#sell-item" data-role="button" data-theme="a">OK</a>
-        <a href="#sell-item" data-role="button" data-theme="a">Cancel</a>
-      </div>
-    </form>
   </div>
 
   <div data-role="footer" data-theme="a" class="ui-footer">
