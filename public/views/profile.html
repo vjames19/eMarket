@@ -3,7 +3,6 @@
 <div data-role="header" data-position="fixed" data-theme="a">
   <h1>Profile</h1>
   <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
   <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
     <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
   </div>
@@ -12,68 +11,118 @@
 
 <div data-role="content">
 
-<form data-ajax="false" ng-submit="submitUser()">
-  <div data-role="collapsible" data-theme="a" data-content-theme="a">
-    <h2>Edit Profile Information</h2>
-    <ul data-role="listview" data-theme="a" data-divider-theme="b" data-inset="true">
-      <li data-role="list-divider">
-        <table>
-          <tr>
-            <td>UserName</td>
-            <td class="pad"></td>
-            <td><span class="ui-li-count">{{user.username}}</span></td>
-          </tr>
-        </table>
-      </li>
-    </ul>
+<div data-role="collapsible" data-theme="a" data-content-theme="a">
+  <h2>Edit Profile Information</h2>
+  <ul data-role="listview" data-theme="a" data-divider-theme="b" data-inset="true">
+    <li data-role="list-divider">
+      <table>
+        <tr>
+          <td>UserName</td>
+          <td class="pad"></td>
+          <td><span class="ui-li-count">{{user.username}}</span></td>
+        </tr>
+      </table>
+    </li>
+  </ul>
+  <form name="profileForm" data-ajax="false" ng-submit="submitUser()">
     <div class="form-pad">
       <label for="profile-firstName"><strong>First Name</strong></label>
-      <input type="text" id="profile-firstName" ng-model="user.firstName" ng-required="true">
+      <input type="text" name="profileFirstName" id="profile-firstName"
+             ng-model="user.firstName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+      <div ng-show="profileForm.profileFirstName.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-middleName"><strong>Middle Name</strong></label>
-      <input type="text" id="profile-middleName" ng-model="user.middleName" ng-required="false">
+      <input type="text" name="profileMiddleName" id="profile-middleName"
+             ng-model="user.middleName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="false">
+      <div ng-show="profileForm.profileMiddleName.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-lastName"><strong>Last Name</strong></label>
-      <input type="text" id="profile-lastName" ng-model="user.lastName" ng-required="true">
+      <input type="text" name="profileLastName" id="profile-lastName"
+             ng-model="user.lastName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+      <div ng-show="profileForm.profileLastName.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-email"><strong>Email</strong></label>
-      <input type="email" id="profile-email" ng-model="user.email" ng-required="true">
+      <input type="email" name="profileEmail" id="profile-email"
+             ng-model="user.email" ng-required="true">
+      <div ng-show="profileForm.profileEmail.$error.email" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-telephone"><strong>Telephone</strong></label>
-      <input type="tel" id="profile-telephone" ng-model="user.telephone" ng-required="true">
+      <input type="tel" name="profileTelephone" id="profile-telephone"
+             ng-model="user.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
+      <div ng-show="profileForm.profileTelephone.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-securityQuestion-1"><strong>Question 1</strong></label>
-      <select id="profile-securityQuestion-1" ng-model="user.question1"
-              ng-options="question.id as question.question for question in questions" ng-required="true">
+      <select name="profileSecurityQuestion1" id="profile-securityQuestion-1"
+              ng-model="user.question1"
+              ng-options="question.id as question.question for question in questions"
+              ng-required="true">
       </select>
       <label for="profile-securityAnswer-1"><strong>Answer</strong></label>
-      <input type="text" id="profile-securityAnswer-1" ng-model="user.questionAnswer1" ng-required="true">
-
+      <input type="text" name="profileSecurityAnswer1" id="profile-securityAnswer-1"
+             ng-model="user.questionAnswer1"
+             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
+             ng-required="true">
+      <div ng-show="profileForm.profileSecurityAnswer1.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-securityQuestion-2"><strong>Question 2</strong></label>
-      <select id="profile-securityQuestion-2" ng-model="user.question2"
-              ng-options="question.id as question.question for question in questions" ng-required="true">
+      <select name="profileSecurityQuestion2" id="profile-securityQuestion-2"
+              ng-model="user.question2"
+              ng-options="question.id as question.question for question in questions"
+              ng-required="true">
       </select>
       <label for="profile-securityAnswer-2"><strong>Answer</strong></label>
-      <input type="text" id="profile-securityAnswer-2" ng-model="user.questionAnswer2" ng-required="true">
-
+      <input type="text" name="profileSecurityAnswer2" id="profile-securityAnswer-2"
+             ng-model="user.questionAnswer2"
+             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
+             ng-required="true">
+      <div ng-show="profileForm.profileSecurityAnswer2.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-securityQuestion-3"><strong>Question 3</strong></label>
-      <select id="profile-securityQuestion-3" ng-model="user.question3"
-              ng-options="question.id as question.question for question in questions" ng-required="true">
+      <select name="profileSecurityQuestion3" id="profile-securityQuestion-3"
+              ng-model="user.question3"
+              ng-options="question.id as question.question for question in questions"
+              ng-required="true">
       </select>
       <label for="profile-securityAnswer-3"><strong>Answer</strong></label>
-      <input type="text" id="profile-securityAnswer-3" ng-model="user.questionAnswer3" ng-required="true">
-
-      <label for="profile-oldPassword"><strong>Old Password</strong></label>
-      <input type="password" id="profile-oldPassword" autocomplete="off" ng-model="user.oldPassword"
+      <input type="text" name="profileSecurityAnswer3" id="profile-securityAnswer-3"
+             ng-model="user.questionAnswer3"
+             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
              ng-required="true">
+      <div ng-show="profileForm.profileSecurityAnswer3.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
+      <label for="profile-oldPassword"><strong>Old Password</strong></label>
+      <input type="password" name="profileOldPassword" id="profile-oldPassword" autocomplete="off"
+             ng-model="user.oldPassword" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="true">
+      <div ng-show="profileForm.profileOldPassword.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-newPassword"><strong>New Password</strong></label>
-      <input type="password" id="profile-newPassword" autocomplete="off" ng-model="user.newPassword"
-             ng-required="false">
+      <input type="password" name="profileNewPassword" id="profile-newPassword" autocomplete="off"
+             ng-model="user.newPassword" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+      <div ng-show="profileForm.profileNewPassword.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
       <label for="profile-newPasswordConfirm"><strong>Confirm Password</strong></label>
-      <input type="password" id="profile-newPasswordConfirm" autocomplete="off" ng-model="user.newPasswordConfirm"
-             ng-required="false">
+      <input type="password" name="profileNewPasswordConfirm" id="profile-newPasswordConfirm" autocomplete="off"
+             ng-model="user.newPasswordConfirm" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+      <div ng-show="profileForm.profileNewPasswordConfirm.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
     </div>
     <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
       <a href="#home-user" data-role="button" data-icon="delete" data-transition="fade">Cancel</a>
-      <button type="submit" data-icon="check">Submit</button>
+      <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[profileForm.$valid]">Submit</button>
     </div>
-  </div>
-</form>
+  </form>
+</div>
 
 <div data-role="collapsible-set">
 
@@ -85,9 +134,10 @@
           <tr>
             <td><strong>Mail Addresses on System</strong></td>
             <td class="pad"></td>
-            <td><a href="#add-mailing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">Add
-              Mailing
-              Address</a>
+            <td>
+              <a href="#add-mailing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
+                Add Mailing Address
+              </a>
             </td>
             <td><span class="ui-li-count">{{mailAddresses.length}}</span></td>
           </tr>
@@ -148,9 +198,10 @@
           <tr>
             <td><strong>Bill Addresses on System</strong></td>
             <td class="pad"></td>
-            <td><a href="#add-billing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">Add
-              Billing
-              Address</a>
+            <td>
+              <a href="#add-billing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
+                Add Billing Address
+              </a>
             </td>
             <td><span class="ui-li-count">{{billAddresses.length}}</span></td>
           </tr>
