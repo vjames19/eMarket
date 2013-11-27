@@ -6,29 +6,61 @@
   </div>
 
   <div data-role="content" data-theme="a">
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editMailForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="editMail-name"><strong>Name</strong></label>
-        <input type="text" id="editMail-name" ng-model="mailInfo.recipientName" ng-required="true">
+        <label for="editMail-name"><strong>Full Name</strong></label>
+        <input type="text" name="editMailName" id="editMail-name"
+               ng-model="mailInfo.recipientName"
+               ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/"
+               ng-required="true">
+        <div ng-show="editMailForm.editMailName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-address"><strong>Address</strong></label>
-        <input type="text" id="editMail-address" ng-model="mailInfo.address" ng-required="true">
+        <input type="text" name="editMailAddress" id="editMail-address"
+               ng-model="mailInfo.address"
+               ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){5,255}$/"
+               ng-required="true">
+        <div ng-show="editMailForm.editMailAddress.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-country"><strong>Country</strong></label>
-        <input type="text" id="editMail-country" ng-model="mailInfo.country" ng-required="true">
+        <input type="text" name="editMailCountry" id="editMail-country"
+               ng-model="mailInfo.country" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/" ng-required="true">
+        <div ng-show="editMailForm.editMailCountry.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-city"><strong>City</strong></label>
-        <input type="text" id="editMail-city" ng-model="mailInfo.city" ng-required="true">
+        <input type="text" name="editMailCity" id="editMail-city"
+               ng-model="mailInfo.city" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+        <div ng-show="editMailForm.editMailCity.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" id="editMail-geographicalRegion" ng-model="mailInfo.geographicalRegion" ng-required="false">
+        <input type="text" name="editMailGeographicalRegion" id="editMail-geographicalRegion"
+               ng-model="mailInfo.geographicalRegion" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="false">
+        <div ng-show="editMailForm.editMailGeographicalRegion.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-zipCode"><strong>Zip Code</strong></label>
-        <input type="tel" id="editMail-zipCode" ng-model="mailInfo.zipCode" ng-required="true">
+        <input type="tel" name="editMailZipCode" id="editMail-zipCode"
+               ng-model="mailInfo.zipCode" ng-pattern="/^\d{5}(?:[-]\d{4})?$/" ng-required="true">
+        <div ng-show="editMailForm.editMailZipCode.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="editMail-telephone" ng-model="mailInfo.telephone" ng-required="true">
+        <input type="tel" name="editMailTelephone" id="editMail-telephone"
+               ng-model="mailInfo.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
+        <div ng-show="editMailForm.editMailTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editMail-makePrimary">Make Primary</label>
-        <input id="editMail-makePrimary" data-mini="true" type="checkbox"
-               name="editMail-makePrimary" ng-model="mailInfo.isPrimary" ng-required="false">
+        <input type="checkbox" name="editMailMakePrimary" id="editMail-makePrimary" data-mini="true"
+               ng-model="mailInfo.isPrimary" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editMailForm.$valid]">Submit</button>
       </div>
     </form>
   </div>

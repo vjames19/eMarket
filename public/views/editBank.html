@@ -6,30 +6,48 @@
   </div>
 
   <div data-role="content" data-theme="a">
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editBankForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="editBank-name"><strong>Bank Name</strong></label>
-        <input type="text" id="editBank-name" ng-model="bankInfo.bankName" ng-required="true">
-        <label for="editBank-accountName"><strong>Account Name</strong></label>
-        <input type="text" id="editBank-accountName" ng-model="bankInfo.ownerName" ng-required="true">
+        <input type="text" name="editBankName" id="editBank-name"
+               ng-model="bankInfo.bankName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+        <div ng-show="editBankForm.editBankName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-accountOwnerName"><strong>Account Owner Name</strong></label>
+        <input type="text" name="editBankAccountOwnerName" id="editBank-accountOwnerName"
+               ng-model="bankInfo.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+        <div ng-show="editBankForm.editBankAccountOwnerName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editBank-accountType"><strong>Account Type</strong></label>
-        <select id="editBank-accountType" ng-model="bankInfo.accountType" ng-required="true">
-          <option value="Checking">Checking</option>
+        <select name="editBankAccountType" id="editBank-accountType" ng-model="bankInfo.accountType" ng-required="true">
+        <option value="Checking">Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="editBank-accountNumber"><strong>Account Number</strong></label>
-        <input type="text" id="editBank-accountNumber" ng-model="bankInfo.accountNumber" ng-required="true">
+        <input type="tel" name="editBankAccountNumber" id="editBank-accountNumber"
+               ng-model="bankInfo.accountNumber" ng-pattern="/^[0-9]{4,17}$/" ng-required="true">
+        <div ng-show="editBankForm.editBankAccountNumber.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editBank-accountRouting"><strong>Routing Number</strong></label>
-        <input type="text" id="editBank-accountRouting" ng-model="bankInfo.routingNumber" ng-required="true">
+        <input type="tel" name="editBankAccountRouting" id="editBank-accountRouting"
+               ng-model="bankInfo.routingNumber" ng-pattern="/^[0-9]{9}$/" ng-required="true">
+        <div ng-show="editBankForm.editBankAccountRouting.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editBank-associatedAddress"><strong>Associated Address</strong></label>
-        <select id="editBank-associatedAddress" ng-model="bankInfo.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses" ng-required="true">
+        <select name="editBankAssociatedAddress" id="editBank-associatedAddress"
+                ng-model="bankInfo.addressId"
+                ng-options="bill.addressId as bill.address for bill in billAddresses"
+                ng-required="true">
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editBankForm.$valid]">Submit</button>
       </div>
     </form>
   </div>

@@ -46,7 +46,7 @@
     </div>
     <label for="register-mailingCountry">Country</label>
     <input type="text" name="registerMailingCountry" id="register-mailingCountry"
-           ng-model="register.mailingCountry" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+           ng-model="register.mailingCountry" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/" ng-required="true">
     <div ng-show="registerForm.registerMailingCountry.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
@@ -113,7 +113,7 @@
     </div>
     <label for="register-telephone">Telephone</label>
     <input type="tel" name="registerTelephone" id="register-telephone"
-           ng-model="register.telephone" ng-pattern="/^\d{3}[\-]{1}\d{3}[\-]{1}\d{4}$/" ng-required="true">
+           ng-model="register.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
     <div ng-show="registerForm.registerTelephone.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
@@ -146,13 +146,13 @@
       <strong><em>Wrong Format.</em></strong>
     </div>
     <label for="register-cardNumber">Card Number</label>
-    <input type="number" name="registerCardNumber" id="register-cardNumber"
+    <input type="tel" name="registerCardNumber" id="register-cardNumber"
            ng-model="register.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
     <div ng-show="registerForm.registerCardNumber.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>
     </div>
     <label for="register-cardSecurityCode">Card Security Code</label>
-    <input type="number" name="registerCardSecurityCode" id="register-cardSecurityCode"
+    <input type="tel" name="registerCardSecurityCode" id="register-cardSecurityCode"
            ng-model="register.cardSecurityCode" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
     <div ng-show="registerForm.registerCardSecurityCode.$error.pattern" class="labelError">
       <strong><em>Wrong Format.</em></strong>

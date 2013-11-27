@@ -26,7 +26,7 @@
         </div>
         <label for="addBill-country"><strong>Country</strong></label>
         <input type="text" name="addBillCountry" id="addBill-country"
-               ng-model="billAddresses.country" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+               ng-model="billAddresses.country" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/" ng-required="true">
         <div ng-show="addBillForm.addBillCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -51,7 +51,7 @@
         </div>
         <label for="addBill-telephone"><strong>Telephone</strong></label>
         <input type="tel" name="addBillTelephone" id="addBill-telephone"
-               ng-model="billAddresses.telephone" ng-pattern="/^\d{3}[\-]{1}\d{3}[\-]{1}\d{4}$/" ng-required="true">
+               ng-model="billAddresses.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
         <div ng-show="addBillForm.addBillTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>

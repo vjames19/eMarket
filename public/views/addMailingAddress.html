@@ -26,7 +26,7 @@
         </div>
         <label for="addMail-country"><strong>Country</strong></label>
         <input type="text" name="addMailCountry" id="addMail-country"
-               ng-model="mailAddresses.country" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+               ng-model="mailAddresses.country" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/" ng-required="true">
         <div ng-show="addMailForm.addMailCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -52,7 +52,7 @@
         </div>
         <label for="addMail-telephone"><strong>Telephone</strong></label>
         <input type="tel" name="addMailTelephone" id="addMail-telephone"
-               ng-model="mailAddresses.telephone" ng-pattern="/^\d{3}[\-]{1}\d{3}[\-]{1}\d{4}$/" ng-required="true">
+               ng-model="mailAddresses.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
         <div ng-show="addMailForm.addMailTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>

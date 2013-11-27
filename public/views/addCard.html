@@ -8,7 +8,7 @@
   <div data-role="content" data-theme="a">
     <form name="addCardForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="addCard-ownerName"><strong>Card Owner Full Name</strong></label>
+        <label for="addCard-ownerName"><strong>Card Owner Name</strong></label>
         <input type="text" name="addCardOwnerName" id="addCard-ownerName"
                ng-model="card.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
         <div ng-show="addCardForm.addCardOwnerName.$error.pattern" class="labelError">
@@ -16,7 +16,7 @@
         </div>
         <label for="addCard-type"><strong>Card Type</strong></label>
         <select name="addCardType" id="addCard-type" ng-model="card.cardType" ng-required="true">
-        <option value="Visa" selected>Visa</option>
+          <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
@@ -28,13 +28,13 @@
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-number"><strong>Card Number</strong></label>
-        <input type="number" name="addCardNumber" id="addCard-number"
+        <input type="tel" name="addCardNumber" id="addCard-number"
                ng-model="card.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
         <div ng-show="addCardForm.addCardNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-cardSecurityCode"><strong>Card Security Code</strong></label>
-        <input type="number" name="addCardCardSecurityCode" id="addCard-cardSecurityCode"
+        <input type="tel" name="addCardCardSecurityCode" id="addCard-cardSecurityCode"
                ng-model="card.cardCsv" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
         <div ng-show="addCardForm.addCardCardSecurityCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
@@ -44,7 +44,7 @@
                 ng-model="card.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses"
                 ng-required="true">
-        <option value="" ng-hide="card.addressId">Please Choose</option>
+          <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">

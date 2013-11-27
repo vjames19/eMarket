@@ -6,32 +6,49 @@
   </div>
 
   <div data-role="content" data-theme="a">
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editCardForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="editCard-name"><strong>Card Name</strong></label>
-        <input type="text" id="editCard-name" ng-model="cardInfo.ownerName" ng-required="true">
+        <label for="editCard-ownerName"><strong>Card Owner Name</strong></label>
+        <input type="text" name="editCardOwnerName" id="editCard-ownerName"
+               ng-model="cardInfo.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+        <div ng-show="editCardForm.editCardOwnerName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editCard-type"><strong>Card Type</strong></label>
-        <select id="editCard-type" ng-model="cardInfo.cardType" ng-required="true">
-          <option value="Visa">Visa</option>
+        <select name="editCardType" id="editCard-type" ng-model="cardInfo.cardType" ng-required="true">
+        <option value="Visa">Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
         <label for="editCard-expDate"><strong>Expiration Date</strong></label>
-        <input type="month" id="editCard-expDate" ng-model="cardInfo.expirationDate" ng-required="true">
-        <!-- The type number in the phone make the last digit 0 in the card-number-->
+        <input type="month" name="editCardExpDate" id="editCard-expDate"
+               ng-model="cardInfo.expirationDate" ng-pattern="/^20\d\d-(0[1-9]|1[012])$/" ng-required="true">
+        <div ng-show="editCardForm.editCardExpDate.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editCard-number"><strong>Card Number</strong></label>
-        <input type="text" id="editCard-number" ng-model="cardInfo.cardNumber" ng-required="true">
-        <label for="editCard-csv"><strong>Card CSV</strong></label>
-        <input type="text" id="editCard-csv" ng-model="cardInfo.cardCsv" ng-required="true">
+        <input type="tel" name="editCardNumber" id="editCard-number"
+               ng-model="cardInfo.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
+        <div ng-show="editCardForm.editCardNumber.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editCard-cardSecurityCode"><strong>Card Security Code</strong></label>
+        <input type="tel" name="editCardCardSecurityCode" id="editCard-cardSecurityCode"
+               ng-model="cardInfo.cardCsv" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
+        <div ng-show="editCardForm.editCardCardSecurityCode.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editCard-associatedAddress"><strong>Associated Address</strong></label>
-        <select id="editCard-associatedAddress" ng-model="cardInfo.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses" ng-required="true">
+        <select name="editCardAssociatedAddress" id="editCard-associatedAddress"
+                ng-model="cardInfo.addressId"
+                ng-options="bill.addressId as bill.address for bill in billAddresses"
+                ng-required="true">
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editCardForm.$valid]">Submit</button>
       </div>
     </form>
   </div>
