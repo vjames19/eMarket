@@ -155,7 +155,8 @@
           </div>
           <label for="sellItem-endDate">Product End Date</label>
           <input type="datetime-local" name="sellItemEndDate" id="sellItem-endDate" data-theme="a"
-                 ng-model="item.bidEndDate" ng-pattern="" ng-required="true">
+                 ng-model="item.bidEndDate" ng-pattern="/^(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})$/"
+                 ng-required="true">
           <div ng-show="sellItemForm.sellItemEndDate.$error.pattern" class="labelError">
             <strong><em>Wrong Format.</em></strong>
           </div>
@@ -174,7 +175,7 @@
           <label for="sellItem-shippingPrice">Shipping Price</label>
           <input type="number" name="sellItemShippingPrice" id="sellItem-shippingPrice" min="0" data-theme="a"
                  ng-model="item.shippingPrice"
-                 ng-pattern="/^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/"
+                 ng-pattern="/^0$|^([1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?)$/"
                  ng-required="true">
           <div ng-show="sellItemForm.sellItemShippingPrice.$error.pattern" class="labelError">
             <strong><em>Wrong Format.</em></strong>
@@ -191,7 +192,7 @@
 
   <div data-role="footer" data-theme="a" class="ui-footer">
     <a href="#sell-item-preview" data-role="button" class="footer-button" data-theme="b"
-       ng-click="setPreviewItemInfo(item)">Preview</a>
+       ng-click="setPreviewItemInfo(item)" ng-class="{false: 'ui-disabled'}[sellItemForm.$valid]">Preview</a>
   </div>
 
 </div>
