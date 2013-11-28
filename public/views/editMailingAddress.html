@@ -10,47 +10,43 @@
       <div class="form-pad">
         <label for="editMail-name"><strong>Full Name</strong></label>
         <input type="text" name="editMailName" id="editMail-name" maxlength="160"
-               ng-model="mailInfo.recipientName"
-               ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/"
-               ng-required="true">
+               ng-model="mailInfo.recipientName" ng-pattern="patternFullName" ng-required="true">
         <div ng-show="editMailForm.editMailName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-address"><strong>Address</strong></label>
         <input type="text" name="editMailAddress" id="editMail-address" maxlength="255"
-               ng-model="mailInfo.address"
-               ng-pattern="/^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){5,255}$/"
-               ng-required="true">
+               ng-model="mailInfo.address" ng-pattern="patternAddress" ng-required="true">
         <div ng-show="editMailForm.editMailAddress.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-country"><strong>Country</strong></label>
         <input type="text" name="editMailCountry" id="editMail-country" maxlength="45"
-               ng-model="mailInfo.country" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/" ng-required="true">
+               ng-model="mailInfo.country" ng-pattern="patternCountry" ng-required="true">
         <div ng-show="editMailForm.editMailCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-city"><strong>City</strong></label>
         <input type="text" name="editMailCity" id="editMail-city" maxlength="45"
-               ng-model="mailInfo.city" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+               ng-model="mailInfo.city" ng-pattern="patternCity" ng-required="true">
         <div ng-show="editMailForm.editMailCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-geographicalRegion"><strong>State/Region/Providence</strong></label>
         <input type="text" name="editMailGeographicalRegion" id="editMail-geographicalRegion" maxlength="45"
-               ng-model="mailInfo.geographicalRegion" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="false">
+               ng-model="mailInfo.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
         <div ng-show="editMailForm.editMailGeographicalRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-zipCode"><strong>Zip Code</strong></label>
         <input type="tel" name="editMailZipCode" id="editMail-zipCode" maxlength="10"
-               ng-model="mailInfo.zipCode" ng-pattern="/^\d{5}(?:[-]\d{4})?$/" ng-required="true">
+               ng-model="mailInfo.zipCode" ng-pattern="patternZipCode" ng-required="true">
         <div ng-show="editMailForm.editMailZipCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editMail-telephone"><strong>Telephone</strong></label>
         <input type="tel" name="editMailTelephone" id="editMail-telephone" maxlength="10"
-               ng-model="mailInfo.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
+               ng-model="mailInfo.telephone" ng-pattern="patternTelephone" ng-required="true">
         <div ng-show="editMailForm.editMailTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>

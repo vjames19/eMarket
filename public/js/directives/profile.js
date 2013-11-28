@@ -6,7 +6,14 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, MailingAddressInfo, BillingAddressInfo) {
+    controller: function($scope, MailingAddressInfo, BillingAddressInfo, Patterns) {
+
+      $scope.patternFirstName = Patterns.user.firstName;
+      $scope.patternMiddleName = Patterns.user.middleName;
+      $scope.patternLastName = Patterns.user.lastName;
+      $scope.patternTelephone = Patterns.address.telephone;
+      $scope.patternPassword = Patterns.user.password;
+      $scope.patternAnswer = Patterns.question.answer;
 
       $scope.setMailInfo = function(mailInfo) {
         angular.copy(mailInfo, MailingAddressInfo.mailInfo);

@@ -6,7 +6,12 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, Patterns) {
+
+      $scope.patternBankName = Patterns.bank.name;
+      $scope.patternOwnerName = Patterns.user.fullName;
+      $scope.patternAccNumber = Patterns.bank.accNum;
+      $scope.patternRoutingNumber = Patterns.bank.routing;
 
       $scope.bank = {accountType: 'Checking'};
 

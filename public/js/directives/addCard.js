@@ -6,7 +6,12 @@ angular.module('eMarketApp').directive('addCard', function(User, Helper) {
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, Patterns) {
+
+      $scope.patternOwnerName = Patterns.user.fullName;
+      $scope.patternExpDate = Patterns.card.expDate;
+      $scope.patternNumber = Patterns.card.number;
+      $scope.patternCsv = Patterns.card.csv;
 
       // init value
       $scope.card = {cardType: 'Visa'};

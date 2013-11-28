@@ -6,7 +6,12 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, Patterns) {
+
+      $scope.patternBankName = Patterns.bank.name;
+      $scope.patternOwnerName = Patterns.user.fullName;
+      $scope.patternAccNumber = Patterns.bank.accNum;
+      $scope.patternRoutingNumber = Patterns.bank.routing;
 
       $scope.submit = function() {
 //        console.log($scope.cardInfo);

@@ -6,7 +6,27 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, $element, Restangular) {
+    controller: function($scope, $element, Restangular, Patterns) {
+
+      $scope.patternFirstName = Patterns.user.firstName;
+      $scope.patternMiddleName = Patterns.user.middleName;
+      $scope.patternLastName = Patterns.user.lastName;
+
+      $scope.patternAddress = Patterns.address.street;
+      $scope.patternCountry = Patterns.address.country;
+      $scope.patternCity = Patterns.address.city;
+      $scope.patternGeoRegion = Patterns.address.geoRegion;
+      $scope.patternZipCode = Patterns.address.zipCode;
+      $scope.patternTelephone = Patterns.address.telephone;
+
+      $scope.patternOwnerName = Patterns.user.fullName;
+      $scope.patternExpDate = Patterns.card.expDate;
+      $scope.patternNumber = Patterns.card.number;
+      $scope.patternCsv = Patterns.card.csv;
+
+      $scope.patternUsername = Patterns.user.username;
+      $scope.patternPassword = Patterns.user.password;
+      $scope.patternAnswer = Patterns.question.answer;
 
       $scope.register = { cardType: 'Visa' };
 

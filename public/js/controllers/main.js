@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth) {
+angular.module('eMarketApp').controller('MainCtrl', function($scope, Auth, Patterns) {
+
+  $scope.patternUsername = Patterns.user.username;
+  $scope.patternPassword = Patterns.user.password;
 
   $scope.logIn = function() {
     // TODO: Uncomment for real auth!!!!!

@@ -55,14 +55,14 @@
         <label for="index-username" class="ui-hidden-accessible">Username:</label>
         <input type="text" name="indexUsername" id="index-username"
                placeholder="username" maxlength="16" data-theme="a"
-               ng-model="username" ng-pattern="/^[a-zA-Z0-9_]{3,16}$/" ng-required="false">
+               ng-model="username" ng-pattern="patternUsername" ng-required="false">
         <div ng-show="indexForm.indexUsername.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="index-password" class="ui-hidden-accessible">Password:</label>
         <input type="password" name="indexPassword" id="index-password" autocomplete="off"
                placeholder="password" maxlength="40" data-theme="a"
-               ng-model="password" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+               ng-model="password" ng-pattern="patternPassword" ng-required="false">
         <div ng-show="indexForm.indexPassword.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -82,7 +82,7 @@
 
   <div data-role="footer" data-theme="a">
     <h1>
-    <a href="admin" data-ajax="false" data-rel="external">Admin</a>
+      <a href="admin" data-ajax="false" data-rel="external">Admin</a>
     </h1>
   </div>
 
@@ -139,6 +139,7 @@
 <script src="js/services/category.js"></script>
 <script src="js/services/helper.js"></script>
 <script src="js/services/mailInfo.js"></script>
+<script src="js/services/patterns.js"></script>
 <script src="js/services/product.js"></script>
 <script src="js/services/productBids.js"></script>
 <script src="js/services/search.js"></script>

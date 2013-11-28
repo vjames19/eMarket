@@ -28,19 +28,19 @@
     <div class="form-pad">
       <label for="profile-firstName"><strong>First Name</strong></label>
       <input type="text" name="profileFirstName" id="profile-firstName"
-             ng-model="user.firstName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+             ng-model="user.firstName" ng-pattern="patternFirstName" ng-required="true">
       <div ng-show="profileForm.profileFirstName.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
       <label for="profile-middleName"><strong>Middle Name</strong></label>
       <input type="text" name="profileMiddleName" id="profile-middleName"
-             ng-model="user.middleName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="false">
+             ng-model="user.middleName" ng-pattern="patternMiddleName" ng-required="false">
       <div ng-show="profileForm.profileMiddleName.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
       <label for="profile-lastName"><strong>Last Name</strong></label>
       <input type="text" name="profileLastName" id="profile-lastName"
-             ng-model="user.lastName" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/" ng-required="true">
+             ng-model="user.lastName" ng-pattern="patternLastName" ng-required="true">
       <div ng-show="profileForm.profileLastName.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
@@ -52,7 +52,7 @@
       </div>
       <label for="profile-telephone"><strong>Telephone</strong></label>
       <input type="tel" name="profileTelephone" id="profile-telephone"
-             ng-model="user.telephone" ng-pattern="/^\d{10}$/" ng-required="true">
+             ng-model="user.telephone" ng-pattern="patternTelephone" ng-required="true">
       <div ng-show="profileForm.profileTelephone.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
@@ -64,9 +64,7 @@
       </select>
       <label for="profile-securityAnswer-1"><strong>Answer</strong></label>
       <input type="text" name="profileSecurityAnswer1" id="profile-securityAnswer-1"
-             ng-model="user.questionAnswer1"
-             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
-             ng-required="true">
+             ng-model="user.questionAnswer1" ng-pattern="patternAnswer" ng-required="true">
       <div ng-show="profileForm.profileSecurityAnswer1.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
@@ -78,9 +76,7 @@
       </select>
       <label for="profile-securityAnswer-2"><strong>Answer</strong></label>
       <input type="text" name="profileSecurityAnswer2" id="profile-securityAnswer-2"
-             ng-model="user.questionAnswer2"
-             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
-             ng-required="true">
+             ng-model="user.questionAnswer2" ng-pattern="patternAnswer" ng-required="true">
       <div ng-show="profileForm.profileSecurityAnswer2.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
@@ -92,27 +88,25 @@
       </select>
       <label for="profile-securityAnswer-3"><strong>Answer</strong></label>
       <input type="text" name="profileSecurityAnswer3" id="profile-securityAnswer-3"
-             ng-model="user.questionAnswer3"
-             ng-pattern="/^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/"
-             ng-required="true">
+             ng-model="user.questionAnswer3" ng-pattern="patternAnswer" ng-required="true">
       <div ng-show="profileForm.profileSecurityAnswer3.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
       <label for="profile-oldPassword"><strong>Old Password</strong></label>
       <input type="password" name="profileOldPassword" id="profile-oldPassword" autocomplete="off"
-             ng-model="user.oldPassword" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="true">
+             ng-model="user.oldPassword" ng-pattern="patternPassword" ng-required="true">
       <div ng-show="profileForm.profileOldPassword.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
       <label for="profile-newPassword"><strong>New Password</strong></label>
       <input type="password" name="profileNewPassword" id="profile-newPassword" autocomplete="off"
-             ng-model="user.newPassword" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+             ng-model="user.newPassword" ng-pattern="patternPassword" ng-required="false">
       <div ng-show="profileForm.profileNewPassword.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>
       <label for="profile-newPasswordConfirm"><strong>Confirm Password</strong></label>
       <input type="password" name="profileNewPasswordConfirm" id="profile-newPasswordConfirm" autocomplete="off"
-             ng-model="user.newPasswordConfirm" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+             ng-model="user.newPasswordConfirm" ng-pattern="patternPassword" ng-required="false">
       <div ng-show="profileForm.profileNewPasswordConfirm.$error.pattern" class="labelError">
         <strong><em>Wrong Format.</em></strong>
       </div>

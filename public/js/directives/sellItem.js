@@ -6,7 +6,18 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope) {
+    controller: function($scope, Patterns) {
+
+      $scope.patternTitle = Patterns.item.title;
+      $scope.patternBrand = Patterns.item.brand;
+      $scope.patternModel = Patterns.item.model;
+      $scope.patternDimension = Patterns.item.dimension;
+      $scope.patternDescription = Patterns.item.description;
+      $scope.patternBidPrice = Patterns.item.bidPrice;
+      $scope.patternNonBidPrice = Patterns.item.nonBidPrice;
+      $scope.patternQuantity = Patterns.item.quantity;
+      $scope.patternEndDate = Patterns.item.endDate;
+      $scope.patternShipping = Patterns.item.shipping;
 
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
 

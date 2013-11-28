@@ -6,7 +6,11 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, $element) {
+    controller: function($scope, $element, Patterns) {
+
+      $scope.patternUsername = Patterns.user.username;
+      $scope.patternPassword = Patterns.user.password;
+      $scope.patternAnswer = Patterns.question.answer;
 
       var page = $($element[0]);
 

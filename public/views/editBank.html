@@ -10,13 +10,13 @@
       <div class="form-pad">
         <label for="editBank-name"><strong>Bank Name</strong></label>
         <input type="text" name="editBankName" id="editBank-name" maxlength="160"
-               ng-model="bankInfo.bankName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+               ng-model="bankInfo.bankName" ng-pattern="patternBankName" ng-required="true">
         <div ng-show="editBankForm.editBankName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBank-accountOwnerName"><strong>Account Owner Name</strong></label>
         <input type="text" name="editBankAccountOwnerName" id="editBank-accountOwnerName" maxlength="160"
-               ng-model="bankInfo.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
+               ng-model="bankInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="editBankForm.editBankAccountOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -28,13 +28,13 @@
         </select>
         <label for="editBank-accountNumber"><strong>Account Number</strong></label>
         <input type="tel" name="editBankAccountNumber" id="editBank-accountNumber" maxlength="17"
-               ng-model="bankInfo.accountNumber" ng-pattern="/^[0-9]{4,17}$/" ng-required="true">
+               ng-model="bankInfo.accountNumber" ng-pattern="patternAccNumber" ng-required="true">
         <div ng-show="editBankForm.editBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBank-accountRouting"><strong>Routing Number</strong></label>
         <input type="tel" name="editBankAccountRouting" id="editBank-accountRouting" maxlength="9"
-               ng-model="bankInfo.routingNumber" ng-pattern="/^[0-9]{9}$/" ng-required="true">
+               ng-model="bankInfo.routingNumber" ng-pattern="patternRoutingNumber" ng-required="true">
         <div ng-show="editBankForm.editBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
