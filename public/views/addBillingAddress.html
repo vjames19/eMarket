@@ -5,54 +5,55 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content" data-theme="a">
+  <div data-role="content" data-theme="b">
     <form name="addBillForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addBill-name"><strong>Full Name</strong></label>
-        <input type="text" name="addBillName" id="addBill-name" maxlength="160"
+        <input type="text" name="addBillName" id="addBill-name" maxlength="160" data-theme="a"
                ng-model="billAddresses.recipientName" ng-pattern="patternFullName" ng-required="true">
         <div ng-show="addBillForm.addBillName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-address"><strong>Address</strong></label>
-        <input type="text" name="addBillAddress" id="addBill-address" maxlength="255"
+        <input type="text" name="addBillAddress" id="addBill-address" maxlength="255" data-theme="a"
                ng-model="billAddresses.billAddress" ng-pattern="patternAddress" ng-required="true">
         <div ng-show="addBillForm.addBillAddress.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-country"><strong>Country</strong></label>
-        <input type="text" name="addBillCountry" id="addBill-country" maxlength="45"
+        <input type="text" name="addBillCountry" id="addBill-country" maxlength="45" data-theme="a"
                ng-model="billAddresses.country" ng-pattern="patternCountry" ng-required="true">
         <div ng-show="addBillForm.addBillCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-city"><strong>City</strong></label>
-        <input type="text" name="addBillCity" id="addBill-city" maxlength="45"
+        <input type="text" name="addBillCity" id="addBill-city" maxlength="45" data-theme="a"
                ng-model="billAddresses.city" ng-pattern="patternCity" ng-required="true">
         <div ng-show="addBillForm.addBillCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" name="addBillGeographicalRegion" id="addBill-geographicalRegion" maxlength="45"
+        <input type="text" name="addBillGeographicalRegion" id="addBill-geographicalRegion"
+               maxlength="45" data-theme="a"
                ng-model="billAddresses.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
         <div ng-show="addBillForm.addBillGeographicalRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-zipCode"><strong>Zip Code</strong></label>
-        <input type="tel" name="addBillZipCode" id="addBill-zipCode" maxlength="10"
+        <input type="tel" name="addBillZipCode" id="addBill-zipCode" maxlength="10" data-theme="a"
                ng-model="billAddresses.zipCode" ng-pattern="patternZipCode" ng-required="true">
         <div ng-show="addBillForm.addBillZipCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-telephone"><strong>Telephone</strong></label>
-        <input type="tel" name="addBillTelephone" id="addBill-telephone" maxlength="10"
+        <input type="tel" name="addBillTelephone" id="addBill-telephone" maxlength="10" data-theme="a"
                ng-model="billAddresses.telephone" ng-pattern="patternTelephone" ng-required="true">
         <div ng-show="addBillForm.addBillTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
       </div>
-      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
+      <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addBillForm.$valid]">Submit</button>
       </div>
     </form>

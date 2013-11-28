@@ -5,50 +5,51 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content" data-theme="a">
+  <div data-role="content" data-theme="b">
     <form name="addCardForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addCard-ownerName"><strong>Card Owner Name</strong></label>
-        <input type="text" name="addCardOwnerName" id="addCard-ownerName" maxlength="160"
+        <input type="text" name="addCardOwnerName" id="addCard-ownerName" maxlength="160" data-theme="a"
                ng-model="card.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="addCardForm.addCardOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-type"><strong>Card Type</strong></label>
-        <select name="addCardType" id="addCard-type" ng-model="card.cardType" ng-required="true">
-          <option value="Visa" selected>Visa</option>
+        <select name="addCardType" id="addCard-type" data-theme="a"
+                ng-model="card.cardType" ng-required="true">
+        <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
         <label for="addCard-expDate"><strong>Expiration Date</strong></label>
-        <input type="month" name="addCardExpDate" id="addCard-expDate" maxlength="7"
+        <input type="month" name="addCardExpDate" id="addCard-expDate" maxlength="7" data-theme="a"
                ng-model="card.expirationDate" ng-pattern="patternExpDate" ng-required="true">
         <div ng-show="addCardForm.addCardExpDate.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-number"><strong>Card Number</strong></label>
-        <input type="tel" name="addCardNumber" id="addCard-number" maxlength="16"
+        <input type="tel" name="addCardNumber" id="addCard-number" maxlength="16" data-theme="a"
                ng-model="card.cardNumber" ng-pattern="patternNumber" ng-required="true">
         <div ng-show="addCardForm.addCardNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-cardSecurityCode"><strong>Card Security Code</strong></label>
-        <input type="tel" name="addCardCardSecurityCode" id="addCard-cardSecurityCode" maxlength="4"
+        <input type="tel" name="addCardCardSecurityCode" id="addCard-cardSecurityCode" maxlength="4" data-theme="a"
                ng-model="card.cardCsv" ng-pattern="patternCsv" ng-required="true">
         <div ng-show="addCardForm.addCardCardSecurityCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-associatedAddress"><strong>Associated Address</strong></label>
-        <select name="addCardAssociatedAddress" id="addCard-associatedAddress"
+        <select name="addCardAssociatedAddress" id="addCard-associatedAddress" data-theme="a"
                 ng-model="card.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses"
                 ng-required="true">
           <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
       </div>
-      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
+      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addCardForm.$valid]">Submit</button>
       </div>
     </form>

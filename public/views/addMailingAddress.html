@@ -5,57 +5,59 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content" data-theme="a">
+  <div data-role="content" data-theme="b">
     <form name="addMailForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addMail-name"><strong>Full Name</strong></label>
-        <input type="text" name="addMailName" id="addMail-name" maxlength="160"
+        <input type="text" name="addMailName" id="addMail-name" maxlength="160" data-theme="a"
                ng-model="mailAddresses.recipientName" ng-pattern="patternFullName" ng-required="true">
         <div ng-show="addMailForm.addMailName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-address"><strong>Address</strong></label>
-        <input type="text" name="addMailAddress" id="addMail-address" maxlength="255"
+        <input type="text" name="addMailAddress" id="addMail-address" maxlength="255" data-theme="a"
                ng-model="mailAddresses.mailAddress" ng-pattern="patternAddress" ng-required="true">
         <div ng-show="addMailForm.addMailAddress.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-country"><strong>Country</strong></label>
-        <input type="text" name="addMailCountry" id="addMail-country" maxlength="45"
+        <input type="text" name="addMailCountry" id="addMail-country" maxlength="45" data-theme="a"
                ng-model="mailAddresses.country" ng-pattern="patternCountry" ng-required="true">
         <div ng-show="addMailForm.addMailCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-city"><strong>City</strong></label>
-        <input type="text" name="addMailCity" id="addMail-city" maxlength="45"
+        <input type="text" name="addMailCity" id="addMail-city" maxlength="45" data-theme="a"
                ng-model="mailAddresses.city" ng-pattern="patternCity" ng-required="true">
         <div ng-show="addMailForm.addMailCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" name="addMailGeographicalRegion" id="addMail-geographicalRegion" maxlength="45"
+        <input type="text" name="addMailGeographicalRegion" id="addMail-geographicalRegion"
+               maxlength="45" data-theme="a"
                ng-model="mailAddresses.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
         <div ng-show="addMailForm.addMailGeographicalRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-zipCode"><strong>Zip Code</strong></label>
-        <input type="tel" name="addMailZipCode" id="addMail-zipCode" maxlength="10"
+        <input type="tel" name="addMailZipCode" id="addMail-zipCode" maxlength="10" data-theme="a"
                ng-model="mailAddresses.zipCode" ng-pattern="patternZipCode" ng-required="true">
         <div ng-show="addMailForm.addMailZipCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-telephone"><strong>Telephone</strong></label>
-        <input type="tel" name="addMailTelephone" id="addMail-telephone" maxlength="10"
+        <input type="tel" name="addMailTelephone" id="addMail-telephone" maxlength="10" data-theme="a"
                ng-model="mailAddresses.telephone" ng-pattern="patternTelephone" ng-required="true">
         <div ng-show="addMailForm.addMailTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
+        <hr/>
         <label for="addMail-makePrimary">Make Primary</label>
-        <input type="checkbox" name="addMailMakePrimary" id="addMail-makePrimary" data-mini="true"
+        <input type="checkbox" name="addMailMakePrimary" id="addMail-makePrimary" data-mini="true" data-theme="a"
                ng-model="mailAddresses.isPrimary" ng-required="false">
       </div>
-      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
+      <a href="#profile" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addMailForm.$valid]">Submit</button>
       </div>
     </form>

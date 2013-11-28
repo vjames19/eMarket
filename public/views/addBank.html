@@ -5,49 +5,50 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content" data-theme="a">
+  <div data-role="content" data-theme="b">
     <form name="addBankForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addBank-name"><strong>Bank Name</strong></label>
-        <input type="text" name="addBankName" id="addBank-name" maxlength="160"
+        <input type="text" name="addBankName" id="addBank-name" maxlength="160" data-theme="a"
                ng-model="bank.bankName" ng-pattern="patternBankName" ng-required="true">
         <div ng-show="addBankForm.addBankName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountOwnerName"><strong>Account Owner Name</strong></label>
-        <input type="text" name="addBankAccountOwnerName" id="addBank-accountOwnerName" maxlength="160"
+        <input type="text" name="addBankAccountOwnerName" id="addBank-accountOwnerName" maxlength="160" data-theme="a"
                ng-model="bank.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="addBankForm.addBankAccountOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountType"><strong>Account Type</strong></label>
-        <select name="addBankAccountType" id="addBank-accountType" ng-model="bank.accountType" ng-required="true">
-          <option value="Checking" selected>Checking</option>
+        <select name="addBankAccountType" id="addBank-accountType" data-theme="a"
+                ng-model="bank.accountType" ng-required="true">
+        <option value="Checking" selected>Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="addBank-accountNumber"><strong>Account Number</strong></label>
-        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber" maxlength="17"
+        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber" maxlength="17" data-theme="a"
                ng-model="bank.accountNumber" ng-pattern="patternAccNumber" ng-required="true">
         <div ng-show="addBankForm.addBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountRouting"><strong>Routing Number</strong></label>
-        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting" maxlength="9"
+        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting" maxlength="9" data-theme="a"
                ng-model="bank.routingNumber" ng-pattern="patternRoutingNumber" ng-required="true">
         <div ng-show="addBankForm.addBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-associatedAddress"><strong>Associated Address</strong></label>
-        <select name="addBankAssociatedAddress" id="addBank-associatedAddress"
+        <select name="addBankAssociatedAddress" id="addBank-associatedAddress" data-theme="a"
                 ng-model="bank.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses"
                 ng-required="true">
           <option value="" ng-hide="bank.addressId">Please Choose</option>
         </select>
       </div>
-      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
+      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addBankForm.$valid]">Submit</button>
       </div>
     </form>

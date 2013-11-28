@@ -5,49 +5,50 @@
     <a href="#" data-role="button" data-rel="back" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content" data-theme="a">
+  <div data-role="content" data-theme="b">
     <form name="editCardForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="editCard-ownerName"><strong>Card Owner Name</strong></label>
-        <input type="text" name="editCardOwnerName" id="editCard-ownerName" maxlength="160"
+        <input type="text" name="editCardOwnerName" id="editCard-ownerName" maxlength="160" data-theme="a"
                ng-model="cardInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="editCardForm.editCardOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-type"><strong>Card Type</strong></label>
-        <select name="editCardType" id="editCard-type" ng-model="cardInfo.cardType" ng-required="true">
-          <option value="Visa">Visa</option>
+        <select name="editCardType" id="editCard-type" data-theme="a"
+                ng-model="cardInfo.cardType" ng-required="true">
+        <option value="Visa">Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
         </select>
         <label for="editCard-expDate"><strong>Expiration Date</strong></label>
-        <input type="month" name="editCardExpDate" id="editCard-expDate" maxlength="7"
+        <input type="month" name="editCardExpDate" id="editCard-expDate" maxlength="7" data-theme="a"
                ng-model="cardInfo.expirationDate" ng-pattern="patternExpDate" ng-required="true">
         <div ng-show="editCardForm.editCardExpDate.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-number"><strong>Card Number</strong></label>
-        <input type="tel" name="editCardNumber" id="editCard-number" maxlength="16"
+        <input type="tel" name="editCardNumber" id="editCard-number" maxlength="16" data-theme="a"
                ng-model="cardInfo.cardNumber" ng-pattern="patternNumber" ng-required="true">
         <div ng-show="editCardForm.editCardNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-cardSecurityCode"><strong>Card Security Code</strong></label>
-        <input type="tel" name="editCardCardSecurityCode" id="editCard-cardSecurityCode" maxlength="4"
+        <input type="tel" name="editCardCardSecurityCode" id="editCard-cardSecurityCode" maxlength="4" data-theme="a"
                ng-model="cardInfo.cardCsv" ng-pattern="patternCsv" ng-required="true">
         <div ng-show="editCardForm.editCardCardSecurityCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-associatedAddress"><strong>Associated Address</strong></label>
-        <select name="editCardAssociatedAddress" id="editCard-associatedAddress"
+        <select name="editCardAssociatedAddress" id="editCard-associatedAddress" data-theme="a"
                 ng-model="cardInfo.addressId"
                 ng-options="bill.addressId as bill.address for bill in billAddresses"
                 ng-required="true">
         </select>
       </div>
-      <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+      <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
+      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editCardForm.$valid]">Submit</button>
       </div>
     </form>
