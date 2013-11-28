@@ -187,7 +187,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `emarket_test`.`product_specification` (
   `product_spec_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_spec_category_id` INT UNSIGNED NOT NULL,
-  `product_spec_name` VARCHAR(45) NOT NULL,
+  `product_spec_name` VARCHAR(160) NOT NULL,
   `product_spec_nonbid_price` DECIMAL(13,2) NOT NULL,
   `product_spec_starting_bid_price` DECIMAL(13,2) NOT NULL,
   `product_spec_bid_end_date` TIMESTAMP NOT NULL,
