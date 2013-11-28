@@ -41,7 +41,7 @@
 </head>
 
 <body ng-app="eMarketApp" ng-controller="MainCtrl">
-<!-- Login -->
+
 <div data-role="page" data-theme="b" id="index-page">
 
   <div data-role="header" data-position="fixed" data-theme="a">
@@ -49,19 +49,29 @@
   </div>
 
   <div data-role="content">
-    <form ng-submit="logIn()" data-ajax="false">
+    <form name="indexForm" ng-submit="logIn()" data-ajax="false">
       <div class="form-pad">
         <h3>Welcome, Please Sign In</h3>
         <label for="index-username" class="ui-hidden-accessible">Username:</label>
-        <input name="username" id="index-username" value="" placeholder="username" data-theme="a" type="text"
-               ng-model="username">
+        <input type="text" name="indexUsername" id="index-username"
+               placeholder="username" maxlength="16" data-theme="a"
+               ng-model="username" ng-pattern="/^[a-zA-Z0-9_]{3,16}$/" ng-required="false">
+        <div ng-show="indexForm.indexUsername.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="index-password" class="ui-hidden-accessible">Password:</label>
-        <input name="password" id="index-password" value="" placeholder="password" autocomplete="off" data-theme="a"
-               type="password" ng-model="password">
-        <button type="submit" data-theme="b" data-icon="check">Sign in</button>
+        <input type="password" name="indexPassword" id="index-password" autocomplete="off"
+               placeholder="password" maxlength="40" data-theme="a"
+               ng-model="password" ng-pattern="/^[a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ]{4,40}$/" ng-required="false">
+        <div ng-show="indexForm.indexPassword.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <hr/>
+        <button type="submit" data-icon="check" ng-class="">Sign in</button>
         <a href="#register" data-role="button" data-icon="star" data-transition="slide">Register</a>
-        <a href="#forgot-password" data-role="button" data-icon="info" data-theme="a" data-mini="true">Forgot
-          password?</a>
+        <a href="#forgot-password" data-role="button" data-icon="info" data-mini="true" data-theme="a">
+          Forgot Password?
+        </a>
       </div>
     </form>
   </div>
@@ -71,8 +81,8 @@
   </div>
 
   <div data-role="footer" data-theme="a">
-  <h1>
-      <a href="admin" data-ajax="false" data-rel="external">Admin</a>
+    <h1>
+    <a href="admin" data-ajax="false" data-rel="external">Admin</a>
     </h1>
   </div>
 

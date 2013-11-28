@@ -9,13 +9,13 @@
     <form name="addBankForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addBank-name"><strong>Bank Name</strong></label>
-        <input type="text" name="addBankName" id="addBank-name"
+        <input type="text" name="addBankName" id="addBank-name" maxlength="160"
                ng-model="bank.bankName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
         <div ng-show="addBankForm.addBankName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountOwnerName"><strong>Account Owner Name</strong></label>
-        <input type="text" name="addBankAccountOwnerName" id="addBank-accountOwnerName"
+        <input type="text" name="addBankAccountOwnerName" id="addBank-accountOwnerName" maxlength="160"
                ng-model="bank.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
@@ -27,13 +27,13 @@
           <option value="Other">Other</option>
         </select>
         <label for="addBank-accountNumber"><strong>Account Number</strong></label>
-        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber"
+        <input type="tel" name="addBankAccountNumber" id="addBank-accountNumber" maxlength="17"
                ng-model="bank.accountNumber" ng-pattern="/^[0-9]{4,17}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-accountRouting"><strong>Routing Number</strong></label>
-        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting"
+        <input type="tel" name="addBankAccountRouting" id="addBank-accountRouting" maxlength="9"
                ng-model="bank.routingNumber" ng-pattern="/^[0-9]{9}$/" ng-required="true">
         <div ng-show="addBankForm.addBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>

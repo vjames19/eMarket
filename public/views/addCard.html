@@ -9,7 +9,7 @@
     <form name="addCardForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <label for="addCard-ownerName"><strong>Card Owner Name</strong></label>
-        <input type="text" name="addCardOwnerName" id="addCard-ownerName"
+        <input type="text" name="addCardOwnerName" id="addCard-ownerName" maxlength="160"
                ng-model="card.ownerName" ng-pattern="/^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,160}$/" ng-required="true">
         <div ng-show="addCardForm.addCardOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
@@ -22,19 +22,19 @@
           <option value="Other">Other</option>
         </select>
         <label for="addCard-expDate"><strong>Expiration Date</strong></label>
-        <input type="month" name="addCardExpDate" id="addCard-expDate"
+        <input type="month" name="addCardExpDate" id="addCard-expDate" maxlength="7"
                ng-model="card.expirationDate" ng-pattern="/^20\d\d-(0[1-9]|1[012])$/" ng-required="true">
         <div ng-show="addCardForm.addCardExpDate.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-number"><strong>Card Number</strong></label>
-        <input type="tel" name="addCardNumber" id="addCard-number"
+        <input type="tel" name="addCardNumber" id="addCard-number" maxlength="16"
                ng-model="card.cardNumber" ng-pattern="/^[0-9]{13,16}$/" ng-required="true">
         <div ng-show="addCardForm.addCardNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addCard-cardSecurityCode"><strong>Card Security Code</strong></label>
-        <input type="tel" name="addCardCardSecurityCode" id="addCard-cardSecurityCode"
+        <input type="tel" name="addCardCardSecurityCode" id="addCard-cardSecurityCode" maxlength="4"
                ng-model="card.cardCsv" ng-pattern="/^[0-9]{3,4}$/" ng-required="true">
         <div ng-show="addCardForm.addCardCardSecurityCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
