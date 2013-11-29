@@ -71,6 +71,10 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                   console.log('removedFile');
                   tempFile = null;
                 });
+                this.on('success', function(file, newFileName){
+                  console.log('Current Picture Name ', newFileName);
+                  scope.item.picture = 'pictures/' + newFileName;
+                });
               }
             }
         );
