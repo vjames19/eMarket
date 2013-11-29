@@ -6,7 +6,10 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, $filter) {
+    controller: function($scope, $filter, Patterns) {
+
+      $scope.patternPlaceBid = Patterns.item.placeBid;
+      $scope.patternBuyItNow = Patterns.item.buyItNow;
 
       $scope.submitBid = function() {
         $.mobile.loading('show');
