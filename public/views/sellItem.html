@@ -12,17 +12,15 @@
 
   <div data-role="content" data-theme="b">
 
-    <table align="center">
-      <tr>
-        <td>
-          <button id="sellItem-addImage" ng-model="item.image"
-                  class="ui-btn ui-shadow ui-btn-a ui-icon-plus
+    <div data-role="none" style="margin: 0 auto; width: 50%">
+      <button id="sellItem-addImage" ng-model="item.image"
+              class="ui-btn ui-shadow ui-btn-a ui-icon-plus
                     ui-btn-icon-bottom ui-mini ui-btn-corner-all">
-            <strong>Add Image</strong>
-          </button>
-        </td>
-      </tr>
-    </table>
+        <strong>Add Image</strong>
+      </button>
+    </div>
+
+    <div id="sellItem-pictureContainer" data-role="none" class="dropzone-previews" style="text-align: center"></div>
 
     <form name="sellItemForm">
 
