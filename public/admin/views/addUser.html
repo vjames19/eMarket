@@ -1,142 +1,243 @@
-<div data-role="page" data-theme="a" id="add-user">
+<div data-role="page" data-theme="b" id="add-user">
 
-  <div data-role="header" data-theme="b" data-position="fixed" id="index-header">
+  <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Add User</h1>
     <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
 
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="addUserForm" data-ajax="false" ng-submit="submit()">
 
       <div data-role="collapsible-set" data-theme="b" data-content-theme="false">
 
         <div data-role="collapsible" data-collapsed="false">
           <h3>Personal Information</h3>
-
           <div class="form-pad">
             <label for="addUser-firstName">First Name</label>
-            <input type="text" id="addUser-firstName" ng-model="addUser.user.userFirstName" ng-required="true">
+            <input type="text" name="addUserFirstName" id="addUser-firstName" maxlength="45"
+                   ng-model="addUser.firstName" ng-pattern="patternFirstName" ng-required="true">
+            <div ng-show="addUserForm.addUserFirstName.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-middleName">Middle Name</label>
-            <input type="text" id="addUser-middleName" ng-model="addUser.user.userMiddleName" ng-required="false">
+            <input type="text" name="addUserMiddleName" id="addUser-middleName" maxlength="45"
+                   ng-model="addUser.middleName" ng-pattern="patternMiddleName" ng-required="false">
+            <div ng-show="addUserForm.addUserMiddleName.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-lastName">Last Name</label>
-            <input type="text" id="addUser-lastName" ng-model="addUser.user.userLastName" ng-required="true">
+            <input type="text" name="addUserLastName" id="addUser-lastName" maxlength="45"
+                   ng-model="addUser.lastName" ng-pattern="patternLastName" ng-required="true">
+            <div ng-show="addUserForm.addUserLastName.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <hr/>
             <label for="addUser-mailing"><strong>Mailing Address</strong></label>
-            <input type="hidden" id="addUser-mailing">
+            <input type="hidden" name="addUserMailing" id="addUser-mailing">
             <hr/>
             <label for="addUser-mailingAddress">Address</label>
-            <input type="text" id="addUser-mailingAddress" ng-model="addUser.mailAddress.mailAddress"
-                   ng-required="true">
+            <input type="text" name="addUserMailingAddress" id="addUser-mailingAddress" maxlength="255"
+                   ng-model="addUser.mailingAddress" ng-pattern="patternAddress" ng-required="true">
+            <div ng-show="addUserForm.addUserMailingAddress.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-mailingCountry">Country</label>
-            <input type="text" id="addUser-mailingCountry" ng-model="addUser.mailAddress.country" ng-required="true">
-            <label for="addUser-mailingGeographicalRegion">State/Providence/Region</label>
-            <input type="text" id="addUser-mailingGeographicalRegion"
-                   ng-model="addUser.mailAddress.geographicalRegion" ng-required="false">
+            <input type="text" name="addUserMailingCountry" id="addUser-mailingCountry" maxlength="45"
+                   ng-model="addUser.mailingCountry" ng-pattern="patternCountry" ng-required="true">
+            <div ng-show="addUserForm.addUserMailingCountry.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-mailingCity">City</label>
-            <input type="text" id="addUser-mailingCity" ng-model="addUser.mailAddress.city" ng-required="true">
+            <input type="text" name="addUserMailingCity" id="addUser-mailingCity" maxlength="45"
+                   ng-model="addUser.mailingCity" ng-pattern="patternCity" ng-required="true">
+            <div ng-show="addUserForm.addUserMailingCity.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
+            <label for="addUser-mailingGeographicalRegion">State/Providence/Region</label>
+            <input type="text" name="addUserMailingGeographicalRegion" id="addUser-mailingGeographicalRegion"
+                   maxlength="45"
+                   ng-model="addUser.mailingGeographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
+            <div ng-show="addUserForm.addUserMailingGeographicalRegion.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-mailingZipCode">Zip Code</label>
-            <input type="tel" id="addUser-mailingZipCode" ng-model="addUser.mailAddress.zipCode" ng-required="true">
+            <input type="tel" name="addUserMailingZipCode" id="addUser-mailingZipCode" maxlength="10"
+                   ng-model="addUser.mailingZipCode" ng-pattern="patternZipCode" ng-required="true">
+            <div ng-show="addUserForm.addUserMailingZipCode.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <hr/>
             <label for="addUser-billing"><strong>Billing Address</strong></label>
-            <input type="hidden" id="addUser-billing">
+            <input type="hidden" name="addUserBilling" id="addUser-billing">
             <hr/>
             <label for="addUser-sameAsMailing">Same as Mailing Address</label>
-            <input type="checkbox" id="addUser-sameAsMailing" name="addUser-sameAsMailing"
-                   ng-click="disableBillAddress()" ng-required="false">
+            <input type="checkbox" name="addUserSameAsMailing" id="addUser-sameAsMailing"
+                   ng-model="addUser.sameAsMailing" ng-click="disableBillAddress()" ng-required="false">
             <label for="addUser-billingAddress">Address</label>
-            <input type="text" id="addUser-billingAddress" ng-model="addUser.billAddress.billAddress"
-                   ng-required="true">
+            <input type="text" name="addUserBillingAddress" id="addUser-billingAddress" maxlength="255"
+                   ng-model="addUser.billingAddress" ng-pattern="patternAddress" ng-required="true">
+            <div ng-show="addUserForm.addUserBillingAddress.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-billingCountry">Country</label>
-            <input type="text" id="addUser-billingCountry" ng-model="addUser.billAddress.country" ng-required="true">
-            <label for="addUser-billingGeographicalRegion">State/Providence/Region</label>
-            <input type="text" id="addUser-billingGeographicalRegion"
-                   ng-model="addUser.billAddress.geographicalRegion" ng-required="false">
+            <input type="text" name="addUserBillingCountry" id="addUser-billingCountry" maxlength="45"
+                   ng-model="addUser.billingCountry" ng-pattern="patternCountry" ng-required="true">
+            <div ng-show="addUserForm.addUserBillingCountry.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-billingCity">City</label>
-            <input type="text" id="addUser-billingCity" ng-model="addUser.billAddress.city" ng-required="true">
+            <input type="text" name="addUserBillingCity" id="addUser-billingCity" maxlength="45"
+                   ng-model="addUser.billingCity" ng-pattern="patternCity" ng-required="true">
+            <div ng-show="addUserForm.addUserBillingCity.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
+            <label for="addUser-billingGeographicalRegion">State/Providence/Region</label>
+            <input type="text" name="addUserBillingGeographicalRegion" id="addUser-billingGeographicalRegion"
+                   maxlength="45"
+                   ng-model="addUser.billingGeographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
+            <div ng-show="addUserForm.addUserBillingGeographicalRegion.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-billingZipCode">Zip Code</label>
-            <input type="tel" id="addUser-billingZipCode" ng-model="addUser.billAddress.zipCode"
-                   ng-required="true">
+            <input type="tel" name="addUserBillingZipCode" id="addUser-billingZipCode" maxlength="10"
+                   ng-model="addUser.billingZipCode" ng-pattern="patternZipCode" ng-required="true">
+            <div ng-show="addUserForm.addUserBillingZipCode.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-telephone">Telephone</label>
-            <input type="tel" id="addUser-telephone" ng-model="addUser.user.telephone" ng-required="true">
+            <input type="tel" name="addUserTelephone" id="addUser-telephone" maxlength="10"
+                   ng-model="addUser.telephone" ng-pattern="patternTelephone" ng-required="true">
+            <div ng-show="addUserForm.addUserTelephone.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
           </div>
         </div>
 
         <div data-role="collapsible">
           <h3>Credit Card Information</h3>
-
           <div class="form-pad">
-            <label for="addUser-cardName">Name as Appear in Card</label>
-            <input type="text" id="addUser-cardName" ng-model="addUser.creditCard.creditCardName" ng-required="true">
+            <label for="addUser-cardName">Card Owner Full Name</label>
+            <input type="text" name="addUserCardName" id="addUser-cardName" maxlength="160"
+                   ng-model="addUser.cardName" ng-pattern="patternOwnerName" ng-required="true">
+            <div ng-show="addUserForm.addUserCardName.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-cardType">Card Type</label>
-            <select id="addUser-cardType" ng-model="addUser.creditCard.creditCardType" ng-required="true">
+            <select name="addUserCardType" id="addUser-cardType"
+                    ng-model="addUser.cardType" ng-required="true">
               <option value="Visa" selected>Visa</option>
               <option value="Master Card">Master Card</option>
               <option value="American Express">American Express</option>
               <option value="Other">Other</option>
             </select>
+            <label for="addUser-cardExpirationDate">Expiration Date</label>
+            <input type="month" name="addUserCardExpirationDate" id="addUser-cardExpirationDate" maxlength="7"
+                   ng-model="addUser.cardExpirationDate" ng-pattern="patternExpDate" ng-required="true">
+            <div ng-show="addUserForm.addUserCardExpirationDate.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-cardNumber">Card Number</label>
-            <input type="number" id="addUser-cardNumber" ng-model="addUser.creditCard.creditCardNumber"
-                   ng-required="true">
-            <label for="addUser-expDate">Expiration Date</label>
-            <input type="month" id="addUser-expDate" ng-model="addUser.creditCard.creditCardExpDate" ng-required="true">
+            <input type="tel" name="addUserCardNumber" id="addUser-cardNumber" maxlength="16"
+                   ng-model="addUser.cardNumber" ng-pattern="patternNumber" ng-required="true">
+            <div ng-show="addUserForm.addUserCardNumber.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-cardSecurityCode">Card Security Code</label>
-            <input type="number" id="addUser-cardSecurityCode" ng-model="addUser.creditCard.creditCardCvs"
-                   ng-required="true">
+            <input type="tel" name="addUserCardSecurityCode" id="addUser-cardSecurityCode" maxlength="4"
+                   ng-model="addUser.cardSecurityCode" ng-pattern="patternCsv" ng-required="true">
+            <div ng-show="addUserForm.addUserCardSecurityCode.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
           </div>
         </div>
 
         <div data-role="collapsible">
           <h3>Login Information</h3>
-
           <div class="form-pad">
             <label for="addUser-email">Email</label>
-            <input type="email" id="addUser-email" ng-model="addUser.user.userEmail" ng-required="true">
+            <input type="email" name="addUserEmail" id="addUser-email" maxlength="255"
+                   ng-model="addUser.email" ng-required="true">
+            <div ng-show="addUserForm.addUserEmail.$error.email" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-username">Username</label>
-            <input type="text" id="addUser-username" ng-model="addUser.user.username" ng-required="true">
+            <input type="text" name="addUserUsername" id="addUser-username" maxlength="16"
+                   ng-model="addUser.username" ng-pattern="patternUsername" ng-required="true">
+            <div ng-show="addUserForm.addUserUsername.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-password">Password</label>
-            <input type="password" id="addUser-password" autocomplete="off" ng-model="addUser.user.userPassword"
-                   ng-required="true">
-            <label for="addUser-passwordConfirm">Confirm Password</label>
-            <input type="password" id="addUser-passwordConfirm" autocomplete="off"
-                   ng-model="addUser.validateUser.userConfirmPassword" ng-required="true">
+            <input type="password" name="addUserPassword" id="addUser-password" autocomplete="off" maxlength="40"
+                   ng-model="addUser.password" ng-pattern="patternPassword" ng-required="true">
+            <div ng-show="addUserForm.addUserPassword.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
+            <label for="addUser-passwordConfirm">Password Confirm</label>
+            <input type="password" name="addUserPasswordConfirm" id="addUser-passwordConfirm"
+                   autocomplete="off" maxlength="40"
+                   ng-model="addUser.passwordConfirm" ng-pattern="patternPassword" ng-required="true">
+            <div ng-show="addUserForm.addUserPasswordConfirm.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-securityQuestions">Security Questions</label>
-            <input type="hidden" id="addUser-securityQuestions" ng-required="true">
+            <input type="hidden" name="addUserSecurityQuestions" id="addUser-securityQuestions">
             <label for="addUser-securityQuestion-1"></label>
-            <select id="addUser-securityQuestion-1" ng-model="question1"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question1">Select a question</option>
+            <select name="addUserSecurityQuestion1" id="addUser-securityQuestion-1"
+                    ng-model="addUser.securityQuestion1"
+                    ng-options="question.id as question.question for question in questions"
+                    ng-required="true">
+              <option value="" ng-hide="addUser.securityQuestion1">Select a question</option>
             </select>
             <label for="addUser-securityAnswer-1"></label>
-            <input type="text" id="addUser-securityAnswer-1" placeholder="Answer"
-                   ng-model="addUser.user.questions.answer1" ng-required="true">
+            <input type="text" name="addUserSecurityAnswer1" id="addUser-securityAnswer-1"
+                   placeholder="Answer" maxlength="45"
+                   ng-model="addUser.securityAnswer1" ng-pattern="patternAnswer" ng-required="true">
+            <div ng-show="addUserForm.addUserSecurityAnswer1.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-securityQuestion-2"></label>
-            <select id="addUser-securityQuestion-2" ng-model="question2"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question2">Select a question</option>
+            <select name="addUserSecurityQuestion2" id="addUser-securityQuestion-2"
+                    ng-model="addUser.securityQuestion2"
+                    ng-options="question.id as question.question for question in questions"
+                    ng-required="true">
+              <option value="" ng-hide="addUser.securityQuestion2">Select a question</option>
             </select>
             <label for="addUser-securityAnswer-2"></label>
-            <input type="text" id="addUser-securityAnswer-2" placeholder="Answer"
-                   ng-model="addUser.user.questions.answer2" ng-required="true">
+            <input type="text" name="addUserSecurityAnswer2" id="addUser-securityAnswer-2"
+                   placeholder="Answer" maxlength="45"
+                   ng-model="addUser.securityAnswer2" ng-pattern="patternAnswer" ng-required="true">
+            <div ng-show="addUserForm.addUserSecurityAnswer2.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
             <label for="addUser-securityQuestion-3"></label>
-            <select id="addUser-securityQuestion-3" ng-model="question3"
-                    ng-options="question.id as question.question for question in questions" ng-required="true">
-              <option value="" ng-hide="question3">Select a question</option>
+            <select name="addUserSecurityQuestion3" id="addUser-securityQuestion-3"
+                    ng-model="addUser.securityQuestion3"
+                    ng-options="question.id as question.question for question in questions"
+                    ng-required="true">
+              <option value="" ng-hide="addUser.securityQuestion3">Select a question</option>
             </select>
             <label for="addUser-securityAnswer-3"></label>
-            <input type="text" id="addUser-securityAnswer-3" placeholder="Answer"
-                   ng-model="addUser.user.questions.answer3" ng-required="true">
+            <input type="text" name="addUserSecurityAnswer3" id="addUser-securityAnswer-3"
+                   placeholder="Answer" maxlength="45"
+                   ng-model="addUser.securityAnswer3" ng-pattern="patternAnswer" ng-required="true">
+            <div ng-show="addUserForm.addUserSecurityAnswer3.$error.pattern" class="labelError">
+              <strong><em>Wrong Format.</em></strong>
+            </div>
           </div>
         </div>
 
       </div>
+
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-        <a href="#user-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <a href="#user-accounts" data-role="button" data-icon="back">Cancel</a>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addUserForm.$valid]">Submit</button>
       </div>
+
     </form>
+
   </div>
 
-  <div data-role="footer" data-theme="b"><h1></h1></div>
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>

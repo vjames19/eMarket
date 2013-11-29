@@ -6,7 +6,13 @@ angular.module('eMarketApp').directive('editUser', function(UserInfo) {
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular) {
+    controller: function($scope, Restangular, Patterns) {
+
+      $scope.patternFirstName = Patterns.user.firstName;
+      $scope.patternMiddleName = Patterns.user.middleName;
+      $scope.patternLastName = Patterns.user.lastName;
+      $scope.patternTelephone = Patterns.address.telephone;
+      $scope.patternPassword = Patterns.user.password;
 
       $scope.submit = function() {
         $.mobile.loading('show');

@@ -11,6 +11,8 @@
 
   <link rel="stylesheet" type="text/css" href="css/index.css">
 
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.css">
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
@@ -40,17 +42,26 @@
     <h1>Administrator</h1>
   </div>
 
-  <div data-role="content">
-    <form data-ajax="false" ng-submit="logIn()">
+  <div data-role="content" data-theme="a">
+    <form name="indexForm" ng-submit="logIn()" data-ajax="false">
       <div class="form-pad">
         <h3>Admin, Please Sign In</h3>
         <label for="index-username" class="ui-hidden-accessible">Username:</label>
-        <input name="username" id="index-username" value="" placeholder="username" data-theme="b" type="text"
-               ng-model="username">
+        <input type="text" name="indexUsername" id="index-username"
+               placeholder="username" maxlength="16" data-theme="b"
+               ng-model="username" ng-pattern="patternUsername" ng-required="false">
+        <div ng-show="indexForm.indexUsername.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="index-password" class="ui-hidden-accessible">Password:</label>
-        <input name="password" id="index-password" value="" placeholder="password" autocomplete="off" data-theme="b"
-               type="password" ng-model="password">
-        <button type="submit" data-theme="b" data-icon="check">Sign in</button>
+        <input type="password" name="indexPassword" id="index-password" autocomplete="off"
+               placeholder="password" maxlength="40" data-theme="b"
+               ng-model="password" ng-pattern="patternPassword" ng-required="false">
+        <div ng-show="indexForm.indexPassword.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <hr/>
+        <button type="submit" data-icon="check" data-theme="b" ng-class="">Sign in</button>
       </div>
     </form>
   </div>
@@ -60,7 +71,7 @@
   </div>
 
   <div data-role="footer" data-theme="b">
-  <h1>
+    <h1>
       <a href="/" data-ajax="false" data-rel="external">User</a>
     </h1>
   </div>
@@ -96,6 +107,7 @@
 <script src="js/services/category.js"></script>
 <script src="js/services/categoryInfo.js"></script>
 <script src="js/services/helper.js"></script>
+<script src="js/services/patterns.js"></script>
 <script src="js/services/report.js"></script>
 <script src="js/services/userInfo.js"></script>
 

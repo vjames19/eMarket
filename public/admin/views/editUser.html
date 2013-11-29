@@ -5,33 +5,61 @@
     <a href="#user-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
 
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editUserForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <strong>UserName:</strong>
         <em>{{userInfo.username}}</em>
         <hr/>
         <label for="editUser-firstName"><strong>First Name</strong></label>
-        <input type="text" id="editUser-firstName" data-theme="b" ng-model="userInfo.firstName" ng-required="true">
+        <input type="text" name="editUserFirstName" id="editUser-firstName" maxlength="45" data-theme="b"
+               ng-model="userInfo.firstName" ng-pattern="patternFirstName" ng-required="true">
+        <div ng-show="editUserForm.editUserFirstName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-middleName"><strong>Middle Name</strong></label>
-        <input type="text" id="editUser-middleName" data-theme="b" ng-model="userInfo.middleName" ng-required="false">
+        <input type="text" name="editUserMiddleName" id="editUser-middleName" maxlength="45" data-theme="b"
+               ng-model="userInfo.middleName" ng-pattern="patternMiddleName" ng-required="false">
+        <div ng-show="editUserForm.editUserMiddleName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-lastName"><strong>Last Name</strong></label>
-        <input type="text" id="editUser-lastName" data-theme="b" ng-model="userInfo.lastName" ng-required="true">
+        <input type="text" name="editUserLastName" id="editUser-lastName" maxlength="45" data-theme="b"
+               ng-model="userInfo.lastName" ng-pattern="patternLastName" ng-required="true">
+        <div ng-show="editUserForm.editUserLastName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="editUser-telephone" data-theme="b" ng-model="userInfo.telephone" ng-required="true">
+        <input type="tel" name="editUserTelephone" id="editUser-telephone" maxlength="10" data-theme="b"
+               ng-model="userInfo.telephone" ng-pattern="patternTelephone" ng-required="true">
+        <div ng-show="editUserForm.editUserTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-email"><strong>Email</strong></label>
-        <input type="email" id="editUser-email" data-theme="b" ng-model="userInfo.email" ng-required="true">
+        <input type="email" name="editUserEmail" id="editUser-email" maxlength="255" data-theme="b"
+               ng-model="userInfo.email" ng-required="true">
+        <div ng-show="editUserForm.editUserEmail.$error.email" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-newPassword"><strong>New Password</strong></label>
-        <input type="password" id="editUser-newPassword" autocomplete="off" data-theme="b"
-               ng-model="editUser.userPassword" ng-required="false">
+        <input type="password" name="editUserNewPassword" id="editUser-newPassword"
+               autocomplete="off" maxlength="40" data-theme="b"
+               ng-model="editUser.userPassword" ng-pattern="patternPassword" ng-required="false">
+        <div ng-show="editUserForm.editUserNewPassword.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editUser-newPasswordConfirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="editUser-newPasswordConfirm" autocomplete="off" data-theme="b"
-               ng-model="editUser.userConfirmPassword" ng-required="false">
+        <input type="password" name="editUserNewPasswordConfirm" id="editUser-newPasswordConfirm"
+               autocomplete="off" maxlength="40" data-theme="b"
+               ng-model="editUser.userConfirmPassword" ng-pattern="patternPassword" ng-required="false">
+        <div ng-show="editUserForm.editUserNewPasswordConfirm.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#user-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editUserForm.$valid]">Submit</button>
       </div>
     </form>
 

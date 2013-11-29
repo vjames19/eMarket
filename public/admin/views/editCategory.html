@@ -5,22 +5,28 @@
     <a href="#categories-admin" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
 
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editCategoryForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
-        <label for="editCategory-name">Category Name</label>
-        <input type="text" id="editCategory-name" data-theme="b" ng-model="categoryInfo.categoryName"
-               ng-required="true">
-        <label for="editCategory-parent">Category Parent</label>
-        <select id="editCategory-parent" data-theme="b" ng-model="categoryInfo.categoryParent"
-                ng-options="category.id as category.categoryName for category in categories" ng-required="false">
+        <label for="editCategory-name"><strong>Category Name</strong></label>
+        <input type="text" name="editCategoryName" id="editCategory-name" maxlength="45" data-theme="b"
+               ng-model="categoryInfo.categoryName" ng-pattern="patternCategoryName" ng-required="true">
+        <div ng-show="editCategoryForm.editCategoryName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editCategory-parent"><strong>Category Parent</strong></label>
+        <select name="editCategoryParent" id="editCategory-parent" data-theme="b"
+                ng-model="categoryInfo.categoryParent"
+                ng-options="category.id as category.categoryName for category in categories"
+                ng-required="false">
           <option value="">None</option>
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#categories-admin" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editCategoryForm.$valid]">Submit
+        </button>
       </div>
     </form>
 

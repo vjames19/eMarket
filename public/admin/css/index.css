@@ -9,6 +9,15 @@
     margin-right: auto;
 }
 
+/* Error Message Styles */
+
+.labelError {
+    display: inline-block;
+    font: 12px Tahoma, sans-serif;
+    color: #ED7476;
+    margin: 10px 0;
+}
+
 /* Image Manipulation */
 
 /* Only Works on Chrome, currently not in use. */
@@ -84,7 +93,15 @@ img.item-photo-small {
 
 /* Font Manipulation*/
 
-.medium-text{
+.homeFont {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.big-text {
+    font-size: 85%;
+}
+
+.medium-text {
     font-size: 80%;
 }
 

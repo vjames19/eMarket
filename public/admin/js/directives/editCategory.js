@@ -6,7 +6,9 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular) {
+    controller: function($scope, Restangular, Patterns) {
+
+      $scope.patternCategoryName = Patterns.category.name;
 
       $scope.submit = function() {
         $.mobile.loading('show');

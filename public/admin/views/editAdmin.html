@@ -5,36 +5,65 @@
     <a href="#admin-accounts" data-role="button" data-icon="back" data-direction="reverse">Back</a>
   </div>
 
-  <div data-role="content">
+  <div data-role="content" data-theme="a">
 
-    <form data-ajax="false" ng-submit="submit()">
+    <form name="editAdminForm" data-ajax="false" ng-submit="submit()">
       <div class="form-pad">
         <strong>UserName:</strong>
         <em>{{adminInfo.username}}</em>
         <hr/>
         <label for="editAdmin-firstName"><strong>First Name</strong></label>
-        <input type="text" id="editAdmin-firstName" data-theme="b" ng-model="adminInfo.firstName" ng-required="true">
+        <input type="text" name="editAdminFirstName" id="editAdmin-firstName" maxlength="45" data-theme="b"
+               ng-model="adminInfo.firstName" ng-pattern="patternFirstName" ng-required="true">
+        <div ng-show="editAdminForm.editAdminFirstName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-middleName"><strong>Middle Name</strong></label>
-        <input type="text" id="editAdmin-middleName" data-theme="b" ng-model="adminInfo.middleName" ng-required="false">
+        <input type="text" name="editAdminMiddleName" id="editAdmin-middleName" maxlength="45" data-theme="b"
+               ng-model="adminInfo.middleName" ng-pattern="patternMiddleName" ng-required="false">
+        <div ng-show="editAdminForm.editAdminMiddleName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-lastName"><strong>Last Name</strong></label>
-        <input type="text" id="editAdmin-lastName" data-theme="b" ng-model="adminInfo.lastName" ng-required="true">
+        <input type="text" name="editAdminLastName" id="editAdmin-lastName" maxlength="45" data-theme="b"
+               ng-model="adminInfo.lastName" ng-pattern="patternLastName" ng-required="true">
+        <div ng-show="editAdminForm.editAdminLastName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-telephone"><strong>Telephone</strong></label>
-        <input type="tel" id="editAdmin-telephone" data-theme="b" ng-model="adminInfo.telephone" ng-required="true">
+        <input type="tel" name="editAdminTelephone" id="editAdmin-telephone" maxlength="10" data-theme="b"
+               ng-model="adminInfo.telephone" ng-pattern="patternTelephone" ng-required="true">
+        <div ng-show="editAdminForm.editAdminTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-email"><strong>Email</strong></label>
-        <input type="email" id="editAdmin-email" data-theme="b" ng-model="adminInfo.email" ng-required="true">
+        <input type="email" name="editAdminEmail" id="editAdmin-email" maxlength="255" data-theme="b"
+               ng-model="adminInfo.email" ng-required="true">
+        <div ng-show="editAdminForm.editAdminEmail.$error.email" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-newPassword"><strong>New Password</strong></label>
-        <input type="password" id="editAdmin-newPassword" autocomplete="off" data-theme="b"
-               ng-model="editAdmin.adminPassword" ng-required="false">
+        <input type="password" name="editAdminNewPassword" id="editAdmin-newPassword"
+               autocomplete="off" maxlength="40" data-theme="b"
+               ng-model="editAdmin.adminPassword" ng-pattern="patternPassword" ng-required="false">
+        <div ng-show="editAdminForm.editAdminNewPassword.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
         <label for="editAdmin-newPasswordConfirm"><strong>Confirm Password</strong></label>
-        <input type="password" id="editAdmin-newPasswordConfirm" autocomplete="off" data-theme="b"
-               ng-model="editAdmin.adminConfirmPassword" ng-required="false">
-        <label for="editAdmin-makeRoot"><strong>Make Root</strong></label>
-        <input id="editAdmin-makeRoot" data-mini="true" type="checkbox" name="editAdmin-makeRoot"
-               data-theme="b" ng-model="adminInfo.isRoot" ng-required="false">
+        <input type="password" name="editAdminNewPasswordConfirm" id="editAdmin-newPasswordConfirm"
+               autocomplete="off" maxlength="40" data-theme="b"
+               ng-model="editAdmin.adminConfirmPassword" ng-pattern="patternPassword" ng-required="false">
+        <div ng-show="editAdminForm.editAdminNewPasswordConfirm.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <hr/>
+        <label for="editAdmin-makeRoot">Make Root</label>
+        <input type="checkbox" name="editAdminMakeRoot" id="editAdmin-makeRoot" data-mini="true" data-theme="b"
+               ng-model="adminInfo.isRoot" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#admin-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
-        <button type="submit" data-icon="check">Submit</button>
+        <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editAdminForm.$valid]">Submit</button>
       </div>
     </form>
 
