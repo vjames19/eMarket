@@ -9,9 +9,8 @@
 ## Prerequisites
 
 * Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm.
-* Bower - [bower](https://github.com/bower/bower)
 * Grunt - [grunt-cli](http://gruntjs.com/getting-started)
-* Make sure you install bower, grunt-cli and globally using `npm install -g bower grunt-cli`.
+* Make sure you install grunt-cli globally using `npm install -g grunt-cli`.
 
 ## Quick Install
 
@@ -22,7 +21,6 @@
     git clone https://github.com/vjames19/eMarket.git
     cd eMarket
     npm install
-    bower install
     grunt
 
   We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:
