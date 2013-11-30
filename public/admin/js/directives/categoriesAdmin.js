@@ -19,6 +19,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
       var categoryAdminList = page.find('#categories-categoryAdminList');
       var noMore = page.find('#category-noMoreCategories');
 
+      var optionMenu = page.find('#categories-categoryOptionMenu');
+      var statusPopup = page.find('#categories-statusPopup');
+      var statusPopupMessage = page.find('#categories-statusPopupMessage');
+
       var upButton = page.find('#categories-upBtn');
       var stack = [];
 
@@ -65,19 +69,42 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
 
       scope.deleteCategory = function() {
         $.mobile.loading('show');
-        if(selectedCategory.categoryName.toLowerCase() !== 'other') { // Special Category
-          Restangular.one('categories', selectedCategory.id).remove().then(function() {
-            scope.categories.splice(selectedIndex, 1);
-            Helper.refreshList(categoryAdminList);
-            $.mobile.loading('hide');
-          }, function(err) {
-            $.mobile.loading('hide');
-            alert('Could not delete category');
-            console.log('Error Removing Category', err);
-          });
-        } else {
+        if(selectedCategory.categoryName.toLowerCase() === 'other') { // Special Category
           $.mobile.loading('hide');
+          optionMenu.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Category \'other\' cannot be deleted.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          return;
         }
+        Restangular.one('categories', selectedCategory.id).remove().then(function() {
+          scope.categories.splice(selectedIndex, 1);
+          Helper.refreshList(categoryAdminList);
+          $.mobile.loading('hide');
+          optionMenu.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Category deleted successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          optionMenu.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Category not deleted successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          console.log('Error Removing Category', err);
+        });
       };
 
     }

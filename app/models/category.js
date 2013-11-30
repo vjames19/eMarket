@@ -20,24 +20,24 @@ var SCHEMA = {
       'required': true
     },
     'categoryParent': {
-      'type': 'integer',
-      'minimum': 1,
-      'required': true
-    },
-    'categoryStatus': {
-      'type': 'integer',
-      'minimum': 0,
-      'maximum': 1,
-      'required': true
-    },
-    'id': {
-      'type': 'integer',
-      'required': true
-    }
+      'type': 'any',
+      'required': false
+    }//,
+//    'categoryStatus': {
+//      'type': 'integer',
+//      'minimum': 0,
+//      'maximum': 1,
+//      'required': true
+//    },
+//    'id': {
+//      'type': 'integer',
+//      'required': true
+//    }
   }
 };
 
 module.exports.validate = function(object) {
+  console.log(object);
   return validate(object, SCHEMA).errors;
 };
 
@@ -50,52 +50,65 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * from category_info WHERE category_status = true';
-    connection.query(sql, function(err, categories) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(categories, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT * from category_info WHERE category_status = true';
+      connection.query(sql, function(err, categories) {
+        if(err) {
+          callback(err);
+        } else {
+          callback(null, mapper.mapCollection(categories, DICTIONARY));
+        }
+      });
+    }
   });
 };
 
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM category_info WHERE category_status = true AND category_id = ?';
-    connection.query(sql, [id], function(err, categories) {
-      callback(err, mapper.map(categories[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT * FROM category_info WHERE category_status = true AND category_id = ?';
+      connection.query(sql, [id], function(err, categories) {
+        callback(err, mapper.map(categories[0], DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.create = function(category, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'INSERT INTO category_info (category_name, category_parent_id) VALUES (?, ?)';
-    connection.query(sql, [category.categoryName, category.categoryParent], function(err, insertStatus) {
-      if(err) {
-        callback(err);
-      } else {
-        category.id = insertStatus.insertId;
-        callback(null, category);
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'INSERT INTO category_info (category_name, category_parent_id) VALUES (?, ?)';
+      connection.query(sql, [category.categoryName, category.categoryParent], function(err, insertStatus) {
+        if(err) {
+          callback(err);
+        } else {
+          category.id = insertStatus.insertId;
+          callback(null, category);
+        }
+      });
+    }
   });
 };
 
 module.exports.update = function(category, callback) {
-//  category = _.pick(category, WHITELIST);
   executor.execute(function(err, connection) {
-    // TODO: Verify parent id; <-- This Still needs to be done?
-    var sql = 'UPDATE category_info ' +
-        'SET category_name = ?, category_parent_id = ?, category_status = ? ' +
-        'WHERE category_id = ?';
-    var params = [category.categoryName, category.categoryParent, category.categoryStatus, category.id];
-    console.log(params);
-    connection.query(sql, params, function(err) {
-      callback(err, category);
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'UPDATE category_info ' +
+          'SET category_name = ?, category_parent_id = ?, category_status = ? ' +
+          'WHERE category_id = ?';
+      var params = [category.categoryName, category.categoryParent, category.categoryStatus, category.id];
+      connection.query(sql, params, function(err) {
+        callback(err, category);
+      });
+    }
   });
 };
 
@@ -321,11 +334,15 @@ module.exports.remove = function(id, callback) {
 
 var getAllChildrenIds = function(categoryParentId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT category_id FROM category_info ' +
-        'WHERE category_status = 1 AND category_parent_id = ?';
-    connection.query(sql, [categoryParentId], function(err, categories) {
-      callback(err, mapper.mapCollection(categories, DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT category_id FROM category_info ' +
+          'WHERE category_status = 1 AND category_parent_id = ?';
+      connection.query(sql, [categoryParentId], function(err, categories) {
+        callback(err, mapper.mapCollection(categories, DICTIONARY));
+      });
+    }
   });
 };
 

@@ -40,10 +40,16 @@
     </div>
   </div>
 
-  <div data-role="popup" id="category-noMoreCategories" data-theme="a" style="max-width:280px" class="ui-content">
-    <a href="#categories-admin" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
+  <div data-role="popup" id="category-noMoreCategories" data-theme="b" style="max-width:280px" class="ui-content">
+    <a href="#categories-admin" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
        data-iconpos="notext" data-mini="true" class="ui-btn-right">Close</a>
     <h3>No More Subcategories</h3>
+  </div>
+
+  <div data-role="popup" id="categories-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#categories-admin" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="categories-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="b"><h1></h1></div>

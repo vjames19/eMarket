@@ -6,29 +6,46 @@ angular.module('eMarketApp').directive('addCategory', function(Restangular, Help
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular, Patterns) {
+    controller: function($scope, $element, Restangular, Patterns) {
 
       $scope.patternCategoryName = Patterns.category.name;
+
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#addCategory-statusPopup');
+      var statusPopupMessage = page.find('#addCategory-statusPopupMessage');
 
       $scope.submit = function() {
         $.mobile.loading('show');
         if(!$scope.addCategory.categoryParent) {
           $scope.addCategory.categoryParent = null;
         }
-        if($scope.addCategory.categoryName.toLowerCase() !== 'other') {  // Special Category
-          Restangular.all('categories').post($scope.addCategory).then(function() {
-            $.mobile.loading('hide');
-            $.mobile.changePage('#categories-admin');
-          }, function(err) {
-            $.mobile.loading('hide');
-            alert('Create Not Successful.');
-            console.log('Create Category failed: ', err);
-            $.mobile.changePage('#categories-admin');
-          });
-        } else {
+        if($scope.addCategory.categoryName.toLowerCase() === 'other') { // Special Category
           $.mobile.loading('hide');
-          $.mobile.changePage('#categories-admin');
+          statusPopupMessage.text('Category name cannot be \'other\'.');
+          statusPopup.popup('open');
+          return;
         }
+        Restangular.all('categories').post($scope.addCategory).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Category Added Successfully.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#categories-admin');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Category not Added Successfully.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#categories-admin');
+            }
+          });
+          console.log('Create Category failed: ', err);
+        });
       };
 
     },
