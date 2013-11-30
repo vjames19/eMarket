@@ -23,52 +23,59 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(timeFrame, callback) {
   executor.execute(function(err, connection) {
-    if(!_.contains(timeFrames, timeFrame)) {
+    if(err) {
       callback(err);
-    }
-    var sql = 'SELECT * ' +
-        'FROM report_' + timeFrame;
-    connection.query(sql, function(err, reports) {
-      if(err) {
+    } else {
+      if(!_.contains(timeFrames, timeFrame)) {
         callback(err);
       } else {
-        callback(null, mapper.mapCollection(reports, DICTIONARY));
+        var sql = 'SELECT * ' +
+            'FROM report_' + timeFrame;
+        connection.query(sql, function(err, reports) {
+          callback(err, mapper.mapCollection(reports, DICTIONARY));
+        });
       }
-    });
+    }
   });
 };
 
 module.exports.get = function(id, timeFrame, callback) {
   executor.execute(function(err, connection) {
-    if(!_.contains(timeFrames, timeFrame)) {
+    if(err) {
       callback(err);
+    } else {
+      if(!_.contains(timeFrames, timeFrame)) {
+        callback(err);
+      } else {
+        var sql = 'SELECT * ' +
+            'FROM report_' + timeFrame + ' ' +
+            'WHERE category_id = ?';
+        connection.query(sql, [id], function(err, report) {
+          callback(err, mapper.map(report[0], DICTIONARY));
+        });
+      }
     }
-    var sql = 'SELECT * ' +
-        'FROM report_' + timeFrame + ' ' +
-        'WHERE category_id = ?';
-    connection.query(sql, [id], function(err, report) {
-      callback(err, mapper.map(report[0], DICTIONARY));
-    });
   });
 };
 
 module.exports.getTotal = function(timeFrame, callback) {
   executor.execute(function(err, connection) {
-    if(!_.contains(timeFrames, timeFrame)) {
+    if(err) {
       callback(err);
-    }
-    var sql = 'SELECT NULL as category_id, NULL as category_name, ' +
-        'SUM(category_sales) as category_sales, ' +
-        'SUM(category_profit) as category_profit, ' +
-        'SUM(category_revenue) as category_revenue ' +
-        'FROM report_' + timeFrame;
-    connection.query(sql, function(err, report) {
-      if(err) {
+    } else {
+      if(!_.contains(timeFrames, timeFrame)) {
         callback(err);
       } else {
-        callback(null, mapper.map(report[0], DICTIONARY));
+        var sql = 'SELECT NULL as category_id, NULL as category_name, ' +
+            'SUM(category_sales) as category_sales, ' +
+            'SUM(category_profit) as category_profit, ' +
+            'SUM(category_revenue) as category_revenue ' +
+            'FROM report_' + timeFrame;
+        connection.query(sql, function(err, report) {
+          callback(err, mapper.map(report[0], DICTIONARY));
+        });
       }
-    });
+    }
   });
 
 };

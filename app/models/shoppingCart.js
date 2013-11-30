@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -37,31 +37,34 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT cart_id, cart_item_quantity, ' +
-        'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
-        'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
-        'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
-        'WHERE cart_user_id = ?';
-    connection.query(sql, [userId], function(err, shoppingCarts) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(shoppingCarts, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT cart_id, cart_item_quantity, ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
+          'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
+          'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
+          'WHERE cart_user_id = ?';
+      connection.query(sql, [userId], function(err, shoppingCarts) {
+        callback(err, mapper.mapCollection(shoppingCarts, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, cartId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT cart_id, cart_item_quantity, ' +
-        'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
-        'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
-        'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
-        'WHERE cart_user_id = ? AND cart_id = ?';
-    connection.query(sql, [userId, cartId], function(err, shoppingCart) {
-      callback(err, mapper.map(shoppingCart[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT cart_id, cart_item_quantity, ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
+          'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
+          'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
+          'WHERE cart_user_id = ? AND cart_id = ?';
+      connection.query(sql, [userId, cartId], function(err, shoppingCart) {
+        callback(err, mapper.map(shoppingCart[0], DICTIONARY));
+      });
+    }
   });
 };
-

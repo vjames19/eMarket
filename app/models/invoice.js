@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -42,50 +42,53 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT invoice_id, SUM(invoice_item_sold_price) AS total, invoice_creation_date ' +
-              'FROM invoice_history INNER JOIN user_info INNER JOIN invoice_item_history ' +
-              'ON (invoice_history.invoice_user_id=user_info.user_id AND invoice_id=invoice_item_id) ' +
-              'WHERE invoice_user_id = ? ' +
-              'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
-              'ORDER BY invoice_creation_date DESC';
-    connection.query(sql, [userId], function(err, invoices) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(invoices, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT invoice_id, SUM(invoice_item_sold_price) AS total, invoice_creation_date ' +
+          'FROM invoice_history INNER JOIN user_info INNER JOIN invoice_item_history ' +
+          'ON (invoice_history.invoice_user_id=user_info.user_id AND invoice_id=invoice_item_id) ' +
+          'WHERE invoice_user_id = ? ' +
+          'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
+          'ORDER BY invoice_creation_date DESC';
+      connection.query(sql, [userId], function(err, invoices) {
+        callback(err, mapper.mapCollection(invoices, DICTIONARY));
+      });
+    }
   });
-
 };
 
 module.exports.get = function(userId, invoiceId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT invoice_id, SUM(invoice_item_sold_price) AS total, invoice_creation_date ' +
-              'FROM invoice_history INNER JOIN user_info INNER JOIN invoice_item_history ' +
-              'ON (invoice_history.invoice_user_id=user_info.user_id AND invoice_id=invoice_item_id) ' +
-              'WHERE invoice_user_id = ? AND invoice_id = ?' +
-              'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
-              'ORDER BY invoice_creation_date DESC';
-    connection.query(sql, [userId, invoiceId], function(err, invoices) {
-      callback(err, mapper.map(invoices[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT invoice_id, SUM(invoice_item_sold_price) AS total, invoice_creation_date ' +
+          'FROM invoice_history INNER JOIN user_info INNER JOIN invoice_item_history ' +
+          'ON (invoice_history.invoice_user_id=user_info.user_id AND invoice_id=invoice_item_id) ' +
+          'WHERE invoice_user_id = ? AND invoice_id = ?' +
+          'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
+          'ORDER BY invoice_creation_date DESC';
+      connection.query(sql, [userId, invoiceId], function(err, invoices) {
+        callback(err, mapper.map(invoices[0], DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.getProducts = function(userId, invoiceId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.*, invoice_item_quantity ' +
-              'FROM invoice_history INNER JOIN active_users INNER JOIN invoice_item_history INNER JOIN products ' +
-              'ON (invoice_history.invoice_user_id=user_id AND invoice_id=invoice_item_invoice_id ' +
-              'AND products.product_id=invoice_item_product_id) ' +
-              'WHERE user_id = ? AND invoice_history.invoice_id = ?';
-    connection.query(sql, [userId, invoiceId], function(err, products) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, PRODUCT_DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.*, invoice_item_quantity ' +
+          'FROM invoice_history INNER JOIN active_users INNER JOIN invoice_item_history INNER JOIN products ' +
+          'ON (invoice_history.invoice_user_id=user_id AND invoice_id=invoice_item_invoice_id ' +
+          'AND products.product_id=invoice_item_product_id) ' +
+          'WHERE user_id = ? AND invoice_history.invoice_id = ?';
+      connection.query(sql, [userId, invoiceId], function(err, products) {
+        callback(err, mapper.mapCollection(products, PRODUCT_DICTIONARY));
+      });
+    }
   });
 };

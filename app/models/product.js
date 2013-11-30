@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 var Category = require('./category.js');
 
@@ -36,61 +36,68 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM products';
-    connection.query(sql, function(err, products) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT * FROM products';
+      connection.query(sql, function(err, products) {
+        callback(err, mapper.mapCollection(products, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM products ' +
-        'WHERE product_id = ?';
-    connection.query(sql, [id], function(err, products) {
-      callback(err, mapper.map(products[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT * FROM products ' +
+          'WHERE product_id = ?';
+      connection.query(sql, [id], function(err, products) {
+        callback(err, mapper.map(products[0], DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.search = function(query, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT * FROM products ' +
-        'WHERE category_id=? ' +
-        'OR product_spec_name LIKE ? ' +
-        'OR product_spec_brand LIKE ? ' +
-        'OR product_spec_model LIKE ?';
-    var categoryId = query;
-    query = '%' + query + '%';
-    connection.query(sql, [categoryId, query, query, query], function(err, products) {
-      console.log('model search', categoryId, query, arguments);
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT * FROM products ' +
+          'WHERE category_id=? ' +
+          'OR product_spec_name LIKE ? ' +
+          'OR product_spec_brand LIKE ? ' +
+          'OR product_spec_model LIKE ?';
+      var categoryId = query;
+      query = '%' + query + '%';
+      connection.query(sql, [categoryId, query, query, query], function(err, products) {
+        console.log('model search', categoryId, query, arguments);
+        callback(err, mapper.mapCollection(products, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.searchByCategory = function(parentCategoryId, callback) {
   Category.getAllSubTreeIds(parentCategoryId, function(err, categoryIds) {
-    executor.execute(function(err, connection) {
-      categoryIds.push(parentCategoryId);
-      var sql = 'SELECT * FROM products ' +
-          'WHERE category_id IN (?)';
-      connection.query(sql, [categoryIds], function(err, products) {
+    if(err) {
+      callback(err);
+    } else {
+      executor.execute(function(err, connection) {
         if(err) {
           callback(err);
         } else {
-          callback(null, mapper.mapCollection(products, DICTIONARY));
+          categoryIds.push(parentCategoryId);
+          var sql = 'SELECT * FROM products ' +
+              'WHERE category_id IN (?)';
+          connection.query(sql, [categoryIds], function(err, products) {
+            callback(err, mapper.mapCollection(products, DICTIONARY));
+          });
         }
       });
-    });
+    }
   });
 };
-

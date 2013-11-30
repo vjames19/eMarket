@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -35,33 +35,34 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT product_drafts.*, product_specification.* ' +
-              'FROM product_drafts INNER JOIN product_specification ' +
-              'ON (product_drafts.product_draft_spec_id = product_specification.product_spec_id) ' +
-              'WHERE product_draft_user_id = ? ' +
-              'ORDER BY product_draft_creation_date DESC';
-    connection.query(sql, [userId], function(err, drafts) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(drafts, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT product_drafts.*, product_specification.* ' +
+          'FROM product_drafts INNER JOIN product_specification ' +
+          'ON (product_drafts.product_draft_spec_id = product_specification.product_spec_id) ' +
+          'WHERE product_draft_user_id = ? ' +
+          'ORDER BY product_draft_creation_date DESC';
+      connection.query(sql, [userId], function(err, drafts) {
+        callback(err, mapper.mapCollection(drafts, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, draftId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT product_drafts.*, product_specification.* ' +
-              'FROM product_drafts INNER JOIN product_specification ' +
-              'ON (product_drafts.product_draft_spec_id = product_specification.product_spec_id) ' +
-              'WHERE product_draft_user_id = ? AND product_draft_id = ?' +
-              'ORDER BY product_draft_creation_date DESC';
-    connection.query(sql, [userId, draftId], function(err, draft) {
-      callback(err, mapper.map(draft[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT product_drafts.*, product_specification.* ' +
+          'FROM product_drafts INNER JOIN product_specification ' +
+          'ON (product_drafts.product_draft_spec_id = product_specification.product_spec_id) ' +
+          'WHERE product_draft_user_id = ? AND product_draft_id = ?' +
+          'ORDER BY product_draft_creation_date DESC';
+      connection.query(sql, [userId, draftId], function(err, draft) {
+        callback(err, mapper.map(draft[0], DICTIONARY));
+      });
+    }
   });
 };
-
-
-

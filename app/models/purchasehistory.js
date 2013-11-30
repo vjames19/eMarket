@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -23,7 +23,7 @@ var DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
-  'invoice_creation_date' : 'purchaseDate'
+  'invoice_creation_date': 'purchaseDate'
 };
 
 //var WHITELIST = [];
@@ -36,36 +36,38 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.*, invoice_history.invoice_creation_date ' +
-        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
-        'ON (user_id=invoice_user_id ' +
-        'AND invoice_item_invoice_id=invoice_id ' +
-        'AND invoice_item_product_id=product_id) ' +
-        'WHERE user_id=? ' +
-        'ORDER BY invoice_creation_date DESC';
-    connection.query(sql, [userId], function(err, products) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.*, invoice_history.invoice_creation_date ' +
+          'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
+          'ON (user_id=invoice_user_id ' +
+          'AND invoice_item_invoice_id=invoice_id ' +
+          'AND invoice_item_product_id=product_id) ' +
+          'WHERE user_id=? ' +
+          'ORDER BY invoice_creation_date DESC';
+      connection.query(sql, [userId], function(err, products) {
+        callback(err, mapper.mapCollection(products, DICTIONARY));
+      });
+    }
   });
-
 };
 
 module.exports.get = function(userId, invoiceItemId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-        'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
-        'ON (user_id=invoice_user_id ' +
-        'AND invoice_item_invoice_id=invoice_id ' +
-        'AND invoice_item_product_id=product_id) ' +
-        'WHERE user_id=? AND invoice_item_id=? ' +
-        'ORDER BY invoice_creation_date DESC';
-
-    connection.query(sql, [userId, invoiceItemId], function(err, products) {
-      callback(err, mapper.map(products[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM user_info INNER JOIN invoice_history INNER JOIN invoice_item_history INNER JOIN products ' +
+          'ON (user_id=invoice_user_id ' +
+          'AND invoice_item_invoice_id=invoice_id ' +
+          'AND invoice_item_product_id=product_id) ' +
+          'WHERE user_id=? AND invoice_item_id=? ' +
+          'ORDER BY invoice_creation_date DESC';
+      connection.query(sql, [userId, invoiceItemId], function(err, products) {
+        callback(err, mapper.map(products[0], DICTIONARY));
+      });
+    }
   });
 };

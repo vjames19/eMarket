@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -35,32 +35,36 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-              'FROM recently_viewed_items INNER JOIN user_info INNER JOIN products ' +
-              'ON (user_id = recently_viewed_user_id AND product_id = recently_viewed_product_id) ' +
-              'WHERE user_id = ? ' +
-              'ORDER BY recently_viewed_date DESC ' +
-              'LIMIT 0, 10';
-    connection.query(sql, [userId], function(err, products) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM recently_viewed_items INNER JOIN user_info INNER JOIN products ' +
+          'ON (user_id = recently_viewed_user_id AND product_id = recently_viewed_product_id) ' +
+          'WHERE user_id = ? ' +
+          'ORDER BY recently_viewed_date DESC ' +
+          'LIMIT 0, 10';
+      connection.query(sql, [userId], function(err, products) {
+        callback(err, mapper.mapCollection(products, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, recentlyViewedId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-              'FROM recently_viewed_items INNER JOIN user_info INNER JOIN products ' +
-              'ON (user_id = recently_viewed_user_id AND product_id = recently_viewed_product_id) ' +
-              'WHERE user_id = ? AND recently_viewed_id = ?' +
-              'ORDER BY recently_viewed_date DESC ' +
-              'LIMIT 0, 10';
-    connection.query(sql, [userId, recentlyViewedId], function(err, product) {
-      callback(err, mapper.map(product[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM recently_viewed_items INNER JOIN user_info INNER JOIN products ' +
+          'ON (user_id = recently_viewed_user_id AND product_id = recently_viewed_product_id) ' +
+          'WHERE user_id = ? AND recently_viewed_id = ?' +
+          'ORDER BY recently_viewed_date DESC ' +
+          'LIMIT 0, 10';
+      connection.query(sql, [userId, recentlyViewedId], function(err, product) {
+        callback(err, mapper.map(product[0], DICTIONARY));
+      });
+    }
   });
 };

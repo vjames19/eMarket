@@ -24,31 +24,35 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT admin_info.* ' +
-        'FROM admin_info ' +
-        'WHERE admin_account_status = 1';
-    connection.query(sql, function(err, admins) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(admins, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT admin_info.* ' +
+          'FROM admin_info ' +
+          'WHERE admin_account_status = 1';
+      connection.query(sql, function(err, admins) {
+        callback(err, mapper.mapCollection(admins, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(id, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT admin_info.* ' +
-        'FROM admin_info ' +
-        'WHERE admin_id = ? AND admin_account_status = 1';
-    connection.query(sql, [id], function(err, admins) {
-      var admin = mapper.map(admins[0], DICTIONARY);
-      if(admins.length > 0) {
-        admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
-      }
-      callback(err, admin);
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT admin_info.* ' +
+          'FROM admin_info ' +
+          'WHERE admin_id = ? AND admin_account_status = 1';
+      connection.query(sql, [id], function(err, admins) {
+        var admin = mapper.map(admins[0], DICTIONARY);
+        if(admins.length > 0) {
+          admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
+        }
+        callback(err, admin);
+      });
+    }
   });
 };
 
@@ -120,16 +124,20 @@ module.exports.remove = function(id, callback) {
 
 module.exports.authenticate = function(username, password, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT admin_id, admin_user_name, admin_is_root ' +
-        'FROM admin_info ' +
-        'WHERE admin_user_name = LCASE(?) AND admin_password = SHA1(?) AND admin_account_status = 1';
-    connection.query(sql, [username, password], function(err, admins) {
-      var admin = mapper.map(admins[0], DICTIONARY);
-      if(admins.length > 0) {
-        admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
-      }
-      callback(err, admin);
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT admin_id, admin_user_name, admin_is_root ' +
+          'FROM admin_info ' +
+          'WHERE admin_user_name = LCASE(?) AND admin_password = SHA1(?) AND admin_account_status = 1';
+      connection.query(sql, [username, password], function(err, admins) {
+        var admin = mapper.map(admins[0], DICTIONARY);
+        if(admins.length > 0) {
+          admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
+        }
+        callback(err, admin);
+      });
+    }
   });
 };
 

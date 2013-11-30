@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -35,32 +35,36 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-              'FROM products INNER JOIN active_users ' +
-              'ON (product_seller_id = user_id) ' +
-              'WHERE product_seller_id != ? ' +
-              'ORDER BY RAND() ' +
-              'LIMIT 10';
-    connection.query(sql, [userId], function(err, products) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(products, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM products INNER JOIN active_users ' +
+          'ON (product_seller_id = user_id) ' +
+          'WHERE product_seller_id != ? ' +
+          'ORDER BY RAND() ' +
+          'LIMIT 10';
+      connection.query(sql, [userId], function(err, products) {
+        callback(err, mapper.mapCollection(products, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, carouselId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-              'FROM products INNER JOIN active_users ' +
-              'ON (product_seller_id = user_id) ' +
-              'WHERE product_seller_id != ? AND product_id = ? ' +
-              'ORDER BY RAND() ' +
-              'LIMIT 10';
-    connection.query(sql, [userId, carouselId], function(err, product) {
-      callback(err, mapper.map(product[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM products INNER JOIN active_users ' +
+          'ON (product_seller_id = user_id) ' +
+          'WHERE product_seller_id != ? AND product_id = ? ' +
+          'ORDER BY RAND() ' +
+          'LIMIT 10';
+      connection.query(sql, [userId, carouselId], function(err, product) {
+        callback(err, mapper.map(product[0], DICTIONARY));
+      });
+    }
   });
 };

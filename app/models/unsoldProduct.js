@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -36,33 +36,35 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-        'FROM products ' +
-        'WHERE product_seller_id = ? AND ' +
-        'product_quantity_remaining > 0 AND ' +
-        'product_depletion_date IS NULL';
-    connection.query(sql, [userId], function(err, unsoldProducts) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(unsoldProducts, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM products ' +
+          'WHERE product_seller_id = ? AND ' +
+          'product_quantity_remaining > 0 AND ' +
+          'product_depletion_date IS NULL';
+      connection.query(sql, [userId], function(err, unsoldProducts) {
+        callback(err, mapper.mapCollection(unsoldProducts, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, unsoldProductId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT products.* ' +
-        'FROM products ' +
-        'WHERE product_seller_id = ? AND ' +
-        'product_quantity_remaining > 0 AND ' +
-        'product_depletion_date IS NULL AND ' +
-        'product_id = ?';
-    connection.query(sql, [userId, unsoldProductId], function(err, unsoldProduct) {
-      callback(err, mapper.map(unsoldProduct[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT products.* ' +
+          'FROM products ' +
+          'WHERE product_seller_id = ? AND ' +
+          'product_quantity_remaining > 0 AND ' +
+          'product_depletion_date IS NULL AND ' +
+          'product_id = ?';
+      connection.query(sql, [userId, unsoldProductId], function(err, unsoldProduct) {
+        callback(err, mapper.map(unsoldProduct[0], DICTIONARY));
+      });
+    }
   });
 };
-
-

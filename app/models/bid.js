@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('underscore');
+//var _ = require('underscore');
 var mapper = require('../mapper');
 
 var DICTIONARY = {
@@ -9,7 +9,7 @@ var DICTIONARY = {
   'bid_product_id': 'productId',
   'bid_amount': 'bidAmount',
   'bid_creation_date': 'creationDate',
-  'bid_closed_date' : 'closedDate',
+  'bid_closed_date': 'closedDate',
   'highest_bid': 'highestBid',
   'product_seller_id': 'sellerId',
   'seller_name': 'sellerName',
@@ -42,32 +42,36 @@ module.exports.init = function(realExecutor) {
 
 module.exports.getAll = function(userId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT bid_history.*, MAX(bid_amount) AS highest_bid, products.* ' +
-              'FROM bid_history INNER JOIN active_users INNER JOIN products ' +
-              'ON (bid_user_id = user_id AND bid_product_id = product_id) ' +
-              'WHERE user_id = ? ' +
-              'GROUP BY bid_product_id ' +
-              'ORDER BY bid_creation_date DESC';
-    connection.query(sql, [userId], function(err, bids) {
-      if(err) {
-        callback(err);
-      } else {
-        callback(null, mapper.mapCollection(bids, DICTIONARY));
-      }
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT bid_history.*, MAX(bid_amount) AS highest_bid, products.* ' +
+          'FROM bid_history INNER JOIN active_users INNER JOIN products ' +
+          'ON (bid_user_id = user_id AND bid_product_id = product_id) ' +
+          'WHERE user_id = ? ' +
+          'GROUP BY bid_product_id ' +
+          'ORDER BY bid_creation_date DESC';
+      connection.query(sql, [userId], function(err, bids) {
+        callback(err, mapper.mapCollection(bids, DICTIONARY));
+      });
+    }
   });
 };
 
 module.exports.get = function(userId, bidId, callback) {
   executor.execute(function(err, connection) {
-    var sql = 'SELECT bid_history.*, MAX(bid_amount) AS highest_bid, products.* ' +
-              'FROM bid_history INNER JOIN active_users INNER JOIN products ' +
-              'ON (bid_user_id = user_id AND bid_product_id = product_id) ' +
-              'WHERE user_id = ? AND bid_id = ? ' +
-              'GROUP BY bid_product_id ' +
-              'ORDER BY bid_creation_date DESC';
-    connection.query(sql, [userId, bidId], function(err, bids) {
-      callback(err, mapper.map(bids[0], DICTIONARY));
-    });
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'SELECT bid_history.*, MAX(bid_amount) AS highest_bid, products.* ' +
+          'FROM bid_history INNER JOIN active_users INNER JOIN products ' +
+          'ON (bid_user_id = user_id AND bid_product_id = product_id) ' +
+          'WHERE user_id = ? AND bid_id = ? ' +
+          'GROUP BY bid_product_id ' +
+          'ORDER BY bid_creation_date DESC';
+      connection.query(sql, [userId, bidId], function(err, bids) {
+        callback(err, mapper.map(bids[0], DICTIONARY));
+      });
+    }
   });
 };
