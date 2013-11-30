@@ -13,14 +13,17 @@
   <div data-role="content" data-theme="b">
 
     <div data-role="none" style="margin: 0 auto; width: 50%">
-      <button id="sellItem-addImage" ng-model="item.image"
-              class="ui-btn ui-shadow ui-btn-a ui-icon-plus
-                    ui-btn-icon-bottom ui-mini ui-btn-corner-all">
+      <button id="sellItem-addImage"
+              class="ui-btn ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-bottom ui-mini ui-btn-corner-all">
         <strong>Add Image</strong>
       </button>
     </div>
 
     <div id="sellItem-pictureContainer" data-role="none" class="dropzone-previews" style="text-align: center"></div>
+
+    <div data-role="none" ng-show="imageDraft" style="margin: 15px auto; width: 50%">
+      <img ng-src="{{ item.picture }}" class="item-photo-big ui-corner-all" src=""/>
+    </div>
 
     <form name="sellItemForm">
 
@@ -131,11 +134,14 @@
 
     </form>
 
+    <pre>{{ item | json }}</pre>
+
   </div>
 
   <div data-role="footer" data-theme="a" class="ui-footer">
     <a href="#sell-item-preview" data-role="button" class="footer-button" data-theme="b"
-       ng-click="setPreviewItemInfo(item)" ng-class="{false: 'ui-disabled'}[sellItemForm.$valid]">Preview</a>
+       ng-click="setPreviewItemInfo(item)"
+       ng-class="{false: 'ui-disabled'}[sellItemForm.$valid]">Preview</a>
   </div>
 
 </div>

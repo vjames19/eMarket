@@ -59,7 +59,6 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                 dropZone = this; // Important to be able to get object outside this container...
                 var tempFile;
                 this.on('addedfile', function(file) {
-                  console.log('added a file');
                   if(!tempFile) {
                     tempFile = file;
                   } else {
@@ -68,8 +67,8 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                   }
                 });
                 this.on('removedfile', function() {
-                  console.log('removedFile');
                   tempFile = null;
+                  delete scope.item.picture;
                 });
                 this.on('success', function(file, newFileName){
                   console.log('Current Picture Name ', newFileName);
@@ -83,6 +82,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
       page.on('pagehide', function() {
 
+        delete scope.item.picture;
         dropZone.removeAllFiles(true);
 
       });
@@ -92,6 +92,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         if(!SellItem.isDraft) {
           scope.item = {};
           SellItem.setDraft({});
+          scope.imageDraft = false;
         }
 
         Category.getList({flat: true}).then(function(categoryList) {
@@ -105,15 +106,16 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
           if(SellItem.isDraft) {
 
+            scope.imageDraft = true;
             // Format for datetime-local input correct display
             scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
 
-            if(scope.item.shippingPrice !== null) {
-              freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
-            } else {
-              freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
-            }
+          }
 
+          if(SellItem.isDraft && scope.item.shippingPrice !== null) {
+            freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
+          } else {
+            freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
           }
 
           Helper.refreshSelect(categorySelect);
