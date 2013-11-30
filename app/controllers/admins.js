@@ -27,6 +27,39 @@ exports.readAdmin = function(req, res) {
   res.jsonp(req.admin);
 };
 
+exports.createAdmin = function(req, res) {
+  Admins.create(req.body, function(err, admin) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(201, admin);
+    }
+  });
+};
+
+exports.updateAdmin = function(req, res) {
+  var id = req.admin.id;
+  _.extend(req.admin, req.body);
+  req.admin.id = id;
+  Admins.update(req.admin, function(err, admin) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(200, admin);
+    }
+  });
+};
+
+exports.deleteAdmin = function(req, res) {
+  Admins.remove(req.admin.id, function(err) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(200, req.admin);
+    }
+  });
+};
+
 // Reports Day (Read-Only)
 
 exports.findReportByIdDay = function(req, res, next, id) {
@@ -112,49 +145,4 @@ exports.readReportMonthTotal = function(req, res) {
   Reports.getTotal('month', function(err, total) {
     res.jsonp(total);
   });
-};
-
-// Dummy Data for Compatibility
-
-var admins = {
-  1: {
-    adminId: 1,
-    adminUserName: 'root',
-    adminFirstName: 'Juan',
-    adminMiddleName: 'Del',
-    adminLastName: 'Pueblo',
-    adminEmail: 'juan.del.pueblo@ptm.db',
-    adminPhone: '7775554444',
-    adminPassword: '123',
-    adminIsRoot: true
-  },
-  2: {
-    adminId: 2,
-    adminUserName: 'admin',
-    adminFirstName: 'Jesus',
-    adminMiddleName: 'Del',
-    adminLastName: 'Campo',
-    adminEmail: 'jesus.del.campo@wtf.db',
-    adminPhone: '3332221111',
-    adminPassword: '456',
-    adminIsRoot: false
-  }
-};
-
-exports.createAdmin = function(req, res) {
-  var admin = req.body;
-  admin.adminId = _.keys(admins).length + 1;
-  admins[admin.adminId] = admin;
-  res.jsonp(admin);
-};
-
-exports.updateAdmin = function(req, res) {
-  _.extend(req.admin, req.body);
-  admins[req.admin.adminId] = req.admin;
-  res.jsonp(req.admin);
-};
-
-exports.deleteAdmin = function(req, res) {
-  delete admins[req.admin.adminId];
-  res.jsonp(req.admin);
 };

@@ -52,6 +52,72 @@ module.exports.get = function(id, callback) {
   });
 };
 
+module.exports.create = function(admin, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'INSERT INTO admin_info ' +
+          '(admin_user_name, admin_password, admin_email, admin_first_name, admin_middle_name, admin_last_name, ' +
+          'admin_telephone, admin_is_root, admin_account_status) ' +
+          'VALUES (LCASE(?), SHA1(?), LCASE(?), ?, ?, ?, ?, ?, TRUE)';
+      var params = [admin.username, admin.password, admin.email, admin.firstName,
+        admin.middleName, admin.lastName, admin.telephone, admin.isRoot];
+      connection.query(sql, params, function(err, insertStatus) {
+        if(err) {
+          callback(err);
+        } else {
+          admin.id = insertStatus.insertId;
+          callback(null, admin);
+        }
+      });
+    }
+  });
+};
+
+module.exports.update = function(admin, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql, params;
+      if(admin.password) {
+        sql = 'UPDATE admin_info ' +
+            'SET admin_password = SHA1(?), admin_email = LCASE(?), admin_first_name = ?, ' +
+            'admin_middle_name = ?, admin_last_name = ?, admin_telephone = ?, admin_is_root = ? ' +
+            'WHERE admin_id = ?';
+        params = [admin.password, admin.email, admin.firstName, admin.middleName,
+          admin.lastName, admin.telephone, admin.isRoot, admin.id];
+      } else {
+        sql = 'UPDATE admin_info ' +
+            'SET admin_email = LCASE(?), admin_first_name = ?, ' +
+            'admin_middle_name = ?, admin_last_name = ?, admin_telephone = ?, admin_is_root = ? ' +
+            'WHERE admin_id = ?';
+        params = [admin.email, admin.firstName, admin.middleName,
+          admin.lastName, admin.telephone, admin.isRoot, admin.id];
+      }
+      connection.query(sql, params, function(err) {
+        callback(err, admin);
+      });
+    }
+  });
+};
+
+module.exports.remove = function(id, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'UPDATE admin_info ' +
+          'SET admin_account_status = 0 ' +
+          'WHERE admin_id = ?';
+      connection.query(sql, [id], function(err) {
+        callback(err, id);
+      });
+    }
+  });
+};
+
 module.exports.authenticate = function(username, password, callback) {
   executor.execute(function(err, connection) {
     var sql = 'SELECT admin_id, admin_user_name, admin_is_root ' +

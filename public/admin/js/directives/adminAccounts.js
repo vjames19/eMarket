@@ -18,6 +18,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
       var page = $(elem[0]);
       var adminAccountList = page.find('#adminAcc-adminAccountList');
 
+      var adminAccPopup = page.find('#adminAcc-adminPopupMenu');
+      var statusPopup = page.find('#adminAcc-statusPopup');
+      var statusPopupMessage = page.find('#adminAcc-statusPopupMessage');
+
       var selectedAdmin = null;
       var selectedAdminIndex = null;
 
@@ -28,20 +32,66 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
 
       scope.deleteAdmin = function() {
         $.mobile.loading('show');
-//        Restangular.one('admins', selectedAdmin.adminId).remove().then(function() {
-        if(selectedAdmin.isRoot === 0 && selectedAdmin.username !== Admin.adminUserName) {
-          // Non-Root Cannot Delete Root Admins or themselves Ever!
+        if(selectedAdmin.username === Admin.adminUserName) {
+          $.mobile.loading('hide');
+          adminAccPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Cannot Delete yourself!!!');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          return;
+        }
+        if(selectedAdmin.username === 'root') {
+          $.mobile.loading('hide');
+          adminAccPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Cannot Delete Root Ever!!!');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          return;
+        }
+        if(selectedAdmin.isRoot === 1 && Admin.isRoot === 0) {
+          $.mobile.loading('hide');
+          adminAccPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Not enough privileges to delete this admin.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          return;
+        }
+        Restangular.one('admins', selectedAdmin.id).remove().then(function() {
           scope.admins.splice(selectedAdminIndex, 1);
           Helper.refreshList(adminAccountList);
-        }
-        // Root Cannot Be Deleted Ever but Root people can delete other root people
-        else if(Admin.isRoot === 1 && selectedAdmin.username !== 'root' &&
-            selectedAdmin.username !== Admin.adminUserName) {
-          scope.admins.splice(selectedAdminIndex, 1);
-          Helper.refreshList(adminAccountList);
-        }
-        $.mobile.loading('hide');
-//        });
+          $.mobile.loading('hide');
+          adminAccPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Admin Deleted Successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          adminAccPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not delete admin.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          console.log('Error Removing Admin', err);
+        });
       };
 
       page.on('pagebeforeshow', function() {

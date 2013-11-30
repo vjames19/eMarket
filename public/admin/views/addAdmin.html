@@ -11,58 +11,58 @@
       <div class="form-pad">
         <label for="addAdmin-username"><strong>Username</strong></label>
         <input type="text" name="addAdminUsername" id="addAdmin-username" maxlength="16" data-theme="b"
-               ng-model="addAdmin.adminUserName" ng-pattern="patternUsername" ng-required="true">
+               ng-model="addAdmin.username" ng-pattern="patternUsername" ng-required="true">
         <div ng-show="addAdminForm.addAdminUsername.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-firstName"><strong>First Name</strong></label>
         <input type="text" name="addAdminFirstName" id="addAdmin-firstName" maxlength="45" data-theme="b"
-               ng-model="addAdmin.adminFirstName" ng-pattern="patternFirstName" ng-required="true">
+               ng-model="addAdmin.firstName" ng-pattern="patternFirstName" ng-required="true">
         <div ng-show="addAdminForm.addAdminFirstName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-middleName"><strong>Middle Name</strong></label>
         <input type="text" name="addAdminMiddleName" id="addAdmin-middleName" maxlength="45" data-theme="b"
-               ng-model="addAdmin.adminMiddleName" ng-pattern="patternMiddleName" ng-required="false">
+               ng-model="addAdmin.middleName" ng-pattern="patternMiddleName" ng-required="false">
         <div ng-show="addAdminForm.addAdminMiddleName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-lastName"><strong>Last Name</strong></label>
         <input type="text" name="addAdminLastName" id="addAdmin-lastName" maxlength="45" data-theme="b"
-               ng-model="addAdmin.adminLastName" ng-pattern="patternLastName" ng-required="true">
+               ng-model="addAdmin.lastName" ng-pattern="patternLastName" ng-required="true">
         <div ng-show="addAdminForm.addAdminLastName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-email"><strong>Email</strong></label>
         <input type="email" name="addAdminEmail" id="addAdmin-email" maxlength="255" data-theme="b"
-               ng-model="addAdmin.adminEmail" ng-required="true">
+               ng-model="addAdmin.email" ng-required="true">
         <div ng-show="addAdminForm.addAdminEmail.$error.email" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-telephone"><strong>Telephone</strong></label>
         <input type="tel" name="addAdminTelephone" id="addAdmin-telephone" maxlength="10" data-theme="b"
-               ng-model="addAdmin.adminPhone" ng-pattern="patternTelephone" ng-required="true">
+               ng-model="addAdmin.telephone" ng-pattern="patternTelephone" ng-required="true">
         <div ng-show="addAdminForm.addAdminTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-password"><strong>Password</strong></label>
         <input type="password" name="addAdminPassword" id="addAdmin-password"
                autocomplete="off" maxlength="40" data-theme="b"
-               ng-model="addAdmin.adminPassword" ng-pattern="patternPassword" ng-required="true">
+               ng-model="addAdmin.password" ng-pattern="patternPassword" ng-required="true">
         <div ng-show="addAdminForm.addAdminPassword.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addAdmin-passwordConfirm"><strong>Confirm Password</strong></label>
         <input type="password" name="addAdminPasswordConfirm" id="addAdmin-passwordConfirm"
                autocomplete="off" maxlength="40" data-theme="b"
-               ng-model="addAdmin.adminConfirmPassword" ng-pattern="patternPassword" ng-required="true">
+               ng-model="addAdmin.passwordConfirm" ng-pattern="patternPassword" ng-required="true">
         <div ng-show="addAdminForm.addAdminPasswordConfirm.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <hr/>
         <label for="addAdmin-makeRoot">Make Root</label>
         <input type="checkbox" name="addAdminMakeRoot" id="addAdmin-makeRoot" data-mini="true" data-theme="b"
-               ng-model="addAdmin.adminIsRoot" ng-required="false">
+               ng-model="addAdmin.isRoot" ng-required="false">
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
         <a href="#admin-accounts" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
@@ -70,6 +70,12 @@
       </div>
     </form>
 
+  </div>
+
+  <div data-role="popup" id="addAdmin-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#add-admin" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="addAdmin-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="b"><h1></h1></div>

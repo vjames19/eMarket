@@ -45,14 +45,14 @@
         <label for="editAdmin-newPassword"><strong>New Password</strong></label>
         <input type="password" name="editAdminNewPassword" id="editAdmin-newPassword"
                autocomplete="off" maxlength="40" data-theme="b"
-               ng-model="editAdmin.adminPassword" ng-pattern="patternPassword" ng-required="false">
+               ng-model="adminInfo.password" ng-pattern="patternPassword" ng-required="false">
         <div ng-show="editAdminForm.editAdminNewPassword.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editAdmin-newPasswordConfirm"><strong>Confirm Password</strong></label>
         <input type="password" name="editAdminNewPasswordConfirm" id="editAdmin-newPasswordConfirm"
                autocomplete="off" maxlength="40" data-theme="b"
-               ng-model="editAdmin.adminConfirmPassword" ng-pattern="patternPassword" ng-required="false">
+               ng-model="adminInfo.passwordConfirm" ng-pattern="patternPassword" ng-required="false">
         <div ng-show="editAdminForm.editAdminNewPasswordConfirm.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -67,6 +67,12 @@
       </div>
     </form>
 
+  </div>
+
+  <div data-role="popup" id="editAdmin-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#edit-admin" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="editAdmin-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="b"><h1></h1></div>

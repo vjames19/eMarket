@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper, 
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular, Patterns) {
+    controller: function($scope, $element, Restangular, Patterns) {
 
       $scope.patternFirstName = Patterns.user.firstName;
       $scope.patternMiddleName = Patterns.user.middleName;
@@ -14,16 +14,40 @@ angular.module('eMarketApp').directive('editAdmin', function(AdminInfo, Helper, 
       $scope.patternTelephone = Patterns.address.telephone;
       $scope.patternPassword = Patterns.user.password;
 
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#editAdmin-statusPopup');
+      var statusPopupMessage = page.find('#editAdmin-statusPopupMessage');
+
       $scope.submit = function() {
+        console.log('Details', $scope.adminInfo);
+        if($scope.adminInfo.password !== $scope.adminInfo.passwordConfirm) {
+          statusPopupMessage.text('Passwords do not match.');
+          statusPopup.popup('open');
+          return;
+        }
+        if(!$scope.adminInfo.middleName) {
+          $scope.adminInfo.middleName = null;
+        }
+        if(!$scope.adminInfo.isRoot) {
+          $scope.adminInfo.isRoot = 0;
+        }
         $.mobile.loading('show');
-//        $scope.adminInfo.adminPassword = $scope.editAdmin.adminPassword;
-//        Restangular.one('admins', $scope.adminInfo.adminId).customPUT($scope.adminInfo).then(function(adminInfo) {
-//          $scope.adminInfo = adminInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#admin-accounts');
-//        }, function(err) {
-//          alert(err);
-//        });
+        Restangular.one('admins', $scope.adminInfo.id).customPUT($scope.adminInfo).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Admin Updated Successfully.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#admin-accounts');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Could not update admin Successfully. Username or Email might already exists.');
+          statusPopup.popup('open');
+          console.log('AddAdmin Error', err);
+        });
       };
 
     },
