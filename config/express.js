@@ -45,10 +45,10 @@ module.exports = function(app, passport) {
 
     app.use(function(err, req, res, next) {
       // Authentication failed
-      if(err.message.indexOf('Authentication') >= 0) {
+      if(err.message && err.message.indexOf('Authentication') >= 0) {
         console.log('in dsnfksdfna');
         res.jsonp(401, err);
-      } else if(~err.message.indexOf('not found')) { //Treat as 404
+      } else if(err.message && ~err.message.indexOf('not found')) { //Treat as 404
         res.jsonp(404, 'Not found');
       } else {
         //Log it
