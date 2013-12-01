@@ -37,6 +37,7 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
       var statusPopupMessage = page.find('#addUser-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off(); // Unbind any previous events
         if($scope.addUser.password !== $scope.addUser.passwordConfirm) {
           statusPopupMessage.text('Passwords do not match.');
           statusPopup.popup('open');

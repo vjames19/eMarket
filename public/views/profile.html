@@ -1,313 +1,322 @@
 <div data-role="page" data-theme="b" id="profile">
 
-<div data-role="header" data-position="fixed" data-theme="a">
-  <h1>Profile</h1>
-  <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-  <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-    <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
+  <div data-role="header" data-position="fixed" data-theme="a">
+    <h1>Profile</h1>
+    <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+      <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
+    </div>
+    <search></search>
   </div>
-  <search></search>
-</div>
 
-<div data-role="content">
+  <div data-role="content">
 
-<div data-role="collapsible" data-theme="a" data-content-theme="a">
-  <h2>Edit Profile Information</h2>
-  <ul data-role="listview" data-theme="a" data-divider-theme="b" data-inset="true">
-    <li data-role="list-divider">
-      <table>
-        <tr>
-          <td>UserName</td>
-          <td class="pad"></td>
-          <td><span class="ui-li-count">{{user.username}}</span></td>
-        </tr>
-      </table>
-    </li>
-  </ul>
-  <form name="profileForm" data-ajax="false" ng-submit="submitUser()">
-    <div class="form-pad">
-      <label for="profile-firstName"><strong>First Name</strong></label>
-      <input type="text" name="profileFirstName" id="profile-firstName"
-             ng-model="user.firstName" ng-pattern="patternFirstName" ng-required="true">
-      <div ng-show="profileForm.profileFirstName.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-middleName"><strong>Middle Name</strong></label>
-      <input type="text" name="profileMiddleName" id="profile-middleName"
-             ng-model="user.middleName" ng-pattern="patternMiddleName" ng-required="false">
-      <div ng-show="profileForm.profileMiddleName.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-lastName"><strong>Last Name</strong></label>
-      <input type="text" name="profileLastName" id="profile-lastName"
-             ng-model="user.lastName" ng-pattern="patternLastName" ng-required="true">
-      <div ng-show="profileForm.profileLastName.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-email"><strong>Email</strong></label>
-      <input type="email" name="profileEmail" id="profile-email"
-             ng-model="user.email" ng-required="true">
-      <div ng-show="profileForm.profileEmail.$error.email" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-telephone"><strong>Telephone</strong></label>
-      <input type="tel" name="profileTelephone" id="profile-telephone"
-             ng-model="user.telephone" ng-pattern="patternTelephone" ng-required="true">
-      <div ng-show="profileForm.profileTelephone.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-securityQuestion-1"><strong>Question 1</strong></label>
-      <select name="profileSecurityQuestion1" id="profile-securityQuestion-1"
-              ng-model="user.question1"
-              ng-options="question.id as question.question for question in questions"
-              ng-required="true">
-      </select>
-      <label for="profile-securityAnswer-1"><strong>Answer</strong></label>
-      <input type="text" name="profileSecurityAnswer1" id="profile-securityAnswer-1"
-             ng-model="user.questionAnswer1" ng-pattern="patternAnswer" ng-required="true">
-      <div ng-show="profileForm.profileSecurityAnswer1.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-securityQuestion-2"><strong>Question 2</strong></label>
-      <select name="profileSecurityQuestion2" id="profile-securityQuestion-2"
-              ng-model="user.question2"
-              ng-options="question.id as question.question for question in questions"
-              ng-required="true">
-      </select>
-      <label for="profile-securityAnswer-2"><strong>Answer</strong></label>
-      <input type="text" name="profileSecurityAnswer2" id="profile-securityAnswer-2"
-             ng-model="user.questionAnswer2" ng-pattern="patternAnswer" ng-required="true">
-      <div ng-show="profileForm.profileSecurityAnswer2.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-securityQuestion-3"><strong>Question 3</strong></label>
-      <select name="profileSecurityQuestion3" id="profile-securityQuestion-3"
-              ng-model="user.question3"
-              ng-options="question.id as question.question for question in questions"
-              ng-required="true">
-      </select>
-      <label for="profile-securityAnswer-3"><strong>Answer</strong></label>
-      <input type="text" name="profileSecurityAnswer3" id="profile-securityAnswer-3"
-             ng-model="user.questionAnswer3" ng-pattern="patternAnswer" ng-required="true">
-      <div ng-show="profileForm.profileSecurityAnswer3.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-oldPassword"><strong>Old Password</strong></label>
-      <input type="password" name="profileOldPassword" id="profile-oldPassword" autocomplete="off"
-             ng-model="user.oldPassword" ng-pattern="patternPassword" ng-required="true">
-      <div ng-show="profileForm.profileOldPassword.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-newPassword"><strong>New Password</strong></label>
-      <input type="password" name="profileNewPassword" id="profile-newPassword" autocomplete="off"
-             ng-model="user.newPassword" ng-pattern="patternPassword" ng-required="false">
-      <div ng-show="profileForm.profileNewPassword.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-      <label for="profile-newPasswordConfirm"><strong>Confirm Password</strong></label>
-      <input type="password" name="profileNewPasswordConfirm" id="profile-newPasswordConfirm" autocomplete="off"
-             ng-model="user.newPasswordConfirm" ng-pattern="patternPassword" ng-required="false">
-      <div ng-show="profileForm.profileNewPasswordConfirm.$error.pattern" class="labelError">
-        <strong><em>Wrong Format.</em></strong>
-      </div>
-    </div>
-    <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
-      <a href="#home-user" data-role="button" data-icon="delete" data-transition="fade">Cancel</a>
-      <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[profileForm.$valid]">Submit</button>
-    </div>
-  </form>
-</div>
-
-<div data-role="collapsible-set">
-
-  <div data-role="collapsible" data-theme="a" data-content-theme="false">
-    <h2>Edit Mailing Addresses</h2>
-    <ul data-role="listview" id="profile-mailAddressList" data-theme="a" data-divider-theme="b">
-      <li data-role="list-divider">
-        <table class="wrap-text">
-          <tr>
-            <td><strong>Mail Addresses on System</strong></td>
-            <td class="pad"></td>
-            <td>
-              <a href="#add-mailing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
-                Add Mailing Address
-              </a>
-            </td>
-            <td><span class="ui-li-count">{{mailAddresses.length}}</span></td>
-          </tr>
-        </table>
-      </li>
-      <li ng-repeat="mailAddress in mailAddresses">
-        <a href="">
-          <table class="x-small-text wrap-text">
+    <div data-role="collapsible" data-theme="a" data-content-theme="a">
+      <h2>Edit Profile Information</h2>
+      <ul data-role="listview" data-theme="a" data-divider-theme="b" data-inset="true">
+        <li data-role="list-divider">
+          <table>
             <tr>
-              <td><strong>Name:</strong></td>
+              <td>UserName</td>
               <td class="pad"></td>
-              <td><em>{{mailAddress.recipientName}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Address:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.address}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Country:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.country}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>City:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.city}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>State/Region/Prov.:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.geographicalRegion}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>ZipCode:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.zipCode}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Telephone:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{mailAddress.telephone}}</em></td>
+              <td><span class="ui-li-count">{{user.username}}</span></td>
             </tr>
           </table>
-        </a>
-        <a href="#profile-mailAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
-           data-position-to="window" data-icon="gear" data-theme="c"
-           ng-click="setMailInfo(mailAddress); selectMailAddress(mailAddress, $index)"></a>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+      <form name="profileForm" data-ajax="false" ng-submit="submitUser()">
+        <div class="form-pad">
+          <label for="profile-firstName"><strong>First Name</strong></label>
+          <input type="text" name="profileFirstName" id="profile-firstName" maxlength="45"
+                 ng-model="user.firstName" ng-pattern="patternFirstName" ng-required="true">
+          <div ng-show="profileForm.profileFirstName.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-middleName"><strong>Middle Name</strong></label>
+          <input type="text" name="profileMiddleName" id="profile-middleName" maxlength="45"
+                 ng-model="user.middleName" ng-pattern="patternMiddleName" ng-required="false">
+          <div ng-show="profileForm.profileMiddleName.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-lastName"><strong>Last Name</strong></label>
+          <input type="text" name="profileLastName" id="profile-lastName" maxlength="45"
+                 ng-model="user.lastName" ng-pattern="patternLastName" ng-required="true">
+          <div ng-show="profileForm.profileLastName.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-email"><strong>Email</strong></label>
+          <input type="email" name="profileEmail" id="profile-email" maxlength="255"
+                 ng-model="user.email" ng-required="true">
+          <div ng-show="profileForm.profileEmail.$error.email" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-telephone"><strong>Telephone</strong></label>
+          <input type="tel" name="profileTelephone" id="profile-telephone" maxlength="10"
+                 ng-model="user.telephone" ng-pattern="patternTelephone" ng-required="true">
+          <div ng-show="profileForm.profileTelephone.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-securityQuestion-1"><strong>Question 1</strong></label>
+          <select name="profileSecurityQuestion1" id="profile-securityQuestion-1"
+                  ng-model="user.question1"
+                  ng-options="question.id as question.question for question in questions"
+                  ng-required="true">
+          </select>
+          <label for="profile-securityAnswer-1"><strong>Answer</strong></label>
+          <input type="text" name="profileSecurityAnswer1" id="profile-securityAnswer-1" maxlength="45"
+                 ng-model="user.questionAnswer1" ng-pattern="patternAnswer" ng-required="true">
+          <div ng-show="profileForm.profileSecurityAnswer1.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-securityQuestion-2"><strong>Question 2</strong></label>
+          <select name="profileSecurityQuestion2" id="profile-securityQuestion-2"
+                  ng-model="user.question2"
+                  ng-options="question.id as question.question for question in questions"
+                  ng-required="true">
+          </select>
+          <label for="profile-securityAnswer-2"><strong>Answer</strong></label>
+          <input type="text" name="profileSecurityAnswer2" id="profile-securityAnswer-2" maxlength="45"
+                 ng-model="user.questionAnswer2" ng-pattern="patternAnswer" ng-required="true">
+          <div ng-show="profileForm.profileSecurityAnswer2.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-securityQuestion-3"><strong>Question 3</strong></label>
+          <select name="profileSecurityQuestion3" id="profile-securityQuestion-3"
+                  ng-model="user.question3"
+                  ng-options="question.id as question.question for question in questions"
+                  ng-required="true">
+          </select>
+          <label for="profile-securityAnswer-3"><strong>Answer</strong></label>
+          <input type="text" name="profileSecurityAnswer3" id="profile-securityAnswer-3" maxlength="45"
+                 ng-model="user.questionAnswer3" ng-pattern="patternAnswer" ng-required="true">
+          <div ng-show="profileForm.profileSecurityAnswer3.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-oldPassword"><strong>Old Password</strong></label>
+          <input type="password" name="profileOldPassword" id="profile-oldPassword"
+                 autocomplete="off" maxlength="40"
+                 ng-model="user.oldPassword" ng-pattern="patternPassword" ng-required="true">
+          <div ng-show="profileForm.profileOldPassword.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-newPassword"><strong>New Password</strong></label>
+          <input type="password" name="profileNewPassword" id="profile-newPassword"
+                 autocomplete="off" maxlength="40"
+                 ng-model="user.password" ng-pattern="patternPassword" ng-required="false">
+          <div ng-show="profileForm.profileNewPassword.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+          <label for="profile-newPasswordConfirm"><strong>Confirm Password</strong></label>
+          <input type="password" name="profileNewPasswordConfirm" id="profile-newPasswordConfirm"
+                 autocomplete="off" maxlength="40"
+                 ng-model="user.passwordConfirm" ng-pattern="patternPassword" ng-required="false">
+          <div ng-show="profileForm.profileNewPasswordConfirm.$error.pattern" class="labelError">
+            <strong><em>Wrong Format.</em></strong>
+          </div>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal" data-theme="b" style="text-align: center">
+          <a href="#home-user" data-role="button" data-icon="delete" data-transition="fade">Cancel</a>
+          <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[profileForm.$valid]">Submit</button>
+        </div>
+      </form>
+    </div>
 
-  <div data-role="collapsible" data-theme="a" data-content-theme="false">
-    <h2>Edit Billing Addresses</h2>
-    <ul data-role="listview" id="profile-billAddressList" data-theme="a" data-divider-theme="b">
-      <li data-role="list-divider">
-        <table class="wrap-text">
-          <tr>
-            <td><strong>Bill Addresses on System</strong></td>
-            <td class="pad"></td>
-            <td>
-              <a href="#add-billing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
-                Add Billing Address
-              </a>
-            </td>
-            <td><span class="ui-li-count">{{billAddresses.length}}</span></td>
-          </tr>
-        </table>
-      </li>
-      <li ng-repeat="billAddress in billAddresses">
-        <a href="">
-          <table class="x-small-text wrap-text">
-            <tr>
-              <td><strong>Name:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.recipientName}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Address:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.address}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Country:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.country}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>City:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.city}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>State/Region/Prov.:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.geographicalRegion}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>ZipCode:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.zipCode}}</em></td>
-            </tr>
-            <tr>
-              <td><strong>Telephone:</strong></td>
-              <td class="pad"></td>
-              <td><em>{{billAddress.telephone}}</em></td>
-            </tr>
-          </table>
-        </a>
-        <a href="#profile-billAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
-           data-position-to="window" data-icon="gear" data-theme="c"
-           ng-click="setBillInfo(billAddress); selectBillAddress(billAddress, $index)"></a>
-      </li>
-    </ul>
-  </div>
+    <div data-role="collapsible-set">
 
-</div>
+      <div data-role="collapsible" data-theme="a" data-content-theme="false">
+        <h2>Edit Mailing Addresses</h2>
+        <ul data-role="listview" id="profile-mailAddressList" data-theme="a" data-divider-theme="b">
+          <li data-role="list-divider">
+            <table class="wrap-text">
+              <tr>
+                <td><strong>Mail Addresses on System</strong></td>
+                <td class="pad"></td>
+                <td>
+                  <a href="#add-mailing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
+                    Add Mailing Address
+                  </a>
+                </td>
+                <td><span class="ui-li-count">{{mailAddresses.length}}</span></td>
+              </tr>
+            </table>
+          </li>
+          <li ng-repeat="mailAddress in mailAddresses">
+            <a href="">
+              <table class="x-small-text wrap-text">
+                <tr>
+                  <td><strong>Name:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.recipientName}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Address:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.address}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Country:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.country}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>City:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.city}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>State/Region/Prov.:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.geographicalRegion}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>ZipCode:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.zipCode}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Telephone:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{mailAddress.telephone}}</em></td>
+                </tr>
+              </table>
+            </a>
+            <a href="#profile-mailAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="c"
+               ng-click="setMailInfo(mailAddress); selectMailAddress(mailAddress, $index)"></a>
+          </li>
+        </ul>
+      </div>
 
-<div data-role="collapsible" data-theme="a" data-content-theme="false">
-  <h2>My Ratings</h2>
-  <ul data-role="listview" data-theme="a" data-divider-theme="b" id="profile-ratingList">
-    <li data-role="list-divider">
-      <table>
-        <tr>
-          <td><strong>Your Average Rating</strong></td>
-          <td>
+      <div data-role="collapsible" data-theme="a" data-content-theme="false">
+        <h2>Edit Billing Addresses</h2>
+        <ul data-role="listview" id="profile-billAddressList" data-theme="a" data-divider-theme="b">
+          <li data-role="list-divider">
+            <table class="wrap-text">
+              <tr>
+                <td><strong>Bill Addresses on System</strong></td>
+                <td class="pad"></td>
+                <td>
+                  <a href="#add-billing-address" class="ui-btn ui-btn-a ui-icon-plus ui-btn-icon-notext ui-corner-all">
+                    Add Billing Address
+                  </a>
+                </td>
+                <td><span class="ui-li-count">{{billAddresses.length}}</span></td>
+              </tr>
+            </table>
+          </li>
+          <li ng-repeat="billAddress in billAddresses">
+            <a href="">
+              <table class="x-small-text wrap-text">
+                <tr>
+                  <td><strong>Name:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.recipientName}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Address:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.address}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Country:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.country}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>City:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.city}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>State/Region/Prov.:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.geographicalRegion}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>ZipCode:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.zipCode}}</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Telephone:</strong></td>
+                  <td class="pad"></td>
+                  <td><em>{{billAddress.telephone}}</em></td>
+                </tr>
+              </table>
+            </a>
+            <a href="#profile-billAddressOptionsPopup" data-rel="popup" data-inline="true" data-transition="slideup"
+               data-position-to="window" data-icon="gear" data-theme="c"
+               ng-click="setBillInfo(billAddress); selectBillAddress(billAddress, $index)"></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div data-role="collapsible" data-theme="a" data-content-theme="false">
+      <h2>My Ratings</h2>
+      <ul data-role="listview" data-theme="a" data-divider-theme="b" id="profile-ratingList">
+        <li data-role="list-divider">
+          <table>
+            <tr>
+              <td><strong>Your Average Rating</strong></td>
+              <td>
               <span class="ui-li-count">
                 <div class="star" data-score="{{ rating.avgRating }}"></div>
               </span>
-          </td>
-        </tr>
-      </table>
-    </li>
-    <li ng-repeat="rating in ratings" data-icon="false">
-      <a href="#">
-        <table>
-          <tr>
-            <td><strong>User:</strong></td>
-            <td class="pad"></td>
-            <td><em>{{rating.raterName}}</em></td>
-          </tr>
-          <tr>
-            <td><strong>Rating:</strong></td>
-            <td class="pad"></td>
-            <td>
-              <div class="star" data-score="{{ rating.rating }}"></div>
-            </td>
-          </tr>
-        </table>
-      </a>
-    </li>
-  </ul>
-</div>
+              </td>
+            </tr>
+          </table>
+        </li>
+        <li ng-repeat="rating in ratings" data-icon="false">
+          <a href="#">
+            <table>
+              <tr>
+                <td><strong>User:</strong></td>
+                <td class="pad"></td>
+                <td><em>{{rating.raterName}}</em></td>
+              </tr>
+              <tr>
+                <td><strong>Rating:</strong></td>
+                <td class="pad"></td>
+                <td>
+                  <div class="star" data-score="{{ rating.rating }}"></div>
+                </td>
+              </tr>
+            </table>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-</div>
-
-<div data-role="popup" id="profile-mailAddressOptionsPopup" data-theme="b">
-  <div class="form-pad">
-    <h3>Choose An Action</h3>
-    <a href="#edit-mailing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
-    <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
-       ng-click="deleteMailAddress()">Delete</a>
-    <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
   </div>
-</div>
 
-<div data-role="popup" id="profile-billAddressOptionsPopup" data-theme="b">
-  <div class="form-pad">
-    <h3>Choose An Action</h3>
-    <a href="#edit-billing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
-    <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
-       ng-click="deleteBillAddress()">Delete</a>
-    <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
+  <div data-role="popup" id="profile-mailAddressOptionsPopup" data-theme="b">
+    <div class="form-pad">
+      <h3>Choose An Action</h3>
+      <a href="#edit-mailing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
+      <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
+         ng-click="deleteMailAddress()">Delete</a>
+      <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
+    </div>
   </div>
-</div>
 
-<div data-role="footer" data-theme="a"><h1></h1></div>
+  <div data-role="popup" id="profile-billAddressOptionsPopup" data-theme="b">
+    <div class="form-pad">
+      <h3>Choose An Action</h3>
+      <a href="#edit-billing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
+      <a href="#profile" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
+         ng-click="deleteBillAddress()">Delete</a>
+      <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
+    </div>
+  </div>
+
+  <div data-role="popup" id="profile-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#profile" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="profile-statusPopupMessage" style="text-align: center"></p>
+  </div>
+
+  <div data-role="footer" data-theme="a"><h1></h1></div>
 
 </div>

@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('addCategory', function(Restangular, Help
       var statusPopupMessage = page.find('#addCategory-statusPopupMessage');
 
       $scope.submit = function() {
-        $.mobile.loading('show');
+        statusPopup.off(); // Unbind any previous events
         if(!$scope.addCategory.categoryParent) {
           $scope.addCategory.categoryParent = null;
         }
@@ -26,6 +26,7 @@ angular.module('eMarketApp').directive('addCategory', function(Restangular, Help
           statusPopup.popup('open');
           return;
         }
+        $.mobile.loading('show');
         Restangular.all('categories').post($scope.addCategory).then(function() {
           $.mobile.loading('hide');
           statusPopupMessage.text('Category Added Successfully.');

@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Users = require('../models/user.js');
 var Register = require('../models/register.js');
+var Admins = require('../models/admin.js');
 
 var nestedControllersPath = __dirname + '/user';
 require('fs').readdirSync(nestedControllersPath).forEach(function(file) {
@@ -121,14 +122,42 @@ exports.readUser = function(req, res) {
   res.jsonp(req.requestedUser);
 };
 
-/**
- * Update a user
- */
 exports.updateUser = function(req, res) {
-  _.extend(req.requestedUser, req.body);
-  users[req.requestedUser.userId] = req.requestedUser;
-  res.jsonp(req.requestedUser);
+  if(Admins.isAdmin(req.user)) {
+    console.log('Admin updating User.');
+    Users.update(req.body, true, function(err, user) {
+      if(err) {
+        res.jsonp(500, err);
+      } else if(user === null) {
+        res.jsonp(409, 'Old Password is incorrect.');
+      }
+      else {
+        res.jsonp(200, user);
+      }
+    });
+  } else {
+    console.log('User updating Profile.');
+    Users.update(req.body, false, function(err, user) {
+      if(err) {
+        res.jsonp(500, err);
+      } else if(user === null) {
+        res.jsonp(409, 'Old Password is incorrect.');
+      }
+      else {
+        res.jsonp(200, user);
+      }
+    });
+  }
 };
+
+///**
+// * Update a user
+// */
+//exports.updateUser = function(req, res) {
+//  _.extend(req.requestedUser, req.body);
+//  users[req.requestedUser.userId] = req.requestedUser;
+//  res.jsonp(req.requestedUser);
+//};
 
 /**
  * Delete a user

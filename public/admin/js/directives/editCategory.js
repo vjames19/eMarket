@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
       var statusPopupMessage = page.find('#editCategory-statusPopupMessage');
 
       $scope.submit = function() {
-        $.mobile.loading('show');
+        statusPopup.off(); // Unbind any previous events
         if(!$scope.categoryInfo.categoryParent) {
           $scope.categoryInfo.categoryParent = null;
         }
@@ -27,6 +27,7 @@ angular.module('eMarketApp').directive('editCategory', function(Restangular, Cat
           return;
         }
         var id = $scope.categoryInfo.id; // To Avoid Wrapping xD
+        $.mobile.loading('show');
         Restangular.one('categories', id).customPUT($scope.categoryInfo).then(function(categoryInfo) {
           $scope.categoryInfo = categoryInfo;
           $.mobile.loading('hide');

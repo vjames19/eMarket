@@ -18,6 +18,7 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
       var statusPopupMessage = page.find('#forgot-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off(); // Unbind any previous events
         var questions = [$scope.forgot.question1, $scope.forgot.question2, $scope.forgot.question3];
         if(window._.uniq(questions).length !== 3) {
           statusPopupMessage.text('All three questions must be different.');

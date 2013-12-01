@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('addAdmin', function(Admin, Helper) {
       var statusPopupMessage = page.find('#addAdmin-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off(); // Unbind any previous events
         if($scope.addAdmin.password !== $scope.addAdmin.passwordConfirm) {
           statusPopupMessage.text('Passwords do not match.');
           statusPopup.popup('open');

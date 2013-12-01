@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, MailingAddressInfo, BillingAddressInfo, Patterns) {
+    controller: function($scope, $element, MailingAddressInfo, BillingAddressInfo, Patterns) {
 
       $scope.patternFirstName = Patterns.user.firstName;
       $scope.patternMiddleName = Patterns.user.middleName;
@@ -23,12 +23,48 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
         angular.copy(billInfo, BillingAddressInfo.billInfo);
       };
 
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#profile-statusPopup');
+      var statusPopupMessage = page.find('#profile-statusPopupMessage');
+
       $scope.submitUser = function() {
+        statusPopup.off(); // Unbind any previous events
+        if($scope.user.password !== $scope.user.passwordConfirm) {
+          statusPopupMessage.text('Passwords do not match.');
+          statusPopup.popup('open');
+          return;
+        }
+        var questions = [
+          $scope.user.question1,
+          $scope.user.question2,
+          $scope.user.question3
+        ];
+        if(window._.uniq(questions).length !== 3) {
+          statusPopupMessage.text('All three questions must be different.');
+          statusPopup.popup('open');
+          return;
+        }
+        if(!$scope.user.middleName) {
+          $scope.user.middleName = null;
+        }
         $.mobile.loading('show');
-//        scope.user.customPUT(scope.user, scope.user.userId).then(function() {
-        $.mobile.loading('hide');
-        $.mobile.changePage('#home-user');
-//        });
+        Restangular.one('users', $scope.user.id).customPUT($scope.user).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Profile Updated Successfully.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#home-user');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Could not update Profile Successfully. ' +
+              'Email might already exists or Old Password is incorrect.');
+          statusPopup.popup('open');
+          console.log('Profile Error', err);
+        });
       };
 
     },

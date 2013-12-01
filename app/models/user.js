@@ -59,6 +59,159 @@ module.exports.get = function(id, callback) {
   });
 };
 
+module.exports.update = function(user, AdminReq, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      console.log('userInfo', user);
+      var sql1, sql2, sql3, sql4, sql5;
+      var params1, params2, params3, params4, params5;
+      sql1 = 'UPDATE user_info ' +
+          'SET user_first_name = ?, user_middle_name = ?, user_last_name = ?, user_telephone = ? ' +
+          'WHERE user_id = ?';
+      params1 = [user.firstName, user.middleName, user.lastName, user.telephone, user.id];
+      if(user.password) {
+        sql2 = 'UPDATE user_login_info ' +
+            'SET user_login_email = LCASE(?), user_login_password = SHA1(?) ' +
+            'WHERE user_login_id = ?';
+        params2 = [user.email, user.password, user.id];
+      } else {
+        sql2 = 'UPDATE user_login_info ' +
+            'SET user_login_email = LCASE(?) ' +
+            'WHERE user_login_id = ?';
+        params2 = [user.email, user.id];
+      }
+      sql3 = 'SELECT * FROM user_login_info WHERE user_login_password = SHA1(?) AND user_login_id = ?';
+      params3 = [user.oldPassword, user.id];
+      // TODO <-- maybe in future compare current questions and actually update/insert those needed
+      sql4 = 'UPDATE question_answer_history SET answer_status = 0 WHERE answer_user_id = ?';
+      sql5 = 'INSERT INTO question_answer_history ' +
+          '(answer_question_id, answer_user_id, answer_content, answer_status) ' +
+          'VALUES ?';
+      params4 = [user.id];
+      params5 = [
+        [
+          [user.question1, user.id, user.questionAnswer1, true],
+          [user.question2, user.id , user.questionAnswer2, true],
+          [user.question3, user.id, user.questionAnswer3, true]
+        ]
+      ];
+
+      if(AdminReq) { // Admin Updating User
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          }
+          else {
+            connection.query(sql1, params1, function(err) {
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              } else {
+                connection.query(sql2, params2, function(err) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    connection.commit(function(err) {
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        callback(null, user);
+                        console.log('User Updated Successfully.');
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+      else { // User Updating his Profile
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          }
+          else {
+            connection.query(sql3, params3, function(err, result) {
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              }
+              else {
+                if(result.length === 1) { // user matched
+                  connection.query(sql1, params1, function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      connection.query(sql2, params2, function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          connection.query(sql4, params4, function(err) {
+                            if(err) {
+                              connection.rollback(function() {
+                                callback(err);
+                              });
+                            } else {
+                              connection.query(sql5, params5, function(err) {
+                                if(err) {
+                                  connection.rollback(function() {
+                                    callback(err);
+                                  });
+                                } else {
+                                  connection.commit(function(err) {
+                                    if(err) {
+                                      connection.rollback(function() {
+                                        callback(err);
+                                      });
+                                    } else {
+                                      callback(null, user);
+                                      console.log('User Updated Successfully.');
+                                    }
+                                  });
+                                }
+                              });
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+                else { // user not matched
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, null);
+                      console.log('Old Password is incorrect.');
+                    }
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+    }
+  });
+};
+
 module.exports.authenticate = function(username, password, callback) {
   executor.execute(function(err, connection) {
     if(err) {
