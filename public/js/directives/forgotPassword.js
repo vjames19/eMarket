@@ -14,35 +14,35 @@ angular.module('eMarketApp').directive('forgotPassword', function(Restangular, H
 
       var page = $($element[0]);
 
-      var changedPopup = page.find('#forgot-changeStatus');
-      var changedMessage = page.find('#forgot-changeStatusMessage');
+      var statusPopup = page.find('#forgot-statusPopup');
+      var statusPopupMessage = page.find('#forgot-statusPopupMessage');
 
       $scope.submit = function() {
         var questions = [$scope.forgot.question1, $scope.forgot.question2, $scope.forgot.question3];
         if(window._.uniq(questions).length !== 3) {
-          changedMessage.text('All three questions must be different.');
-          changedPopup.popup('open');
+          statusPopupMessage.text('All three questions must be different.');
+          statusPopup.popup('open');
           return;
         }
         if($scope.forgot.newPassword !== $scope.forgot.newPasswordConfirm) {
-          changedMessage.text('Passwords do not match.');
-          changedPopup.popup('open');
+          statusPopupMessage.text('Passwords do not match.');
+          statusPopup.popup('open');
           return;
         }
         $.mobile.loading('show');
         Restangular.all('../forgot').post($scope.forgot).then(function() {
           $.mobile.loading('hide');
-          changedMessage.text('Password Changed to ' + $scope.forgot.newPassword);
-          changedPopup.popup('open');
-          changedPopup.on({
+          statusPopupMessage.text('Password Changed to ' + $scope.forgot.newPassword);
+          statusPopup.popup('open');
+          statusPopup.on({
             popupafterclose: function() {
               $.mobile.changePage('#index-page');
             }
           });
         }, function(err) {
           $.mobile.loading('hide');
-          changedMessage.text('Incorrect Information');
-          changedPopup.popup('open');
+          statusPopupMessage.text('User not found with the information given.');
+          statusPopup.popup('open');
           console.log(err);
         });
       };

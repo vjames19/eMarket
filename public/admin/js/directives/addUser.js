@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Restangular, Patterns) {
+    controller: function($scope, $element, Restangular, Patterns) {
 
       $scope.patternFirstName = Patterns.user.firstName;
       $scope.patternMiddleName = Patterns.user.middleName;
@@ -31,15 +31,63 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
       // initial value for display
       $scope.addUser = { cardType: 'Visa' };
 
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#addUser-statusPopup');
+      var statusPopupMessage = page.find('#addUser-statusPopupMessage');
+
       $scope.submit = function() {
+        if($scope.addUser.password !== $scope.addUser.passwordConfirm) {
+          statusPopupMessage.text('Passwords do not match.');
+          statusPopup.popup('open');
+          return;
+        }
+        var questions = [
+          $scope.addUser.securityQuestion1,
+          $scope.addUser.securityQuestion2,
+          $scope.addUser.securityQuestion3
+        ];
+        if(window._.uniq(questions).length !== 3) {
+          statusPopupMessage.text('All three questions must be different.');
+          statusPopup.popup('open');
+          return;
+        }
+        if(!$scope.addUser.middleName) {
+          $scope.addUser.middleName = null;
+        }
+        if(!$scope.addUser.mailingGeoRegion) {
+          $scope.addUser.mailingGeoRegion = null;
+        }
+        if(!$scope.addUser.billingGeoRegion) {
+          $scope.addUser.billingGeoRegion = null;
+        }
+        if($scope.addUser.sameAsMailing === true) {
+          $scope.addUser.billingAddress = $scope.addUser.mailingAddress;
+          $scope.addUser.billingCountry = $scope.addUser.mailingCountry;
+          $scope.addUser.billingGeoRegion = $scope.addUser.mailingGeoRegion;
+          $scope.addUser.billingCity = $scope.addUser.mailingCity;
+          $scope.addUser.billingZipCode = $scope.addUser.mailingZipCode;
+        }
+        $scope.addUser.cardExpDate = $scope.addUser.cardExpDate + '-01'; // Default Day
         $.mobile.loading('show');
-//        Restangular.all('users').post($scope.addUser.user).then(function(user) {
-//          Restangular.one('users', user.userId).all('mailAddresses').post($scope.addUser.mailAddress);
-//          Restangular.one('users', user.userId).all('billAddresses').post($scope.addUser.billAddress);
-//          Restangular.one('users', user.userId).all('creditCards').post($scope.addUser.creditCard);
-        $.mobile.loading('hide');
-        $.mobile.changePage('#user-accounts');
-//        });
+        Restangular.all('../register').post($scope.addUser).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Registration successful. ' +
+              'The username is ' + $scope.addUser.username + '. ' +
+              'The password is ' + $scope.addUser.password + '.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#user-accounts'); //Force user to put hes newly registered credentials
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Could not Finish Registration. ' +
+              'Username or Email might be already registered.');
+          statusPopup.popup('open');
+          console.log('AddUser Error', err);
+        });
       };
 
     },

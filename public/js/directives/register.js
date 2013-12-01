@@ -32,13 +32,13 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
 
       var page = $($element[0]);
 
-      var changedPopup = page.find('#register-changeStatus');
-      var changedMessage = page.find('#register-changeStatusMessage');
+      var statusPopup = page.find('#register-statusPopup');
+      var statusPopupMessage = page.find('#register-statusPopupMessage');
 
       $scope.submit = function() {
         if($scope.register.password !== $scope.register.passwordConfirm) {
-          changedMessage.text('Passwords do not match.');
-          changedPopup.popup('open');
+          statusPopupMessage.text('Passwords do not match.');
+          statusPopup.popup('open');
           return;
         }
         var questions = [
@@ -47,43 +47,44 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
           $scope.register.securityQuestion3
         ];
         if(window._.uniq(questions).length !== 3) {
-          changedMessage.text('All three questions must be different.');
-          changedPopup.popup('open');
+          statusPopupMessage.text('All three questions must be different.');
+          statusPopup.popup('open');
           return;
         }
         if(!$scope.register.middleName) {
           $scope.register.middleName = null;
         }
-        if(!$scope.register.mailingGeographicalRegion) {
-          $scope.register.mailingGeographicalRegion = null;
+        if(!$scope.register.mailingGeoRegion) {
+          $scope.register.mailingGeoRegion = null;
         }
-        if(!$scope.register.billingGeographicalRegion) {
-          $scope.register.billingGeographicalRegion = null;
+        if(!$scope.register.billingGeoRegion) {
+          $scope.register.billingGeoRegion = null;
         }
         if($scope.register.sameAsMailing === true) {
           $scope.register.billingAddress = $scope.register.mailingAddress;
           $scope.register.billingCountry = $scope.register.mailingCountry;
-          $scope.register.billingGeographicalRegion = $scope.register.mailingGeographicalRegion;
+          $scope.register.billingGeoRegion = $scope.register.mailingGeoRegion;
           $scope.register.billingCity = $scope.register.mailingCity;
           $scope.register.billingZipCode = $scope.register.mailingZipCode;
         }
+        $scope.register.cardExpDate = $scope.register.cardExpDate + '-01'; // Default Day
         $.mobile.loading('show');
         Restangular.all('../register').post($scope.register).then(function() {
           $.mobile.loading('hide');
-          changedMessage.text('Registration successful. ' +
+          statusPopupMessage.text('Registration successful. ' +
               'Your username is ' + $scope.register.username + '. ' +
               'Your password is ' + $scope.register.password + '.');
-          changedPopup.popup('open');
-          changedPopup.on({
+          statusPopup.popup('open');
+          statusPopup.on({
             popupafterclose: function() {
               $.mobile.changePage('#index-page'); //Force user to put hes newly registered credentials
             }
           });
         }, function(err) {
           $.mobile.loading('hide');
-          changedMessage.text('Could not Finish Registration. ' +
+          statusPopupMessage.text('Could not Finish Registration. ' +
               'Username or Email might be already registered.');
-          changedPopup.popup('open');
+          statusPopup.popup('open');
           console.log('Registration Error', err);
         });
       };

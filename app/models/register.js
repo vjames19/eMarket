@@ -5,10 +5,10 @@ var _ = require('underscore');
 
 var WHITELIST = [
   'firstName', 'middleName', 'lastName', 'telephone', 'email', 'username', 'password',
-  'mailingAddress', 'mailingCountry', 'mailingGeographicalRegion', 'mailingCity', 'mailingZipCode',
+  'mailingAddress', 'mailingCountry', 'mailingGeoRegion', 'mailingCity', 'mailingZipCode',
   'sameAsMailing',
-  'billingAddress', 'billingCountry', 'billingGeographicalRegion', 'billingCity', 'billingZipCode',
-  'cardName', 'cardType', 'cardNumber', 'cardExpirationDate', 'cardSecurityCode',
+  'billingAddress', 'billingCountry', 'billingGeoRegion', 'billingCity', 'billingZipCode',
+  'cardName', 'cardType', 'cardNumber', 'cardExpDate', 'cardSecurityCode',
   'securityQuestion1', 'securityQuestion2', 'securityQuestion3',
   'securityAnswer1', 'securityAnswer2', 'securityAnswer3'];
 
@@ -103,15 +103,15 @@ module.exports.create = function(register, callback) {
                           var params4;
                           if(register.sameAsMailing === true) {
                             params4 = [
-                              [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
+                              [register.mailingAddress, register.mailingCountry, register.mailingGeoRegion,
                                 register.mailingCity, register.mailingZipCode]
                             ];
                           }
                           else {
                             params4 = [
-                              [register.mailingAddress, register.mailingCountry, register.mailingGeographicalRegion,
+                              [register.mailingAddress, register.mailingCountry, register.mailingGeoRegion,
                                 register.mailingCity, register.mailingZipCode],
-                              [register.billingAddress, register.billingCountry, register.billingGeographicalRegion,
+                              [register.billingAddress, register.billingCountry, register.billingGeoRegion,
                                 register.billingCity, register.billingZipCode]
                             ];
                           }
@@ -176,7 +176,7 @@ module.exports.create = function(register, callback) {
                                           'VALUES (?, ?, ?, ?, ?, ?, ?, TRUE)';
 
                                       var params7 = [userId, billId, register.cardType, register.cardName,
-                                        register.cardExpirationDate, register.cardNumber, register.cardSecurityCode];
+                                        register.cardExpDate, register.cardNumber, register.cardSecurityCode];
                                       connection.query(sql7, params7, function(err) {
                                         if(err) {
                                           connection.rollback(function() {
