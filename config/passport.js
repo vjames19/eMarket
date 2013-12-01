@@ -19,7 +19,9 @@ module.exports = function(passport) {
   passport.deserializeUser(function(user, done) {
     if(user.role === 'admin') {
       Admin.get(user.id, function(err, admin) {
-        if(_.isEmpty(admin)) {
+        if(err) {
+          done(err, false);
+        } else if(_.isEmpty(admin)) {
           done(null, false);
         } else {
           done(null, admin);
@@ -27,7 +29,9 @@ module.exports = function(passport) {
       });
     } else {
       User.get(user.id, function(err, user) {
-        if(_.isEmpty(user)) {
+        if(err) {
+          done(err, false);
+        } else if(_.isEmpty(user)) {
           done(null, false);
         } else {
           done(null, user);
@@ -63,4 +67,5 @@ module.exports = function(passport) {
           }
         });
       }));
+
 };
