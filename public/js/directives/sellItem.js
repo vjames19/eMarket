@@ -8,6 +8,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
     replace: true,
     controller: function($scope, Patterns) {
 
+      $scope.patternPicture = Patterns.item.picture;
       $scope.patternTitle = Patterns.item.title;
       $scope.patternBrand = Patterns.item.brand;
       $scope.patternModel = Patterns.item.model;
@@ -68,10 +69,16 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                 });
                 this.on('removedfile', function() {
                   tempFile = null;
+                  if(scope.item.picture) {
+                    delete scope.item.picture;
+                    scope.$digest();
+                  }
                 });
                 this.on('success', function(file, newFileName) {
                   console.log('Current Picture Name ', newFileName);
-                  scope.item.picture = 'pictures/' + newFileName;
+                  scope.item.picture = '/pictures/' + newFileName;
+                  scope.imageDraft = false;
+                  scope.$digest();
                 });
               }
             }
@@ -101,6 +108,8 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
           if(SellItem.isDraft) {
             scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
             freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
+          } else {
+            freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
           }
         });
 

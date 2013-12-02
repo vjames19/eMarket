@@ -27,6 +27,13 @@
 
     <form name="sellItemForm">
 
+      <label for="sellItem-picture"></label>
+      <input type="hidden" name="sellItemPicture" id="sellItem-picture"
+             ng-model="item.picture" ng-pattern="patternPicture" ng-required="true">
+      <div ng-show="sellItemForm.sellItemPicture.$error.pattern" class="labelError">
+        <strong><em>Wrong Format.</em></strong>
+      </div>
+
       <div data-role="collapsible-set">
 
         <div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed="false">
