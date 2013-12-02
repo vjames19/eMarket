@@ -98,3 +98,18 @@ module.exports.update = function(card, userId, callback) {
     }
   });
 };
+
+module.exports.remove = function(card, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'UPDATE credit_card_info ' +
+                'SET credit_card_status = FALSE ' +
+                'WHERE credit_card_id = ?';
+      connection.query(sql, [card.id], function(err) {
+        callback(err, card);
+      });
+    }
+  });
+};
