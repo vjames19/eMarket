@@ -12,10 +12,6 @@ angular.module('eMarketApp').directive('homeUser', function(User, Carousel, Help
 
       $scope.setItem = Product.setItem;
 
-      $scope.isDraft = function(isDraft) {
-        SellItem.isDraft = angular.copy(isDraft);
-      };
-
     },
     link: function(scope, elem) {
 

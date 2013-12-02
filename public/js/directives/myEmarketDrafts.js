@@ -24,8 +24,6 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
           Helper.refreshList(draftList);
         });
 
-        SellItem.isDraft = true;
-
       });
 
     }

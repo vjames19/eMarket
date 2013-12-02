@@ -78,6 +78,7 @@
             <td><em>{{ item.quantity }}</em></td>
           </tr>
         </table>
+        <p class="wrap-text x-small-text">*Note: Quantity refers to 'Buy It Now Quantity'.</p>
       </li>
       <li>
         <table>
@@ -90,6 +91,10 @@
       <li>
         <table>
           <tr>
+            <td><strong>Category:</strong></td>
+            <td><em>{{ item.categoryName }}</em></td>
+          </tr>
+          <tr>
             <td><strong>Condition:</strong></td>
             <td><em>{{ item.condition }}</em></td>
           </tr>
@@ -97,9 +102,9 @@
       </li>
       <li>
         <table>
-          <tr>
-            <th colspan="2"><strong>Description</strong></th>
-          </tr>
+          <!--<tr>-->
+            <!--<th colspan="2"><strong>Description</strong></th>-->
+          <!--</tr>-->
           <tr>
             <td><strong>Brand:</strong></td>
             <td><em>{{item.brand}}</em></td>

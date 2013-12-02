@@ -6,7 +6,7 @@ app.config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('api/');
 });
 
-app.run(function($rootScope, $location, Auth, Product) {
+app.run(function($rootScope, $location, Auth, Product, SellItem) {
 
   var history = [];
   var itemHistory = [];
@@ -20,6 +20,11 @@ app.run(function($rootScope, $location, Auth, Product) {
       history = [];
       itemHistory = [];
       back = false;
+      SellItem.isDraft = false;
+    }
+
+    if($location.path().indexOf('my-emarket-drafts') >= 0){
+      SellItem.isDraft = true;
     }
 
     if(!Auth.isLoggedIn() && !Auth.isValidUnAuthPath($location.path())) {
