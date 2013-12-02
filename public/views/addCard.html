@@ -43,16 +43,23 @@
         <label for="addCard-associatedAddress"><strong>Associated Address</strong></label>
         <select name="addCardAssociatedAddress" id="addCard-associatedAddress" data-theme="a"
                 ng-model="card.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses"
+                ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
           <option value="" ng-hide="card.addressId">Please Choose</option>
         </select>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
-      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addCardForm.$valid]">Submit</button>
       </div>
     </form>
+
+  </div>
+
+  <div data-role="popup" id="addCard-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#add-card" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="addCard-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

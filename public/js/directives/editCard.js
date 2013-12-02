@@ -6,26 +6,42 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Patterns) {
+    controller: function($scope, $element, Patterns) {
 
       $scope.patternOwnerName = Patterns.user.fullName;
       $scope.patternExpDate = Patterns.card.expDate;
       $scope.patternNumber = Patterns.card.number;
       $scope.patternCsv = Patterns.card.csv;
 
-      $scope.submit = function() {
-//        console.log($scope.cardInfo);
-        $.mobile.loading('show');
-//        User.me().one('creditCards', $scope.cardInfo.creditCardId).customPUT($scope.cardInfo)
-//            .then(function(cardInfo) {
-//              $scope.cardInfo = cardInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#payment-options');
-//            }, function(err) {
-//              alert(err);
-//            });
-      };
+      var page = $($element[0]);
 
+      var statusPopup = page.find('#editCard-statusPopup');
+      var statusPopupMessage = page.find('#editCard-statusPopupMessage');
+
+      $scope.submit = function() {
+        $scope.cardInfo.expirationDate = $scope.cardInfo.expirationDate + '-01';
+        $.mobile.loading('show');
+        User.me().one('creditCards', $scope.cardInfo.id).customPUT($scope.cardInfo).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Card Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Card Not Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+          console.log('Card Update Error', err);
+        });
+      };
     },
     link: function(scope, elem) {
 

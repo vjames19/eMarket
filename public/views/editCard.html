@@ -42,8 +42,8 @@
         </div>
         <label for="editCard-associatedAddress"><strong>Associated Address</strong></label>
         <select name="editCardAssociatedAddress" id="editCard-associatedAddress" data-theme="a"
-                ng-model="cardInfo.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses"
+                ng-model="cardInfo.billId"
+                ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
         </select>
       </div>
@@ -52,6 +52,12 @@
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editCardForm.$valid]">Submit</button>
       </div>
     </form>
+  </div>
+
+  <div data-role="popup" id="editCard-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#edit-card" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="editCard-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

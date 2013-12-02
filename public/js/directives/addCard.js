@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('addCard', function(User, Helper) {
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Patterns) {
+    controller: function($scope, $element, Patterns) {
 
       $scope.patternOwnerName = Patterns.user.fullName;
       $scope.patternExpDate = Patterns.card.expDate;
@@ -16,11 +16,35 @@ angular.module('eMarketApp').directive('addCard', function(User, Helper) {
       // init value
       $scope.card = {cardType: 'Visa'};
 
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#addCard-statusPopup');
+      var statusPopupMessage = page.find('#addCard-statusPopupMessage');
+
       $scope.submit = function() {
+        statusPopup.off();
+        $scope.card.expirationDate = $scope.card.expirationDate + '-01';
         $.mobile.loading('show');
-//        User.me().all('creditCards').post($scope.card); // TODO <-- missing .then()
-        $.mobile.loading('hide');
-        $.mobile.changePage('#payment-options');
+        User.me().all('creditCards').post($scope.card).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Card Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Card Not Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+          console.log('Card Creation Error', err);
+        });
       };
 
     },
