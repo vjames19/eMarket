@@ -21,7 +21,7 @@
 
     <div id="sellItem-pictureContainer" data-role="none" class="dropzone-previews" style="text-align: center"></div>
 
-    <div data-role="none" ng-show="imageDraft" style="margin: 15px auto; width: 50%">
+    <div data-role="none" ng-show="showPicture" style="margin: 15px auto; width: 50%">
       <img ng-src="{{ item.picture }}" class="item-photo-big ui-corner-all" src=""/>
     </div>
 
@@ -145,7 +145,7 @@
 
   <div data-role="footer" data-theme="a" class="ui-footer">
     <a href="#sell-item-preview" data-role="button" class="footer-button" data-theme="b"
-       ng-click="setPreviewItemInfo(item)"
+       ng-click="setPreviewItemInfo(item); setDraftInfo(item)"
        ng-class="{false: 'ui-disabled'}[sellItemForm.$valid]">Preview</a>
   </div>
 

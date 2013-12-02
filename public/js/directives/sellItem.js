@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       $scope.patternShipping = Patterns.item.shipping;
 
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
+      $scope.setDraftInfo = SellItem.setDraft;
 
     },
     link: function(scope, elem) {
@@ -77,7 +78,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                 this.on('success', function(file, newFileName) {
                   console.log('Current Picture Name ', newFileName);
                   scope.item.picture = '/pictures/' + newFileName;
-                  scope.imageDraft = false;
+                  scope.showPicture = false;
                   scope.$digest();
                 });
               }
@@ -94,14 +95,9 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
       page.on('pagebeforeshow', function() {
 
-        if(!SellItem.isDraft) {
-          scope.item = {condition: 'New'};
-          SellItem.setDraft(scope.item);
-          scope.imageDraft = false;
-        } else {
-          scope.item = SellItem.getDraft();
-          scope.imageDraft = true;
-        }
+        scope.item = SellItem.getDraft();
+
+        scope.showPicture = scope.item.picture;
 
         setTimeout(function() {
           Helper.refreshSelect(conditionSelect);

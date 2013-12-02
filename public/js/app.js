@@ -21,10 +21,14 @@ app.run(function($rootScope, $location, Auth, Product, SellItem) {
       itemHistory = [];
       back = false;
       SellItem.isDraft = false;
+      SellItem.setDraft({condition: 'New'});
+      SellItem.setItemPreview({});
     }
 
     if($location.path().indexOf('my-emarket-drafts') >= 0){
       SellItem.isDraft = true;
+      SellItem.setDraft({});
+      SellItem.setItemPreview({});
     }
 
     if(!Auth.isLoggedIn() && !Auth.isValidUnAuthPath($location.path())) {
