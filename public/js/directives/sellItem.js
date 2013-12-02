@@ -68,7 +68,6 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                 });
                 this.on('removedfile', function() {
                   tempFile = null;
-                  delete scope.item.picture;
                 });
                 this.on('success', function(file, newFileName){
                   console.log('Current Picture Name ', newFileName);
@@ -82,7 +81,6 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
       page.on('pagehide', function() {
 
-        delete scope.item.picture;
         dropZone.removeAllFiles(true);
 
       });

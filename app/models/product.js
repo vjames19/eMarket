@@ -101,3 +101,73 @@ module.exports.searchByCategory = function(parentCategoryId, callback) {
     }
   });
 };
+
+module.exports.create = function(product, userId, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql1 = 'INSERT INTO product_specification ' +
+          '(product_spec_category_id, product_spec_name, product_spec_nonbid_price, ' +
+          'product_spec_starting_bid_price, product_spec_bid_end_date, product_spec_shipping_price, ' +
+          'product_spec_quantity, product_spec_description, product_spec_condition, product_spec_picture, ' +
+          'product_spec_brand, product_spec_model, product_spec_dimensions, product_spec_is_draft) ' +
+          'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+      var params1 = [
+        product.categoryId, product.productName, product.nonbidPrice,
+        product.startingBidPrice, product.bidEndDate, product.shippingPrice,
+        product.quantity - 1, product.description, product.condition, product.picture,
+        product.brand, product.model, product.dimensions, false
+      ];
+      var sql2 = 'INSERT INTO product_quantity_record ' +
+          '(product_quantity_spec_id, product_quantity_remaining) ' +
+          'VALUES (?, ?)';
+      var sql3 = 'INSERT INTO product_info ' +
+          '(product_seller_id, product_info_spec_id, product_creation_date, product_depletion_date) ' +
+          'VALUES (?, ?, CURRENT_TIMESTAMP, NULL)';
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          connection.query(sql1, params1, function(err, insertStatus) {
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              var specId = insertStatus.insertId;
+              var params2 = [specId, product.quantity - 1];
+              connection.query(sql2, params2, function(err) {
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                } else {
+                  var params3 = [userId, specId];
+                  connection.query(sql3, params3, function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      connection.commit(function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          callback(null, product);
+                          console.log('Product Created Successfully.');
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+};

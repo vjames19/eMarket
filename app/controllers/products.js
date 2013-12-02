@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var Product = require('../models/product.js');
-var ProductBids = require('../models/productBids');
+var ProductBids = require('../models/productBids.js');
 
 var products = {
   1: {
@@ -47,8 +47,10 @@ var products = {
 
 exports.findProductById = function(req, res, next, id) {
   Product.get(id, function(err, product) {
-    if(_.isEmpty(product)) {
-      res.jsonp(404, {message: 'Product with id ' + id + ' not found'});
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(product)) {
+      res.jsonp(404, {message: 'Product with id ' + id + ' not found.'});
     } else {
       req.product = product;
       next();
@@ -58,20 +60,37 @@ exports.findProductById = function(req, res, next, id) {
 
 exports.readAllProducts = function(req, res) {
   Product.getAll(function(err, products) {
-    res.jsonp(products);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(products)) {
+      res.jsonp(404, {message: 'Products not found'});
+    } else {
+      res.jsonp(200, products);
+    }
   });
-};
-
-exports.createProduct = function(req, res) {
-  var product = req.body;
-  product.productId = _.keys(products).length + 1;
-  products[product.productId] = product;
-  res.jsonp(product);
 };
 
 exports.readProduct = function(req, res) {
   res.jsonp(req.product);
 };
+
+exports.createProduct = function(req, res) {
+  var userId = req.user.id;
+  Product.create(req.body, userId, function(err, product) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(201, product);
+    }
+  });
+};
+
+//exports.createProduct = function(req, res) {
+//  var product = req.body;
+//  product.productId = _.keys(products).length + 1;
+//  products[product.productId] = product;
+//  res.jsonp(product);
+//};
 
 exports.updateProduct = function(req, res) {
   _.extend(req.product, req.body);
@@ -132,7 +151,9 @@ exports.deleteProductBid = function(req, res) {
 
 exports.findProductBidById = function(req, res, next, id) {
   ProductBids.get(req.params.productId, id, function(err, productBid) {
-    if(_.isEmpty(productBid)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(productBid)) {
       res.jsonp(404, {message: 'Product Bid with id ' + id + ' not found'});
     } else {
       req.productBid = productBid;
@@ -143,7 +164,13 @@ exports.findProductBidById = function(req, res, next, id) {
 
 exports.readAllProductBids = function(req, res) {
   ProductBids.getAll(req.params.productId, function(err, productBids) {
-    res.jsonp(productBids);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(productBids)) {
+      res.jsonp(404, {message: 'Product Bids not found'});
+    } else {
+      res.jsonp(200, productBids);
+    }
   });
 };
 
