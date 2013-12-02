@@ -21,8 +21,6 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
 
       $scope.setPreviewItemInfo = SellItem.setItemPreview;
 
-      $scope.item = {condition: 'New'};
-
     },
     link: function(scope, elem) {
 
@@ -92,18 +90,19 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         if(!SellItem.isDraft) {
           scope.item = {condition: 'New'};
           SellItem.setDraft(scope.item);
-          setTimeout(function() { // Doesn't work without timeout...
-            Helper.refreshSelect(conditionSelect);
-          });
-          freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
+          scope.imageDraft = false;
         } else {
           scope.item = SellItem.getDraft();
-          Helper.refreshSelect(conditionSelect);
-          scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
-          freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
+          scope.imageDraft = true;
         }
 
-        console.log(scope.item);
+        setTimeout(function() {
+          Helper.refreshSelect(conditionSelect);
+          if(SellItem.isDraft) {
+            scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
+            freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
+          }
+        });
 
         Category.getList({flat: true}).then(function(categoryList) {
 
