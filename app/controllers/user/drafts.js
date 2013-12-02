@@ -104,7 +104,7 @@ exports.updateDraft = function(req, res) {
 
 exports.deleteDraft = function(req, res) {
   var userId = req.params.userId;
-  Drafts.remove(req.body, userId, function(err, draft) {
+  Drafts.remove(req.draft, userId, function(err, draft) {
     if(err) {
       res.jsonp(500, err);
     } else {

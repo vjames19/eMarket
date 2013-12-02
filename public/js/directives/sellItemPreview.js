@@ -65,10 +65,34 @@ angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Res
       };
 
       $scope.submitProduct = function() {
-//        statusPopup.off();
-//        $.mobile.loading('show');
-//        $scope.previewItemInfo.bidEndDate = $filter('date')(new Date($scope.previewItemInfo.bidEndDate), 'yyyy-MM-dd HH:mm:ss');
-//
+        statusPopup.off();
+        $.mobile.loading('show');
+        if(SellItem.isDraft) { // Delete the Draft, New Product
+          User.me().one('drafts', $scope.previewItemInfo.id).remove().then(function() {
+            $.mobile.loading('hide');
+            statusPopupMessage.text('Product Posted Successfully.');
+            statusPopup.popup('open');
+            statusPopup.on({
+              popupafterclose: function() {
+                $.mobile.changePage('#my-emarket-drafts');
+              }
+            });
+
+          }, function(err) {
+            $.mobile.loading('hide');
+            statusPopupMessage.text('Product Not Posted Successfully');
+            statusPopup.popup('open');
+            statusPopup.on({
+              popupafterclose: function() {
+                $.mobile.changePage('#my-emarket-drafts');
+              }
+            });
+            console.log('Draft Remove Error', err);
+          });
+        }
+        else { // No Draft Exists, New Product Only
+          // TODO: Coming Soon
+        }
       };
 
 //      $scope.submit = function() {
@@ -89,12 +113,11 @@ angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Res
 
         scope.previewItemInfo = SellItem.getItemPreview();
 
-        Restangular.one('categories', scope.previewItemInfo.categoryId).get().then(function(category){
+        Restangular.one('categories', scope.previewItemInfo.categoryId).get().then(function(category) {
 
           scope.previewItemInfo.categoryName = category.categoryName;
 
         });
-
 
       });
 
