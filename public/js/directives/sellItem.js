@@ -69,7 +69,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
                 this.on('removedfile', function() {
                   tempFile = null;
                 });
-                this.on('success', function(file, newFileName){
+                this.on('success', function(file, newFileName) {
                   console.log('Current Picture Name ', newFileName);
                   scope.item.picture = 'pictures/' + newFileName;
                 });
@@ -90,34 +90,24 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         if(!SellItem.isDraft) {
           scope.item = {};
           SellItem.setDraft({});
-          scope.imageDraft = false;
+          scope.item = {condition: 'New'};
+          setTimeout(function() { // Doesn't work without timeout...
+            Helper.refreshSelect(conditionSelect);
+          });
+          freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
+        } else {
+          scope.item = SellItem.getDraft();
+          setTimeout(function() { // Doesn't work without timeout...
+            Helper.refreshSelect(conditionSelect);
+            scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
+            freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
+          });
         }
 
         Category.getList({flat: true}).then(function(categoryList) {
+
           scope.categories = categoryList;
-
-          scope.item = SellItem.getDraft();
-
-          if(!SellItem.isDraft) {
-            scope.item = {condition: 'New'};
-          }
-
-          if(SellItem.isDraft) {
-
-            scope.imageDraft = true;
-            // Format for datetime-local input correct display
-            scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
-
-          }
-
-          if(SellItem.isDraft && scope.item.shippingPrice !== null) {
-            freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
-          } else {
-            freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');
-          }
-
           Helper.refreshSelect(categorySelect);
-          Helper.refreshSelect(conditionSelect);
 
         });
 
