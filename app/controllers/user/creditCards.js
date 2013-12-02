@@ -86,6 +86,11 @@ exports.updateCreditCard = function(req, res) {
 };
 
 exports.deleteCreditCard = function(req, res) {
-  delete creditCards[req.creditCard.creditCardId];
-  res.jsonp(req.creditCard);
+  CreditCards.remove(req.creditCard, function(err, creditCard) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(200, creditCard);
+    }
+  });
 };

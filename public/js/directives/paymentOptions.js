@@ -26,6 +26,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
       var cardList = page.find('#paymentOptions-cardList');
       var bankList = page.find('#paymentOptions-bankList');
 
+      var paymentOptionsPopup = page.find('#paymentOptions-cardOptionsPopup');
+      var statusPopup = page.find('#paymentOption-statusPopup');
+      var statusPopupMessage = page.find('#paymentOption-statusPopupMessage');
+
       var selectedCard = null;
       var selectedBank = null;
       var selectedCardIndex = null;
@@ -42,12 +46,33 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
       };
 
       scope.deleteCreditCard = function() {
+        paymentOptionsPopup.off();
+        statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('creditCards', selectedCard.creditCardId).remove().then(function() {
-        scope.creditCards.splice(selectedCardIndex, 1);
-        Helper.refreshList(cardList);
-        $.mobile.loading('hide');
-//        });
+        User.me().one('creditCards', selectedCard.id).remove().then(function() {
+          scope.creditCards.splice(selectedCardIndex, 1);
+          Helper.refreshList(cardList);
+          $.mobile.loading('hide');
+          paymentOptionsPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Card Deleted Successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          paymentOptionsPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not delete card.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+              });
+            }
+          });
+          console.log('Error Removing Card', err);
+        });
       };
 
       scope.deleteBankAccount = function() {
