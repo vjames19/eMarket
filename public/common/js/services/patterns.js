@@ -19,7 +19,7 @@ angular.module('eMarketApp').factory('Patterns', function() {
       telephone: /^\d{10}$/
     },
     card: {
-      expDate: /^20\d\d-(0[1-9]|1[012])$/,
+      expDate: /^20\d\d-(0[1-9]|1[0-2])$/,
       number: /^[0-9]{13,16}$/,
       csv: /^[0-9]{3,4}$/
     },
@@ -31,7 +31,7 @@ angular.module('eMarketApp').factory('Patterns', function() {
     question: {
       answer: /^([a-zA-Z0-9_ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){2,45}$/
     },
-    category:{
+    category: {
       name: /^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/
     },
     item: {
@@ -43,7 +43,7 @@ angular.module('eMarketApp').factory('Patterns', function() {
       bidPrice: /^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/,
       nonBidPrice: /^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/,
       quantity: /^[1-9]{1}([0-9]{1,2})?$/,
-      endDate: /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(:(\d{2}))?$/,
+      endDate: /^(20\d\d)-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[0-1])T(0\d|1\d|2[0-3]):(0\d|1\d|2\d|3\d|4\d|5\d)(:(0\d|1\d|2\d|3\d|4\d|5\d))?$/,
       shipping: /^0$|^([1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?)$/,
       placeBid: /^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/,
       buyItNow: /^[1-9]{1}([0-9]{1,12})?(\.[0-9]{1,2})?$/,
