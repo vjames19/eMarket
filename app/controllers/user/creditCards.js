@@ -57,7 +57,6 @@ exports.readAllCreditCards = function(req, res) {
     else {
       res.jsonp(200, creditCards);
     }
-
   });
 };
 

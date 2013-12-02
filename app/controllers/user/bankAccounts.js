@@ -36,10 +36,11 @@ var bankAccounts = {
 
 exports.findBankAccountById = function(req, res, next, id) {
   BankAccounts.get(req.params.userId, id, function(err, bankAccount) {
-    if(_.isEmpty(bankAccount)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(bankAccount)) {
       res.jsonp(404, {message: 'Bank Account with id ' + id + ' not found'});
-    }
-    else {
+    } else {
       req.bankAccount = bankAccount;
       next();
     }
@@ -48,16 +49,25 @@ exports.findBankAccountById = function(req, res, next, id) {
 
 exports.readAllBankAccounts = function(req, res) {
   BankAccounts.getAll(req.params.userId, function(err, bankAccounts) {
-    res.jsonp(bankAccounts);
+    if(err) {
+      res.jsonp(500, err);
+    } else if (_.isEmpty(bankAccounts)) {
+      res.jsonp(404, {message: 'Credit Cards not found'});
+    } else {
+      res.jsonp(bankAccounts);
+    }
   });
 
 };
 
 exports.createBankAccount = function(req, res) {
-  var bankAccount = req.body;
-  bankAccount.bankId = _.keys(bankAccounts).length + 1;
-  bankAccounts[bankAccount.bankId] = bankAccount;
-  res.jsonp(bankAccount);
+  BankAccounts.create(req.body, req.params.userId, function(err, bankAccount) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(201, bankAccount);
+    }
+  });
 };
 
 exports.readBankAccount = function(req, res) {
@@ -65,9 +75,13 @@ exports.readBankAccount = function(req, res) {
 };
 
 exports.updateBankAccount = function(req, res) {
-  _.extend(req.bankAccount, req.body);
-  bankAccounts[req.bankAccount.bankId] = req.bankAccount;
-  res.jsonp(req.bankAccount);
+  BankAccounts.update(req.body, req.params.userId, function(err, bankAccount) {
+    if(err) {
+      res.jsonp(500, err);
+    } else {
+      res.jsonp(200, bankAccount);
+    }
+  });
 };
 
 exports.deleteBankAccount = function(req, res) {

@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Patterns) {
+    controller: function($scope, $element, Patterns) {
 
       $scope.patternBankName = Patterns.bank.name;
       $scope.patternOwnerName = Patterns.user.fullName;
@@ -15,13 +15,34 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
 
       $scope.bank = {accountType: 'Checking'};
 
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#addBank-statusPopup');
+      var statusPopupMessage = page.find('#addBank-statusPopupMessage');
+
       $scope.submit = function() {
         $.mobile.loading('show');
-//        User.me().all('banks').post($scope.bank); // TODO <-- missing .then()
-        $.mobile.loading('hide');
-        $.mobile.changePage('#payment-options');
+        User.me().all('banks').post($scope.bank).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Bank Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Bank Not Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+          console.log('Bank Creation Error', err);
+        });
       };
-
     },
     link: function(scope, elem) {
 

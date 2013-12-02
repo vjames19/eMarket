@@ -42,7 +42,7 @@
         <label for="addBank-associatedAddress"><strong>Associated Address</strong></label>
         <select name="addBankAssociatedAddress" id="addBank-associatedAddress" data-theme="a"
                 ng-model="bank.addressId"
-                ng-options="bill.addressId as bill.address for bill in billAddresses"
+                ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
           <option value="" ng-hide="bank.addressId">Please Choose</option>
         </select>
@@ -52,6 +52,12 @@
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addBankForm.$valid]">Submit</button>
       </div>
     </form>
+  </div>
+
+  <div data-role="popup" id="addBank-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#add-bank" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="addBank-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

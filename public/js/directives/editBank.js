@@ -6,26 +6,43 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Patterns) {
+    controller: function($scope, $element, Patterns) {
 
       $scope.patternBankName = Patterns.bank.name;
       $scope.patternOwnerName = Patterns.user.fullName;
       $scope.patternAccNumber = Patterns.bank.accNum;
       $scope.patternRoutingNumber = Patterns.bank.routing;
 
-      $scope.submit = function() {
-//        console.log($scope.cardInfo);
-        $.mobile.loading('show');
-//        User.me().one('banks', $scope.bankInfo.bankId).customPUT($scope.bankInfo)
-//            .then(function(bankInfo) {
-//              $scope.bankInfo = bankInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#payment-options');
-//            }, function(err) {
-//              alert(err);
-//            });
-      };
+      var page = $($element[0]);
 
+      var statusPopup = page.find('#editBank-statusPopup');
+      var statusPopupMessage = page.find('#editBank-statusPopupMessage');
+
+
+      $scope.submit = function() {
+        statusPopup.off();
+        $.mobile.loading('show');
+        User.me().one('banks', $scope.bankInfo.id).customPUT($scope.bankInfo).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Bank Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Bank Not Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#payment-options');
+            }
+          });
+          console.log('Bank Update Error', err);
+        });
+      };
     },
     link: function(scope, elem) {
 
