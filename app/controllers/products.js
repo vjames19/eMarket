@@ -4,51 +4,10 @@ var _ = require('underscore');
 var Product = require('../models/product.js');
 var ProductBids = require('../models/productBids.js');
 
-var products = {
-  1: {
-    productId: 1,
-    productSellerId: 1,
-    productCategory: 'books',
-    productName: 'harry potter',
-    productBuyItNowPrice: 100,
-    productStartingBidPrice: 80,
-    productCurrentBidPrice: 89,
-    productBidEndDate: '07/07/2007',
-    productShippingPrice: 18.99,
-    productQuantity: 5,
-    productDescription: {
-      productCondition: 'New',
-      productPicture: '/img/products/users/1/z98how.png',
-      productBrand: 'pearson',
-      productModel: 'IBN:19238476',
-      productDimensions: '30x29x49'
-    }
-  },
-  2: {
-    productId: 2,
-    productSellerId: 9,
-    productCategory: 'computers',
-    productName: 'alienware',
-    productBuyItNowPrice: 1000.99,
-    productStartingBidPrice: 500.99,
-    productCurrentBidPrice: 800.99,
-    productBidEndDate: '07/07/2008',
-    productShippingPrice: 8.99,
-    productQuantity: 3,
-    productDescription: {
-      productCondition: 'Refurbished',
-      productPicture: '/img/products/users/9/z98gyu.png',
-      productBrand: 'dell',
-      productModel: 'M179385',
-      productDimensions: '19x30x25'
-    }
-  }
-};
-
 exports.findProductById = function(req, res, next, id) {
   Product.get(id, function(err, product) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(product)) {
       res.jsonp(404, {message: 'Product with id ' + id + ' not found.'});
     } else {
@@ -61,9 +20,9 @@ exports.findProductById = function(req, res, next, id) {
 exports.readAllProducts = function(req, res) {
   Product.getAll(function(err, products) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(products)) {
-      res.jsonp(404, {message: 'Products not found'});
+      res.jsonp(404, {message: 'Products not found.'});
     } else {
       res.jsonp(200, products);
     }
@@ -71,90 +30,37 @@ exports.readAllProducts = function(req, res) {
 };
 
 exports.readProduct = function(req, res) {
-  res.jsonp(req.product);
+  if(!req.product) {
+    res.jsonp(404, {message: 'Product not found.'});
+  } else {
+    res.jsonp(200, req.product);
+  }
 };
 
 exports.createProduct = function(req, res) {
-  var userId = req.user.id;
-  Product.create(req.body, userId, function(err, product) {
+  Product.create(req.body, req.user.id, function(err, product) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(201, product);
     }
   });
 };
 
-//exports.createProduct = function(req, res) {
-//  var product = req.body;
-//  product.productId = _.keys(products).length + 1;
-//  products[product.productId] = product;
-//  res.jsonp(product);
-//};
-
 exports.updateProduct = function(req, res) {
-  _.extend(req.product, req.body);
-  products[req.product.productId] = req.product;
-  res.jsonp(req.product);
+  res.jsonp(501);
 };
 
 exports.deleteProduct = function(req, res) {
-  delete products[req.product.productId];
-  res.jsonp(req.product);
-};
-
-// Bid methods
-var bids = {
-  1: {
-    bidId: 1,
-    bidderId: 1,
-    bidProductId: 1,
-    bidAmount: 100
-  }
-};
-
-//exports.findProductBidById = function(req, res, next, id) {
-//  id = +id;
-//  if(!bids[id]) {
-//    res.jsonp(404, {message: 'not found'});
-//  } else {
-//    req.bid = bids[id];
-//    next();
-//  }
-//};
-//
-//exports.readAllProductBids = function(req, res) {
-//  res.jsonp(_.values(bids));
-//};
-
-exports.createProductBid = function(req, res) {
-  var bid = req.body;
-  bid.bidId = _.keys(bids).length + 1;
-  bids[bid.bidId] = bid;
-  res.jsonp(bid);
-};
-
-//exports.readProductBid = function(req, res) {
-//  res.jsonp(req.bid);
-//};
-
-exports.updateProductBid = function(req, res) {
-  _.extend(req.bid, req.body);
-  bids[req.bid.bidId] = req.bid;
-  res.jsonp(req.bid);
-};
-
-exports.deleteProductBid = function(req, res) {
-  delete bids[req.bid.bidId];
-  res.jsonp(req.bid);
+  res.jsonp(501);
 };
 
 exports.findProductBidById = function(req, res, next, id) {
   ProductBids.get(req.params.productId, id, function(err, productBid) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(productBid)) {
-      res.jsonp(404, {message: 'Product Bid with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Product Bid with id ' + id + ' not found.'});
     } else {
       req.productBid = productBid;
       next();
@@ -165,9 +71,9 @@ exports.findProductBidById = function(req, res, next, id) {
 exports.readAllProductBids = function(req, res) {
   ProductBids.getAll(req.params.productId, function(err, productBids) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(productBids)) {
-      res.jsonp(404, {message: 'Product Bids not found'});
+      res.jsonp(404, {message: 'Product Bids not found.'});
     } else {
       res.jsonp(200, productBids);
     }
@@ -175,5 +81,21 @@ exports.readAllProductBids = function(req, res) {
 };
 
 exports.readProductBid = function(req, res) {
-  res.jsonp(req.productBid);
+  if(!req.productBid) {
+    res.jsonp(404, {message: 'Product Bid not found.'});
+  } else {
+    res.jsonp(200, req.productBid);
+  }
+};
+
+exports.createProductBid = function(req, res) {
+  res.jsonp(501);
+};
+
+exports.updateProductBid = function(req, res) {
+  res.jsonp(501);
+};
+
+exports.deleteProductBid = function(req, res) {
+  res.jsonp(501);
 };

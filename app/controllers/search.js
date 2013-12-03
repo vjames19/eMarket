@@ -12,6 +12,6 @@ exports.searchProduct = function(req, res) {
       res.jsonp(results);
     });
   } else {
-    res.jsonp(400, {message: 'Need a query parameter'});
+    res.jsonp(400, {message: 'Need a query parameter.'});
   }
 };
