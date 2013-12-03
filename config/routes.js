@@ -1,27 +1,37 @@
 'use strict';
 
 module.exports = function(app, passport, auth) {
-  // TODO: Create routes and its respectives controllers.
-  // User Routes
+
+  //=================USER ROUTES================//
+
   var users = require('../app/controllers/users');
+
   app.post('/login', passport.authenticate('user'), function(req, res) {
-    res.jsonp(req.user);
+    if(!req.user) {
+      res.jsonp(404, {message: 'User not found.'});
+    } else {
+      res.jsonp(200, req.user);
+    }
   });
 
   app.post('/admin/login', passport.authenticate('admin'), function(req, res) {
-    res.jsonp(req.user);
+    if(!req.user) {
+      res.jsonp(404, {message: 'User not found.'});
+    } else {
+      res.jsonp(200, req.user);
+    }
   });
 
   app.get('/logout', function(req, res) {
-    req.logout();
-    res.jsonp(200);
+    if(!req.user) {
+      res.jsonp(404, {message: 'User not found.'});
+    } else {
+      req.logout();
+      res.jsonp(200);
+    }
   });
 
-  // Picture
-  var pictureCtrl = require('../app/controllers/picture');
-  app.post('/pictures', pictureCtrl.createPicture);
-
-  // TODO(vjames19): Secure users api
+  // TODO: Secure users API
 
   // User Routes
   app.post('/api/*', auth.requiresLogin);
@@ -148,7 +158,7 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
   app.get('/api/users/:userId/avgRating', users.readAvgRating);
 
-  // Security Questions
+  // Security Questions Routes
   app.param('questionId', users.findQuestionById);
   app.get('/api/questions', users.readAllQuestions);
   app.post('/api/questions', users.createQuestion);
@@ -156,7 +166,7 @@ module.exports = function(app, passport, auth) {
   app.put('/api/questions/:questionId', users.updateQuestion);
   app.del('/api/questions/:questionId', users.deleteQuestion);
 
-  // User Question and Answer Routes
+  // User Question Answer Routes
   app.param('questionAnswerId', users.findQuestionAnswerById);
   app.get('/api/users/:userId/questionsAnswers', users.readAllQuestionsAnswers);
   app.post('/api/users/:userId/questionsAnswers', users.createQuestionAnswer);
@@ -170,7 +180,15 @@ module.exports = function(app, passport, auth) {
 
   //=================NON USER ROUTES================//
 
-  // Category Routes //============COMMENTS BELOW ARE TEMPORARILY TO TEST==========//
+  // Search Routes
+  var search = require('../app/controllers/search.js');
+  app.get('/api/search', search.searchProduct);
+
+  // Picture Routes
+  var pictureCtrl = require('../app/controllers/picture');
+  app.post('/pictures', pictureCtrl.createPicture);
+
+  // Category Routes
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
@@ -178,12 +196,6 @@ module.exports = function(app, passport, auth) {
   app.get('/api/categories/:categoryId', categories.readCategory);
   app.put('/api/categories/:categoryId', categories.validate, categories.updateCategory);
   app.del('/api/categories/:categoryId', categories.deleteCategory);
-  //  app.post('/api/categories', auth.requiresLogin, categories.createCategory);
-  //  app.post('/api/categories', auth.requiresLogin, auth.admin.hasAuthorization, categories.createCategory);
-  //  app.put('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization,
-  // categories.updateCategory);
-  //  app.del('/api/categories/:categoryId', auth.requiresLogin, auth.admin.hasAuthorization,
-  // categories.deleteCategory);
 
   // Product Routes
   var products = require('../app/controllers/products');
@@ -197,11 +209,10 @@ module.exports = function(app, passport, auth) {
   // Bid Routes
   app.param('bidId', products.findProductBidById);
   app.get('/api/products/:productId/bids', products.readAllProductBids);
-  //  app.post('/api/products/:productId/bids', auth.requiresLogin, products.createProductBid);
+  app.post('/api/products/:productId/bids', products.createProductBid);
   app.get('/api/products/:productId/bids/:bidId', products.readProductBid);
-  //  app.put('/api/products/:productId/bids/:bidId', auth.requiresLogin, products.updateProductBid);
-  //  app.del('/api/products/:productId/bids/:bidId', auth.requiresLogin, auth.admin.hasAuthorization,
-  //      products.deleteProductBid);
+  app.put('/api/products/:productId/bids/:bidId', products.updateProductBid);
+  app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
 
   // Seller Routes
   var sellers = require('../app/controllers/sellers');
@@ -212,9 +223,12 @@ module.exports = function(app, passport, auth) {
   app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
   app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
 
+  // Seller Ratings Routes
   app.param('ratingId', sellers.findRatingById);
   app.get('/api/sellers/:sellerId/ratings', sellers.readAllRatings);
   app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
+
+  //================ADMINISTRATOR ROUTES================//
 
   // Admin Routes
   var admins = require('../app/controllers/admins');
@@ -247,12 +261,4 @@ module.exports = function(app, passport, auth) {
   app.get('/api/reportsWeekTotal', admins.readReportWeekTotal);
   app.get('/api/reportsMonthTotal', admins.readReportMonthTotal);
 
-  var search = require('../app/controllers/search.js');
-  app.get('/api/search', search.searchProduct);
-  // Should always be the last route.
-  // TODO: Find a better way to redirect.
-  //  app.get('*', function(req, res) {
-  //    //    res.redirect(404, '/');
-  //    res.redirect('/');
-  //  });
 };
