@@ -37,7 +37,13 @@ exports.readBillAddress = function(req, res) {
 };
 
 exports.createBillAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  BillingAddresses.create(req.body, req.params.userId, function(err, billAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(201, billAddress);
+    }
+  });
 };
 
 exports.updateBillAddress = function(req, res) {

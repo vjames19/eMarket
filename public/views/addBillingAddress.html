@@ -32,11 +32,10 @@
         <div ng-show="addBillForm.addBillCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
-        <label for="addBill-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" name="addBillGeographicalRegion" id="addBill-geographicalRegion"
-               maxlength="45" data-theme="a"
-               ng-model="billAddresses.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
-        <div ng-show="addBillForm.addBillGeographicalRegion.$error.pattern" class="labelError">
+        <label for="addBill-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="addBillGeoRegion" id="addBill-geoRegion" maxlength="45" data-theme="a"
+               ng-model="billAddresses.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="addBillForm.addBillGeoRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBill-zipCode"><strong>Zip Code</strong></label>
@@ -57,6 +56,12 @@
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addBillForm.$valid]">Submit</button>
       </div>
     </form>
+  </div>
+
+  <div data-role="popup" id="addBill-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#add-billing-address" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="addBill-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>

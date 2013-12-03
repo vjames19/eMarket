@@ -12,7 +12,7 @@ var DICTIONARY = {
   'address_address': 'address',
   'address_country': 'country',
   'address_city': 'city',
-  'address_geographical_region': 'geographicalRegion',
+  'address_geographical_region': 'geoRegion',
   'address_zipcode': 'zipCode'
 };
 

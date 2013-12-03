@@ -43,6 +43,7 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
           console.log('Card Update Error', err);
         });
       };
+
     },
     link: function(scope, elem) {
 

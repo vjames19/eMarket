@@ -12,7 +12,7 @@ var DICTIONARY = {
   'address_address': 'address',
   'address_country': 'country',
   'address_city': 'city',
-  'address_geographical_region': 'geographicalRegion',
+  'address_geographical_region': 'geoRegion',
   'address_zipcode': 'zipCode'
 };
 
@@ -56,6 +56,57 @@ module.exports.get = function(userId, billingId, callback) {
           'ORDER BY address_geographical_region';
       connection.query(sql, [userId, billingId], function(err, billingAddress) {
         callback(err, mapper.map(billingAddress[0], DICTIONARY));
+      });
+    }
+  });
+};
+
+module.exports.create = function(billAddress, userID, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql1 = 'INSERT INTO address_history ' +
+          '(address_address,address_country,address_city,address_geographical_region,address_zipcode) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var sql2 = 'INSERT INTO billing_info ' +
+          '(billing_user_id,billing_address_id,billing_recipient_name,billing_telephone,billing_status) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          var params1 = [billAddress.billAddress, billAddress.country, billAddress.city,
+            billAddress.geoRegion, billAddress.zipCode];
+          connection.query(sql1, params1, function(err, insertStatus) {
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              var addressId = insertStatus.insertId;
+              var params2 = [userID, addressId, billAddress.recipientName, billAddress.telephone, true];
+              connection.query(sql2, params2, function(err) {
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                } else {
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, billAddress);
+                      console.log('Billing Address Created Successfully.');
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
       });
     }
   });

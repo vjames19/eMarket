@@ -44,6 +44,7 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
           console.log('Bank Creation Error', err);
         });
       };
+
     },
     link: function(scope, elem) {
 

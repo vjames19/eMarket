@@ -18,7 +18,6 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
       var statusPopup = page.find('#editBank-statusPopup');
       var statusPopupMessage = page.find('#editBank-statusPopupMessage');
 
-
       $scope.submit = function() {
         statusPopup.off();
         $.mobile.loading('show');
@@ -43,6 +42,7 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
           console.log('Bank Update Error', err);
         });
       };
+
     },
     link: function(scope, elem) {
 

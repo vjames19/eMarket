@@ -32,11 +32,10 @@
         <div ng-show="addMailForm.addMailCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
-        <label for="addMail-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" name="addMailGeographicalRegion" id="addMail-geographicalRegion"
-               maxlength="45" data-theme="a"
-               ng-model="mailAddresses.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
-        <div ng-show="addMailForm.addMailGeographicalRegion.$error.pattern" class="labelError">
+        <label for="addMail-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="addMailGeoRegion" id="addMail-geoRegion" maxlength="45" data-theme="a"
+               ng-model="mailAddresses.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="addMailForm.addMailGeoRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addMail-zipCode"><strong>Zip Code</strong></label>

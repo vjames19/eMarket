@@ -32,11 +32,10 @@
         <div ng-show="editBillForm.editBillCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
-        <label for="editBill-geographicalRegion"><strong>State/Region/Providence</strong></label>
-        <input type="text" name="editBillGeographicalRegion" id="editBill-geographicalRegion"
-               maxlength="45" data-theme="a"
-               ng-model="billInfo.geographicalRegion" ng-pattern="patternGeoRegion" ng-required="false">
-        <div ng-show="editBillForm.editBillGeographicalRegion.$error.pattern" class="labelError">
+        <label for="editBill-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="editBillGeoRegion" id="editBill-geoRegion" maxlength="45" data-theme="a"
+               ng-model="billInfo.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="editBillForm.editBillGeoRegion.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBill-zipCode"><strong>Zip Code</strong></label>
