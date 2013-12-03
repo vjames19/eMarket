@@ -59,7 +59,7 @@ module.exports = function(passport) {
         Admin.authenticate(username, password, function(err, admin) {
           console.log('Local Admin Strategy', arguments);
           if(err) {
-            done(err);
+            done(err, false);
           } else if(_.isEmpty(admin)) {
             done(null, false);
           } else {
