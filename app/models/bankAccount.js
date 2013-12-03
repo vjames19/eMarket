@@ -98,3 +98,18 @@ module.exports.update = function(bank, userId, callback) {
     }
   });
 };
+
+module.exports.remove = function(bank, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'UPDATE bank_info ' +
+                'SET bank_status = FALSE ' +
+                'WHERE bank_id = ?';
+      connection.query(sql, [bank.id], function(err) {
+        callback(err, bank);
+      });
+    }
+  });
+};

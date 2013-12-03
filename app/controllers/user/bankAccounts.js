@@ -37,7 +37,7 @@ var bankAccounts = {
 exports.findBankAccountById = function(req, res, next, id) {
   BankAccounts.get(req.params.userId, id, function(err, bankAccount) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(bankAccount)) {
       res.jsonp(404, {message: 'Bank Account with id ' + id + ' not found'});
     } else {
@@ -50,7 +50,7 @@ exports.findBankAccountById = function(req, res, next, id) {
 exports.readAllBankAccounts = function(req, res) {
   BankAccounts.getAll(req.params.userId, function(err, bankAccounts) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if (_.isEmpty(bankAccounts)) {
       res.jsonp(404, {message: 'Credit Cards not found'});
     } else {
@@ -63,7 +63,7 @@ exports.readAllBankAccounts = function(req, res) {
 exports.createBankAccount = function(req, res) {
   BankAccounts.create(req.body, req.params.userId, function(err, bankAccount) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(201, bankAccount);
     }
@@ -71,13 +71,17 @@ exports.createBankAccount = function(req, res) {
 };
 
 exports.readBankAccount = function(req, res) {
-  res.jsonp(req.bankAccount);
+  if(!req.bankAccount) {
+    res.jsonp(404, {message: 'Bank not found'});
+  } else {
+    res.jsonp(req.bankAccount);
+  }
 };
 
 exports.updateBankAccount = function(req, res) {
   BankAccounts.update(req.body, req.params.userId, function(err, bankAccount) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(200, bankAccount);
     }
@@ -85,6 +89,11 @@ exports.updateBankAccount = function(req, res) {
 };
 
 exports.deleteBankAccount = function(req, res) {
-  delete bankAccounts[req.bankAccount.bankId];
-  res.jsonp(req.bankAccount);
+  BankAccounts.remove(req.bankAccount, function(err, bankAccount) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(200, bankAccount);
+    }
+  });
 };

@@ -19,6 +19,7 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
       var statusPopupMessage = page.find('#editCard-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off();
         $scope.cardInfo.expirationDate = $scope.cardInfo.expirationDate + '-01';
         $.mobile.loading('show');
         User.me().one('creditCards', $scope.cardInfo.id).customPUT($scope.cardInfo).then(function() {
