@@ -73,8 +73,12 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
           Helper.refreshCheckBox(primaryCheckBox);
         }
 
+        if(scope.mailInfo.isPrimary) {
+          primaryCheckBox.checkboxradio('disable');
+        } else {
+          primaryCheckBox.checkboxradio('enable');
+        }
       });
-
     }
   };
 });

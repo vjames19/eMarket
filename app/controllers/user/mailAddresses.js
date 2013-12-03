@@ -57,5 +57,11 @@ exports.updateMailAddress = function(req, res) {
 };
 
 exports.deleteMailAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  MailingAddresses.remove(req.mailAddress, function(err, mailingAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(200, mailingAddress);
+    }
+  });
 };

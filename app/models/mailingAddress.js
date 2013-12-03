@@ -240,3 +240,18 @@ module.exports.update = function(mailAddress, userId, callback) {
     }
   });
 };
+
+module.exports.remove = function(mailingAddress, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql = 'UPDATE mailing_info ' +
+                 'SET mailing_status = FALSE ' +
+                 'WHERE mailing_id = ?';
+      connection.query(sql, [mailingAddress.id], function(err) {
+        callback(err, mailingAddress);
+      });
+    }
+  });
+};

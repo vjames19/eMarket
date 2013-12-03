@@ -77,6 +77,14 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
       var billAddressList = page.find('#profile-billAddressList');
       var questionSelects = page.find('select[id*="profile-securityQuestion"]');
 
+      var statusPopup = page.find('#profile-statusPopup');
+      var statusPopupMessage = page.find('#profile-statusPopupMessage');
+      var profileMailingPopup = page.find('#profile-mailAddressOptionsPopup');
+      var profileBillingPopup = page.find('#profile-billAddressOptionsPopup');
+
+      var deleteMailingButton = page.find('#deleteMailingBtn');
+      var deleteBillingButton = page.find('#deleteBillingBtn');
+
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;
       var selectedBillAddress = null;
@@ -93,15 +101,64 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
       };
 
       scope.deleteMailAddress = function() {
+        profileMailingPopup.off();
+        statusPopup.off();
+
+        if(scope.mailAddresses[selectedMailAddressIndex].isPrimary) {
+          profileMailingPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Cannot delete a primary mail address.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                profileMailingPopup.off();
+              });
+            }
+          });
+          return
+        }
+
+        profileMailingPopup.off();
+        statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('mailAddresses', selectedMailAddress.mailAddressId).remove().then(function() {
-        scope.mailAddresses.splice(selectedMailAddressIndex, 1);
-        Helper.refreshList(mailAddressList);
-        $.mobile.loading('hide');
-//        });
+        User.me().one('mailAddresses', selectedMailAddress.id).remove().then(function() {
+          scope.mailAddresses.splice(selectedMailAddressIndex, 1);
+          Helper.refreshList(mailAddressList);
+
+          if(scope.mailAddresses.length === 1) {
+            deleteMailingButton.addClass('ui-disabled');
+          }
+          else {
+            deleteMailingButton.removeClass('ui-disabled');
+          }
+
+          $.mobile.loading('hide');
+          profileMailingPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Mailing Address Deleted Successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                profileMailingPopup.off();
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          profileMailingPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not delete mailing address.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                profileMailingPopup.off();
+              });
+            }
+          });
+          console.log('Error Removing Mailing Address', err);
+        });
       };
 
       scope.deleteBillAddress = function() {
+        profileBillingPopup.off();
+        statusPopup.off();
         $.mobile.loading('show');
 //        User.me().one('BillAddresses', selectedBillAddress.billAddressId).remove().then(function() {
         scope.billAddresses.splice(selectedBillAddressIndex, 1);
@@ -144,11 +201,25 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
           scope.mailAddresses = mailAddressesList;
           Helper.refreshList(mailAddressList);
 
+          if(scope.mailAddresses.length === 1) {
+            deleteMailingButton.addClass('ui-disabled');
+          }
+          else {
+            deleteMailingButton.removeClass('ui-disabled');
+          }
+
         });
 
         user.getList('billAddresses').then(function(billAddressesList) {
           scope.billAddresses = billAddressesList;
           Helper.refreshList(billAddressList);
+
+          if(scope.billAddresses.length === 1) {
+            deleteBillingButton.addClass('ui-disabled');
+          }
+          else {
+            deleteBillingButton.removeClass('ui-disabled');
+          }
         });
 
         user.one('avgRating').get().then(function(avg) {
