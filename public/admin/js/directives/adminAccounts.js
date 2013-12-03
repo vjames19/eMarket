@@ -31,6 +31,8 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
       };
 
       scope.deleteAdmin = function() {
+        adminAccPopup.off();
+        statusPopup.off();
         $.mobile.loading('show');
         if(selectedAdmin.username === Admin.adminUserName) {
           $.mobile.loading('hide');
@@ -39,6 +41,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               statusPopupMessage.text('Cannot Delete yourself!!!');
               setTimeout(function() {
                 statusPopup.popup('open');
+                adminAccPopup.off();
               });
             }
           });
@@ -51,6 +54,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               statusPopupMessage.text('Cannot Delete Root Ever!!!');
               setTimeout(function() {
                 statusPopup.popup('open');
+                adminAccPopup.off();
               });
             }
           });
@@ -63,6 +67,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               statusPopupMessage.text('Not enough privileges to delete this admin.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                adminAccPopup.off();
               });
             }
           });
@@ -77,6 +82,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               statusPopupMessage.text('Admin Deleted Successfully.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                adminAccPopup.off();
               });
             }
           });
@@ -87,6 +93,7 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               statusPopupMessage.text('Could not delete admin.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                adminAccPopup.off();
               });
             }
           });
