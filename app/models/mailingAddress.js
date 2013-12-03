@@ -166,6 +166,9 @@ module.exports.update = function(mailAddress, userId, callback) {
       var sql3 = 'UPDATE mailing_info ' +
                  'SET mailing_recipient_name = ?, mailing_telephone = ?, mailing_is_primary = ? ' +
                  'WHERE mailing_id = ? AND mailing_user_id = ?';
+      var sql4 = 'SELECT mailing_is_primary ' +
+                  'FROM mailing_info ' +
+                  'WHERE mailing_id = ?';
 
       connection.beginTransaction(function(err) {
         if(err) {
@@ -183,56 +186,79 @@ module.exports.update = function(mailAddress, userId, callback) {
                 callback(err);
               });
             } else {
-              var params3 = [mailAddress.recipientName, mailAddress.telephone,
-                mailAddress.isPrimary, mailAddress.id, userId];
-
-              if(mailAddress.isPrimary) {
-                connection.query(sql2, [userId], function(err) {
-                  if(err) {
-                    connection.rollback(function() {
-                      callback(err);
-                    });
-                  } else {
-                    connection.query(sql3, params3, function(err) {
-                      if(err) {
-                        connection.rollback(function() {
-                          callback(err);
-                        });
-                      } else {
-                        connection.commit(function(err) {
-                          if(err) {
-                            connection.rollback(function() {
-                              callback(err);
-                            });
-                          } else {
-                            callback(null, mailAddress);
-                            console.log('Mailing Address Updated Successfully.');
-                          }
-                        });
-                      }
-                    });
-                  }
-                });
-              } else {
-                connection.query(sql3, params3, function(err) {
-                  if(err) {
-                    connection.rollback(function() {
-                      callback(err);
-                    });
-                  } else {
+              connection.query(sql4, [mailAddress.id], function(err, mailAddressToBeUpdated) { // Check if mail address to be updated is primary
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                }  else {
+                  if(mailAddressToBeUpdated[0].isPrimary && !mailAddress.isPrimary) {
                     connection.commit(function(err) {
                       if(err) {
-                        connection.rollback(function() {
+                        connection.rollback(function(err) {
                           callback(err);
                         });
                       } else {
                         callback(null, mailAddress);
-                        console.log('Mailing Address Updated Successfully.');
+                        console.log('Cannot Update Mailing Address Successfully.');
                       }
                     });
                   }
-                });
-              }
+                  else {
+                    var params3 = [mailAddress.recipientName, mailAddress.telephone,
+                      mailAddress.isPrimary, mailAddress.id, userId];
+
+                    if(mailAddress.isPrimary) {
+                      connection.query(sql2, [userId], function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          connection.query(sql3, params3, function(err) {
+                            if(err) {
+                              connection.rollback(function() {
+                                callback(err);
+                              });
+                            } else {
+                              connection.commit(function(err) {
+                                if(err) {
+                                  connection.rollback(function() {
+                                    callback(err);
+                                  });
+                                } else {
+                                  callback(null, mailAddress);
+                                  console.log('Mailing Address Updated Successfully.');
+                                }
+                              });
+                            }
+                          });
+                        }
+                      });
+                    }
+                    else {
+                      connection.query(sql3, params3, function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          connection.commit(function(err) {
+                            if(err) {
+                              connection.rollback(function() {
+                                callback(err);
+                              });
+                            } else {
+                              callback(null, mailAddress);
+                              console.log('Mailing Address Updated Successfully.');
+                            }
+                          });
+                        }
+                      });
+                    }
+                  }
+                }
+              });
             }
           });
         }
