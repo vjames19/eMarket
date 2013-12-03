@@ -7,31 +7,39 @@
 
   <div data-role="content">
 
-    <form data-ajax="false" ng-submit="submit()" id="checkout-form">
+    <form name="checkoutForm">
       <div class="form-pad">
         <label for="checkout-paymentMethod"><strong>Select Payment Method</strong></label>
-        <select id="checkout-paymentMethod" ng-model="paymentMethod"
-                ng-options="paymentMethod for paymentMethod in paymentMethods"
-                ng-change="selectPaymentMethod()" data-theme="a" ng-required="false">
+        <select name="checkoutPaymentMethod" id="checkout-paymentMethod" data-theme="a"
+                ng-model="checkout.paymentMethod" ng-change="selectPaymentMethod()" ng-required="false">
+          <option value="Bank">Bank</option>
+          <option value="Credit Card">Credit Card</option>
         </select>
       </div>
-      <div class="form-pad" ng-hide="isCreditCard">
+      <div class="form-pad" ng-show="!isCreditCard">
         <label for="checkout-bankSelect"><strong>Select Bank</strong></label>
-        <select id="checkout-bankSelect" ng-model="selectedBank"
-                ng-options="bank.bankName for bank in banks" data-theme="a">
-          <option value="" ng-hide="selectedBank" ng-required="true">Please Select a Bank</option>
+        <select name="checkoutBankSelect" id="checkout-bankSelect" ng-model="checkout.selectedBank"
+                ng-options="bank.id as bank.bankName for bank in banks" data-theme="a">
+          <option value="" ng-hide="checkout.selectedBank" ng-required="!isCreditCard">Please Select a Bank</option>
         </select>
       </div>
       <div class="form-pad" ng-show="isCreditCard">
         <label for="checkout-cardSelect"><strong>Select Card</strong></label>
-        <select id="checkout-cardSelect" ng-model="selectedCard"
-                ng-options="card.cardNumber for card in cards" data-theme="a">
-          <option value="" ng-hide="selectedCard" ng-required="true">Please Select a Card</option>
+        <select name="checkoutCardSelect" id="checkout-cardSelect" ng-model="checkout.selectedCard"
+                ng-options="card.id as card.cardNumber for card in cards" data-theme="a">
+          <option value="" ng-hide="checkout.selectedCard" ng-required="isCreditCard">Please Select a Card</option>
+        </select>
+      </div>
+      <div class="form-pad">
+        <label for="checkout-addressSelect"><strong>Select Card</strong></label>
+        <select name="checkoutAddressSelect" id="checkout-addressSelect" ng-model="checkout.selectedAddress"
+                ng-options="mail.id as mail.address for mail in mailAddresses" data-theme="a">
+          <option value="" ng-hide="checkout.selectedAddress" ng-required="true">Please Select an Address</option>
         </select>
       </div>
     </form>
 
-    <div>
+    <div data-role="none">
       <table align="right">
         <tr>
           <td align="left">
@@ -63,11 +71,10 @@
 
   </div>
 
-  <div data-role="footer" data-theme="a">
-    <button type="submit" form="checkout-form" data-icon="check" data-theme="a"
-            class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right
-            ui-btn-corner-all ui-btn-inline">Checkout
-    </button>
+  <div data-role="footer" data-theme="a" class="ui-footer">
+    <a href="#" data-role="button" class="footer-button" data-icon="check" data-theme="b"
+       ng-click="submit()"
+       ng-class="{false: 'ui-disabled'}[checkoutForm.$valid]">Submit Payment</a>
   </div>
 
 </div>
