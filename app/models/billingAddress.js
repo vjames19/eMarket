@@ -61,7 +61,7 @@ module.exports.get = function(userId, billingId, callback) {
   });
 };
 
-module.exports.create = function(billAddress, userID, callback) {
+module.exports.create = function(billAddress, userId, callback) {
   executor.execute(function(err, connection) {
     if(err) {
       callback(err);
@@ -85,7 +85,7 @@ module.exports.create = function(billAddress, userID, callback) {
               });
             } else {
               var addressId = insertStatus.insertId;
-              var params2 = [userID, addressId, billAddress.recipientName, billAddress.telephone, true];
+              var params2 = [userId, addressId, billAddress.recipientName, billAddress.telephone, true];
               connection.query(sql2, params2, function(err) {
                 if(err) {
                   connection.rollback(function() {
@@ -100,6 +100,59 @@ module.exports.create = function(billAddress, userID, callback) {
                     } else {
                       callback(null, billAddress);
                       console.log('Billing Address Created Successfully.');
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+};
+
+module.exports.update = function(billAddress, userId, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql1 = 'UPDATE address_history ' +
+          'SET address_address = ?, address_country = ?, address_city = ?, ' +
+          'address_geographical_region = ?, address_zipcode = ? ' +
+          'WHERE address_id = ?';
+      var sql2 = 'UPDATE billing_info ' +
+                  'SET billing_recipient_name = ?, billing_telephone = ? ' +
+                  'WHERE billing_id = ? AND billing_user_id = ?';
+      connection.beginTransaction(function(err) {
+        if(err) {
+          connection.rollback(function() {
+            callback(err);
+          });
+        } else {
+          var params1 = [billAddress.address, billAddress.country, billAddress.city,
+                        billAddress.geoRegion, billAddress.zipCode, billAddress.addressId];
+          connection.query(sql1, params1, function(err) {
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              var params2 = [billAddress.recipientName, billAddress.telephone, billAddress.id, userId];
+              connection.query(sql2, params2, function(err) {
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                } else {
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, billAddress);
+                      console.log('Billing Address Updated Successfully.');
                     }
                   });
                 }

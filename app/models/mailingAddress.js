@@ -175,7 +175,7 @@ module.exports.update = function(mailAddress, userId, callback) {
         } else {
           var params1 = [
             mailAddress.address, mailAddress.country, mailAddress.city,
-            mailAddress.geoRegion, mailAddress.zipCode, mailAddress.id
+            mailAddress.geoRegion, mailAddress.zipCode, mailAddress.addressId
           ];
           connection.query(sql1, params1, function(err) {
             if(err) {

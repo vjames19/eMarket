@@ -47,7 +47,15 @@ exports.createBillAddress = function(req, res) {
 };
 
 exports.updateBillAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  console.log('FUERA', req.body);
+  BillingAddresses.update(req.body, req.params.userId, function(err, billAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      console.log('DENTRO', billAddress);
+      res.jsonp(200, billAddress);
+    }
+  });
 };
 
 exports.deleteBillAddress = function(req, res) {

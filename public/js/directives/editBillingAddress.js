@@ -22,16 +22,34 @@ angular.module('eMarketApp').directive('editBillingAddress', function(BillingAdd
       var statusPopupMessage = page.find('#editBill-statusPopupMessage');
 
       $scope.submit = function() {
-//        console.log($scope.billInfo);
+        statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('billAddresses', $scope.billInfo.billAddressId).customPUT($scope.billInfo)
-//            .then(function(billInfo) {
-//              $scope.billInfo = billInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#profile');
-//            }, function(err) {
-//              alert(err);
-//            });
+
+        if(!$scope.billInfo.geoRegion) {
+          $scope.billInfo.geoRegion = null;
+        }
+
+        User.me().one('billAddresses', $scope.billInfo.id).customPUT($scope.billInfo).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Billing Address Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Billing Address Not Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+          console.log('Billing Address Update Error', err);
+
+        });
       };
 
     },
