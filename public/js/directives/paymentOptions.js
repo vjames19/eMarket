@@ -31,6 +31,7 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
 
       var paymentOptionsCardPopup = page.find('#paymentOptions-cardOptionsPopup');
       var paymentOptionsBankPopup = page.find('#paymentOptions-bankOptionsPopup');
+
       var statusPopup = page.find('#paymentOption-statusPopup');
       var statusPopupMessage = page.find('#paymentOption-statusPopupMessage');
 
@@ -134,11 +135,9 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
         User.me().getList('creditCards').then(function(creditCardsList) {
           scope.creditCards = creditCardsList;
           Helper.refreshList(cardList);
-
           if(scope.creditCards.length === 1) {
             deleteCardButton.addClass('ui-disabled');
-          }
-          else {
+          } else {
             deleteCardButton.removeClass('ui-disabled');
           }
         });
@@ -146,15 +145,15 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
         User.me().getList('banks').then(function(bankAccountsList) {
           scope.bankAccounts = bankAccountsList;
           Helper.refreshList(bankList);
-
           if(scope.bankAccounts.length === 1) {
             deleteBankButton.addClass('ui-disabled');
-          }
-          else {
+          } else {
             deleteBankButton.removeClass('ui-disabled');
           }
         });
+
       });
+
     }
   };
 });

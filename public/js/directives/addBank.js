@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
       var statusPopupMessage = page.find('#addBank-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off();
         $.mobile.loading('show');
         User.me().all('banks').post($scope.bank).then(function() {
           $.mobile.loading('hide');
