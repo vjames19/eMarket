@@ -9,9 +9,9 @@ var Reports = require('../models/report.js');
 exports.findAdminById = function(req, res, next, id) {
   Admins.get(id, function(err, admin) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(admin)) {
-      res.jsonp(404, {message: 'Admin with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Admin with id ' + id + ' not found.'});
     } else {
       req.admin = admin;
       next();
@@ -22,9 +22,9 @@ exports.findAdminById = function(req, res, next, id) {
 exports.readAllAdmins = function(req, res) {
   Admins.getAll(function(err, admins) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(admins)) {
-      res.jsonp(404, {message: 'Admins not found'});
+      res.jsonp(404, {message: 'Admins not found.'});
     } else {
       res.jsonp(200, admins);
     }
@@ -33,7 +33,7 @@ exports.readAllAdmins = function(req, res) {
 
 exports.readAdmin = function(req, res) {
   if(!req.admin) {
-    res.jsonp(404, {message: 'Admin not found'});
+    res.jsonp(404, {message: 'Admin not found.'});
   } else {
     res.jsonp(200, req.admin);
   }
@@ -42,7 +42,7 @@ exports.readAdmin = function(req, res) {
 exports.createAdmin = function(req, res) {
   Admins.create(req.body, function(err, admin) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(201, admin);
     }
@@ -52,7 +52,7 @@ exports.createAdmin = function(req, res) {
 exports.updateAdmin = function(req, res) {
   Admins.update(req.body, function(err, admin) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(200, admin);
     }
@@ -62,7 +62,7 @@ exports.updateAdmin = function(req, res) {
 exports.deleteAdmin = function(req, res) {
   Admins.remove(req.admin.id, function(err) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(200, req.admin);
     }
@@ -74,9 +74,9 @@ exports.deleteAdmin = function(req, res) {
 exports.findReportByIdDay = function(req, res, next, id) {
   Reports.get(id, 'day', function(err, report) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(report)) {
-      res.jsonp(404, {message: 'Daily Report with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Daily Report with id ' + id + ' not found.'});
     } else {
       req.dailyReport = report;
       next();
@@ -87,9 +87,9 @@ exports.findReportByIdDay = function(req, res, next, id) {
 exports.readAllReportsDay = function(req, res) {
   Reports.getAll('day', function(err, reports) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(reports)) {
-      res.jsonp(404, {message: 'Reports not found'});
+      res.jsonp(404, {message: 'Reports not found.'});
     } else {
       res.jsonp(200, reports);
     }
@@ -98,7 +98,7 @@ exports.readAllReportsDay = function(req, res) {
 
 exports.readReportDay = function(req, res) {
   if(!req.dailyReport) {
-    res.jsonp(404, {message: 'Daily Report not found'});
+    res.jsonp(404, {message: 'Daily Report not found.'});
   } else {
     res.jsonp(200, req.dailyReport);
   }
@@ -107,9 +107,9 @@ exports.readReportDay = function(req, res) {
 exports.readReportDayTotal = function(req, res) {
   Reports.getTotal('day', function(err, total) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(total)) {
-      res.jsonp(404, {message: 'Daily Total Report not found'});
+      res.jsonp(404, {message: 'Daily Total Report not found.'});
     } else {
       res.jsonp(200, total);
     }
@@ -121,9 +121,9 @@ exports.readReportDayTotal = function(req, res) {
 exports.findReportByIdWeek = function(req, res, next, id) {
   Reports.get(id, 'week', function(err, report) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(report)) {
-      res.jsonp(404, {message: 'Weekly Report with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Weekly Report with id ' + id + ' not found.'});
     } else {
       req.weeklyReport = report;
       next();
@@ -134,9 +134,9 @@ exports.findReportByIdWeek = function(req, res, next, id) {
 exports.readAllReportsWeek = function(req, res) {
   Reports.getAll('week', function(err, reports) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(reports)) {
-      res.jsonp(404, {message: 'Reports not found'});
+      res.jsonp(404, {message: 'Reports not found.'});
     } else {
       res.jsonp(200, reports);
     }
@@ -145,7 +145,7 @@ exports.readAllReportsWeek = function(req, res) {
 
 exports.readReportWeek = function(req, res) {
   if(!req.weeklyReport) {
-    res.jsonp(404, {message: 'Weekly Report not found'});
+    res.jsonp(404, {message: 'Weekly Report not found.'});
   } else {
     res.jsonp(200, req.weeklyReport);
   }
@@ -154,9 +154,9 @@ exports.readReportWeek = function(req, res) {
 exports.readReportWeekTotal = function(req, res) {
   Reports.getTotal('week', function(err, total) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(total)) {
-      res.jsonp(404, {message: 'Weekly Total Report not found'});
+      res.jsonp(404, {message: 'Weekly Total Report not found.'});
     } else {
       res.jsonp(200, total);
     }
@@ -168,9 +168,9 @@ exports.readReportWeekTotal = function(req, res) {
 exports.findReportByIdMonth = function(req, res, next, id) {
   Reports.get(id, 'month', function(err, report) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(report)) {
-      res.jsonp(404, {message: 'Monthly Report with id ' + id + ' not found'});
+      res.jsonp(404, {message: 'Monthly Report with id ' + id + ' not found.'});
     } else {
       req.monthlyReport = report;
       next();
@@ -181,9 +181,9 @@ exports.findReportByIdMonth = function(req, res, next, id) {
 exports.readAllReportsMonth = function(req, res) {
   Reports.getAll('month', function(err, reports) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(reports)) {
-      res.jsonp(404, {message: 'Reports not found'});
+      res.jsonp(404, {message: 'Reports not found.'});
     } else {
       res.jsonp(200, reports);
     }
@@ -192,7 +192,7 @@ exports.readAllReportsMonth = function(req, res) {
 
 exports.readReportMonth = function(req, res) {
   if(!req.monthlyReport) {
-    res.jsonp(404, {message: 'Monthly Report not found'});
+    res.jsonp(404, {message: 'Monthly Report not found.'});
   } else {
     res.jsonp(200, req.monthlyReport);
   }
@@ -201,9 +201,9 @@ exports.readReportMonth = function(req, res) {
 exports.readReportMonthTotal = function(req, res) {
   Reports.getTotal('month', function(err, total) {
     if(err) {
-      res.jsonp(500, err);
+      res.jsonp(500, {message: err});
     } else if(_.isEmpty(total)) {
-      res.jsonp(404, {message: 'Monthly Total Report not found'});
+      res.jsonp(404, {message: 'Monthly Total Report not found.'});
     } else {
       res.jsonp(200, total);
     }
