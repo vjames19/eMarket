@@ -3,11 +3,12 @@
 var _ = require('underscore');
 var Carousels = require('../../models/carousel.js');
 
-// Carousel
 exports.findCarouselById = function(req, res, next, id) {
   Carousels.get(req.params.userId, id, function(err, carousel) {
-    if(_.isEmpty(carousel)) {
-      res.jsonp(404, {message: 'Carousel with id ' + id + ' not found'});
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else if(_.isEmpty(carousel)) {
+      res.jsonp(404, {message: 'Carousel with id ' + id + ' not found.'});
     } else {
       req.carousel = carousel;
       next();
@@ -17,10 +18,20 @@ exports.findCarouselById = function(req, res, next, id) {
 
 exports.readAllCarousels = function(req, res) {
   Carousels.getAll(req.params.userId, function(err, carousels) {
-    res.jsonp(carousels);
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else if(_.isEmpty(carousels)) {
+      res.jsonp(404, {message: 'Carousels not found.'});
+    } else {
+      res.jsonp(200, carousels);
+    }
   });
 };
 
 exports.readCarousel = function(req, res) {
-  res.jsonp(req.carousel);
+  if(!req.carousel) {
+    res.jsonp(404, {message: 'Carousel not found.'});
+  } else {
+    res.jsonp(200, req.carousel);
+  }
 };
