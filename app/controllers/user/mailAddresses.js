@@ -37,13 +37,31 @@ exports.readMailAddress = function(req, res) {
 };
 
 exports.createMailAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  MailingAddresses.create(req.body, req.params.userId, function(err, mailingAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(201, mailingAddress);
+    }
+  });
 };
 
 exports.updateMailAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  MailingAddresses.update(req.body, req.params.userId, function(err, mailingAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(200, mailingAddress);
+    }
+  });
 };
 
 exports.deleteMailAddress = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+  MailingAddresses.remove(req.mailAddress, function(err, mailingAddress) {
+    if(err) {
+      res.jsonp(500, {message: err});
+    } else {
+      res.jsonp(200, mailingAddress);
+    }
+  });
 };
