@@ -17,17 +17,21 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
     },
     link: function(scope, elem) {
 
-      scope.paymentMethods = ['Bank', 'Credit Card'];
-      scope.paymentMethod = scope.paymentMethods[0];
+      scope.checkout = { paymentMethod: 'Bank' };
       scope.isCreditCard = false;
 
       var page = $(elem[0]);
 
       var bankSelect = page.find('#checkout-bankSelect');
       var cardSelect = page.find('#checkout-cardSelect');
+      var addressSelect = page.find('#checkout-addressSelect');
 
       scope.selectPaymentMethod = function() {
-        scope.isCreditCard = scope.paymentMethod === 'Credit Card';
+        delete scope.checkout.selectedBank;
+        delete scope.checkout.selectedCard;
+        scope.isCreditCard = scope.checkout.paymentMethod === 'Credit Card';
+        Helper.refreshSelect(bankSelect);
+        Helper.refreshSelect(cardSelect);
       };
 
       page.on('pagebeforeshow', function() {
@@ -45,6 +49,11 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
         User.me().getList('banks').then(function(bankAccountsList) {
           scope.banks = bankAccountsList;
           Helper.refreshSelect(cardSelect);
+        });
+
+        User.me().getList('mailAddresses').then(function(mailAddressList) {
+          scope.mailAddresses = mailAddressList;
+          Helper.refreshSelect(addressSelect);
         });
 
       });
