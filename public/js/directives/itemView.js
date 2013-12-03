@@ -6,26 +6,72 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, $filter, Patterns) {
+    controller: function($scope, $filter, Patterns, $element) {
 
       $scope.patternPlaceBid = Patterns.item.placeBid;
       $scope.patternBuyItNow = Patterns.item.buyItNow;
 
+      var page = $($element[0]);
+
+      var placeBidPopup = page.find('#itemView-placeBidPopup');
+      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
+
+      var statusPopup = page.find('#itemView-statusPopup');
+      var statusPopupMessage = page.find('#itemView-statusPopupMessage');
+
       $scope.submitBid = function() {
+
+        statusPopup.off();
+        placeBidPopup.off();
         $.mobile.loading('show');
+        $.mobile.loading('hide');
+        statusPopup.on({
+          popupafterclose: function() {
+            $.mobile.changePage('#home-user');
+          }
+        });
+        placeBidPopup.on({
+          popupafterclose: function() {
+            statusPopupMessage.text('Bid Submitted Successfully');
+            setTimeout(function() {
+              statusPopup.popup('open');
+              placeBidPopup.off();
+            });
+          }
+        });
+
 //        $scope.bid.userId = User.userId;
 //        $scope.bid.productId = $scope.item.productId;
 //        $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
 //        $scope.bid.productName = $scope.item.productName;
 //        User.me().all('bids').post($scope.bid); //TODO <-- add .then
-        $.mobile.loading('hide');
-        $.mobile.changePage('#home-user');
+//        $.mobile.loading('hide');
+//        $.mobile.changePage('#home-user');
       };
 
       $scope.submitCart = function() {
+
+        statusPopup.off();
+        buyItNowPopup.off();
         $.mobile.loading('show');
         $.mobile.loading('hide');
-        $.mobile.changePage('#home-user');
+        statusPopup.on({
+          popupafterclose: function() {
+            $.mobile.changePage('#home-user');
+          }
+        });
+        buyItNowPopup.on({
+          popupafterclose: function() {
+            statusPopupMessage.text('Product(s) have been placed in cart.');
+            setTimeout(function() {
+              statusPopup.popup('open');
+              buyItNowPopup.off();
+            });
+          }
+        });
+
+//        $.mobile.loading('hide');
+//        $.mobile.changePage('#home-user');
       };
 
     },
@@ -36,8 +82,8 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       var placeBidBtn = page.find('#itemView-placeBidBtn');
       var buyItNowBtn = page.find('#itemView-buyItNowBtn');
       var productBidsLink = page.find('#itemView-productBidsLink');
-      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
-      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
+//      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
+//      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
 
       page.on('pagebeforeshow', function() {
 
