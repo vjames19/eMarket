@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, User, Patterns) {
+    controller: function($scope, User, Patterns, $element) {
 
       $scope.patternFullName = Patterns.user.fullName;
       $scope.patternAddress = Patterns.address.street;
@@ -15,6 +15,11 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
       $scope.patternGeoRegion = Patterns.address.geoRegion;
       $scope.patternZipCode = Patterns.address.zipCode;
       $scope.patternTelephone = Patterns.address.telephone;
+
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#editMail-statusPopup');
+      var statusPopupMessage = page.find('#editMail-statusPopupMessage');
 
       $scope.submit = function() {
 //        console.log($scope.mailInfo);
