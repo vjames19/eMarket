@@ -166,7 +166,7 @@ module.exports.update = function(mailAddress, userId, callback) {
       var sql3 = 'UPDATE mailing_info ' +
                  'SET mailing_recipient_name = ?, mailing_telephone = ?, mailing_is_primary = ? ' +
                  'WHERE mailing_id = ? AND mailing_user_id = ?';
-      var sql4 = 'SELECT mailing_is_primary ' +
+      var sql4 = 'SELECT * ' +
                   'FROM mailing_info ' +
                   'WHERE mailing_id = ?';
 
@@ -186,13 +186,14 @@ module.exports.update = function(mailAddress, userId, callback) {
                 callback(err);
               });
             } else {
-              connection.query(sql4, [mailAddress.id], function(err, mailAddressToBeUpdated) { // Check if mail address to be updated is primary
+              connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) { // Check if mail address to be updated is primary
+                var mailAddressToBeUpdated = mapper.map(addressToBeUpdated[0], DICTIONARY);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
                   });
                 }  else {
-                  if(mailAddressToBeUpdated[0].isPrimary && !mailAddress.isPrimary) {
+                  if(mailAddressToBeUpdated.isPrimary && !mailAddress.isPrimary) {
                     connection.commit(function(err) {
                       if(err) {
                         connection.rollback(function(err) {
