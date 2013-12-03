@@ -22,16 +22,36 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
       var statusPopupMessage = page.find('#editMail-statusPopupMessage');
 
       $scope.submit = function() {
-//        console.log($scope.mailInfo);
+        statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('mailAddresses', $scope.mailInfo.mailAddressId).customPUT($scope.mailInfo)
-//            .then(function(mailInfo) {
-//              $scope.mailInfo = mailInfo;
-        $.mobile.loading('hide');
-        $.mobile.changePage('#profile');
-//            }, function(err) {
-//              alert(err);
-//            });
+        if(!$scope.mailInfo.geoRegion) {
+          $scope.mailInfo.geoRegion = null;
+        }
+
+        if(!$scope.mailInfo.isPrimary) {
+          $scope.mailInfo.isPrimary = false;
+        }
+
+        User.me().one('mailAddresses', $scope.mailInfo.id).customPUT($scope.mailInfo).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Mailing Address Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Mailing Address Not Updated Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+          console.log('Mailing Address Update Error', err);
+        });
       };
 
     },

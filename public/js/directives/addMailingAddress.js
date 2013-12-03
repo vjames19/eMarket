@@ -22,13 +22,37 @@ angular.module('eMarketApp').directive('addMailingAddress', function() {
       var statusPopupMessage = page.find('#addMail-statusPopupMessage');
 
       $scope.submit = function() {
+        statusPopup.off();
         $.mobile.loading('show');
-//        $scope.mailAddresses.userId = User.userId;
-//        User.me().all('mailAddresses').post($scope.mailAddresses); // TODO <-- missing .then()
-        $.mobile.loading('hide');
-        $.mobile.changePage('#profile');
-      };
+        if(!$scope.mailAddresses.geoRegion) {
+          $scope.mailAddresses.geoRegion = null;
+        }
 
+        if(!$scope.mailAddresses.isPrimary) {
+          $scope.mailAddresses.isPrimary = false;
+        }
+
+        User.me().all('mailAddresses').post($scope.mailAddresses).then(function() {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Mail Address Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          statusPopupMessage.text('Mail Address Not Added Successfully');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#profile');
+            }
+          });
+          console.log('Mail Address Creation Error', err);
+        });
+      };
     }
   };
 });
