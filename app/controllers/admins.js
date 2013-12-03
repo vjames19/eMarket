@@ -8,7 +8,9 @@ var Reports = require('../models/report.js');
 
 exports.findAdminById = function(req, res, next, id) {
   Admins.get(id, function(err, admin) {
-    if(_.isEmpty(admin)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(admin)) {
       res.jsonp(404, {message: 'Admin with id ' + id + ' not found'});
     } else {
       req.admin = admin;
@@ -19,12 +21,22 @@ exports.findAdminById = function(req, res, next, id) {
 
 exports.readAllAdmins = function(req, res) {
   Admins.getAll(function(err, admins) {
-    res.jsonp(admins);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(admins)) {
+      res.jsonp(404, {message: 'Admins not found'});
+    } else {
+      res.jsonp(200, admins);
+    }
   });
 };
 
 exports.readAdmin = function(req, res) {
-  res.jsonp(req.admin);
+  if(!req.admin) {
+    res.jsonp(404, {message: 'Admin not found'});
+  } else {
+    res.jsonp(200, req.admin);
+  }
 };
 
 exports.createAdmin = function(req, res) {
@@ -38,10 +50,7 @@ exports.createAdmin = function(req, res) {
 };
 
 exports.updateAdmin = function(req, res) {
-  var id = req.admin.id;
-  _.extend(req.admin, req.body);
-  req.admin.id = id;
-  Admins.update(req.admin, function(err, admin) {
+  Admins.update(req.body, function(err, admin) {
     if(err) {
       res.jsonp(500, err);
     } else {
@@ -64,7 +73,9 @@ exports.deleteAdmin = function(req, res) {
 
 exports.findReportByIdDay = function(req, res, next, id) {
   Reports.get(id, 'day', function(err, report) {
-    if(_.isEmpty(report)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(report)) {
       res.jsonp(404, {message: 'Daily Report with id ' + id + ' not found'});
     } else {
       req.dailyReport = report;
@@ -75,17 +86,33 @@ exports.findReportByIdDay = function(req, res, next, id) {
 
 exports.readAllReportsDay = function(req, res) {
   Reports.getAll('day', function(err, reports) {
-    res.jsonp(reports);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(reports)) {
+      res.jsonp(404, {message: 'Reports not found'});
+    } else {
+      res.jsonp(200, reports);
+    }
   });
 };
 
 exports.readReportDay = function(req, res) {
-  res.jsonp(req.dailyReport);
+  if(!req.dailyReport) {
+    res.jsonp(404, {message: 'Daily Report not found'});
+  } else {
+    res.jsonp(200, req.dailyReport);
+  }
 };
 
 exports.readReportDayTotal = function(req, res) {
   Reports.getTotal('day', function(err, total) {
-    res.jsonp(total);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(total)) {
+      res.jsonp(404, {message: 'Daily Total Report not found'});
+    } else {
+      res.jsonp(200, total);
+    }
   });
 };
 
@@ -93,7 +120,9 @@ exports.readReportDayTotal = function(req, res) {
 
 exports.findReportByIdWeek = function(req, res, next, id) {
   Reports.get(id, 'week', function(err, report) {
-    if(_.isEmpty(report)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(report)) {
       res.jsonp(404, {message: 'Weekly Report with id ' + id + ' not found'});
     } else {
       req.weeklyReport = report;
@@ -104,17 +133,33 @@ exports.findReportByIdWeek = function(req, res, next, id) {
 
 exports.readAllReportsWeek = function(req, res) {
   Reports.getAll('week', function(err, reports) {
-    res.jsonp(reports);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(reports)) {
+      res.jsonp(404, {message: 'Reports not found'});
+    } else {
+      res.jsonp(200, reports);
+    }
   });
 };
 
 exports.readReportWeek = function(req, res) {
-  res.jsonp(req.weeklyReport);
+  if(!req.weeklyReport) {
+    res.jsonp(404, {message: 'Weekly Report not found'});
+  } else {
+    res.jsonp(200, req.weeklyReport);
+  }
 };
 
 exports.readReportWeekTotal = function(req, res) {
   Reports.getTotal('week', function(err, total) {
-    res.jsonp(total);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(total)) {
+      res.jsonp(404, {message: 'Weekly Total Report not found'});
+    } else {
+      res.jsonp(200, total);
+    }
   });
 };
 
@@ -122,7 +167,9 @@ exports.readReportWeekTotal = function(req, res) {
 
 exports.findReportByIdMonth = function(req, res, next, id) {
   Reports.get(id, 'month', function(err, report) {
-    if(_.isEmpty(report)) {
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(report)) {
       res.jsonp(404, {message: 'Monthly Report with id ' + id + ' not found'});
     } else {
       req.monthlyReport = report;
@@ -133,16 +180,32 @@ exports.findReportByIdMonth = function(req, res, next, id) {
 
 exports.readAllReportsMonth = function(req, res) {
   Reports.getAll('month', function(err, reports) {
-    res.jsonp(reports);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(reports)) {
+      res.jsonp(404, {message: 'Reports not found'});
+    } else {
+      res.jsonp(200, reports);
+    }
   });
 };
 
 exports.readReportMonth = function(req, res) {
-  res.jsonp(req.monthlyReport);
+  if(!req.monthlyReport) {
+    res.jsonp(404, {message: 'Monthly Report not found'});
+  } else {
+    res.jsonp(200, req.monthlyReport);
+  }
 };
 
 exports.readReportMonthTotal = function(req, res) {
   Reports.getTotal('month', function(err, total) {
-    res.jsonp(total);
+    if(err) {
+      res.jsonp(500, err);
+    } else if(_.isEmpty(total)) {
+      res.jsonp(404, {message: 'Monthly Total Report not found'});
+    } else {
+      res.jsonp(200, total);
+    }
   });
 };

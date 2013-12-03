@@ -68,6 +68,8 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
       };
 
       scope.deleteCategory = function() {
+        optionMenu.off();
+        statusPopup.off();
         $.mobile.loading('show');
         if(selectedCategory.categoryName.toLowerCase() === 'other') { // Special Category
           $.mobile.loading('hide');
@@ -76,6 +78,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               statusPopupMessage.text('Category \'other\' cannot be deleted.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                optionMenu.off();
               });
             }
           });
@@ -90,6 +93,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               statusPopupMessage.text('Category deleted successfully.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                optionMenu.off();
               });
             }
           });
@@ -100,6 +104,7 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               statusPopupMessage.text('Category not deleted successfully.');
               setTimeout(function() {
                 statusPopup.popup('open');
+                optionMenu.off();
               });
             }
           });
