@@ -64,7 +64,7 @@ exports.updateCategory = function(req, res) {
     if(err) {
       res.jsonp(500, {message: err});
     } else {
-      res.jsonp(category);
+      res.jsonp(200, category);
     }
   });
 };
@@ -74,7 +74,7 @@ exports.deleteCategory = function(req, res) {
     if(err) {
       res.jsonp(500, {message: err});
     } else {
-      res.jsonp(req.category);
+      res.jsonp(200, req.category);
     }
   });
 };

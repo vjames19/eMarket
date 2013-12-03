@@ -23,7 +23,7 @@ exports.readAllBankAccounts = function(req, res) {
     } else if(_.isEmpty(bankAccounts)) {
       res.jsonp(404, {message: 'Banks not found.'});
     } else {
-      res.jsonp(bankAccounts);
+      res.jsonp(200, bankAccounts);
     }
   });
 };
@@ -32,7 +32,7 @@ exports.readBankAccount = function(req, res) {
   if(!req.bankAccount) {
     res.jsonp(404, {message: 'Bank not found.'});
   } else {
-    res.jsonp(req.bankAccount);
+    res.jsonp(200, req.bankAccount);
   }
 };
 

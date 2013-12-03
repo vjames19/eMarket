@@ -48,11 +48,11 @@ exports.createProduct = function(req, res) {
 };
 
 exports.updateProduct = function(req, res) {
-  res.jsonp(501);
+  res.jsonp(501, {message: 'Not Implemented'});
 };
 
 exports.deleteProduct = function(req, res) {
-  res.jsonp(501);
+  res.jsonp(501, {message: 'Not Implemented'});
 };
 
 exports.findProductBidById = function(req, res, next, id) {
@@ -89,13 +89,13 @@ exports.readProductBid = function(req, res) {
 };
 
 exports.createProductBid = function(req, res) {
-  res.jsonp(501);
+  res.jsonp(501, {message: 'Not Implemented'});
 };
 
 exports.updateProductBid = function(req, res) {
-  res.jsonp(501);
+  res.jsonp(501, {message: 'Not Implemented'});
 };
 
 exports.deleteProductBid = function(req, res) {
-  res.jsonp(501);
+  res.jsonp(501, {message: 'Not Implemented'});
 };

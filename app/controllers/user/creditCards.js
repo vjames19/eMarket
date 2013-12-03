@@ -33,7 +33,7 @@ exports.readCreditCard = function(req, res) {
   if(!req.creditCard) {
     res.jsonp(404, {message: 'Credit Card not found.'});
   } else {
-    res.jsonp(req.creditCard);
+    res.jsonp(200, req.creditCard);
   }
 };
 

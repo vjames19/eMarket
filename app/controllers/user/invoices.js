@@ -23,7 +23,7 @@ exports.readAllInvoices = function(req, res) {
     } else if(_.isEmpty(invoices)) {
       res.jsonp(404, {message: 'Invoices not found.'});
     } else {
-      res.jsonp(invoices);
+      res.jsonp(200, invoices);
     }
   });
 };
@@ -47,6 +47,8 @@ exports.updateInvoice = function(req, res) {
 exports.deleteInvoice = function(req, res) {
   res.jsonp(501, {message: 'Not Implemented'});
 };
+
+// Invoice Items
 
 exports.readAllProductsInvoice = function(req, res) {
   Invoices.getProducts(req.params.userId, req.params.invoiceId, function(err, products) {

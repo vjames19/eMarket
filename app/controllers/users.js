@@ -89,6 +89,8 @@ exports.deleteUser = function(req, res) {
   res.jsonp(501, {message: 'Not Implemented'});
 };
 
+// Change Password
+
 exports.changeUserPassword = function(req, res) {
   Users.changePassword(req.body, function(err, forgotInfo) {
     if(err) {
