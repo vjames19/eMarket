@@ -312,11 +312,13 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`invoice_history` (
   `invoice_user_id` INT UNSIGNED NOT NULL,
   `invoice_bank_id` INT UNSIGNED NULL,
   `invoice_card_id` INT UNSIGNED NULL,
+  `invoice_mail_id` INT UNSIGNED NOT NULL,
   `invoice_creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`invoice_id`),
   INDEX `invoice_user_id_idx` (`invoice_user_id` ASC),
   INDEX `invoice_card_id_idx` (`invoice_card_id` ASC),
   INDEX `invoice_bank_id_idx` (`invoice_bank_id` ASC),
+  INDEX `invoice_mail_id_idx` (`invoice_mail_id` ASC),
   CONSTRAINT `invoice_user_id`
     FOREIGN KEY (`invoice_user_id`)
     REFERENCES `emarket_test`.`user_info` (`user_id`)
@@ -330,6 +332,11 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`invoice_history` (
   CONSTRAINT `invoice_bank_id`
     FOREIGN KEY (`invoice_bank_id`)
     REFERENCES `emarket_test`.`bank_info` (`bank_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `invoice_mail_id`
+    FOREIGN KEY (`invoice_mail_id`)
+    REFERENCES `emarket_test`.`mailing_info` (`mailing_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -616,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`products` (`product_id` INT, `product
 -- -----------------------------------------------------
 -- Placeholder table for view `emarket_test`.`report_params`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emarket_test`.`report_params` (`operation_cost` INT, `sales_fee_percent` INT);
+CREATE TABLE IF NOT EXISTS `emarket_test`.`report_params` (`operation_cost` INT, `sales_fee_percent` INT, `active_category_count` INT, `operation_cost_per_category` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `emarket_test`.`report_items`
@@ -643,18 +650,19 @@ CREATE TABLE IF NOT EXISTS `emarket_test`.`report_day` (`category_id` INT, `cate
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`active_users`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW active_users AS
+CREATE OR REPLACE VIEW active_users AS
 SELECT user_info.*, user_login_user_name, user_login_email
 FROM user_info INNER JOIN user_account_status INNER JOIN user_login_info
 ON (user_info.user_id = user_account_status.user_account_id AND user_id = user_login_id)
 WHERE user_account_status = 1;
+
 
 -- -----------------------------------------------------
 -- View `emarket_test`.`products`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`products`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW products AS
+CREATE OR REPLACE VIEW products AS
 SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
 ci.category_id, ci.category_name,
 (
@@ -663,7 +671,7 @@ ci.category_id, ci.category_name,
   ON(bid_product_id = P.product_id)
   WHERE P.product_id = pi.product_id
   ORDER BY bid_amount DESC
-  LIMIT 0, 1
+  LIMIT 0,1
 ) AS current_bid
 FROM product_info AS pi INNER JOIN product_specification AS ps INNER JOIN active_users AS au
 INNER JOIN category_info AS ci INNER JOIN product_quantity_record as pq
@@ -680,14 +688,18 @@ WHERE ps.product_spec_is_draft = 0;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`report_params`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW report_params AS SELECT 5000 as operation_cost, 0.05 as sales_fee_percent;
+CREATE OR REPLACE VIEW report_params AS
+SELECT  5000 as operation_cost,
+        0.05 as sales_fee_percent,
+        (SELECT COUNT(*) FROM category_info WHERE category_status = 1) as active_category_count,
+        TRUNCATE(((SELECT operation_cost)/(SELECT active_category_count)), 2) as operation_cost_per_category;
 
 -- -----------------------------------------------------
 -- View `emarket_test`.`report_items`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`report_items`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW report_items AS
+CREATE OR REPLACE VIEW report_items AS
 SELECT  category_info.category_id,
     category_info.category_name,
     invoice_history.invoice_creation_date,
@@ -709,12 +721,12 @@ WHERE
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`report_month`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW report_month AS
+CREATE OR REPLACE VIEW report_month AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
@@ -734,12 +746,12 @@ GROUP BY category_info.category_id, category_info.category_name;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`report_week`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW report_week AS
+CREATE OR REPLACE VIEW report_week AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
@@ -759,12 +771,12 @@ GROUP BY category_info.category_id, category_info.category_name;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `emarket_test`.`report_day`;
 USE `emarket_test`;
-CREATE  OR REPLACE VIEW report_day AS
+CREATE OR REPLACE VIEW report_day AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
     TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost/(SELECT COUNT(*) FROM category_info WHERE category_status = 1) FROM report_params), 0), 2) as category_revenue
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
 FROM  report_items RIGHT OUTER JOIN category_info
     ON (report_items.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
