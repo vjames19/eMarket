@@ -31,7 +31,7 @@
         </select>
       </div>
       <div class="form-pad">
-        <label for="checkout-addressSelect"><strong>Select Card</strong></label>
+        <label for="checkout-addressSelect"><strong>Select Address</strong></label>
         <select name="checkoutAddressSelect" id="checkout-addressSelect" ng-model="checkout.selectedAddress"
                 ng-options="mail.id as mail.address for mail in mailAddresses" data-theme="a">
           <option value="" ng-hide="checkout.selectedAddress" ng-required="true">Please Select an Address</option>
