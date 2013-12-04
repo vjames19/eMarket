@@ -105,7 +105,7 @@ angular.module('eMarketApp').directive('addUser', function(Restangular, Helper) 
 
       page.on('pagebeforeshow', function() {
 
-        Restangular.one('questions').getList().then(function(questionsList) {
+        Restangular.all('questions').getList().then(function(questionsList) {
           scope.questions = questionsList;
           Helper.refreshSelect(securityQuestions);
         });

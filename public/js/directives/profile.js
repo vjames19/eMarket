@@ -169,17 +169,15 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
 
       page.on('pagebeforeshow', function() {
 
-        var user = User.me();
-
-        user.get().then(function(user) {
+        User.me().get().then(function(user) {
           scope.user = user;
         });
 
-        Restangular.one('questions').getList().then(function(questionsList) {
+        Restangular.all('questions').getList().then(function(questionsList) {
 
           scope.questions = questionsList;
 
-          user.getList('questionsAnswers').then(function(questionsAnswersList) {
+          User.me().getList('questionsAnswers').then(function(questionsAnswersList) {
 
             scope.questionsAnswers = questionsAnswersList;
 
@@ -197,7 +195,7 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
 
         });
 
-        user.getList('mailAddresses').then(function(mailAddressesList) {
+        User.me().getList('mailAddresses').then(function(mailAddressesList) {
           scope.mailAddresses = mailAddressesList;
           Helper.refreshList(mailAddressList);
 
@@ -210,7 +208,7 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
 
         });
 
-        user.getList('billAddresses').then(function(billAddressesList) {
+        User.me().getList('billAddresses').then(function(billAddressesList) {
           scope.billAddresses = billAddressesList;
           Helper.refreshList(billAddressList);
 
@@ -222,11 +220,11 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
           }
         });
 
-        user.one('avgRating').get().then(function(avg) {
+        User.me().one('avgRating').get().then(function(avg) {
           scope.rating = avg;
         });
 
-        user.getList('ratings').then(function(ratings) {
+        User.me().getList('ratings').then(function(ratings) {
           scope.ratings = ratings;
           setTimeout(function() {
             page.find('.star').raty({

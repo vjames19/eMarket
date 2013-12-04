@@ -55,7 +55,7 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
 
         scope.bankInfo = BankInfo.bankInfo;
 
-        User.me().all('billaddresses').getList().then(function(addresses) {
+        User.me().getList('billaddresses').then(function(addresses) {
           scope.billAddresses = addresses;
           Helper.refreshSelect(accountType);
           Helper.refreshSelect(addressSelect);

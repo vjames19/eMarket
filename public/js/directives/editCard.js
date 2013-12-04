@@ -56,7 +56,7 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
 
         scope.cardInfo = CardInfo.cardInfo;
 
-        User.me().all('billaddresses').getList().then(function(addresses) {
+        User.me().getList('billaddresses').then(function(addresses) {
           scope.billAddresses = addresses;
           Helper.refreshSelect(cardType);
           Helper.refreshSelect(addressSelect);
