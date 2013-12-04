@@ -172,9 +172,7 @@ module.exports.update = function(mailAddress, userId, callback) {
 
       connection.beginTransaction(function(err) {
         if(err) {
-          connection.rollback(function() {
             callback(err);
-          });
         } else {
           var params1 = [
             mailAddress.address, mailAddress.country, mailAddress.city,
