@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var Users = require('../models/user.js');
-var Register = require('../models/register.js');
 var Admins = require('../models/admin.js');
 
 var nestedControllersPath = __dirname + '/user';
@@ -44,7 +43,7 @@ exports.readUser = function(req, res) {
 };
 
 exports.createUser = function(req, res) {
-  Register.create(req.body, function(err, registration) {
+  Users.create(req.body, function(err, registration) {
     if(err) {
       res.jsonp(500, {message: err});
     }
