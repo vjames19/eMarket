@@ -41,7 +41,7 @@
           <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th rowspan="4">
-                <img ng-src="{{result.picture}}" class="item-photo-small ui-corner-all">
+                <img ng-src="{{result.picture}}" class="item-photo-small ui-corner-all" src="">
               </th>
               <th rowspan="4" class="pad"></th>
               <th colspan="3">
@@ -69,6 +69,12 @@
       </li>
     </ul>
 
+  </div>
+
+  <div data-role="popup" id="searchResult-statusPopup" data-theme="a" class="ui-corner-all ui-content">
+    <a href="#search-results" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="searchResult-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>
