@@ -97,7 +97,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
         // Remove any state from the other object.
         scope.nextMinBid = null;
-        scope.sellerRating = null;
+        //scope.sellerRating = null;
         scope.bidAmount = null;
         scope.amountToBuy = null;
 
@@ -123,12 +123,11 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         }
 
         Restangular.one('users', scope.item.sellerId).one('avgRating').get().then(function(avg) {
-
-          scope.sellerRating = avg;
+          //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
-
+        }, function(err) {
+          SellerInfo.sellerAvgRate = 0;
         });
-
       });
 
 //        scope.submitCart = function() {
