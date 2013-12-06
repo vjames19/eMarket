@@ -20,7 +20,7 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
 
       $scope.submit = function() {
         statusPopup.off();
-        $scope.cardInfo.expirationDate = $scope.cardInfo.expirationDate + '-01';
+        $scope.cardInfo.expirationDate = Helper.formatDate($scope.cardInfo.expirationDate, 'yyyy-MM-dd');
         $.mobile.loading('show');
         User.me().one('creditCards', $scope.cardInfo.id).customPUT($scope.cardInfo).then(function() {
           $.mobile.loading('hide');

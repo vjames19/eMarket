@@ -76,14 +76,15 @@ module.exports.create = function(mailAddress, userId, callback) {
           'SET mailing_is_primary = FALSE ' +
           'WHERE mailing_user_id = ? AND mailing_status = TRUE';
       var sql3 = 'INSERT INTO mailing_info ' +
-                 '(mailing_user_id, mailing_address_id, mailing_recipient_name, mailing_telephone, ' +
-                 'mailing_is_primary, mailing_status) ' +
-                 'VALUES (?, ?, ?, ?, ?, ?)';
+          '(mailing_user_id, mailing_address_id, mailing_recipient_name, mailing_telephone, ' +
+          'mailing_is_primary, mailing_status) ' +
+          'VALUES (?, ?, ?, ?, ?, ?)';
       connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
         } else {
-          var params1 = [mailAddress.mailAddress, mailAddress.country, mailAddress.city, mailAddress.geoRegion, mailAddress.zipCode];
+          var params1 = [mailAddress.mailAddress, mailAddress.country,
+            mailAddress.city, mailAddress.geoRegion, mailAddress.zipCode];
           connection.query(sql1, params1, function(err, insertStatus) {
             if(err) {
               connection.rollback(function() {
@@ -164,15 +165,14 @@ module.exports.update = function(mailAddress, userId, callback) {
           'SET mailing_is_primary = FALSE ' +
           'WHERE mailing_user_id = ? AND mailing_status = TRUE';
       var sql3 = 'UPDATE mailing_info ' +
-                 'SET mailing_recipient_name = ?, mailing_telephone = ?, mailing_is_primary = ? ' +
-                 'WHERE mailing_id = ? AND mailing_user_id = ?';
+          'SET mailing_recipient_name = ?, mailing_telephone = ?, mailing_is_primary = ? ' +
+          'WHERE mailing_id = ? AND mailing_user_id = ?';
       var sql4 = 'SELECT * ' +
-                  'FROM mailing_info ' +
-                  'WHERE mailing_id = ?';
-
+          'FROM mailing_info ' +
+          'WHERE mailing_id = ?';
       connection.beginTransaction(function(err) {
         if(err) {
-            callback(err);
+          callback(err);
         } else {
           var params1 = [
             mailAddress.address, mailAddress.country, mailAddress.city,
@@ -180,17 +180,18 @@ module.exports.update = function(mailAddress, userId, callback) {
           ];
           connection.query(sql1, params1, function(err) {
             if(err) {
-              connection.rollback(function(){
+              connection.rollback(function() {
                 callback(err);
               });
             } else {
-              connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) { // Check if mail address to be updated is primary
+              // Check if mail address to be updated is primary
+              connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) {
                 var mailAddressToBeUpdated = mapper.map(addressToBeUpdated[0], DICTIONARY);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
                   });
-                }  else {
+                } else {
                   if(mailAddressToBeUpdated.isPrimary && !mailAddress.isPrimary) {
                     connection.commit(function(err) {
                       if(err) {
@@ -272,8 +273,8 @@ module.exports.remove = function(mailingAddress, callback) {
       callback(err);
     } else {
       var sql = 'UPDATE mailing_info ' +
-                 'SET mailing_status = FALSE ' +
-                 'WHERE mailing_id = ?';
+          'SET mailing_status = FALSE ' +
+          'WHERE mailing_id = ?';
       connection.query(sql, [mailingAddress.id], function(err) {
         callback(err, mailingAddress);
       });

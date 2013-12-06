@@ -21,6 +21,9 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
       var notificationMessage = page.find('#notifications-message');
       var notificationPopup = page.find('#notifications-infoPopup');
 
+      var statusPopup = page.find('#notifications-statusPopup');
+      var statusPopupMessage = page.find('#notifications-statusPopupMessage');
+
       scope.readMessage = function(notification) {
         notificationMessage.text(notification.message);
         if(!notification.isRead) {
@@ -50,6 +53,21 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
           scope.notifications = notifications;
           Helper.refreshList(notificationList);
         });
+
+      });
+
+      page.on('pageshow', function() {
+
+        statusPopup.off();
+        if(scope.notifications.length === 0) {
+          statusPopupMessage.text('No notifications found.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#home-user');
+            }
+          });
+        }
 
       });
 

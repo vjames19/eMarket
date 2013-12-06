@@ -92,6 +92,12 @@
     </div>
   </div>
 
+  <div data-role="popup" id="cart-statusPopup" data-theme="a" class="ui-corner-all ui-content">
+    <a href="#shopping-cart" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="cart-statusPopupMessage" style="text-align: center"></p>
+  </div>
+
   <div data-role="footer" data-theme="a">
     <a href="#proceed-to-checkout" id="cart-proceedToCheckoutBtn" data-role="button" class="footer-button"
        ng-click="setCostAndShipping(shoppingCarts.length, cost, shipping)" data-theme="b">Proceed to Checkout</a>

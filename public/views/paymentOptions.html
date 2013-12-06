@@ -3,7 +3,6 @@
   <div data-role="header" data-position="fixed" data-theme="a">
     <h1>Payment Options</h1>
     <a href="#home-user" data-role="button" data-icon="back" data-direction="reverse">Back</a>
-
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
@@ -13,7 +12,8 @@
   <div data-role="content">
 
     <div data-role="collapsible-set" data-theme="a">
-      <div data-role="collapsible">
+
+      <div data-role="collapsible" data-collapsed="false">
         <h2>Edit Credit Cards</h2>
         <ul data-role="listview" data-theme="a" data-divider-theme="b" id="paymentOptions-cardList" data-inset="true">
           <li data-role="list-divider">
@@ -63,6 +63,7 @@
           </li>
         </ul>
       </div>
+
       <div data-role="collapsible">
         <h2>Edit Bank Accounts</h2>
         <ul data-role="listview" data-theme="a" data-divider-theme="b" id="paymentOptions-bankList" data-inset="true">
@@ -72,7 +73,7 @@
                 <td>Bank Accounts on System</td>
                 <td class="pad"></td>
                 <td><a href="#add-bank" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all">Add Bank
-                  Account</a></td>
+                                                                                                     Account</a></td>
                 <td><span class="ui-li-count">{{bankAccounts.length}}</span></td>
               </tr>
             </table>
@@ -108,6 +109,7 @@
           </li>
         </ul>
       </div>
+
     </div>
 
   </div>
@@ -116,7 +118,7 @@
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-card" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
-      <a href="#payment-options"  id="paymentOptions-deleteCardBtn"
+      <a href="#payment-options" id="paymentOptions-deleteCardBtn"
          class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
          ng-click="deleteCreditCard()">Delete</a>
       <a href="#payment-options" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
@@ -141,4 +143,5 @@
   </div>
 
   <div data-role="footer" data-theme="a"><h1></h1></div>
+
 </div>

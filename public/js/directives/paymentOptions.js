@@ -10,7 +10,7 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
 
       $scope.setCardInfo = function(cardInfo) {
         // Adding Filter because node-mysql escape replaces all dates with YYYY-mm-dd HH:ii:ss.
-        cardInfo.expirationDate = $filter('date')(new Date(cardInfo.expirationDate), 'yyyy-MM');
+        cardInfo.expirationDate = Helper.formatDate(cardInfo.expirationDate, 'yyyy-MM');
         angular.copy(cardInfo, CardInfo.cardInfo);
       };
 

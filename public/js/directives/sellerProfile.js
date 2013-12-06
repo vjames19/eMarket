@@ -61,8 +61,12 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
       });
 
       page.on('pagehide', function() {
+
         sellerAvgRate.raty('destroy');
+        rateSellerBox.raty('destroy');
+
       });
+
     }
   };
 });

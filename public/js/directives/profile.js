@@ -103,7 +103,6 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
       scope.deleteMailAddress = function() {
         profileMailingPopup.off();
         statusPopup.off();
-
         if(scope.mailAddresses[selectedMailAddressIndex].isPrimary) {
           profileMailingPopup.on({
             popupafterclose: function() {
@@ -114,11 +113,8 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               });
             }
           });
-          return
+          return;
         }
-
-        profileMailingPopup.off();
-        statusPopup.off();
         $.mobile.loading('show');
         User.me().one('mailAddresses', selectedMailAddress.id).remove().then(function() {
           scope.mailAddresses.splice(selectedMailAddressIndex, 1);
@@ -240,6 +236,12 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
             Helper.refreshList(ratingList);
           });
         });
+
+      });
+
+      page.on('pagehide', function() {
+
+        page.find('.star').raty('destroy');
 
       });
 

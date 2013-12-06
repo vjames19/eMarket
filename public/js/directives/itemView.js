@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo, Product, Helper) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo, Product) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
@@ -126,6 +126,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
         }, function(err) {
+          console.log('Avg Rating Error', err);
           SellerInfo.sellerAvgRate = 0;
         });
       });

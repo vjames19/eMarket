@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, Helper, $filter) {
+angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, Helper) {
   return {
     templateUrl: 'views/sellItem.html',
     restrict: 'E',
@@ -102,7 +102,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
         setTimeout(function() {
           Helper.refreshSelect(conditionSelect);
           if(SellItem.isDraft) {
-            scope.item.bidEndDate = $filter('date')(new Date(scope.item.bidEndDate), 'yyyy-MM-ddTHH:mm:ss');
+            scope.item.bidEndDate = Helper.formatDate(scope.item.bidEndDate, 'yyyy-MM-ddTHH:mm:ss');
             freeShippingCheckbox.prop('checked', scope.item.shippingPrice === 0).checkboxradio('refresh');
           } else {
             freeShippingCheckbox.prop('checked', false).checkboxradio('refresh');

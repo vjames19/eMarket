@@ -17,12 +17,30 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
 
       var draftList = page.find('#myEmDrafts-draftList');
 
+      var statusPopup = page.find('#myEmDrafts-statusPopup');
+      var statusPopupMessage = page.find('#myEmDrafts-statusPopupMessage');
+
       page.on('pagebeforeshow', function() {
 
         User.me().getList('drafts').then(function(drafts) {
           scope.drafts = drafts;
           Helper.refreshList(draftList);
         });
+
+      });
+
+      page.on('pageshow', function() {
+
+        statusPopup.off();
+        if(scope.drafts.length === 0) {
+          statusPopupMessage.text('No drafts found.');
+          statusPopup.popup('open');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#my-emarket-buying');
+            }
+          });
+        }
 
       });
 

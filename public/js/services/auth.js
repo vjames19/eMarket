@@ -21,9 +21,10 @@ angular.module('eMarketApp').factory('Auth', function($rootScope, $http, User) {
         $.mobile.loading('hide');
       }).error(function() {
             $.mobile.loading('hide');
-            $('#index-loginError').popup('open');
+            setTimeout(function() {
+              $('#index-loginError').popup('open');
+            });
           });
-
     },
     logOut: function() {
       console.log('Logging Out: ', user.username);

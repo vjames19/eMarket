@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Restangular) {
+angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Restangular, Helper) {
   return {
     templateUrl: 'views/sellItemPreview.html',
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, $element, Restangular, User, $filter) {
+    controller: function($scope, $element, Restangular, User) {
 
       var page = $($element[0]);
 
@@ -16,7 +16,7 @@ angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Res
       $scope.submitDraft = function() {
         statusPopup.off();
         $.mobile.loading('show');
-        $scope.previewItemInfo.bidEndDate = $filter('date')(new Date($scope.previewItemInfo.bidEndDate), 'yyyy-MM-dd HH:mm:ss');
+        $scope.previewItemInfo.bidEndDate = Helper.formatDate($scope.previewItemInfo.bidEndDate, 'yyyy-MM-dd HH:mm:ss');
         if(SellItem.isDraft) { // Update
           User.me().one('drafts', $scope.previewItemInfo.id).customPUT($scope.previewItemInfo).then(function() {
             $.mobile.loading('hide');
@@ -67,7 +67,7 @@ angular.module('eMarketApp').directive('sellItemPreview', function(SellItem, Res
       $scope.submitProduct = function() {
         statusPopup.off();
         $.mobile.loading('show');
-        $scope.previewItemInfo.bidEndDate = $filter('date')(new Date($scope.previewItemInfo.bidEndDate), 'yyyy-MM-dd HH:mm:ss');
+        $scope.previewItemInfo.bidEndDate = Helper.formatDate($scope.previewItemInfo.bidEndDate, 'yyyy-MM-dd HH:mm:ss');
         if(SellItem.isDraft) { // Delete the Draft, New Product
           User.me().one('drafts', $scope.previewItemInfo.id).remove().then(function() {
             $.mobile.loading('hide');

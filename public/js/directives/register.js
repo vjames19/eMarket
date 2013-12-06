@@ -68,7 +68,7 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
           $scope.register.billingCity = $scope.register.mailingCity;
           $scope.register.billingZipCode = $scope.register.mailingZipCode;
         }
-        $scope.register.cardExpDate = $scope.register.cardExpDate + '-01'; // Default Day
+        $scope.register.cardExpDate = Helper.formatDate($scope.register.cardExpDate, 'yyyy-MM-dd');
         $.mobile.loading('show');
         Restangular.all('../register').post($scope.register).then(function() {
           $.mobile.loading('hide');

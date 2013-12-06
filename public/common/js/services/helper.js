@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').factory('Helper', function() {
+angular.module('eMarketApp').factory('Helper', function($filter) {
   return{
     refreshList: function(listSelector, noTimeOut) {
       if(!noTimeOut) {
@@ -47,6 +47,9 @@ angular.module('eMarketApp').factory('Helper', function() {
       } else {
         element.trigger('create');
       }
+    },
+    formatDate: function(date, format) {
+      return $filter('date')(new Date(date), format);
     }
   };
 });
