@@ -50,6 +50,8 @@ exports.updateMailAddress = function(req, res) {
   MailingAddresses.update(req.body, req.params.userId, function(err, mailingAddress) {
     if(err) {
       res.jsonp(500, {message: err});
+    } else if(mailingAddress === null) {
+      res.jsonp(409, {message: 'Cannot remove only primary address.'});
     } else {
       res.jsonp(200, mailingAddress);
     }

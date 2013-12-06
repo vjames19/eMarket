@@ -174,40 +174,38 @@ module.exports.update = function(mailAddress, userId, callback) {
         if(err) {
           callback(err);
         } else {
-          var params1 = [
-            mailAddress.address, mailAddress.country, mailAddress.city,
-            mailAddress.geoRegion, mailAddress.zipCode, mailAddress.addressId
-          ];
-          connection.query(sql1, params1, function(err) {
+          connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) {
             if(err) {
               connection.rollback(function() {
                 callback(err);
               });
             } else {
-              // Check if mail address to be updated is primary
-              connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) {
-                var mailAddressToBeUpdated = mapper.map(addressToBeUpdated[0], DICTIONARY);
-                if(err) {
-                  connection.rollback(function() {
-                    callback(err);
-                  });
-                } else {
-                  if(mailAddressToBeUpdated.isPrimary && !mailAddress.isPrimary) {
-                    connection.commit(function(err) {
-                      if(err) {
-                        connection.rollback(function(err) {
-                          callback(err);
-                        });
-                      } else {
-                        callback(null, mailAddress);
-                        console.log('Cannot Update Mailing Address Successfully.');
-                      }
+              var mailAddressToBeUpdated = mapper.map(addressToBeUpdated[0], DICTIONARY);
+              if(mailAddressToBeUpdated.isPrimary && !mailAddress.isPrimary) {
+                connection.commit(function(err) {
+                  if(err) {
+                    connection.rollback(function(err) {
+                      callback(err);
                     });
+                  } else {
+                    callback(null, null);
+                    console.log('Cannot Update Mailing Address Successfully.');
                   }
-                  else {
+                });
+              }
+              else {
+                var params1 = [
+                  mailAddress.address, mailAddress.country, mailAddress.city,
+                  mailAddress.geoRegion, mailAddress.zipCode, mailAddress.addressId
+                ];
+                connection.query(sql1, params1, function(err) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
                     var params3 = [mailAddress.recipientName, mailAddress.telephone,
                       mailAddress.isPrimary, mailAddress.id, userId];
-
                     if(mailAddress.isPrimary) {
                       connection.query(sql2, [userId], function(err) {
                         if(err) {
@@ -257,8 +255,8 @@ module.exports.update = function(mailAddress, userId, callback) {
                       });
                     }
                   }
-                }
-              });
+                });
+              }
             }
           });
         }

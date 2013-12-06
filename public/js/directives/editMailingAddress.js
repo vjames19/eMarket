@@ -27,11 +27,9 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
         if(!$scope.mailInfo.geoRegion) {
           $scope.mailInfo.geoRegion = null;
         }
-
         if(!$scope.mailInfo.isPrimary) {
           $scope.mailInfo.isPrimary = false;
         }
-
         User.me().one('mailAddresses', $scope.mailInfo.id).customPUT($scope.mailInfo).then(function() {
           $.mobile.loading('hide');
           statusPopupMessage.text('Mailing Address Updated Successfully');
@@ -78,6 +76,7 @@ angular.module('eMarketApp').directive('editMailingAddress', function(MailingAdd
         } else {
           primaryCheckBox.checkboxradio('enable');
         }
+
       });
     }
   };
