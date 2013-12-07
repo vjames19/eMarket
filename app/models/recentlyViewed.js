@@ -68,3 +68,23 @@ module.exports.get = function(userId, recentlyViewedId, callback) {
     }
   });
 };
+
+module.exports.create = function(userId, recentlyViewed, callback) {
+  console.log("create recently", arguments);
+
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err)
+    } else {
+      var sql = 'INSERT INTO recently_viewed_items (recently_viewed_user_id, recently_viewed_product_id) ' +
+          'VALUES (?,?)';
+      var q = connection.query(sql, [userId, recentlyViewed.productId], function(err, insertStatus) {
+        console.log("create recently", arguments);
+        callback(err, {id: insertStatus.insertId});
+      });
+
+      console.log(q.sql);
+    }
+  });
+
+};

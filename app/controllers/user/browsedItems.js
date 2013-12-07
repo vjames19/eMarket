@@ -36,8 +36,14 @@ exports.readBrowsedItem = function(req, res) {
   }
 };
 
-exports.createBrowsedItem = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+exports.createBrowsedItem = function(req, res, next) {
+  BrowsedItems.create(req.params.userId, req.body, function(err, recentlyViewed) {
+    if(err) {
+      return next({message: err, code: 500});
+    } else {
+      res.jsonp(201, recentlyViewed);
+    }
+  });
 };
 
 exports.updateBrowsedItem = function(req, res) {
