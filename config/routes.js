@@ -141,8 +141,9 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/browsedItems', users.readAllBrowsedItems);
   app.post('/api/users/:userId/browsedItems', users.createBrowsedItem);
   app.get('/api/users/:userId/browsedItems/:browsedItemId', users.readBrowsedItem);
-  app.put('/api/users/:userId/browsedItems/:browsedItemId', users.updateBrowsedItem);
-  app.del('/api/users/:userId/browsedItems/:browsedItemId', users.deleteBrowsedItem);
+  // Not supported
+  //  app.put('/api/users/:userId/browsedItems/:browsedItemId', users.updateBrowsedItem);
+  //  app.del('/api/users/:userId/browsedItems/:browsedItemId', users.deleteBrowsedItem);
 
   // User Purchases Routes
   app.param('purchaseId', users.findPurchaseById);
