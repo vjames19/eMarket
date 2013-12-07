@@ -43,20 +43,18 @@ module.exports = function(app, passport) {
     //routes should be at the last
     app.use(app.router);
 
-    app.use(function(err, req, res, next) {
-      // Authentication failed
-      if(err.message && err.message.indexOf('Authentication') >= 0) {
-        console.log('in dsnfksdfna');
-        res.jsonp(401, err);
-      } else if(err.message && ~err.message.indexOf('not found')) { //Treat as 404
-        res.jsonp(404, 'Not found');
-      } else {
-        //Log it
-        console.error(err.stack);
-        //Error page
-        res.jsonp(500, {error: err.stack});
+    app.use(function errorHandler(err, req, res, next) {
+      console.log('error handlder');
+      if(err.hasOwnProperty("code")) {
+        console.log(err);
+        res.jsonp(err.code, err);
+      } else { // 404
+        return next();
       }
     });
 
+    app.use(function notFound(req, res) { // no middleware responded :(
+      res.jsonp(404, {message: "Resource not found"});
+    });
   });
 };
