@@ -83,15 +83,51 @@ module.exports.createRating = function(rating, callback) {
     if(err) {
       callback(err)
     } else {
-      var sql = 'INSERT INTO rating_history (rating_rated_user_id, rating_rater_user_id, rating_value) ' +
-          'VALUES (?,?,?)';
-      connection.query(sql, [rating.ratedId, rating.raterId, rating.value], function(err, insertStatus) {
-        console.log("rating create", this.sql);
-
+      connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
         } else {
-          callback(err, {id: insertStatus.insertId});
+          var sql1 = 'SELECT rating_id FROM rating_history ' +
+              'WHERE rating_rated_user_id=? AND rating_rater_user_id=?';
+          connection.query(sql1, [rating.ratedId, rating.raterId], function(err, ratings) {
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              if(!_.isEmpty(ratings)) {
+                var updateRatingSql = 'UPDATE rating_history ' +
+                    'SET rating_value=? ' +
+                    'WHERE rating_id=?';
+                connection.query(updateRatingSql, [rating.value, ratings[0].rating_id], function(err, updatedRating) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    console.log('update rating', arguments);
+                    callback(null, updatedRating);
+                  }
+                });
+              } else {
+                var insertRatingSql = 'INSERT INTO rating_history ' +
+                    '(rating_rated_user_id, rating_rater_user_id, rating_value) ' +
+                    'VALUES (?,?,?)';
+                connection.query(insertRatingSql, [rating.ratedId, rating.raterId, rating.value
+                ], function(err, insertStatus) {
+                  console.log("rating create", this.sql);
+
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    callback(null, {id: insertStatus.insertId});
+                  }
+                });
+              }
+            }
+          });
         }
       });
     }
