@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('sellerProfile', function(Restangular, SellerInfo, Helper) {
+angular.module('eMarketApp').directive('sellerProfile', function(Restangular, SellerInfo, User, Helper) {
   return {
     templateUrl: 'views/sellerProfile.html',
     restrict: 'E',
@@ -34,24 +34,29 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
         setTimeout(function() {
 
           sellerAvgRate.raty({
-            cancel: true,
             score: function() {
               return $(this).attr('data-score');
             },
-            half: true,
             size: 12,
             readOnly: true,
             path: '../lib/raty/lib/img'
           });
 
           rateSellerBox.raty({
-            cancel: true,
-            score: function() {
-              return $(this).attr('data-score');
-            },
-            half: true,
             size: 16,
-            path: '../lib/raty/lib/img'
+            path: '../lib/raty/lib/img',
+            click: function() {
+              var score = $(this).raty('score');
+              console.log('clicked star', $(this).raty('score'));
+              Restangular.one('users', SellerInfo.sellerId).all('ratings')
+                  .post({ratedId: SellerInfo.sellerId, raterId: User.userId, value: score});
+            }
+          });
+
+          scope.$watch(function() {
+            return rateSellerBox.raty('score');
+          }, function() {
+            console.log('rating val', arguments);
           });
 
           Helper.refreshList(sellerRatingList);
