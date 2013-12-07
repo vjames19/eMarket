@@ -19,6 +19,7 @@ var express = require('express'),
 //    config = require('./config/config'),
 //    auth = require('./config/middlewares/authorization');
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.LOG_QUERIES = process.env.LOG_QUERIES || 'true';
 
 var config = require('./config/config'),
     auth = require('./config/middlewares/authorization');

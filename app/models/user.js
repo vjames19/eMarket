@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'user_id': 'id',
@@ -46,6 +47,7 @@ module.exports.getAll = function(callback) {
           'ON user_info.user_id = user_account_status.user_account_id AND user_id = user_login_id ' +
           'WHERE user_account_status = 1 ';
       connection.query(sql, function(err, users) {
+        logger.logQuery('user_getAll:', this);
         callback(err, mapper.mapCollection(users, DICTIONARY));
       });
     }
@@ -62,6 +64,7 @@ module.exports.get = function(id, callback) {
           'ON (user_info.user_id=user_account_status.user_account_id AND user_id=user_login_id) ' +
           'WHERE user_id = ? AND user_account_status=1';
       connection.query(sql, [id], function(err, users) {
+        logger.logQuery('user_get:', this);
         callback(err, mapper.map(users[0], DICTIONARY));
       });
     }
@@ -82,6 +85,7 @@ module.exports.create = function(register, callback) {
           var sql0 = 'SELECT * FROM active_users WHERE user_login_user_name = LCASE(?) OR user_login_email = LCASE(?)';
           var params0 = [register.username, register.email];
           connection.query(sql0, params0, function(err, result) {
+            logger.logQuery('user_create:', this);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -113,6 +117,7 @@ module.exports.create = function(register, callback) {
 
               var params1 = [register.firstName, register.middleName, register.lastName, register.telephone];
               connection.query(sql1, params1, function(err, firstResult) {
+                logger.logQuery('user_create:', this);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -126,6 +131,7 @@ module.exports.create = function(register, callback) {
                       '(user_account_id, user_account_status) VALUES (?, TRUE)';
 
                   connection.query(sql2, [userId], function(err) {
+                    logger.logQuery('user_create:', this);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
@@ -138,6 +144,7 @@ module.exports.create = function(register, callback) {
 
                       var params3 = [userId, register.username, register.password, register.email];
                       connection.query(sql3, params3, function(err) {
+                        logger.logQuery('user_create:', this);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
@@ -166,6 +173,7 @@ module.exports.create = function(register, callback) {
                           }
 
                           connection.query(sql4, [params4], function(err, fourthResult) {
+                            logger.logQuery('user_create:', this);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
@@ -197,6 +205,7 @@ module.exports.create = function(register, callback) {
 
                               var params5 = [userId, mailAddressId, recipient, register.telephone];
                               connection.query(sql5, params5, function(err) {
+                                logger.logQuery('user_create:', this);
                                 if(err) {
                                   connection.rollback(function() {
                                     callback(err);
@@ -210,6 +219,7 @@ module.exports.create = function(register, callback) {
 
                                   var params6 = [userId, billAddressId, recipient, register.telephone];
                                   connection.query(sql6, params6, function(err, sixthResult) {
+                                    logger.logQuery('user_create:', this);
                                     if(err) {
                                       connection.rollback(function() {
                                         callback(err);
@@ -227,6 +237,7 @@ module.exports.create = function(register, callback) {
                                       var params7 = [userId, billId, register.cardType, register.cardName,
                                         register.cardExpDate, register.cardNumber, register.cardSecurityCode];
                                       connection.query(sql7, params7, function(err) {
+                                        logger.logQuery('user_create:', this);
                                         if(err) {
                                           connection.rollback(function() {
                                             callback(err);
@@ -243,6 +254,7 @@ module.exports.create = function(register, callback) {
                                             [register.securityQuestion3, userId, register.securityAnswer3, true]
                                           ];
                                           connection.query(sql8, [params8], function(err) {
+                                            logger.logQuery('user_create:', this);
                                             if(err) {
                                               connection.rollback(function() {
                                                 callback(err);
@@ -329,12 +341,14 @@ module.exports.update = function(user, AdminReq, callback) {
           }
           else {
             connection.query(sql1, params1, function(err) {
+              logger.logQuery('user_update:', this);
               if(err) {
                 connection.rollback(function() {
                   callback(err);
                 });
               } else {
                 connection.query(sql2, params2, function(err) {
+                  logger.logQuery('user_update:', this);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
@@ -364,6 +378,7 @@ module.exports.update = function(user, AdminReq, callback) {
           }
           else {
             connection.query(sql3, params3, function(err, result) {
+              logger.logQuery('user_update:', this);
               if(err) {
                 connection.rollback(function() {
                   callback(err);
@@ -372,24 +387,28 @@ module.exports.update = function(user, AdminReq, callback) {
               else {
                 if(result.length === 1) { // user matched
                   connection.query(sql1, params1, function(err) {
+                    logger.logQuery('user_update:', this);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
                       });
                     } else {
                       connection.query(sql2, params2, function(err) {
+                        logger.logQuery('user_update:', this);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
                           });
                         } else {
                           connection.query(sql4, params4, function(err) {
+                            logger.logQuery('user_update:', this);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
                               });
                             } else {
                               connection.query(sql5, params5, function(err) {
+                                logger.logQuery('user_update:', this);
                                 if(err) {
                                   connection.rollback(function() {
                                     callback(err);
@@ -446,6 +465,7 @@ module.exports.authenticate = function(username, password, callback) {
           'ON (user_login_id=user_id AND user_id=user_account_id) ' +
           'WHERE user_login_user_name = LCASE(?) AND user_login_password = SHA1(?) AND user_account_status = 1';
       connection.query(sql, [username, password], function(err, users) {
+        logger.logQuery('user_authenticate:', this);
         callback(err, mapper.map(users[0], DICTIONARY));
       });
     }
@@ -498,6 +518,7 @@ module.exports.changePassword = function(forgotInfo, callback) {
         }
         else {
           connection.query(sql1, params1, function(err, result) {
+            logger.logQuery('user_changePassword:', this);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -508,6 +529,7 @@ module.exports.changePassword = function(forgotInfo, callback) {
               if(result.length === 3) {
 
                 connection.query(sql2, params2, function(err) {
+                  logger.logQuery('user_changePassword:', this);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
