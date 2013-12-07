@@ -53,12 +53,6 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
             }
           });
 
-          scope.$watch(function() {
-            return rateSellerBox.raty('score');
-          }, function() {
-            console.log('rating val', arguments);
-          });
-
           Helper.refreshList(sellerRatingList);
 
         });
