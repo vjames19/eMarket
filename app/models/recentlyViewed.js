@@ -38,7 +38,8 @@ module.exports.getAll = function(userId, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'SELECT products.* ' +
+      // TODO (vjames19): fix distinct and use subquery
+      var sql = 'SELECT DISTINCT products.* ' +
           'FROM recently_viewed_items INNER JOIN user_info INNER JOIN products ' +
           'ON (user_id = recently_viewed_user_id AND product_id = recently_viewed_product_id) ' +
           'WHERE user_id = ? ' +
