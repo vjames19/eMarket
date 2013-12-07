@@ -99,7 +99,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.nextMinBid = null;
         //scope.sellerRating = null;
         scope.bidAmount = null;
-        scope.amountToBuy = null;
+        scope.amountToBuy = 1;
 
         if(scope.item && scope.item.currentBid === null) {
           productBidsLink.addClass('ui-disabled');
