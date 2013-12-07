@@ -37,7 +37,6 @@ exports.readRating = function(req, res) {
 };
 
 // Average User Rating
-
 exports.readAvgRating = function(req, res) {
   Ratings.getAvgRating(req.params.userId, function(err, avgRating) {
     if(err) {
@@ -46,6 +45,16 @@ exports.readAvgRating = function(req, res) {
       res.jsonp(404, {message: 'Average Rating not found.'});
     } else {
       res.jsonp(200, avgRating);
+    }
+  });
+};
+
+exports.createRating = function(req, res, next) {
+  Ratings.createRating(req.body, function(err, insert) {
+    if(err) {
+      next({message: err, code: 500});
+    } else {
+      res.jsonp(201, insert);
     }
   });
 };

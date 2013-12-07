@@ -30,6 +30,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE rating_rated_user_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId], function(err, ratings) {
+        console.log("rating getAll", this.sql);
         callback(err, mapper.mapCollection(ratings, DICTIONARY));
       });
     }
@@ -47,6 +48,7 @@ module.exports.get = function(userId, ratingId, callback) {
           'WHERE rating_rated_user_id = ? AND rating_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId, ratingId], function(err, rating) {
+        console.log("rating get", this.sql);
         callback(err, mapper.map(rating[0], DICTIONARY));
       });
     }
@@ -64,10 +66,32 @@ module.exports.getAvgRating = function(userId, callback) {
           'GROUP BY rating_rated_user_id';
       var newRating = {'rating_rated_user_id': userId, 'rating_avg': 0};
       connection.query(sql, [userId], function(err, rating) {
+        console.log("rating getAvgRating", this.sql);
         if(_.isEmpty(rating)) {
           callback(err, mapper.map(newRating, DICTIONARY));
         } else {
           callback(err, mapper.map(rating[0], DICTIONARY));
+        }
+      });
+    }
+  });
+};
+
+module.exports.createRating = function(rating, callback) {
+
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err)
+    } else {
+      var sql = 'INSERT INTO rating_history (rating_rated_user_id, rating_rater_user_id, rating_value) ' +
+          'VALUES (?,?,?)';
+      connection.query(sql, [rating.ratedId, rating.raterId, rating.value], function(err, insertStatus) {
+        console.log("rating create", this.sql);
+
+        if(err) {
+          callback(err);
+        } else {
+          callback(err, {id: insertStatus.insertId});
         }
       });
     }
