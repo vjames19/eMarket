@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var _ = require('underscore');
 
 var DICTIONARY = {
   'rating_id': 'id',
@@ -61,8 +62,17 @@ module.exports.getAvgRating = function(userId, callback) {
           'FROM rating_history ' +
           'WHERE rating_rated_user_id = ? ' +
           'GROUP BY rating_rated_user_id';
+      var newRating = {};
       connection.query(sql, [userId], function(err, rating) {
-        callback(err, mapper.map(rating[0], DICTIONARY));
+        if(_.isEmpty(rating)) {
+          newRating = {
+            'rating_rated_user_id': userId,
+            'rating_avg': 0
+          }
+          callback(err, mapper.map(newRating, DICTIONARY));
+        } else {
+          callback(err, mapper.map(rating[0], DICTIONARY));
+        }
       });
     }
   });

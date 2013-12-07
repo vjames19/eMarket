@@ -125,9 +125,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         Restangular.one('users', scope.item.sellerId).one('avgRating').get().then(function(avg) {
           //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
-        }, function(err) {
-          console.log('Avg Rating Error', err);
-          SellerInfo.sellerAvgRate = 0;
         });
       });
 
