@@ -74,12 +74,18 @@ module.exports.getTotal = function(timeFrame, callback) {
             'SUM(category_profit) as category_profit, ' +
             'SUM(category_revenue) as category_revenue ' +
             'FROM report_' + timeFrame;
+        var reportTotals = {'category_id': null, 'category_name': null,
+          'category_sales': 0, 'category_profit': 0, 'category_revenue': 0};
         connection.query(sql, function(err, report) {
           logger.logQuery('report_getTotal:', this.sql);
-          callback(err, mapper.map(report[0], DICTIONARY));
+          report = mapper.map(report[0], DICTIONARY);
+          if(_.isNull(report.sales) && _.isNull(report.profit) && _.isNull(report.revenue)) {
+            callback(err, mapper.map(reportTotals, DICTIONARY));
+          } else {
+            callback(err, report);
+          }
         });
       }
     }
   });
-
 };
