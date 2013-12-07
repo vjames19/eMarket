@@ -121,12 +121,13 @@ module.exports = function(app, passport, auth) {
   app.del('/api/users/:userId/unsoldProducts/:unsoldProductId', users.deleteUnsoldProduct);
 
   // User Cart Routes
-  app.param('cartId', users.findCartById);
-  app.get('/api/users/:userId/carts', users.readAllCarts);
-  app.post('/api/users/:userId/carts', users.createCart);
-  app.get('/api/users/:userId/carts/:cartId', users.readCart);
-  app.put('/api/users/:userId/carts/:cartId', users.updateCart);
-  app.del('/api/users/:userId/carts/:cartId', users.deleteCart);
+  app.param('cartItemId', users.findCartById);
+  app.get('/api/users/:userId/cartItems', users.readAll);
+  app.post('/api/users/:userId/cartItems', users.createCart);
+  app.get('/api/users/:userId/cartItems/:cartItemId', users.readCart);
+  app.put('/api/users/:userId/cartItems/:cartItemId', users.updateCart);
+  app.del('/api/users/:userId/cartItems/:cartItemId', users.deleteCart);
+
 
   // User Bid Routes
   app.param('userBidId', users.findUserBidById);

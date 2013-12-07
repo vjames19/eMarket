@@ -40,38 +40,50 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           }
         });
 
-        //        $scope.bid.userId = User.userId;
-        //        $scope.bid.productId = $scope.item.productId;
-        //        $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
-        //        $scope.bid.productName = $scope.item.productName;
-        //        User.me().all('bids').post($scope.bid); //TODO <-- add .then
-        //        $.mobile.loading('hide');
-        //        $.mobile.changePage('#home-user');
+//        $scope.bid.userId = User.userId;
+//        $scope.bid.productId = $scope.item.productId;
+//        $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
+//        $scope.bid.productName = $scope.item.productName;
+//        User.me().all('bids').post($scope.bid); //TODO <-- add .then
+//        $.mobile.loading('hide');
+//        $.mobile.changePage('#home-user');
       };
 
       $scope.submitCart = function() {
 
         statusPopup.off();
         buyItNowPopup.off();
+        $scope.item.isBidItem = 0;
         $.mobile.loading('show');
-        $.mobile.loading('hide');
-        statusPopup.on({
-          popupafterclose: function() {
-            $.mobile.changePage('#home-user');
-          }
+        User.me().all('cartItems').post($scope.item).then(function() {
+          $.mobile.loading('hide');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#home-user');
+            }
+          });
+          buyItNowPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Product(s) have been placed in cart.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                buyItNowPopup.off();
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          buyItNowPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not place product in cart.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                buyItNowPopup.off();
+              });
+            }
+          });
+          console.log('Error placing product in cart', err);
         });
-        buyItNowPopup.on({
-          popupafterclose: function() {
-            statusPopupMessage.text('Product(s) have been placed in cart.');
-            setTimeout(function() {
-              statusPopup.popup('open');
-              buyItNowPopup.off();
-            });
-          }
-        });
-
-        //        $.mobile.loading('hide');
-        //        $.mobile.changePage('#home-user');
       };
 
     },
@@ -82,14 +94,16 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       var placeBidBtn = page.find('#itemView-placeBidBtn');
       var buyItNowBtn = page.find('#itemView-buyItNowBtn');
       var productBidsLink = page.find('#itemView-productBidsLink');
-      //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
-      //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
+//      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
+//      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
 
       page.on('pagebeforeshow', function() {
 
         // Set the product to scope item
         scope.item = {}; // delete any previous values
         scope.item = Product.getItem();
+        scope.item.amountToBuy = 1;
+        scope.item.isBidItem = null;
 
         // Set sellerId into a service
         SellerInfo.sellerId = scope.item.sellerId;
@@ -99,7 +113,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.nextMinBid = null;
         //scope.sellerRating = null;
         scope.bidAmount = null;
-        scope.amountToBuy = 1;
 
         if(scope.item && scope.item.currentBid === null) {
           productBidsLink.addClass('ui-disabled');
@@ -126,32 +139,27 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
         });
-
-        User.me().all('browsedItems').post({productId: Product.getItem().id}).then(function() {
-          console.log('Saved to browsedItems');
-        });
-
       });
 
-      //        scope.submitCart = function() {
-      //          $.mobile.loading('show');
-      //          quantityPopup.popup('close');
-      //          // User.me().all('carts').post(scope.item); // TODO <-- add .then later
-      //          setTimeout(function() {
-      //            scope.item.cost = scope.item.quantity * scope.item.nonbidPrice;
-      //            $.mobile.loading('hide');
-      //            addedToCartPopup.popup('open');
-      //            setTimeout(function() {
-      //              addedToCartPopup.popup('close');
-      //            }, 2000);
-      //          });
-      //        };
+//        scope.submitCart = function() {
+//          $.mobile.loading('show');
+//          quantityPopup.popup('close');
+//          // User.me().all('carts').post(scope.item); // TODO <-- add .then later
+//          setTimeout(function() {
+//            scope.item.cost = scope.item.quantity * scope.item.nonbidPrice;
+//            $.mobile.loading('hide');
+//            addedToCartPopup.popup('open');
+//            setTimeout(function() {
+//              addedToCartPopup.popup('close');
+//            }, 2000);
+//          });
+//        };
 
-      //      scope.addToCart = function() {
+//      scope.addToCart = function() {
       // Get the item quantity and multiply it by the price to get the total cost
-      //        scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;
+//        scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;
       // User.me().all('carts').post(scope.item);
-      //      };
+//      };
 
       scope.setNextBid = function() {
         scope.bidAmount = scope.nextMinBid;

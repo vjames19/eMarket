@@ -24,6 +24,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
 
       var statusPopup = page.find('#cart-statusPopup');
       var statusPopupMessage = page.find('#cart-statusPopupMessage');
+      var shoppingCartPopup = page.find('#cart-notificationPopup');
 
       var cartSelected = null;
       var selectedCartIndex = null;
@@ -46,21 +47,45 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
       };
 
       scope.deleteCartItem = function() {
+        shoppingCartPopup.off();
+        statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('carts', cartSelected.cartId).remove().then(function() {
-        scope.shoppingCarts.splice(selectedCartIndex, 1);
-        computeTotalCostAndShipping();
-        if(scope.shoppingCarts.length === 0) {
-          proceedToCheckOut.addClass('ui-disabled');
-        }
-        Helper.refreshList(shoppingCartList);
-        $.mobile.loading('hide');
-//        });
+        User.me().one('cartItems', scope.shoppingCarts[selectedCartIndex].itemId).remove().then(function() {
+          scope.shoppingCarts.splice(selectedCartIndex, 1);
+          computeTotalCostAndShipping();
+          if(scope.shoppingCarts.length === 0) {
+            proceedToCheckOut.addClass('ui-disabled');
+          }
+          Helper.refreshList(shoppingCartList);
+
+          $.mobile.loading('hide');
+          shoppingCartPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Product Deleted Successfully From Cart.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                shoppingCartPopup.off();
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          shoppingCartPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not delete product from cart.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                shoppingCartPopup.off();
+              });
+            }
+          });
+          console.log('Error Removing Product From Cart', err);
+        });
       };
 
       page.on('pagebeforeshow', function() {
 
-        User.me().getList('carts').then(function(carts) {
+        User.me().getList('cartItems').then(function(carts) {
           scope.shoppingCarts = carts;
           Helper.refreshList(shoppingCartList);
           computeTotalCostAndShipping();
@@ -70,7 +95,6 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
             proceedToCheckOut.removeClass('ui-disabled');
           }
         });
-
       });
 
       page.on('pageshow', function() {
@@ -80,9 +104,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           statusPopupMessage.text('No items in cart, please buy some :)');
           statusPopup.popup('open');
         }
-
       });
-
     }
   };
 });

@@ -162,10 +162,10 @@
           <label for="itemView-quantityAmount"></label>
           <input type="number" name="itemViewQuantityAmount" id="itemView-quantityAmount"
                  min="1" max="{{item.quantity}}" placeholder="1" maxlength="999"
-                 ng-model="amountToBuy" ng-pattern="patternBuyItNow" ng-required="true">
+                 ng-model="item.amountToBuy" ng-pattern="patternBuyItNow" ng-required="true">
         </div>
         <a href="#item-view" data-role="button" data-theme="b" ng-click="submitCart()"
-           ng-class="{false: 'ui-disabled'}[itemViewBuyItNowForm.$valid && amountToBuy <= item.quantity]">
+           ng-class="{false: 'ui-disabled'}[itemViewBuyItNowForm.$valid && item.amountToBuy <= item.quantity]">
           Add to Cart</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>
