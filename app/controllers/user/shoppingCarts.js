@@ -37,13 +37,13 @@ exports.readCart = function(req, res) {
 };
 
 exports.createCart = function(req, res, next) {
- ShoppingCarts.create(req.body, req.params.userId, function(err, cartItem) {
-   if(err) {
-     return next({message: err, code: 500});
-   } else {
-     res.jsonp(201, cartItem);
-   }
- });
+  ShoppingCarts.create(req.body, req.params.userId, function(err, cartItem) {
+    if(err) {
+      next({message: err, code: 500});
+    } else {
+      res.jsonp(201, cartItem);
+    }
+  });
 };
 
 exports.updateCart = function(req, res) {
@@ -53,7 +53,7 @@ exports.updateCart = function(req, res) {
 exports.deleteCart = function(req, res, next) {
   ShoppingCarts.remove(req.cart, function(err, cartItem) {
     if(err) {
-      return next({message: err, code: 500});
+      next({message: err, code: 500});
     } else {
       res.jsonp(200, cartItem);
     }

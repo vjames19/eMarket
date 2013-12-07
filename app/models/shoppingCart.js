@@ -81,7 +81,7 @@ module.exports.create = function(cartItem, userId, callback) {
                  'WHERE cart_user_id = ? AND cart_closed_date IS NULL';
       var sql2 = 'INSERT INTO cart_item_history ' +
                  '(cart_item_cart_id, cart_item_product_id, cart_item_quantity, cart_item_is_bid_item) ' +
-                 'VALUES(?, ?, ?, ?)';
+                 'VALUES (?, ?, ?, ?)';
       connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
@@ -93,7 +93,6 @@ module.exports.create = function(cartItem, userId, callback) {
               });
             } else {
               var cartId = mapper.map(cartIdToBeAdded[0], DICTIONARY);
-
               if(cartItem.amountToBuy <= 0 && cartItem.amountToBuy > cartItem.quantity) {
                 connection.commit(function(err) {
                   if(err) {
@@ -102,7 +101,7 @@ module.exports.create = function(cartItem, userId, callback) {
                     });
                   } else {
                     callback(null, null);
-                    console.log('Cannot Added Product Successfully.');
+                    console.log('Cannot Add Product Successfully.');
                   }
                 });
               } else {

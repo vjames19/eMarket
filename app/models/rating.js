@@ -30,7 +30,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE rating_rated_user_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId], function(err, ratings) {
-        console.log("rating getAll", this.sql);
+        console.log('rating_getAll:', this.sql);
         callback(err, mapper.mapCollection(ratings, DICTIONARY));
       });
     }
@@ -48,7 +48,7 @@ module.exports.get = function(userId, ratingId, callback) {
           'WHERE rating_rated_user_id = ? AND rating_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId, ratingId], function(err, rating) {
-        console.log("rating get", this.sql);
+        console.log('rating_get:', this.sql);
         callback(err, mapper.map(rating[0], DICTIONARY));
       });
     }
@@ -66,7 +66,7 @@ module.exports.getAvgRating = function(userId, callback) {
           'GROUP BY rating_rated_user_id';
       var newRating = {'rating_rated_user_id': userId, 'rating_avg': 0};
       connection.query(sql, [userId], function(err, rating) {
-        console.log("rating getAvgRating", this.sql);
+        console.log('rating_getAvgRating:', this.sql);
         if(_.isEmpty(rating)) {
           callback(err, mapper.map(newRating, DICTIONARY));
         } else {
@@ -81,14 +81,20 @@ module.exports.createRating = function(rating, callback) {
 
   executor.execute(function(err, connection) {
     if(err) {
-      callback(err)
+      callback(err);
     } else {
+      var sql1 = 'SELECT rating_id FROM rating_history ' +
+          'WHERE rating_rated_user_id=? AND rating_rater_user_id = ?';
+      var updateRatingSql = 'UPDATE rating_history ' +
+          'SET rating_value = ? ' +
+          'WHERE rating_id = ?';
+      var insertRatingSql = 'INSERT INTO rating_history ' +
+          '(rating_rated_user_id, rating_rater_user_id, rating_value) ' +
+          'VALUES (?,?,?)';
       connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
         } else {
-          var sql1 = 'SELECT rating_id FROM rating_history ' +
-              'WHERE rating_rated_user_id=? AND rating_rater_user_id=?';
           connection.query(sql1, [rating.ratedId, rating.raterId], function(err, ratings) {
             if(err) {
               connection.rollback(function() {
@@ -96,33 +102,47 @@ module.exports.createRating = function(rating, callback) {
               });
             } else {
               if(!_.isEmpty(ratings)) {
-                var updateRatingSql = 'UPDATE rating_history ' +
-                    'SET rating_value=? ' +
-                    'WHERE rating_id=?';
-                connection.query(updateRatingSql, [rating.value, ratings[0].rating_id], function(err, updatedRating) {
+                var mappedRatings = mapper.map(ratings[0], DICTIONARY);
+                var updateRatingParams = [rating.value, mappedRatings.id];
+                connection.query(updateRatingSql, updateRatingParams, function(err, updatedRating) {
+                  console.log('rating_update:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
                     });
                   } else {
-                    console.log('update rating', arguments);
-                    callback(null, updatedRating);
+                    connection.commit(function(err) {
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        console.log('Updated Rating Successfully', arguments);
+                        callback(null, updatedRating);
+                      }
+                    });
                   }
                 });
-              } else {
-                var insertRatingSql = 'INSERT INTO rating_history ' +
-                    '(rating_rated_user_id, rating_rater_user_id, rating_value) ' +
-                    'VALUES (?,?,?)';
-                connection.query(insertRatingSql, [rating.ratedId, rating.raterId, rating.value
-                ], function(err, insertStatus) {
-                  console.log("rating create", this.sql);
-
+              }
+              else {
+                var insertRatingParams = [rating.ratedId, rating.raterId, rating.value];
+                connection.query(insertRatingSql, insertRatingParams, function(err, insertStatus) {
+                  console.log('rating_create:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
                     });
                   } else {
-                    callback(null, {id: insertStatus.insertId});
+                    connection.commit(function(err) {
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        console.log('Created Rating Successfully', arguments);
+                        callback(null, {id: insertStatus.insertId});
+                      }
+                    });
                   }
                 });
               }
