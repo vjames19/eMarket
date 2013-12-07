@@ -128,8 +128,9 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         });
 
         User.me().all('browsedItems').post({productId: Product.getItem().id}).then(function() {
-          console.log('saved to browsedItems');
-        })
+          console.log('Saved to browsedItems');
+        });
+
       });
 
       //        scope.submitCart = function() {
