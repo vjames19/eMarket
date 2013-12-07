@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 var validate = require('jsonschema').validate;
 
 var DICTIONARY = {
@@ -58,6 +59,7 @@ module.exports.getAll = function(userId, callback) {
       var sql = 'SELECT * FROM notification_history WHERE notification_user_id = ? ' +
           'ORDER BY notification_date DESC, notification_is_read ASC';
       connection.query(sql, [userId], function(err, notifications) {
+        logger.logQuery('notification_getAll:', this.sql);
         callback(err, mapper.mapCollection(notifications, DICTIONARY));
       });
     }
@@ -71,6 +73,7 @@ module.exports.get = function(userId, notificationId, callback) {
     } else {
       var sql = 'SELECT * FROM notification_history WHERE notification_user_id = ? AND notification_id = ?';
       connection.query(sql, [userId, notificationId], function(err, notifications) {
+        logger.logQuery('notification_get:', this.sql);
         callback(err, mapper.map(notifications[0], DICTIONARY));
       });
     }
@@ -86,6 +89,7 @@ module.exports.create = function(userId, notification, callback) {
           '(notification_user_id, notification_message) ' +
           'VALUES (?,?)';
       connection.query(sql, [userId, notification.message], function(err, insertStatus) {
+        logger.logQuery('notification_create:', this.sql);
         if(err) {
           callback(err);
         } else {
@@ -106,6 +110,7 @@ module.exports.update = function(notification, callback) {
           'SET notification_is_read=? ' +
           'WHERE notification_id=?';
       connection.query(sql, [notification.isRead, notification.id], function(err) {
+        logger.logQuery('notification_update:', this.sql);
         callback(err, notification);
       });
     }

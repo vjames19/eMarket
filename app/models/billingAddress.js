@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'billing_id': 'id',
@@ -36,6 +37,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE billing_info.billing_user_id = ? AND billing_info.billing_status = 1 ' +
           'ORDER BY address_geographical_region';
       connection.query(sql, [userId], function(err, billingAddresses) {
+        logger.logQuery('bill_getAll:', this.sql);
         callback(err, mapper.mapCollection(billingAddresses, DICTIONARY));
       });
     }
@@ -55,6 +57,7 @@ module.exports.get = function(userId, billingId, callback) {
           'WHERE user_info.user_id = ? AND billing_info.billing_status = 1 AND billing_info.billing_id = ? ' +
           'ORDER BY address_geographical_region';
       connection.query(sql, [userId, billingId], function(err, billingAddress) {
+        logger.logQuery('bill_get:', this.sql);
         callback(err, mapper.map(billingAddress[0], DICTIONARY));
       });
     }
@@ -79,6 +82,7 @@ module.exports.create = function(billAddress, userId, callback) {
           var params1 = [billAddress.billAddress, billAddress.country, billAddress.city,
             billAddress.geoRegion, billAddress.zipCode];
           connection.query(sql1, params1, function(err, insertStatus) {
+            logger.logQuery('bill_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -87,6 +91,7 @@ module.exports.create = function(billAddress, userId, callback) {
               var addressId = insertStatus.insertId;
               var params2 = [userId, addressId, billAddress.recipientName, billAddress.telephone, true];
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('bill_create:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -122,8 +127,8 @@ module.exports.update = function(billAddress, userId, callback) {
           'address_geographical_region = ?, address_zipcode = ? ' +
           'WHERE address_id = ?';
       var sql2 = 'UPDATE billing_info ' +
-                  'SET billing_recipient_name = ?, billing_telephone = ? ' +
-                  'WHERE billing_id = ? AND billing_user_id = ?';
+          'SET billing_recipient_name = ?, billing_telephone = ? ' +
+          'WHERE billing_id = ? AND billing_user_id = ?';
       connection.beginTransaction(function(err) {
         if(err) {
           connection.rollback(function() {
@@ -131,8 +136,9 @@ module.exports.update = function(billAddress, userId, callback) {
           });
         } else {
           var params1 = [billAddress.address, billAddress.country, billAddress.city,
-                        billAddress.geoRegion, billAddress.zipCode, billAddress.addressId];
+            billAddress.geoRegion, billAddress.zipCode, billAddress.addressId];
           connection.query(sql1, params1, function(err) {
+            logger.logQuery('bill_update:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -140,6 +146,7 @@ module.exports.update = function(billAddress, userId, callback) {
             } else {
               var params2 = [billAddress.recipientName, billAddress.telephone, billAddress.id, userId];
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('bill_update:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);

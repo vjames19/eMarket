@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'admin_id': 'id',
@@ -31,6 +32,7 @@ module.exports.getAll = function(callback) {
           'FROM admin_info ' +
           'WHERE admin_account_status = 1';
       connection.query(sql, function(err, admins) {
+        logger.logQuery('admin_getAll:', this.sql);
         callback(err, mapper.mapCollection(admins, DICTIONARY));
       });
     }
@@ -46,6 +48,7 @@ module.exports.get = function(id, callback) {
           'FROM admin_info ' +
           'WHERE admin_id = ? AND admin_account_status = 1';
       connection.query(sql, [id], function(err, admins) {
+        logger.logQuery('admin_get:', this.sql);
         var admin = mapper.map(admins[0], DICTIONARY);
         if(admins.length > 0) {
           admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks
@@ -68,6 +71,7 @@ module.exports.create = function(admin, callback) {
       var params = [admin.username, admin.password, admin.email, admin.firstName,
         admin.middleName, admin.lastName, admin.telephone, admin.isRoot];
       connection.query(sql, params, function(err, insertStatus) {
+        logger.logQuery('admin_create:', this.sql);
         if(err) {
           callback(err);
         } else {
@@ -101,6 +105,7 @@ module.exports.update = function(admin, callback) {
           admin.lastName, admin.telephone, admin.isRoot, admin.id];
       }
       connection.query(sql, params, function(err) {
+        logger.logQuery('admin_update:', this.sql);
         callback(err, admin);
       });
     }
@@ -116,6 +121,7 @@ module.exports.remove = function(id, callback) {
           'SET admin_account_status = 0 ' +
           'WHERE admin_id = ?';
       connection.query(sql, [id], function(err) {
+        logger.logQuery('admin_remove', this.sql);
         callback(err, id);
       });
     }
@@ -131,6 +137,7 @@ module.exports.authenticate = function(username, password, callback) {
           'FROM admin_info ' +
           'WHERE admin_user_name = LCASE(?) AND admin_password = SHA1(?) AND admin_account_status = 1';
       connection.query(sql, [username, password], function(err, admins) {
+        logger.logQuery('admin_authenticate:', this.sql);
         var admin = mapper.map(admins[0], DICTIONARY);
         if(admins.length > 0) {
           admin.isAdmin = !_.isEmpty(admin); // For hasAuth Checks

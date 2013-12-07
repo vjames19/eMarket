@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'product_draft_id': 'id',
@@ -44,6 +45,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE product_draft_user_id = ? AND product_draft_closed_date IS NULL ' +
           'ORDER BY product_draft_creation_date DESC';
       connection.query(sql, [userId], function(err, drafts) {
+        logger.logQuery('drafts_getAll:', this.sql);
         callback(err, mapper.mapCollection(drafts, DICTIONARY));
       });
     }
@@ -61,6 +63,7 @@ module.exports.get = function(userId, draftId, callback) {
           'WHERE product_draft_user_id = ? AND product_draft_id = ? AND product_draft_closed_date IS NULL ' +
           'ORDER BY product_draft_creation_date DESC';
       connection.query(sql, [userId, draftId], function(err, draft) {
+        logger.logQuery('drafts_get:', this.sql);
         callback(err, mapper.map(draft[0], DICTIONARY));
       });
     }
@@ -99,6 +102,7 @@ module.exports.create = function(draft, userId, callback) {
           callback(err);
         } else {
           connection.query(sql1, params1, function(err, insertStatus) {
+            logger.logQuery('drafts_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -107,6 +111,7 @@ module.exports.create = function(draft, userId, callback) {
               var specId = insertStatus.insertId;
               var params2 = [specId, draft.quantity];
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('drafts_create:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -114,6 +119,7 @@ module.exports.create = function(draft, userId, callback) {
                 } else {
                   var params3 = [userId, specId];
                   connection.query(sql3, params3, function(err) {
+                    logger.logQuery('drafts_create:', this.sql);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
@@ -121,6 +127,7 @@ module.exports.create = function(draft, userId, callback) {
                     } else {
                       var params4 = [userId, specId];
                       connection.query(sql4, params4, function(err) {
+                        logger.logQuery('drafts_create:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
@@ -181,18 +188,21 @@ module.exports.update = function(draft, userId, callback) {
           callback(err);
         } else {
           connection.query(sql1, params1, function(err) {
+            logger.logQuery('drafts_update:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
               });
             } else {
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('drafts_update:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
                   });
                 } else {
                   connection.query(sql3, params3, function(err) {
+                    logger.logQuery('drafts_update:', this.sql);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
@@ -246,24 +256,28 @@ module.exports.remove = function(draft, userId, callback) {
           callback(err);
         } else {
           connection.query(sql1, params1, function(err) {
+            logger.logQuery('drafts_remove:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
               });
             } else {
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('drafts_remove:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
                   });
                 } else {
                   connection.query(sql3, params3, function(err) {
+                    logger.logQuery('drafts_remove:', this.sql);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);
                       });
                     } else {
                       connection.query(sql4, params4, function(err) {
+                        logger.logQuery('drafts_remove:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);

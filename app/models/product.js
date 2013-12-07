@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 var Category = require('./category.js');
 
 var DICTIONARY = {
@@ -41,6 +42,7 @@ module.exports.getAll = function(callback) {
     } else {
       var sql = 'SELECT * FROM products';
       connection.query(sql, function(err, products) {
+        logger.logQuery('products_getAll:', this.sql);
         callback(err, mapper.mapCollection(products, DICTIONARY));
       });
     }
@@ -55,6 +57,7 @@ module.exports.get = function(id, callback) {
       var sql = 'SELECT * FROM products ' +
           'WHERE product_id = ?';
       connection.query(sql, [id], function(err, products) {
+        logger.logQuery('products_get:', this.sql);
         callback(err, mapper.map(products[0], DICTIONARY));
       });
     }
@@ -67,14 +70,14 @@ module.exports.search = function(query, callback) {
       callback(err);
     } else {
       var sql = 'SELECT * FROM products ' +
-          'WHERE category_id=? ' +
+          'WHERE category_id = ? ' +
           'OR product_spec_name LIKE ? ' +
           'OR product_spec_brand LIKE ? ' +
           'OR product_spec_model LIKE ?';
       var categoryId = query;
       query = '%' + query + '%';
       connection.query(sql, [categoryId, query, query, query], function(err, products) {
-        console.log('model search', categoryId, query, arguments);
+        logger.logQuery('products_search:', this.sql);
         callback(err, mapper.mapCollection(products, DICTIONARY));
       });
     }
@@ -94,6 +97,7 @@ module.exports.searchByCategory = function(parentCategoryId, callback) {
           var sql = 'SELECT * FROM products ' +
               'WHERE category_id IN (?)';
           connection.query(sql, [categoryIds], function(err, products) {
+            logger.logQuery('products_searchByCategory:', this.sql);
             callback(err, mapper.mapCollection(products, DICTIONARY));
           });
         }
@@ -130,6 +134,7 @@ module.exports.create = function(product, userId, callback) {
           callback(err);
         } else {
           connection.query(sql1, params1, function(err, insertStatus) {
+            logger.logQuery('products_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -138,6 +143,7 @@ module.exports.create = function(product, userId, callback) {
               var specId = insertStatus.insertId;
               var params2 = [specId, product.quantity - 1];
               connection.query(sql2, params2, function(err) {
+                logger.logQuery('products_create:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -145,6 +151,7 @@ module.exports.create = function(product, userId, callback) {
                 } else {
                   var params3 = [userId, specId];
                   connection.query(sql3, params3, function(err) {
+                    logger.logQuery('products_create:', this.sql);
                     if(err) {
                       connection.rollback(function() {
                         callback(err);

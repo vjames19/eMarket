@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'credit_card_id': 'id',
@@ -34,6 +35,7 @@ module.exports.getAll = function(userId, callback) {
           'ON ( credit_card_info.credit_card_billing_address_id = billing_info.billing_id ) ' +
           'WHERE credit_card_info.credit_card_user_id = ? AND credit_card_info.credit_card_status = 1';
       connection.query(sql, [userId], function(err, creditCards) {
+        logger.logQuery('card_getAll:', this.sql);
         callback(err, mapper.mapCollection(creditCards, DICTIONARY));
       });
     }
@@ -53,6 +55,7 @@ module.exports.get = function(userId, cardId, callback) {
           'WHERE credit_card_info.credit_card_user_id = ? AND credit_card_info.credit_card_status = 1 ' +
           'AND credit_card_info.credit_card_id = ?';
       connection.query(sql, [userId, cardId], function(err, creditCard) {
+        logger.logQuery('card_get:', this.sql);
         callback(err, mapper.map(creditCard[0], DICTIONARY));
       });
     }
@@ -73,6 +76,7 @@ module.exports.create = function(card, userId, callback) {
         card.expirationDate, card.cardNumber, card.cardCsv, true
       ];
       connection.query(sql, params, function(err) {
+        logger.logQuery('card_create:', this.sql);
         callback(err, card);
       });
     }
@@ -93,6 +97,7 @@ module.exports.update = function(card, userId, callback) {
         card.cardNumber, card.cardCsv, card.id, userId
       ];
       connection.query(sql, params, function(err) {
+        logger.logQuery('card_update:', this.sql);
         callback(err, card);
       });
     }
@@ -105,9 +110,10 @@ module.exports.remove = function(card, callback) {
       callback(err);
     } else {
       var sql = 'UPDATE credit_card_info ' +
-                'SET credit_card_status = FALSE ' +
-                'WHERE credit_card_id = ?';
+          'SET credit_card_status = FALSE ' +
+          'WHERE credit_card_id = ?';
       connection.query(sql, [card.id], function(err) {
+        logger.logQuery('card_remove:', this.sql);
         callback(err, card);
       });
     }

@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'cart_id': 'id',
@@ -48,6 +49,7 @@ module.exports.getAll = function(userId, callback) {
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_closed_date IS NULL';
       connection.query(sql, [userId], function(err, shoppingCarts) {
+        logger.logQuery('cart_getAll:', this.sql);
         callback(err, mapper.mapCollection(shoppingCarts, DICTIONARY));
       });
     }
@@ -65,6 +67,7 @@ module.exports.get = function(userId, cartItemId, callback) {
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_id = ? AND cart_item_closed_date IS NULL';
       connection.query(sql, [userId, cartItemId], function(err, shoppingCart) {
+        logger.logQuery('cart_get:', this.sql);
         callback(err, mapper.map(shoppingCart[0], DICTIONARY));
       });
     }
@@ -77,16 +80,17 @@ module.exports.create = function(cartItem, userId, callback) {
       callback(err);
     } else {
       var sql1 = 'SELECT cart_id ' +
-                 'FROM cart_history ' +
-                 'WHERE cart_user_id = ? AND cart_closed_date IS NULL';
+          'FROM cart_history ' +
+          'WHERE cart_user_id = ? AND cart_closed_date IS NULL';
       var sql2 = 'INSERT INTO cart_item_history ' +
-                 '(cart_item_cart_id, cart_item_product_id, cart_item_quantity, cart_item_is_bid_item) ' +
-                 'VALUES (?, ?, ?, ?)';
+          '(cart_item_cart_id, cart_item_product_id, cart_item_quantity, cart_item_is_bid_item) ' +
+          'VALUES (?, ?, ?, ?)';
       connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
         } else {
           connection.query(sql1, [userId], function(err, cartIdToBeAdded) {
+            logger.logQuery('cart_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -107,8 +111,9 @@ module.exports.create = function(cartItem, userId, callback) {
               } else {
                 var params2 = [cartId.id, cartItem.id, cartItem.amountToBuy, cartItem.isBidItem];
                 connection.query(sql2, params2, function(err) {
+                  logger.logQuery('cart_create:', this.sql);
                   if(err) {
-                    connection.rollback(function(){
+                    connection.rollback(function() {
                       callback(err);
                     });
                   } else {
@@ -139,9 +144,10 @@ module.exports.remove = function(cartItem, callback) {
       callback(err);
     } else {
       var sql = 'UPDATE cart_item_history ' +
-                'SET cart_item_closed_date = NOW() ' +
-                'WHERE cart_item_id = ?';
+          'SET cart_item_closed_date = NOW() ' +
+          'WHERE cart_item_id = ?';
       connection.query(sql, [cartItem.itemId], function(err) {
+        logger.logQuery('cart_remove:', this.sql);
         callback(err, cartItem);
       });
     }

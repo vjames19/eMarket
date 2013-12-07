@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'bid_id': 'id',
@@ -31,6 +32,7 @@ module.exports.getAll = function(productId, callback) {
           'products.product_id = ? ' +
           'ORDER BY bid_amount DESC';
       connection.query(sql, [productId], function(err, bids) {
+        logger.logQuery('productBids_getAll:', this.sql);
         callback(err, mapper.mapCollection(bids, DICTIONARY));
       });
     }
@@ -50,6 +52,7 @@ module.exports.get = function(productId, bidId, callback) {
           'products.product_id = ? AND bid_history.bid_id = ? ' +
           'ORDER BY bid_amount DESC';
       connection.query(sql, [productId, bidId], function(err, bids) {
+        logger.logQuery('productBids_get:', this.sql);
         callback(err, mapper.map(bids[0], DICTIONARY));
       });
     }

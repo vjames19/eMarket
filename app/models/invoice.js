@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'invoice_id': 'id',
@@ -52,6 +53,7 @@ module.exports.getAll = function(userId, callback) {
           'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
           'ORDER BY invoice_creation_date DESC';
       connection.query(sql, [userId], function(err, invoices) {
+        logger.logQuery('invoice_getAll:', this.sql);
         callback(err, mapper.mapCollection(invoices, DICTIONARY));
       });
     }
@@ -70,6 +72,7 @@ module.exports.get = function(userId, invoiceId, callback) {
           'GROUP BY invoice_item_invoice_id, invoice_creation_date ' +
           'ORDER BY invoice_creation_date DESC';
       connection.query(sql, [userId, invoiceId], function(err, invoices) {
+        logger.logQuery('invoice_get:', this.sql);
         callback(err, mapper.map(invoices[0], DICTIONARY));
       });
     }
@@ -87,6 +90,7 @@ module.exports.getProducts = function(userId, invoiceId, callback) {
           'AND products.product_id=invoice_item_product_id) ' +
           'WHERE user_id = ? AND invoice_history.invoice_id = ?';
       connection.query(sql, [userId, invoiceId], function(err, products) {
+        logger.logQuery('invoice_getProducts:', this.sql);
         callback(err, mapper.mapCollection(products, PRODUCT_DICTIONARY));
       });
     }

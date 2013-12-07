@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'product_id': 'id',
@@ -45,6 +46,7 @@ module.exports.getAll = function(userId, callback) {
           'product_quantity_remaining > 0 AND ' +
           'product_depletion_date IS NULL';
       connection.query(sql, [userId], function(err, unsoldProducts) {
+        logger.logQuery('unSoldProd_getAll:', this.sql);
         callback(err, mapper.mapCollection(unsoldProducts, DICTIONARY));
       });
     }
@@ -63,6 +65,7 @@ module.exports.get = function(userId, unsoldProductId, callback) {
           'product_depletion_date IS NULL AND ' +
           'product_id = ?';
       connection.query(sql, [userId, unsoldProductId], function(err, unsoldProduct) {
+        logger.logQuery('unSoldProd_get:', this.sql);
         callback(err, mapper.map(unsoldProduct[0], DICTIONARY));
       });
     }

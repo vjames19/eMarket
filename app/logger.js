@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports.logQuery = function(msg, con) {
+module.exports.logQuery = function(msg, sql) {
   if(process.env.LOG_QUERIES === 'true') {
-    console.log(msg, con.sql);
+    console.log(msg, sql);
   }
 };

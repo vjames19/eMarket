@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'mailing_id': 'id',
@@ -38,6 +39,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE mailing_info.mailing_user_id = ? AND mailing_info.mailing_status = 1 ' +
           'ORDER BY address_geographical_region';
       connection.query(sql, [userId], function(err, mailingAddresses) {
+        logger.logQuery('mail_getAll:', this.sql);
         callback(err, mapper.mapCollection(mailingAddresses, DICTIONARY));
       });
     }
@@ -58,6 +60,7 @@ module.exports.get = function(userId, mailingId, callback) {
           'WHERE user_info.user_id = ? AND mailing_info.mailing_status = 1 AND mailing_info.mailing_id = ? ' +
           'ORDER BY address_geographical_region';
       connection.query(sql, [userId, mailingId], function(err, mailingAddress) {
+        logger.logQuery('mail_get:', this.sql);
         callback(err, mapper.map(mailingAddress[0], DICTIONARY));
       });
     }
@@ -86,6 +89,7 @@ module.exports.create = function(mailAddress, userId, callback) {
           var params1 = [mailAddress.mailAddress, mailAddress.country,
             mailAddress.city, mailAddress.geoRegion, mailAddress.zipCode];
           connection.query(sql1, params1, function(err, insertStatus) {
+            logger.logQuery('mail_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -97,12 +101,14 @@ module.exports.create = function(mailAddress, userId, callback) {
 
               if(mailAddress.isPrimary) {
                 connection.query(sql2, [userId], function(err) {
+                  logger.logQuery('mail_create:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
                     });
                   } else {
                     connection.query(sql3, params3, function(err) {
+                      logger.logQuery('mail_create:', this.sql);
                       if(err) {
                         connection.rollback(function() {
                           callback(err);
@@ -125,6 +131,7 @@ module.exports.create = function(mailAddress, userId, callback) {
                 });
               } else {
                 connection.query(sql3, params3, function(err) {
+                  logger.logQuery('mail_create:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
@@ -175,6 +182,7 @@ module.exports.update = function(mailAddress, userId, callback) {
           callback(err);
         } else {
           connection.query(sql4, [mailAddress.id], function(err, addressToBeUpdated) {
+            logger.logQuery('mail_update:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -199,6 +207,7 @@ module.exports.update = function(mailAddress, userId, callback) {
                   mailAddress.geoRegion, mailAddress.zipCode, mailAddress.addressId
                 ];
                 connection.query(sql1, params1, function(err) {
+                  logger.logQuery('mail_update:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
@@ -208,12 +217,14 @@ module.exports.update = function(mailAddress, userId, callback) {
                       mailAddress.isPrimary, mailAddress.id, userId];
                     if(mailAddress.isPrimary) {
                       connection.query(sql2, [userId], function(err) {
+                        logger.logQuery('mail_update:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
                           });
                         } else {
                           connection.query(sql3, params3, function(err) {
+                            logger.logQuery('mail_update:', this.sql);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
@@ -236,6 +247,7 @@ module.exports.update = function(mailAddress, userId, callback) {
                     }
                     else {
                       connection.query(sql3, params3, function(err) {
+                        logger.logQuery('mail_update:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
@@ -274,6 +286,7 @@ module.exports.remove = function(mailingAddress, callback) {
           'SET mailing_status = FALSE ' +
           'WHERE mailing_id = ?';
       connection.query(sql, [mailingAddress.id], function(err) {
+        logger.logQuery('mail_remove:', this.sql);
         callback(err, mailingAddress);
       });
     }

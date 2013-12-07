@@ -1,8 +1,8 @@
 'use strict';
 
-//var _ = require('underscore');
-var mapper = require('../mapper');
 var _ = require('underscore');
+var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'rating_id': 'id',
@@ -30,7 +30,7 @@ module.exports.getAll = function(userId, callback) {
           'WHERE rating_rated_user_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId], function(err, ratings) {
-        console.log('rating_getAll:', this.sql);
+        logger.logQuery('rating_getAll:', this.sql);
         callback(err, mapper.mapCollection(ratings, DICTIONARY));
       });
     }
@@ -48,7 +48,7 @@ module.exports.get = function(userId, ratingId, callback) {
           'WHERE rating_rated_user_id = ? AND rating_id = ? ' +
           'ORDER BY user_login_user_name';
       connection.query(sql, [userId, ratingId], function(err, rating) {
-        console.log('rating_get:', this.sql);
+        logger.logQuery('rating_get:', this.sql);
         callback(err, mapper.map(rating[0], DICTIONARY));
       });
     }
@@ -66,7 +66,7 @@ module.exports.getAvgRating = function(userId, callback) {
           'GROUP BY rating_rated_user_id';
       var newRating = {'rating_rated_user_id': userId, 'rating_avg': 0};
       connection.query(sql, [userId], function(err, rating) {
-        console.log('rating_getAvgRating:', this.sql);
+        logger.logQuery('rating_getAvgRating:', this.sql);
         if(_.isEmpty(rating)) {
           callback(err, mapper.map(newRating, DICTIONARY));
         } else {
@@ -96,6 +96,7 @@ module.exports.createRating = function(rating, callback) {
           callback(err);
         } else {
           connection.query(sql1, [rating.ratedId, rating.raterId], function(err, ratings) {
+            logger.logQuery('rating_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -105,7 +106,7 @@ module.exports.createRating = function(rating, callback) {
                 var mappedRatings = mapper.map(ratings[0], DICTIONARY);
                 var updateRatingParams = [rating.value, mappedRatings.id];
                 connection.query(updateRatingSql, updateRatingParams, function(err, updatedRating) {
-                  console.log('rating_update:', this.sql);
+                  logger.logQuery('rating_create:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);
@@ -127,7 +128,7 @@ module.exports.createRating = function(rating, callback) {
               else {
                 var insertRatingParams = [rating.ratedId, rating.raterId, rating.value];
                 connection.query(insertRatingSql, insertRatingParams, function(err, insertStatus) {
-                  console.log('rating_create:', this.sql);
+                  logger.logQuery('rating_create:', this.sql);
                   if(err) {
                     connection.rollback(function() {
                       callback(err);

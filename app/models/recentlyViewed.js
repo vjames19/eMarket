@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'product_id': 'id',
@@ -46,6 +47,7 @@ module.exports.getAll = function(userId, callback) {
           'ORDER BY recently_viewed_date DESC ' +
           'LIMIT 0, 10';
       connection.query(sql, [userId], function(err, products) {
+        logger.logQuery('recentlyViewed_getAll:', this.sql);
         callback(err, mapper.mapCollection(products, DICTIONARY));
       });
     }
@@ -64,6 +66,7 @@ module.exports.get = function(userId, recentlyViewedId, callback) {
           'ORDER BY recently_viewed_date DESC ' +
           'LIMIT 0, 10';
       connection.query(sql, [userId, recentlyViewedId], function(err, product) {
+        logger.logQuery('recentlyViewed_get:', this.sql);
         callback(err, mapper.map(product[0], DICTIONARY));
       });
     }
@@ -78,7 +81,7 @@ module.exports.create = function(userId, recentlyViewed, callback) {
       var sql = 'INSERT INTO recently_viewed_items (recently_viewed_user_id, recently_viewed_product_id) ' +
           'VALUES (?,?)';
       connection.query(sql, [userId, recentlyViewed.productId], function(err, insertStatus) {
-        console.log('recentlyViewed_create:', this.sql);
+        logger.logQuery('recentlyViewed_create:', this.sql);
         callback(err, {id: insertStatus.insertId});
       });
     }

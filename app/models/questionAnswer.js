@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'question_id': 'id',
@@ -28,6 +29,7 @@ module.exports.getAll = function(userId, callback) {
           'ON (user_id = answer_user_id AND answer_question_id = question_id) ' +
           'WHERE user_id = ? AND answer_status = 1';
       connection.query(sql, [userId], function(err, securityQuestions) {
+        logger.logQuery('questionAnswer_getAll:', this.sql);
         callback(err, mapper.mapCollection(securityQuestions, DICTIONARY));
       });
     }
@@ -44,6 +46,7 @@ module.exports.get = function(userId, questionId, callback) {
           'ON (user_id = answer_user_id AND answer_question_id = question_id) ' +
           'WHERE user_id = ? AND answer_status = 1 AND question_id = ?';
       connection.query(sql, [userId, questionId], function(err, securityQuestion) {
+        logger.logQuery('questionAnswer_get:', this.sql);
         callback(err, mapper.map(securityQuestion[0], DICTIONARY));
       });
     }

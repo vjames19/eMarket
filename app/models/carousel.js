@@ -2,6 +2,7 @@
 
 //var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'product_id': 'id',
@@ -45,6 +46,7 @@ module.exports.getAll = function(userId, callback) {
           'ORDER BY RAND() ' +
           'LIMIT 10';
       connection.query(sql, [userId], function(err, products) {
+        logger.logQuery('carousel_getAll:', this.sql);
         callback(err, mapper.mapCollection(products, DICTIONARY));
       });
     }
@@ -63,6 +65,7 @@ module.exports.get = function(userId, carouselId, callback) {
           'ORDER BY RAND() ' +
           'LIMIT 10';
       connection.query(sql, [userId, carouselId], function(err, product) {
+        logger.logQuery('carousel_get:', this.sql);
         callback(err, mapper.map(product[0], DICTIONARY));
       });
     }

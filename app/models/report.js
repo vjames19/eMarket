@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var mapper = require('../mapper');
+var logger = require('../logger');
 
 var DICTIONARY = {
   'category_id': 'id',
@@ -32,6 +33,7 @@ module.exports.getAll = function(timeFrame, callback) {
         var sql = 'SELECT * ' +
             'FROM report_' + timeFrame;
         connection.query(sql, function(err, reports) {
+          logger.logQuery('report_getAll:', this.sql);
           callback(err, mapper.mapCollection(reports, DICTIONARY));
         });
       }
@@ -51,6 +53,7 @@ module.exports.get = function(id, timeFrame, callback) {
             'FROM report_' + timeFrame + ' ' +
             'WHERE category_id = ?';
         connection.query(sql, [id], function(err, report) {
+          logger.logQuery('report_get:', this.sql);
           callback(err, mapper.map(report[0], DICTIONARY));
         });
       }
@@ -72,6 +75,7 @@ module.exports.getTotal = function(timeFrame, callback) {
             'SUM(category_revenue) as category_revenue ' +
             'FROM report_' + timeFrame;
         connection.query(sql, function(err, report) {
+          logger.logQuery('report_getTotal:', this.sql);
           callback(err, mapper.map(report[0], DICTIONARY));
         });
       }
