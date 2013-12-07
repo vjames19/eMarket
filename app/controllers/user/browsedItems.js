@@ -36,10 +36,10 @@ exports.readBrowsedItem = function(req, res) {
   }
 };
 
-exports.createBrowsedItem = function(req, res, next) {
+exports.createBrowsedItem = function(req, res) {
   BrowsedItems.create(req.params.userId, req.body, function(err, recentlyViewed) {
     if(err) {
-      return next({message: err, code: 500});
+      res.jsonp(500, {message: err});
     } else {
       res.jsonp(201, recentlyViewed);
     }

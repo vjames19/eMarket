@@ -44,8 +44,7 @@ module.exports = function(app, passport) {
     app.use(app.router);
 
     app.use(function errorHandler(err, req, res, next) {
-      console.log('error handlder');
-      if(err.hasOwnProperty("code")) {
+      if(err.hasOwnProperty('code')) {
         console.log(err);
         res.jsonp(err.code, err);
       } else { // 404
@@ -54,7 +53,8 @@ module.exports = function(app, passport) {
     });
 
     app.use(function notFound(req, res) { // no middleware responded :(
-      res.jsonp(404, {message: "Resource not found"});
+      res.jsonp(404, {message: 'Resource not found'});
     });
+
   });
 };
