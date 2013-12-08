@@ -8,6 +8,8 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
     replace: true,
     controller: function($scope) {
 
+      $scope.envelopeImage = '/img/envelope.png';
+
       $scope.getStatus = function(notification) {
         return notification.isRead ? 'Read' : 'Unread';
       };

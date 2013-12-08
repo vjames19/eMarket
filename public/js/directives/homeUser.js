@@ -8,6 +8,8 @@ angular.module('eMarketApp').directive('homeUser', function(User, Carousel, Help
     replace: true,
     controller: function($scope, Auth, SellItem, Product) {
 
+      $scope.eMarketLogo = '/img/logo.png';
+
       $scope.logOut = Auth.logOut;
 
       $scope.setItem = Product.setItem;
