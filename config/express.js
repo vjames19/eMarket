@@ -48,12 +48,12 @@ module.exports = function(app, passport) {
         console.log(err);
         res.jsonp(err.code, err);
       } else { // 404
-        return next();
+        next();
       }
     });
 
     app.use(function notFound(req, res) { // no middleware responded :(
-      res.jsonp(404, {message: 'Resource not found'});
+      res.jsonp(404, {message: 'Resource not found.'});
     });
 
   });

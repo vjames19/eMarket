@@ -6,9 +6,9 @@ var Bids = require('../../models/bid.js');
 exports.findUserBidById = function(req, res, next, id) {
   Bids.get(req.params.userId, id, function(err, bid) {
     if(err) {
-      res.jsonp(500, {message: err});
+      next({code: 500, message: err});
     } else if(_.isEmpty(bid)) {
-      res.jsonp(404, {message: 'Bid with id ' + id + ' not found.'});
+      next({code: 404, message: 'Bid with id ' + id + ' not found.'});
     } else {
       req.bid = bid;
       next();
@@ -16,34 +16,34 @@ exports.findUserBidById = function(req, res, next, id) {
   });
 };
 
-exports.readAllUserBids = function(req, res) {
+exports.readAllUserBids = function(req, res, next) {
   Bids.getAll(req.params.userId, function(err, bids) {
     if(err) {
-      res.jsonp(500, {message: err});
+      next({code: 500, message: err});
     } else if(_.isEmpty(bids)) {
-      res.jsonp(404, {message: 'Bids not found.'});
+      next({code: 404, message: 'Bids not found.'});
     } else {
       res.jsonp(200, bids);
     }
   });
 };
 
-exports.readUserBid = function(req, res) {
+exports.readUserBid = function(req, res, next) {
   if(!req.bid) {
-    res.jsonp(404, {message: 'Bid not found.'});
+    next({code: 404, message: 'Bid not found.'});
   } else {
     res.jsonp(200, req.bid);
   }
 };
 
-exports.createUserBid = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+exports.createUserBid = function(req, res, next) {
+  next({code: 501, message: 'Not Implemented'});
 };
 
-exports.updateUserBid = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+exports.updateUserBid = function(req, res, next) {
+  next({code: 501, message: 'Not Implemented'});
 };
 
-exports.deleteUserBid = function(req, res) {
-  res.jsonp(501, {message: 'Not Implemented'});
+exports.deleteUserBid = function(req, res, next) {
+  next({code: 501, message: 'Not Implemented'});
 };

@@ -6,25 +6,25 @@ module.exports = function(app, passport, auth) {
 
   var users = require('../app/controllers/users');
 
-  app.post('/login', passport.authenticate('user'), function(req, res) {
+  app.post('/login', passport.authenticate('user'), function(req, res, next) {
     if(!req.user) {
-      res.jsonp(404, {message: 'User not found.'});
+      next({code: 404, message: 'User not found.'});
     } else {
       res.jsonp(200, req.user);
     }
   });
 
-  app.post('/admin/login', passport.authenticate('admin'), function(req, res) {
+  app.post('/admin/login', passport.authenticate('admin'), function(req, res, next) {
     if(!req.user) {
-      res.jsonp(404, {message: 'User not found.'});
+      next({code: 404, message: 'Admin not found.'});
     } else {
       res.jsonp(200, req.user);
     }
   });
 
-  app.get('/logout', function(req, res) {
+  app.get('/logout', function(req, res, next) {
     if(!req.user) {
-      res.jsonp(404, {message: 'User not found.'});
+      next({code: 404, message: 'User not found.'});
     } else {
       req.logout();
       res.jsonp(200);
@@ -127,7 +127,6 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/cartItems/:cartItemId', users.readCart);
   app.put('/api/users/:userId/cartItems/:cartItemId', users.updateCart);
   app.del('/api/users/:userId/cartItems/:cartItemId', users.deleteCart);
-
 
   // User Bid Routes
   app.param('userBidId', users.findUserBidById);

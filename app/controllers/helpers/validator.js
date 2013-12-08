@@ -12,10 +12,7 @@ module.exports.validate = function(reqProperty, model, req, res, next) {
 
   var errors = model.validate(objectToValidate);
   if(!_.isEmpty(errors)) {
-    res.jsonp(422, {
-      message: 'Validation Failed.',
-      errors: errors
-    });
+    next({code: 422, message: 'Validation Failed.', errors: errors});
   } else {
     next();
   }
