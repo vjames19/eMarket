@@ -53,7 +53,19 @@ module.exports = function(app, passport) {
     });
 
     app.use(function notFound(req, res) { // no middleware responded :(
-      res.jsonp(404, {message: 'Resource not found.'});
+      res.status(404);
+      // respond with html page
+      if(req.accepts('html')) {
+        res.sendfile(config.root + '/public/404.html');
+        return;
+      }
+      // respond with json
+      if(req.accepts('json')) {
+        res.send({code: 404, message: 'Resource not found.'});
+        return;
+      }
+      // default to plain-text. send()
+      res.type('txt').send('Resource Not found.');
     });
 
   });
