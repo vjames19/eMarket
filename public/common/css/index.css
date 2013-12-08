@@ -9,6 +9,17 @@
     margin-right: auto;
 }
 
+/* Envelope Picture */
+
+.envelope-image {
+    width: 75px;
+    height: 49px;
+    background: transparent;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Error Message Styles */
 
 .labelError {
@@ -32,6 +43,14 @@ img.center-image {
 img.item-photo-big {
     width: 150px;
     height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.item-photo-medium {
+    width: 125px;
+    height: 125px;
     display: block;
     margin-left: auto;
     margin-right: auto;

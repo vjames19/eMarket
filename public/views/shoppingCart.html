@@ -15,12 +15,11 @@
     <ul data-role="listview" data-divider-theme="a" data-theme="b" data-inset="true" id="cart-shoppingCartList">
       <li data-role="list-divider">Items<span class="ui-li-count">{{shoppingCarts.length}}</span></li>
       <li ng-repeat="shoppingCart in shoppingCarts">
-        <a href="#item-view" data-transition="slide" ng-click="setItem(shoppingCart)"
-           data-transition="slide">
+        <a href="#item-view" data-transition="slide" ng-click="setItem(shoppingCart)">
           <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th rowspan="4">
-                <img ng-src="{{shoppingCart.picture}}" class="item-photo-small ui-corner-all">
+                <img ng-src="{{shoppingCart.picture}}" class="item-photo-small ui-corner-all" src=""/>
               </th>
               <th rowspan="4" class="pad"></th>
               <th colspan="3">

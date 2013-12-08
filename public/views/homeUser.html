@@ -1,7 +1,7 @@
 <div data-role="page" data-theme="b" id="home-user">
 
   <div data-role="header" data-theme="a" data-position="fixed">
-    <img src="img/logo.png" class="eMarket-logo">
+    <img ng-src="img/logo.png" title="eMarket" class="eMarket-logo" src="" alt="eMarket_Logo">
     <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
       <a href="#shopping-cart" class="ui-btn ui-shadow ui-icon-shop ui-btn-icon-notext ui-mini">Cart</a>
     </div>
@@ -14,8 +14,8 @@
     <div data-role="fieldcontain" id="homeUser-carousel" class="owl-carousel">
       <div ng-repeat="carouselProduct in carouselProducts">
         <a href="#item-view" ng-click="setItem(carouselProduct)">
-          <img title="{{ carouselProduct.productName }}" ng-src="{{carouselProduct.picture}}"
-               style="width: 125px; height: 125px;" class="ui-corner-all">
+          <img ng-src="{{carouselProduct.picture}}" title="{{ carouselProduct.productName }}"
+               class="item-photo-medium ui-corner-all" src="" alt="Carousel_Picture">
         </a>
       </div>
     </div>
