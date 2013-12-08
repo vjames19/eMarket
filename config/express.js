@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var express = require('express'),
+    path = require('path'),
     config = require('./config');
 
 module.exports = function(app, passport) {
@@ -19,7 +20,7 @@ module.exports = function(app, passport) {
 
   //Setting the fav icon and static folder
   app.use(express.favicon());
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(path.join(config.root, 'public')));
 
   //Don't use logger for test env
   if(process.env.NODE_ENV !== 'test') {
@@ -61,7 +62,7 @@ module.exports = function(app, passport) {
       }
       // respond with html page
       if(req.accepts('html')) {
-        res.sendfile(config.root + '/public/404.html');
+        res.sendfile(path.join(config.root, 'public', '404.html'));
         return;
       }
       // respond with text if default
