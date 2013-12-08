@@ -3,7 +3,7 @@
 angular.module('eMarketApp').factory('Auth', function($rootScope, $http, Admin) {
   var admin = Admin;
   var isLoggedIn = false;
-  var unAuthPaths = ['index-page'];
+  var unAuthPaths = ['index-page', 'error-page'];
 
   return {
     logIn: function(adminData) {
