@@ -7,7 +7,7 @@ module.exports = function(pool) {
     execute: function(callback) {
       pool.getConnection(function(err, connection) {
         if(err) {
-          console.log('Error getting connection from pool', err);
+          console.log('Error getting connection from pool.', err);
           callback(err);
         } else {
           callback(err, connection);

@@ -8,6 +8,7 @@ var express = require('express'),
     config = require('./config');
 
 module.exports = function(app, passport) {
+
   app.set('showStackError', true);
 
   //Should be placed before express.static

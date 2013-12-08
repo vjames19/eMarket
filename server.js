@@ -6,7 +6,8 @@
 var express = require('express'),
     fs = require('fs'),
     mysql = require('mysql'),
-    passport = require('passport');
+    passport = require('passport'),
+    path = require('path');
 
 /**
  * Main application entry file.
@@ -29,7 +30,7 @@ var pool = mysql.createPool(config.db);
 var executor = require('./app/queryexecutor')(pool);
 
 // Bootstrap models
-var modelsPath = __dirname + '/app/models';
+var modelsPath = path.join(__dirname, 'app/models');
 fs.readdirSync(modelsPath).forEach(function(file) {
   require(modelsPath + '/' + file).init(executor);
 });
@@ -48,7 +49,7 @@ require('./config/routes')(app, passport, auth);
 //Start the app by listening on <port>
 var port = config.port;
 app.listen(port);
-console.log('Express app started on port ' + port);
+console.log('Express App started on port ' + port);
 
 //expose app
 exports = module.exports = app;
