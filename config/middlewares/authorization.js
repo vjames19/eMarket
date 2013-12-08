@@ -18,7 +18,7 @@ exports.admin = {
     if(admins.isAdmin(req.user)) {
       next();
     } else {
-      next({code: 403, message: req.user + ' is not an Administrator.'});
+      next({code: 403, message: 'User ' + req.user.username + ' is not an Administrator.'});
     }
   }
 };
