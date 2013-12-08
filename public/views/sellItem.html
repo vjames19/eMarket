@@ -98,14 +98,14 @@
           <div class="form-pad">
             <label for="sellItem-buyItNowPrice"><strong>Buy it Now Price</strong></label>
             <input type="number" name="sellItemBuyItNowPrice" id="sellItem-buyItNowPrice"
-                   min="1" max="9999999999999.99" step="0.01" maxlength="16" data-theme="a"
+                   min="1" max="99999999999.99" step="0.01" maxlength="16" data-theme="a"
                    ng-model="item.nonbidPrice" ng-pattern="patternNonBidPrice" ng-required="true">
             <div ng-show="sellItemForm.sellItemBuyItNowPrice.$error.pattern" class="labelError">
               <strong><em>Wrong Format.</em></strong>
             </div>
             <label for="sellItem-startingBid"><strong>Starting Bid Price</strong></label>
             <input type="number" name="sellItemStartingBid" id="sellItem-startingBid"
-                   min="1" max="9999999999999.99" step="0.01" maxlength="16" data-theme="a"
+                   min="1" max="99999999999.99" step="0.01" maxlength="16" data-theme="a"
                    ng-model="item.startingBidPrice" ng-pattern="patternBidPrice" ng-required="true">
             <div ng-show="sellItemForm.sellItemStartingBid.$error.pattern" class="labelError">
               <strong><em>Wrong Format.</em></strong>
@@ -129,7 +129,7 @@
                    ng-click="disableShipping()" ng-required="false">
             <label for="sellItem-shippingPrice"><strong>Shipping Price</strong></label>
             <input type="number" name="sellItemShippingPrice" id="sellItem-shippingPrice"
-                   min="0" max="9999999999999.99" step="0.01" maxlength="16" data-theme="a"
+                   min="0" max="99999999999.99" step="0.01" maxlength="16" data-theme="a"
                    ng-model="item.shippingPrice" ng-pattern="patternShipping" ng-required="true">
             <div ng-show="sellItemForm.sellItemShippingPrice.$error.pattern" class="labelError">
               <strong><em>Wrong Format.</em></strong>
