@@ -11,6 +11,7 @@ adminApp.run(function($rootScope, $location, Auth) {
   var history = [];
   var back = false;
   var loginPath = 'index-page';
+  var errorPage = '#error-page';
 
   $(window).on('hashchange', function() {
 
@@ -44,6 +45,12 @@ adminApp.run(function($rootScope, $location, Auth) {
       changeHash: false
     });
     return false;
+  });
+
+  $(document).on('pageloadfailed', function(event, data) {
+    event.preventDefault();
+    $.mobile.changePage(errorPage);
+    data.deferred.resolve(data.absUrl, data.options, $(errorPage));
   });
 
 });

@@ -13,6 +13,7 @@ app.run(function($rootScope, $location, Auth, Product, SellItem) {
   var back = false;
 //  var loginPath = 'login-user';
   var loginPath = 'index-page';
+  var errorPage = '#error-page';
 
   $(window).on('hashchange', function() {
     // If its not logged in and not in a valid unauth page
@@ -25,7 +26,7 @@ app.run(function($rootScope, $location, Auth, Product, SellItem) {
       SellItem.setItemPreview({});
     }
 
-    if($location.path().indexOf('my-emarket-drafts') >= 0){
+    if($location.path().indexOf('my-emarket-drafts') >= 0) {
       SellItem.isDraft = true;
       SellItem.setDraft({});
       SellItem.setItemPreview({});
@@ -57,9 +58,10 @@ app.run(function($rootScope, $location, Auth, Product, SellItem) {
     return false;
   });
 
-  //  $(document).find('#loginSearch').submit(function(e) {
-  //    console.log("submitting");
-  //    e.preventDefault();
-  //    $.mobile.changePage('#search-results', { data: 'addfasdfds'});
-  //  });
+  $(document).on('pageloadfailed', function(event, data) {
+    event.preventDefault();
+    $.mobile.changePage(errorPage);
+    data.deferred.resolve(data.absUrl, data.options, $(errorPage));
+  });
+
 });
