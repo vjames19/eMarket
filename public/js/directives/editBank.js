@@ -13,6 +13,14 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
       $scope.patternAccNumber = Patterns.bank.accNum;
       $scope.patternRoutingNumber = Patterns.bank.routing;
 
+      $scope.patternFullName = Patterns.user.fullName;
+      $scope.patternAddress = Patterns.address.street;
+      $scope.patternCountry = Patterns.address.country;
+      $scope.patternCity = Patterns.address.city;
+      $scope.patternGeoRegion = Patterns.address.geoRegion;
+      $scope.patternZipCode = Patterns.address.zipCode;
+      $scope.patternTelephone = Patterns.address.telephone;
+
       var page = $($element[0]);
 
       var statusPopup = page.find('#editBank-statusPopup');

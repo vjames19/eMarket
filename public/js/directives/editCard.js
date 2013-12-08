@@ -13,6 +13,14 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
       $scope.patternNumber = Patterns.card.number;
       $scope.patternCsv = Patterns.card.csv;
 
+      $scope.patternFullName = Patterns.user.fullName;
+      $scope.patternAddress = Patterns.address.street;
+      $scope.patternCountry = Patterns.address.country;
+      $scope.patternCity = Patterns.address.city;
+      $scope.patternGeoRegion = Patterns.address.geoRegion;
+      $scope.patternZipCode = Patterns.address.zipCode;
+      $scope.patternTelephone = Patterns.address.telephone;
+
       var page = $($element[0]);
 
       var statusPopup = page.find('#editCard-statusPopup');

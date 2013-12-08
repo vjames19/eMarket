@@ -13,6 +13,14 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
       $scope.patternAccNumber = Patterns.bank.accNum;
       $scope.patternRoutingNumber = Patterns.bank.routing;
 
+      $scope.patternFullName = Patterns.user.fullName;
+      $scope.patternAddress = Patterns.address.street;
+      $scope.patternCountry = Patterns.address.country;
+      $scope.patternCity = Patterns.address.city;
+      $scope.patternGeoRegion = Patterns.address.geoRegion;
+      $scope.patternZipCode = Patterns.address.zipCode;
+      $scope.patternTelephone = Patterns.address.telephone;
+
       $scope.bank = {accountType: 'Checking'};
 
       var page = $($element[0]);

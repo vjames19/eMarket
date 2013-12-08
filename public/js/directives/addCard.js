@@ -13,6 +13,14 @@ angular.module('eMarketApp').directive('addCard', function(User, Helper) {
       $scope.patternNumber = Patterns.card.number;
       $scope.patternCsv = Patterns.card.csv;
 
+      $scope.patternFullName = Patterns.user.fullName;
+      $scope.patternAddress = Patterns.address.street;
+      $scope.patternCountry = Patterns.address.country;
+      $scope.patternCity = Patterns.address.city;
+      $scope.patternGeoRegion = Patterns.address.geoRegion;
+      $scope.patternZipCode = Patterns.address.zipCode;
+      $scope.patternTelephone = Patterns.address.telephone;
+
       // init value
       $scope.card = {cardType: 'Visa'};
 

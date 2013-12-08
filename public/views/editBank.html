@@ -10,32 +10,32 @@
       <div class="form-pad">
         <label for="editBank-name"><strong>Bank Name</strong></label>
         <input type="text" name="editBankName" id="editBank-name" maxlength="160" data-theme="a"
-               ng-model="bankInfo.bankName" ng-pattern="patternBankName" ng-required="true">
+               ng-model="bankInfoInfo.bankName" ng-pattern="patternBankName" ng-required="true">
         <div ng-show="editBankForm.editBankName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBank-accountOwnerName"><strong>Account Owner Name</strong></label>
         <input type="text" name="editBankAccountOwnerName" id="editBank-accountOwnerName" maxlength="160" data-theme="a"
-               ng-model="bankInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
+               ng-model="bankInfoInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="editBankForm.editBankAccountOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBank-accountType"><strong>Account Type</strong></label>
         <select name="editBankAccountType" id="editBank-accountType" data-theme="a"
-                ng-model="bankInfo.accountType" ng-required="true">
-        <option value="Checking">Checking</option>
+                ng-model="bankInfoInfo.accountType" ng-required="true">
+          <option value="Checking">Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
         <label for="editBank-accountNumber"><strong>Account Number</strong></label>
         <input type="tel" name="editBankAccountNumber" id="editBank-accountNumber" maxlength="17" data-theme="a"
-               ng-model="bankInfo.accountNumber" ng-pattern="patternAccNumber" ng-required="true">
+               ng-model="bankInfoInfo.accountNumber" ng-pattern="patternAccNumber" ng-required="true">
         <div ng-show="editBankForm.editBankAccountNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editBank-accountRouting"><strong>Routing Number</strong></label>
         <input type="tel" name="editBankAccountRouting" id="editBank-accountRouting" maxlength="9" data-theme="a"
-               ng-model="bankInfo.routingNumber" ng-pattern="patternRoutingNumber" ng-required="true">
+               ng-model="bankInfoInfo.routingNumber" ng-pattern="patternRoutingNumber" ng-required="true">
         <div ng-show="editBankForm.editBankAccountRouting.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -44,10 +44,55 @@
                 ng-model="bankInfo.billId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
+          <option value="">None</option>
         </select>
       </div>
+      <div class="form-pad" ng-hide="bankInfo.billId">
+        <label for="editBank-recipientName"><strong>Full Name</strong></label>
+        <input type="text" name="editBankRecipientName" id="editBank-recipientName" maxlength="160" data-theme="a"
+               ng-model="bankInfo.recipientName" ng-pattern="patternFullName" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankRecipientName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-address"><strong>Address</strong></label>
+        <input type="text" name="editBankAddress" id="editBank-address" maxlength="255" data-theme="a"
+               ng-model="bankInfo.billAddress" ng-pattern="patternAddress" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankAddress.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-country"><strong>Country</strong></label>
+        <input type="text" name="editBankCountry" id="editBank-country" maxlength="45" data-theme="a"
+               ng-model="bankInfo.country" ng-pattern="patternCountry" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankCountry.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-city"><strong>City</strong></label>
+        <input type="text" name="editBankCity" id="editBank-city" maxlength="45" data-theme="a"
+               ng-model="bankInfo.city" ng-pattern="patternCity" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankCity.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="editBankGeoRegion" id="editBank-geoRegion" maxlength="45" data-theme="a"
+               ng-model="bankInfo.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="editBankForm.editBankGeoRegion.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-zipCode"><strong>Zip Code</strong></label>
+        <input type="tel" name="editBankZipCode" id="editBank-zipCode" maxlength="10" data-theme="a"
+               ng-model="bankInfo.zipCode" ng-pattern="patternZipCode" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankZipCode.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="editBank-telephone"><strong>Telephone</strong></label>
+        <input type="tel" name="editBankTelephone" id="editBank-telephone" maxlength="10" data-theme="a"
+               ng-model="bankInfo.telephone" ng-pattern="patternTelephone" ng-required="!bankInfo.billId">
+        <div ng-show="editBankForm.editBankTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+      </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
-      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[editBankForm.$valid]">Submit</button>
       </div>
     </form>

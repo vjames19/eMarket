@@ -17,7 +17,7 @@
         <label for="addCard-type"><strong>Card Type</strong></label>
         <select name="addCardType" id="addCard-type" data-theme="a"
                 ng-model="card.cardType" ng-required="true">
-        <option value="Visa" selected>Visa</option>
+          <option value="Visa" selected>Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
           <option value="Other">Other</option>
@@ -45,8 +45,52 @@
                 ng-model="card.addressId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
-          <option value="" ng-hide="card.addressId">Please Choose</option>
+          <option value="">None</option>
         </select>
+      </div>
+      <div class="form-pad" ng-hide="card.addressId">
+        <label for="addCard-recipientName"><strong>Full Name</strong></label>
+        <input type="text" name="addCardRecipientName" id="addCard-recipientName" maxlength="160" data-theme="a"
+               ng-model="card.recipientName" ng-pattern="patternFullName" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardRecipientName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-address"><strong>Address</strong></label>
+        <input type="text" name="addCardAddress" id="addCard-address" maxlength="255" data-theme="a"
+               ng-model="card.billAddress" ng-pattern="patternAddress" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardAddress.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-country"><strong>Country</strong></label>
+        <input type="text" name="addCardCountry" id="addCard-country" maxlength="45" data-theme="a"
+               ng-model="card.country" ng-pattern="patternCountry" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardCountry.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-city"><strong>City</strong></label>
+        <input type="text" name="addCardCity" id="addCard-city" maxlength="45" data-theme="a"
+               ng-model="card.city" ng-pattern="patternCity" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardCity.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="addCardGeoRegion" id="addCard-geoRegion" maxlength="45" data-theme="a"
+               ng-model="card.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="addCardForm.addCardGeoRegion.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-zipCode"><strong>Zip Code</strong></label>
+        <input type="tel" name="addCardZipCode" id="addCard-zipCode" maxlength="10" data-theme="a"
+               ng-model="card.zipCode" ng-pattern="patternZipCode" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardZipCode.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addCard-telephone"><strong>Telephone</strong></label>
+        <input type="tel" name="addCardTelephone" id="addCard-telephone" maxlength="10" data-theme="a"
+               ng-model="card.telephone" ng-pattern="patternTelephone" ng-required="!card.addressId">
+        <div ng-show="addCardForm.addCardTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
       </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
         <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>

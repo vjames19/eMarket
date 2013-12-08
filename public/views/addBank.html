@@ -23,7 +23,7 @@
         <label for="addBank-accountType"><strong>Account Type</strong></label>
         <select name="addBankAccountType" id="addBank-accountType" data-theme="a"
                 ng-model="bank.accountType" ng-required="true">
-        <option value="Checking" selected>Checking</option>
+          <option value="Checking" selected>Checking</option>
           <option value="Savings">Saving</option>
           <option value="Other">Other</option>
         </select>
@@ -44,11 +44,55 @@
                 ng-model="bank.addressId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
-          <option value="" ng-hide="bank.addressId">Please Choose</option>
+          <option value="">None</option>
         </select>
       </div>
+      <div class="form-pad" ng-hide="bank.addressId">
+        <label for="addBank-recipientName"><strong>Full Name</strong></label>
+        <input type="text" name="addBankRecipientName" id="addBank-recipientName" maxlength="160" data-theme="a"
+               ng-model="bank.recipientName" ng-pattern="patternFullName" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankRecipientName.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-address"><strong>Address</strong></label>
+        <input type="text" name="addBankAddress" id="addBank-address" maxlength="255" data-theme="a"
+               ng-model="bank.billAddress" ng-pattern="patternAddress" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankAddress.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-country"><strong>Country</strong></label>
+        <input type="text" name="addBankCountry" id="addBank-country" maxlength="45" data-theme="a"
+               ng-model="bank.country" ng-pattern="patternCountry" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankCountry.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-city"><strong>City</strong></label>
+        <input type="text" name="addBankCity" id="addBank-city" maxlength="45" data-theme="a"
+               ng-model="bank.city" ng-pattern="patternCity" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankCity.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-geoRegion"><strong>State/Region/Providence</strong></label>
+        <input type="text" name="addBankGeoRegion" id="addBank-geoRegion" maxlength="45" data-theme="a"
+               ng-model="bank.geoRegion" ng-pattern="patternGeoRegion" ng-required="false">
+        <div ng-show="addBankForm.addBankGeoRegion.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-zipCode"><strong>Zip Code</strong></label>
+        <input type="tel" name="addBankZipCode" id="addBank-zipCode" maxlength="10" data-theme="a"
+               ng-model="bank.zipCode" ng-pattern="patternZipCode" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankZipCode.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+        <label for="addBank-telephone"><strong>Telephone</strong></label>
+        <input type="tel" name="addBankTelephone" id="addBank-telephone" maxlength="10" data-theme="a"
+               ng-model="bank.telephone" ng-pattern="patternTelephone" ng-required="!bank.addressId">
+        <div ng-show="addBankForm.addBankTelephone.$error.pattern" class="labelError">
+          <strong><em>Wrong Format.</em></strong>
+        </div>
+      </div>
       <div data-role="controlgroup" data-type="horizontal" data-theme="a" style="text-align: center">
-      <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
+        <a href="#payment-options" data-role="button" data-icon="back" data-transition="fade">Cancel</a>
         <button type="submit" data-icon="check" ng-class="{false: 'ui-disabled'}[addBankForm.$valid]">Submit</button>
       </div>
     </form>
