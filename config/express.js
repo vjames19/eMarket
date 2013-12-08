@@ -54,17 +54,17 @@ module.exports = function(app, passport) {
 
     app.use(function notFound(req, res) { // no middleware responded :(
       res.status(404);
+      // respond with json
+      if(req.accepts('json') && req.url.substring(0, 5) === '/api/') {
+        res.send({code: 404, message: 'Resource not found.'});
+        return;
+      }
       // respond with html page
       if(req.accepts('html')) {
         res.sendfile(config.root + '/public/404.html');
         return;
       }
-      // respond with json
-      if(req.accepts('json')) {
-        res.send({code: 404, message: 'Resource not found.'});
-        return;
-      }
-      // default to plain-text. send()
+      // respond with text if default
       res.type('txt').send('Resource Not found.');
     });
 
