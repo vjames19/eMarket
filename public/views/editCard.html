@@ -44,7 +44,7 @@
         <select name="editCardAssociatedAddress" id="editCard-associatedAddress" data-theme="a"
                 ng-model="cardInfo.billId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
-                ng-required="true">
+                ng-required="false">
           <option value="">New Billing Address</option>
         </select>
       </div>

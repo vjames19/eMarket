@@ -43,7 +43,7 @@
         <select name="editBankAssociatedAddress" id="editBank-associatedAddress" data-theme="a"
                 ng-model="bankInfo.billId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
-                ng-required="true">
+                ng-required="false">
           <option value="">New Billing Address</option>
         </select>
       </div>

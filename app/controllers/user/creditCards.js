@@ -38,6 +38,7 @@ exports.readCreditCard = function(req, res, next) {
 };
 
 exports.createCreditCard = function(req, res, next) {
+  console.log(req.body);
   CreditCards.create(req.body, req.params.userId, function(err, creditCard) {
     if(err) {
       next({code: 500, message: err});
@@ -48,6 +49,7 @@ exports.createCreditCard = function(req, res, next) {
 };
 
 exports.updateCreditCard = function(req, res, next) {
+  console.log(req.body);
   CreditCards.update(req.body, req.params.userId, function(err, creditCard) {
     if(err) {
       next({code: 500, message: err});

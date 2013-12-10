@@ -41,34 +41,34 @@
         </div>
         <label for="addBank-associatedAddress"><strong>Associated Address</strong></label>
         <select name="addBankAssociatedAddress" id="addBank-associatedAddress" data-theme="a"
-                ng-model="bank.addressId"
+                ng-model="bank.billId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
-                ng-required="true">
+                ng-required="false">
           <option value="">New Billing Address</option>
         </select>
       </div>
-      <div class="form-pad" ng-hide="bank.addressId">
+      <div class="form-pad" ng-hide="bank.billId">
         <label for="addBank-recipientName"><strong>Full Name</strong></label>
         <input type="text" name="addBankRecipientName" id="addBank-recipientName" maxlength="160" data-theme="a"
-               ng-model="bank.recipientName" ng-pattern="patternFullName" ng-required="!bank.addressId">
+               ng-model="bank.recipientName" ng-pattern="patternFullName" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankRecipientName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-address"><strong>Address</strong></label>
         <input type="text" name="addBankAddress" id="addBank-address" maxlength="255" data-theme="a"
-               ng-model="bank.billAddress" ng-pattern="patternAddress" ng-required="!bank.addressId">
+               ng-model="bank.billAddress" ng-pattern="patternAddress" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankAddress.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-country"><strong>Country</strong></label>
         <input type="text" name="addBankCountry" id="addBank-country" maxlength="45" data-theme="a"
-               ng-model="bank.country" ng-pattern="patternCountry" ng-required="!bank.addressId">
+               ng-model="bank.country" ng-pattern="patternCountry" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankCountry.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-city"><strong>City</strong></label>
         <input type="text" name="addBankCity" id="addBank-city" maxlength="45" data-theme="a"
-               ng-model="bank.city" ng-pattern="patternCity" ng-required="!bank.addressId">
+               ng-model="bank.city" ng-pattern="patternCity" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankCity.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -80,13 +80,13 @@
         </div>
         <label for="addBank-zipCode"><strong>Zip Code</strong></label>
         <input type="tel" name="addBankZipCode" id="addBank-zipCode" maxlength="10" data-theme="a"
-               ng-model="bank.zipCode" ng-pattern="patternZipCode" ng-required="!bank.addressId">
+               ng-model="bank.zipCode" ng-pattern="patternZipCode" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankZipCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="addBank-telephone"><strong>Telephone</strong></label>
         <input type="tel" name="addBankTelephone" id="addBank-telephone" maxlength="10" data-theme="a"
-               ng-model="bank.telephone" ng-pattern="patternTelephone" ng-required="!bank.addressId">
+               ng-model="bank.telephone" ng-pattern="patternTelephone" ng-required="!bank.billId">
         <div ng-show="addBankForm.addBankTelephone.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>

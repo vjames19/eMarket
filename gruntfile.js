@@ -89,7 +89,7 @@ module.exports = function(grunt) {
               args: [],
               ignoredFiles: ['LICENSE', 'README.md', 'node_modules/**', '.DS_Store', '.idea'],
               watchedExtensions: ['js', 'json'],
-              watchedFolders: ['app', 'config'],
+              watchedFolders: ['app', 'config', 'server.js'],
               debug: true,
               delayTime: 1,
               env: {

@@ -66,18 +66,79 @@ module.exports.create = function(bank, userId, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'INSERT INTO bank_info ' +
+      var insertBank = 'INSERT INTO bank_info ' +
           '(bank_user_id, bank_billing_address_id, bank_name, bank_account_owner_name, ' +
           'bank_account_type, bank_account_number, bank_routing_number, bank_status) ' +
           'VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-      var params = [
-        userId, bank.addressId, bank.bankName, bank.ownerName,
-        bank.accountType, bank.accountNumber, bank.routingNumber, true
-      ];
-      connection.query(sql, params, function(err) {
-        logger.logQuery('bankAcc_create:', this.sql);
-        callback(err, bank);
-      });
+      var insertAddress = 'INSERT INTO address_history ' +
+          '(address_address,address_country,address_city,address_geographical_region,address_zipcode) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertBillAddress = 'INSERT INTO billing_info ' +
+          '(billing_user_id,billing_address_id,billing_recipient_name,billing_telephone,billing_status) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertBankParams = null;
+      if(bank.billId) {
+        insertBankParams = [
+          userId, bank.billId, bank.bankName, bank.ownerName,
+          bank.accountType, bank.accountNumber, bank.routingNumber, true
+        ];
+        connection.query(insertBank, insertBankParams, function(err) {
+          logger.logQuery('bankAcc_create:', this.sql);
+          callback(err, bank);
+        });
+      } else {
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          } else {
+            var insertAddressParams = [bank.billAddress, bank.country, bank.city, bank.geoRegion, bank.zipCode];
+            connection.query(insertAddress, insertAddressParams, function(err, insertAddressResult) {
+              logger.logQuery('bankAcc_create:', this.sql);
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              } else {
+                var addressId = insertAddressResult.insertId;
+                var insertBillAddressParams = [userId, addressId, bank.recipientName, bank.telephone, true];
+                connection.query(insertBillAddress, insertBillAddressParams, function(err, insertBillResult) {
+                  logger.logQuery('bankAcc_create:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    var billAddressId = insertBillResult.insertId;
+                    insertBankParams = [
+                      userId, billAddressId, bank.bankName, bank.ownerName,
+                      bank.accountType, bank.accountNumber, bank.routingNumber, true
+                    ];
+                    connection.query(insertBank, insertBankParams, function(err) {
+                      logger.logQuery('bankAcc_create:', this.sql);
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        connection.commit(function(err) {
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            callback(null, bank);
+                            console.log('Bank Created Successfully.');
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
     }
   });
 };
@@ -87,19 +148,81 @@ module.exports.update = function(bank, userId, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'UPDATE bank_info ' +
+      var updateBank = 'UPDATE bank_info ' +
           'SET bank_billing_address_id = ?, bank_name = ?, bank_account_owner_name = ?, ' +
           'bank_account_type = ?, bank_account_number = ?, bank_routing_number = ? ' +
           'WHERE bank_id = ? AND bank_user_id = ?';
-      var params = [
-        bank.billId, bank.bankName, bank.ownerName,
-        bank.accountType, bank.accountNumber, bank.routingNumber,
-        bank.id, userId
-      ];
-      connection.query(sql, params, function(err) {
-        logger.logQuery('bankAcc_update:', this.sql);
-        callback(err, bank);
-      });
+      var insertAddress = 'INSERT INTO address_history ' +
+          '(address_address,address_country,address_city,address_geographical_region,address_zipcode) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertBillAddress = 'INSERT INTO billing_info ' +
+          '(billing_user_id,billing_address_id,billing_recipient_name,billing_telephone,billing_status) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var updateBankParams = null;
+      if(bank.billId) {
+        updateBankParams = [
+          bank.billId, bank.bankName, bank.ownerName,
+          bank.accountType, bank.accountNumber, bank.routingNumber,
+          bank.id, userId
+        ];
+        connection.query(updateBank, updateBankParams, function(err) {
+          logger.logQuery('bankAcc_update:', this.sql);
+          callback(err, bank);
+        });
+      } else {
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          } else {
+            var insertAddressParams = [bank.billAddress, bank.country, bank.city, bank.geoRegion, bank.zipCode];
+            connection.query(insertAddress, insertAddressParams, function(err, insertAddressResult) {
+              logger.logQuery('bankAcc_update:', this.sql);
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              } else {
+                var addressId = insertAddressResult.insertId;
+                var insertBillAddressParams = [userId, addressId, bank.recipientName, bank.telephone, true];
+                connection.query(insertBillAddress, insertBillAddressParams, function(err, insertBillResult) {
+                  logger.logQuery('bankAcc_update:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    var billAddressId = insertBillResult.insertId;
+                    updateBankParams = [
+                      billAddressId, bank.bankName, bank.ownerName,
+                      bank.accountType, bank.accountNumber, bank.routingNumber,
+                      bank.id, userId
+                    ];
+                    connection.query(updateBank, updateBankParams, function(err) {
+                      logger.logQuery('bankAcc_update:', this.sql);
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        connection.commit(function(err) {
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            callback(null, bank);
+                            console.log('Updated Bank Successfully.');
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
     }
   });
 };

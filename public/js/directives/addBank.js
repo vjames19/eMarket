@@ -30,6 +30,12 @@ angular.module('eMarketApp').directive('addBank', function(User, Helper) {
 
       $scope.submit = function() {
         statusPopup.off();
+        if(!$scope.bank.billId) {
+          if(!$scope.bank.geoRegion) {
+            $scope.bank.geoRegion = null;
+          }
+          $scope.bank.billId = null;
+        }
         $.mobile.loading('show');
         User.me().all('banks').post($scope.bank).then(function() {
           $.mobile.loading('hide');

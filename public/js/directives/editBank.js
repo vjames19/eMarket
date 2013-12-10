@@ -28,6 +28,12 @@ angular.module('eMarketApp').directive('editBank', function(User, BankInfo, Help
 
       $scope.submit = function() {
         statusPopup.off();
+        if(!$scope.bankInfo.billId) {
+          if(!$scope.bankInfo.geoRegion) {
+            $scope.bankInfo.geoRegion = null;
+          }
+          $scope.bankInfo.billId = null;
+        }
         $.mobile.loading('show');
         User.me().one('banks', $scope.bankInfo.id).customPUT($scope.bankInfo).then(function() {
           $.mobile.loading('hide');

@@ -28,15 +28,23 @@ angular.module('eMarketApp').directive('editCard', function(User, Helper, CardIn
 
       $scope.submit = function() {
         statusPopup.off();
+        var oldDateFormat = $scope.cardInfo.expirationDate;
         var newDateFormat = Helper.formatDate($scope.cardInfo.expirationDate, 'yyyy-MM-dd');
         if(new Date(newDateFormat) < new Date()) {
           statusPopupMessage.text('Expiration Date already passed.');
           statusPopup.popup('open');
           return;
         }
+        if(!$scope.cardInfo.billId) {
+          if(!$scope.cardInfo.geoRegion) {
+            $scope.cardInfo.geoRegion = null;
+          }
+          $scope.cardInfo.billId = null;
+        }
         $scope.cardInfo.expirationDate = newDateFormat;
         $.mobile.loading('show');
         User.me().one('creditCards', $scope.cardInfo.id).customPUT($scope.cardInfo).then(function() {
+          $scope.cardInfo.expirationDate = oldDateFormat;
           $.mobile.loading('hide');
           statusPopupMessage.text('Card Updated Successfully');
           statusPopup.popup('open');

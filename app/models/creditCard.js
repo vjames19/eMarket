@@ -67,18 +67,79 @@ module.exports.create = function(card, userId, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'INSERT INTO credit_card_info ' +
+      var insertCard = 'INSERT INTO credit_card_info ' +
           '(credit_card_user_id, credit_card_billing_address_id, credit_card_type, credit_card_owner_name, ' +
           'credit_card_expiration_date, credit_card_number, credit_card_csv, credit_card_status) ' +
           'VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-      var params = [
-        userId, card.addressId, card.cardType, card.ownerName,
-        card.expirationDate, card.cardNumber, card.cardCsv, true
-      ];
-      connection.query(sql, params, function(err) {
-        logger.logQuery('card_create:', this.sql);
-        callback(err, card);
-      });
+      var insertAddress = 'INSERT INTO address_history ' +
+          '(address_address,address_country,address_city,address_geographical_region,address_zipcode) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertBillAddress = 'INSERT INTO billing_info ' +
+          '(billing_user_id,billing_address_id,billing_recipient_name,billing_telephone,billing_status) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertCardParams = null;
+      if(card.billId) {
+        insertCardParams = [
+          userId, card.billId, card.cardType, card.ownerName,
+          card.expirationDate, card.cardNumber, card.cardCsv, true
+        ];
+        connection.query(insertCard, insertCardParams, function(err) {
+          logger.logQuery('card_create:', this.sql);
+          callback(err, card);
+        });
+      } else {
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          } else {
+            var insertAddressParams = [card.billAddress, card.country, card.city, card.geoRegion, card.zipCode];
+            connection.query(insertAddress, insertAddressParams, function(err, insertAddressResult) {
+              logger.logQuery('card_create:', this.sql);
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              } else {
+                var addressId = insertAddressResult.insertId;
+                var insertBillAddressParams = [userId, addressId, card.recipientName, card.telephone, true];
+                connection.query(insertBillAddress, insertBillAddressParams, function(err, insertBillResult) {
+                  logger.logQuery('card_create:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    var billAddressId = insertBillResult.insertId;
+                    insertCardParams = [
+                      userId, billAddressId, card.cardType, card.ownerName,
+                      card.expirationDate, card.cardNumber, card.cardCsv, true
+                    ];
+                    connection.query(insertCard, insertCardParams, function(err) {
+                      logger.logQuery('card_create:', this.sql);
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        connection.commit(function(err) {
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            callback(null, card);
+                            console.log('Card Created Successfully.');
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
     }
   });
 };
@@ -88,18 +149,79 @@ module.exports.update = function(card, userId, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'UPDATE credit_card_info ' +
+      var updateCard = 'UPDATE credit_card_info ' +
           'SET credit_card_billing_address_id = ?, credit_card_type = ?, credit_card_owner_name = ?, ' +
           'credit_card_expiration_date = ?, credit_card_number = ?, credit_card_csv = ? ' +
           'WHERE credit_card_id = ? AND credit_card_user_id = ?';
-      var params = [
-        card.billId, card.cardType, card.ownerName, card.expirationDate,
-        card.cardNumber, card.cardCsv, card.id, userId
-      ];
-      connection.query(sql, params, function(err) {
-        logger.logQuery('card_update:', this.sql);
-        callback(err, card);
-      });
+      var insertAddress = 'INSERT INTO address_history ' +
+          '(address_address,address_country,address_city,address_geographical_region,address_zipcode) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var insertBillAddress = 'INSERT INTO billing_info ' +
+          '(billing_user_id,billing_address_id,billing_recipient_name,billing_telephone,billing_status) ' +
+          'VALUES (?, ?, ?, ?, ?)';
+      var updateCardParams = null;
+      if(card.billId) {
+        updateCardParams = [
+          card.billId, card.cardType, card.ownerName, card.expirationDate,
+          card.cardNumber, card.cardCsv, card.id, userId
+        ];
+        connection.query(updateCard, updateCardParams, function(err) {
+          logger.logQuery('card_update:', this.sql);
+          callback(err, card);
+        });
+      } else {
+        connection.beginTransaction(function(err) {
+          if(err) {
+            callback(err);
+          } else {
+            var insertAddressParams = [card.billAddress, card.country, card.city, card.geoRegion, card.zipCode];
+            connection.query(insertAddress, insertAddressParams, function(err, insertAddressResult) {
+              logger.logQuery('card_update:', this.sql);
+              if(err) {
+                connection.rollback(function() {
+                  callback(err);
+                });
+              } else {
+                var addressId = insertAddressResult.insertId;
+                var insertBillAddressParams = [userId, addressId, card.recipientName, card.telephone, true];
+                connection.query(insertBillAddress, insertBillAddressParams, function(err, insertBillResult) {
+                  logger.logQuery('card_update:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    var billAddressId = insertBillResult.insertId;
+                    updateCardParams = [
+                      billAddressId, card.cardType, card.ownerName, card.expirationDate,
+                      card.cardNumber, card.cardCsv, card.id, userId
+                    ];
+                    connection.query(updateCard, updateCardParams, function(err) {
+                      logger.logQuery('card_update:', this.sql);
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        connection.commit(function(err) {
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            callback(null, card);
+                            console.log('Card Updated Successfully.');
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
     }
   });
 };
