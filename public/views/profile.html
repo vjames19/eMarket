@@ -295,7 +295,7 @@
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-mailing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
-      <a href="#profile" id="deleteMailingBtn"
+      <a href="#profile" id="profile-deleteMailingBtn"
          class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
          ng-click="deleteMailAddress()">Delete</a>
       <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
@@ -306,15 +306,29 @@
     <div class="form-pad">
       <h3>Choose An Action</h3>
       <a href="#edit-billing-address" class="ui-btn ui-btn-a ui-icon-edit ui-btn-icon-right ui-btn-corner-all">Edit</a>
-      <a href="#profile" id="deleteBillingBtn"
-         class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all"
-         ng-click="deleteBillAddress()">Delete</a>
+      <a href="#profile" id="profile-deleteBillingBtn" ng-click="openAssociatedPopup()"
+         class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-right ui-btn-corner-all">Delete</a>
       <a href="#profile" class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all">Cancel</a>
     </div>
   </div>
 
-  <div data-role="popup" id="profile-statusPopup" data-theme="b" class="ui-corner-all ui-content">
-    <a href="#profile" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+  <div data-role="popup" id="profile-deleteAssociatedPopup" data-theme="b" class="ui-content">
+    <div class="form-pad">
+      <h4>Address might be associated with one or more payment options.
+          Please confirm if you wish to delete them as well along with the
+          selected address.
+      </h4>
+      <div data-role="none" style="text-align: center">
+        <a href="#profile"
+           class="ui-btn ui-btn-a ui-icon-back ui-btn-icon-right ui-btn-corner-all ui-btn-inline">Cancel</a>
+        <a href="#profile" ng-click="deleteBillAddress()"
+           class="ui-btn ui-btn-a ui-icon-check ui-btn-icon-right ui-btn-corner-all ui-btn-inline">Ok</a>
+      </div>
+    </div>
+  </div>
+
+  <div data-role="popup" id="profile-statusPopup" data-theme="a" class="ui-corner-all ui-content">
+    <a href="#profile" data-rel="external" data-role="button" data-theme="b" data-icon="delete"
        data-iconpos="notext" class="ui-btn-right">Close</a>
     <p id="profile-statusPopupMessage" style="text-align: center"></p>
   </div>

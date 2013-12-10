@@ -57,5 +57,13 @@ exports.updateBillAddress = function(req, res, next) {
 };
 
 exports.deleteBillAddress = function(req, res, next) {
-  next({code: 501, message: 'Not Implemented'});
+  BillingAddresses.remove(req.billAddress, req.params.userId, function(err, billAddress) {
+    if(err) {
+      next({code: 500, message: err});
+    } else if(billAddress === null) {
+      next({code: 409, message: 'Update removes all banks or cards left.'});
+    } else {
+      res.jsonp(200, billAddress);
+    }
+  });
 };

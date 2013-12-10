@@ -81,9 +81,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
       var statusPopupMessage = page.find('#profile-statusPopupMessage');
       var profileMailingPopup = page.find('#profile-mailAddressOptionsPopup');
       var profileBillingPopup = page.find('#profile-billAddressOptionsPopup');
+      var deleteAssociatedPopup = page.find('#profile-deleteAssociatedPopup');
 
-      var deleteMailingButton = page.find('#deleteMailingBtn');
-      var deleteBillingButton = page.find('#deleteBillingBtn');
+      var deleteMailingButton = page.find('#profile-deleteMailingBtn');
+      var deleteBillingButton = page.find('#profile-deleteBillingBtn');
 
       var selectedMailAddress = null;
       var selectedMailAddressIndex = null;
@@ -119,14 +120,12 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
         User.me().one('mailAddresses', selectedMailAddress.id).remove().then(function() {
           scope.mailAddresses.splice(selectedMailAddressIndex, 1);
           Helper.refreshList(mailAddressList);
-
           if(scope.mailAddresses.length === 1) {
             deleteMailingButton.addClass('ui-disabled');
           }
           else {
             deleteMailingButton.removeClass('ui-disabled');
           }
-
           $.mobile.loading('hide');
           profileMailingPopup.on({
             popupafterclose: function() {
@@ -152,15 +151,54 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
         });
       };
 
-      scope.deleteBillAddress = function() {
+      scope.openAssociatedPopup = function() {
         profileBillingPopup.off();
+        profileBillingPopup.on({
+          popupafterclose: function() {
+            setTimeout(function() {
+              deleteAssociatedPopup.popup('open');
+              profileBillingPopup.off();
+            });
+          }
+        });
+      };
+
+      scope.deleteBillAddress = function() {
+        deleteAssociatedPopup.off();
         statusPopup.off();
         $.mobile.loading('show');
-//        User.me().one('BillAddresses', selectedBillAddress.billAddressId).remove().then(function() {
-        scope.billAddresses.splice(selectedBillAddressIndex, 1);
-        Helper.refreshList(billAddressList);
-        $.mobile.loading('hide');
-//        });
+        User.me().one('billAddresses', selectedBillAddress.id).remove().then(function() {
+          scope.billAddresses.splice(selectedBillAddressIndex, 1);
+          Helper.refreshList(billAddressList);
+          if(scope.billAddresses.length === 1) {
+            deleteBillingButton.addClass('ui-disabled');
+          }
+          else {
+            deleteBillingButton.removeClass('ui-disabled');
+          }
+          $.mobile.loading('hide');
+          deleteAssociatedPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Billing Address Deleted Successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                deleteAssociatedPopup.off();
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          deleteAssociatedPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Billing Address Not Deleted Successfully.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                deleteAssociatedPopup.off();
+              });
+            }
+          });
+          console.log('Error Removing Billing Address', err);
+        });
       };
 
       page.on('pagebeforeshow', function() {

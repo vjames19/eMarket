@@ -171,3 +171,101 @@ module.exports.update = function(billAddress, userId, callback) {
     }
   });
 };
+
+module.exports.remove = function(billAddress, userId, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var removeAssociatedCards = 'UPDATE credit_card_info ' +
+          'SET credit_card_status = FALSE ' +
+          'WHERE credit_card_user_id = ? AND credit_card_billing_address_id = ?';
+      var verifyCards = 'SELECT * FROM credit_card_info WHERE credit_card_user_id = ? AND credit_card_status != FALSE';
+      var removeAssociatedBanks = 'UPDATE bank_info ' +
+          'SET bank_status = FALSE ' +
+          'WHERE bank_user_id = ? AND bank_billing_address_id = ?';
+      var verifyBanks = 'SELECT * FROM bank_info WHERE bank_user_id = ? AND bank_status != FALSE';
+      var removeBilling = 'UPDATE billing_info ' +
+          'SET billing_status = FALSE ' +
+          'WHERE billing_user_id = ? AND billing_id = ?';
+      var params = [userId, billAddress.id];
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          connection.query(removeAssociatedCards, params, function(err) {
+            logger.logQuery('bill_remove:', this.sql);
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              connection.query(verifyCards, [userId], function(err, resultCards) {
+                logger.logQuery('bill_remove:', this.sql);
+                if(err) {
+                  connection.rollback(function() {
+                    callback(err);
+                  });
+                } else {
+                  if(resultCards < 1) {
+                    connection.rollback(function() {
+                      callback(null, null);
+                      console.log('Update removes all credit cards left.');
+                    });
+                  }
+                  else {
+                    connection.query(removeAssociatedBanks, params, function(err) {
+                      logger.logQuery('bill_remove:', this.sql);
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        connection.query(verifyBanks, [userId], function(err, resultBanks) {
+                          logger.logQuery('bill_remove:', this.sql);
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            if(resultBanks < 1) {
+                              connection.rollback(function() {
+                                callback(null, null);
+                                console.log('Update removes all banks left.');
+                              });
+                            }
+                            else {
+                              connection.query(removeBilling, params, function(err) {
+                                logger.logQuery('bill_remove:', this.sql);
+                                if(err) {
+                                  connection.rollback(function() {
+                                    callback(err);
+                                  });
+                                } else {
+                                  connection.commit(function(err) {
+                                    if(err) {
+                                      connection.rollback(function() {
+                                        callback(err);
+                                      });
+                                    } else {
+                                      callback(null, billAddress);
+                                      console.log('Removed Billing Address and Card/Bank Successfully.');
+                                    }
+                                  });
+                                }
+                              });
+                            }
+                          }
+                        });
+                      }
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+};
