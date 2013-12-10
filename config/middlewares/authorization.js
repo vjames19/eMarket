@@ -6,6 +6,7 @@ var admins = require('../../app/models/admin');
  * Generic require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {
+  console.log("requires login");
   if(req.isAuthenticated() || process.env.NODE_ENV === "development") {
     next();
   } else {
@@ -14,7 +15,7 @@ exports.requiresLogin = function(req, res, next) {
 };
 
 exports.hasSameUserId = function(req, res, next) {
-  if(req.hasOwnProperty('user') && req.user.id === req.params.userId) {
+  if(req.hasOwnProperty('user') && (req.user.id == req.params.userId)) {
     next();
   } else {
     next({code: 403, message: 'Forbidden to access anothers user\'s resources.'});

@@ -40,7 +40,7 @@ module.exports = function(app, passport, auth) {
   app.del('/api/*', auth.requiresLogin);
 
   // Users can't access anothers user's resource.
-  app.all('/api/users/*', auth.hasSameUserId);
+  app.all('/api/users/:userId/*', auth.hasSameUserId);
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/register', users.createUser); // Doest not require login.
