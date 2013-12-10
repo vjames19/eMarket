@@ -23,6 +23,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
         statusPopup.off();
         placeBidPopup.off();
+        $scope.item.isBidItem = 1;
         $.mobile.loading('show');
         User.me().all('bids').post($scope.item).then(function() {
           $.mobile.loading('hide');
@@ -44,7 +45,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           $.mobile.loading('hide');
           placeBidPopup.on({
             popupafterclose: function() {
-              statusPopupMessage.text('Could not place the bid.');
+              statusPopupMessage.text('Could not place the bid. Bidding has ended.');
               setTimeout(function() {
                 statusPopup.popup('open');
                 placeBidPopup.off();
@@ -118,7 +119,8 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
         // Remove any state from the other object.
         scope.nextMinBid = null;
-        //scope.sellerRating = null;
+
+        var currentDate = new Date();
 
         if(scope.item && scope.item.currentBid === null) {
           productBidsLink.addClass('ui-disabled');
@@ -130,7 +132,11 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           buyItNowBtn.addClass('ui-disabled');
           placeBidBtn.addClass('ui-disabled');
         } else {
-          placeBidBtn.removeClass('ui-disabled');
+          if(new Date(scope.item.bidEndDate) < currentDate) {
+            placeBidBtn.addClass('ui-disabled');
+          } else {
+            placeBidBtn.removeClass('ui-disabled');
+          }
           buyItNowBtn.removeClass('ui-disabled');
         }
 
@@ -146,26 +152,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           SellerInfo.sellerAvgRate = avg.avgRating;
         });
       });
-
-//        scope.submitCart = function() {
-//          $.mobile.loading('show');
-//          quantityPopup.popup('close');
-//          // User.me().all('carts').post(scope.item); // TODO <-- add .then later
-//          setTimeout(function() {
-//            scope.item.cost = scope.item.quantity * scope.item.nonbidPrice;
-//            $.mobile.loading('hide');
-//            addedToCartPopup.popup('open');
-//            setTimeout(function() {
-//              addedToCartPopup.popup('close');
-//            }, 2000);
-//          });
-//        };
-
-//      scope.addToCart = function() {
-      // Get the item quantity and multiply it by the price to get the total cost
-//        scope.item.cost = scope.item.quantity * scope.item.productBuyItNowPrice;
-      // User.me().all('carts').post(scope.item);
-//      };
 
       scope.setNextBid = function() {
         scope.item.bidAmount = scope.nextMinBid;

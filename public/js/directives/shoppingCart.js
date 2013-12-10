@@ -72,7 +72,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           $.mobile.loading('hide');
           shoppingCartPopup.on({
             popupafterclose: function() {
-              statusPopupMessage.text('Could not delete product from cart.');
+              statusPopupMessage.text('Could not delete bid product.');
               setTimeout(function() {
                 statusPopup.popup('open');
                 shoppingCartPopup.off();
