@@ -25,7 +25,7 @@ module.exports.getAll = function(userId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT rating_id, user_login_user_name, rating_value ' +
-          'FROM rating_history INNER JOIN user_login_info ' +
+          'FROM user_ratings INNER JOIN user_login_info ' +
           'ON (rating_rater_user_id = user_login_info.user_login_id) ' +
           'WHERE rating_rated_user_id = ? ' +
           'ORDER BY user_login_user_name';
@@ -43,7 +43,7 @@ module.exports.get = function(userId, ratingId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT rating_id, user_login_user_name, rating_value ' +
-          'FROM rating_history INNER JOIN user_login_info ' +
+          'FROM user_ratings INNER JOIN user_login_info ' +
           'ON (rating_rater_user_id = user_login_info.user_login_id) ' +
           'WHERE rating_rated_user_id = ? AND rating_id = ? ' +
           'ORDER BY user_login_user_name';
@@ -61,7 +61,7 @@ module.exports.getAvgRating = function(userId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT rating_rated_user_id, AVG(rating_value) AS rating_avg ' +
-          'FROM rating_history ' +
+          'FROM user_ratings ' +
           'WHERE rating_rated_user_id = ? ' +
           'GROUP BY rating_rated_user_id';
       var newRating = {'rating_rated_user_id': userId, 'rating_avg': 0};
@@ -83,12 +83,12 @@ module.exports.createRating = function(rating, callback) {
     if(err) {
       callback(err);
     } else {
-      var sql1 = 'SELECT rating_id FROM rating_history ' +
+      var sql1 = 'SELECT rating_id FROM user_ratings ' +
           'WHERE rating_rated_user_id=? AND rating_rater_user_id = ?';
-      var updateRatingSql = 'UPDATE rating_history ' +
+      var updateRatingSql = 'UPDATE user_ratings ' +
           'SET rating_value = ? ' +
           'WHERE rating_id = ?';
-      var insertRatingSql = 'INSERT INTO rating_history ' +
+      var insertRatingSql = 'INSERT INTO user_ratings ' +
           '(rating_rated_user_id, rating_rater_user_id, rating_value) ' +
           'VALUES (?,?,?)';
       connection.beginTransaction(function(err) {
