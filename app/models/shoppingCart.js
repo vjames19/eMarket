@@ -9,6 +9,7 @@ var DICTIONARY = {
   'cart_item_id': 'itemId',
   'cart_item_cart_id': 'cartItemCartId',
   'cart_item_quantity': 'itemQuantity',
+  'cart_item_is_bid_Item': 'isBidItem',
   'product_seller_id': 'sellerId',
   'seller_name': 'sellerName',
   'product_creation_date': 'creationDate',
@@ -44,7 +45,7 @@ module.exports.getAll = function(userId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
-          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, cart_item_is_bid_Item, products.* ' +
           'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_closed_date IS NULL';
@@ -62,7 +63,7 @@ module.exports.get = function(userId, cartItemId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
-          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, products.* ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, cart_item_is_bid_Item, products.* ' +
           'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_id = ? AND cart_item_closed_date IS NULL';
@@ -146,10 +147,15 @@ module.exports.remove = function(cartItem, callback) {
       var sql = 'UPDATE cart_item_history ' +
           'SET cart_item_closed_date = CURRENT_TIMESTAMP ' +
           'WHERE cart_item_id = ?';
-      connection.query(sql, [cartItem.itemId], function(err) {
-        logger.logQuery('cart_remove:', this.sql);
-        callback(err, cartItem);
-      });
+      if(cartItem.isBidItem) {
+        callback(null, null);
+        console.log('Cannot delete product from cart successfully.');
+      } else {
+        connection.query(sql, [cartItem.itemId], function(err) {
+          logger.logQuery('cart_remove:', this.sql);
+          callback(err, cartItem);
+        });
+      }
     }
   });
 };

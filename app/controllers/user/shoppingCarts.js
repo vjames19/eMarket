@@ -54,7 +54,10 @@ exports.deleteCart = function(req, res, next) {
   ShoppingCarts.remove(req.cart, function(err, cartItem) {
     if(err) {
       next({code: 500, message: err});
-    } else {
+    } else if (cartItem === null) {
+      next({code: 409, message: 'Cannot remove a bid product.'});
+    }
+    else {
       res.jsonp(200, cartItem);
     }
   });
