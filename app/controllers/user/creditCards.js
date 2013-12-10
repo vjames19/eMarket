@@ -58,9 +58,11 @@ exports.updateCreditCard = function(req, res, next) {
 };
 
 exports.deleteCreditCard = function(req, res, next) {
-  CreditCards.remove(req.creditCard, function(err, creditCard) {
+  CreditCards.remove(req.creditCard, req.params.userId, function(err, creditCard) {
     if(err) {
       next({code: 500, message: err});
+    } else if(creditCard === null) {
+      next({code: 409, message: 'Cannot Delete Last Credit Card.'});
     } else {
       res.jsonp(200, creditCard);
     }

@@ -104,17 +104,64 @@ module.exports.update = function(card, userId, callback) {
   });
 };
 
-module.exports.remove = function(card, callback) {
+module.exports.remove = function(card, userId, callback) {
   executor.execute(function(err, connection) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'UPDATE credit_card_info ' +
+      var sql1 = 'SELECT * ' +
+          'FROM credit_card_info as CARD ' +
+          'WHERE CARD.credit_card_user_id = ? AND CARD.credit_card_status != FALSE';
+      var sql2 = 'UPDATE credit_card_info ' +
           'SET credit_card_status = FALSE ' +
           'WHERE credit_card_id = ?';
-      connection.query(sql, [card.id], function(err) {
-        logger.logQuery('card_remove:', this.sql);
-        callback(err, card);
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          connection.query(sql1, [userId], function(err, result) {
+            logger.logQuery('card_remove:', this.sql);
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              if(result.length > 1) {
+                connection.query(sql2, [card.id], function(err) {
+                  logger.logQuery('card_remove:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    connection.commit(function(err) {
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        callback(null, card);
+                        console.log('Card Removed Successfully.');
+                      }
+                    });
+                  }
+                });
+              }
+              else {
+                connection.commit(function(err) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    callback(null, null);
+                    console.log('Card Not Removed Successfully. Last Card.');
+                  }
+                });
+              }
+            }
+          });
+        }
       });
     }
   });

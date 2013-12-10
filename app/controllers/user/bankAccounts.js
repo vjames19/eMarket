@@ -57,9 +57,11 @@ exports.updateBankAccount = function(req, res, next) {
 };
 
 exports.deleteBankAccount = function(req, res, next) {
-  BankAccounts.remove(req.bankAccount, function(err, bankAccount) {
+  BankAccounts.remove(req.bankAccount, req.params.userId, function(err, bankAccount) {
     if(err) {
       next({code: 500, message: err});
+    } else if(bankAccount === null) {
+      next({code: 409, message: 'Cannot Delete Last Bank Account.'});
     } else {
       res.jsonp(200, bankAccount);
     }

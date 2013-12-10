@@ -104,17 +104,64 @@ module.exports.update = function(bank, userId, callback) {
   });
 };
 
-module.exports.remove = function(bank, callback) {
+module.exports.remove = function(bank, userId, callback) {
   executor.execute(function(err, connection) {
     if(err) {
       callback(err);
     } else {
-      var sql = 'UPDATE bank_info ' +
+      var sql1 = 'SELECT * ' +
+          'FROM bank_info as BANK ' +
+          'WHERE BANK.bank_user_id = ? AND BANK.bank_status != FALSE';
+      var sql2 = 'UPDATE bank_info ' +
           'SET bank_status = FALSE ' +
           'WHERE bank_id = ?';
-      connection.query(sql, [bank.id], function(err) {
-        logger.logQuery('bankAcc_remove:', this.sql);
-        callback(err, bank);
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          connection.query(sql1, [userId], function(err, result) {
+            logger.logQuery('bankAcc_remove:', this.sql);
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              if(result.length > 1) {
+                connection.query(sql2, [bank.id], function(err) {
+                  logger.logQuery('bankAcc_remove:', this.sql);
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    connection.commit(function(err) {
+                      if(err) {
+                        connection.rollback(function() {
+                          callback(err);
+                        });
+                      } else {
+                        callback(null, bank);
+                        console.log('Bank Removed Successfully.');
+                      }
+                    });
+                  }
+                });
+              }
+              else {
+                connection.commit(function(err) {
+                  if(err) {
+                    connection.rollback(function() {
+                      callback(err);
+                    });
+                  } else {
+                    callback(null, null);
+                    console.log('Bank Not Removed Successfully. Last Bank.');
+                  }
+                });
+              }
+            }
+          });
+        }
       });
     }
   });
