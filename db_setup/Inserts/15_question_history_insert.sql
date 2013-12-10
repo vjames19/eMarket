@@ -1,4 +1,4 @@
-INSERT INTO `emarket_test`.`question_history`
+INSERT INTO `question_history`
 (`question_content`)
 VALUES
 ('What was your childhood nickname?'),

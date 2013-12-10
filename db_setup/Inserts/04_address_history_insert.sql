@@ -1,4 +1,4 @@
-INSERT INTO `emarket_test`.`address_history`
+INSERT INTO `address_history`
 (`address_address`,`address_country`,`address_city`,`address_geographical_region`,`address_zipcode`)
 VALUES
 ('P.O. Box 812, 3891 Lobortis Rd.','United States','Rockford','IL','40375'),

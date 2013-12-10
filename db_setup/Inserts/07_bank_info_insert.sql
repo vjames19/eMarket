@@ -1,4 +1,4 @@
-INSERT INTO `emarket_test`.`bank_info`
+INSERT INTO `bank_info`
 (`bank_user_id`,`bank_billing_address_id`,`bank_name`,`bank_account_owner_name`,`bank_account_type`,`bank_account_number`,`bank_routing_number`,`bank_status`)
 VALUES
 (1, 1, 'Twitterblab', 'Juan Del Barrio', 'Checking', '34972961372885649', '488803777', TRUE),
