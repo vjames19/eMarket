@@ -101,8 +101,8 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       var placeBidBtn = page.find('#itemView-placeBidBtn');
       var buyItNowBtn = page.find('#itemView-buyItNowBtn');
       var productBidsLink = page.find('#itemView-productBidsLink');
-//      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
-//      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
+      //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
+      //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
 
       page.on('pagebeforeshow', function() {
 
@@ -147,7 +147,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           scope.nextMinBid = scope.item.currentBid + 5;
         }
 
-        Restangular.one('users', scope.item.sellerId).one('avgRating').get().then(function(avg) {
+        Restangular.one('sellers', scope.item.sellerId).one('avgRating').get().then(function(avg) {
           //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
         });

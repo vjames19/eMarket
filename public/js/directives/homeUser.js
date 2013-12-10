@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('homeUser', function(User, Carousel, Helper) {
+angular.module('eMarketApp').directive('homeUser', function(Restangular, User, Carousel, Helper) {
   return {
     templateUrl: 'views/homeUser.html',
     restrict: 'E',
@@ -23,7 +23,7 @@ angular.module('eMarketApp').directive('homeUser', function(User, Carousel, Help
 
       page.on('pagebeforeshow', function() {
 
-        User.me().getList('carousels').then(function(products) {
+        Restangular.all('carousels').getList({userId: User.userId}).then(function(products) {
           scope.carouselProducts = products;
           Helper.triggerCreate(carousel);
           setTimeout(function() {

@@ -26,7 +26,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
 
       page.on('pagebeforeshow', function() {
 
-        Restangular.one('users', SellerInfo.sellerId).getList('unsoldProducts').then(function(products) {
+        Restangular.one('sellers', SellerInfo.sellerId).getList('unsoldProducts').then(function(products) {
           scope.products = products;
           Helper.refreshList(sellerProductList);
         });
@@ -34,7 +34,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
         var route = 'ratingGivenToSellerByUser';
         var currUser = {userId: User.userId};
 
-        Restangular.one('users', SellerInfo.sellerId).customGET(route, currUser).then(function(rating) {
+        Restangular.one('sellers', SellerInfo.sellerId).customGET(route, currUser).then(function(rating) {
           scope.initialRating = rating.rating;
         });
 
@@ -63,7 +63,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
               var newScore = $(this).raty('score');
               var postParams = {ratedId: SellerInfo.sellerId, raterId: User.userId, value: newScore};
               $.mobile.loading('show');
-              Restangular.one('users', SellerInfo.sellerId).all('ratings').post(postParams).then(function() {
+              Restangular.one('sellers', SellerInfo.sellerId).all('ratings').post(postParams).then(function() {
 
                 scope.initialRating = newScore;
 
@@ -71,7 +71,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
                 statusPopupMessage.text('Rated user successfully.');
                 statusPopup.popup('open');
 
-                Restangular.one('users', SellerInfo.sellerId).one('avgRating').get().then(function(avg) {
+                Restangular.one('sellers', SellerInfo.sellerId).one('avgRating').get().then(function(avg) {
 
                   scope.sellerAvgRate = avg.avgRating;
 
