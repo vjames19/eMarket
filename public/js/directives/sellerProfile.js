@@ -21,6 +21,9 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
       var sellerAvgRate = page.find('#sellerProfile-sellerAvgRate');
       var rateSellerBox = page.find('#sellerProfile-rateSeller');
 
+      var statusPopup = page.find('#sellerProfile-statusPopup');
+      var statusPopupMessage = page.find('#sellerProfile-statusPopupMessage');
+
       page.on('pagebeforeshow', function() {
 
         Restangular.one('users', SellerInfo.sellerId).getList('unsoldProducts').then(function(products) {
@@ -28,10 +31,12 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
           Helper.refreshList(sellerProductList);
         });
 
-        Restangular.one('users', SellerInfo.sellerId).customGET('ratingGivenToSellerByUser', {userId: User.userId}).
-            then(function(rating) {
-              scope.initialRating = rating.rating;
-            });
+        var route = 'ratingGivenToSellerByUser';
+        var currUser = {userId: User.userId};
+
+        Restangular.one('users', SellerInfo.sellerId).customGET(route, currUser).then(function(rating) {
+          scope.initialRating = rating.rating;
+        });
 
         scope.sellerName = SellerInfo.sellerName;
         scope.sellerAvgRate = SellerInfo.sellerAvgRate;
@@ -40,7 +45,7 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
 
           sellerAvgRate.raty({
             score: function() {
-              return $(this).attr('data-score');
+              return scope.sellerAvgRate;
             },
             size: 12,
             readOnly: true,
@@ -48,22 +53,45 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
           });
 
           rateSellerBox.raty({
+            score: function() {
+              return scope.initialRating;
+            },
             size: 16,
             path: '../lib/raty/lib/img',
             click: function() {
-              var score = $(this).raty('score');
-              console.log('clicked star', $(this).raty('score'));
-              Restangular.one('users', SellerInfo.sellerId).all('ratings')
-                  .post({ratedId: SellerInfo.sellerId, raterId: User.userId, value: score});
+
+              var newScore = $(this).raty('score');
+              var postParams = {ratedId: SellerInfo.sellerId, raterId: User.userId, value: newScore};
+              $.mobile.loading('show');
+              Restangular.one('users', SellerInfo.sellerId).all('ratings').post(postParams).then(function() {
+
+                scope.initialRating = newScore;
+
+                $.mobile.loading('hide');
+                statusPopupMessage.text('Rated user successfully.');
+                statusPopup.popup('open');
+
+                Restangular.one('users', SellerInfo.sellerId).one('avgRating').get().then(function(avg) {
+
+                  scope.sellerAvgRate = avg.avgRating;
+
+                  sellerAvgRate.raty('set', { score: scope.sellerAvgRate });
+                  rateSellerBox.raty('set', { score: scope.initialRating });
+
+                  Helper.refreshList(sellerRatingList);
+
+                });
+
+              }, function(err) {
+
+                $.mobile.loading('hide');
+                statusPopupMessage.text('Rated user unsuccessfully.');
+                statusPopup.popup('open');
+                console.log('Rating Error', err);
+
+              });
             }
           });
-
-          Restangular.one('users', SellerInfo.sellerId).customGET('ratingGivenToSellerByUser', {userId: User.userId}).
-              then(function(rating) {
-                rateSellerBox.raty('score', rating.rating);
-              });
-
-          Helper.refreshList(sellerRatingList);
 
         });
 
