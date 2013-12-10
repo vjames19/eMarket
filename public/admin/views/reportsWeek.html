@@ -3,6 +3,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <h1>Reports</h1>
     <a href="#home-admin" data-role="button" data-icon="back" data-direction="reverse">Back</a>
+
     <div data-role="navbar">
       <ul>
         <li><a href="#reports-day">Day</a></li>
@@ -17,7 +18,7 @@
       <label for="reportsWeek-selectCategory">Category</label>
       <select id="reportsWeek-selectCategory" data-theme="b" ng-model="selectedCategory"
               ng-options="category.id as category.categoryName for category in categories">
-        <option value="" selected>None</option>
+        <option value="" selected>All</option>
       </select>
     </form>
     <div id="reportsWeek-graph"></div>
