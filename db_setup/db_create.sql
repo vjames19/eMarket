@@ -736,7 +736,7 @@ ON (
     AND ci.category_id = ps.product_spec_category_id
     AND pq.product_quantity_spec_id = ps.product_spec_id
     )
-WHERE ps.product_spec_is_draft = 0;
+WHERE ps.product_spec_is_draft = 0 AND pi.product_depletion_date IS NULL;
 
 -- -----------------------------------------------------
 -- View `report_constants`
