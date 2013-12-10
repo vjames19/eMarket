@@ -145,10 +145,10 @@
           <input type="number" name="itemViewBidAmount" id="itemView-bidAmount"
                  min="{{ nextMinBid | number:2 }}" max="99999999999.99" step="0.01"
                  placeholder="{{ nextMinBid | number:2 }}" maxlength="16"
-                 ng-model="bidAmount" ng-pattern="patternPlaceBid" ng-required="true">
+                 ng-model="item.bidAmount" ng-pattern="patternPlaceBid" ng-required="true">
         </div>
         <a href="#item-view" data-role="button" data-theme="b" ng-click="submitBid()"
-           ng-class="{false: 'ui-disabled'}[itemViewPlaceBidForm.$valid && bidAmount >= nextMinBid]">Bid</a>
+           ng-class="{false: 'ui-disabled'}[itemViewPlaceBidForm.$valid && item.bidAmount >= nextMinBid]">Bid</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>
     </form>
