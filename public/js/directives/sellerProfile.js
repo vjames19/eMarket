@@ -93,6 +93,12 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
             }
           });
 
+          if(SellerInfo.sellerId === User.userId) {
+            rateSellerBox.raty('readOnly', true);
+          } else {
+            rateSellerBox.raty('readOnly', false);
+          }
+
         });
 
       });
