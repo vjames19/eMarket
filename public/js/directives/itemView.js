@@ -24,29 +24,35 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         statusPopup.off();
         placeBidPopup.off();
         $.mobile.loading('show');
-        $.mobile.loading('hide');
-        statusPopup.on({
-          popupafterclose: function() {
-            $.mobile.changePage('#home-user');
-          }
+        User.me().all('bids').post($scope.item).then(function() {
+          $.mobile.loading('hide');
+          statusPopup.on({
+            popupafterclose: function() {
+              $.mobile.changePage('#home-user');
+            }
+          });
+          placeBidPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Bid Submitted Successfully');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                placeBidPopup.off();
+              });
+            }
+          });
+        }, function(err) {
+          $.mobile.loading('hide');
+          placeBidPopup.on({
+            popupafterclose: function() {
+              statusPopupMessage.text('Could not place the bid.');
+              setTimeout(function() {
+                statusPopup.popup('open');
+                placeBidPopup.off();
+              });
+            }
+          });
+          console.log('Error bid', err);
         });
-        placeBidPopup.on({
-          popupafterclose: function() {
-            statusPopupMessage.text('Bid Submitted Successfully');
-            setTimeout(function() {
-              statusPopup.popup('open');
-              placeBidPopup.off();
-            });
-          }
-        });
-
-//        $scope.bid.userId = User.userId;
-//        $scope.bid.productId = $scope.item.productId;
-//        $scope.bid.bidTime = $filter('date')(new Date(), 'dd/MM/YYYY:HH:mm:ss Z');
-//        $scope.bid.productName = $scope.item.productName;
-//        User.me().all('bids').post($scope.bid); //TODO <-- add .then
-//        $.mobile.loading('hide');
-//        $.mobile.changePage('#home-user');
       };
 
       $scope.submitCart = function() {
@@ -104,6 +110,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.item = Product.getItem();
         scope.item.amountToBuy = 1;
         scope.item.isBidItem = null;
+        scope.item.bidAmount = null;
 
         // Set sellerId into a service
         SellerInfo.sellerId = scope.item.sellerId;
@@ -112,7 +119,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         // Remove any state from the other object.
         scope.nextMinBid = null;
         //scope.sellerRating = null;
-        scope.bidAmount = null;
 
         if(scope.item && scope.item.currentBid === null) {
           productBidsLink.addClass('ui-disabled');
@@ -162,7 +168,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 //      };
 
       scope.setNextBid = function() {
-        scope.bidAmount = scope.nextMinBid;
+        scope.item.bidAmount = scope.nextMinBid;
       };
 
       scope.setProductId = function(productId) {

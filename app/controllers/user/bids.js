@@ -37,7 +37,15 @@ exports.readUserBid = function(req, res, next) {
 };
 
 exports.createUserBid = function(req, res, next) {
-  next({code: 501, message: 'Not Implemented'});
+  Bids.create(req.body, req.params.userId, function(err, itemBid) {
+    if(err) {
+      next({code: 500, message: err});
+    } else if(itemBid === null) {
+     next({code: 409, message:'Cannot Place Bid Successfully'});
+    } else {
+      res.jsonp(201, itemBid);
+    }
+  });
 };
 
 exports.updateUserBid = function(req, res, next) {

@@ -3,6 +3,7 @@
 //var _ = require('underscore');
 var mapper = require('../mapper');
 var logger = require('../logger');
+var _ = require('underscore');
 
 var DICTIONARY = {
   'bid_id': 'id',
@@ -74,6 +75,108 @@ module.exports.get = function(userId, bidId, callback) {
       connection.query(sql, [userId, bidId], function(err, bids) {
         logger.logQuery('bid_get:', this.sql);
         callback(err, mapper.map(bids[0], DICTIONARY));
+      });
+    }
+  });
+};
+
+module.exports.create = function(itemBid, userId, callback) {
+  executor.execute(function(err, connection) {
+    if(err) {
+      callback(err);
+    } else {
+      var sql1 = 'SELECT current_bid ' +
+                 'FROM products ' +
+                  'WHERE product_id = ?';
+      var sql2 = 'INSERT INTO bid_history ' +
+                 '(bid_user_id, bid_product_id, bid_amount) ' +
+                 'VALUES (?, ?, ?)';
+      connection.beginTransaction(function(err) {
+        if(err) {
+          callback(err);
+        } else {
+          connection.query(sql1, itemBid.id, function(err, currentBidToBeUsed) {
+            logger.logQuery('product_current_bid:', this.sql);
+            if(err) {
+              connection.rollback(function() {
+                callback(err);
+              });
+            } else {
+              var latestBid = mapper.map(currentBidToBeUsed[0], DICTIONARY);
+
+              if(_.isEmpty(latestBid.currentBid)) {
+                 if(itemBid.startingBidPrice + 5 > itemBid.bidAmount || itemBid.bidAmount >= 99999999999.99) {
+                   connection.commit(function(err) {
+                     if(err) {
+                       connection.rollback(function(err) {
+                         callback(err);
+                       });
+                     } else {
+                       callback(null, null);
+                       console.log('Cannot Place Bid Successfully.');
+                     }
+                   });
+                 } else {
+                   var params2 = [userId, itemBid.id, itemBid.bidAmount];
+                   connection.query(sql2, params2, function(err) {
+                     logger.logQuery('bid_create:', this.sql);
+                     if(err) {
+                       connection.rollback(function() {
+                         callback(err);
+                       });
+                     } else {
+                       connection.commit(function(err) {
+                         if(err) {
+                           connection.rollback(function() {
+                             callback(err);
+                           });
+                         } else {
+                           callback(null, itemBid);
+                           console.log('Bid added successful');
+                         }
+                       });
+                     }
+                   });
+                 }
+              }
+              else {
+                if(latestBid.currentBid + 5 > itemBid.bidAmount || itemBid.bidAmount >= 99999999999.99) {
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function(err) {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, null);
+                      console.log('Cannot Place Bid Successfully.');
+                    }
+                  });
+                } else {
+                  var params2 = [userId, itemBid.id, itemBid.bidAmount];
+                  connection.query(sql2, params2, function(err) {
+                    logger.logQuery('bid_create:', this.sql);
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else {
+                      connection.commit(function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          callback(null, itemBid);
+                          console.log('Bid added successful');
+                        }
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          });
+        }
       });
     }
   });
