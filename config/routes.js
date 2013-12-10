@@ -193,10 +193,10 @@ module.exports = function(app, passport, auth) {
   var categories = require('../app/controllers/categories');
   app.param('categoryId', categories.findCategoryById);
   app.get('/api/categories', categories.readAll);
-  app.post('/api/categories', categories.validate, categories.createCategory);
+  app.post('/api/categories', auth.admin.hasAuthorization, categories.validate, categories.createCategory);
   app.get('/api/categories/:categoryId', categories.readCategory);
-  app.put('/api/categories/:categoryId', categories.validate, categories.updateCategory);
-  app.del('/api/categories/:categoryId', categories.deleteCategory);
+  app.put('/api/categories/:categoryId', auth.admin.hasAuthorization, categories.validate, categories.updateCategory);
+  app.del('/api/categories/:categoryId', auth.admin.hasAuthorization, categories.deleteCategory);
 
   // Product Routes
   var products = require('../app/controllers/products');
@@ -259,7 +259,6 @@ module.exports = function(app, passport, auth) {
   app.del('/api/admins/:adminId', admins.deleteAdmin);
 
   // Report Routes
-
   app.param('reportIdDay', admins.findReportByIdDay);
   app.param('reportIdWeek', admins.findReportByIdWeek);
   app.param('reportIdMonth', admins.findReportByIdMonth);
