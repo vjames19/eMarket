@@ -187,7 +187,7 @@ module.exports = function(app, passport, auth) {
 
   // Picture Routes
   var pictureCtrl = require('../app/controllers/picture');
-  app.post('/pictures', pictureCtrl.createPicture);
+  app.post('/api/pictures', pictureCtrl.createPicture);
 
   // Category Routes
   var categories = require('../app/controllers/categories');

@@ -40,11 +40,11 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       page.on('pageinit', function() {
 
         pictureSelector.dropzone({
-              url: 'pictures',
+              url: 'api/pictures',
               method: 'post',
               parallelUploads: 1,
               maxFiles: 1,
-              maxFilesize: 1, // MB
+              maxFilesize: 4, // MB
               paramName: 'file',
               addRemoveLinks: true,
               acceptedFiles: 'image/*',
