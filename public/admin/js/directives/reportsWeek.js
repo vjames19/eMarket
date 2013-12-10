@@ -23,30 +23,7 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular, Repo
 
       scope.selectedCategory = null;
 
-      scope.$watch('selectedCategory', function() {
-        if(scope.selectedCategory === null) {
-          Restangular.one('reportsWeekTotal').get().then(function(result) {
-            totalSales = result.sales;
-            totalRevenue = result.revenue;
-            updateGraph(totalSales, totalRevenue);
-          });
-        } else {
-          Restangular.one('reportsWeek', scope.selectedCategory).get().then(function(result) {
-            totalSales = result.sales;
-            totalRevenue = result.revenue;
-            updateGraph(totalSales, totalRevenue);
-          });
-        }
-      });
-
-      page.on('pageinit', function() {
-
-        if(!scope.$$phase) {
-          console.log('Firing Week Watcher');
-          scope.$digest();
-        }
-
-      });
+      var unregisterWatcher = null;
 
       page.on('pagebeforeshow', function() {
 
@@ -55,6 +32,26 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular, Repo
           Helper.refreshSelect(selectedCategory);
         });
 
+        unregisterWatcher = scope.$watch('selectedCategory', function() {
+          if(scope.selectedCategory === null) {
+            Restangular.one('reportsWeekTotal').get().then(function(result) {
+              totalSales = result.sales;
+              totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            });
+          } else {
+            Restangular.one('reportsWeek', scope.selectedCategory).get().then(function(result) {
+              totalSales = result.sales;
+              totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            });
+          }
+        });
+
+      });
+
+      page.on('pagehide', function() {
+        unregisterWatcher();
       });
 
     }

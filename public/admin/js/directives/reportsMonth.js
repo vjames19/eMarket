@@ -23,30 +23,7 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
 
       scope.selectedCategory = null;
 
-      scope.$watch('selectedCategory', function() {
-        if(scope.selectedCategory === null) {
-          Restangular.one('reportsMonthTotal').get().then(function(result) {
-            totalSales = result.sales;
-            totalRevenue = result.revenue;
-            updateGraph(totalSales, totalRevenue);
-          });
-        } else {
-          Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
-            totalSales = result.sales;
-            totalRevenue = result.revenue;
-            updateGraph(totalSales, totalRevenue);
-          });
-        }
-      });
-
-      page.on('pageinit', function() {
-
-        if(!scope.$$phase) {
-          console.log('Firing Month Watcher');
-          scope.$digest();
-        }
-
-      });
+      var unregisterWatcher = null;
 
       page.on('pagebeforeshow', function() {
 
@@ -55,6 +32,25 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
           Helper.refreshSelect(selectedCategory);
         });
 
+        unregisterWatcher = scope.$watch('selectedCategory', function() {
+          if(scope.selectedCategory === null) {
+            Restangular.one('reportsMonthTotal').get().then(function(result) {
+              totalSales = result.sales;
+              totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            });
+          } else {
+            Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
+              totalSales = result.sales;
+              totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            });
+          }
+        });
+      });
+
+      page.on('pagehide', function() {
+        unregisterWatcher();
       });
 
     }
