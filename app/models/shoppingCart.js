@@ -144,7 +144,7 @@ module.exports.remove = function(cartItem, callback) {
       callback(err);
     } else {
       var sql = 'UPDATE cart_item_history ' +
-          'SET cart_item_closed_date = NOW() ' +
+          'SET cart_item_closed_date = CURRENT_TIMESTAMP ' +
           'WHERE cart_item_id = ?';
       connection.query(sql, [cartItem.itemId], function(err) {
         logger.logQuery('cart_remove:', this.sql);
