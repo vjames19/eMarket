@@ -165,7 +165,7 @@ img.item-photo-small {
     height: 100px;
 }
 
-/* HTML Manipulation*/
+/* HTML Manipulation */
 
 hr {
     clear: both;
@@ -174,4 +174,28 @@ hr {
 
 textarea {
     resize: none !important;
+}
+
+html * {
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+
+html em {
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: italic !important;
+    font-weight: lighter !important;
+}
+
+html strong {
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+}
+
+html strong + em {
+    font-family: 'Open Sans', sans-serif !important;
+    font-style: italic !important;
+    font-weight: bold !important;
 }
