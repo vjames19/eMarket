@@ -34,10 +34,13 @@ module.exports = function(app, passport, auth) {
   // TODO: Secure users API
 
   // User Routes
+  // The user needs to be logged in to be able to modify.
   app.post('/api/*', auth.requiresLogin);
   app.put('/api/*', auth.requiresLogin);
   app.del('/api/*', auth.requiresLogin);
 
+  // Users can't access anothers user's resource.
+  app.all('/api/users/*', auth.hasSameUserId);
   app.param('userId', users.findUserById);
   app.get('/api/users', users.readAllUsers);
   app.post('/register', users.createUser); // Doest not require login.
@@ -159,7 +162,6 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/ratings/:ratingId', users.readRating);
   app.get('/api/users/:userId/avgRating', users.readAvgRating);
   app.post('/api/users/:userId/ratings', users.createRating);
-  app.get('/api/users/:userId/ratingGivenToSellerByUser', users.readRatingGivenToSeller);
 
   // Security Questions Routes
   app.param('questionId', users.findQuestionById);
@@ -176,10 +178,6 @@ module.exports = function(app, passport, auth) {
   app.get('/api/users/:userId/questionsAnswers/:questionAnswerId', users.readQuestionAnswer);
   app.put('/api/users/:userId/questionsAnswers/:questionAnswerId', users.updateQuestionAnswer);
   app.del('/api/users/:userId/questionsAnswers/:questionAnswerId', users.deleteQuestionAnswer);
-
-  // User Carousel Routes
-  app.param('carouselId', users.findCarouselById);
-  app.get('/api/users/:userId/carousels', users.readAllCarousels);
 
   //=================NON USER ROUTES================//
 
@@ -218,18 +216,32 @@ module.exports = function(app, passport, auth) {
   app.del('/api/products/:productId/bids/:bidId', products.deleteProductBid);
 
   // Seller Routes
-  var sellers = require('../app/controllers/sellers');
-  app.param('sellerId', sellers.findSellerById);
-  app.get('/api/sellers', sellers.readAllSellers);
-  app.post('/api/sellers', auth.requiresLogin, sellers.createSeller);
-  app.get('/api/sellers/:sellerId', sellers.readSeller);
-  app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
-  app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
+  //  var sellers = require('../app/controllers/sellers');
+  //  app.get('/api/sellers', sellers.readAllSellers);
+  //  app.post('/api/sellers', auth.requiresLogin, sellers.createSeller);
+  //  app.get('/api/sellers/:sellerId', sellers.readSeller);
+  //  app.put('/api/sellers/:sellerId', auth.requiresLogin, sellers.updateSeller);
+  //  app.del('/api/sellers/:sellerId', auth.requiresLogin, sellers.deleteSeller);
 
   // Seller Ratings Routes
-  app.param('ratingId', sellers.findRatingById);
-  app.get('/api/sellers/:sellerId/ratings', sellers.readAllRatings);
-  app.get('/api/sellers/:sellerId/ratings/:ratingId', sellers.readRating);
+  app.param('ratingId', users.findRatingById);
+  app.get('/api/sellers/:userId/ratings', users.readAllRatings);
+  app.get('/api/sellers/:userId/ratings/:ratingId', users.readRating);
+  app.get('/api/sellers/:userId/avgRating', users.readAvgRating);
+  app.get('/api/sellers/:userId/ratingGivenToSellerByUser', users.readRatingGivenToSeller);
+  app.post('/api/sellers/:userId/ratings', users.createRating);
+
+  // Seller Unsold Products Routes
+  app.param('unsoldProductId', users.findUnsoldProductById);
+  app.get('/api/sellers/:userId/unsoldProducts', users.readAllUnsoldProducts);
+  app.post('/api/sellers/:userId/unsoldProducts', users.createUnsoldProduct);
+  app.get('/api/sellers/:userId/unsoldProducts/:unsoldProductId', users.readUnsoldProduct);
+  app.put('/api/sellers/:userId/unsoldProducts/:unsoldProductId', users.updateUnsoldProduct);
+  app.del('/api/sellers/:userId/unsoldProducts/:unsoldProductId', users.deleteUnsoldProduct);
+
+  // Carousel routes
+  var carousels = require('../app/controllers/carousels');
+  app.get('/api/carousels', carousels.readAllCarousels);
 
   //================ADMINISTRATOR ROUTES================//
 

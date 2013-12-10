@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var Carousels = require('../../models/carousel.js');
+var Carousels = require('../models/carousel.js');
 
 exports.findCarouselById = function(req, res, next, id) {
   Carousels.get(req.params.userId, id, function(err, carousel) {
@@ -17,7 +17,7 @@ exports.findCarouselById = function(req, res, next, id) {
 };
 
 exports.readAllCarousels = function(req, res, next) {
-  Carousels.getAll(req.params.userId, function(err, carousels) {
+  Carousels.getAll(req.query.userId, function(err, carousels) {
     if(err) {
       next({code: 500, message: err});
     } else if(_.isEmpty(carousels)) {
