@@ -10,13 +10,13 @@
       <div class="form-pad">
         <label for="editCard-ownerName"><strong>Card Owner Name</strong></label>
         <input type="text" name="editCardOwnerName" id="editCard-ownerName" maxlength="160" data-theme="a"
-               ng-model="cardInfoInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
+               ng-model="cardInfo.ownerName" ng-pattern="patternOwnerName" ng-required="true">
         <div ng-show="editCardForm.editCardOwnerName.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-type"><strong>Card Type</strong></label>
         <select name="editCardType" id="editCard-type" data-theme="a"
-                ng-model="cardInfoInfo.cardType" ng-required="true">
+                ng-model="cardInfo.cardType" ng-required="true">
           <option value="Visa">Visa</option>
           <option value="MasterCard">MasterCard</option>
           <option value="AmericanExpress">AmericanExpress</option>
@@ -24,19 +24,19 @@
         </select>
         <label for="editCard-expDate"><strong>Expiration Date</strong></label>
         <input type="month" name="editCardExpDate" id="editCard-expDate" maxlength="7" data-theme="a"
-               ng-model="cardInfoInfo.expirationDate" ng-pattern="patternExpDate" ng-required="true">
+               ng-model="cardInfo.expirationDate" ng-pattern="patternExpDate" ng-required="true">
         <div ng-show="editCardForm.editCardExpDate.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-number"><strong>Card Number</strong></label>
         <input type="tel" name="editCardNumber" id="editCard-number" maxlength="16" data-theme="a"
-               ng-model="cardInfoInfo.cardNumber" ng-pattern="patternNumber" ng-required="true">
+               ng-model="cardInfo.cardNumber" ng-pattern="patternNumber" ng-required="true">
         <div ng-show="editCardForm.editCardNumber.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
         <label for="editCard-cardSecurityCode"><strong>Card Security Code</strong></label>
         <input type="tel" name="editCardCardSecurityCode" id="editCard-cardSecurityCode" maxlength="4" data-theme="a"
-               ng-model="cardInfoInfo.cardCsv" ng-pattern="patternCsv" ng-required="true">
+               ng-model="cardInfo.cardCsv" ng-pattern="patternCsv" ng-required="true">
         <div ng-show="editCardForm.editCardCardSecurityCode.$error.pattern" class="labelError">
           <strong><em>Wrong Format.</em></strong>
         </div>
@@ -45,7 +45,7 @@
                 ng-model="cardInfo.billId"
                 ng-options="bill.id as bill.address for bill in billAddresses"
                 ng-required="true">
-          <option value="">None</option>
+          <option value="">New Billing Address</option>
         </select>
       </div>
       <div class="form-pad" ng-hide="cardInfo.billId">
