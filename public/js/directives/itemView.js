@@ -45,7 +45,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           $.mobile.loading('hide');
           placeBidPopup.on({
             popupafterclose: function() {
-              statusPopupMessage.text('Could not place the bid. Bidding has ended.');
+              statusPopupMessage.text('Could not place the bid. Bidding probably has ended.');
               setTimeout(function() {
                 statusPopup.popup('open');
                 placeBidPopup.off();
