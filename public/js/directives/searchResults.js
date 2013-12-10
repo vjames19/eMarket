@@ -34,11 +34,16 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
         scope.results = {};
         done(false);
         $http.get('api/search', {params: Search.getSearchParams()}).success(function(results) {
+          console.log(JSON.stringify(results));
           scope.results = results;
           Helper.refreshList(resultList);
           $.mobile.loading('hide');
           done(true);
-        });
+        }).error(function() {
+              $.mobile.loading('hide');
+              scope.results = [];
+              Helper.refreshList(resultList);
+            });
       };
 
       scope.submitSearch = function() {
@@ -73,7 +78,6 @@ angular.module('eMarketApp').directive('searchResults', function(Restangular, $h
 
         // Here for first search.
         setTimeout(function() {
-          console.log(scope.results);
           if(scope.results.length === 0) {
             statusPopupMessage.text('No Results Found, Please Try Again.');
             statusPopup.popup('open');
