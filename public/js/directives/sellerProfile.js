@@ -28,6 +28,11 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
           Helper.refreshList(sellerProductList);
         });
 
+        Restangular.one('users', SellerInfo.sellerId).customGET('ratingGivenToSellerByUser', {userId: User.userId}).
+            then(function(rating) {
+              scope.initialRating = rating.rating;
+            });
+
         scope.sellerName = SellerInfo.sellerName;
         scope.sellerAvgRate = SellerInfo.sellerAvgRate;
 
@@ -52,6 +57,11 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
                   .post({ratedId: SellerInfo.sellerId, raterId: User.userId, value: score});
             }
           });
+
+          Restangular.one('users', SellerInfo.sellerId).customGET('ratingGivenToSellerByUser', {userId: User.userId}).
+              then(function(rating) {
+                rateSellerBox.raty('score', rating.rating);
+              });
 
           Helper.refreshList(sellerRatingList);
 

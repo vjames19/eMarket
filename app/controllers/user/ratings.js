@@ -58,3 +58,13 @@ exports.createRating = function(req, res, next) {
     }
   });
 };
+
+exports.readRatingGivenToSeller = function(req, res, next) {
+  Ratings.ratingGivenToSellerByUser(req.params.userId, req.query.userId, function(err, rating) {
+    if(err) {
+      next({code: 500, message: err});
+    } else {
+      res.jsonp(200, rating);
+    }
+  });
+};
