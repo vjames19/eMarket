@@ -6,6 +6,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Table `user_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_info` ;
+
 CREATE TABLE IF NOT EXISTS `user_info` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_first_name` VARCHAR(45) NOT NULL,
@@ -19,6 +21,8 @@ CREATE TABLE IF NOT EXISTS `user_info` (
 -- -----------------------------------------------------
 -- Table `user_login_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_login_info` ;
+
 CREATE TABLE IF NOT EXISTS `user_login_info` (
   `user_login_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_login_user_name` VARCHAR(16) NOT NULL,
@@ -38,6 +42,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `address_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `address_history` ;
+
 CREATE TABLE IF NOT EXISTS `address_history` (
   `address_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `address_address` VARCHAR(255) NOT NULL,
@@ -52,6 +58,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mailing_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mailing_info` ;
+
 CREATE TABLE IF NOT EXISTS `mailing_info` (
   `mailing_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `mailing_user_id` INT UNSIGNED NOT NULL,
@@ -79,6 +87,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `billing_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `billing_info` ;
+
 CREATE TABLE IF NOT EXISTS `billing_info` (
   `billing_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `billing_user_id` INT UNSIGNED NOT NULL,
@@ -105,6 +115,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `credit_card_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `credit_card_info` ;
+
 CREATE TABLE IF NOT EXISTS `credit_card_info` (
   `credit_card_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `credit_card_user_id` INT UNSIGNED NOT NULL,
@@ -134,6 +146,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bank_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `bank_info` ;
+
 CREATE TABLE IF NOT EXISTS `bank_info` (
   `bank_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `bank_user_id` INT UNSIGNED NOT NULL,
@@ -163,6 +177,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `category_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `category_info` ;
+
 CREATE TABLE IF NOT EXISTS `category_info` (
   `category_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(45) NOT NULL,
@@ -182,6 +198,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `product_specification`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `product_specification` ;
+
 CREATE TABLE IF NOT EXISTS `product_specification` (
   `product_spec_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_spec_category_id` INT UNSIGNED NOT NULL,
@@ -215,6 +233,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `product_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `product_info` ;
+
 CREATE TABLE IF NOT EXISTS `product_info` (
   `product_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_seller_id` INT UNSIGNED NOT NULL,
@@ -240,6 +260,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bid_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `bid_history` ;
+
 CREATE TABLE IF NOT EXISTS `bid_history` (
   `bid_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `bid_user_id` INT UNSIGNED NOT NULL,
@@ -266,6 +288,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `cart_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cart_history` ;
+
 CREATE TABLE IF NOT EXISTS `cart_history` (
   `cart_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cart_user_id` INT UNSIGNED NOT NULL,
@@ -283,6 +307,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `cart_item_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cart_item_history` ;
+
 CREATE TABLE IF NOT EXISTS `cart_item_history` (
   `cart_item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `cart_item_cart_id` INT UNSIGNED NOT NULL,
@@ -311,6 +337,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `invoice_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `invoice_history` ;
+
 CREATE TABLE IF NOT EXISTS `invoice_history` (
   `invoice_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `invoice_user_id` INT UNSIGNED NOT NULL,
@@ -349,6 +377,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `invoice_item_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `invoice_item_history` ;
+
 CREATE TABLE IF NOT EXISTS `invoice_item_history` (
   `invoice_item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `invoice_item_invoice_id` INT UNSIGNED NOT NULL,
@@ -374,6 +404,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `user_ratings`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_ratings` ;
+
 CREATE TABLE IF NOT EXISTS `user_ratings` (
   `rating_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `rating_rated_user_id` INT UNSIGNED NOT NULL,
@@ -399,6 +431,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `admin_info`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `admin_info` ;
+
 CREATE TABLE IF NOT EXISTS `admin_info` (
   `admin_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `admin_user_name` VARCHAR(16) NOT NULL,
@@ -419,6 +453,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `user_account_status`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_account_status` ;
+
 CREATE TABLE IF NOT EXISTS `user_account_status` (
   `user_account_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_account_status` TINYINT(1) NOT NULL DEFAULT TRUE,
@@ -434,6 +470,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `product_drafts`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `product_drafts` ;
+
 CREATE TABLE IF NOT EXISTS `product_drafts` (
   `product_draft_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_draft_user_id` INT UNSIGNED NOT NULL,
@@ -460,6 +498,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `recently_viewed_items`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `recently_viewed_items` ;
+
 CREATE TABLE IF NOT EXISTS `recently_viewed_items` (
   `recently_viewed_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `recently_viewed_user_id` INT UNSIGNED NOT NULL,
@@ -484,6 +524,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `notification_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `notification_history` ;
+
 CREATE TABLE IF NOT EXISTS `notification_history` (
   `notification_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `notification_user_id` INT UNSIGNED NOT NULL,
@@ -503,6 +545,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `question_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `question_history` ;
+
 CREATE TABLE IF NOT EXISTS `question_history` (
   `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `question_content` VARCHAR(160) NOT NULL,
@@ -514,6 +558,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `question_answer_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `question_answer_history` ;
+
 CREATE TABLE IF NOT EXISTS `question_answer_history` (
   `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `answer_question_id` INT UNSIGNED NOT NULL,
@@ -539,6 +585,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `product_quantity_record`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `product_quantity_record` ;
+
 CREATE TABLE IF NOT EXISTS `product_quantity_record` (
   `product_quantity_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_quantity_spec_id` INT UNSIGNED NOT NULL,
@@ -557,6 +605,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `product_transaction_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `product_transaction_history` ;
+
 CREATE TABLE IF NOT EXISTS `product_transaction_history` (
   `product_transaction_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_transaction_product_id` INT UNSIGNED NOT NULL,
@@ -575,6 +625,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `payment_history`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `payment_history` ;
+
 CREATE TABLE IF NOT EXISTS `payment_history` (
   `payment_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `payment_sender_user_id` INT UNSIGNED NOT NULL,
@@ -624,14 +676,14 @@ CREATE TABLE IF NOT EXISTS `active_users` (`user_id` INT, `user_first_name` INT,
 CREATE TABLE IF NOT EXISTS `products` (`product_id` INT, `product_seller_id` INT, `product_info_spec_id` INT, `product_creation_date` INT, `product_depletion_date` INT, `product_spec_id` INT, `product_spec_category_id` INT, `product_spec_name` INT, `product_spec_nonbid_price` INT, `product_spec_starting_bid_price` INT, `product_spec_bid_end_date` INT, `product_spec_shipping_price` INT, `product_spec_quantity` INT, `product_spec_description` INT, `product_spec_condition` INT, `product_spec_picture` INT, `product_spec_brand` INT, `product_spec_model` INT, `product_spec_dimensions` INT, `product_spec_is_draft` INT, `product_quantity_remaining` INT, `seller_name` INT, `category_id` INT, `category_name` INT, `current_bid` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `report_params`
+-- Placeholder table for view `report_constants`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `report_params` (`operation_cost` INT, `sales_fee_percent` INT, `active_category_count` INT, `operation_cost_per_category` INT);
+CREATE TABLE IF NOT EXISTS `report_constants` (`operation_cost` INT, `sales_fee_percent` INT, `active_category_count` INT, `operation_cost_per_category` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `report_items`
+-- Placeholder table for view `report_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `report_items` (`category_id` INT, `category_name` INT, `invoice_creation_date` INT, `invoice_item_sold_price` INT);
+CREATE TABLE IF NOT EXISTS `report_data` (`category_id` INT, `category_name` INT, `invoice_creation_date` INT, `invoice_item_sold_price` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `report_month`
@@ -651,6 +703,7 @@ CREATE TABLE IF NOT EXISTS `report_day` (`category_id` INT, `category_name` INT,
 -- -----------------------------------------------------
 -- View `active_users`
 -- -----------------------------------------------------
+DROP VIEW IF EXISTS `active_users` ;
 DROP TABLE IF EXISTS `active_users`;
 CREATE OR REPLACE VIEW active_users AS
 SELECT user_info.*, user_login_user_name, user_login_email
@@ -662,6 +715,7 @@ WHERE user_account_status = 1;
 -- -----------------------------------------------------
 -- View `products`
 -- -----------------------------------------------------
+DROP VIEW IF EXISTS `products` ;
 DROP TABLE IF EXISTS `products`;
 CREATE OR REPLACE VIEW products AS
 SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
@@ -685,20 +739,22 @@ ON (
 WHERE ps.product_spec_is_draft = 0;
 
 -- -----------------------------------------------------
--- View `report_params`
+-- View `report_constants`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `report_params`;
-CREATE OR REPLACE VIEW report_params AS
+DROP VIEW IF EXISTS `report_constants` ;
+DROP TABLE IF EXISTS `report_constants`;
+CREATE OR REPLACE VIEW report_constants AS
 SELECT  5000 as operation_cost,
         0.05 as sales_fee_percent,
         (SELECT COUNT(*) FROM category_info WHERE category_status = 1) as active_category_count,
         TRUNCATE(((SELECT operation_cost)/(SELECT active_category_count)), 2) as operation_cost_per_category;
 
 -- -----------------------------------------------------
--- View `report_items`
+-- View `report_data`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `report_items`;
-CREATE OR REPLACE VIEW report_items AS
+DROP VIEW IF EXISTS `report_data` ;
+DROP TABLE IF EXISTS `report_data`;
+CREATE OR REPLACE VIEW report_data AS
 SELECT  category_info.category_id,
     category_info.category_name,
     invoice_history.invoice_creation_date,
@@ -718,72 +774,75 @@ WHERE
 -- -----------------------------------------------------
 -- View `report_month`
 -- -----------------------------------------------------
+DROP VIEW IF EXISTS `report_month` ;
 DROP TABLE IF EXISTS `report_month`;
 CREATE OR REPLACE VIEW report_month AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
-FROM  report_items RIGHT OUTER JOIN category_info
-    ON (report_items.category_id = category_info.category_id)
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_constants), 2) as category_profit,
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_constants) - (SELECT operation_cost_per_category FROM report_constants), 0), 2) as category_revenue
+FROM  report_data RIGHT OUTER JOIN category_info
+    ON (report_data.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
     (
-      report_items.invoice_creation_date IS NULL
+      report_data.invoice_creation_date IS NULL
       OR
-      DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 30 DAY) AND curdate()
+      DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 30 DAY) AND curdate()
     ) AND
     0 < (  SELECT COUNT(*)
-        FROM report_items
-        WHERE DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 30 DAY) AND curdate()
+        FROM report_data
+        WHERE DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 30 DAY) AND curdate()
       )
 GROUP BY category_info.category_id, category_info.category_name;
 
 -- -----------------------------------------------------
 -- View `report_week`
 -- -----------------------------------------------------
+DROP VIEW IF EXISTS `report_week` ;
 DROP TABLE IF EXISTS `report_week`;
 CREATE OR REPLACE VIEW report_week AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
-FROM  report_items RIGHT OUTER JOIN category_info
-    ON (report_items.category_id = category_info.category_id)
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_constants), 2) as category_profit,
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_constants) - (SELECT operation_cost_per_category FROM report_constants), 0), 2) as category_revenue
+FROM  report_data RIGHT OUTER JOIN category_info
+    ON (report_data.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
     (
-      report_items.invoice_creation_date IS NULL
+      report_data.invoice_creation_date IS NULL
       OR
-      DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 7 DAY) AND curdate()
+      DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 7 DAY) AND curdate()
     ) AND
     0 < (  SELECT COUNT(*)
-        FROM report_items
-        WHERE DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 7 DAY) AND curdate()
+        FROM report_data
+        WHERE DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 7 DAY) AND curdate()
       )
 GROUP BY category_info.category_id, category_info.category_name;
 
 -- -----------------------------------------------------
 -- View `report_day`
 -- -----------------------------------------------------
+DROP VIEW IF EXISTS `report_day` ;
 DROP TABLE IF EXISTS `report_day`;
 CREATE OR REPLACE VIEW report_day AS
 SELECT  category_info.category_id,
     category_info.category_name,
     IFNULL(SUM(invoice_item_sold_price), 0) as category_sales,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_params), 2) as category_profit,
-    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_params) - (SELECT operation_cost_per_category FROM report_params), 0), 2) as category_revenue
-FROM  report_items RIGHT OUTER JOIN category_info
-    ON (report_items.category_id = category_info.category_id)
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price), 0) * (SELECT sales_fee_percent FROM report_constants), 2) as category_profit,
+    TRUNCATE (IFNULL(SUM(invoice_item_sold_price) * (SELECT sales_fee_percent FROM report_constants) - (SELECT operation_cost_per_category FROM report_constants), 0), 2) as category_revenue
+FROM  report_data RIGHT OUTER JOIN category_info
+    ON (report_data.category_id = category_info.category_id)
 WHERE  category_info.category_status = 1 AND
     (
-      report_items.invoice_creation_date IS NULL
+      report_data.invoice_creation_date IS NULL
       OR
-      DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 0 DAY) AND curdate()
+      DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 0 DAY) AND curdate()
     ) AND
     0 < (  SELECT COUNT(*)
-        FROM report_items
-        WHERE DATE(report_items.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 0 DAY) AND curdate()
+        FROM report_data
+        WHERE DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 0 DAY) AND curdate()
       )
 GROUP BY category_info.category_id, category_info.category_name;
 

@@ -236,11 +236,11 @@ module.exports.remove = function(draft, userId, callback) {
       callback(err);
     } else {
       var sql1 = 'UPDATE product_specification ' +
-          'SET product_spec_is_draft = FALSE, product_spec_quantity = product_spec_quantity - 1 ' +
+          'SET product_spec_is_draft = FALSE, product_spec_quantity = product_spec_quantity ' +
           'WHERE product_spec_id = ?';
       var params1 = [draft.specId];
       var sql2 = 'UPDATE product_quantity_record ' +
-          'SET product_quantity_remaining = product_quantity_remaining - 1 ' +
+          'SET product_quantity_remaining = product_quantity_remaining ' +
           'WHERE product_quantity_spec_id = ?';
       var params2 = [draft.specId];
       var sql3 = 'UPDATE product_drafts ' +

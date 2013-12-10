@@ -120,7 +120,7 @@ module.exports.create = function(product, userId, callback) {
       var params1 = [
         product.categoryId, product.productName, product.nonbidPrice,
         product.startingBidPrice, product.bidEndDate, product.shippingPrice,
-        product.quantity - 1, product.description, product.condition, product.picture,
+        product.quantity, product.description, product.condition, product.picture,
         product.brand, product.model, product.dimensions, false
       ];
       var sql2 = 'INSERT INTO product_quantity_record ' +
@@ -141,7 +141,7 @@ module.exports.create = function(product, userId, callback) {
               });
             } else {
               var specId = insertStatus.insertId;
-              var params2 = [specId, product.quantity - 1];
+              var params2 = [specId, product.quantity];
               connection.query(sql2, params2, function(err) {
                 logger.logQuery('products_create:', this.sql);
                 if(err) {
