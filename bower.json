@@ -15,7 +15,8 @@
     "raty": "2.5.2",
     "owlcarousel": "*",
     "underscore": "~1.5.2",
-    "dropzone" : "~3.7.1"
+    "dropzone" : "~3.7.1",
+    "jQuery.countdown" : "git://github.com/hilios/jQuery.countdown"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",

@@ -103,6 +103,9 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       var productBidsLink = page.find('#itemView-productBidsLink');
       //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
       //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
+      var countdownTimer = page.find('#countdown-timer');
+
+      var finalDay, finalMonth, finalYear, finalHour, finalMinute, finalSecond;
 
       page.on('pagebeforeshow', function() {
 
@@ -121,6 +124,20 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         scope.nextMinBid = null;
 
         var currentDate = new Date();
+
+        finalYear = new Date(scope.item.bidEndDate).getFullYear();
+        finalMonth = new Date(scope.item.bidEndDate).getMonth()+1;
+        finalDay = new Date(scope.item.bidEndDate).getDate();
+        finalHour = new Date(scope.item.bidEndDate).getHours();
+        finalMinute = new Date(scope.item.bidEndDate).getMinutes();
+        finalSecond = new Date(scope.item.bidEndDate).getSeconds();
+
+        var bidEndDateStr = finalYear + '/' + finalMonth + '/' + finalDay + ' ' +
+                            finalHour + ':' + finalMinute + ':' + finalSecond;
+
+        countdownTimer.countdown(bidEndDateStr, function(event) {
+          $(this).html(event.strftime('%ww %dd %Hh %Mm %Ss'));
+        });
 
         if(scope.item && scope.item.currentBid === null) {
           productBidsLink.addClass('ui-disabled');
@@ -153,6 +170,10 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         });
 
         User.me().all('browsedItems').post({productId: Product.getItem().id});
+      });
+
+      page.on('pagehide', function() {
+        countdownTimer.countdown('destroy');
       });
 
       scope.setNextBid = function() {
