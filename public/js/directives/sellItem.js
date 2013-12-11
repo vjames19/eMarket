@@ -6,7 +6,7 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
     restrict: 'E',
     scope: {},
     replace: true,
-    controller: function($scope, Patterns) {
+    controller: function($scope, $element, Patterns) {
 
       $scope.patternPicture = Patterns.item.picture;
       $scope.patternTitle = Patterns.item.title;
@@ -20,8 +20,28 @@ angular.module('eMarketApp').directive('sellItem', function(Category, SellItem, 
       $scope.patternEndDate = Patterns.item.endDate;
       $scope.patternShipping = Patterns.item.shipping;
 
-      $scope.setPreviewItemInfo = SellItem.setItemPreview;
-      $scope.setDraftInfo = SellItem.setDraft;
+      var page = $($element[0]);
+
+      var statusPopup = page.find('#sellItem-statusPopup');
+      var statusPopupMessage = page.find('#sellItem-statusPopupMessage');
+
+      $scope.validateItem = function(item) {
+
+        var dateToValidate = Helper.formatDate(item.bidEndDate, 'yyyy-MM-ddTHH:mm:ss');
+        var currDate = new Date();
+        var validDate = currDate.setDate(currDate.getDate() + 1);
+        if(new Date(dateToValidate) < validDate) {
+          statusPopupMessage.text('Invalid Date. Bid End Date has to last at least 24 hours.');
+          statusPopup.popup('open');
+          return;
+        }
+
+        SellItem.setItemPreview(item);
+        SellItem.setDraft(item);
+
+        $.mobile.changePage('#sell-item-preview');
+
+      };
 
     },
     link: function(scope, elem) {

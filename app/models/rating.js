@@ -158,13 +158,13 @@ module.exports.createRating = function(rating, callback) {
 module.exports.ratingGivenToSellerByUser = function(sellerId, userId, callback) {
   executor.execute(function(err, connection) {
     if(err) {
-      callback(err)
+      callback(err);
     } else {
       var sql = 'SELECT rating_value ' +
           'FROM user_ratings ' +
           'WHERE rating_rated_user_id = ? AND rating_rater_user_id= ? ';
       connection.query(sql, [sellerId, userId], function(err, rating) {
-        logger.logQuery("Rating givent to seller by user: ", this.sql);
+        logger.logQuery('rating_ratingGivenToSellerByUser:', this.sql);
         if(err) {
           callback(err);
         } else {

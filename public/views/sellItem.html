@@ -143,9 +143,15 @@
 
   </div>
 
+  <div data-role="popup" id="sellItem-statusPopup" data-theme="b" class="ui-corner-all ui-content">
+    <a href="#sell-item" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
+       data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p id="sellItem-statusPopupMessage" style="text-align: center"></p>
+  </div>
+
   <div data-role="footer" data-theme="a">
-    <a href="#sell-item-preview" data-role="button" class="footer-button" data-theme="b"
-       ng-click="setPreviewItemInfo(item); setDraftInfo(item)"
+    <a href="#" data-role="button" class="footer-button" data-theme="b"
+       ng-click="validateItem(item)"
        ng-class="{false: 'ui-disabled'}[sellItemForm.$valid]">Preview</a>
   </div>
 
