@@ -151,6 +151,8 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
           //scope.sellerRating = avg;
           SellerInfo.sellerAvgRate = avg.avgRating;
         });
+
+        User.me().all('browsedItems').post({productId: Product.getItem().id});
       });
 
       scope.setNextBid = function() {
