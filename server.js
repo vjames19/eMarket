@@ -8,7 +8,8 @@ var express = require('express'),
     mysql = require('mysql'),
     passport = require('passport'),
     path = require('path'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    async = require('async');
 
 /**
  * Main application entry file.
@@ -119,7 +120,7 @@ setInterval(function updateBidEndDateSold(callback) {
                 'SET product_depletion_date = CURRENT_TIMESTAMP ' +
                 'WHERE product_info_spec_id = ?';
 
-            _.each(productsToUpdate, function(productToUpdate) {
+            async.forEach(productsToUpdate, function(productToUpdate, callback) {
 
               connection.beginTransaction(function(err) {
                 if(err) {
