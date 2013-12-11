@@ -83,7 +83,9 @@ setInterval(function updateBidEndDateSold(allDone) {
       allDone(err);
     } else {
       var getBidProducts = 'SELECT * FROM products ' +
-          'WHERE product_spec_bid_end_date <= NOW() AND product_depletion_date IS NULL AND current_bid IS NOT NULL';
+          'WHERE product_spec_bid_end_date <= NOW() AND product_depletion_date IS NULL AND current_bid IS NOT NULL ' +
+          'AND NOT EXISTS (SELECT * FROM bid_history ' +
+          'WHERE bid_history.bid_product_id = products.product_id AND bid_closed_date IS NOT NULL)';
       connection.query(getBidProducts, function(err, productsToUpdate) {
         logger.logQuery('bidder_process:', this.sql);
         if(err) {
@@ -120,7 +122,7 @@ setInterval(function updateBidEndDateSold(allDone) {
                 'SET product_depletion_date = CURRENT_TIMESTAMP ' +
                 'WHERE product_info_spec_id = ?';
 
-            async.forEach(productsToUpdate, function(productToUpdate, callback) {
+            async.forEachSeries(productsToUpdate, function(productToUpdate, callback) {
 
               connection.beginTransaction(function(err) {
                 if(err) {
