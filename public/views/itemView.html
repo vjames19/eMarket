@@ -82,8 +82,12 @@
       <li>
         <table>
           <tr>
+            <td><strong>End Date:</strong></td>
+            <td><em>{{ item.bidEndDate | date:'medium' }}</em></td>
+          </tr>
+          <tr>
             <td><strong>Time Left:</strong></td>
-            <td><em><div id="countdown-timer"></div></em></td>
+            <td><em><div id="countdown-timer" data-role="none"></div></em></td>
           </tr>
         </table>
       </li>

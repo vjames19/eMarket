@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo, Product) {
+angular.module('eMarketApp').directive('itemView', function(User, Restangular, ProductBids, SellerInfo, Product, Helper) {
   return {
     templateUrl: 'views/itemView.html',
     restrict: 'E',
@@ -105,8 +105,6 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
       //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
       var countdownTimer = page.find('#countdown-timer');
 
-      var finalDay, finalMonth, finalYear, finalHour, finalMinute, finalSecond;
-
       page.on('pagebeforeshow', function() {
 
         // Set the product to scope item
@@ -125,15 +123,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
 
         var currentDate = new Date();
 
-        finalYear = new Date(scope.item.bidEndDate).getFullYear();
-        finalMonth = new Date(scope.item.bidEndDate).getMonth()+1;
-        finalDay = new Date(scope.item.bidEndDate).getDate();
-        finalHour = new Date(scope.item.bidEndDate).getHours();
-        finalMinute = new Date(scope.item.bidEndDate).getMinutes();
-        finalSecond = new Date(scope.item.bidEndDate).getSeconds();
-
-        var bidEndDateStr = finalYear + '/' + finalMonth + '/' + finalDay + ' ' +
-                            finalHour + ':' + finalMinute + ':' + finalSecond;
+        var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
 
         countdownTimer.countdown(bidEndDateStr, function(event) {
           $(this).html(event.strftime('%ww %dd %Hh %Mm %Ss'));

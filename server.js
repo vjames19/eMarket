@@ -94,6 +94,7 @@ setInterval(function() {
           console.log(err);
 //          allDone(err);
         } else {
+
           if(!_.isEmpty(productsToUpdate)) {
 
             productsToUpdate = mapper.mapCollection(productsToUpdate, PRODUCT_DICTIONARY);
@@ -169,7 +170,8 @@ setInterval(function() {
                                             callback(err);
                                           });
                                         } else {
-                                          var uMsg = 'You have won the bid for product ' + productToUpdate.productName;
+                                          var uMsg = 'You have won the bid for product ' +
+                                              productToUpdate.productName;
                                           connection.query(notifyUser, [winnerInfo.userId, uMsg], function(err) {
                                             logger.logQuery('bidder_process:', this.sql);
                                             if(err) {
@@ -177,7 +179,8 @@ setInterval(function() {
                                                 callback(err);
                                               });
                                             } else {
-                                              var sMsg = 'You have sold the bid for product ' + productToUpdate.productName;
+                                              var sMsg = 'You have sold the bid for product ' +
+                                                  productToUpdate.productName;
                                               var notifySellerParams = [productToUpdate.sellerId, sMsg];
                                               connection.query(notifySeller, notifySellerParams, function(err) {
                                                 logger.logQuery('bidder_process:', this.sql);
@@ -187,7 +190,8 @@ setInterval(function() {
                                                   });
                                                 } else {
                                                   if(productToUpdate.quantityRemaining - 1 === 0) {
-                                                    connection.query(depleteItem, [productToUpdate.specId], function(err) {
+                                                    var depleteItemParams = [productToUpdate.specId];
+                                                    connection.query(depleteItem, depleteItemParams, function(err) {
                                                       logger.logQuery('bidder_process:', this.sql);
                                                       if(err) {
                                                         connection.rollback(function() {
