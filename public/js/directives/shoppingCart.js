@@ -68,6 +68,8 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           if(scope.shoppingCarts.length === 0) {
             proceedToCheckOut.addClass('ui-disabled');
           }
+          Helper.refreshList(shoppingCartList);
+
           $.mobile.loading('hide');
           shoppingCartPopup.on({
             popupafterclose: function() {
