@@ -1,5 +1,5 @@
 INSERT INTO `cart_item_history`
-(`cart_item_cart_id`, `cart_item_product_id`, `cart_item_quantity`, `cart_item_is_bid_Item`, `cart_item_creation_date`, `cart_item_purchased_date`, `cart_item_closed_date`)
+(`cart_item_cart_id`, `cart_item_product_id`, `cart_item_quantity`, `cart_item_is_bid_item`, `cart_item_creation_date`, `cart_item_purchased_date`, `cart_item_closed_date`)
 VALUES
 -- user 1 products --
 (5, 2, 5, FALSE, CURRENT_TIMESTAMP, NULL, NULL),

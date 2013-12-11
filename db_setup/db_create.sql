@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `cart_item_history` (
   `cart_item_cart_id` INT UNSIGNED NOT NULL,
   `cart_item_product_id` INT UNSIGNED NOT NULL,
   `cart_item_quantity` INT UNSIGNED NOT NULL,
-  `cart_item_is_bid_Item` TINYINT(1) NOT NULL DEFAULT FALSE,
+  `cart_item_is_bid_item` TINYINT(1) NOT NULL DEFAULT FALSE,
   `cart_item_creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cart_item_purchased_date` TIMESTAMP NULL DEFAULT NULL,
   `cart_item_closed_date` TIMESTAMP NULL DEFAULT NULL,
