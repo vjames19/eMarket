@@ -77,10 +77,12 @@ var CART_DICTIONARY = {
   'cart_id': 'id'
 };
 
-setInterval(function updateBidEndDateSold(allDone) {
+setInterval(function() {
+
   executor.execute(function(err, connection) {
     if(err) {
-      allDone(err);
+      console.log(err);
+//      allDone(err);
     } else {
       var getBidProducts = 'SELECT * FROM products ' +
           'WHERE product_spec_bid_end_date <= NOW() AND product_depletion_date IS NULL AND current_bid IS NOT NULL ' +
@@ -89,7 +91,8 @@ setInterval(function updateBidEndDateSold(allDone) {
       connection.query(getBidProducts, function(err, productsToUpdate) {
         logger.logQuery('bidder_process:', this.sql);
         if(err) {
-          allDone(err);
+          console.log(err);
+//          allDone(err);
         } else {
           if(!_.isEmpty(productsToUpdate)) {
 
@@ -124,98 +127,100 @@ setInterval(function updateBidEndDateSold(allDone) {
 
             async.forEachSeries(productsToUpdate, function(productToUpdate, callback) {
 
-              connection.beginTransaction(function(err) {
-                if(err) {
-                  callback(err);
-                } else {
-                  connection.query(getWinnerInfo, [productToUpdate.id], function(err, winnerInfo) {
-                    logger.logQuery('bidder_process:', this.sql);
+                  connection.beginTransaction(function(err) {
                     if(err) {
-                      connection.rollback(function() {
-                        callback(err);
-                      });
+                      callback(err);
                     } else {
-                      winnerInfo = mapper.map(winnerInfo[0], WINNER_DICTIONARY);
-                      connection.query(getWinnerCart, [winnerInfo.userId], function(err, winnerCart) {
+                      connection.query(getWinnerInfo, [productToUpdate.id], function(err, winnerInfo) {
                         logger.logQuery('bidder_process:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
                           });
                         } else {
-                          winnerCart = mapper.map(winnerCart[0], CART_DICTIONARY);
-                          var insertItemInCartParams = [winnerCart.id, productToUpdate.id, 1];
-                          connection.query(insertItemInCart, insertItemInCartParams, function(err) {
+                          winnerInfo = mapper.map(winnerInfo[0], WINNER_DICTIONARY);
+                          connection.query(getWinnerCart, [winnerInfo.userId], function(err, winnerCart) {
                             logger.logQuery('bidder_process:', this.sql);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
                               });
                             } else {
-                              connection.query(updateQuantity, [productToUpdate.specId], function(err) {
+                              winnerCart = mapper.map(winnerCart[0], CART_DICTIONARY);
+                              var insertItemInCartParams = [winnerCart.id, productToUpdate.id, 1];
+                              connection.query(insertItemInCart, insertItemInCartParams, function(err) {
                                 logger.logQuery('bidder_process:', this.sql);
                                 if(err) {
                                   connection.rollback(function() {
                                     callback(err);
                                   });
                                 } else {
-                                  connection.query(closeProductBids, [productToUpdate.id], function(err) {
+                                  connection.query(updateQuantity, [productToUpdate.specId], function(err) {
                                     logger.logQuery('bidder_process:', this.sql);
                                     if(err) {
                                       connection.rollback(function() {
                                         callback(err);
                                       });
                                     } else {
-                                      var uMsg = 'You have won the bid for product ' + productToUpdate.productName;
-                                      connection.query(notifyUser, [winnerInfo.userId, uMsg], function(err) {
+                                      connection.query(closeProductBids, [productToUpdate.id], function(err) {
                                         logger.logQuery('bidder_process:', this.sql);
                                         if(err) {
                                           connection.rollback(function() {
                                             callback(err);
                                           });
                                         } else {
-                                          var sMsg = 'You have sold the bid for product ' + productToUpdate.productName;
-                                          var notifySellerParams = [productToUpdate.sellerId, sMsg];
-                                          connection.query(notifySeller, notifySellerParams, function(err) {
+                                          var uMsg = 'You have won the bid for product ' + productToUpdate.productName;
+                                          connection.query(notifyUser, [winnerInfo.userId, uMsg], function(err) {
                                             logger.logQuery('bidder_process:', this.sql);
                                             if(err) {
                                               connection.rollback(function() {
                                                 callback(err);
                                               });
                                             } else {
-                                              if(productToUpdate.quantityRemaining - 1 === 0) {
-                                                connection.query(depleteItem, [productToUpdate.specId], function(err) {
-                                                  logger.logQuery('bidder_process:', this.sql);
-                                                  if(err) {
-                                                    connection.rollback(function() {
-                                                      callback(err);
+                                              var sMsg = 'You have sold the bid for product ' + productToUpdate.productName;
+                                              var notifySellerParams = [productToUpdate.sellerId, sMsg];
+                                              connection.query(notifySeller, notifySellerParams, function(err) {
+                                                logger.logQuery('bidder_process:', this.sql);
+                                                if(err) {
+                                                  connection.rollback(function() {
+                                                    callback(err);
+                                                  });
+                                                } else {
+                                                  if(productToUpdate.quantityRemaining - 1 === 0) {
+                                                    connection.query(depleteItem, [productToUpdate.specId], function(err) {
+                                                      logger.logQuery('bidder_process:', this.sql);
+                                                      if(err) {
+                                                        connection.rollback(function() {
+                                                          callback(err);
+                                                        });
+                                                      } else {
+                                                        connection.commit(function(err) {
+                                                          if(err) {
+                                                            connection.rollback(function() {
+                                                              callback(err);
+                                                            });
+                                                          } else {
+                                                            callback(null);
+                                                            console.log('New Winner of Bid Updated Successfully.');
+                                                          }
+                                                        });
+                                                      }
                                                     });
-                                                  } else {
+                                                  }
+                                                  else {
                                                     connection.commit(function(err) {
                                                       if(err) {
                                                         connection.rollback(function() {
                                                           callback(err);
                                                         });
                                                       } else {
-                                                        callback(null, productToUpdate);
+                                                        callback(null);
                                                         console.log('New Winner of Bid Updated Successfully.');
                                                       }
                                                     });
                                                   }
-                                                });
-                                              }
-                                              else {
-                                                connection.commit(function(err) {
-                                                  if(err) {
-                                                    connection.rollback(function() {
-                                                      callback(err);
-                                                    });
-                                                  } else {
-                                                    callback(null, productToUpdate);
-                                                    console.log('New Winner of Bid Updated Successfully.');
-                                                  }
-                                                });
-                                              }
+                                                }
+                                              });
                                             }
                                           });
                                         }
@@ -230,17 +235,21 @@ setInterval(function updateBidEndDateSold(allDone) {
                       });
                     }
                   });
+
+                }, function(err) {
+
+                  if(err) {
+                    console.log(err);
+                  }
+//                  allDone(null);
+
                 }
-              });
 
-            }, function() {
-
-              allDone(null, productsToUpdate);
-
-            });
+            );
           }
         }
       });
     }
   });
+
 }, 5000);
