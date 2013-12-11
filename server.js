@@ -76,14 +76,14 @@ var CART_DICTIONARY = {
   'cart_id': 'id'
 };
 
-setInterval(function updateBidEndDate(callback) {
+setInterval(function updateBidEndDateSold(callback) {
   executor.execute(function(err, connection) {
     if(err) {
       callback(err);
     } else {
-      var getProducts = 'SELECT * FROM products ' +
-          'WHERE product_spec_bid_end_date <= CURRENT_TIMESTAMP AND product_depletion_date IS NULL';
-      connection.query(getProducts, function(err, productsToUpdate) {
+      var getBidProducts = 'SELECT * FROM products ' +
+          'WHERE product_spec_bid_end_date <= NOW() AND product_depletion_date IS NULL AND current_bid IS NOT NULL';
+      connection.query(getBidProducts, function(err, productsToUpdate) {
         logger.logQuery('bidder_process:', this.sql);
         if(err) {
           callback(err);
@@ -194,7 +194,7 @@ setInterval(function updateBidEndDate(callback) {
                                                           callback(err);
                                                         });
                                                       } else {
-                                                        callback(null, null);
+                                                        callback(null, productToUpdate);
                                                         console.log('New Winner of Bid Updated Successfully.');
                                                       }
                                                     });
@@ -208,7 +208,7 @@ setInterval(function updateBidEndDate(callback) {
                                                       callback(err);
                                                     });
                                                   } else {
-                                                    callback(null, null);
+                                                    callback(null, productToUpdate);
                                                     console.log('New Winner of Bid Updated Successfully.');
                                                   }
                                                 });
