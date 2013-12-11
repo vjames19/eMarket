@@ -102,7 +102,9 @@ module.exports.create = function(checkoutInfo, userId, callback) {
           'SET bid_closed_date = CURRENT_TIMESTAMP ' +
           'WHERE bid_product_id = ?';
 
-
+//      connection.query(getUserCart, [userId], function(err, result) {
+//
+//      });
 
     }
   });
