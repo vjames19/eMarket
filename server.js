@@ -77,17 +77,17 @@ var CART_DICTIONARY = {
   'cart_id': 'id'
 };
 
-setInterval(function updateBidEndDateSold(callback) {
+setInterval(function updateBidEndDateSold(allDone) {
   executor.execute(function(err, connection) {
     if(err) {
-      callback(err);
+      allDone(err);
     } else {
       var getBidProducts = 'SELECT * FROM products ' +
           'WHERE product_spec_bid_end_date <= NOW() AND product_depletion_date IS NULL AND current_bid IS NOT NULL';
       connection.query(getBidProducts, function(err, productsToUpdate) {
         logger.logQuery('bidder_process:', this.sql);
         if(err) {
-          callback(err);
+          allDone(err);
         } else {
           if(!_.isEmpty(productsToUpdate)) {
 
@@ -230,6 +230,11 @@ setInterval(function updateBidEndDateSold(callback) {
                   });
                 }
               });
+
+            }, function() {
+
+              allDone(null, productsToUpdate);
+
             });
           }
         }
