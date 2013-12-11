@@ -88,14 +88,14 @@ module.exports.create = function(itemBid, userId, callback) {
       callback(err);
     } else {
       var sql1 = 'SELECT current_bid, product_quantity_remaining ' +
-                 'FROM products ' +
-                  'WHERE product_id = ? AND product_depletion_date IS NULL AND product_spec_bid_end_date > NOW()';
+          'FROM products ' +
+          'WHERE product_id = ? AND product_depletion_date IS NULL AND product_spec_bid_end_date > CURRENT_TIMESTAMP';
       var sql2 = 'INSERT INTO bid_history ' +
-                 '(bid_user_id, bid_product_id, bid_amount, bid_closed_date) ' +
-                 'VALUES (?, ?, ?, ?)';
+          '(bid_user_id, bid_product_id, bid_amount, bid_closed_date) ' +
+          'VALUES (?, ?, ?, ?)';
       var sql3 = 'UPDATE product_quantity_record ' +
-                 'SET product_quantity_remaining = ? ' +
-                 'WHERE product_quantity_id = ? AND product_quantity_spec_id = ?';
+          'SET product_quantity_remaining = ? ' +
+          'WHERE product_quantity_spec_id = ?';
       var sql4 = 'SELECT cart_id ' +
           'FROM cart_history ' +
           'WHERE cart_user_id = ? AND cart_closed_date IS NULL';
@@ -103,15 +103,18 @@ module.exports.create = function(itemBid, userId, callback) {
           '(cart_item_cart_id, cart_item_product_id, cart_item_quantity, cart_item_is_bid_item) ' +
           'VALUES (?, ?, ?, ?)';
       var sql6 = 'INSERT INTO notification_history ' +
-                 '(notification_user_id, notification_message, notification_is_read) ' +
-                 'VALUES(?, ?, ?)';
-
+          '(notification_user_id, notification_message, notification_is_read) ' +
+          'VALUES(?, ?, ?)';
+      var sql7 = 'UPDATE product_info ' +
+          'SET product_depletion_date = CURRENT_TIMESTAMP ' +
+          'WHERE product_info_spec_id = ?';
+      var MAX_BID_VALUE = 99999999999.99;
       connection.beginTransaction(function(err) {
         if(err) {
           callback(err);
         } else {
           connection.query(sql1, itemBid.id, function(err, productToBeUsed) {
-            logger.logQuery('product_current_bid:', this.sql);
+            logger.logQuery('bid_create:', this.sql);
             if(err) {
               connection.rollback(function() {
                 callback(err);
@@ -128,218 +131,159 @@ module.exports.create = function(itemBid, userId, callback) {
                     console.log('Bidding Probably Has Ended. Cannot Place Bid Successfully.');
                   }
                 });
-              } else {
-                if(err) {
-                  connection.rollback(function() {
-                    callback(err);
+              }
+              else {
+                var product = mapper.map(productToBeUsed[0], DICTIONARY);
+                if(product.quantityRemaining < 1) {
+                  connection.commit(function(err) {
+                    if(err) {
+                      connection.rollback(function(err) {
+                        callback(err);
+                      });
+                    } else {
+                      callback(null, null);
+                      console.log('There is no more products available. Cannot Place Bid Successfully.');
+                    }
                   });
-                } else {
-                  var product = mapper.map(productToBeUsed[0], DICTIONARY);
-                  if(product.quantityRemaining < 1) {
-                    connection.commit(function(err) {
+                }
+                else {
+                  // Validate Data
+                  var isBidValid = false;
+                  var isBidMax = false;
+                  console.log('bidAm', itemBid.bidAmount);
+                  console.log('max', MAX_BID_VALUE);
+                  if(+itemBid.bidAmount >= MAX_BID_VALUE) {
+                    itemBid.bidAmount = MAX_BID_VALUE;
+                    isBidMax = true;
+                  } else {
+                    if(!product.currentBid) {
+                      isBidValid = itemBid.startingBidPrice + 5 <= itemBid.bidAmount;
+                    }
+                    else {
+                      isBidValid = product.currentBid + 5 <= itemBid.bidAmount;
+                    }
+                    isBidMax = false;
+                  }
+                  // Execute Corresponding queries
+                  if(isBidMax) {
+                    connection.query(sql3, [product.quantityRemaining - 1, itemBid.id], function(err) {
+                      logger.logQuery('bic_create:', this.sql);
                       if(err) {
                         connection.rollback(function(err) {
                           callback(err);
                         });
                       } else {
-                        callback(null, null);
-                        console.log('There is no more products available. Cannot Place Bid Successfully.');
+                        // Close bid_history for this product
+                        var params2 = [userId, itemBid.id, itemBid.bidAmount, new Date()];
+                        connection.query(sql2, params2, function(err) {
+                          logger.logQuery('bid_create:', this.sql);
+                          if(err) {
+                            connection.rollback(function() {
+                              callback(err);
+                            });
+                          } else {
+                            connection.query(sql4, [userId], function(err, cartIdToBeAdded) {
+                              logger.logQuery('bid_create:', this.sql);
+                              if(err) {
+                                connection.rollback(function() {
+                                  callback(err);
+                                });
+                              } else {
+                                var cart = mapper.map(cartIdToBeAdded[0], DICTIONARY);
+                                var params5 = [cart.cartId, itemBid.id, 1, itemBid.isBidItem];
+                                connection.query(sql5, params5, function(err) {
+                                  logger.logQuery('bid_create:', this.sql);
+                                  if(err) {
+                                    connection.rollback(function() {
+                                      callback(err);
+                                    });
+                                  } else {
+                                    var msg = 'You have won the bid for product ' + itemBid.productName;
+                                    var params6 = [userId, msg, 0];
+                                    connection.query(sql6, params6, function(err) {
+                                      logger.logQuery('bid_create:', this.sql);
+                                      if(err) {
+                                        connection.rollback(function() {
+                                          callback(err);
+                                        });
+                                      } else {
+                                        if(product.quantityRemaining - 1 === 0) {
+                                          connection.query(sql7, [itemBid.id], function(err) {
+                                            logger.logQuery('bid_create:', this.sql);
+                                            if(err) {
+                                              connection.rollback(function() {
+                                                callback(err);
+                                              });
+                                            } else {
+                                              connection.commit(function(err) {
+                                                if(err) {
+                                                  connection.rollback(function() {
+                                                    callback(err);
+                                                  });
+                                                } else {
+                                                  callback(null, itemBid);
+                                                  console.log('Bid Added Successfully. Product Depleted.');
+                                                }
+                                              });
+                                            }
+                                          });
+                                        }
+                                        else {
+                                          connection.commit(function(err) {
+                                            if(err) {
+                                              connection.rollback(function() {
+                                                callback(err);
+                                              });
+                                            } else {
+                                              callback(null, itemBid);
+                                              console.log('Bid Added Successfully.');
+                                            }
+                                          });
+                                        }
+                                      }
+                                    });
+                                  }
+                                });
+                              }
+                            });
+                          }
+                        });
                       }
                     });
                   }
                   else {
-                    if(_.isEmpty(product.currentBid)) {
-                      if(itemBid.startingBidPrice + 5 > itemBid.bidAmount || itemBid.bidAmount > 99999999999.99) {
-                        connection.commit(function(err) {
-                          if(err) {
-                            connection.rollback(function(err) {
-                              callback(err);
-                            });
-                          } else {
-                            callback(null, null);
-                            console.log('Need to place a higher bid or bid is too high. Cannot Place Bid Successfully.');
-                          }
-                        });
-                      } else if(itemBid.bidAmount === 99999999999.99) {
-                        connection.query(sql3, [product.quantityRemaining - 1, itemBid.id, itemBid.id], function(err) {
-                          logger.logQuery('update_quantity:', this.sql);
-                          if(err) {
-                            connection.rollback(function(err) {
-                              callback(err);
-                            });
-                          } else {
-                            var params2 = [userId, itemBid.id, itemBid.bidAmount, 'CURRENT_TIMESTAMP']; // Close bid_history for this product
-                            connection.query(sql2, params2, function(err) {
-                              logger.logQuery('bid_create:', this.sql);
-                              if(err) {
-                                connection.rollback(function() {
-                                  callback(err);
-                                });
-                              } else {
-                                connection.query(sql4, [userId], function(err, cartIdToBeAdded) {
-                                  logger.logQuery('bid_create:', this.sql);
-                                  if(err) {
-                                    connection.rollback(function() {
-                                      callback(err);
-                                    });
-                                  } else {
-                                    var cart = mapper.map(cartIdToBeAdded[0], DICTIONARY);
-                                    var params5 = [cart.cartId, itemBid.id, 1, itemBid.isBidItem];
-                                    connection.query(sql5, params5, function(err) {
-                                      logger.logQuery('insert_cart:', this.sql);
-                                      if(err) {
-                                        connection.rollback(function() {
-                                          callback(err);
-                                        });
-                                      } else {
-                                        var params6 = [userId, 'You have won the bid for product ' + itemBid.productName, 0];
-                                        connection.query(sql6, params6, function(err) {
-                                          logger.logQuery('insert_notification:', this.sql);
-                                          if(err) {
-                                            connection.rollback(function() {
-                                              callback(err);
-                                            });
-                                          } else {
-                                            connection.commit(function(err) {
-                                              if(err) {
-                                                connection.rollback(function() {
-                                                  callback(err);
-                                                });
-                                              } else {
-                                                callback(null, itemBid);
-                                                console.log('Bid Added Successfully.');
-                                              }
-                                            });
-                                          }
-                                        });
-                                      }
-                                    });
-                                  }
-                                });
-                              }
-                            });
-                          }
-                        });
-
-                      } else {
-                        var params2 = [userId, itemBid.id, itemBid.bidAmount, null];
-                        connection.query(sql2, params2, function(err) {
-                          logger.logQuery('bid_create:', this.sql);
-                          if(err) {
-                            connection.rollback(function() {
-                              callback(err);
-                            });
-                          } else {
-                            connection.commit(function(err) {
-                              if(err) {
-                                connection.rollback(function() {
-                                  callback(err);
-                                });
-                              } else {
-                                callback(null, itemBid);
-                                console.log('Bid Added successful');
-                              }
-                            });
-                          }
-                        });
-                      }
-                    }
-                    else {
-                      if(product.currentBid + 5 > itemBid.bidAmount || itemBid.bidAmount > 99999999999.99) {
-                        connection.commit(function(err) {
-                          if(err) {
-                            connection.rollback(function(err) {
-                              callback(err);
-                            });
-                          } else {
-                            callback(null, null);
-                            console.log('Need to place a higher bid or bid is too high. Cannot Place Bid Successfully.');
-                          }
-                        });
-                      } else if(itemBid.bidAmount === 99999999999.99  || product.currentBid + 5 >= 99999999999.99) {
-                        itemBid.bidAmount = 99999999999.99;
-                        connection.query(sql3, [product.remainingQuantity - 1, itemBid.id, itemBid.id], function(err) {
-                          logger.logQuery('update_quantity:', this.sql);
-                          if(err) {
-                            connection.rollback(function(err) {
-                              callback(err);
-                            });
-                          } else {
-                            var params2 = [userId, itemBid.id, itemBid.bidAmount, 'NOW()']; // Close bid_history for this product
-                            connection.query(sql2, params2, function(err) {
-                              logger.logQuery('bid_create:', this.sql);
-                              if(err) {
-                                connection.rollback(function() {
-                                  callback(err);
-                                });
-                              } else {
-                                connection.query(sql4, [userId], function(err, cartIdToBeAdded) {
-                                  logger.logQuery('bid_create:', this.sql);
-                                  if(err) {
-                                    connection.rollback(function() {
-                                      callback(err);
-                                    });
-                                  } else {
-                                    var cart = mapper.map(cartIdToBeAdded[0], DICTIONARY);
-                                    var params5 = [cart.cartId, itemBid.id, 1, itemBid.isBidItem];
-                                    connection.query(sql5, params5, function(err) {
-                                      logger.logQuery('insert_cart:', this.sql);
-                                      if(err) {
-                                        connection.rollback(function() {
-                                          callback(err);
-                                        });
-                                      } else {
-                                        var params6 = [userId, 'You have won the bid for product ' + itemBid.productName, 0];
-                                        connection.query(sql6, params6, function(err) {
-                                          logger.logQuery('insert_notification:', this.sql);
-                                          if(err) {
-                                            connection.rollback(function() {
-                                              callback(err);
-                                            });
-                                          } else {
-                                            connection.commit(function(err) {
-                                              if(err) {
-                                                connection.rollback(function() {
-                                                  callback(err);
-                                                });
-                                              } else {
-                                                callback(null, itemBid);
-                                                console.log('Bid Added Successfully.');
-                                              }
-                                            });
-                                          }
-                                        });
-                                      }
-                                    });
-                                  }
-                                });
-                              }
-                            });
-                          }
-                        });
-                      }
-                      else {
-                        var params2 = [userId, itemBid.id, itemBid.bidAmount];
-                        connection.query(sql2, params2, function(err) {
-                          logger.logQuery('bid_create:', this.sql);
-                          if(err) {
-                            connection.rollback(function() {
-                              callback(err);
-                            });
-                          } else {
-                            connection.commit(function(err) {
-                              if(err) {
-                                connection.rollback(function() {
-                                  callback(err);
-                                });
-                              } else {
-                                callback(null, itemBid);
-                                console.log('Bid Added successful');
-                              }
-                            });
-                          }
-                        });
-                      }
+                    if(!isBidValid) {
+                      connection.commit(function(err) {
+                        if(err) {
+                          connection.rollback(function(err) {
+                            callback(err);
+                          });
+                        } else {
+                          callback(null, null);
+                          console.log('Need to place a higher bid. Cannot Place Bid Successfully.');
+                        }
+                      });
+                    } else {
+                      var params2 = [userId, itemBid.id, itemBid.bidAmount, null];
+                      connection.query(sql2, params2, function(err) {
+                        logger.logQuery('bid_create:', this.sql);
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          connection.commit(function(err) {
+                            if(err) {
+                              connection.rollback(function() {
+                                callback(err);
+                              });
+                            } else {
+                              callback(null, itemBid);
+                              console.log('Bid Added successful.');
+                            }
+                          });
+                        }
+                      });
                     }
                   }
                 }
@@ -351,3 +295,4 @@ module.exports.create = function(itemBid, userId, callback) {
     }
   });
 };
+
