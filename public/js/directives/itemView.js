@@ -126,7 +126,7 @@ angular.module('eMarketApp').directive('itemView', function(User, Restangular, P
         var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
 
         countdownTimer.countdown(bidEndDateStr, function(event) {
-          $(this).html(event.strftime('%ww %dd %Hh %Mm %Ss'));
+          $(this).html(event.strftime('%-ww %-dd %Hh %Mm %Ss'));
         });
 
         if(scope.item && scope.item.currentBid === null) {
