@@ -21,6 +21,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
 
       var shoppingCartList = page.find('#cart-shoppingCartList');
       var proceedToCheckOut = page.find('#cart-proceedToCheckoutBtn');
+      var deleteCartItemBtn = page.find('#cart-deleteItemCartBtn');
 
       var statusPopup = page.find('#cart-statusPopup');
       var statusPopupMessage = page.find('#cart-statusPopupMessage');
@@ -36,7 +37,11 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
         scope.cost = 0;
         scope.shipping = 0;
         window._.each(scope.shoppingCarts, function(cart) {
-          scope.cost += cart.productTotalPrice;
+          if(cart.isBidItem) {
+            scope.cost += cart.productTotalBidPrice;
+          } else {
+            scope.cost += cart.productTotalNonBidPrice;
+          }
           scope.shipping += cart.shippingPrice;
         });
       };
@@ -44,20 +49,25 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
       scope.selectCart = function(cartItem, index) {
         cartSelected = cartItem;
         selectedCartIndex = index;
+
+        if(scope.shoppingCarts[selectedCartIndex].isBidItem) { // Check if it is a bid item
+          deleteCartItemBtn.addClass('ui-disabled');
+        } else {
+          deleteCartItemBtn.removeClass('ui-disabled');
+        }
       };
 
       scope.deleteCartItem = function() {
         shoppingCartPopup.off();
         statusPopup.off();
         $.mobile.loading('show');
+
         User.me().one('cartItems', scope.shoppingCarts[selectedCartIndex].itemId).remove().then(function() {
           scope.shoppingCarts.splice(selectedCartIndex, 1);
           computeTotalCostAndShipping();
           if(scope.shoppingCarts.length === 0) {
             proceedToCheckOut.addClass('ui-disabled');
           }
-          Helper.refreshList(shoppingCartList);
-
           $.mobile.loading('hide');
           shoppingCartPopup.on({
             popupafterclose: function() {

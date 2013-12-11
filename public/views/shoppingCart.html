@@ -31,7 +31,8 @@
             <tr>
               <td><strong>Product</strong></td>
               <td class="pad"></td>
-              <td><em>{{shoppingCart.productTotalPrice | currency}}</em></td>
+              <td ng-show="shoppingCart.isBidItem"><em>{{shoppingCart.productTotalBidPrice | currency}}</em></td>
+              <td ng-show="!shoppingCart.isBidItem"><em>{{shoppingCart.productTotalNonBidPrice | currency}}</em></td>
             </tr>
             <tr>
               <td><strong>Shipping</strong></td>
@@ -81,13 +82,13 @@
         </tr>
       </table>
     </div>
-
   </div>
 
   <div data-role="popup" id="cart-notificationPopup" data-theme="a" class="ui-corner-all">
     <div class="form-pad">
       <h3>Select an action</h3>
-      <a href="#shopping-cart" data-role="button" ng-click="deleteCartItem()" data-theme="b">Delete</a>
+      <a href="#shopping-cart" data-role="button" id="cart-deleteItemCartBtn" ng-click="deleteCartItem()"
+         data-theme="b">Delete</a>
       <a href="#shopping-cart" data-role="button" data-theme="b">Cancel</a>
     </div>
   </div>

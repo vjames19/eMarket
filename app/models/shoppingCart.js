@@ -21,7 +21,8 @@ var DICTIONARY = {
   'current_bid': 'currentBid',
   'product_spec_bid_end_date': 'bidEndDate',
   'product_spec_shipping_price': 'shippingPrice',
-  'product_total_price': 'productTotalPrice',
+  'product_total_nonbid_price': 'productTotalNonBidPrice',
+  'product_total_bid_price': 'productTotalBidPrice',
   'product_spec_quantity': 'quantity',
   'product_spec_description': 'description',
   'product_spec_condition': 'condition',
@@ -45,7 +46,9 @@ module.exports.getAll = function(userId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
-          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, cart_item_is_bid_Item, products.* ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_nonbid_price, ' +
+          'current_bid * cart_item_quantity AS product_total_bid_price, ' +
+          'cart_item_is_bid_Item, products.* ' +
           'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_closed_date IS NULL';
@@ -63,7 +66,9 @@ module.exports.get = function(userId, cartItemId, callback) {
       callback(err);
     } else {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
-          'product_spec_nonbid_price * cart_item_quantity AS product_total_price, cart_item_is_bid_Item, products.* ' +
+          'product_spec_nonbid_price * cart_item_quantity AS product_total_nonbid_price, ' +
+          'current_bid * cart_item_quantity AS product_total_bid_price, ' +
+          'cart_item_is_bid_Item, products.* ' +
           'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_id = ? AND cart_item_closed_date IS NULL';
