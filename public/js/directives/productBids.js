@@ -19,6 +19,10 @@ angular.module('eMarketApp').directive('productBids', function(Restangular, Prod
         Restangular.one('products', scope.productId).getList('bids').then(function(bids) {
           scope.productBids = bids;
           Helper.refreshList(productBidList);
+        }, function(err) {
+          scope.productBids = [];
+          Helper.refreshList(productBidList);
+          console.log('Empty productBids', err);
         });
 
       });

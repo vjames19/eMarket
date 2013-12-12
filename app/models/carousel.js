@@ -11,6 +11,7 @@ var DICTIONARY = {
   'product_creation_date': 'creationDate',
   'product_spec_category_id': 'categoryId',
   'category_name': 'categoryName',
+  'product_spec_id': 'specId',
   'product_spec_name': 'productName',
   'product_spec_nonbid_price': 'nonbidPrice',
   'product_spec_starting_bid_price': 'startingBidPrice',

@@ -29,6 +29,10 @@ angular.module('eMarketApp').directive('sellerProfile', function(Restangular, Se
         Restangular.one('sellers', SellerInfo.sellerId).getList('unsoldProducts').then(function(products) {
           scope.products = products;
           Helper.refreshList(sellerProductList);
+        }, function(err) {
+          scope.products = [];
+          Helper.refreshList(sellerProductList);
+          console.log('Empty seller products', err);
         });
 
         var route = 'ratingGivenToSellerByUser';
