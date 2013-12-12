@@ -261,14 +261,25 @@ module.exports.create = function(register, callback) {
                                               });
                                             }
                                             else {
-                                              connection.commit(function(err) {
+                                              var sql9 = 'INSERT INTO cart_history ' +
+                                                  '(cart_user_id, cart_closed_date) ' +
+                                                  'VALUES (?, NULL)';
+                                              connection.query(sql9, [userId], function(err) {
                                                 if(err) {
                                                   connection.rollback(function() {
                                                     callback(err);
                                                   });
                                                 } else {
-                                                  callback(null, register);
-                                                  console.log('Finished Registration!');
+                                                  connection.commit(function(err) {
+                                                    if(err) {
+                                                      connection.rollback(function() {
+                                                        callback(err);
+                                                      });
+                                                    } else {
+                                                      callback(null, register);
+                                                      console.log('Finished Registration!');
+                                                    }
+                                                  });
                                                 }
                                               });
                                             }
