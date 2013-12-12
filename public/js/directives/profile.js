@@ -111,9 +111,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 profileMailingPopup.off();
-              });
+              }, 250);
             }
           });
+          profileMailingPopup.popup('close');
           return;
         }
         $.mobile.loading('show');
@@ -133,9 +134,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 profileMailingPopup.off();
-              });
+              }, 250);
             }
           });
+          profileMailingPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           profileMailingPopup.on({
@@ -144,9 +146,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 profileMailingPopup.off();
-              });
+              }, 250);
             }
           });
+          profileMailingPopup.popup('close');
           console.log('Error Removing Mailing Address', err);
         });
       };
@@ -158,9 +161,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
             setTimeout(function() {
               deleteAssociatedPopup.popup('open');
               profileBillingPopup.off();
-            });
+            }, 250);
           }
         });
+        profileBillingPopup.popup('close');
       };
 
       scope.deleteBillAddress = function() {
@@ -183,9 +187,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 deleteAssociatedPopup.off();
-              });
+              }, 250);
             }
           });
+          deleteAssociatedPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           deleteAssociatedPopup.on({
@@ -194,9 +199,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 deleteAssociatedPopup.off();
-              });
+              }, 250);
             }
           });
+          deleteAssociatedPopup.popup('close');
           console.log('Error Removing Billing Address', err);
         });
       };
