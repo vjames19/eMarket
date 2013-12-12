@@ -701,9 +701,9 @@ CREATE TABLE IF NOT EXISTS `report_week` (`category_id` INT, `category_name` INT
 CREATE TABLE IF NOT EXISTS `report_day` (`category_id` INT, `category_name` INT, `category_sales` INT, `category_profit` INT, `category_revenue` INT);
 
 -- -----------------------------------------------------
--- Placeholder table for view `non_draft_all_Products`
+-- Placeholder table for view `non_draft_all_products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `non_draft_all_Products` (`product_id` INT, `product_seller_id` INT, `product_info_spec_id` INT, `product_creation_date` INT, `product_depletion_date` INT, `product_spec_id` INT, `product_spec_category_id` INT, `product_spec_name` INT, `product_spec_nonbid_price` INT, `product_spec_starting_bid_price` INT, `product_spec_bid_end_date` INT, `product_spec_shipping_price` INT, `product_spec_quantity` INT, `product_spec_description` INT, `product_spec_condition` INT, `product_spec_picture` INT, `product_spec_brand` INT, `product_spec_model` INT, `product_spec_dimensions` INT, `product_spec_is_draft` INT, `product_quantity_remaining` INT, `seller_name` INT, `category_id` INT, `category_name` INT, `current_bid` INT);
+CREATE TABLE IF NOT EXISTS `non_draft_all_products` (`product_id` INT, `product_seller_id` INT, `product_info_spec_id` INT, `product_creation_date` INT, `product_depletion_date` INT, `product_spec_id` INT, `product_spec_category_id` INT, `product_spec_name` INT, `product_spec_nonbid_price` INT, `product_spec_starting_bid_price` INT, `product_spec_bid_end_date` INT, `product_spec_shipping_price` INT, `product_spec_quantity` INT, `product_spec_description` INT, `product_spec_condition` INT, `product_spec_picture` INT, `product_spec_brand` INT, `product_spec_model` INT, `product_spec_dimensions` INT, `product_spec_is_draft` INT, `product_quantity_remaining` INT, `seller_name` INT, `category_id` INT, `category_name` INT, `current_bid` INT);
 
 -- -----------------------------------------------------
 -- View `active_users`
@@ -852,11 +852,11 @@ WHERE  category_info.category_status = 1 AND
 GROUP BY category_info.category_id, category_info.category_name;
 
 -- -----------------------------------------------------
--- View `non_draft_all_Products`
+-- View `non_draft_all_products`
 -- -----------------------------------------------------
-DROP VIEW IF EXISTS `non_draft_all_Products` ;
-DROP TABLE IF EXISTS `non_draft_all_Products`;
-CREATE OR REPLACE VIEW non_draft_all_Products AS
+DROP VIEW IF EXISTS `non_draft_all_products` ;
+DROP TABLE IF EXISTS `non_draft_all_products`;
+CREATE OR REPLACE VIEW non_draft_all_products AS
 SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
 ci.category_id, ci.category_name,
 (
