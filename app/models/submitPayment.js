@@ -257,7 +257,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                 var uMsg = 'You have bought ' + prices.productName + '.';
                                                 var sMsg = 'You have sold ' + prices.productName + '.';
                                                 var uMsgP = [userId, uMsg];
-                                                var sMsgP = [userId, sMsg];
+                                                var sMsgP = [prices.sellerId, sMsg];
                                                 connection.query(notifyUser, uMsgP, function(err) {
                                                   logger.logQuery('pay_create:', this.sql);
                                                   if(err) {
