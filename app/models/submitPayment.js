@@ -110,12 +110,13 @@ module.exports.create = function(checkoutInfo, userId, callback) {
           callback(err);
         } else {
           connection.query(getUserCart, [userId], function(err, userCart) {
-            logger.logQuery('submitPayment_create:', this.sql);
+            logger.logQuery('pay_create:', this.sql);
             if(err) {
               callback(err);
             } else {
               userCart = mapper.map(userCart[0], CART_DICT);
               connection.query(getCartItems, [userCart.cartId], function(err, cartItems) {
+                logger.logQuery('pay_create:', this.sql);
                 if(err) {
                   connection.rollback(function() {
                     callback(err);
@@ -127,6 +128,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                   async.forEach(cartItems, function(cartItem, callback) {
 
                     connection.query(getRemainingQuantity, [cartItem.productId], function(err, quantity) {
+                      logger.logQuery('pay_create:', this.sql);
                       if(err) {
                         connection.rollback(function() {
                           callback(err);
@@ -140,6 +142,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                           hasError = true;
                           var partialParams = [cartItem.productId, userCart.cartId];
                           connection.query(removeCartItemsPartial, partialParams, function(err) {
+                            logger.logQuery('pay_create:', this.sql);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
@@ -160,18 +163,21 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                     else {
 
                       connection.query(removeCart, [userId], function(err) {
+                        logger.logQuery('pay_create:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
                           });
                         } else {
                           connection.query(removeCartItemsFull, [userCart.cartId], function(err) {
+                            logger.logQuery('pay_create:', this.sql);
                             if(err) {
                               connection.rollback(function() {
                                 callback(err);
                               });
                             } else {
                               connection.query(insertNewCart, [userId], function(err) {
+                                logger.logQuery('pay_create:', this.sql);
                                 if(err) {
                                   connection.rollback(function() {
                                     callback(err);
@@ -182,6 +188,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
 
                                     var pricesParams = [userId, cartItem.itemId];
                                     connection.query(calculatePricesPerItem, pricesParams, function(err, prices) {
+                                      logger.logQuery('pay_create:', this.sql);
                                       if(err) {
                                         connection.rollback(function() {
                                           callback(err);
@@ -190,6 +197,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                         prices = mapper.mapCollection(prices, CALCULATE_ITEMS_DICT);
                                         var newQuantity = prices.remainingQuantity - prices.cartQuantity;
                                         connection.query(updateQuantity, [newQuantity, prices.specId], function(err) {
+                                          logger.logQuery('pay_create:', this.sql);
                                           if(err) {
                                             connection.rollback(function() {
                                               callback(err);
@@ -197,6 +205,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                           } else {
                                             var prodTransParams = [prices.productId, prices.cartQuantity];
                                             connection.query(insertProductTransaction, prodTransParams, function(err) {
+                                              logger.logQuery('pay_create:', this.sql);
                                               if(err) {
                                                 connection.rollback(function() {
                                                   callback(err);
@@ -218,6 +227,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                     checkoutInfo.paymentMethod, checkoutInfo.selectedCard, null];
                                                 }
                                                 connection.query(insertPaymentHistory, payParams, function(err) {
+                                                  logger.logQuery('pay_create:', this.sql);
                                                   if(err) {
                                                     connection.rollback(function() {
                                                       callback(err);
@@ -233,6 +243,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                         checkoutInfo.selectedCard, checkoutInfo.selectedAddress];
                                                     }
                                                     connection.query(insertInvoiceHistory, par, function(err, invoice) {
+                                                      logger.logQuery('pay_create:', this.sql);
                                                       if(err) {
                                                         connection.rollback(function() {
                                                           callback(err);
@@ -245,6 +256,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                         var par2 = [invoiceId, prices.productId,
                                                           prices.cartQuantity, paymentAmount];
                                                         connection.query(insertInvoiceItemHistory, par2, function(err) {
+                                                          logger.logQuery('pay_create:', this.sql);
                                                           if(err) {
                                                             connection.rollback(function() {
                                                               callback(err);
@@ -255,12 +267,14 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                             var uMsgP = [userId, uMsg];
                                                             var sMsgP = [userId, sMsg];
                                                             connection.query(notifyUser, uMsgP, function(err) {
+                                                              logger.logQuery('pay_create:', this.sql);
                                                               if(err) {
                                                                 connection.rollback(function() {
                                                                   callback(err);
                                                                 });
                                                               } else {
                                                                 connection.query(notifySeller, sMsgP, function(err) {
+                                                                  logger.logQuery('pay_create:', this.sql);
                                                                   if(err) {
                                                                     connection.rollback(function() {
                                                                       callback(err);
@@ -284,12 +298,14 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                                       var q2 = closeProductBids;
                                                                       var q2P = [prices.productId];
                                                                       connection.query(q1, q1P, function(err) {
+                                                                        logger.logQuery('pay_create:', this.sql);
                                                                         if(err) {
                                                                           connection.rollback(function() {
                                                                             callback(err);
                                                                           });
                                                                         } else {
                                                                           connection.query(q2, q2P, function(err) {
+                                                                            logger.logQuery('pay_create:', this.sql);
                                                                             if(err) {
                                                                               connection.rollback(function() {
                                                                                 callback(err);
