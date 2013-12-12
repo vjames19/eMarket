@@ -89,17 +89,29 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
 
         User.me().getList('creditCards').then(function(creditCardsList) {
           scope.cards = creditCardsList;
-          Helper.refreshSelect(bankSelect);
+          Helper.refreshSelect(cardSelect);
+        }, function(err) {
+          scope.cards = [];
+          Helper.refreshList(cardSelect);
+          console.log('Empty Cards', err);
         });
 
         User.me().getList('banks').then(function(bankAccountsList) {
           scope.banks = bankAccountsList;
-          Helper.refreshSelect(cardSelect);
+          Helper.refreshSelect(bankSelect);
+        }, function(err) {
+          scope.banks = [];
+          Helper.refreshList(cardSelect);
+          console.log('Empty Banks', err);
         });
 
         User.me().getList('mailAddresses').then(function(mailAddressList) {
           scope.mailAddresses = mailAddressList;
           Helper.refreshSelect(addressSelect);
+        }, function(err) {
+          scope.mailAddresses = [];
+          Helper.refreshList(addressSelect);
+          console.log('Empty Address', err);
         });
 
       });
