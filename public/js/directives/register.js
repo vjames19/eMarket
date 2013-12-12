@@ -81,8 +81,7 @@ angular.module('eMarketApp').directive('register', function(Restangular, Helper)
           $scope.register.cardExpDate = oldDateFormat;
           $.mobile.loading('hide');
           statusPopupMessage.text('Registration successful. ' +
-              'Your username is ' + $scope.register.username + '. ' +
-              'Your password is ' + $scope.register.password + '.');
+              'Your username is ' + $scope.register.username + '.');
           statusPopup.popup('open');
           statusPopup.on({
             popupafterclose: function() {

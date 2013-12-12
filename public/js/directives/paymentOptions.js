@@ -72,9 +72,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
               setTimeout(function() {
                 statusPopup.popup('open');
                 paymentOptionsCardPopup.off();
-              });
+              }, 250);
             }
           });
+          paymentOptionsCardPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           paymentOptionsCardPopup.on({
@@ -83,9 +84,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
               setTimeout(function() {
                 statusPopup.popup('open');
                 paymentOptionsCardPopup.off();
-              });
+              }, 250);
             }
           });
+          paymentOptionsCardPopup.popup('close');
           console.log('Error Removing Card', err);
         });
       };
@@ -112,9 +114,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
               setTimeout(function() {
                 statusPopup.popup('open');
                 paymentOptionsBankPopup.off();
-              });
+              }, 250);
             }
           });
+          paymentOptionsBankPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           paymentOptionsBankPopup.on({
@@ -123,9 +126,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
               setTimeout(function() {
                 statusPopup.popup('open');
                 paymentOptionsBankPopup.off();
-              });
+              }, 250);
             }
           });
+          paymentOptionsBankPopup.popup('close');
           console.log('Error Removing Bank', err);
         });
       };
