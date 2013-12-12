@@ -22,11 +22,19 @@ angular.module('eMarketApp').directive('myEmarketBuying', function(User, Helper)
         User.me().getList('purchases').then(function(purchases) {
           scope.purchases = purchases;
           Helper.refreshList(bidAndPurchaseList);
+        }, function(err) {
+          scope.purchases = [];
+          Helper.refreshList(bidAndPurchaseList);
+          console.log('Empty Purchases', err);
         });
 
         User.me().getList('bids').then(function(bids) {
           scope.bids = bids;
           Helper.refreshList(bidAndPurchaseList);
+        }, function(err) {
+          scope.bids = [];
+          Helper.refreshList(bidAndPurchaseList);
+          console.log('Empty Bids', err);
         });
 
       });

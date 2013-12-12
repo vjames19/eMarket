@@ -25,6 +25,10 @@ angular.module('eMarketApp').directive('recentlyViewed', function(User, Helper) 
         User.me().getList('browsedItems').then(function(items) {
           scope.recentlyViewed = items;
           Helper.refreshList(recentlyViewedList);
+        }, function(err) {
+          scope.recentlyViewed = [];
+          Helper.refreshList(recentlyViewedList);
+          console.log('Empty recentlyViewed', err);
         });
 
       });

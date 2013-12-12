@@ -140,6 +140,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
           } else {
             deleteCardButton.removeClass('ui-disabled');
           }
+        }, function(err) {
+          scope.creditCards = [];
+          Helper.refreshList(cardList);
+          console.log('Empty Cards', err);
         });
 
         User.me().getList('banks').then(function(bankAccountsList) {
@@ -150,6 +154,10 @@ angular.module('eMarketApp').directive('paymentOptions', function(User, Helper) 
           } else {
             deleteBankButton.removeClass('ui-disabled');
           }
+        }, function(err) {
+          scope.bankAccounts = [];
+          Helper.refreshList(bankList);
+          console.log('Empty Banks', err);
         });
 
       });

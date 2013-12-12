@@ -29,6 +29,10 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoic
         User.me().getList('invoices').then(function(invoices) {
           scope.invoices = invoices;
           Helper.refreshList(invoiceList);
+        }, function(err) {
+          scope.invoices = [];
+          Helper.refreshList(invoiceList);
+          console.log('Empty Invoices', err);
         });
 
       });

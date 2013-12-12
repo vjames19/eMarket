@@ -110,6 +110,10 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           } else {
             proceedToCheckOut.removeClass('ui-disabled');
           }
+        }, function(err) {
+          scope.shoppingCarts = [];
+          Helper.refreshList(shoppingCartList);
+          console.log('Empty Cart', err);
         });
       });
 

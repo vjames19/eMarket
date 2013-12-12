@@ -22,12 +22,21 @@ angular.module('eMarketApp').directive('myEmarketSelling', function(User, Helper
         User.me().getList('unsoldProducts').then(function(unsoldProducts) {
           scope.unsoldProducts = unsoldProducts;
           Helper.refreshList(soldAndUnsoldList);
+        }, function(err) {
+          scope.unsoldProducts = [];
+          Helper.refreshList(soldAndUnsoldList);
+          console.log('Empty unsoldProducts', err);
         });
 
         User.me().getList('soldProducts').then(function(soldProducts) {
           scope.soldProducts = soldProducts;
           Helper.refreshList(soldAndUnsoldList);
+        }, function(err) {
+          scope.soldProducts = [];
+          Helper.refreshList(soldAndUnsoldList);
+          console.log('Empty soldProducts', err);
         });
+
       });
 
     }

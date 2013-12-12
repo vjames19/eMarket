@@ -16,19 +16,16 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
       $scope.submit = function() {
         statusPopup.off();
         if(!$scope.checkout) {
-          console.log('got here1');
           statusPopupMessage.text('Please provide the requested information.');
           statusPopup.popup('open');
           return;
         }
         if(!$scope.checkout.paymentMethod || !$scope.checkout.selectedAddress) {
-          console.log('got here2');
           statusPopupMessage.text('Please provide the requested information.');
           statusPopup.popup('open');
           return;
         }
         if(!$scope.checkout.selectedBank && !$scope.checkout.selectedCard) {
-          console.log('got here3');
           statusPopupMessage.text('Please provide the requested information.');
           statusPopup.popup('open');
           return;
@@ -39,27 +36,27 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
           $scope.checkout.selectedCard = null;
         }
         $.mobile.loading('show');
-        console.log('got here4');
-
         User.me().all('submitPayment').post($scope.checkout).then(function() {
           $.mobile.loading('hide');
           statusPopupMessage.text('Payment Submitted Successfully');
           statusPopup.popup('open');
           statusPopup.on({
             popupafterclose: function() {
-              $.mobile.changePage('#home-user');
+//              $.mobile.changePage('#home-user');
             }
           });
+          $.mobile.changePage('#home-user');
         }, function(err) {
           $.mobile.loading('hide');
           statusPopupMessage.text('Payment Not Submitted Successfully');
           statusPopup.popup('open');
           statusPopup.on({
             popupafterclose: function() {
-              $.mobile.changePage('#shopping-cart');
+//              $.mobile.changePage('#shopping-cart');
             }
           });
           console.log('Payment Error', err);
+          $.mobile.changePage('#shopping-cart');
         });
       };
 

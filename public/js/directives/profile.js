@@ -240,6 +240,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
             deleteMailingButton.removeClass('ui-disabled');
           }
 
+        }, function(err) {
+          scope.mailAddresses = [];
+          Helper.refreshList(mailAddressList);
+          console.log('Empty Mailing', err);
         });
 
         User.me().getList('billAddresses').then(function(billAddressesList) {
@@ -252,6 +256,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
           else {
             deleteBillingButton.removeClass('ui-disabled');
           }
+        }, function(err) {
+          scope.billAddresses = [];
+          Helper.refreshList(billAddressList);
+          console.log('Empty Billing', err);
         });
 
         User.me().one('avgRating').get().then(function(avg) {
@@ -273,6 +281,10 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
             });
             Helper.refreshList(ratingList);
           });
+        }, function(err) {
+          scope.ratings = [];
+          Helper.refreshList(ratingList);
+          console.log('Empty Ratings', err);
         });
 
       });

@@ -54,6 +54,10 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
         User.me().getList('notifications').then(function(notifications) {
           scope.notifications = notifications;
           Helper.refreshList(notificationList);
+        }, function(err) {
+          scope.notifications = [];
+          Helper.refreshList(notificationList);
+          console.log('Empty Notifications', err);
         });
 
       });

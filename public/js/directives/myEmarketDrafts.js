@@ -25,6 +25,10 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
         User.me().getList('drafts').then(function(drafts) {
           scope.drafts = drafts;
           Helper.refreshList(draftList);
+        }, function(err) {
+          scope.drafts = [];
+          Helper.refreshList(draftList);
+          console.log('Empty Draft', err);
         });
 
       });
