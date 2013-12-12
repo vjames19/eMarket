@@ -45,12 +45,16 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoic
         statusPopup.off();
         promise.then(function(invoices) {
           if(invoices.length === 0) {
-            statusPopupMessage.text('No invoices found.');
-            statusPopup.popup('open');
+            setTimeout(function() {
+              statusPopupMessage.text('No invoices found.');
+              statusPopup.popup('open');
+            });
           }
         }, function() {
-          statusPopupMessage.text('No invoices found.');
-          statusPopup.popup('open');
+          setTimeout(function() {
+            statusPopupMessage.text('No invoices found.');
+            statusPopup.popup('open');
+          });
         });
 
       });

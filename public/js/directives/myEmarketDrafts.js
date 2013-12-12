@@ -41,12 +41,16 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
         statusPopup.off();
         promise.then(function(drafts) {
           if(drafts.length === 0) {
-            statusPopupMessage.text('No drafts found.');
-            statusPopup.popup('open');
+            setTimeout(function() {
+              statusPopupMessage.text('No drafts found.');
+              statusPopup.popup('open');
+            });
           }
         }, function() {
-          statusPopupMessage.text('No drafts found.');
-          statusPopup.popup('open');
+          setTimeout(function() {
+            statusPopupMessage.text('No drafts found.');
+            statusPopup.popup('open');
+          });
         });
 
       });

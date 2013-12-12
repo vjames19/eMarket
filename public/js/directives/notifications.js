@@ -70,12 +70,16 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
         statusPopup.off();
         promise.then(function(notifications) {
           if(notifications.length === 0) {
-            statusPopupMessage.text('No notifications found.');
-            statusPopup.popup('open');
+            setTimeout(function() {
+              statusPopupMessage.text('No notifications found.');
+              statusPopup.popup('open');
+            });
           }
         }, function() {
-          statusPopupMessage.text('No notifications found.');
-          statusPopup.popup('open');
+          setTimeout(function() {
+            statusPopupMessage.text('No notifications found.');
+            statusPopup.popup('open');
+          });
         });
 
       });

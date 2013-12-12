@@ -128,12 +128,16 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
         statusPopup.off();
         promise.then(function(shoppingCarts) {
           if(shoppingCarts.length === 0) {
-            statusPopupMessage.text('No items in cart, please buy some :)');
-            statusPopup.popup('open');
+            setTimeout(function() {
+              statusPopupMessage.text('No items in cart, please buy some :)');
+              statusPopup.popup('open');
+            });
           }
         }, function() {
-          statusPopupMessage.text('No items in cart, please buy some :)');
-          statusPopup.popup('open');
+          setTimeout(function() {
+            statusPopupMessage.text('No items in cart, please buy some :)');
+            statusPopup.popup('open');
+          });
         });
 
       });
