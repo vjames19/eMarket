@@ -14,7 +14,7 @@ var CART_ITEM_DICT = {
   'cart_item_cart_id': 'cartId',
   'cart_item_product_id': 'productId',
   'cart_item_quantity': 'quantity',
-  'cart_item_is_bid_Item': 'isBidItem'
+  'cart_item_is_bid_item': 'isBidItem'
 };
 
 var REMAINING_DICT = {
@@ -25,7 +25,7 @@ var CALCULATE_ITEMS_DICT = {
   'cart_item_quantity': 'cartQuantity',
   'product_total_nonbid_price': 'nonBidPrice',
   'product_total_bid_price': 'bidPrice',
-  'cart_item_is_bid_Item': 'isBidItem',
+  'cart_item_is_bid_item': 'isBidItem',
   'product_id': 'productId',
   'product_seller_id': 'sellerId',
   'product_spec_id': 'specId',
@@ -72,12 +72,12 @@ module.exports.create = function(checkoutInfo, userId, callback) {
       var calculatePricesPerItem = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
           'product_spec_nonbid_price * cart_item_quantity AS product_total_nonbid_price, ' +
           'current_bid * cart_item_quantity AS product_total_bid_price, ' +
-          'cart_item_is_bid_Item, products.* ' +
-          'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
+          'cart_item_is_bid_item, non_draft_all_Products.* ' +
+          'FROM cart_history INNER JOIN cart_item_history INNER JOIN non_draft_all_Products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_id = ? AND cart_item_closed_date IS NULL';
       var updateQuantity = 'UPDATE product_quantity_record ' +
-          'SET product_quantity_remaining = product_quantity_remaining - ? ' +
+          'SET product_quantity_remaining =  ? ' +
           'WHERE product_quantity_spec_id = ?';
       var insertProductTransaction = 'INSERT INTO product_transaction_history ' +
           '(product_transaction_product_id, product_transaction_quantity, product_transaction_date) ' +
@@ -136,7 +136,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                         });
                       } else {
                         quantity = mapper.map(quantity[0], REMAINING_DICT);
-                        if(cartItem.quantity < quantity.remainingQuantity) {
+                        if(cartItem.quantity <= quantity.remainingQuantity || cartItem.isBidItem) {
                           finishedFirst(null);
                         } else {
                           hasError = true;
@@ -205,6 +205,9 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                               } else {
                                 prices = mapper.map(prices[0], CALCULATE_ITEMS_DICT);
                                 var newQuantity = prices.remainingQuantity - prices.cartQuantity;
+                                if(cartItem.isBidItem){
+                                  newQuantity = prices.remainingQuantity;
+                                }
                                 connection.query(updateQuantity, [newQuantity, prices.specId], function(err) {
                                   logger.logQuery('pay_create:', this.sql);
                                   if(err) {
@@ -254,7 +257,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                 var uMsg = 'You have bought ' + prices.productName + '.';
                                                 var sMsg = 'You have sold ' + prices.productName + '.';
                                                 var uMsgP = [userId, uMsg];
-                                                var sMsgP = [userId, sMsg];
+                                                var sMsgP = [prices.sellerId, sMsg];
                                                 connection.query(notifyUser, uMsgP, function(err) {
                                                   logger.logQuery('pay_create:', this.sql);
                                                   if(err) {
@@ -269,7 +272,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                           finishedSecond(err);
                                                         });
                                                       } else {
-                                                        if(newQuantity > 0) {
+                                                        if(newQuantity > 0 || cartItem.isBidItem) {
                                                           finishedSecond(null);
                                                         }
                                                         else {

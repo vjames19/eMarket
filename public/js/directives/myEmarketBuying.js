@@ -8,7 +8,13 @@ angular.module('eMarketApp').directive('myEmarketBuying', function(User, Helper)
     replace: true,
     controller: function($scope, Product) {
 
-      $scope.setItem = Product.setItem;
+      $scope.setItemBid = function(bid) {
+        var copy = angular.copy(bid);
+        copy.id = copy.productId;
+        Product.setItem(copy);
+      };
+
+      $scope.setItemPurchase = Product.setItem;
 
     },
     link: function(scope, elem) {

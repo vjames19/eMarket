@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp').directive('itemView',
-    function(User, Restangular, ProductBids, SellerInfo, Product, Helper, $filter) {
+    function(User, Restangular, ProductBids, SellerInfo, Product, Helper) {
       return {
         templateUrl: 'views/itemView.html',
         restrict: 'E',
@@ -105,7 +105,6 @@ angular.module('eMarketApp').directive('itemView',
           //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
           //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
           var countdownTimer = page.find('#countdown-timer');
-          var countdownTimerParent = page.find('#timer');
 
           page.on('pagebeforeshow', function() {
 
@@ -125,7 +124,7 @@ angular.module('eMarketApp').directive('itemView',
 
             var currentDate = new Date();
 
-            if(new Date(scope.item.bidEndDate) > currentDate) {
+            if(new Date(scope.item.bidEndDate) > currentDate && scope.item.quantityRemaining > 0) {
               scope.activateTimer = true;
               var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
               countdownTimer.countdown(bidEndDateStr, function(event) {
@@ -145,12 +144,16 @@ angular.module('eMarketApp').directive('itemView',
               buyItNowBtn.addClass('ui-disabled');
               placeBidBtn.addClass('ui-disabled');
             } else {
-              if(new Date(scope.item.bidEndDate) < currentDate) {
+              if(new Date(scope.item.bidEndDate) < currentDate || scope.item.quantityRemaining <= 0) {
                 placeBidBtn.addClass('ui-disabled');
               } else {
                 placeBidBtn.removeClass('ui-disabled');
               }
-              buyItNowBtn.removeClass('ui-disabled');
+              if(scope.item.quantityRemaining <= 0) {
+                buyItNowBtn.addClass('ui-disabled');
+              } else {
+                buyItNowBtn.removeClass('ui-disabled');
+              }
             }
 
             if(scope.item.currentBid < scope.item.startingBidPrice) {
