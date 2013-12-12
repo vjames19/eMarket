@@ -23,6 +23,7 @@ var DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
+  'product_quantity_remaining': 'quantityRemaining',
   'user_login_user_name': 'buyerName',
   'invoice_item_quantity': 'soldQuantity',
   'invoice_item_sold_price': 'soldPrice',

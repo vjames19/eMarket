@@ -25,6 +25,7 @@ var DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
+  'product_quantity_remaining': 'quantityRemaining',
   'current_bid': 'currentBid'
 };
 

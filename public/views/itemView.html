@@ -75,7 +75,7 @@
           </tr>
           <tr>
             <td><strong>Available Quantity:</strong></td>
-            <td><em>{{ item.quantity }}</em></td>
+            <td><em>{{ item.quantityRemaining }}</em></td>
           </tr>
         </table>
       </li>
@@ -169,11 +169,11 @@
         <div data-role="fieldcontain">
           <label for="itemView-quantityAmount"></label>
           <input type="number" name="itemViewQuantityAmount" id="itemView-quantityAmount"
-                 min="1" max="{{item.quantity}}" placeholder="1" maxlength="999"
+                 min="1" max="{{item.quantityRemaining}}" placeholder="1" maxlength="999"
                  ng-model="item.amountToBuy" ng-pattern="patternBuyItNow" ng-required="true">
         </div>
         <a href="#item-view" data-role="button" data-theme="b" ng-click="submitCart()"
-           ng-class="{false: 'ui-disabled'}[itemViewBuyItNowForm.$valid && item.amountToBuy <= item.quantity]">
+           ng-class="{false: 'ui-disabled'}[itemViewBuyItNowForm.$valid && item.amountToBuy <= item.quantityRemaining]">
           Add to Cart</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>

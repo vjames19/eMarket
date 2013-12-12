@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp').directive('itemView',
-    function(User, Restangular, ProductBids, SellerInfo, Product, Helper, $filter) {
+    function(User, Restangular, ProductBids, SellerInfo, Product, Helper) {
       return {
         templateUrl: 'views/itemView.html',
         restrict: 'E',
@@ -105,7 +105,6 @@ angular.module('eMarketApp').directive('itemView',
           //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
           //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
           var countdownTimer = page.find('#countdown-timer');
-          var countdownTimerParent = page.find('#timer');
 
           page.on('pagebeforeshow', function() {
 

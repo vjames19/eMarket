@@ -30,6 +30,7 @@ var PRODUCT_DICTIONARY = {
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
   'product_spec_dimensions': 'dimensions',
+  'product_quantity_remaining': 'quantityRemaining',
   'curren_bid': 'currentBid',
   'invoice_item_quantity': 'purchasedQuantity'
 };
