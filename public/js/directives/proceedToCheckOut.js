@@ -63,8 +63,8 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
     },
     link: function(scope, elem) {
 
-      scope.checkout = { paymentMethod: 'Bank' };
-      scope.isCreditCard = false;
+      scope.checkout = { paymentMethod: 'Credit Card' };
+      scope.isCreditCard = scope.checkout.paymentMethod === 'Credit Card';
 
       var page = $(elem[0]);
 
