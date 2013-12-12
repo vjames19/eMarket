@@ -83,9 +83,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               setTimeout(function() {
                 statusPopup.popup('open');
                 optionMenu.off();
-              });
+              }, 250);
             }
           });
+          optionMenu.popup('close');
           return;
         }
         Restangular.one('categories', selectedCategory.id).remove().then(function() {
@@ -98,9 +99,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               setTimeout(function() {
                 statusPopup.popup('open');
                 optionMenu.off();
-              });
+              }, 250);
             }
           });
+          optionMenu.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           optionMenu.on({
@@ -109,9 +111,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
               setTimeout(function() {
                 statusPopup.popup('open');
                 optionMenu.off();
-              });
+              }, 250);
             }
           });
+          optionMenu.popup('close');
           console.log('Error Removing Category', err);
         });
       };

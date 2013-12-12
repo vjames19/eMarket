@@ -42,9 +42,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 adminAccPopup.off();
-              });
+              }, 250);
             }
           });
+          adminAccPopup.popup('close');
           return;
         }
         if(selectedAdmin.username === 'root') {
@@ -55,9 +56,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 adminAccPopup.off();
-              });
+              }, 250);
             }
           });
+          adminAccPopup.popup('close');
           return;
         }
         if(selectedAdmin.isRoot === 1 && Admin.isRoot === 0) {
@@ -68,9 +70,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 adminAccPopup.off();
-              });
+              }, 250);
             }
           });
+          adminAccPopup.popup('close');
           return;
         }
         Restangular.one('admins', selectedAdmin.id).remove().then(function() {
@@ -83,9 +86,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 adminAccPopup.off();
-              });
+              }, 250);
             }
           });
+          adminAccPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           adminAccPopup.on({
@@ -94,9 +98,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
               setTimeout(function() {
                 statusPopup.popup('open');
                 adminAccPopup.off();
-              });
+              }, 250);
             }
           });
+          adminAccPopup.popup('close');
           console.log('Error Removing Admin', err);
         });
       };
