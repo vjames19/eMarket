@@ -82,7 +82,7 @@ module.exports.create = function(userId, recentlyViewed, callback) {
           'VALUES (?,?)';
       connection.query(sql, [userId, recentlyViewed.productId], function(err, insertStatus) {
         logger.logQuery('recentlyViewed_create:', this.sql);
-        callback(err, {id: insertStatus.insertId});
+        callback(err, insertStatus);
       });
     }
   });

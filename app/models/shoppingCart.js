@@ -10,6 +10,9 @@ var DICTIONARY = {
   'cart_item_cart_id': 'cartItemCartId',
   'cart_item_quantity': 'itemQuantity',
   'cart_item_is_bid_Item': 'isBidItem',
+  'product_total_nonbid_price': 'productTotalNonBidPrice',
+  'product_total_bid_price': 'productTotalBidPrice',
+  'product_id': 'productId',
   'product_seller_id': 'sellerId',
   'seller_name': 'sellerName',
   'product_creation_date': 'creationDate',
@@ -18,18 +21,16 @@ var DICTIONARY = {
   'product_spec_name': 'productName',
   'product_spec_nonbid_price': 'nonbidPrice',
   'product_spec_starting_bid_price': 'startingBidPrice',
-  'current_bid': 'currentBid',
   'product_spec_bid_end_date': 'bidEndDate',
   'product_spec_shipping_price': 'shippingPrice',
-  'product_total_nonbid_price': 'productTotalNonBidPrice',
-  'product_total_bid_price': 'productTotalBidPrice',
   'product_spec_quantity': 'quantity',
   'product_spec_description': 'description',
   'product_spec_condition': 'condition',
   'product_spec_picture': 'picture',
   'product_spec_brand': 'brand',
   'product_spec_model': 'model',
-  'product_spec_dimensions': 'dimensions'
+  'product_spec_dimensions': 'dimensions',
+  'current_bid': 'currentBid'
 };
 
 //var WHITELIST = [];
