@@ -81,7 +81,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
               setTimeout(function() {
                 statusPopup.popup('open');
                 shoppingCartPopup.off();
-              });
+              }, 250);
             }
           });
           shoppingCartPopup.popup('close');
@@ -93,7 +93,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
               setTimeout(function() {
                 statusPopup.popup('open');
                 shoppingCartPopup.off();
-              });
+              }, 250);
             }
           });
           shoppingCartPopup.popup('close');
