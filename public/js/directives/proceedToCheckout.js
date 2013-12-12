@@ -42,21 +42,19 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
           statusPopup.popup('open');
           statusPopup.on({
             popupafterclose: function() {
-//              $.mobile.changePage('#home-user');
+              $.mobile.changePage('#home-user');
             }
           });
-          $.mobile.changePage('#home-user');
         }, function(err) {
           $.mobile.loading('hide');
           statusPopupMessage.text('Payment Not Submitted Successfully');
           statusPopup.popup('open');
           statusPopup.on({
             popupafterclose: function() {
-//              $.mobile.changePage('#shopping-cart');
+              $.mobile.changePage('#shopping-cart');
             }
           });
           console.log('Payment Error', err);
-          $.mobile.changePage('#shopping-cart');
         });
       };
 
