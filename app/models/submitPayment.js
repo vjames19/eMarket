@@ -157,13 +157,22 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                     });
 
                   }, function(err) {
-                    if(err || hasError) {
-                      console.log('got here to error');
-                      callback(err, null);
-                    }
-                    else {
+                    if(err) {
+                      connection.rollback(function() {
+                        callback(err);
+                      });
+                    } else if(hasError) {
+                      connection.commit(function(err) {
+                        if(err) {
+                          connection.rollback(function() {
+                            callback(err);
+                          });
+                        } else {
+                          callback(err, null);
+                        }
+                      });
+                    } else {
                       console.log('passed all iterators');
-
                       connection.query(removeCart, [userId], function(err) {
                         logger.logQuery('pay_create:', this.sql);
                         if(err) {
