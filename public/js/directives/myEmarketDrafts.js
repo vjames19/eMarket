@@ -20,9 +20,12 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
       var statusPopup = page.find('#myEmDrafts-statusPopup');
       var statusPopupMessage = page.find('#myEmDrafts-statusPopupMessage');
 
+      var promise = null;
+
       page.on('pagebeforeshow', function() {
 
-        User.me().getList('drafts').then(function(drafts) {
+        promise = User.me().getList('drafts');
+        promise.then(function(drafts) {
           scope.drafts = drafts;
           Helper.refreshList(draftList);
         }, function(err) {
@@ -36,15 +39,15 @@ angular.module('eMarketApp').directive('myEmarketDrafts', function(User, SellIte
       page.on('pageshow', function() {
 
         statusPopup.off();
-        if(scope.drafts.length === 0) {
+        promise.then(function(drafts) {
+          if(drafts.length === 0) {
+            statusPopupMessage.text('No drafts found.');
+            statusPopup.popup('open');
+          }
+        }, function() {
           statusPopupMessage.text('No drafts found.');
           statusPopup.popup('open');
-          statusPopup.on({
-            popupafterclose: function() {
-              $.mobile.changePage('#my-emarket-buying');
-            }
-          });
-        }
+        });
 
       });
 

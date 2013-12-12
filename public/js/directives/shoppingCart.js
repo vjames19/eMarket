@@ -101,9 +101,12 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
         });
       };
 
+      var promise = null;
+
       page.on('pagebeforeshow', function() {
 
-        User.me().getList('cartItems').then(function(carts) {
+        promise = User.me().getList('cartItems');
+        promise.then(function(carts) {
           scope.shoppingCarts = carts;
           Helper.refreshList(shoppingCartList);
           computeTotalCostAndShipping();
@@ -123,10 +126,16 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
       page.on('pageshow', function() {
 
         statusPopup.off();
-        if(scope.shoppingCarts.length === 0) {
+        promise.then(function(shoppingCarts) {
+          if(shoppingCarts.length === 0) {
+            statusPopupMessage.text('No items in cart, please buy some :)');
+            statusPopup.popup('open');
+          }
+        }, function() {
           statusPopupMessage.text('No items in cart, please buy some :)');
           statusPopup.popup('open');
-        }
+        });
+
       });
     }
   };
