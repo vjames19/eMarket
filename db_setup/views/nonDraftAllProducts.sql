@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `non_draft_all_Products`;
-DROP VIEW IF EXISTS `non_draft_all_Products`;
+DROP TABLE IF EXISTS `non_draft_all_products`;
+DROP VIEW IF EXISTS `non_draft_all_products`;
 
-CREATE OR REPLACE VIEW non_draft_all_Products AS
+CREATE OR REPLACE VIEW non_draft_all_products AS
 SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
 ci.category_id, ci.category_name,
 (
