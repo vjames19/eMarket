@@ -14,7 +14,7 @@ angular.module('eMarketApp').factory('Patterns', function() {
       street: /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ][,.\s\-'#&\(\)]*){5,255}$/,
       country: /^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/,
       city: /^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/,
-      geoRegion: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{2,45}$/,
+      geoRegion: /^([a-zA-ZñÑáéíóúÁÉÍÓÚ][\s]?){2,45}$/,
       zipCode: /^\d{5}(?:[-]\d{4})?$/,
       telephone: /^\d{10}$/
     },
