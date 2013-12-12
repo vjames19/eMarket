@@ -179,6 +179,9 @@ module.exports = function(app, passport, auth) {
   app.put('/api/users/:userId/questionsAnswers/:questionAnswerId', users.updateQuestionAnswer);
   app.del('/api/users/:userId/questionsAnswers/:questionAnswerId', users.deleteQuestionAnswer);
 
+  // Submit payment route
+  app.post('/api/users/:userId/submitPayment', users.createPayment);
+
   //=================NON USER ROUTES================//
 
   // Search Routes
