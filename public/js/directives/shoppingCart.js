@@ -84,6 +84,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
               });
             }
           });
+          shoppingCartPopup.popup('close');
         }, function(err) {
           $.mobile.loading('hide');
           shoppingCartPopup.on({
@@ -95,6 +96,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
               });
             }
           });
+          shoppingCartPopup.popup('close');
           console.log('Error Removing Product From Cart', err);
         });
       };
