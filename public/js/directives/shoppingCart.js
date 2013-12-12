@@ -8,7 +8,11 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
     replace: true,
     controller: function($scope, Product, CartInfo) {
 
-      $scope.setItem = Product.setItem;
+      $scope.setItem = function(cartProduct) {
+        var copy = angular.copy(cartProduct);
+        copy.id = copy.productId;
+        Product.setItem(copy);
+      };
 
       $scope.setCostAndShipping = function(items, cost, shipping) {
         CartInfo.setCartInfo(items, cost, shipping);
