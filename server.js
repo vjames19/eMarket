@@ -89,7 +89,7 @@ setInterval(function() {
           'AND NOT EXISTS (SELECT * FROM bid_history ' +
           'WHERE bid_history.bid_product_id = products.product_id AND bid_closed_date IS NOT NULL)';
       connection.query(getBidProducts, function(err, productsToUpdate) {
-        logger.logQuery('bidder_process:', this.sql);
+//        logger.logQuery('bidder_process:', this.sql);
         if(err) {
           console.log(err);
 //          allDone(err);
