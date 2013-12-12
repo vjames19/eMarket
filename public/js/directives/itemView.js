@@ -28,7 +28,6 @@ angular.module('eMarketApp').directive('itemView',
             $.mobile.loading('show');
             User.me().all('bids').post($scope.item).then(function() {
               $.mobile.loading('hide');
-              placeBidPopup.popup('close');
               statusPopup.on({
                 popupafterclose: function() {
                   setTimeout(function() {
@@ -45,9 +44,9 @@ angular.module('eMarketApp').directive('itemView',
                   }, 250);
                 }
               });
+              placeBidPopup.popup('close');
             }, function(err) {
               $.mobile.loading('hide');
-              placeBidPopup.popup('close');
               placeBidPopup.on({
                 popupafterclose: function() {
                   statusPopupMessage.text('Could not place the bid. Bidding probably has ended.');
@@ -57,6 +56,7 @@ angular.module('eMarketApp').directive('itemView',
                   }, 250);
                 }
               });
+              placeBidPopup.popup('close');
               console.log('Error bid', err);
             });
           };
@@ -70,7 +70,6 @@ angular.module('eMarketApp').directive('itemView',
             $.mobile.loading('show');
             User.me().all('cartItems').post($scope.item).then(function() {
               $.mobile.loading('hide');
-              buyItNowPopup.popup('close');
               statusPopup.on({
                 popupafterclose: function() {
                   setTimeout(function() {
@@ -87,9 +86,9 @@ angular.module('eMarketApp').directive('itemView',
                   }, 250);
                 }
               });
+              buyItNowPopup.popup('close');
             }, function(err) {
               $.mobile.loading('hide');
-              buyItNowPopup.popup('close');
               buyItNowPopup.on({
                 popupafterclose: function() {
                   statusPopupMessage.text('Could not place product in cart.');
@@ -99,6 +98,7 @@ angular.module('eMarketApp').directive('itemView',
                   }, 250);
                 }
               });
+              buyItNowPopup.popup('close');
               console.log('Error placing product in cart', err);
             });
           };
