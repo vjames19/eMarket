@@ -36,6 +36,10 @@ angular.module('eMarketApp').directive('categoriesAdmin', function(Restangular, 
           scope.categories = categories;
           stack.push(categories);
           Helper.refreshList(categoryAdminList);
+        }, function(err) {
+          scope.categories = [];
+          Helper.refreshList(categoryAdminList);
+          console.log('Empty Categories', err);
         });
       });
 

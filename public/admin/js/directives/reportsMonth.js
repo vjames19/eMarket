@@ -38,11 +38,19 @@ angular.module('eMarketApp').directive('reportsMonth', function(Restangular, Rep
               totalSales = result.sales;
               totalRevenue = result.revenue;
               updateGraph(totalSales, totalRevenue);
+            }, function() {
+              totalSales = 0;
+              totalRevenue = 0;
+              updateGraph(totalSales, totalRevenue);
             });
           } else {
             Restangular.one('reportsMonth', scope.selectedCategory).get().then(function(result) {
               totalSales = result.sales;
               totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            }, function() {
+              totalSales = 0;
+              totalRevenue = 0;
               updateGraph(totalSales, totalRevenue);
             });
           }

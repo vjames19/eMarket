@@ -50,6 +50,10 @@ angular.module('eMarketApp').directive('categories', function(Category, Search, 
           scope.categories = categories;
           stack.push(categories);
           Helper.refreshList(categoryList);
+        }, function(err) {
+          scope.categories = [];
+          Helper.refreshList(categoryList);
+          console.log('Empty Categories', err);
         });
       });
 

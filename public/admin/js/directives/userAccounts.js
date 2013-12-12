@@ -40,6 +40,10 @@ angular.module('eMarketApp').directive('userAccounts', function(Restangular, Hel
         Restangular.all('users').getList().then(function(userList) {
           scope.users = userList;
           Helper.refreshList(userAccountList);
+        }, function(err) {
+          scope.users = [];
+          Helper.refreshList(userAccountList);
+          console.log('Empty Users', err);
         });
 
       });

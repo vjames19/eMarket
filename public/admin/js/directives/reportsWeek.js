@@ -38,11 +38,19 @@ angular.module('eMarketApp').directive('reportsWeek', function(Restangular, Repo
               totalSales = result.sales;
               totalRevenue = result.revenue;
               updateGraph(totalSales, totalRevenue);
+            }, function() {
+              totalSales = 0;
+              totalRevenue = 0;
+              updateGraph(totalSales, totalRevenue);
             });
           } else {
             Restangular.one('reportsWeek', scope.selectedCategory).get().then(function(result) {
               totalSales = result.sales;
               totalRevenue = result.revenue;
+              updateGraph(totalSales, totalRevenue);
+            }, function() {
+              totalSales = 0;
+              totalRevenue = 0;
               updateGraph(totalSales, totalRevenue);
             });
           }

@@ -106,6 +106,10 @@ angular.module('eMarketApp').directive('adminAccounts', function(Restangular, He
         Restangular.all('admins').getList().then(function(adminList) {
           scope.admins = adminList;
           Helper.refreshList(adminAccountList);
+        }, function(err) {
+          scope.admins = [];
+          Helper.refreshList(adminAccountList);
+          console.log('Empty Admins', err);
         });
 
       });
