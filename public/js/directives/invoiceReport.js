@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('invoiceReport', function(User, Helper) {
+angular.module('eMarketApp').directive('invoiceReport', function(User, Helper, Invoice) {
   return {
     templateUrl: 'views/invoiceReport.html',
     restrict: 'E',
@@ -14,8 +14,7 @@ angular.module('eMarketApp').directive('invoiceReport', function(User, Helper) {
 
       page.on('pagebeforeshow', function() {
 
-        var invoiceId = User.userId;
-        User.me().one('invoices', invoiceId).getList('products').then(function(invoiceProducts) {
+        User.me().one('invoices', Invoice.invoice.id).getList('products').then(function(invoiceProducts) {
           scope.invoiceProducts = invoiceProducts;
           Helper.refreshList(invoiceProductsList);
         });

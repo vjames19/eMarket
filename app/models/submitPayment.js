@@ -49,6 +49,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
       callback(err);
     } else {
 
+      userId = +userId;
       var getUserCart = 'SELECT cart_id ' +
           'FROM cart_history ' +
           'WHERE cart_user_id = ? AND cart_closed_date IS NULL';
@@ -135,12 +136,9 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                         });
                       } else {
                         quantity = mapper.map(quantity[0], REMAINING_DICT);
-                        console.log(cartItem.quantity, quantity.remainingQuantity);
                         if(cartItem.quantity < quantity.remainingQuantity) {
-                          console.log('passed');
                           finishedFirst(null);
-                        }
-                        else {
+                        } else {
                           hasError = true;
                           var partialParams = [cartItem.productId, userCart.cartId];
                           connection.query(removeCartItemsPartial, partialParams, function(err) {
@@ -151,8 +149,8 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                               });
                             }
                           });
+                          finishedFirst(null);
                         }
-                        finishedFirst(null);
                       }
                     });
 
@@ -172,177 +170,133 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                         }
                       });
                     } else {
+
                       console.log('passed all iterators');
-                      connection.query(removeCart, [userId], function(err) {
+                      var par = null;
+                      if(checkoutInfo.selectedBank) {
+                        par = [userId, checkoutInfo.selectedBank,
+                          null, checkoutInfo.selectedAddress];
+                      } else {
+                        par = [userId, null,
+                          checkoutInfo.selectedCard, checkoutInfo.selectedAddress];
+                      }
+
+                      connection.query(insertInvoiceHistory, par, function(err, invoice) {
                         logger.logQuery('pay_create:', this.sql);
                         if(err) {
                           connection.rollback(function() {
                             callback(err);
                           });
                         } else {
-                          connection.query(removeCartItemsFull, [userCart.cartId], function(err) {
-                            logger.logQuery('pay_create:', this.sql);
-                            if(err) {
-                              connection.rollback(function() {
-                                callback(err);
-                              });
-                            } else {
-                              connection.query(insertNewCart, [userId], function(err) {
-                                logger.logQuery('pay_create:', this.sql);
-                                if(err) {
-                                  connection.rollback(function() {
-                                    callback(err);
-                                  });
-                                } else {
+                          var invoiceId = null;
+                          if(invoice.insertId) {
+                            invoiceId = invoice.insertId;
+                          }
 
-                                  async.forEachSeries(cartItems, function(cartItem, finishedSecond) {
+                          async.forEachSeries(cartItems, function(cartItem, finishedSecond) {
 
-                                    var pricesParams = [userId, cartItem.itemId];
-                                    connection.query(calculatePricesPerItem, pricesParams, function(err, prices) {
+                            var pricesParams = [userId, cartItem.itemId];
+                            connection.query(calculatePricesPerItem, pricesParams, function(err, prices) {
+                              logger.logQuery('pay_create:', this.sql);
+                              if(err) {
+                                connection.rollback(function() {
+                                  finishedSecond(err);
+                                });
+                              } else {
+                                prices = mapper.map(prices[0], CALCULATE_ITEMS_DICT);
+                                var newQuantity = prices.remainingQuantity - prices.cartQuantity;
+                                connection.query(updateQuantity, [newQuantity, prices.specId], function(err) {
+                                  logger.logQuery('pay_create:', this.sql);
+                                  if(err) {
+                                    connection.rollback(function() {
+                                      finishedSecond(err);
+                                    });
+                                  } else {
+                                    var prodTransParams = [prices.productId, prices.cartQuantity];
+                                    connection.query(insertProductTransaction, prodTransParams, function(err) {
                                       logger.logQuery('pay_create:', this.sql);
                                       if(err) {
                                         connection.rollback(function() {
                                           finishedSecond(err);
                                         });
                                       } else {
-                                        prices = mapper.mapCollection(prices, CALCULATE_ITEMS_DICT);
-                                        var newQuantity = prices.remainingQuantity - prices.cartQuantity;
-                                        connection.query(updateQuantity, [newQuantity, prices.specId], function(err) {
+
+                                        var paymentAmount = null;
+                                        if(prices.isBidItem) {
+                                          paymentAmount = prices.bidPrice + prices.shippingPrice;
+                                        } else {
+                                          paymentAmount = prices.nonBidPrice + prices.shippingPrice;
+                                        }
+                                        var payParams = null;
+                                        if(checkoutInfo.selectedBank) {
+                                          payParams = [userId, prices.sellerId, paymentAmount,
+                                            checkoutInfo.paymentMethod, null, checkoutInfo.selectedBank];
+                                        } else {
+                                          payParams = [userId, prices.sellerId, paymentAmount,
+                                            checkoutInfo.paymentMethod, checkoutInfo.selectedCard, null];
+                                        }
+                                        connection.query(insertPaymentHistory, payParams, function(err) {
                                           logger.logQuery('pay_create:', this.sql);
                                           if(err) {
                                             connection.rollback(function() {
                                               finishedSecond(err);
                                             });
                                           } else {
-                                            var prodTransParams = [prices.productId, prices.cartQuantity];
-                                            connection.query(insertProductTransaction, prodTransParams, function(err) {
+                                            var par2 = [invoiceId, prices.productId,
+                                              prices.cartQuantity, paymentAmount];
+                                            connection.query(insertInvoiceItemHistory, par2, function(err) {
                                               logger.logQuery('pay_create:', this.sql);
                                               if(err) {
                                                 connection.rollback(function() {
                                                   finishedSecond(err);
                                                 });
                                               } else {
-
-                                                var paymentAmount = null;
-                                                if(cartItem.isBidItem) {
-                                                  paymentAmount = cartItem.bidPrice + prices.shippingPrice;
-                                                } else {
-                                                  paymentAmount = cartItem.nonbidPrice + prices.shippingPrice;
-                                                }
-                                                var payParams = null;
-                                                if(checkoutInfo.selectedBank) {
-                                                  payParams = [userId, prices.sellerId, paymentAmount,
-                                                    checkoutInfo.paymentMethod, null, checkoutInfo.selectedBank];
-                                                } else {
-                                                  payParams = [userId, prices.sellerId, paymentAmount,
-                                                    checkoutInfo.paymentMethod, checkoutInfo.selectedCard, null];
-                                                }
-                                                connection.query(insertPaymentHistory, payParams, function(err) {
+                                                var uMsg = 'You have bought ' + prices.productName + '.';
+                                                var sMsg = 'You have sold ' + prices.productName + '.';
+                                                var uMsgP = [userId, uMsg];
+                                                var sMsgP = [userId, sMsg];
+                                                connection.query(notifyUser, uMsgP, function(err) {
                                                   logger.logQuery('pay_create:', this.sql);
                                                   if(err) {
                                                     connection.rollback(function() {
                                                       finishedSecond(err);
                                                     });
                                                   } else {
-
-                                                    var par = null;
-                                                    if(checkoutInfo.selectedBank) {
-                                                      par = [userId, checkoutInfo.selectedBank,
-                                                        null, checkoutInfo.selectedAddress];
-                                                    } else {
-                                                      par = [userId, null,
-                                                        checkoutInfo.selectedCard, checkoutInfo.selectedAddress];
-                                                    }
-                                                    connection.query(insertInvoiceHistory, par, function(err, invoice) {
+                                                    connection.query(notifySeller, sMsgP, function(err) {
                                                       logger.logQuery('pay_create:', this.sql);
                                                       if(err) {
                                                         connection.rollback(function() {
                                                           finishedSecond(err);
                                                         });
                                                       } else {
-                                                        var invoiceId = null;
-                                                        if(invoice.insertId) {
-                                                          invoiceId = invoice.insertId;
+                                                        if(newQuantity > 0) {
+                                                          finishedSecond(null);
                                                         }
-                                                        var par2 = [invoiceId, prices.productId,
-                                                          prices.cartQuantity, paymentAmount];
-                                                        connection.query(insertInvoiceItemHistory, par2, function(err) {
-                                                          logger.logQuery('pay_create:', this.sql);
-                                                          if(err) {
-                                                            connection.rollback(function() {
-                                                              finishedSecond(err);
-                                                            });
-                                                          } else {
-                                                            var uMsg = 'You have bought ' + prices.productName + '.';
-                                                            var sMsg = 'You have sold ' + prices.productName + '.';
-                                                            var uMsgP = [userId, uMsg];
-                                                            var sMsgP = [userId, sMsg];
-                                                            connection.query(notifyUser, uMsgP, function(err) {
-                                                              logger.logQuery('pay_create:', this.sql);
-                                                              if(err) {
-                                                                connection.rollback(function() {
-                                                                  finishedSecond(err);
-                                                                });
-                                                              } else {
-                                                                connection.query(notifySeller, sMsgP, function(err) {
-                                                                  logger.logQuery('pay_create:', this.sql);
-                                                                  if(err) {
-                                                                    connection.rollback(function() {
-                                                                      finishedSecond(err);
-                                                                    });
-                                                                  } else {
-                                                                    if(newQuantity > 0) {
-                                                                      connection.commit(function(err) {
-                                                                        if(err) {
-                                                                          connection.rollback(function() {
-                                                                            finishedSecond(err);
-                                                                          });
-                                                                        } else {
-                                                                          finishedSecond(null);
-                                                                          console.log('Payment is Successful.');
-                                                                        }
-                                                                      });
-                                                                    }
-                                                                    else {
-                                                                      var q1 = depleteItem;
-                                                                      var q1P = [prices.specId];
-                                                                      var q2 = closeProductBids;
-                                                                      var q2P = [prices.productId];
-                                                                      connection.query(q1, q1P, function(err) {
-                                                                        logger.logQuery('pay_create:', this.sql);
-                                                                        if(err) {
-                                                                          connection.rollback(function() {
-                                                                            finishedSecond(err);
-                                                                          });
-                                                                        } else {
-                                                                          connection.query(q2, q2P, function(err) {
-                                                                            logger.logQuery('pay_create:', this.sql);
-                                                                            if(err) {
-                                                                              connection.rollback(function() {
-                                                                                finishedSecond(err);
-                                                                              });
-                                                                            } else {
-                                                                              connection.commit(function(err) {
-                                                                                if(err) {
-                                                                                  connection.rollback(function() {
-                                                                                    finishedSecond(err);
-                                                                                  });
-                                                                                } else {
-                                                                                  finishedSecond(null);
-                                                                                  console.log('Payment is Successful.');
-                                                                                }
-                                                                              });
-                                                                            }
-                                                                          });
-                                                                        }
-                                                                      });
-                                                                    }
-                                                                  }
-                                                                });
-                                                              }
-                                                            });
-                                                          }
-                                                        });
+                                                        else {
+                                                          var q1 = depleteItem;
+                                                          var q1P = [prices.specId];
+                                                          var q2 = closeProductBids;
+                                                          var q2P = [prices.productId];
+                                                          connection.query(q1, q1P, function(err) {
+                                                            logger.logQuery('pay_create:', this.sql);
+                                                            if(err) {
+                                                              connection.rollback(function() {
+                                                                finishedSecond(err);
+                                                              });
+                                                            } else {
+                                                              connection.query(q2, q2P, function(err) {
+                                                                logger.logQuery('pay_create:', this.sql);
+                                                                if(err) {
+                                                                  connection.rollback(function() {
+                                                                    finishedSecond(err);
+                                                                  });
+                                                                } else {
+                                                                  finishedSecond(null);
+                                                                }
+                                                              });
+                                                            }
+                                                          });
+                                                        }
                                                       }
                                                     });
                                                   }
@@ -352,23 +306,60 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                           }
                                         });
                                       }
-
                                     });
+                                  }
+                                });
+                              }
 
-                                  }, function(err) {
+                            });
 
-                                    if(err) {
-                                      callback(err);
-                                    } else {
-                                      callback(null, checkoutInfo);
-                                    }
+                          }, function(err) {
 
+                            if(err) {
+                              callback(err);
+                            } else {
+
+                              connection.query(removeCart, [userId], function(err) {
+                                logger.logQuery('pay_create:', this.sql);
+                                if(err) {
+                                  connection.rollback(function() {
+                                    callback(err);
                                   });
-
+                                } else {
+                                  connection.query(removeCartItemsFull, [userCart.cartId], function(err) {
+                                    logger.logQuery('pay_create:', this.sql);
+                                    if(err) {
+                                      connection.rollback(function() {
+                                        callback(err);
+                                      });
+                                    } else {
+                                      connection.query(insertNewCart, [userId], function(err) {
+                                        logger.logQuery('pay_create:', this.sql);
+                                        if(err) {
+                                          connection.rollback(function() {
+                                            callback(err);
+                                          });
+                                        } else {
+                                          connection.commit(function(err) {
+                                            if(err) {
+                                              connection.rollback(function() {
+                                                callback(err);
+                                              });
+                                            } else {
+                                              callback(null, checkoutInfo);
+                                              console.log('Payment is Successful.');
+                                            }
+                                          });
+                                        }
+                                      });
+                                    }
+                                  });
                                 }
                               });
                             }
+
                           });
+
                         }
                       });
 

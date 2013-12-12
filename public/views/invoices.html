@@ -21,7 +21,7 @@
         </table>
       </li>
       <li ng-repeat="invoice in invoices">
-        <a href="#invoice-report" data-transition="slide">
+        <a href="#invoice-report" data-transition="slide" ng-click="selectInvoice(invoice, $index)">
           <table class="ui-responsive medium-text wrap-text">
             <tr>
               <th>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eMarketApp').directive('invoices', function(User, Helper) {
+angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoice) {
   return {
     templateUrl: 'views/invoices.html',
     restrict: 'E',
@@ -15,7 +15,16 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper) {
       var statusPopup = page.find('#invoices-statusPopup');
       var statusPopupMessage = page.find('#invoices-statusPopupMessage');
 
+      var invoiceSelected = null;
+      var selectedInvoiceIndex = null;
+
       page.on('pagebeforeshow', function() {
+
+        scope.selectInvoice = function(invoice, index) {
+          invoiceSelected = invoice;
+          selectedInvoiceIndex = index;
+          Invoice.invoice = invoice;
+        };
 
         User.me().getList('invoices').then(function(invoices) {
           scope.invoices = invoices;
