@@ -87,7 +87,12 @@
           </tr>
           <tr>
             <td><strong>Time Left:</strong></td>
-            <td><em><div id="countdown-timer" data-role="none"></div></em></td>
+            <td ng-show="activateTimer">
+              <em>
+                <div id="countdown-timer" data-role="none"></div>
+              </em>
+            </td>
+            <td ng-hide="activateTimer"><em>0w 0d 00h 00m 00s</em></td>
           </tr>
         </table>
       </li>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eMarketApp').directive('itemView',
-    function(User, Restangular, ProductBids, SellerInfo, Product, Helper) {
+    function(User, Restangular, ProductBids, SellerInfo, Product, Helper, $filter) {
       return {
         templateUrl: 'views/itemView.html',
         restrict: 'E',
@@ -105,6 +105,7 @@ angular.module('eMarketApp').directive('itemView',
           //      var buyItNowPopup = page.find('#itemView-buyItNowPopup');
           //      var addedToCartPopup = page.find('#itemView-addedToCartPopup');
           var countdownTimer = page.find('#countdown-timer');
+          var countdownTimerParent = page.find('#timer');
 
           page.on('pagebeforeshow', function() {
 
@@ -124,11 +125,15 @@ angular.module('eMarketApp').directive('itemView',
 
             var currentDate = new Date();
 
-            var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
-
-            countdownTimer.countdown(bidEndDateStr, function(event) {
-              $(this).html(event.strftime('%-ww %-dd %Hh %Mm %Ss'));
-            });
+            if(new Date(scope.item.bidEndDate) > currentDate) {
+              scope.activateTimer = true;
+              var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
+              countdownTimer.countdown(bidEndDateStr, function(event) {
+                countdownTimer.html(event.strftime('%-ww %-dd %Hh %Mm %Ss'));
+              });
+            } else {
+              scope.activateTimer = false;
+            }
 
             if(scope.item && scope.item.currentBid === null) {
               productBidsLink.addClass('ui-disabled');
@@ -164,7 +169,8 @@ angular.module('eMarketApp').directive('itemView',
           });
 
           page.on('pagehide', function() {
-            countdownTimer.countdown('destroy');
+//            countdownTimer.countdown('destroy');
+//            countdownTimer.remove();
           });
 
           scope.setNextBid = function() {
