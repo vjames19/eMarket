@@ -7,7 +7,7 @@
     "port": 3306,
     "user": "phx_emarket",
     "password": "phx_emarket_pwd",
-    "database": "emarket_test",
+    "database": "emarket_prod",
     "supportBigNumbers": true,
     "debug": false,
     "connectionLimit": 100,
