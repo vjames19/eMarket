@@ -136,8 +136,10 @@ angular.module('eMarketApp').directive('itemView',
             if(new Date(scope.item.bidEndDate) > currentDate && scope.item.quantityRemaining > 0) {
               scope.activateTimer = true;
               var bidEndDateStr = Helper.formatDate(scope.item.bidEndDate, 'yyyy/MM/dd HH:mm:ss');
-              countdownTimer.countdown(bidEndDateStr, function(event) {
-                countdownTimer.html(event.strftime('%-ww %-dd %Hh %Mm %Ss'));
+              setTimeout(function() {
+                countdownTimer.countdown(bidEndDateStr, function(event) {
+                  countdownTimer.html(event.strftime('%-ww %-dd %Hh %Mm %Ss'));
+                });
               });
             } else {
               scope.activateTimer = false;
