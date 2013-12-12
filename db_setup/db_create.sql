@@ -204,10 +204,10 @@ CREATE TABLE IF NOT EXISTS `product_specification` (
   `product_spec_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_spec_category_id` INT UNSIGNED NOT NULL,
   `product_spec_name` VARCHAR(160) NOT NULL,
-  `product_spec_nonbid_price` DECIMAL(13,2) NOT NULL,
-  `product_spec_starting_bid_price` DECIMAL(13,2) NOT NULL,
+  `product_spec_nonbid_price` DECIMAL(17,2) NOT NULL,
+  `product_spec_starting_bid_price` DECIMAL(17,2) NOT NULL,
   `product_spec_bid_end_date` DATETIME NOT NULL,
-  `product_spec_shipping_price` DECIMAL(13,2) NOT NULL,
+  `product_spec_shipping_price` DECIMAL(17,2) NOT NULL,
   `product_spec_quantity` INT UNSIGNED NOT NULL,
   `product_spec_description` VARCHAR(255) NOT NULL,
   `product_spec_condition` ENUM('New','Used','Refurbished') NOT NULL,
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `bid_history` (
   `bid_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `bid_user_id` INT UNSIGNED NOT NULL,
   `bid_product_id` INT UNSIGNED NOT NULL,
-  `bid_amount` DECIMAL(13,2) NOT NULL,
+  `bid_amount` DECIMAL(17,2) NOT NULL,
   `bid_creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `bid_closed_date` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`bid_id`),
@@ -384,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `invoice_item_history` (
   `invoice_item_invoice_id` INT UNSIGNED NOT NULL,
   `invoice_item_product_id` INT UNSIGNED NOT NULL,
   `invoice_item_quantity` INT UNSIGNED NOT NULL,
-  `invoice_item_sold_price` DECIMAL(13,2) NOT NULL,
+  `invoice_item_sold_price` DECIMAL(17,2) NOT NULL,
   PRIMARY KEY (`invoice_item_id`),
   INDEX `invoice_item_invoice_id_idx` (`invoice_item_invoice_id` ASC),
   INDEX `invoice_item_product_id_idx` (`invoice_item_product_id` ASC),
@@ -631,7 +631,7 @@ CREATE TABLE IF NOT EXISTS `payment_history` (
   `payment_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `payment_sender_user_id` INT UNSIGNED NOT NULL,
   `payment_recipient_user_id` INT UNSIGNED NOT NULL,
-  `payment_amount` DECIMAL(13,2) NOT NULL,
+  `payment_amount` DECIMAL(17,2) NOT NULL,
   `payment_method` ENUM('Bank','Card') NOT NULL,
   `payment_card_id` INT UNSIGNED NULL,
   `payment_bank_id` INT UNSIGNED NULL,
@@ -699,6 +699,11 @@ CREATE TABLE IF NOT EXISTS `report_week` (`category_id` INT, `category_name` INT
 -- Placeholder table for view `report_day`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `report_day` (`category_id` INT, `category_name` INT, `category_sales` INT, `category_profit` INT, `category_revenue` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `non_draft_all_Products`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `non_draft_all_Products` (`product_id` INT, `product_seller_id` INT, `product_info_spec_id` INT, `product_creation_date` INT, `product_depletion_date` INT, `product_spec_id` INT, `product_spec_category_id` INT, `product_spec_name` INT, `product_spec_nonbid_price` INT, `product_spec_starting_bid_price` INT, `product_spec_bid_end_date` INT, `product_spec_shipping_price` INT, `product_spec_quantity` INT, `product_spec_description` INT, `product_spec_condition` INT, `product_spec_picture` INT, `product_spec_brand` INT, `product_spec_model` INT, `product_spec_dimensions` INT, `product_spec_is_draft` INT, `product_quantity_remaining` INT, `seller_name` INT, `category_id` INT, `category_name` INT, `current_bid` INT);
 
 -- -----------------------------------------------------
 -- View `active_users`
@@ -845,6 +850,33 @@ WHERE  category_info.category_status = 1 AND
         WHERE DATE(report_data.invoice_creation_date) BETWEEN DATE_SUB(curdate(), INTERVAL 0 DAY) AND curdate()
       )
 GROUP BY category_info.category_id, category_info.category_name;
+
+-- -----------------------------------------------------
+-- View `non_draft_all_Products`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `non_draft_all_Products` ;
+DROP TABLE IF EXISTS `non_draft_all_Products`;
+CREATE OR REPLACE VIEW non_draft_all_Products AS
+SELECT pi.*, ps.*, pq.product_quantity_remaining, au.user_login_user_name AS seller_name,
+ci.category_id, ci.category_name,
+(
+  SELECT bid_amount
+  FROM bid_history INNER JOIN product_info AS P
+  ON(bid_product_id = P.product_id)
+  WHERE P.product_id = pi.product_id
+  ORDER BY bid_amount DESC
+  LIMIT 0,1
+) AS current_bid
+FROM product_info AS pi INNER JOIN product_specification AS ps INNER JOIN active_users AS au
+INNER JOIN category_info AS ci INNER JOIN product_quantity_record as pq
+ON (
+    pi.product_info_spec_id = ps.product_spec_id
+    AND au.user_id = pi.product_seller_id
+    AND ci.category_id = ps.product_spec_category_id
+    AND pq.product_quantity_spec_id = ps.product_spec_id
+    )
+WHERE ps.product_spec_is_draft = 0;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
