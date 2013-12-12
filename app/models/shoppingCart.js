@@ -9,7 +9,7 @@ var DICTIONARY = {
   'cart_item_id': 'itemId',
   'cart_item_cart_id': 'cartItemCartId',
   'cart_item_quantity': 'itemQuantity',
-  'cart_item_is_bid_Item': 'isBidItem',
+  'cart_item_is_bid_item': 'isBidItem',
   'product_total_nonbid_price': 'productTotalNonBidPrice',
   'product_total_bid_price': 'productTotalBidPrice',
   'product_id': 'productId',
@@ -51,8 +51,8 @@ module.exports.getAll = function(userId, callback) {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
           'product_spec_nonbid_price * cart_item_quantity AS product_total_nonbid_price, ' +
           'current_bid * cart_item_quantity AS product_total_bid_price, ' +
-          'cart_item_is_bid_Item, products.* ' +
-          'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
+          'cart_item_is_bid_item, non_draft_all_products.* ' +
+          'FROM cart_history INNER JOIN cart_item_history INNER JOIN non_draft_all_products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_closed_date IS NULL';
       connection.query(sql, [userId], function(err, shoppingCarts) {
@@ -71,8 +71,8 @@ module.exports.get = function(userId, cartItemId, callback) {
       var sql = 'SELECT cart_item_id, cart_item_cart_id, cart_item_quantity, ' +
           'product_spec_nonbid_price * cart_item_quantity AS product_total_nonbid_price, ' +
           'current_bid * cart_item_quantity AS product_total_bid_price, ' +
-          'cart_item_is_bid_Item, products.* ' +
-          'FROM cart_history INNER JOIN cart_item_history INNER JOIN products ' +
+          'cart_item_is_bid_item, non_draft_all_products.* ' +
+          'FROM cart_history INNER JOIN cart_item_history INNER JOIN non_draft_all_products ' +
           'ON (cart_id = cart_item_cart_id AND cart_item_product_id = product_id) ' +
           'WHERE cart_user_id = ? AND cart_item_id = ? AND cart_item_closed_date IS NULL';
       connection.query(sql, [userId, cartItemId], function(err, shoppingCart) {

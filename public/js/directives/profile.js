@@ -264,6 +264,9 @@ angular.module('eMarketApp').directive('profile', function(User, Restangular, He
 
         User.me().one('avgRating').get().then(function(avg) {
           scope.rating = avg;
+        }, function(err) {
+          scope.rating = 0;
+          console.log('Empty Avg Rating', err);
         });
 
         User.me().getList('ratings').then(function(ratings) {

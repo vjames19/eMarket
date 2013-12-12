@@ -149,7 +149,11 @@ angular.module('eMarketApp').directive('itemView',
               } else {
                 placeBidBtn.removeClass('ui-disabled');
               }
-              buyItNowBtn.removeClass('ui-disabled');
+              if(scope.item.quantityRemaining <= 0) {
+                buyItNowBtn.addClass('ui-disabled');
+              } else {
+                buyItNowBtn.removeClass('ui-disabled');
+              }
             }
 
             if(scope.item.currentBid < scope.item.startingBidPrice) {
