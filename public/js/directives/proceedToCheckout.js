@@ -61,8 +61,8 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
     },
     link: function(scope, elem) {
 
-      scope.checkout = { paymentMethod: 'Credit Card' };
-      scope.isCreditCard = scope.checkout.paymentMethod === 'Credit Card';
+      scope.checkout = { paymentMethod: 'Card' };
+      scope.isCreditCard = scope.checkout.paymentMethod === 'Card';
 
       var page = $(elem[0]);
 
@@ -73,7 +73,7 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
       scope.selectPaymentMethod = function() {
         delete scope.checkout.selectedBank;
         delete scope.checkout.selectedCard;
-        scope.isCreditCard = scope.checkout.paymentMethod === 'Credit Card';
+        scope.isCreditCard = scope.checkout.paymentMethod === 'Card';
         Helper.refreshSelect(bankSelect);
         Helper.refreshSelect(cardSelect);
       };
