@@ -155,7 +155,7 @@
                  placeholder="{{ nextMinBid | number:2 }}" maxlength="16"
                  ng-model="item.bidAmount" ng-pattern="patternPlaceBid" ng-required="true">
         </div>
-        <a href="#item-view" data-role="button" data-theme="b" ng-click="submitBid()"
+        <a href="#" data-role="button" data-theme="b" ng-click="submitBid()"
            ng-class="{false: 'ui-disabled'}[itemViewPlaceBidForm.$valid && item.bidAmount >= nextMinBid]">Bid</a>
         <a href="#item-view" data-role="button">Cancel</a>
       </div>
@@ -172,7 +172,7 @@
                  min="1" max="{{item.quantityRemaining}}" placeholder="1" maxlength="999"
                  ng-model="item.amountToBuy" ng-pattern="patternBuyItNow" ng-required="true">
         </div>
-        <a href="#item-view" data-role="button" data-theme="b" ng-click="submitCart()"
+        <a href="#" data-role="button" data-theme="b" ng-click="submitCart()"
            ng-class="{false: 'ui-disabled'}[itemViewBuyItNowForm.$valid && item.amountToBuy <= item.quantityRemaining]">
           Add to Cart</a>
         <a href="#item-view" data-role="button">Cancel</a>

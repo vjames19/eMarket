@@ -28,9 +28,12 @@ angular.module('eMarketApp').directive('itemView',
             $.mobile.loading('show');
             User.me().all('bids').post($scope.item).then(function() {
               $.mobile.loading('hide');
+              placeBidPopup.popup('close');
               statusPopup.on({
                 popupafterclose: function() {
-                  $.mobile.changePage('#home-user');
+                  setTimeout(function() {
+                    $.mobile.changePage('#home-user');
+                  });
                 }
               });
               placeBidPopup.on({
@@ -39,18 +42,19 @@ angular.module('eMarketApp').directive('itemView',
                   setTimeout(function() {
                     statusPopup.popup('open');
                     placeBidPopup.off();
-                  });
+                  }, 250);
                 }
               });
             }, function(err) {
               $.mobile.loading('hide');
+              placeBidPopup.popup('close');
               placeBidPopup.on({
                 popupafterclose: function() {
                   statusPopupMessage.text('Could not place the bid. Bidding probably has ended.');
                   setTimeout(function() {
                     statusPopup.popup('open');
                     placeBidPopup.off();
-                  });
+                  }, 250);
                 }
               });
               console.log('Error bid', err);
@@ -61,13 +65,17 @@ angular.module('eMarketApp').directive('itemView',
 
             statusPopup.off();
             buyItNowPopup.off();
+
             $scope.item.isBidItem = 0;
             $.mobile.loading('show');
             User.me().all('cartItems').post($scope.item).then(function() {
               $.mobile.loading('hide');
+              buyItNowPopup.popup('close');
               statusPopup.on({
                 popupafterclose: function() {
-                  $.mobile.changePage('#home-user');
+                  setTimeout(function() {
+                    $.mobile.changePage('#home-user');
+                  });
                 }
               });
               buyItNowPopup.on({
@@ -76,18 +84,19 @@ angular.module('eMarketApp').directive('itemView',
                   setTimeout(function() {
                     statusPopup.popup('open');
                     buyItNowPopup.off();
-                  });
+                  }, 250);
                 }
               });
             }, function(err) {
               $.mobile.loading('hide');
+              buyItNowPopup.popup('close');
               buyItNowPopup.on({
                 popupafterclose: function() {
                   statusPopupMessage.text('Could not place product in cart.');
                   setTimeout(function() {
                     statusPopup.popup('open');
                     buyItNowPopup.off();
-                  });
+                  }, 250);
                 }
               });
               console.log('Error placing product in cart', err);
