@@ -18,6 +18,8 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoic
       var invoiceSelected = null;
       var selectedInvoiceIndex = null;
 
+      var promise = null;
+
       page.on('pagebeforeshow', function() {
 
         scope.selectInvoice = function(invoice, index) {
@@ -26,7 +28,8 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoic
           Invoice.invoice = invoice;
         };
 
-        User.me().getList('invoices').then(function(invoices) {
+        promise = User.me().getList('invoices');
+        promise.then(function(invoices) {
           scope.invoices = invoices;
           Helper.refreshList(invoiceList);
         }, function(err) {
@@ -40,15 +43,15 @@ angular.module('eMarketApp').directive('invoices', function(User, Helper, Invoic
       page.on('pageshow', function() {
 
         statusPopup.off();
-        if(scope.invoices.length === 0) {
+        promise.then(function(invoices) {
+          if(invoices.length === 0) {
+            statusPopupMessage.text('No invoices found.');
+            statusPopup.popup('open');
+          }
+        }, function() {
           statusPopupMessage.text('No invoices found.');
           statusPopup.popup('open');
-          statusPopup.on({
-            popupafterclose: function() {
-              $.mobile.changePage('#home-user');
-            }
-          });
-        }
+        });
 
       });
 

@@ -39,6 +39,8 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
         }
       };
 
+      var promise = null;
+
       page.on('pagebeforeshow', function() {
 
         notificationPopup.on({
@@ -51,7 +53,8 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
           }
         });
 
-        User.me().getList('notifications').then(function(notifications) {
+        promise = User.me().getList('notifications');
+        promise.then(function(notifications) {
           scope.notifications = notifications;
           Helper.refreshList(notificationList);
         }, function(err) {
@@ -65,15 +68,15 @@ angular.module('eMarketApp').directive('notifications', function(User, Helper) {
       page.on('pageshow', function() {
 
         statusPopup.off();
-        if(scope.notifications.length === 0) {
+        promise.then(function(notifications) {
+          if(notifications.length === 0) {
+            statusPopupMessage.text('No notifications found.');
+            statusPopup.popup('open');
+          }
+        }, function() {
           statusPopupMessage.text('No notifications found.');
           statusPopup.popup('open');
-          statusPopup.on({
-            popupafterclose: function() {
-              $.mobile.changePage('#home-user');
-            }
-          });
-        }
+        });
 
       });
 
