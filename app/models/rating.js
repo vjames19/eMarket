@@ -141,7 +141,7 @@ module.exports.createRating = function(rating, callback) {
                         });
                       } else {
                         console.log('Created Rating Successfully', arguments);
-                        callback(null, {id: insertStatus.insertId});
+                        callback(null, insertStatus);
                       }
                     });
                   }
