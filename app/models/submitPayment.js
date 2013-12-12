@@ -125,18 +125,20 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                   cartItems = mapper.mapCollection(cartItems, CART_ITEM_DICT);
 
                   var hasError = false;
-                  async.forEach(cartItems, function(cartItem, callback) {
+                  async.forEachSeries(cartItems, function(cartItem, finishedFirst) {
 
                     connection.query(getRemainingQuantity, [cartItem.productId], function(err, quantity) {
                       logger.logQuery('pay_create:', this.sql);
                       if(err) {
                         connection.rollback(function() {
-                          callback(err);
+                          finishedFirst(err);
                         });
                       } else {
                         quantity = mapper.map(quantity[0], REMAINING_DICT);
-                        if(cartItem.quantity > quantity.remainingQuantity) {
-                          callback(null);
+                        console.log(cartItem.quantity, quantity.remainingQuantity);
+                        if(cartItem.quantity < quantity.remainingQuantity) {
+                          console.log('passed');
+                          finishedFirst(null);
                         }
                         else {
                           hasError = true;
@@ -145,22 +147,22 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                             logger.logQuery('pay_create:', this.sql);
                             if(err) {
                               connection.rollback(function() {
-                                callback(err);
+                                finishedFirst(err);
                               });
-                            } else {
-                              callback(null);
                             }
                           });
                         }
-                        callback(null);
+                        finishedFirst(null);
                       }
                     });
 
                   }, function(err) {
                     if(err || hasError) {
+                      console.log('got here to error');
                       callback(err, null);
                     }
                     else {
+                      console.log('passed all iterators');
 
                       connection.query(removeCart, [userId], function(err) {
                         logger.logQuery('pay_create:', this.sql);
@@ -184,14 +186,14 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                   });
                                 } else {
 
-                                  async.forEachSeries(cartItems, function(cartItem, callback) {
+                                  async.forEachSeries(cartItems, function(cartItem, finishedSecond) {
 
                                     var pricesParams = [userId, cartItem.itemId];
                                     connection.query(calculatePricesPerItem, pricesParams, function(err, prices) {
                                       logger.logQuery('pay_create:', this.sql);
                                       if(err) {
                                         connection.rollback(function() {
-                                          callback(err);
+                                          finishedSecond(err);
                                         });
                                       } else {
                                         prices = mapper.mapCollection(prices, CALCULATE_ITEMS_DICT);
@@ -200,7 +202,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                           logger.logQuery('pay_create:', this.sql);
                                           if(err) {
                                             connection.rollback(function() {
-                                              callback(err);
+                                              finishedSecond(err);
                                             });
                                           } else {
                                             var prodTransParams = [prices.productId, prices.cartQuantity];
@@ -208,7 +210,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                               logger.logQuery('pay_create:', this.sql);
                                               if(err) {
                                                 connection.rollback(function() {
-                                                  callback(err);
+                                                  finishedSecond(err);
                                                 });
                                               } else {
 
@@ -230,7 +232,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                   logger.logQuery('pay_create:', this.sql);
                                                   if(err) {
                                                     connection.rollback(function() {
-                                                      callback(err);
+                                                      finishedSecond(err);
                                                     });
                                                   } else {
 
@@ -246,7 +248,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                       logger.logQuery('pay_create:', this.sql);
                                                       if(err) {
                                                         connection.rollback(function() {
-                                                          callback(err);
+                                                          finishedSecond(err);
                                                         });
                                                       } else {
                                                         var invoiceId = null;
@@ -259,7 +261,7 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                           logger.logQuery('pay_create:', this.sql);
                                                           if(err) {
                                                             connection.rollback(function() {
-                                                              callback(err);
+                                                              finishedSecond(err);
                                                             });
                                                           } else {
                                                             var uMsg = 'You have bought ' + prices.productName + '.';
@@ -270,24 +272,24 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                               logger.logQuery('pay_create:', this.sql);
                                                               if(err) {
                                                                 connection.rollback(function() {
-                                                                  callback(err);
+                                                                  finishedSecond(err);
                                                                 });
                                                               } else {
                                                                 connection.query(notifySeller, sMsgP, function(err) {
                                                                   logger.logQuery('pay_create:', this.sql);
                                                                   if(err) {
                                                                     connection.rollback(function() {
-                                                                      callback(err);
+                                                                      finishedSecond(err);
                                                                     });
                                                                   } else {
                                                                     if(newQuantity > 0) {
                                                                       connection.commit(function(err) {
                                                                         if(err) {
                                                                           connection.rollback(function() {
-                                                                            callback(err);
+                                                                            finishedSecond(err);
                                                                           });
                                                                         } else {
-                                                                          callback(null);
+                                                                          finishedSecond(null);
                                                                           console.log('Payment is Successful.');
                                                                         }
                                                                       });
@@ -301,23 +303,23 @@ module.exports.create = function(checkoutInfo, userId, callback) {
                                                                         logger.logQuery('pay_create:', this.sql);
                                                                         if(err) {
                                                                           connection.rollback(function() {
-                                                                            callback(err);
+                                                                            finishedSecond(err);
                                                                           });
                                                                         } else {
                                                                           connection.query(q2, q2P, function(err) {
                                                                             logger.logQuery('pay_create:', this.sql);
                                                                             if(err) {
                                                                               connection.rollback(function() {
-                                                                                callback(err);
+                                                                                finishedSecond(err);
                                                                               });
                                                                             } else {
                                                                               connection.commit(function(err) {
                                                                                 if(err) {
                                                                                   connection.rollback(function() {
-                                                                                    callback(err);
+                                                                                    finishedSecond(err);
                                                                                   });
                                                                                 } else {
-                                                                                  callback(null);
+                                                                                  finishedSecond(null);
                                                                                   console.log('Payment is Successful.');
                                                                                 }
                                                                               });

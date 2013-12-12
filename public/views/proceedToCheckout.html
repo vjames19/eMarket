@@ -7,7 +7,7 @@
 
   <div data-role="content">
 
-    <form name="checkoutForm">
+    <form name="checkoutForm" data-ajax="false">
       <div class="form-pad">
         <label for="checkout-paymentMethod"><strong>Select Payment Method</strong></label>
         <select name="checkoutPaymentMethod" id="checkout-paymentMethod" data-theme="a"
@@ -43,10 +43,10 @@
       <table align="right">
         <tr>
           <td align="left">
-            Total Items({{itemsAmount}}):
+            Total Items({{checkout.itemsAmount}}):
           </td>
           <td align="right">
-            {{cost | currency}}
+            {{checkout.cost | currency}}
           </td>
           <td align="left">
         </tr>
@@ -55,7 +55,7 @@
             Shipping:
           </td>
           <td align="right" class="bottom-line">
-            {{shipping | currency}}
+            {{checkout.shipping | currency}}
           </td>
         </tr>
         <tr>
@@ -63,7 +63,7 @@
             Amount to pay:
           </td>
           <td align="right">
-            {{cost + shipping | currency}}
+            {{checkout.cost + checkout.shipping | currency}}
           </td>
         </tr>
       </table>
@@ -71,13 +71,17 @@
 
   </div>
 
-  <div data-role="popup" id="submitPayment-statusPopup'" data-theme="b" class="ui-corner-all ui-content">
+  <div data-role="popup" id="checkout-statusPopup'" data-theme="b" class="ui-corner-all ui-content">
     <a href="#proceed-to-checkout" data-rel="external" data-role="button" data-theme="a" data-icon="delete"
        data-iconpos="notext" class="ui-btn-right">Close</a>
-    <p id="submitPayment-statusPopupMessage" style="text-align: center"></p>
+    <p id="checkout-statusPopupMessage" style="text-align: center"></p>
   </div>
 
   <div data-role="footer" data-theme="a">
+    <!--<button type="submit"-->
+    <!--class="footer-button ui-btn ui-btn-b ui-icon-check ui-btn-icon-right ui-btn-corner-all ui-btn-inline"-->
+    <!--ng-click="submit()" ng-class="{false: 'ui-disabled'}[checkoutForm.$valid]">Submit Payment-->
+    <!--</button>-->
     <a href="#" data-role="button" class="footer-button" data-icon="check" data-theme="b"
        ng-click="submit()"
        ng-class="{false: 'ui-disabled'}[checkoutForm.$valid]">Submit Payment</a>

@@ -10,12 +10,25 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
 
       var page = $($element[0]);
 
-      var statusPopup = page.find('#submitPayment-statusPopup');
-      var statusPopupMessage = page.find('#submitPayment-statusPopupMessage');
+      var statusPopup = page.find('#checkout-statusPopup');
+      var statusPopupMessage = page.find('#checkout-statusPopupMessage');
 
       $scope.submit = function() {
         statusPopup.off();
-        if(window._.isEmpty($scope.checkout)) {
+        if(!$scope.checkout) {
+          console.log('got here1');
+          statusPopupMessage.text('Please provide the requested information.');
+          statusPopup.popup('open');
+          return;
+        }
+        if(!$scope.checkout.paymentMethod || !$scope.checkout.selectedAddress) {
+          console.log('got here2');
+          statusPopupMessage.text('Please provide the requested information.');
+          statusPopup.popup('open');
+          return;
+        }
+        if(!$scope.checkout.selectedBank && !$scope.checkout.selectedCard) {
+          console.log('got here3');
           statusPopupMessage.text('Please provide the requested information.');
           statusPopup.popup('open');
           return;
@@ -26,6 +39,8 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
           $scope.checkout.selectedCard = null;
         }
         $.mobile.loading('show');
+        console.log('got here4');
+
         User.me().all('submitPayment').post($scope.checkout).then(function() {
           $.mobile.loading('hide');
           statusPopupMessage.text('Payment Submitted Successfully');
@@ -71,9 +86,9 @@ angular.module('eMarketApp').directive('proceedToCheckout', function(User, CartI
       page.on('pagebeforeshow', function() {
 
         scope.cartInfo = CartInfo.getCartInfo();
-        scope.itemsAmount = scope.cartInfo.itemsAmount;
-        scope.cost = scope.cartInfo.cost;
-        scope.shipping = scope.cartInfo.shipping;
+        scope.checkout.itemsAmount = scope.cartInfo.itemsAmount;
+        scope.checkout.cost = scope.cartInfo.cost;
+        scope.checkout.shipping = scope.cartInfo.shipping;
 
         User.me().getList('creditCards').then(function(creditCardsList) {
           scope.cards = creditCardsList;
