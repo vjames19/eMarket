@@ -112,6 +112,7 @@ angular.module('eMarketApp').directive('shoppingCart', function(User, Helper) {
           }
         }, function(err) {
           scope.shoppingCarts = [];
+          computeTotalCostAndShipping();
           Helper.refreshList(shoppingCartList);
           console.log('Empty Cart', err);
         });
