@@ -59,3 +59,7 @@
 ## Contributing
 
   TODO: Specify commiting rules and format.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/vjames19/emarket/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
